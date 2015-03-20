@@ -1,8 +1,8 @@
-Installation QtDMM 0.9 (c) 2001-2014 M.Toussaint
+Installation QtDMM 0.9.5 (c) 2001-2014 M.Toussaint
 
 Requirements:
 -------------
-- Qt library 4.x developer version
+- Qt library 5.x developer version
 - A supported multimeter or a compatible model
 
 Compilation:
@@ -10,7 +10,7 @@ Compilation:
 
 - untar the tarball you've downloaded
 - enter the qtdmm directory
-- type qmake 
+- type qmake-qt5 
 - type make 
 
 That's it. You should have the executable qtdmm now.
