@@ -1,91 +1,87 @@
 TEMPLATE        = app
 CONFIG          += qt release warn_on thread
+
+TARGET    = qtdmm
+VERSION   = 0.9.5
+DESTDIR   = ../bin
+
+CONFIG += uic3
 QT += qt3support
+
+CONFIG += uic3
+
 macx {
   CONFIG += static
-}
-INCLUDEPATH     = . moc xpm
-MOC_DIR         = moc
-OBJECTS_DIR     = tmp
-DEPENDPATH      = . 
-QTLFLAGS += -DQT3_SUPPORT
-
-HEADERS   = \
-            colorbutton.h \
-            configdlg.h \
-            configitem.h \
-            displaywid.h \
-            dmm.h \
-            dmmbar.h \
-            dmmgraph.h \
-            dmmprefs.h \
-            engnumbervalidator.h \
-            executeprefs.h \
-            graphprefs.h \
-            guiprefs.h \
-            integrationprefs.h \
-            mainwid.h \
-            mainwin.h \
-            prefwidget.h \
-            printdlg.h \
-            qcleanuphandler.h \
-            readerthread.h \
-            readevent.h \
-            recorderprefs.h \
-            scaleprefs.h \
-            simplecfg.h \
-            tipdlg.h
-
-#The following line was changed from FORMS to FORMS3 by qt3to4
-FORMS3 = \
-             uiconfigdlg.ui \
-             uidmmprefs.ui \
-             uiexecuteprefs.ui \
-             uigraphprefs.ui \
-             uiguiprefs.ui \
-             uiintegrationprefs.ui \
-             uimainwid.ui \
-             uiprintdlg.ui \
-             uirecorderprefs.ui \
-             uiscaleprefs.ui \
-             uitipdlg.ui
-                        
-SOURCES   = \
-            colorbutton.cpp \
-            configdlg.cpp \
-            configitem.cpp \
-            displaywid.cpp \
-            dmm.cpp \
-            dmmbar.cpp \
-            dmmgraph.cpp \
-            dmmprefs.cpp \
-            engnumbervalidator.cpp \
-            executeprefs.cpp \
-            graphprefs.cpp \
-            guiprefs.cpp \
-            integrationprefs.cpp \
-            main.cpp \
-            mainwid.cpp \
-            mainwin.cpp \
-            prefwidget.cpp \
-            printdlg.cpp \
-            readerthread.cpp \
-            readevent.cpp \
-            recorderprefs.cpp \
-            scaleprefs.cpp \
-            simplecfg.cpp \
-            tipdlg.cpp
-
-macx {
   LIBS      = -framework Carbon -framework QuickTime -lz $(QTDIR)/lib/libqt-mt.a
   RC_FILE   = QtDMMIcon.icns
 }
-TARGET    = qtdmm
-VERSION   = 0.9.0
-DESTDIR   = ../bin
+UI_DIR=tmp/ui
+MOC_DIR=tmp/moc
+OBJECTS_DIR=tmp/obj
+RCC_DIR=tmp/rcc
 
-#The following line was inserted by qt3to4
-QT +=  
-#The following line was inserted by qt3to4
-CONFIG += uic3
+QTLFLAGS += -DQT3_SUPPORT
+
+HEADERS   = 
+            sources/colorbutton.h \
+            sources/configdlg.h \
+            sources/configitem.h \
+            sources/displaywid.h \
+            sources/dmm.h \
+            sources/dmmbar.h \
+            sources/dmmgraph.h \
+            sources/dmmprefs.h \
+            sources/engnumbervalidator.h \
+            sources/executeprefs.h \
+            sources/graphprefs.h \
+            sources/guiprefs.h \
+            sources/integrationprefs.h \
+            sources/mainwid.h \
+            sources/mainwin.h \
+            sources/prefwidget.h \
+            sources/printdlg.h \
+            sources/qcleanuphandler.h \
+            sources/readerthread.h \
+            sources/readevent.h \
+            sources/recorderprefs.h \
+            sources/scaleprefs.h \
+            sources/simplecfg.h \
+            sources/tipdlg.h
+
+FORMS3 =     forms/uiconfigdlg.ui \
+             forms/uidmmprefs.ui \
+             forms/uiexecuteprefs.ui \
+             forms/uigraphprefs.ui \
+             forms/uiguiprefs.ui \
+             forms/uiintegrationprefs.ui \
+             forms/uimainwid.ui \
+             forms/uiprintdlg.ui \
+             forms/uirecorderprefs.ui \
+             forms/uiscaleprefs.ui \
+             forms/uitipdlg.ui
+                        
+SOURCES   = sources/colorbutton.cpp \
+            sources/configdlg.cpp \
+            sources/configitem.cpp \
+            sources/displaywid.cpp \
+            sources/dmm.cpp \
+            sources/dmmbar.cpp \
+            sources/dmmgraph.cpp \
+            sources/dmmprefs.cpp \
+            sources/engnumbervalidator.cpp \
+            sources/executeprefs.cpp \
+            sources/graphprefs.cpp \
+            sources/guiprefs.cpp \
+            sources/integrationprefs.cpp \
+            sources/main.cpp \
+            sources/mainwid.cpp \
+            sources/mainwin.cpp \
+            sources/prefwidget.cpp \
+            sources/printdlg.cpp \
+            sources/readerthread.cpp \
+            sources/readevent.cpp \
+            sources/recorderprefs.cpp \
+            sources/scaleprefs.cpp \
+            sources/simplecfg.cpp \
+            sources/tipdlg.cpp
 
