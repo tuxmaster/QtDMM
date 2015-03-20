@@ -1,6 +1,7 @@
 xx/xx/2015 0.9.5
 	   - Port to Qt5
-	   - Use C++11 
+	   - Use C++11
+	   - Add translation support 
    
 27/04/2014 0.9.0
 	   - QtDMM was ported to Qt4.x (still a few minor bugs, but usable)
