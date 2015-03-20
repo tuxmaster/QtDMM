@@ -33,20 +33,20 @@ class ColorButton : public QPushButton
   Q_OBJECT
 public:
   ColorButton( QWidget *parent=0, const char *name=0 );
-  virtual ~ColorButton();
 
-  QColor color() const;
-  void setColor( const QColor & );
-  
-signals:
-  void valueChanged();
-  void valueChanged( const QColor & );
-    
-protected slots:
-  void clickedSLOT();
+
+  QColor	color() const;
+  void		setColor( const QColor & );
+
+Q_SIGNALS:
+  void		valueChanged();
+  void		valueChanged( const QColor & );
+
+protected Q_SLOTS:
+  void		clickedSLOT();
 
 protected:
-  QColor m_color;
+  QColor	m_color;
 //  void drawButtonLabel( QPainter * );
 
 };

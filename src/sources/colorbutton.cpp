@@ -20,48 +20,39 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#include <colorbutton.h>
-#include <qcolordialog.h>
-#include <qpainter.h>
-#include <qimage.h>
-#include <qpixmap.h>
+#include "colorbutton.h"
+#include <QtGui>
+#include <QtWidgets>
 
-ColorButton::ColorButton( QWidget *parent, const char *name ) :
-  QPushButton( parent, name )
+ColorButton::ColorButton( QWidget *parent, const char *name ) : QPushButton( parent, name )
 {
   m_color = QColor( 255, 255, 255 );
   setAutoDefault( false );
-  
+
   connect( this, SIGNAL( clicked() ), this, SLOT( clickedSLOT() ));
 }
 
-ColorButton::~ColorButton()
+QColor ColorButton::color() const
 {
+  return m_color;
 }
 
-QColor
-ColorButton::color() const
-{
-  return m_color; 
-}
-
-void
-ColorButton::setColor( const QColor & c )
+void ColorButton::setColor( const QColor & c )
 {
   m_color = c;
-  
+
   QImage img( 16, 12, 32 );
   img.fill(m_color.rgb());
   for (int i=0; i<16; ++i)
   {
-    ((QRgb *)img.scanLine(0))[i] = 0;
-    ((QRgb *)img.scanLine(11))[i] = 0;
+	((QRgb *)img.scanLine(0))[i] = 0;
+	((QRgb *)img.scanLine(11))[i] = 0;
   }
 
   for (int i=0; i<12; ++i)
   {
-    ((QRgb *)img.scanLine(i))[0] = 0;
-    ((QRgb *)img.scanLine(i))[15] = 0;
+	((QRgb *)img.scanLine(i))[0] = 0;
+	((QRgb *)img.scanLine(i))[15] = 0;
   }
 
   QPixmap pix;
@@ -69,17 +60,16 @@ ColorButton::setColor( const QColor & c )
   setPixmap( pix );
 }
 
-void
-ColorButton::clickedSLOT()
+void ColorButton::clickedSLOT()
 {
   QColor c = QColorDialog::getColor( color(), this );
-  
+
   if (c.isValid())
   {
-    setColor( c );
-  
-    emit valueChanged();
-    emit valueChanged( c );
+	setColor( c );
+
+	Q_EMIT valueChanged();
+	Q_EMIT valueChanged( c );
   }
 }
 /*

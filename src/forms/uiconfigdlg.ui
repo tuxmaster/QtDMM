@@ -1,373 +1,273 @@
-<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
-<class>UIConfigDlg</class>
-<widget class="QDialog">
-    <property name="name">
-        <cstring>UIConfigDlg</cstring>
-    </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>385</width>
-            <height>260</height>
-        </rect>
-    </property>
-    <property name="caption">
-        <string>QtDMM: Preferences</string>
-    </property>
-    <property name="sizeGripEnabled">
-        <bool>true</bool>
-    </property>
-    <property name="layoutMargin" stdset="0">
-    </property>
-    <property name="layoutSpacing" stdset="0">
-    </property>
-    <vbox>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <property name="margin">
-            <number>10</number>
-        </property>
-        <property name="spacing">
-            <number>5</number>
-        </property>
-        <widget class="QLayoutWidget">
-            <property name="name">
-                <cstring>Layout48</cstring>
-            </property>
-            <property name="layoutSpacing" stdset="0">
-            </property>
-            <hbox>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <property name="margin">
-                    <number>0</number>
-                </property>
-                <property name="spacing">
-                    <number>10</number>
-                </property>
-                <widget class="QListView">
-                    <column>
-                        <property name="text">
-                            <string>Column 1</string>
-                        </property>
-                        <property name="clickable">
-                            <bool>true</bool>
-                        </property>
-                        <property name="resizable">
-                            <bool>true</bool>
-                        </property>
-                    </column>
-                    <property name="name">
-                        <cstring>ui_list</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>7</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="hScrollBarMode">
-                        <enum>AlwaysOff</enum>
-                    </property>
-                    <property name="allColumnsShowFocus">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget class="QLayoutWidget">
-                    <property name="name">
-                        <cstring>Layout47</cstring>
-                    </property>
-                    <property name="layoutSpacing" stdset="0">
-                    </property>
-                    <vbox>
-                        <property name="name">
-                            <cstring>unnamed</cstring>
-                        </property>
-                        <property name="margin">
-                            <number>0</number>
-                        </property>
-                        <property name="spacing">
-                            <number>5</number>
-                        </property>
-                        <widget class="QLayoutWidget">
-                            <property name="name">
-                                <cstring>Layout16</cstring>
-                            </property>
-                            <property name="layoutSpacing" stdset="0">
-                            </property>
-                            <hbox>
-                                <property name="name">
-                                    <cstring>unnamed</cstring>
-                                </property>
-                                <property name="margin">
-                                    <number>0</number>
-                                </property>
-                                <property name="spacing">
-                                    <number>5</number>
-                                </property>
-                                <widget class="QLabel">
-                                    <property name="name">
-                                        <cstring>ui_helpPixmap</cstring>
-                                    </property>
-                                    <property name="frameShape">
-                                        <enum>MShape</enum>
-                                    </property>
-                                    <property name="frameShadow">
-                                        <enum>MShadow</enum>
-                                    </property>
-                                    <property name="alignment">
-                                        <set>AlignTop|AlignHCenter</set>
-                                    </property>
-                                    <property name="hAlign" stdset="0">
-                                    </property>
-                                    <property name="vAlign" stdset="0">
-                                    </property>
-                                </widget>
-                                <widget class="QLabel">
-                                    <property name="name">
-                                        <cstring>ui_helpText</cstring>
-                                    </property>
-                                    <property name="sizePolicy">
-                                        <sizepolicy>
-                                            <hsizetype>3</hsizetype>
-                                            <vsizetype>1</vsizetype>
-                                            <horstretch>0</horstretch>
-                                            <verstretch>0</verstretch>
-                                        </sizepolicy>
-                                    </property>
-                                    <property name="textFormat">
-                                        <enum>RichText</enum>
-                                    </property>
-                                    <property name="alignment">
-                                        <set>WordBreak|AlignTop|AlignLeft</set>
-                                    </property>
-                                    <property name="vAlign" stdset="0">
-                                    </property>
-                                </widget>
-                            </hbox>
-                        </widget>
-                        <widget class="QLabel">
-                            <property name="name">
-                                <cstring>TextLabel1</cstring>
-                            </property>
-                            <property name="minimumSize">
-                                <size>
-                                    <width>0</width>
-                                    <height>5</height>
-                                </size>
-                            </property>
-                            <property name="maximumSize">
-                                <size>
-                                    <width>32767</width>
-                                    <height>5</height>
-                                </size>
-                            </property>
-                        </widget>
-                        <widget class="Q3WidgetStack">
-                            <property name="name">
-                                <cstring>ui_stack</cstring>
-                            </property>
-                            <property name="sizePolicy">
-                                <sizepolicy>
-                                    <hsizetype>7</hsizetype>
-                                    <vsizetype>7</vsizetype>
-                                    <horstretch>0</horstretch>
-                                    <verstretch>0</verstretch>
-                                </sizepolicy>
-                            </property>
-                        </widget>
-                        <widget class="QLayoutWidget">
-                            <property name="name">
-                                <cstring>Layout46</cstring>
-                            </property>
-                            <property name="layoutSpacing" stdset="0">
-                            </property>
-                            <hbox>
-                                <property name="name">
-                                    <cstring>unnamed</cstring>
-                                </property>
-                                <property name="margin">
-                                    <number>0</number>
-                                </property>
-                                <property name="spacing">
-                                    <number>5</number>
-                                </property>
-                                <widget class="QPushButton">
-                                    <property name="name">
-                                        <cstring>ui_undo</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>&amp;Undo</string>
-                                    </property>
-                                    <property name="autoDefault">
-                                        <bool>false</bool>
-                                    </property>
-                                </widget>
-                                <spacer>
-                                    <property name="name">
-                                        <cstring>Spacer45</cstring>
-                                    </property>
-                                    <property name="orientation">
-                                        <enum>Horizontal</enum>
-                                    </property>
-                                    <property name="sizeType">
-                                        <enum>Expanding</enum>
-                                    </property>
-                                    <property name="sizeHint">
-                                        <size>
-                                            <width>20</width>
-                                            <height>20</height>
-                                        </size>
-                                    </property>
-                                </spacer>
-                                <widget class="QPushButton">
-                                    <property name="name">
-                                        <cstring>ui_factoryDefaults</cstring>
-                                    </property>
-                                    <property name="text">
-                                        <string>&amp;Factory defaults</string>
-                                    </property>
-                                    <property name="autoDefault">
-                                        <bool>false</bool>
-                                    </property>
-                                </widget>
-                            </hbox>
-                        </widget>
-                    </vbox>
-                </widget>
-            </hbox>
-        </widget>
-        <widget class="Line">
-            <property name="name">
-                <cstring>Line7</cstring>
-            </property>
-            <property name="frameShape">
-                <enum>HLine</enum>
-            </property>
-            <property name="frameShadow">
-                <enum>Sunken</enum>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-        </widget>
-        <widget class="QLayoutWidget">
-            <property name="name">
-                <cstring>Layout17</cstring>
-            </property>
-            <property name="layoutSpacing" stdset="0">
-            </property>
-            <hbox>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <property name="margin">
-                    <number>0</number>
-                </property>
-                <property name="spacing">
-                    <number>5</number>
-                </property>
-                <spacer>
-                    <property name="name">
-                        <cstring>Spacer61</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>ui_apply</cstring>
-                    </property>
-                    <property name="minimumSize">
-                        <size>
-                            <width>0</width>
-                            <height>0</height>
-                        </size>
-                    </property>
-                    <property name="maximumSize">
-                        <size>
-                            <width>32767</width>
-                            <height>32767</height>
-                        </size>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Apply</string>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Click this button so change the color of the data graph in the recorder.</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>ui_ok</cstring>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Ok</string>
-                    </property>
-                    <property name="default">
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>ui_cancel</cstring>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Cancel</string>
-                    </property>
-                </widget>
-            </hbox>
-        </widget>
-    </vbox>
-</widget>
-<customwidgets>
-    <customwidget>
-        <class>Q3WidgetStack</class>
-        <header location="global">q3widgetstack.h</header>
-        <sizehint>
-            <width>-1</width>
-            <height>-1</height>
-        </sizehint>
-        <container>0</container>
-        <sizepolicy>
-            <hordata>5</hordata>
-            <verdata>5</verdata>
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-        </sizepolicy>
-        <pixmap>image0</pixmap>
-    </customwidget>
-</customwidgets>
-<images>
-    <image name="image0">
-        <data format="PNG" length="256">89504e470d0a1a0a0000000d4948445200000016000000160806000000c4b46c3b000000c749444154388dad55db1184200c4c180bb81a28c73aad811228c356f42b3792db3cc0db2fc724bb7901dc7b270f27ed17fa5fa9b117b7cd90211f4ba0ac906a7f1453b4d30ca917bb590681552af23f69bfc4ffa71519d2c8f62546ea5ea03738b1c18c33a4d156f0d13f43b61952e4af6d6e8fb3a408f080448419a433d6486d85052fdba892a295f5d45785cd8c51a9d6de6a814a8d2131da51f98e7a3b64ec9da04a8db53d43be3c3c0b22cacf17e4cdb5a931649ceddf34b190cf0aa019f03f1fd3e7457f03b5a66c9ed26e86130000000049454e44ae426082</data>
-    </image>
-</images>
-<tabstops>
-    <tabstop>ui_list</tabstop>
-    <tabstop>ui_undo</tabstop>
-    <tabstop>ui_factoryDefaults</tabstop>
-    <tabstop>ui_apply</tabstop>
-    <tabstop>ui_ok</tabstop>
-    <tabstop>ui_cancel</tabstop>
-</tabstops>
-<layoutdefaults spacing="6" margin="11"/>
-<includehints>
-    <includehint>q3widgetstack.h</includehint>
-</includehints>
-</UI>
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UIConfigDlg</class>
+ <widget class="QDialog" name="UIConfigDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>385</width>
+    <height>260</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QtDMM: Preferences</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout">
+   <property name="spacing">
+    <number>5</number>
+   </property>
+   <property name="margin">
+    <number>10</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QListView" name="ui_list">
+       <property name="sizePolicy">
+	<sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+	 <horstretch>0</horstretch>
+	 <verstretch>0</verstretch>
+	</sizepolicy>
+       </property>
+       <property name="hScrollBarMode">
+	<enum>Q3ScrollView::AlwaysOff</enum>
+       </property>
+       <property name="allColumnsShowFocus">
+	<bool>true</bool>
+       </property>
+       <column>
+	<property name="text">
+	 <string>Column 1</string>
+	</property>
+	<property name="clickable">
+	 <bool>true</bool>
+	</property>
+	<property name="resizable">
+	 <bool>true</bool>
+	</property>
+       </column>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout">
+       <property name="spacing">
+	<number>5</number>
+       </property>
+       <property name="margin">
+	<number>0</number>
+       </property>
+       <item>
+	<layout class="QHBoxLayout">
+	 <property name="spacing">
+	  <number>5</number>
+	 </property>
+	 <property name="margin">
+	  <number>0</number>
+	 </property>
+	 <item>
+	  <widget class="QLabel" name="ui_helpPixmap">
+	   <property name="alignment">
+	    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+	   </property>
+	   <property name="wordWrap">
+	    <bool>false</bool>
+	   </property>
+	  </widget>
+	 </item>
+	 <item>
+	  <widget class="QLabel" name="ui_helpText">
+	   <property name="sizePolicy">
+	    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+	     <horstretch>0</horstretch>
+	     <verstretch>0</verstretch>
+	    </sizepolicy>
+	   </property>
+	   <property name="textFormat">
+	    <enum>Qt::RichText</enum>
+	   </property>
+	   <property name="alignment">
+	    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+	   </property>
+	   <property name="wordWrap">
+	    <bool>true</bool>
+	   </property>
+	  </widget>
+	 </item>
+	</layout>
+       </item>
+       <item>
+	<widget class="QLabel" name="TextLabel1">
+	 <property name="minimumSize">
+	  <size>
+	   <width>0</width>
+	   <height>5</height>
+	  </size>
+	 </property>
+	 <property name="maximumSize">
+	  <size>
+	   <width>32767</width>
+	   <height>5</height>
+	  </size>
+	 </property>
+	 <property name="wordWrap">
+	  <bool>false</bool>
+	 </property>
+	</widget>
+       </item>
+       <item>
+	<widget class="QStackedWidget" name="ui_stack">
+	 <property name="sizePolicy">
+	  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+	   <horstretch>0</horstretch>
+	   <verstretch>0</verstretch>
+	  </sizepolicy>
+	 </property>
+	</widget>
+       </item>
+       <item>
+	<layout class="QHBoxLayout">
+	 <property name="spacing">
+	  <number>5</number>
+	 </property>
+	 <property name="margin">
+	  <number>0</number>
+	 </property>
+	 <item>
+	  <widget class="QPushButton" name="ui_undo">
+	   <property name="text">
+	    <string>&amp;Undo</string>
+	   </property>
+	   <property name="autoDefault">
+	    <bool>false</bool>
+	   </property>
+	  </widget>
+	 </item>
+	 <item>
+	  <spacer name="Spacer45">
+	   <property name="orientation">
+	    <enum>Qt::Horizontal</enum>
+	   </property>
+	   <property name="sizeType">
+	    <enum>QSizePolicy::Expanding</enum>
+	   </property>
+	   <property name="sizeHint" stdset="0">
+	    <size>
+	     <width>20</width>
+	     <height>20</height>
+	    </size>
+	   </property>
+	  </spacer>
+	 </item>
+	 <item>
+	  <widget class="QPushButton" name="ui_factoryDefaults">
+	   <property name="text">
+	    <string>&amp;Factory defaults</string>
+	   </property>
+	   <property name="autoDefault">
+	    <bool>false</bool>
+	   </property>
+	  </widget>
+	 </item>
+	</layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="Line7">
+     <property name="frameShape">
+      <enum>QFrame::HLine</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <property name="spacing">
+      <number>5</number>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <spacer name="Spacer61">
+       <property name="orientation">
+	<enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+	<enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+	<size>
+	 <width>20</width>
+	 <height>20</height>
+	</size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ui_apply">
+       <property name="minimumSize">
+	<size>
+	 <width>0</width>
+	 <height>0</height>
+	</size>
+       </property>
+       <property name="maximumSize">
+	<size>
+	 <width>32767</width>
+	 <height>32767</height>
+	</size>
+       </property>
+       <property name="whatsThis">
+	<string>Click this button so change the color of the data graph in the recorder.</string>
+       </property>
+       <property name="text">
+	<string>&amp;Apply</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ui_ok">
+       <property name="text">
+	<string>&amp;Ok</string>
+       </property>
+       <property name="default">
+	<bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ui_cancel">
+       <property name="text">
+	<string>&amp;Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>ui_list</tabstop>
+  <tabstop>ui_undo</tabstop>
+  <tabstop>ui_factoryDefaults</tabstop>
+  <tabstop>ui_apply</tabstop>
+  <tabstop>ui_ok</tabstop>
+  <tabstop>ui_cancel</tabstop>
+ </tabstops>
+</ui>
