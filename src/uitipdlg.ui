@@ -1,0 +1,257 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>UITipDlg</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>UITipDlg</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>510</width>
+            <height>246</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>QtDMM: Tip of the day</string>
+    </property>
+    <property name="icon">
+        <pixmap>image0</pixmap>
+    </property>
+    <property name="layoutMargin" stdset="0">
+    </property>
+    <property name="layoutSpacing" stdset="0">
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>10</number>
+        </property>
+        <property name="spacing">
+            <number>5</number>
+        </property>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>Layout8</cstring>
+            </property>
+            <property name="layoutSpacing" stdset="0">
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <property name="spacing">
+                    <number>5</number>
+                </property>
+                <widget class="QTextView">
+                    <property name="name">
+                        <cstring>ui_tip</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>7</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>400</width>
+                            <height>50</height>
+                        </size>
+                    </property>
+                    <property name="maximumSize">
+                        <size>
+                            <width>32767</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property name="frameShape">
+                        <enum>NoFrame</enum>
+                    </property>
+                    <property name="resizePolicy">
+                        <enum>Manual</enum>
+                    </property>
+                    <property name="vScrollBarMode">
+                        <enum>AlwaysOff</enum>
+                    </property>
+                    <property name="hScrollBarMode">
+                        <enum>AlwaysOff</enum>
+                    </property>
+                </widget>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>Layout8</cstring>
+                    </property>
+                    <property name="layoutSpacing" stdset="0">
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <property name="margin">
+                            <number>0</number>
+                        </property>
+                        <property name="spacing">
+                            <number>0</number>
+                        </property>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>ui_logo</cstring>
+                            </property>
+                            <property name="margin">
+                                <number>3</number>
+                            </property>
+                            <property name="pixmap">
+                                <pixmap>image1</pixmap>
+                            </property>
+                            <property name="scaledContents">
+                                <bool>true</bool>
+                            </property>
+                            <property name="whatsThis" stdset="0">
+                                <string>Calvin :)</string>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property name="name">
+                                <cstring>Spacer2</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Vertical</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </vbox>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>Layout7</cstring>
+            </property>
+            <property name="layoutSpacing" stdset="0">
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <property name="spacing">
+                    <number>5</number>
+                </property>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>ui_showTip</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Don't show tips again</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>&lt;font size=+1&gt;&lt;b&gt;Don't show tips again&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Check this if you don't want to see the tip of the day at startup. You can activate the tips at any time in the preferences again.</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>ui_previousBut</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Previous</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>false</bool>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>&lt;font size=+1&gt;&lt;b&gt;Previous&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Go to previous tip.</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>ui_nextBut</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Next</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>false</bool>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>&lt;font size=+1&gt;&lt;b&gt;Next&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Go to next tip.</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>Spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>ui_closeBut</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Close</string>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>&lt;font size=+1&gt;&lt;b&gt;Close&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Close this dialog.</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </vbox>
+</widget>
+<images>
+    <image name="image0">
+        <data format="PNG" length="568">89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af4000001ff49444154789cc5573d4ec330187d465ca048ec4442ecd9c897137084962324131513ea8498104cc9095092237082a46c19411512bd89198a8d71fc9712c4932ac7f627bff7bd2fb51dd6751dfe1387b60922e25393755dc782041011bf59dd4ccd0f22e2ba88810041fef1fe31b980e43c1988b0960000eaa69e8c7c315f18c79d0200a0ddb4bf264fcf52ebdc41e802e2675a586dd53817f12801eda60d7222344e85b704803b13752e24e3bd0488ac7402d3f8580746bd036a3f34d687510ef8fabe3813821de89f7b63fb5b0409f84b8c2a417b616eff54c01436ef2dc0b67f4f09e73b503535aa090fa4288a06635607aaa60638071843d5d4b874b8117a6a26e749b800892f112ed2a22c8204544f55b880cbf902d517b1c83e84349be7289befb9fc36dbc5af4a633cd32fa544c4f5974f10fb32cde6b97c2e9b42920b242784f5cb1ade1b51741ae1eef64ef64dc4711c0300fabe977d35f350584b60231584a215d0fb711ca358953f4a503d8d10a0d7522551adeede5a638c4cc4527baf0001356b61bb2fde24642f01367276a4466997946ee7487e9fa1b82e07ebe870ee8426f294dc67434a29d20549113e049d86eae29c7330c68cbbdafa65bd7bd832e0e4fbcbce550eef7d20cb7210a532734a089c73bcbebf0e627f88daeefeea3e17f6ba90cc8e6700e0171180c14eb8bc5a4efe55ace3e1f141ee849fc001eddc052a55eb0000000049454e44ae426082</data>
+    </image>
+    <image name="image1">
+        <data format="PNG" length="1826">89504e470d0a1a0a0000000d49484452000000300000003008060000005702f987000006e949444154789cd5996d6c53d719c77fa90a248ead24bed72f59ad140226a4a405b5acd48bd604cf9598486174a81d53a5b66a36b6f16d9ab4098d5553d7aa9386c4876d883512a1b442534b8b42903a0d414247c6ebc02ca4499336649a143b7e4be4372051bd0f977bb9d7b9d76f713afa972c1d9df3dcc7ffff39cf79ce5bc5c0c0005f673cf0ff26b0503c58a8615b5b7b663189e4427f7f5f85515b41027ef0c20b198fa7b57c8c8a445b5b7bc648445e016d6ded198fa7159fcf577e660520990e33343c6428a222d724fe6ec796ccf33b762c2ac17c8886228422318686879889c5e68593e108b4b5b5674c966aac821980b1e1093e1d1925119f5e64ca12cc965a4451c426d401605ab694191dbb822731c0e8e808003575750b26980bb37377980c0401140146284a00c0e9c153a5b12a121d9e6d058df67dbb0e2c7970694176250bd8b57d37de169ff2d383ba5e5d36fad6c84f2e141d42320e7ef4a7a2fed864a92ef9db5cf8ca4228154f2e8adf924760d7f6dd8c8e8e687a560f7a3dbcd05e57a32c21d4e1d9a66ba3ce58d9a4cb95cdca12428b151e8560c121940d6f8b4fb777ddee26a5ecf1b46a4644b657db148ab284901a46a1a1b67fe3eddf16e53317eedb85ac50942c40bd08e52a2f36bef62350f21c50c77a21e5c5c27d3b02b373770ab22b7a04bc2dbeafe43c908a2779c8e9ca6b5b9400394f2ffaa96cd9521e72ba104531af6951029a9bdc4ad96a138a275602a2a148cef6a204749d39ad943b3779b1da84bc7f20a354c1569b80d526100e87e1ee31538d8204acfaf43f6c8bcf51d3d9c9f9ab9fd17ce52c1d972e32b7612317edf34564938d86229cfbc7f99242cf6ca9d58c7c4902d6c66769be7216deef2675f9143c7f96ef25121cbf7c81e8379f9c672f0beae9ed9dd7966ffbad462a9ec4944c208aa2a1f8e2b3d0061f03277a58fbec56a54edde3dd870ee3763769367a264b353fd9f532d555f927653692e930ff3c778dd46dfdb45a90801b9625f0c4d33cf5e69b208a7c0b38ffc4d3cc59960019253c260341ea9d0e85bc7c1d6913ea6870adc66133110ca50068720bd86a3e6074620bc1500a87cd04c0d0f07f39f7efcd00b43efa310daed58c091386dcf20a8846128c3537f0f1f0045d5d5d4afdbe4d5e7a7a4f00d23dd14c2c06c06420c8d68e0e76ee940e3932e1ec7283fd2d56360e323ab145d376fa5fcff1c905295ddf9e35e17dfcc39cfc720a48c5934a3c5b6d029d9bbc6cce54f0b3932730f59f51ec5e7df5879af01004ab866c369e697d9b958d83006cdffc23aef9db3979a68d03c7763235b55cb1fbe4421323e33b71d79c2aed66ce64a9c66a13e83e74987aa703b3a5969ebbe1918a27f1785a75c3430e0719eafadada2ae271916bfe7689c0d25a62e91dc0a886bc8ca9a9e5b86b8c39e60d21f96e74321054f270bdd3c12f7fb547433abbc79df52b00084c8ecff379fefaf6ac9a088260c56ebf394f84dd7e3327bf82e6c0debdafe9b6a927e4f4745a232618baa16baf175af2c8fcfac77fe3fdbfb72b73e0db1b47f03efe21feab750c0d2f200b3db2c685fbe1934ac6c8869afc538f7da4698ba53b999e4eebfa55fbaaac72e2b0a5d9d8fc17962d791190b290205873722b48c08afaf76869ee533286111187cdc4fa757d9ab6cfbf085359b57fde37d9a1752b1d20184ad1e05a4d83ebe2dd5a2b914874e102d444e5e11e19bdb77d68720b54563975bf59d938c8945f2a67ecf7ea9daca0b63640659593c0e4b8c69f1a65190135d1e9e9b426241c361395554e3276a8988237f6bf46321d56daa391047044e3271a8ae0f53dc363beb56480e0f5143d7d4fb2b5fda2c62f480b5bd904545639617a5c133272b6a99802fff51bbcfebafe95891e9adcd216e4dce00606fc8dac5ff52e0daed58094c56ea503797d1425203039aec93c72d864ecf0cebe23741f3a5cb0af9ede5e2e5dbec4acb59f445a3ae1fdf9d86f78f63b633cb769480a37e31d446902d43dbfec612719a49e7f67df11ac8299975f79491151ef7418fa919f8fa4b5650d5f8ab730596648c56b8884a5637ad03f7ffd58b00087cd742f26fde3ca64ee3e74989fff623707dffa3d23c363dc1c1f63f98a55867e669209cd7daaf9b640827b93589d5ecb3a89017cfd17a4b30170dc6c664f4a2272f4dd0f884612f41d3fc6effe78807dfbffc0ba96f5ba3ed6b5ac579e4d41da963c10afe44bf11603fe46ae7f56c74fbf7f9447d6b872eea920cfb58adc4b164b38afcd4c32c1c8f018078efe15ffd52ba4e2496e8e8f4947411dd845bbeeed462a5e43225d97b7e765e4ddcc01c4e3229f7fd1423094e21b06b635d5d29e69cfde3d80340752b7ef60b6e8db8ba288288af807af299d60b248fb4d73554c59c0229128a148cc70376af852dfd9b92b235f6ba8df6a439198c64eeee142ae408c100e870bfa3e1c0ed3d57550f352ff3f86ade1d7b6af9f100000000049454e44ae426082</data>
+    </image>
+</images>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

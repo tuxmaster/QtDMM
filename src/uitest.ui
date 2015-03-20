@@ -1,0 +1,31 @@
+<!DOCTYPE UI><UI>
+<class>QFrameForm</class>
+<widget>
+    <class>QFrame</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>QFrameForm</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>296</width>
+            <height>400</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>QFrameForm</string>
+    </property>
+    <property stdset="1">
+        <name>frameShape</name>
+        <enum>NoFrame</enum>
+    </property>
+    <property stdset="1">
+        <name>frameShadow</name>
+        <enum></enum>
+    </property>
+</widget>
+</UI>

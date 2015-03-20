@@ -1,0 +1,1392 @@
+<!DOCTYPE UI><UI>
+<class>UIRecorderPrefs</class>
+<widget>
+    <class>PrefWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>UIRecorderPrefs</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>317</width>
+            <height>366</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>QFrameForm</string>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>10</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>5</number>
+        </property>
+        <widget>
+            <class>QButtonGroup</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ButtonGroup1</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Sampling</string>
+            </property>
+            <property stdset="1">
+                <name>exclusive</name>
+                <bool>false</bool>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>10</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>5</number>
+                </property>
+                <widget row="0"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>sampLabel</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Sample &amp;every:</string>
+                    </property>
+                    <property stdset="1">
+                        <name>alignment</name>
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                    <property>
+                        <name>buddy</name>
+                        <cstring>sampleEvery</cstring>
+                    </property>
+                    <property>
+                        <name>hAlign</name>
+                    </property>
+                </widget>
+                <widget row="0"  column="2" >
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>1/10 Seconds</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Seconds</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Minutes</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Hours</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Days</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ui_sampleUnit</cstring>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Unit for sampling period.</string>
+                    </property>
+                </widget>
+                <spacer row="0"  column="3" >
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer9</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget row="1"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>sampLabel_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Sample t&amp;ime:</string>
+                    </property>
+                    <property stdset="1">
+                        <name>alignment</name>
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                    <property>
+                        <name>buddy</name>
+                        <cstring>sampleTime</cstring>
+                    </property>
+                    <property>
+                        <name>hAlign</name>
+                    </property>
+                </widget>
+                <widget row="1"  column="2" >
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Seconds</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Minutes</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Hours</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Days</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>timeUnit</cstring>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Unit for maximum sampling time.</string>
+                    </property>
+                </widget>
+                <widget row="0"  column="1" >
+                    <class>QSpinBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>sampleEvery</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>maxValue</name>
+                        <number>99999</number>
+                    </property>
+                    <property stdset="1">
+                        <name>minValue</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>value</name>
+                        <number>1</number>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Specify the sampling period. See unit to the right.</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="1" >
+                    <class>QSpinBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>sampleTime</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>specialValueText</name>
+                        <string>Infinite</string>
+                    </property>
+                    <property stdset="1">
+                        <name>maxValue</name>
+                        <number>99999</number>
+                    </property>
+                    <property stdset="1">
+                        <name>minValue</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>value</name>
+                        <number>0</number>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Maximum sampling time. When this time expires, the recorder is stopped automatically.</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget>
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>GroupBox1</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Start</string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>10</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>5</number>
+                </property>
+                <widget>
+                    <class>QButtonGroup</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ButtonGroup32</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>NoFrame</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>title</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>exclusive</name>
+                        <bool>false</bool>
+                    </property>
+                    <property>
+                        <name>layoutMargin</name>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
+                    <vbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>5</number>
+                        </property>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout23</cstring>
+                            </property>
+                            <property>
+                                <name>layoutSpacing</name>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>5</number>
+                                </property>
+                                <widget>
+                                    <class>QRadioButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>manualBut</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>&amp;Manual</string>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>checked</name>
+                                        <bool>true</bool>
+                                    </property>
+                                    <property>
+                                        <name>whatsThis</name>
+                                        <string>Select this entry if you want to manually start the transient recorder. Use the &lt;b&gt;Start&lt;/b&gt; and &lt;b&gt;Stop&lt;/b&gt; buttons in the main window to start/stop sampling.</string>
+                                    </property>
+                                </widget>
+                                <spacer>
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer7_2</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>orientation</name>
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </hbox>
+                        </widget>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout24</cstring>
+                            </property>
+                            <property>
+                                <name>layoutSpacing</name>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>5</number>
+                                </property>
+                                <widget>
+                                    <class>QRadioButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>predefinedBut</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>&amp;Predefined time</string>
+                                    </property>
+                                    <property>
+                                        <name>whatsThis</name>
+                                        <string>Select this entry if you want the transient recorder to be started at a predefined time.</string>
+                                    </property>
+                                </widget>
+                                <spacer>
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer8_2</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>orientation</name>
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </hbox>
+                        </widget>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout8</cstring>
+                            </property>
+                            <property>
+                                <name>layoutSpacing</name>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>5</number>
+                                </property>
+                                <widget>
+                                    <class>QLayoutWidget</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>Layout7</cstring>
+                                    </property>
+                                    <hbox>
+                                        <property stdset="1">
+                                            <name>margin</name>
+                                            <number>0</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>spacing</name>
+                                            <number>6</number>
+                                        </property>
+                                        <widget>
+                                            <class>QLabel</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>TextLabel5</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>sizePolicy</name>
+                                                <sizepolicy>
+                                                    <hsizetype>0</hsizetype>
+                                                    <vsizetype>1</vsizetype>
+                                                </sizepolicy>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>minimumSize</name>
+                                                <size>
+                                                    <width>20</width>
+                                                    <height>0</height>
+                                                </size>
+                                            </property>
+                                        </widget>
+                                        <widget>
+                                            <class>QLayoutWidget</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>Layout6</cstring>
+                                            </property>
+                                            <hbox>
+                                                <property stdset="1">
+                                                    <name>margin</name>
+                                                    <number>0</number>
+                                                </property>
+                                                <property stdset="1">
+                                                    <name>spacing</name>
+                                                    <number>6</number>
+                                                </property>
+                                                <widget>
+                                                    <class>QSpinBox</class>
+                                                    <property stdset="1">
+                                                        <name>name</name>
+                                                        <cstring>hour</cstring>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>enabled</name>
+                                                        <bool>false</bool>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>wrapping</name>
+                                                        <bool>true</bool>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>maxValue</name>
+                                                        <number>23</number>
+                                                    </property>
+                                                    <property>
+                                                        <name>whatsThis</name>
+                                                        <string>Hour of start time.</string>
+                                                    </property>
+                                                </widget>
+                                                <widget>
+                                                    <class>QLabel</class>
+                                                    <property stdset="1">
+                                                        <name>name</name>
+                                                        <cstring>TextLabel3</cstring>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>enabled</name>
+                                                        <bool>false</bool>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>font</name>
+                                                        <font>
+                                                            <bold>1</bold>
+                                                        </font>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>text</name>
+                                                        <string>:</string>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>alignment</name>
+                                                        <set>AlignCenter</set>
+                                                    </property>
+                                                    <property>
+                                                        <name>hAlign</name>
+                                                    </property>
+                                                </widget>
+                                                <widget>
+                                                    <class>QSpinBox</class>
+                                                    <property stdset="1">
+                                                        <name>name</name>
+                                                        <cstring>minute</cstring>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>enabled</name>
+                                                        <bool>false</bool>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>wrapping</name>
+                                                        <bool>true</bool>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>maxValue</name>
+                                                        <number>59</number>
+                                                    </property>
+                                                    <property>
+                                                        <name>whatsThis</name>
+                                                        <string>Minutes of start time.</string>
+                                                    </property>
+                                                </widget>
+                                                <widget>
+                                                    <class>QLabel</class>
+                                                    <property stdset="1">
+                                                        <name>name</name>
+                                                        <cstring>TextLabel4</cstring>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>enabled</name>
+                                                        <bool>false</bool>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>font</name>
+                                                        <font>
+                                                            <bold>1</bold>
+                                                        </font>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>text</name>
+                                                        <string>:</string>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>alignment</name>
+                                                        <set>AlignCenter</set>
+                                                    </property>
+                                                    <property>
+                                                        <name>hAlign</name>
+                                                    </property>
+                                                </widget>
+                                                <widget>
+                                                    <class>QSpinBox</class>
+                                                    <property stdset="1">
+                                                        <name>name</name>
+                                                        <cstring>second</cstring>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>enabled</name>
+                                                        <bool>false</bool>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>wrapping</name>
+                                                        <bool>true</bool>
+                                                    </property>
+                                                    <property stdset="1">
+                                                        <name>maxValue</name>
+                                                        <number>59</number>
+                                                    </property>
+                                                    <property>
+                                                        <name>whatsThis</name>
+                                                        <string>Seconds of start time.</string>
+                                                    </property>
+                                                </widget>
+                                            </hbox>
+                                        </widget>
+                                    </hbox>
+                                </widget>
+                                <spacer>
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer2_2</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>orientation</name>
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </hbox>
+                        </widget>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout25</cstring>
+                            </property>
+                            <property>
+                                <name>layoutSpacing</name>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>5</number>
+                                </property>
+                                <widget>
+                                    <class>QRadioButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>triggerBut</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>&amp;Trigger</string>
+                                    </property>
+                                    <property>
+                                        <name>whatsThis</name>
+                                        <string>Select this entry if you want to automatically trigger the sampling. &lt;p&gt;
+You have two choices:
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;Raising edge:&lt;/b&gt; Sampling is started when the measured value gets bigger than the given threshold.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Falling edge:&lt;/b&gt; Sampling is started when the measured value gets lower than the given threshold.&lt;/li&gt;
+&lt;/ul&gt;</string>
+                                    </property>
+                                </widget>
+                                <spacer>
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer9_2</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>orientation</name>
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </hbox>
+                        </widget>
+                    </vbox>
+                </widget>
+                <widget>
+                    <class>QButtonGroup</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ButtonGroup13</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>NoFrame</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>title</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>exclusive</name>
+                        <bool>false</bool>
+                    </property>
+                    <property>
+                        <name>layoutMargin</name>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
+                    <vbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>0</number>
+                        </property>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout14</cstring>
+                            </property>
+                            <property>
+                                <name>layoutSpacing</name>
+                            </property>
+                            <grid>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>5</number>
+                                </property>
+                                <spacer row="0"  column="3" >
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer3</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>orientation</name>
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                                <widget row="1"  column="2" >
+                                    <class>QLineEdit</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>ui_fallingThreshold</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>enabled</name>
+                                        <bool>false</bool>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>maximumSize</name>
+                                        <size>
+                                            <width>80</width>
+                                            <height>32767</height>
+                                        </size>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>0.0</string>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>maxLength</name>
+                                        <number>12</number>
+                                    </property>
+                                    <property>
+                                        <name>whatsThis</name>
+                                        <string>Threshold for falling edge.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+                                    </property>
+                                </widget>
+                                <spacer row="1"  column="3" >
+                                    <property>
+                                        <name>name</name>
+                                        <cstring>Spacer4_2</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>orientation</name>
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizeType</name>
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property>
+                                        <name>sizeHint</name>
+                                        <size>
+                                            <width>20</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                                <widget row="0"  column="2" >
+                                    <class>QLineEdit</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>ui_raisingThreshold</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>enabled</name>
+                                        <bool>false</bool>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>maximumSize</name>
+                                        <size>
+                                            <width>80</width>
+                                            <height>32767</height>
+                                        </size>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>0.0</string>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>maxLength</name>
+                                        <number>12</number>
+                                    </property>
+                                    <property>
+                                        <name>whatsThis</name>
+                                        <string>Threshold for raising edge.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+                                    </property>
+                                </widget>
+                                <widget row="0"  column="1" >
+                                    <class>QLabel</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>TextLabel7</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>enabled</name>
+                                        <bool>false</bool>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>Threshold:</string>
+                                    </property>
+                                </widget>
+                                <widget row="1"  column="1" >
+                                    <class>QLabel</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>TextLabel8</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>enabled</name>
+                                        <bool>false</bool>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>Threshold:</string>
+                                    </property>
+                                </widget>
+                                <widget row="0"  column="0" >
+                                    <class>QLayoutWidget</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>Layout9</cstring>
+                                    </property>
+                                    <property>
+                                        <name>layoutSpacing</name>
+                                    </property>
+                                    <hbox>
+                                        <property stdset="1">
+                                            <name>margin</name>
+                                            <number>0</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>spacing</name>
+                                            <number>5</number>
+                                        </property>
+                                        <widget>
+                                            <class>QLabel</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>TextLabel6</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>sizePolicy</name>
+                                                <sizepolicy>
+                                                    <hsizetype>0</hsizetype>
+                                                    <vsizetype>1</vsizetype>
+                                                </sizepolicy>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>minimumSize</name>
+                                                <size>
+                                                    <width>20</width>
+                                                    <height>0</height>
+                                                </size>
+                                            </property>
+                                        </widget>
+                                        <widget>
+                                            <class>QRadioButton</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>raisingBut</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>enabled</name>
+                                                <bool>false</bool>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>text</name>
+                                                <string>&amp;Raising edge</string>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>checked</name>
+                                                <bool>true</bool>
+                                            </property>
+                                            <property>
+                                                <name>whatsThis</name>
+                                                <string>Trigger sampling on raising edge.</string>
+                                            </property>
+                                        </widget>
+                                    </hbox>
+                                </widget>
+                                <widget row="1"  column="0" >
+                                    <class>QLayoutWidget</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>Layout10</cstring>
+                                    </property>
+                                    <property>
+                                        <name>layoutSpacing</name>
+                                    </property>
+                                    <hbox>
+                                        <property stdset="1">
+                                            <name>margin</name>
+                                            <number>0</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>spacing</name>
+                                            <number>5</number>
+                                        </property>
+                                        <widget>
+                                            <class>QLabel</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>TextLabel6_2</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>sizePolicy</name>
+                                                <sizepolicy>
+                                                    <hsizetype>0</hsizetype>
+                                                    <vsizetype>1</vsizetype>
+                                                </sizepolicy>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>minimumSize</name>
+                                                <size>
+                                                    <width>20</width>
+                                                    <height>0</height>
+                                                </size>
+                                            </property>
+                                        </widget>
+                                        <widget>
+                                            <class>QRadioButton</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>fallingBut</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>enabled</name>
+                                                <bool>false</bool>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>text</name>
+                                                <string>&amp;Falling edge</string>
+                                            </property>
+                                            <property>
+                                                <name>whatsThis</name>
+                                                <string>Trigger sampling on falling edge.</string>
+                                            </property>
+                                        </widget>
+                                    </hbox>
+                                </widget>
+                            </grid>
+                        </widget>
+                    </vbox>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout11</cstring>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
+                    <grid>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>5</number>
+                        </property>
+                        <widget row="0"  column="1" >
+                            <class>QCheckBox</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ui_preTrigger</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Pre trigger</string>
+                            </property>
+                        </widget>
+                        <spacer row="1"  column="4" >
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer9_3</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget row="1"  column="2" >
+                            <class>QSpinBox</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ui_preTriggerTime</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>maxValue</name>
+                                <number>99999</number>
+                            </property>
+                            <property stdset="1">
+                                <name>minValue</name>
+                                <number>1</number>
+                            </property>
+                            <property stdset="1">
+                                <name>value</name>
+                                <number>1</number>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Maximum sampling time. When this time expires, the recorder is stopped automatically.</string>
+                            </property>
+                        </widget>
+                        <widget row="1"  column="3" >
+                            <class>QComboBox</class>
+                            <item>
+                                <property>
+                                    <name>text</name>
+                                    <string>Seconds</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property>
+                                    <name>text</name>
+                                    <string>Minutes</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property>
+                                    <name>text</name>
+                                    <string>Hours</string>
+                                </property>
+                            </item>
+                            <item>
+                                <property>
+                                    <name>text</name>
+                                    <string>Days</string>
+                                </property>
+                            </item>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ui_preTriggerUnit</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Unit for maximum sampling time.</string>
+                            </property>
+                        </widget>
+                        <widget row="1"  column="0" >
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel6_2_2_2</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>sizePolicy</name>
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>1</vsizetype>
+                                </sizepolicy>
+                            </property>
+                            <property stdset="1">
+                                <name>minimumSize</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                        </widget>
+                        <widget row="0"  column="0" >
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel6_2_2</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>sizePolicy</name>
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>1</vsizetype>
+                                </sizepolicy>
+                            </property>
+                            <property stdset="1">
+                                <name>minimumSize</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                        </widget>
+                        <spacer row="0"  column="2"  rowspan="1"  colspan="3" >
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer10</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget row="1"  column="1" >
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>sampLabel_2_2</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Pre trigger time:</string>
+                            </property>
+                            <property stdset="1">
+                                <name>alignment</name>
+                                <set>AlignVCenter|AlignRight</set>
+                            </property>
+                            <property>
+                                <name>buddy</name>
+                                <cstring>sampleTime</cstring>
+                            </property>
+                            <property>
+                                <name>hAlign</name>
+                            </property>
+                        </widget>
+                    </grid>
+                </widget>
+            </vbox>
+        </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer1_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+    </vbox>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>PrefWidget</class>
+        <header location="global">prefwidget.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>1</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+    </customwidget>
+</customwidgets>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>predefinedBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>hour</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>predefinedBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel3</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>predefinedBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>minute</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>predefinedBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>second</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>predefinedBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel4</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>triggerBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>raisingBut</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>triggerBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>fallingBut</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>triggerBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel7</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>triggerBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel8</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>triggerBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ui_raisingThreshold</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>triggerBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ui_fallingThreshold</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>raisingBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel7</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>raisingBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ui_raisingThreshold</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>raisingBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel8</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>raisingBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ui_fallingThreshold</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>sampleEvery</tabstop>
+    <tabstop>ui_sampleUnit</tabstop>
+    <tabstop>sampleTime</tabstop>
+    <tabstop>timeUnit</tabstop>
+    <tabstop>manualBut</tabstop>
+    <tabstop>predefinedBut</tabstop>
+    <tabstop>hour</tabstop>
+    <tabstop>minute</tabstop>
+    <tabstop>second</tabstop>
+    <tabstop>triggerBut</tabstop>
+    <tabstop>raisingBut</tabstop>
+    <tabstop>ui_raisingThreshold</tabstop>
+    <tabstop>fallingBut</tabstop>
+    <tabstop>ui_fallingThreshold</tabstop>
+</tabstops>
+</UI>

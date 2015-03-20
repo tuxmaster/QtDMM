@@ -1,0 +1,71 @@
+QtDMM 0.9.0 (c) 2001-2014 M.Toussaint
+
+QtDMM is a simple DMM readout software including a configurable transient 
+recorder. A friend of mine asked me  for a DMM readout software for Linux 
+because he didn't want to use  the MS-Windows version which came with the 
+multimeter. To help  him out I wrote this little piece of software.
+The transient recorder features manual start, scheduled start (at a given 
+time) and  triggered automatic  start when given  thresholds are reached.
+
+If you call QtDMM  with the commandline option --console it  will display
+some debug output. This might (or hight not :) help resolve problems.
+
+It was written  for Metex (and compatible like VOLTCRAFT)  multimeter and
+is known to work with the following DMM's:
+
+    Digitech     QM1350
+    ELV          M9803R
+    MASTECH      M9803R
+    McVoice      M-980T
+    Metex        M-3660D
+    Metex        M-3830D
+    Metex        M-3850D
+    Metex        M-3850M
+    Metex        ME-11
+    Metex        ME-22
+    Metex        ME-32
+    Metex        ME-42
+    Metex        Universal system 9160
+    PeakTech     4010
+    PeakTech     4390
+    PeakTech     451
+    Radioshack   22-805 DMM
+    Radioshack   RS22-168A
+    Voltcraft    M-3650D
+    Voltcraft    M-4660
+    Voltcraft    ME-11
+    Voltcraft    ME-22T
+    Voltcraft    ME-32
+    Voltcraft    VC 670
+    Voltcraft    VC 820
+    Voltcraft    VC 840
+    Voltcraft    VC 920
+    Voltcraft    VC 940
+
+The following models should work but need to be confirmed by a user:
+
+    Voltcraft    ME-42
+    Voltcraft    M-3860
+    Voltcraft    M-4660A
+    Voltcraft    M-4660M
+    Voltcraft    MXD-4660A
+    Voltcraft    VC 630
+    Voltcraft    VC 650
+    Voltcraft    VC 670
+
+If you manage to  get QtDMM working  with a  digital multimeter different 
+from the mentioned  above, or if you can confirm  one of the  unconfirmed
+models please give a note. For a new multimeter the best would be sending
+me a saved configuration file.
+
+QtDMM is kind of "works for me" software. I'm using it, I like it the way 
+it is  and it seems  to be quite stable. It still needs some improvements 
+but does it's job quite well.
+
+QtDMM 0.9.0 is distributed under the GNU Public License, version 3.
+(QtDMM versions prior to 0.9.0 are licensed under GNU GPL 2.0)
+ 
+-- 27/04/2014
+   Matthias Toussaint
+   <qtdmm@mtoussaint.de>
+

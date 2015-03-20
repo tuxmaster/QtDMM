@@ -1,0 +1,659 @@
+<!DOCTYPE UI><UI>
+<class>UIScalePrefs</class>
+<widget>
+    <class>PrefWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>UIScalePrefs</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>315</width>
+            <height>240</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>maximumSize</name>
+        <size>
+            <width>32767</width>
+            <height>32767</height>
+        </size>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>QFrameForm</string>
+    </property>
+    <property>
+        <name>whatsThis</name>
+        <string>Threshold for raising edge.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>10</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>5</number>
+        </property>
+        <widget>
+            <class>QButtonGroup</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ButtonGroup36</cstring>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>Box</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Sunken</enum>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Scale</string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>10</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>5</number>
+                </property>
+                <widget>
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>autoScaleBut</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Au&amp;tomatic</string>
+                    </property>
+                    <property stdset="1">
+                        <name>checked</name>
+                        <bool>true</bool>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Select this entry if you want automatic scaling of the vertical scale in the transient recorder.</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout12</cstring>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>5</number>
+                        </property>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel9_2</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>minimumSize</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QCheckBox</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ui_includeZero</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Include zero line</string>
+                            </property>
+                            <property stdset="1">
+                                <name>checked</name>
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer14</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </hbox>
+                </widget>
+                <widget>
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>manualScaleBut</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>&amp;Manual</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Select this entry if you want to set the minimum and maximum value for the scale manually. If selected enter the minimum and maximum values below.</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout15_2</cstring>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>5</number>
+                        </property>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel9</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>minimumSize</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel10</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>M&amp;inimum:</string>
+                            </property>
+                            <property>
+                                <name>buddy</name>
+                                <cstring>ui_scaleMin</cstring>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QLineEdit</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ui_scaleMin</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>sizePolicy</name>
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                </sizepolicy>
+                            </property>
+                            <property stdset="1">
+                                <name>minimumSize</name>
+                                <size>
+                                    <width>60</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                            <property stdset="1">
+                                <name>maximumSize</name>
+                                <size>
+                                    <width>60</width>
+                                    <height>32767</height>
+                                </size>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>-3.999</string>
+                            </property>
+                            <property stdset="1">
+                                <name>maxLength</name>
+                                <number>12</number>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Enter the minimum scale value here.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel10_2</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Ma&amp;ximum:</string>
+                            </property>
+                            <property>
+                                <name>buddy</name>
+                                <cstring>ui_scaleMax</cstring>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QLineEdit</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ui_scaleMax</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>sizePolicy</name>
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                </sizepolicy>
+                            </property>
+                            <property stdset="1">
+                                <name>minimumSize</name>
+                                <size>
+                                    <width>60</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                            <property stdset="1">
+                                <name>maximumSize</name>
+                                <size>
+                                    <width>60</width>
+                                    <height>32767</height>
+                                </size>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>3.999</string>
+                            </property>
+                            <property stdset="1">
+                                <name>maxLength</name>
+                                <number>12</number>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Enter the maximum scale value here.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer7</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </hbox>
+                </widget>
+            </vbox>
+        </widget>
+        <widget>
+            <class>QButtonGroup</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ButtonGroup37</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Window</string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>10</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>5</number>
+                </property>
+                <widget row="0"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel11</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>&amp;Size:</string>
+                    </property>
+                    <property stdset="1">
+                        <name>alignment</name>
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                    <property>
+                        <name>buddy</name>
+                        <cstring>ui_winSize</cstring>
+                    </property>
+                    <property>
+                        <name>hAlign</name>
+                    </property>
+                </widget>
+                <widget row="1"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel12</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Max. &amp;length:</string>
+                    </property>
+                    <property stdset="1">
+                        <name>alignment</name>
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                    <property>
+                        <name>buddy</name>
+                        <cstring>winLength</cstring>
+                    </property>
+                    <property>
+                        <name>hAlign</name>
+                    </property>
+                </widget>
+                <spacer row="0"  column="3" >
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer8</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget row="0"  column="2" >
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Seconds</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Minutes</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Hours</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Days</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>sizeUnit</cstring>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Unit for visible window width.</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="2" >
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Seconds</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Minutes</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Hours</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Days</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>lengthUnit</cstring>
+                    </property>
+                </widget>
+                <widget row="0"  column="1" >
+                    <class>QSpinBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ui_winSize</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>maxValue</name>
+                        <number>99999</number>
+                    </property>
+                    <property stdset="1">
+                        <name>minValue</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>value</name>
+                        <number>600</number>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Size (in time) of the visible part of the recorder graph. See unit to the right.</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="1" >
+                    <class>QSpinBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>winLength</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>maxValue</name>
+                        <number>99999</number>
+                    </property>
+                    <property stdset="1">
+                        <name>minValue</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>value</name>
+                        <number>3600</number>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Maximum length (in time) of the recorder graph. If this time is reached the first recorded values will be discarded. It will not stop recording.</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer5</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+    </vbox>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>PrefWidget</class>
+        <header location="global">prefwidget.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>1</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+    </customwidget>
+</customwidgets>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>manualScaleBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel10</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>manualScaleBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ui_scaleMin</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>manualScaleBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel10_2</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>manualScaleBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ui_scaleMax</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>autoScaleBut</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ui_includeZero</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>autoScaleBut</tabstop>
+    <tabstop>manualScaleBut</tabstop>
+    <tabstop>ui_scaleMin</tabstop>
+    <tabstop>ui_scaleMax</tabstop>
+    <tabstop>ui_winSize</tabstop>
+    <tabstop>sizeUnit</tabstop>
+    <tabstop>winLength</tabstop>
+    <tabstop>lengthUnit</tabstop>
+</tabstops>
+</UI>

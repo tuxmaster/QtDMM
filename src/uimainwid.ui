@@ -1,0 +1,134 @@
+<!DOCTYPE UI><UI>
+<class>UIMainWid</class>
+<author>Matthias Toussaint</author>
+<widget>
+    <class>QFrame</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>UIMainWid</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>605</width>
+            <height>496</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>QtDMM 0.4.1</string>
+    </property>
+    <property stdset="1">
+        <name>icon</name>
+        <pixmap>image0</pixmap>
+    </property>
+    <property stdset="1">
+        <name>iconText</name>
+        <string>QtDMM 0.4</string>
+    </property>
+    <property stdset="1">
+        <name>frameShape</name>
+        <enum>StyledPanel</enum>
+    </property>
+    <property stdset="1">
+        <name>frameShadow</name>
+        <enum>Raised</enum>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>5</number>
+        </property>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout5</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>5</number>
+                </property>
+                <widget>
+                    <class>DMMGraph</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ui_graph</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>7</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>minimumSize</name>
+                        <size>
+                            <width>0</width>
+                            <height>60</height>
+                        </size>
+                    </property>
+                    <property stdset="1">
+                        <name>cursor</name>
+                        <cursor>0</cursor>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>This is the plotting area for the transient recorder. It is widely configurable by clicking the &lt;b&gt;config ...&lt;/b&gt; button to the right. Data aquisition may be started by hand, at a specific time or automatically triggered by the measured value itself &lt;i&gt;(See configuration dialog)&lt;/i&gt;&lt;p&gt;
+The maximum resolution for data aquisition is 1/10th of a second, but may also be configured to sample once a week or what ever you want.
+&lt;p&gt;
+&lt;b&gt;Note:&lt;/b&gt; Connecting to the DMM as well as a change of the measuring unit automatically clears the graph.</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </vbox>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>DMMGraph</class>
+        <header location="local">dmmgraph.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image1</pixmap>
+    </customwidget>
+</customwidgets>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="1407">789ca591cd4e84301446f73c453377478c0303c834c647d0b834312e4a692985d144c78531bebbbd947f8a43e22d243de9e1bb6dd9fbe4e9f19ef87befe3ccce25275cb177e2e79fa7d3d7f3cbddb7b78b0ec43c614cc2dd95b7bb269c3cbcbd0a9c839943d0146269313c4a8958593c04166bc430c081c811231a1d238a9821262ca1094364886996d23443148834a6098d1135224ff80d4f10738bb9b02811a5ec76a52c0a61b1b088d51ce7420d0eb86aea0073158c1d6099ab384c1d47aba593cfcbe5982f7125b733703ab86e9dd65ccf81cb39a3a4959c76f58f9c0de712cdf8b7b3a1d7867fb1e59f4ae990a68e2c7a6968c6e74e215b41f4e5ead50bcabc6539736c44f7bd52ca286539cbe922b436af6862168e1586ade8652fa6fa2e5af7590b071774eb68ed3a976a14dd5e8cd615462d7b0d0a4055552b0e14c0b11ac9b51f29cde517f558723b75dd490b87af153a3fb7de2f3bab68bc</data>
+    </image>
+    <image>
+        <name>image1</name>
+        <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
+    </image>
+</images>
+</UI>

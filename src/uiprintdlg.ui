@@ -1,0 +1,381 @@
+<!DOCTYPE UI><UI>
+<class>UIPrintDlg</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>UIPrintDlg</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>531</width>
+            <height>311</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>QtDMM: Print graph ...</string>
+    </property>
+    <property stdset="1">
+        <name>icon</name>
+        <pixmap>image0</pixmap>
+    </property>
+    <property stdset="1">
+        <name>iconText</name>
+        <string>Print ...</string>
+    </property>
+    <property stdset="1">
+        <name>sizeGripEnabled</name>
+        <bool>true</bool>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout2</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>5</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel3</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>5</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>font</name>
+                        <font>
+                            <pointsize>12</pointsize>
+                            <bold>1</bold>
+                        </font>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Printer:</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>printerLabel</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>5</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>NoFrame</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShadow</name>
+                        <enum>Sunken</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Please select printer -&gt;</string>
+                    </property>
+                    <property stdset="1">
+                        <name>indent</name>
+                        <number>8</number>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>This label shows the currently selected printer. Click the button to the right to configure the printer. &lt;i&gt;(You have to select a printer in order to be able to print)&lt;/i&gt;</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>configBut</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Configure ...</string>
+                    </property>
+                    <property stdset="1">
+                        <name>autoDefault</name>
+                        <bool>false</bool>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Click here to configure the printer.</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget>
+            <class>QFrame</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Frame5</cstring>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>WinPanel</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Raised</enum>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>10</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>5</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Title</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>printTitle</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>frame</name>
+                        <bool>true</bool>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Enter a title for the document &lt;i&gt;(Optional)&lt;/i&gt;</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Comment</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QMultiLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>printComment</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>WinPanel</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShadow</name>
+                        <enum>Sunken</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>lineWidth</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>wordWrap</name>
+                        <enum>WidgetWidth</enum>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Here you may enter an comment which will be printed on top of the page &lt;i&gt;(Optional)&lt;/i&gt;</string>
+                    </property>
+                </widget>
+            </vbox>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout28</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>4</number>
+                </property>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>helpBut</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>minimumSize</name>
+                        <size>
+                            <width>26</width>
+                            <height>26</height>
+                        </size>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>pixmap</name>
+                        <pixmap>image1</pixmap>
+                    </property>
+                    <property stdset="1">
+                        <name>autoDefault</name>
+                        <bool>false</bool>
+                    </property>
+                    <property>
+                        <name>toolTip</name>
+                        <string>Direct help (SHIFT+F1)</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>printBut</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>&amp;Print</string>
+                    </property>
+                    <property stdset="1">
+                        <name>default</name>
+                        <bool>true</bool>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Click here to print.</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>cancelBut</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>&amp;Cancel</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Click here to abort printing.</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </vbox>
+</widget>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="1407">789ca591cb4e84301486f73c453367478c0373894e8c8fa07169625c94d2520aa3898e0b637c77fb53ee148764ce81a45ffaf19f02eb903d3f3db0701d7c9ef829174c68fec1c2f4eb78fc7e79bdff0956db0db357bc63f1ea2a585d33c11edfdf24d664d7145505cc1dc6b74a010b879bc861098c23345000b707343001ee391ac88137091a2881871d1a6880628f06a60e53e95001956a4ea51d4ae9307388aa5ee74c750ef96ae810f715f51de289af040d1dcfa8a9938ecbe7d827b193ba15791dec3ba736e773e87c4e2f6926a7defd2767c17bc9aa2f7616cc5af02f96fc53a53cd2d051592b75c3c4d8c9542dc8b67cb35a41db3bcf478e8b689ed75a5b25cf47394d8431f69655ccc471427714339dc5753bc598366be260c3d48e31bef7d29562ea0f634c81a8e9ac4e212a8a62c6a18c04aa927ce751ca7efcacec4b7ea72c1b69e288b982f37b17fc01c4ad690c</data>
+    </image>
+    <image>
+        <name>image1</name>
+        <data format="XPM.GZ" length="676">789ca5d1c10ac2300c00d07bbf222cb7219dce1d04f113148f827868a6a08739d07910f1df6dbab4a3dbf4623668b347d3accd52d86dd79066eade98e65242793637488f8faa7aee0fab974af21cec5bc02c99a84443099bfa7ae239da394e5d706a7cba98734a9c16861fb77034fe10f4b9e1880403905010f440baa54ed08905374482f2694498486af6c412f9cd7a82a18b8160804888c348179d90fc92268a8558a4b1f844c99f43bf9a6ef7a261354f5fee47168ddd9c2f3494287ec87ba93ea6ea882a</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>printBut</sender>
+        <signal>clicked()</signal>
+        <receiver>UIPrintDlg</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>cancelBut</sender>
+        <signal>clicked()</signal>
+        <receiver>UIPrintDlg</receiver>
+        <slot>reject()</slot>
+    </connection>
+</connections>
+</UI>

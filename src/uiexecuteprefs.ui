@@ -1,0 +1,471 @@
+<!DOCTYPE UI><UI>
+<class>UIExecutePrefs</class>
+<widget>
+    <class>PrefWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>UIExecutePrefs</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>297</width>
+            <height>221</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>QFrameForm</string>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>10</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>5</number>
+        </property>
+        <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ui_executeCommand</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Execute external command at given threshold</string>
+            </property>
+            <property>
+                <name>whatsThis</name>
+                <string>Check this if you want QtDMM to execute an external command when given thresholds are reached (Falling or raising edge).</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QButtonGroup</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ButtonGroup9</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>Box</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Sunken</enum>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Threshold</string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>10</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>5</number>
+                </property>
+                <widget row="1"  column="1" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel8_2_2_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Threshold:</string>
+                    </property>
+                </widget>
+                <widget row="0"  column="2" >
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ui_execRaisingThreshold</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>maximumSize</name>
+                        <size>
+                            <width>80</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>0</string>
+                    </property>
+                    <property stdset="1">
+                        <name>maxLength</name>
+                        <number>12</number>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Threshold for raising edge.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+                    </property>
+                </widget>
+                <widget row="0"  column="1" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel7_2_2_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Threshold:</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="2" >
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ui_execFallingThreshold</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>maximumSize</name>
+                        <size>
+                            <width>80</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>0.0</string>
+                    </property>
+                    <property stdset="1">
+                        <name>maxLength</name>
+                        <number>12</number>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Threshold for falling edge.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+                    </property>
+                </widget>
+                <widget row="0"  column="0" >
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ui_execRaising</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>&amp;Raising edge</string>
+                    </property>
+                    <property stdset="1">
+                        <name>checked</name>
+                        <bool>true</bool>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Call command on raising edge.</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="0" >
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ui_execFalling</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>&amp;Falling edge</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Call command on falling edge.</string>
+                    </property>
+                </widget>
+                <spacer row="1"  column="3" >
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer4_2_2_2_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>MinimumExpanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <spacer row="0"  column="3" >
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer3_3_2_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>MinimumExpanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </grid>
+        </widget>
+        <widget>
+            <class>QButtonGroup</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ButtonGroup10</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Command</string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>10</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>5</number>
+                </property>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout32_2_2</cstring>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>5</number>
+                        </property>
+                        <widget>
+                            <class>QCheckBox</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ui_disconnectExec</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>sizePolicy</name>
+                                <sizepolicy>
+                                    <hsizetype>3</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                </sizepolicy>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Disconnect before executing command</string>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Check this if you want QtDMM to disconnect (close the serial port) before executing the external command.</string>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer1_9_2_2</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </hbox>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout30_2_2</cstring>
+                    </property>
+                    <property>
+                        <name>layoutSpacing</name>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>5</number>
+                        </property>
+                        <widget>
+                            <class>QLineEdit</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ui_commandExec</cstring>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Enter here the external command to be executed.</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ui_browseExec</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>minimumSize</name>
+                                <size>
+                                    <width>24</width>
+                                    <height>24</height>
+                                </size>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string></string>
+                            </property>
+                            <property stdset="1">
+                                <name>pixmap</name>
+                                <pixmap>image0</pixmap>
+                            </property>
+                            <property stdset="1">
+                                <name>autoDefault</name>
+                                <bool>false</bool>
+                            </property>
+                            <property>
+                                <name>toolTip</name>
+                                <string>Browse</string>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Here you can browse your harddisk for the external command (Altenative to directly typing it into the field to the left).</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+            </vbox>
+        </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer1_8</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+    </vbox>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>PrefWidget</class>
+        <header location="global">prefwidget.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>1</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image1</pixmap>
+    </customwidget>
+</customwidgets>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="469">789c9590bd0ac2301080f73cc5d1db8a585b5a1dc447501c0571b85c023ab482d641c4773797c4fe6dfd9221df47e042b2144ec73da4997ab6d4de18f84a0f48cdabaedfe7cbeea3927c0d6e6f204f162a5902c3e1de5839a33be3ca236a45a9a49c4a51f2ca44c4a246942b2eb812d5a2a63285f1ca5ead2c3f65c2ac868e4943d29a30d035eda000f60d878446c83db1211b877fb0c538c3b790fe6d9cfa1653d7c629de1b30e70fbe5bf503eed56990</data>
+    </image>
+    <image>
+        <name>image1</name>
+        <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>ui_executeCommand</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ButtonGroup9</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>ui_executeCommand</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ButtonGroup10</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>ui_executeCommand</tabstop>
+    <tabstop>ui_execRaising</tabstop>
+    <tabstop>ui_execRaisingThreshold</tabstop>
+    <tabstop>ui_execFalling</tabstop>
+    <tabstop>ui_execFallingThreshold</tabstop>
+    <tabstop>ui_disconnectExec</tabstop>
+    <tabstop>ui_commandExec</tabstop>
+    <tabstop>ui_browseExec</tabstop>
+</tabstops>
+</UI>
