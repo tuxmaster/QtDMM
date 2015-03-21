@@ -20,9 +20,10 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#include "colorbutton.h"
 #include <QtGui>
 #include <QtWidgets>
+
+#include "colorbutton.h"
 
 ColorButton::ColorButton( QWidget *parent, const char *name ) : QPushButton( parent, name )
 {

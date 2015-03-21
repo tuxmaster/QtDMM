@@ -20,14 +20,9 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#include <qcolordialog.h>
-#include <qdir.h>
-#include <qlabel.h>
-#include <qmessagebox.h>
+
+#include <QtWidgets>
 #include <QtPrintSupport>
-#include <qpushbutton.h>
-//Added by qt3to4:
-#include <QPixmap>
 
 #include "configdlg.h"
 #include "configitem.h"

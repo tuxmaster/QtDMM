@@ -20,12 +20,14 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#include "configitem.h"
+
 #include <QtGui>
 #include <QtWidgets>
 
-ConfigItem::ConfigItem( int id, const QPixmap & pixmap, const QString & label, Q3ListView *parent ) :
-			 QListViewItem( parent, label ), m_id( id )
+#include "configitem.h"
+
+ConfigItem::ConfigItem( int id, const QPixmap & pixmap, const QString & label, QListWidget *parent ) :
+			 QListWidgetItem( parent, label ), m_id( id )
 {
   setPixmap( 0, pixmap );
 }
