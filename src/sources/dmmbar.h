@@ -36,9 +36,6 @@ class DMMBar : public QWidget
 
 	protected:
 	  double	m_value;
-
-	  void		paintEvent( QPaintEvent * ) Q_DECL_OVERRIDE;
-
 };
 
 #endif // DMMBAR_HH

@@ -20,35 +20,19 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#include <dmmbar.h>
-//Added by qt3to4:
-#include <QPaintEvent>
+#include <QtGui>
 
-DMMBar::DMMBar( QWidget *parent, const char *name ) :
-  QWidget( parent, name ),
+#include "dmmbar.h"
+
+DMMBar::DMMBar( QWidget *parent, const char *name ) : QWidget( parent, name ),
   m_value( 0.0 )
 {
 }
 
-DMMBar::~DMMBar()
-{
-}
-
-void
-DMMBar::setValue( double value )
+void DMMBar::setValue( double value )
 {
   while (value > 4)
-  {
-    value /= 10.;
-  }
-  
+	value /= 10.;
   m_value = value;
-  
   update();
-}
-
-void
-DMMBar::paintEvent( QPaintEvent * )
-{
-  
 }
