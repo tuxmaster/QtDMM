@@ -23,38 +23,35 @@
 #ifndef PREFWIDGET_HH
 #define PREFWIDGET_HH
 
-#include <qwidget.h>
-#include <qpixmap.h>
+#include <QtGui>
 
 class SimpleCfg;
 
 class PrefWidget : public QWidget
 {
   Q_OBJECT
-public:
-  PrefWidget( QWidget *parent=0, const char *name=0 );
-  virtual ~PrefWidget();
+	public:
+	  PrefWidget( QWidget *parent=0, const char *name=0 );
+	  QString		label() const { return m_label; }
+	  QString		description() const { return m_description; }
+	  QPixmap		pixmap() const { return *m_pixmap; }
 
-  QString label() const { return m_label; }
-  QString description() const { return m_description; }
-  QPixmap pixmap() const { return *m_pixmap; }
-  
-  void setId( int id ) { m_id = id; }
-  int id() const { return m_id; }
-  
-  void setCfg( SimpleCfg *cfg ) { m_cfg = cfg; }
-  
-public slots:
-  virtual void defaultsSLOT() = 0;
-  virtual void factoryDefaultsSLOT() = 0;
-  virtual void applySLOT() = 0;
+	  void			setId( int id ) { m_id = id; }
+	  int			id() const { return m_id; }
 
-protected:
-  SimpleCfg *m_cfg;
-  QString    m_label;
-  QString    m_description;
-  QPixmap   *m_pixmap;
-  int        m_id;
+	  void			setCfg( SimpleCfg *cfg ) { m_cfg = cfg; }
+
+	public Q_SLOTS:
+	  virtual void	defaultsSLOT() = 0;
+	  virtual void	factoryDefaultsSLOT() = 0;
+	  virtual void	applySLOT() = 0;
+
+	protected:
+	  SimpleCfg		*m_cfg;
+	  QString		m_label;
+	  QString		m_description;
+	  QPixmap		*m_pixmap;
+	  int			m_id;
 
 };
 

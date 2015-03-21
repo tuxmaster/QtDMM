@@ -23,32 +23,33 @@
 #ifndef SCALEPREFS_HH
 #define SCALEPREFS_HH
 
-#include <uiscaleprefs.h>
+#include <QtGui>
+
+#include "uiscaleprefs.h"
 
 class ScalePrefs : public UIScalePrefs
 {
   Q_OBJECT
-public:
-  ScalePrefs( QWidget *parent=0, const char *name=0 );
-  virtual ~ScalePrefs();
+	public:
+	  ScalePrefs( QWidget *parent=0, const char *name=0 );
 
-  bool automaticScale() const;
-  bool includeZero() const;
-  double scaleMin() const;
-  double scaleMax() const;
-  int windowSeconds() const;
-  int totalSeconds() const;
-  
-public slots:
-  virtual void defaultsSLOT();
-  virtual void factoryDefaultsSLOT();
-  virtual void applySLOT();
-  
-  void setAutoScaleSLOT( bool autoScale );
-  void zoomInSLOT( double fac );
-  void zoomOutSLOT( double fac );
-  void setGraphSizeSLOT( int size, int length );
-  
+	  bool			automaticScale() const;
+	  bool			includeZero() const;
+	  double		scaleMin() const;
+	  double		scaleMax() const;
+	  int			windowSeconds() const;
+	  int			totalSeconds() const;
+
+	public Q_SLOTS:
+	  virtual void	defaultsSLOT();
+	  virtual void	factoryDefaultsSLOT();
+	  virtual void	applySLOT();
+
+	  void			setAutoScaleSLOT( bool autoScale );
+	  void			zoomInSLOT( double fac );
+	  void			zoomOutSLOT( double fac );
+	  void			setGraphSizeSLOT( int size, int length );
+
 };
 
 #endif // SCALEPREFS_HH

@@ -31,23 +31,23 @@ class QPainter;
 class ColorButton : public QPushButton
 {
   Q_OBJECT
-public:
-  ColorButton( QWidget *parent=0, const char *name=0 );
+	public:
+	  ColorButton( QWidget *parent=0, const char *name=0 );
 
 
-  QColor	color() const;
-  void		setColor( const QColor & );
+	  QColor	color() const;
+	  void		setColor( const QColor & );
 
-Q_SIGNALS:
-  void		valueChanged();
-  void		valueChanged( const QColor & );
+	Q_SIGNALS:
+	  void		valueChanged();
+	  void		valueChanged( const QColor & );
 
-protected Q_SLOTS:
-  void		clickedSLOT();
+	protected Q_SLOTS:
+	  void		clickedSLOT();
 
-protected:
-  QColor	m_color;
-//  void drawButtonLabel( QPainter * );
+	protected:
+	  QColor	m_color;
+	//  void drawButtonLabel( QPainter * );
 
 };
 

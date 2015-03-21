@@ -23,31 +23,31 @@
 #ifndef INTEGRATIONPREFS_HH
 #define INTEGRATIONPREFS_HH
 
-#include <uiintegrationprefs.h>
+#include <QtGui>
+
+#include "uiintegrationprefs.h"
 
 class IntegrationPrefs : public UIIntegrationPrefs
 {
   Q_OBJECT
-public:
-  IntegrationPrefs( QWidget *parent=0, const char *name=0 );
-  virtual ~IntegrationPrefs();
-  
-  double intScale() const;
-  double intThreshold() const;
-  double intOffset() const;
-  bool   showIntegration() const;
-  QColor intColor() const;
-  QColor intThresholdColor() const;
-  int    intLineWidth() const;
-  int    intLineMode() const;
-  int    intPointMode() const;
-  void   setThreshold( double );
+	public:
+	  IntegrationPrefs( QWidget *parent=0, const char *name=0 );
+	  double		intScale() const;
+	  double		intThreshold() const;
+	  double		intOffset() const;
+	  bool			showIntegration() const;
+	  QColor		intColor() const;
+	  QColor		intThresholdColor() const;
+	  int			intLineWidth() const;
+	  int			intLineMode() const;
+	  int			intPointMode() const;
+	  void			setThreshold( double );
 
-public slots:
-  virtual void defaultsSLOT();
-  virtual void factoryDefaultsSLOT();
-  virtual void applySLOT();
-  
+	public Q_SLOTS:
+	  virtual void	defaultsSLOT();
+	  virtual void	factoryDefaultsSLOT();
+	  virtual void	applySLOT();
+
 };
 
 #endif // INTEGRATIONPREFS_HH

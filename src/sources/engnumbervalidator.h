@@ -23,19 +23,18 @@
 #ifndef ENGNUMBERVALIDATOR_HH
 #define ENGNUMBERVALIDATOR_HH
 
-#include <qvalidator.h>
+#include <QtCore>
+#include <QtGui>
 
 class EngNumberValidator : public QValidator
 {
-public:
-  EngNumberValidator( QObject *parent=0, const char *name=0 );
-  virtual ~EngNumberValidator();
-  
-  QValidator::State validate( QString &, int & ) const;
-  
-  static double value( const QString & );
-  static QString engValue( double );
-  
+	public:
+	  EngNumberValidator( QObject *parent=0, const char *name=0 );
+	  QValidator::State	validate( QString &, int & ) const Q_DECL_OVERRIDE;
+
+	  static double		value( const QString & );
+	  static QString	engValue( double );
+
 };
-  
+
 #endif // ENGNUMBERVALIDATOR_HH

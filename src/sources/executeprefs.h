@@ -23,29 +23,29 @@
 #ifndef EXECUTEPREFS_HH
 #define EXECUTEPREFS_HH
 
-#include <uiexecuteprefs.h>
+#include <QtCore>
+
+#include "uiexecuteprefs.h"
 
 class ExecutePrefs : public UIExecutePrefs
 {
   Q_OBJECT
-public:
-  ExecutePrefs( QWidget *parent=0, const char *name=0 );
-  virtual ~ExecutePrefs();
+	public:
+	  ExecutePrefs( QWidget *parent=0, const char *name=0 );
+	  bool			startExternal() const;
+	  bool			externalFalling() const;
+	  double		externalThreshold() const;
+	  bool			disconnectExternal() const;
+	  QString		externalCommand() const;
+	  void			setThreshold( double );
 
-  bool startExternal() const;
-  bool externalFalling() const;
-  double externalThreshold() const;
-  bool disconnectExternal() const;
-  QString externalCommand() const;
-  void setThreshold( double );
-  
-public slots:
-  virtual void defaultsSLOT();
-  virtual void factoryDefaultsSLOT();
-  virtual void applySLOT();
-  
-protected slots:
-  void browseExecSLOT();
+	public Q_SLOTS:
+	  virtual void	defaultsSLOT();
+	  virtual void	factoryDefaultsSLOT();
+	  virtual void	applySLOT();
+
+	protected Q_SLOTS:
+	  void			browseExecSLOT();
 
 };
 

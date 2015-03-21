@@ -43,7 +43,6 @@ HEADERS   = sources/colorbutton.h \
 	    sources/mainwin.h \
 	    sources/prefwidget.h \
 	    sources/printdlg.h \
-	    sources/qcleanuphandler.h \
 	    sources/readerthread.h \
 	    sources/readevent.h \
 	    sources/recorderprefs.h \

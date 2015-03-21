@@ -23,29 +23,27 @@
 #ifndef PRINTDLG_HH
 #define PRINTDLG_HH
 
-#include <uiprintdlg.h>
-#include <qlineedit.h>
-#include <q3multilineedit.h>
+#include <QtGui>
+#include "uiprintdlg.h"
 
+
+class QPrinter;
 class PrintDlg : public UIPrintDlg
 {
   Q_OBJECT
-public:
-  PrintDlg( QWidget *parent=0, const char *name=0 );
-  virtual ~PrintDlg();
+	public:
+	  PrintDlg( QWidget *parent=0, const char *name=0 );
+	  void		setPrinter( QPrinter * prt );
+	  QString	title() const { return printTitle->text(); }
+	  QString	comment() const { return printComment->text(); }
 
-  void setPrinter( QPrinter * prt );
-    
-  QString title() const { return printTitle->text(); }
-  QString comment() const { return printComment->text(); }
-  
-protected:
-  QPrinter *m_printer;
-  
-protected slots:
-  void configSLOT();
-  void helpSLOT();
-  void createPrinterString();
+	protected:
+	  QPrinter	*m_printer;
+
+	protected Q_SLOTS:
+	  void		configSLOT();
+	  void		helpSLOT();
+	  void		createPrinterString();
 
 };
 

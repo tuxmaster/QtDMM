@@ -23,31 +23,32 @@
 #ifndef GRAPHPREFS_HH
 #define GRAPHPREFS_HH
 
-#include <uigraphprefs.h>
+#include <QtGui>
+#include "uigraphprefs.h"
 
 class GraphPrefs : public UIGraphPrefs
 {
   Q_OBJECT
-public:
-  GraphPrefs( QWidget *parent=0, const char *name=0 );
-  virtual ~GraphPrefs();
-  
-  QColor bgColor() const;
-  QColor gridColor() const;
-  QColor dataColor() const;
-  QColor startColor() const;
-  QColor externalColor() const;
-  QColor cursorColor() const;
-  int    lineWidth() const;
-  int    lineMode() const;
-  int    pointMode() const;
-  bool   crosshair() const;
+	public:
+	  GraphPrefs( QWidget *parent=0, const char *name=0 );
 
-public slots:
-  virtual void defaultsSLOT();
-  virtual void factoryDefaultsSLOT();
-  virtual void applySLOT();
-  
+
+	  QColor		bgColor() const;
+	  QColor		gridColor() const;
+	  QColor		dataColor() const;
+	  QColor		startColor() const;
+	  QColor		externalColor() const;
+	  QColor		cursorColor() const;
+	  int			lineWidth() const;
+	  int			lineMode() const;
+	  int			pointMode() const;
+	  bool			crosshair() const;
+
+	public Q_SLOTS:
+	  virtual void	defaultsSLOT();
+	  virtual void	factoryDefaultsSLOT();
+	  virtual void	applySLOT();
+
 };
 
 #endif // GRAPHPREFS_HH

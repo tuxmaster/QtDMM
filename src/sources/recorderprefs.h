@@ -23,31 +23,28 @@
 #ifndef RECORDERPREFS_HH
 #define RECORDERPREFS_HH
 
-#include <uirecorderprefs.h>
-#include <dmmgraph.h>
+#include "uirecorderprefs.h"
+#include "dmmgraph.h"
 
 class RecorderPrefs : public UIRecorderPrefs
 {
   Q_OBJECT
-public:
-  RecorderPrefs( QWidget *parent=0, const char *name=0 );
-  virtual ~RecorderPrefs();
-  
-  DMMGraph::SampleMode sampleMode() const;
-  int sampleStep() const;
-  int sampleLength() const;
-  double fallingThreshold() const;
-  double raisingThreshold() const;
-  QTime startTime() const;
-  void setThreshold( double );
-  
-public slots:
-  virtual void defaultsSLOT();
-  virtual void factoryDefaultsSLOT();
-  virtual void applySLOT();
+	public:
+	  RecorderPrefs( QWidget *parent=0, const char *name=0 );
+	  DMMGraph::SampleMode	sampleMode() const;
+	  int					sampleStep() const;
+	  int					sampleLength() const;
+	  double				fallingThreshold() const;
+	  double				raisingThreshold() const;
+	  QTime					startTime() const;
+	  void					setThreshold( double );
 
-  void setSampleTimeSLOT( int sampleTime );
-  
+	public Q_SLOTS:
+	  virtual void			defaultsSLOT();
+	  virtual void			factoryDefaultsSLOT();
+	  virtual void			applySLOT();
+	  void					setSampleTimeSLOT( int sampleTime );
+
 };
 
 #endif // RECORDERPREFS_HH

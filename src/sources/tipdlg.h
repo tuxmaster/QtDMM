@@ -23,45 +23,45 @@
 #ifndef TIPDLG_HH
 #define TIPDLG_HH
 
-#include <uitipdlg.h>
-//Added by qt3to4:
-#include <QCloseEvent>
+#include <QtCore>
+
+#include "uitipdlg.h"
 
 class TipDlg : public UITipDlg
 {
   Q_OBJECT
-public:
-  TipDlg( QWidget *parent=0, const char *name=0 );
-  virtual ~TipDlg();
-  
-  bool showTips() const;
-  
-  static const char *s_tipText[];
-  
-  void setCurrentTip( int c );
-  int currentTip() const { return m_curTip; }
+	public:
+	  TipDlg( QWidget *parent=0, const char *name=0 );
 
-signals:
-	void showTips( bool );
-	void currentTip( int );
-  
-public slots:
-  void setShowTipsSLOT( bool );
-	
-protected:
-  int m_numTips;
-  int m_curTip;
-  QString m_formatTip;
-	
-  void showTipText();
-  void closeEvent( QCloseEvent * );
-  
-protected slots:
-  void nextSLOT();
-  void previousSLOT();
-  void closeSLOT();
-  void showTipsSLOT( bool );
-  
+
+	  bool				showTips() const;
+
+	  static const char	*s_tipText[];
+
+	  void				setCurrentTip( int c );
+	  int				currentTip() const { return m_curTip; }
+
+	Q_SIGNALS:
+	  void				showTips( bool );
+	  void				currentTip( int );
+
+	public Q_SLOTS:
+	  void				setShowTipsSLOT( bool );
+
+	protected:
+	  int				m_numTips;
+	  int				m_curTip;
+	  QString			m_formatTip;
+
+	  void				showTipText();
+	  void				closeEvent( QCloseEvent * )Q_DECL_OVERRIDE;
+
+	protected Q_SLOTS:
+	  void				nextSLOT();
+	  void				previousSLOT();
+	  void				closeSLOT();
+	  void				showTipsSLOT( bool );
+
 };
 
 #endif // TIPDLG_HH

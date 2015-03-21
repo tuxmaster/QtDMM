@@ -23,8 +23,8 @@
 #ifndef DMMPREFS_HH
 #define DMMPREFS_HH
 
-#include <uidmmprefs.h>
-#include <readevent.h>
+#include "uidmmprefs.h"
+#include "readevent.h"
 
 struct DMMInfo
 {
@@ -46,43 +46,42 @@ struct DMMInfo
 class DmmPrefs : public UIDmmPrefs
 {
   Q_OBJECT
-public:
-  DmmPrefs( QWidget *parent=0, const char *name=0 );
-  virtual ~DmmPrefs();
-  
-  int parity() const;
-  int bits() const;
-  int stopBits() const;
-  int speed() const;
-  int numValues() const;
-  bool externalSetup() const;
-  bool rts() const;
-  bool cts() const;
-  bool dsr() const;
-  bool dtr() const;
-  ReadEvent::DataFormat format() const;
-  int display() const;
-  QString dmmName() const;
-  QString device() const;
-  
-  QString deviceListText() const;
+	public:
+	  DmmPrefs( QWidget *parent=0, const char *name=0 );
 
-public slots:
-  virtual void defaultsSLOT();
-  virtual void factoryDefaultsSLOT();
-  virtual void applySLOT();
+	  int					parity() const;
+	  int					bits() const;
+	  int					stopBits() const;
+	  int					speed() const;
+	  int					numValues() const;
+	  bool					externalSetup() const;
+	  bool					rts() const;
+	  bool					cts() const;
+	  bool					dsr() const;
+	  bool					dtr() const;
+	  ReadEvent::DataFormat	format() const;
+	  int					display() const;
+	  QString				dmmName() const;
+	  QString				device() const;
 
-protected slots:
-  void modelSLOT( int );
-  void loadSLOT();
-  void saveSLOT();
-  // empty function as damn moc doesn't know about defines
-  void scanDevicesSLOT();
-  void externalSetupSLOT();
-  
-protected:
-  QString m_path;
-      
+	  QString				deviceListText() const;
+
+	public Q_SLOTS:
+	  virtual void			defaultsSLOT();
+	  virtual void			factoryDefaultsSLOT();
+	  virtual void			applySLOT();
+
+	protected Q_SLOTS:
+	  void					modelSLOT( int );
+	  void					loadSLOT();
+	  void					saveSLOT();
+	  // empty function as damn moc doesn't know about defines
+	  void					scanDevicesSLOT();
+	  void					externalSetupSLOT();
+
+	protected:
+	  QString				m_path;
+
 };
 
 #endif // DMMPREFS_HH

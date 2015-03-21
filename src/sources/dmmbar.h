@@ -23,24 +23,21 @@
 #ifndef DMMBAR_HH
 #define DMMBAR_HH
 
-#include <qwidget.h>
-//Added by qt3to4:
-#include <QPaintEvent>
+#include <QtGui>
 
 class DMMBar : public QWidget
 {
-  Q_OBJECT
-public:
-  DMMBar( QWidget *parent=0, const char *name=0 );
-  virtual ~DMMBar();
-  
-public slots:
-  void setValue( double );
+	Q_OBJECT
+	public:
+	  DMMBar( QWidget *parent=0, const char *name=0 );
 
-protected:
-  double m_value;
+	public Q_SLOTS:
+	  void		setValue( double );
 
-  void paintEvent( QPaintEvent * );
+	protected:
+	  double	m_value;
+
+	  void		paintEvent( QPaintEvent * ) Q_DECL_OVERRIDE;
 
 };
 

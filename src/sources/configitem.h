@@ -23,21 +23,18 @@
 #ifndef CONFIGITEM_HH
 #define CONFIGITEM_HH
 
-#include <q3listview.h>
-//Added by qt3to4:
-#include <QPixmap>
+#include <QtGui>
+#include <QtWidgets>
 
-class ConfigItem : public Q3ListViewItem
+class ConfigItem : public QListViewItem
 {
-public:
-  ConfigItem( int id, const QPixmap &, const QString & label, Q3ListView *parent );
-  virtual ~ConfigItem();
-  
-  int id() const { return m_id; }
+	public:
+	  ConfigItem( int id, const QPixmap &, const QString & label, QListView *parent );
+	  int	id() const { return m_id; }
 
-protected:
-  int m_id;
-  
+	protected:
+	  int	m_id;
+
 };
 
 #endif // CONFIGITEM_HH

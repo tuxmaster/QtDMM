@@ -23,9 +23,8 @@
 #ifndef READERTHREAD_HH
 #define READERTHREAD_HH
 
-#include <qobject.h>
-#include <qthread.h>
-#include <readevent.h>
+#include <QtCore>
+#include "readevent.h"
 
 #define FIFO_LENGTH 100
 
@@ -34,61 +33,61 @@ class QSocketNotifier;
 class ReaderThread : public QThread
 {
   Q_OBJECT
-      
-public:
-  enum ReadStatus
-  {
-    Ok,
-    Timeout,
-    Error,
-    NotConnected
-  };
-  
-  ReaderThread( QObject *receiver );
-  virtual ~ReaderThread();
-  
-  void run(); 
-  void startRead();
-  void setHandle( int handle );
-  void setFormat( ReadEvent::DataFormat );
-  
-  ReadStatus status() const { return m_status; }
-  void setNumValues( int num ) { m_numValues = num; }
-  
-signals:
-  void readEvent( const QByteArray &, int id, ReadEvent::DataFormat df );
-  
-protected:
-  QObject              *m_receiver;
-  int                   m_handle;
-  ReadStatus            m_status;
-  bool                  m_readValue;
-  char                  m_fifo[FIFO_LENGTH];
-  char                  m_buffer[FIFO_LENGTH];
-  ReadEvent::DataFormat m_format;
-  QSocketNotifier      *m_notifier;
-  int                   m_length;
-  bool                  m_sendRequest;
-  int                   m_id;
-  int                   m_numValues;
-  
-  void readDMM();
-  void readMetex14();
-  void readVoltcraft14Continuous();
-  void readVoltcraft15Continuous();
-  void readM9803RContinuous();
-  void readPeakTech10();
-  void readIsoTech();
-  void readQM1537Continuous();
-  void readVC820();
-  void readVC940();
-  void readRS22812Continuous();
-  
-  int formatLength() const;
-  bool checkFormat();
-  
-protected slots:
-  void socketNotifierSLOT( int );
+
+	public:
+	  enum ReadStatus
+	  {
+		Ok,
+		Timeout,
+		Error,
+		NotConnected
+	  };
+
+	  ReaderThread( QObject *receiver );
+
+
+	  void					run()Q_DECL_OVERRIDE;
+	  void					startRead();
+	  void					setHandle( int handle );
+	  void					setFormat( ReadEvent::DataFormat );
+
+	  ReadStatus			status() const { return m_status; }
+	  void					setNumValues( int num ) { m_numValues = num; }
+
+	Q_SIGNALS:
+	  void					readEvent( const QByteArray &, int id, ReadEvent::DataFormat df );
+
+	protected:
+	  QObject				*m_receiver;
+	  int                   m_handle;
+	  ReadStatus            m_status;
+	  bool                  m_readValue;
+	  char                  m_fifo[FIFO_LENGTH];
+	  char                  m_buffer[FIFO_LENGTH];
+	  ReadEvent::DataFormat	m_format;
+	  QSocketNotifier		*m_notifier;
+	  int                   m_length;
+	  bool                  m_sendRequest;
+	  int                   m_id;
+	  int                   m_numValues;
+
+	  void					readDMM();
+	  void					readMetex14();
+	  void					readVoltcraft14Continuous();
+	  void					readVoltcraft15Continuous();
+	  void					readM9803RContinuous();
+	  void					readPeakTech10();
+	  void					readIsoTech();
+	  void					readQM1537Continuous();
+	  void					readVC820();
+	  void					readVC940();
+	  void					readRS22812Continuous();
+
+	  int					formatLength() const;
+	  bool					checkFormat();
+
+	protected Q_SLOTS:
+	  void					socketNotifierSLOT( int );
 
 };
 
