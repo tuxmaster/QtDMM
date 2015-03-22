@@ -20,12 +20,11 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#include <readevent.h>
+#include <QtCore>
 
+#include "readevent.h"
 #include <iostream>
-//Added by qt3to4:
-#include <QCustomEvent>
-#include <QEvent>
+
 /*
 ReadEvent::ReadEvent( char *str, int len, int id, DataFormat df ) :
   QCustomEvent( QEvent::User ),

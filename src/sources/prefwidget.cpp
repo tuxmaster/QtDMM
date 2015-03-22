@@ -20,13 +20,9 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#include <prefwidget.h>
+#include "prefwidget.h"
 
-PrefWidget::PrefWidget( QWidget *parent, const char *name ) :
-  QWidget( parent, name )
+PrefWidget::PrefWidget( QWidget *parent, const char *name ) : QWidget( parent, name )
 {
 }
 
-PrefWidget::~PrefWidget()
-{
-}

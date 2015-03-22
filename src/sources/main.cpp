@@ -20,55 +20,50 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#include <qapplication.h>
-#include <mainwin.h>
+#include <QtGui>
 
+#include "mainwin.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <qstring.h>
+
 
 void myMessageOutput( QtMsgType type, const char *msg )
 {
   QString txt = msg;
-  
-  switch ( type ) {
-    case QtDebugMsg:
-      fprintf( stderr, "Debug: %s\n", msg );
-      //abort();
-      break;
-    case QtWarningMsg:     
-      if (txt.contains( "Absolute index" )) abort();
-      //fprintf( stderr, "Warning: %s\n", msg );
-      //abort();
-      break;
-    case QtFatalMsg:
-      fprintf( stderr, "Fatal: %s\n", msg );
-      //abort();                    // deliberately core dump
+
+  switch ( type )
+  {
+	case QtDebugMsg:
+	  fprintf( stderr, "Debug: %s\n", msg );
+	  //abort();
+	  break;
+	case QtWarningMsg:
+	  if (txt.contains( "Absolute index" )) abort();
+	  //fprintf( stderr, "Warning: %s\n", msg );
+	  //abort();
+	  break;
+	case QtFatalMsg:
+	  fprintf( stderr, "Fatal: %s\n", msg );
+	  //abort();                    // deliberately core dump
   }
 }
 
-int
-main( int argc, char **argv )
+int main( int argc, char **argv )
 {
   qInstallMsgHandler( myMessageOutput );
   QApplication app( argc, argv );
-  
+
   MainWin mainWin;
-  
-  // very simple parsing (tm)
-  for (int i=0; i<argc; ++i)
-  {
-    if (QString(argv[i]) == "--console")
-    {
-      mainWin.setConsoleLogging( true );
-      break;
-    }
-  }
-  
+
+  QCommandLineParser parser;
+  parser.process(app);
+  if(parser.isSet("console"))
+	mainWin.setConsoleLogging( true );
+
   app.setMainWidget( &mainWin );
   mainWin.show();
   mainWin.move( 100, 100 );
-  
+
   return app.exec();
 }
