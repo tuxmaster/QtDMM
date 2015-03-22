@@ -29,26 +29,13 @@
 #include "mainwid.h"
 #include "displaywid.h"
 
-#include <connect_on.xpm>
-#include <reset.xpm>
-#include <start.xpm>
-#include <stop.xpm>
-#include <clear.xpm>
-#include <print.xpm>
-#include <export.xpm>
-#include <import.xpm>
-#include <config.xpm>
-#include <quit.xpm>
-#include <help.xpm>
-#include <icon.xpm>
-
 #define VERSION_STRING "0.9.5"
 
 
 MainWin::MainWin( QWidget *parent, const char *name ) : QMainWindow( parent, name ),
   m_running( false )
 {
-  setIcon( QPixmap((const char **)icon_xpm) );
+  setIcon( QPixmap(":/Symbols/icon.xpm") );
 
   m_wid = new MainWid( this );
   setCentralWidget( m_wid );
@@ -71,12 +58,12 @@ MainWin::MainWin( QWidget *parent, const char *name ) : QMainWindow( parent, nam
   connectSLOT( false );
 
   m_error = new QLabel( statusBar() );
-  m_error->setFrameStyle( Q3Frame::Panel | Q3Frame::Sunken );
+  m_error->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   statusBar()->addWidget( m_error, 2, true );
   m_error->setLineWidth( 1 );
 
   m_info = new QLabel( statusBar() );
-  m_info->setFrameStyle( Q3Frame::Panel | Q3Frame::Sunken );
+  m_info->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   statusBar()->addWidget( m_info, 1, true );
   m_info->setLineWidth( 1 );
 
@@ -123,7 +110,7 @@ void MainWin::createActions()
 {
   // mt: changed all QAction into Q3Action
   m_connectAction = new QAction ( tr("Connect"),
-								  QIcon(QPixmap((const char **)connect_on_xpm)),
+								  QIcon(QPixmap(":/Symbols/connect_on.xpm")),
 								  tr("Connect"),
 								  Qt::CTRL+Qt::Key_C,
 								  this, 0, true );
@@ -131,35 +118,35 @@ void MainWin::createActions()
 	  " the serial connection to the dmm. If not connected the serial port is free"
 	  " and can be used by other software." ));
   m_resetAction   = new QAction ( tr("Reset"),
-								  QIcon(QPixmap((const char **)reset_xpm)),
+								  QIcon(QPixmap(":/Symbols/reset.xpm")),
 								  tr("Reset"),
 								  Qt::CTRL+Qt::Key_R,
 								  this );
   m_resetAction->setWhatsThis( tr("<b>Reset min/max values</b><p>The min/max values in the"
 	  " display will be reset. You can activate this option at any time." ));
   m_startAction   = new QAction ( tr("Start"),
-								  QIcon(QPixmap((const char **)start_xpm)),
+								  QIcon(QPixmap(":/Symbols/start.xpm")),
 								  tr("Start"),
 								  Qt::CTRL+Qt::Key_S,
 								  this );
   m_startAction->setWhatsThis( tr("<b>Start the recorder</b><p>If you are in manual mode"
 	  " this will start the recorder. Press F2 to set the recorder options" ));
   m_stopAction    = new QAction ( tr("Stop"),
-								  QIcon(QPixmap((const char **)stop_xpm)),
+								  QIcon(QPixmap(":/Symbols/stop.xpm")),
 								  tr("Stop"),
 								  Qt::CTRL+Qt::Key_X,
 								  this );
   m_stopAction->setWhatsThis( tr("<b>Stop the recorder</b><p>The recorder will be stopped."
 	  " This is independent from the start mode of the recorder" ));
   m_clearAction   = new QAction ( tr("Clear"),
-								  QIcon(QPixmap((const char **)clear_xpm)),
+								  QIcon(QPixmap(":/Symbols/clear.xpm")),
 								  tr("Clear"),
 								  Qt::Key_Delete,
 								  this );
   m_clearAction->setWhatsThis( tr("<b>Clear the recorder graph</b><p>If the recorder is already"
 	  " started it will clear the graph and continue recording." ));
   m_printAction   = new QAction ( tr("Print"),
-								  QIcon(QPixmap((const char **)print_xpm)),
+								  QIcon(QPixmap(":/Symbols/print.xpm")),
 								  tr("Print ..."),
 								  Qt::CTRL+Qt::Key_P,
 								  this );
@@ -168,7 +155,7 @@ void MainWin::createActions()
 	  " To be able to print you need at least one working postscript printer configured in your"
 	  " system. Printing into a file is also supported." ));
   m_exportAction   = new QAction ( tr("Export"),
-								  QIcon(QPixmap((const char **)export_xpm)),
+								  QIcon(QPixmap(":/Symbols/export.xpm")),
 								  tr("Export ..."),
 								  Qt::CTRL+Qt::Key_E,
 								  this );
@@ -176,25 +163,25 @@ void MainWin::createActions()
 	  " data as tab separated list. Each line contains the following values (separated by a tab "
 	  "character): date (dd.mm.yyyy) time (hh:mm:ss) value (float) unit." ));
   m_importAction   = new QAction ( tr("Import"),
-								  QIcon(QPixmap((const char **)import_xpm)),
+								  QIcon(QPixmap(":/Symbols/import.xpm")),
 								  tr("Import ..."),
 								  Qt::CTRL+Qt::Key_I,
 								  this );
   m_importAction->setWhatsThis( tr("<b>Import data into recorder</b><p>Here you can import previously"
 	  " exported data files. QtDMM tries to do an educated guess if the file format is correct and"
 	  " rejects import of files which to not match." ));
-  m_configAction   = new Q3Action ( tr("Configure"),
-								  QIcon(QPixmap((const char **)config_xpm)),
+  m_configAction   = new QAction ( tr("Configure"),
+								  QIcon(QPixmap(":/Symbols/config.xpm")),
 								  tr("Configure ..."),
 								  Qt::Key_F2,
 								  this );
   m_configDmmAction   = new QAction ( tr("Configure"),
-								  QIcon(QPixmap((const char **)config_xpm)),
+								  QIcon(QPixmap(":/Symbols/config.xpm")),
 								  tr("Configure ..."),
 								  Qt::SHIFT+Qt::Key_F2,
 								  this );
   m_configRecorderAction   = new QAction ( tr("Configure"),
-								  QIcon(QPixmap((const char **)config_xpm)),
+								  QIcon(QPixmap(":/Symbols/config.xpm")),
 								  tr("Configure ..."),
 								  Qt::CTRL+Qt::Key_F2,
 								  this );
@@ -208,14 +195,14 @@ void MainWin::createActions()
 	  " dialog. Here you can configure it's visual appearance and all options regarding the "
 	  "multimeter hardware and the recorder." ));
   m_quitAction     = new QAction ( tr("Quit"),
-								  QIcon(QPixmap((const char **)quit_xpm)),
+								  QIcon(QPixmap(":/Symbols/quit.xpm")),
 								  tr("Quit"),
 								  Qt::CTRL+Qt::Key_Q,
 								  this );
   m_quitAction->setWhatsThis( tr("<b>Quit QtDMM</b><p>If the recorder contains unsaved data QtDMM"
 	  " will give you the option to savve your data first." ));
   m_helpAction     = new QAction ( tr("Help"),
-								  QIcon(QPixmap((const char **)help_xpm)),
+								  QIcon(QPixmap(":/Symbols/help.xpm")),
 								  tr("Direct Help"),
 								  Qt::SHIFT+Qt::Key_F1,
 								  this );
@@ -312,7 +299,7 @@ void MainWin::versionSLOT()
 
   version.adjustSize();
   version.setButtonText( QMessageBox::Yes, tr("Ok") );
-  version.setIconPixmap( QPixmap((const char **)icon_xpm ) );
+  version.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
   version.exec();
 }
 
@@ -348,16 +335,11 @@ void MainWin::createToolBars()
   m_display = new DisplayWid( m_displayTB );
   addToolBar( m_displayTB, tr("Display"), Qt::DockTop, true );
 
-  connect( m_displayTB, SIGNAL( visibilityChanged( bool ) ),
-		   this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_helpTB, SIGNAL( visibilityChanged( bool ) ),
-		   this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_fileTB, SIGNAL( visibilityChanged( bool ) ),
-		   this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_graphTB, SIGNAL( visibilityChanged( bool ) ),
-		   this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_dmmTB, SIGNAL( visibilityChanged( bool ) ),
-		   this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( m_displayTB, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( m_helpTB, SIGNAL( visibilityChanged( bool ) ),  this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( m_fileTB, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( m_graphTB, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( m_dmmTB, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
 }
 
 void MainWin::createMenu()

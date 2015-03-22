@@ -27,150 +27,76 @@
 
 #include <iostream>
 
-// less than elegant use of single pixmaps for everything.
-// But hey, it works!
-//
-#include <numbers.xpm>
-#include <decimal.xpm>
-#include <specialchars.xpm>
-#include <minus.xpm>
-#include <G.xpm>
-#include <cm.xpm>
-#include <k.xpm>
-#include <m.xpm>
-#include <u.xpm>
-#include <n.xpm>
-#include <p.xpm>
-#include <Hz.xpm>
-#include <F.xpm>
-#include <V.xpm>
-#include <A.xpm>
-#include <H.xpm>
-#include <W.xpm>
-#include <DBM.xpm>
-#include <Ohm.xpm>
-#include <deg.xpm>
-#include <percent.xpm>
-
-#include <numbers_small.xpm>
-#include <decimal_small.xpm>
-#include <specialchars_small.xpm>
-#include <minus_small.xpm>
-#include <G_small.xpm>
-#include <cm_small.xpm>
-#include <k_small.xpm>
-#include <m_small.xpm>
-#include <u_small.xpm>
-#include <n_small.xpm>
-#include <p_small.xpm>
-#include <Hz_small.xpm>
-#include <F_small.xpm>
-#include <V_small.xpm>
-#include <A_small.xpm>
-#include <H_small.xpm>
-#include <W_small.xpm>
-#include <DBM_small.xpm>
-#include <Ohm_small.xpm>
-#include <deg_small.xpm>
-#include <percent_small.xpm>
-
-#include <min_str.xpm>
-#include <max_str.xpm>
-
-#include <diode.xpm>
-#include <ac.xpm>
-#include <dc.xpm>
-
-#include <null_bar.xpm>
-#include <ten_bar.xpm>
-#include <twenty_bar.xpm>
-#include <thirty_bar.xpm>
-#include <fourty_bar.xpm>
-#include <fifty_bar.xpm>
-#include <sixty_bar.xpm>
-
-
 
 DisplayWid::DisplayWid( QWidget *parent, const char *name ) : QWidget( parent, name ),
   m_paintBar( true ),
   m_numValues( 1 )
 {
-  // HACK: My GIMP doesn't save XBM !!!!
-  //
-  m_bigDigit = createBitmap((const char **)numbers_xpm);
-  m_bigSpecialChar = createBitmap((const char **)specialchars_xpm);
 
-  m_bigDecimal = createBitmap((const char **)decimal_xpm);
-  m_bigMinus = createBitmap((const char **)minus_xpm);
-  m_bigG = createBitmap((const char **)G_xpm);
-  m_bigM = createBitmap((const char **)M_xpm);
-  m_bigk = createBitmap((const char **)k_xpm);
-  m_bigm = createBitmap((const char **)m_xpm);
-  m_bigu = createBitmap((const char **)u_xpm);
-  m_bign = createBitmap((const char **)n_xpm);
-  m_bigp = createBitmap((const char **)p_xpm);
-  m_bigHz = createBitmap((const char **)Hz_xpm);
-  m_bigF = createBitmap((const char **)F_xpm);
-  m_bigV = createBitmap((const char **)V_xpm);
-  m_bigA = createBitmap((const char **)A_xpm);
-  m_bigH = createBitmap((const char **)H_xpm);
-  m_bigW = createBitmap((const char **)W_xpm);
-  m_bigDBM = createBitmap((const char **)DBM_xpm);
-  m_bigOhm = createBitmap((const char **)Ohm_xpm);
-  m_bigDeg = createBitmap((const char **)deg_xpm);
-  m_bigPercent = createBitmap((const char **)percent_xpm);
+  m_bigDigit = new QBitmap(":/Symbols/numbers.xmp");
+  m_bigSpecialChar = new QBitmap(":/Symbols/specialchars.xpm");
 
-  m_smallDigit = createBitmap((const char **)numbers_small_xpm);
-  m_smallSpecialChar = createBitmap((const char **)specialchars_small_xpm);
+  m_bigDecimal = new QBitmap(":/Symbols/decimal.xpm");
+  m_bigMinus = new QBitmap(":/Symbols/minus.xpm");
+  m_bigG =new QBitmap(":/Symbols/G.xpm");
+  m_bigM = new QBitmap(":/Symbols/M.xpm");
+  m_bigk = new QBitmap(":/Symbols/k.xpm");
+  m_bigm = new QBitmap(":/Symbols/m_xpm");
+  m_bigu = new QBitmap(":/Symbols/µ.xpm");
+  m_bign = new QBitmap(":/Symbols/n.xpm");
+  m_bigp = new QBitmap(":/Symbols/p.xpm");
+  m_bigHz = new QBitmap(":/Symbols/Hz.xpm");
+  m_bigF = new QBitmap(":/Symbols/F.xpm");
+  m_bigV = new QBitmap(":/Symbols/V.xpm");
+  m_bigA = new QBitmap(":/Symbols/A.xpm");
+  m_bigH = new QBitmap(":/Symbols/H.xpm");
+  m_bigW = new QBitmap(":/Symbols/W.xpm");
+  m_bigDBM = new QBitmap(":/Symbols/DBM.xpm");
+  m_bigOhm = new QBitmap(":/Symbols/Ohm.xpm");
+  m_bigDeg = new QBitmap(":/Symbols/deg.xpm");
+  m_bigPercent = new QBitmap(":/Symbols/percent.xpm");
 
-  m_smallDecimal = createBitmap((const char **)decimal_small_xpm);
-  m_smallMinus = createBitmap((const char **)minus_small_xpm);
-  m_smallG = createBitmap((const char **)G_small_xpm);
-  m_smallM = createBitmap((const char **)M_small_xpm);
-  m_smallk = createBitmap((const char **)k_small_xpm);
-  m_smallm = createBitmap((const char **)m_small_xpm);
-  m_smallu = createBitmap((const char **)u_small_xpm);
-  m_smalln = createBitmap((const char **)n_small_xpm);
-  m_smallp = createBitmap((const char **)p_small_xpm);
-  m_smallHz = createBitmap((const char **)Hz_small_xpm);
-  m_smallF = createBitmap((const char **)F_small_xpm);
-  m_smallV = createBitmap((const char **)V_small_xpm);
-  m_smallA = createBitmap((const char **)A_small_xpm);
-  m_smallH = createBitmap((const char **)H_small_xpm);
-  m_smallW = createBitmap((const char **)W_small_xpm);
-  m_smallDBM = createBitmap((const char **)DBM_small_xpm);
-  m_smallOhm = createBitmap((const char **)Ohm_small_xpm);
-  m_smallDeg = createBitmap((const char **)deg_small_xpm);
-  m_smallPercent = createBitmap((const char **)percent_small_xpm);
+  m_smallDigit = new QBitmap(":/Symbols/numbers_small.xpm");
+  m_smallSpecialChar = new QBitmap(":/Symbols/specialchars_small.xpm");
 
-  m_minStr = createBitmap((const char **)min_str_xpm);
-  m_maxStr = createBitmap((const char **)max_str_xpm);
+  m_smallDecimal = new QBitmap(":/Symbols/decimal_small.xpm");
+  m_smallMinus = new QBitmap(":/Symbols/minus_small.xpm");
+  m_smallG = new QBitmap(":/Symbols/G_small.xpm");
+  m_smallM = new QBitmap(":/Symbols/M_small.xpm");
+  m_smallk = new QBitmap(":/Symbols/k_small.xpm");
+  m_smallm = new QBitmap(":/Symbols/m_small.xpm");
+  m_smallu = new QBitmap(":/Symbols/µ_small.xpm");
+  m_smalln = new QBitmap(":/Symbols/n_small.xpm");
+  m_smallp = new QBitmap(":/Symbols/p_small.xpm");
+  m_smallHz = new QBitmap(":/Symbols/Hz_small.xpm");
+  m_smallF = new QBitmap(":/Symbols/F_small.xpm");
+  m_smallV = new QBitmap(":/Symbols/V_small.xpm");
+  m_smallA = new QBitmap(":/Symbols/A_small.xpm");
+  m_smallH = new QBitmap(":/Symbols/H_small.xpm");
+  m_smallW = new QBitmap(":/Symbols/W_small.xpm");
+  m_smallDBM = new QBitmap(":/Symbols/DBM_small.xpm");
+  m_smallOhm = new QBitmap(":/Symbols/Ohm_small.xpm");
+  m_smallDeg = new QBitmap(":/Symbols/deg_small.xpm");
+  m_smallPercent = new QBitmap(":/Symbols/percent_small.xpm");
 
-  m_diode = createBitmap((const char **)diode_xpm);
-  m_ac = createBitmap((const char **)ac_xpm);
-  m_dc = createBitmap((const char **)dc_xpm);
+  m_minStr = new QBitmap(":/Symbols/min_str.xpm");
+  m_maxStr = new QBitmap(":/Symbols/max_str.xpm");
 
-  m_bar[0] = createBitmap((const char **)null_bar_xpm);
-  m_bar[1] = createBitmap((const char **)ten_bar_xpm);
-  m_bar[2] = createBitmap((const char **)twenty_bar_xpm);
-  m_bar[3] = createBitmap((const char **)thirty_bar_xpm);
-  m_bar[4] = createBitmap((const char **)fourty_bar_xpm);
-  m_bar[5] = createBitmap((const char **)fifty_bar_xpm);
-  m_bar[6] = createBitmap((const char **)sixty_bar_xpm);
+  m_diode = new QBitmap(":/Symbols/diode.xpm");
+  m_ac = new QBitmap(":/Symbols/ac.xpm");
+  m_dc = new QBitmap(":/Symbols/dc.xpm");
+
+  m_bar[0] = new QBitmap(":/Symbols/null_bar.xpm");
+  m_bar[1] = new QBitmap(":/Symbols/ten_bar.xpm");
+  m_bar[2] = new QBitmap(":/Symbols/twenty_bar.xpm");
+  m_bar[3] = new QBitmap(":/Symbols/thirty_bar.xpm");
+  m_bar[4] = new QBitmap(":/Symbols/fourty_bar.xpm");
+  m_bar[5] = new QBitmap(":/Symbols/fifty_bar.xpm");
+  m_bar[6] = new QBitmap(":/Symbols/sixty_bar.xpm");
 
   setBackgroundMode( Qt::NoBackground );
 
   setDisplayMode( 1, true, true, 1 );
-}
-
-QBitmap *DisplayWid::createBitmap( const char **data )
-{
-  QBitmap *bm = new QBitmap(QPixmap(data).createMaskFromColor(QColor(0,0,0),Qt::MaskOutColor));
-  //QBitmap *bm = new QBitmap;
-  //*bm = QImage(data).convertDepth( 1, Qt::ThresholdDither );
-  //bm->setMask( *bm );
-
-  return bm;
 }
 
 DisplayWid::~DisplayWid()

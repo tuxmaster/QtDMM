@@ -26,7 +26,6 @@
 #include "dmmprefs.h"
 #include "simplecfg.h"
 
-#include <dmm.xpm>
 
 // when all needed parameter are found this hardcoded version will
 // be replaced by a file
@@ -142,7 +141,7 @@ DmmPrefs::DmmPrefs( QWidget *parent, const char *name ) : UIDmmPrefs( parent, na
   m_description = tr( "<b>Here you can configure the serial port"
 					  " and protocol for your DMM. There is"
 					  " also a number of predefined models.</b>" );
-  m_pixmap = new QPixmap( (const char **)dmm_xpm );
+  m_pixmap = new QPixmap( ":/Symbols/dmm.xpm" );
 
   ui_model->clear();
   ui_model->insertItem( "Manual settings" );
@@ -153,21 +152,15 @@ DmmPrefs::DmmPrefs( QWidget *parent, const char *name ) : UIDmmPrefs( parent, na
 
   message2->hide();
 
-  connect( ui_model, SIGNAL( activated( int ) ),
-		   this, SLOT( modelSLOT( int )));
-  connect( ui_externalSetup, SIGNAL( toggled( bool ) ),
-		   this, SLOT( externalSetupSLOT()));
-  connect( ui_load, SIGNAL( clicked() ),
-		   this, SLOT( loadSLOT()));
-  connect( ui_save, SIGNAL( clicked() ),
-		   this, SLOT( saveSLOT()));
+  connect( ui_model, SIGNAL( activated( int ) ),  this, SLOT( modelSLOT( int )));
+  connect( ui_externalSetup, SIGNAL( toggled( bool ) ),   this, SLOT( externalSetupSLOT()));
+  connect( ui_load, SIGNAL( clicked() ), this, SLOT( loadSLOT()));
+  connect( ui_save, SIGNAL( clicked() ), this, SLOT( saveSLOT()));
 
   m_path = QDir::currentDirPath();
 
 #ifdef Q_WS_MACX
-  connect( ui_scanPorts, SIGNAL( clicked() ),
-		   this, SLOT( scanDevicesSLOT() ));
-
+  connect( ui_scanPorts, SIGNAL( clicked() ), this, SLOT( scanDevicesSLOT() ));
   portNumber->hide();
   scanDevicesSLOT();
 #else

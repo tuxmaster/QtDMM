@@ -28,8 +28,6 @@
 #include "scaleprefs.h"
 #include "simplecfg.h"
 
-#include <scale.xpm>
-
 #include <iostream>
 
 #define MINUTE_SECS   60
@@ -42,7 +40,7 @@ ScalePrefs::ScalePrefs( QWidget *parent, const char *name ) : UIScalePrefs( pare
   m_description = tr( "<b>Here you can configure the vertical scale"
 					  " of the recorder and the length (in time)"
 					  " of the window.</b>" );
-  m_pixmap = new QPixmap( (const char **)scale_xpm );
+  m_pixmap = new QPixmap(":/Symbols/scale.xpm" );
 
   EngNumberValidator *validator = new EngNumberValidator( this );
 

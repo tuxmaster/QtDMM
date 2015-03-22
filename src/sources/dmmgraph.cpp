@@ -30,7 +30,6 @@
 #include <cstdlib>
 #include <iostream>
 
-#include <icon.xpm>
 
 DMMGraph::DMMGraph( QWidget *parent, const char *name ) :
   QWidget( parent, name ),
@@ -83,7 +82,7 @@ DMMGraph::DMMGraph( QWidget *parent, const char *name ) :
 								Qt::WStyle_NoBorder |
 								Qt::WStyle_Tool );
   m_infoBox->resize( 100, 50 );
-  m_infoBox->setFrameStyle( Q3Frame::Box | Q3Frame::Plain );
+  m_infoBox->setFrameStyle( QFrame::Box | QFrame::Plain );
   m_infoBox->setPalette( QToolTip::palette() );
 
   setBackgroundMode( Qt::NoBackground );
@@ -92,9 +91,8 @@ DMMGraph::DMMGraph( QWidget *parent, const char *name ) :
 
   setMouseTracking( true );
 
-  m_popup = new Q3PopupMenu( this );
-  connect( m_popup, SIGNAL( activated(int) ),
-		   this, SLOT( popupSLOT(int) ));
+  m_popup = new QPopupMenu( this );
+  connect( m_popup, SIGNAL( activated(int) ),this, SLOT( popupSLOT(int) ));
 }
 
 void DMMGraph::timerEvent( QTimerEvent * )
@@ -1187,7 +1185,7 @@ void DMMGraph::importDataSLOT()
 
 	question.setButtonText( QMessageBox::Yes, tr("Export data first") );
 	question.setButtonText( QMessageBox::No, tr("Import & overwrite data") );
-	question.setIconPixmap( QPixmap((const char **)icon_xpm ) );
+	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 
 	switch (question.exec())
 	{
@@ -1269,8 +1267,7 @@ void DMMGraph::importDataSLOT()
 									dateToken[1].toInt(),
 									dateToken[0].toInt() );
 
-			sample += QDateTime( startDate, startTime ).secsTo(
-				QDateTime( nowDate, nowTime ) );
+			sample += QDateTime( startDate, startTime ).secsTo(QDateTime( nowDate, nowTime ) );
 
 			startTime = nowTime;
 			startDate = nowDate;

@@ -29,14 +29,13 @@
 #include "graphprefs.h"
 #include "simplecfg.h"
 
-#include <graph.xpm>
 
 GraphPrefs::GraphPrefs( QWidget *parent, const char *name ) : UIGraphPrefs( parent, name )
 {
   m_label = tr( "Graph settings" );
   m_description = tr( "<b>Here you can configure the colors and"
 					  " drawing style for the graph.</b>" );
-  m_pixmap = new QPixmap( (const char **)graph_xpm );
+  m_pixmap = new QPixmap(":/Symbols/graph.xpm" );
 }
 
 void GraphPrefs::defaultsSLOT()

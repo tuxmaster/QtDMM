@@ -110,7 +110,7 @@
 		      <string>Integration graph</string>
 		    </property>
 		    <property name="buddy">
-		      <cstring>ui_dataColor</cstring>
+		      <string>ui_dataColor</string>
 		    </property>
 		    <property name="wordWrap">
 		      <bool>false</bool>
@@ -158,7 +158,7 @@
 		      <string>Integration threshold</string>
 		    </property>
 		    <property name="buddy">
-		      <cstring>ui_dataColor</cstring>
+		      <string>ui_dataColor</string>
 		    </property>
 		    <property name="wordWrap">
 		      <bool>false</bool>

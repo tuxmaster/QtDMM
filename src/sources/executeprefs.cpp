@@ -27,14 +27,13 @@
 #include "executeprefs.h"
 #include "simplecfg.h"
 
-#include <execute.xpm>
 
 ExecutePrefs::ExecutePrefs( QWidget *parent, const char *name ) : UIExecutePrefs( parent, name )
 {
   m_label = tr( "External application" );
   m_description = tr( "<b>Here you can configure if an external"
 					  " command is to be started and when.</b>" );
-  m_pixmap = new QPixmap( (const char **)execute_xpm );
+  m_pixmap = new QPixmap(":/Symbols/execute.xpm");
 
   EngNumberValidator *validator = new EngNumberValidator( this );
 

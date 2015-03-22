@@ -28,8 +28,6 @@
 #include "recorderprefs.h"
 #include  "simplecfg.h"
 
-#include <recorder.xpm>
-
 #define MINUTE_SECS   60
 #define HOUR_SECS     60*60
 #define DAY_SECS      60*60*24
@@ -40,7 +38,7 @@ RecorderPrefs::RecorderPrefs( QWidget *parent, const char *name ) : UIRecorderPr
   m_description = tr( "<b>Here you can configure the sampling"
 					  " frequency and start options for the"
 					  " recorder.</b>" );
-  m_pixmap = new QPixmap( (const char **)recorder_xpm );
+  m_pixmap = new QPixmap(":/Symbols/recorder.xpm" );
 
   EngNumberValidator *validator = new EngNumberValidator( this );
 

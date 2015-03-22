@@ -120,7 +120,6 @@ class DisplayWid : public QWidget
 	  void		drawBigUnit( QPainter *, const QString & str );
 
 	private:
-	  QBitmap	*createBitmap( const char ** );
 	  int		calcNumDigits( int );
 
 };

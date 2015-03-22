@@ -74,3 +74,7 @@ SOURCES   = sources/colorbutton.cpp \
 	    sources/scaleprefs.cpp \
 	    sources/simplecfg.cpp \
 	    sources/tipdlg.cpp
+
+
+RESOURCES += \
+    Resources.qrc

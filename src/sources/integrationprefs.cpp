@@ -28,14 +28,12 @@
 #include "integrationprefs.h"
 #include "simplecfg.h"
 
-#include <integration.xpm>
-
 IntegrationPrefs::IntegrationPrefs( QWidget *parent, const char *name ) : UIIntegrationPrefs( parent, name )
 {
   m_label = tr( "Integration" );
   m_description = tr( "<b>Here you can configure the parameter"
 					  " for the integration curve.</b>" );
-  m_pixmap = new QPixmap( (const char **)integration_xpm );
+  m_pixmap = new QPixmap(":/Symbols/integration.xpm" );
 
   EngNumberValidator *validator = new EngNumberValidator( this );
 

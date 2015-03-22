@@ -28,14 +28,12 @@
 #include "guiprefs.h"
 #include "simplecfg.h"
 
-#include <gui.xpm>
-
 GuiPrefs::GuiPrefs( QWidget *parent, const char *name ) : UIGuiPrefs( parent, name )
 {
   m_label = tr( "GUI settings" );
   m_description = tr( "<b>Here you can configure QtDMM's visual"
 					  " appearance and behaviour.</b>" );
-  m_pixmap = new QPixmap( (const char **)gui_xpm );
+  m_pixmap = new QPixmap(":/Symbols/gui.xpm" );
 
   connect( ui_tipOfTheDay, SIGNAL( toggled( bool ) ), this, SIGNAL( showTips( bool ) ));
 }

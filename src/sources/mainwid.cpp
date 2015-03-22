@@ -31,15 +31,13 @@
 #include "displaywid.h"
 #include "tipdlg.h"
 
-#include <icon.xpm>
-
 #include <iostream>
 
 MainWid::MainWid( QWidget *parent, const char *name ) :  UIMainWid( parent, name ),
   m_display( 0 ),
   m_tipDlg( 0 )
 {
-  setIcon( QPixmap((const char **)icon_xpm ) );
+  setIcon( QPixmap(":/Symbols/icon.xpm") );
 
   m_dmm = new DMM( this );
   m_external = new QProcess( this );
@@ -120,7 +118,7 @@ bool MainWid::closeWin()
 
 	question.setButtonText( QMessageBox::Yes, tr("Export data first") );
 	question.setButtonText( QMessageBox::No, tr("Quit without saving") );
-	question.setIconPixmap( QPixmap((const char **)icon_xpm ) );
+	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 
 	switch (question.exec())
 	{
@@ -455,7 +453,7 @@ void MainWid::startExternalSLOT()
 
 	question.setButtonText( QMessageBox::Yes, tr("Yes, kill it!") );
 	question.setButtonText( QMessageBox::Yes, tr("No, keep running") );
-	question.setIconPixmap( QPixmap((const char **)icon_xpm ) );
+	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 
 	switch (question.exec())
 	{
@@ -490,7 +488,7 @@ void MainWid::startExternalSLOT()
 							 Qt::NoButton );
 
 	question.setButtonText( QMessageBox::Yes, tr("Bummer!") );
-	question.setIconPixmap( QPixmap((const char **)icon_xpm ) );
+	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 
 	question.exec();
   }

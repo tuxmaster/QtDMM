@@ -37,11 +37,10 @@
 
 #include <iostream>
 
-#include <xpm/icon.xpm>
 
 ConfigDlg::ConfigDlg( QWidget *parent, const char *name ) :  UIConfigDlg( parent, name )
 {
-  setIcon(QPixmap((const char **)icon_xpm));
+  setIcon(QPixmap(":/Symbols/icon.xpm"));
 
   ui_list->header()->hide();
   ui_list->setItemMargin( 4 );
@@ -78,7 +77,7 @@ ConfigDlg::ConfigDlg( QWidget *parent, const char *name ) :  UIConfigDlg( parent
 						 Qt::NoButton );
 
 	welcome.setButtonText( QMessageBox::Yes, tr("Continue") );
-	welcome.setIconPixmap( QPixmap((const char **)icon_xpm ) );
+	welcome.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 	welcome.exec();
 
 	m_cfg->save();
@@ -104,7 +103,7 @@ ConfigDlg::ConfigDlg( QWidget *parent, const char *name ) :  UIConfigDlg( parent
 							Qt::NoButton );
 
 	  welcome.setButtonText( QMessageBox::Yes, tr("Continue") );
-	  welcome.setIconPixmap( QPixmap((const char **)icon_xpm ) );
+	  welcome.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 	  welcome.exec();
 	}
   }
@@ -539,8 +538,7 @@ bool ConfigDlg::showDisplay() const
   return m_gui->showDisplay();
 }
 
-void ConfigDlg::setToolbarVisibility( bool disp, bool dmm, bool graph,
-									  bool file, bool help )
+void ConfigDlg::setToolbarVisibility( bool disp, bool dmm, bool graph, bool file, bool help )
 {
   m_gui->setToolbarVisibility( disp, dmm, graph, file, help );
 }
