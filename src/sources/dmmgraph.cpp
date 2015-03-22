@@ -31,8 +31,8 @@
 #include <iostream>
 
 
-DMMGraph::DMMGraph( QWidget *parent, const char *name ) :
-  QWidget( parent, name ),
+DMMGraph::DMMGraph( QWidget *parent) :
+  QWidget( parent),
   m_size( 600 ),
   m_length( 3600 ),
   m_scaleMin( 0 ),
@@ -70,7 +70,7 @@ DMMGraph::DMMGraph( QWidget *parent, const char *name ) :
   scrollbar = new QScrollBar( Qt::Horizontal, this );
   scrollbar->setGeometry( 0, height()-16, width(), 16 );
   scrollbar->setTracking( true );
-  scrollbar->setCursor( Qt::arrowCursor );
+  scrollbar->setCursor( Qt::ArrowCursor );
 
   connect( scrollbar, SIGNAL( valueChanged(int) ),
 		   this, SLOT( update() ));
@@ -78,20 +78,20 @@ DMMGraph::DMMGraph( QWidget *parent, const char *name ) :
   m_remainingLength = m_sampleLength;
   emitInfo();
 
-  m_infoBox = new QLabel( 0, 0, Qt::WStyle_Customize |
-								Qt::WStyle_NoBorder |
-								Qt::WStyle_Tool );
+  m_infoBox = new QLabel( 0, 0, Qt::FramelessWindowHint |
+								Qt::Tool );
   m_infoBox->resize( 100, 50 );
   m_infoBox->setFrameStyle( QFrame::Box | QFrame::Plain );
   m_infoBox->setPalette( QToolTip::palette() );
 
-  setBackgroundMode( Qt::NoBackground );
+  setAttribute(Qt::WA_OpaquePaintEvent);
+  //setBackgroundMode( Qt::NoBackground );
 
   startTimer( 200 );
 
   setMouseTracking( true );
 
-  m_popup = new QPopupMenu( this );
+  m_popup = new QMenu( this );
   connect( m_popup, SIGNAL( activated(int) ),this, SLOT( popupSLOT(int) ));
 }
 
@@ -127,7 +127,7 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
   else
   {
 	QString tmpStr;
-	tmpStr.sprintf( "QtDMM: %s", QDateTime::currentDateTime().toString().latin1() );
+	tmpStr.sprintf( "QtDMM: %s", QDateTime::currentDateTime().toString().toLatin1().constData());
   }
 
   prt->setCreator( "QtDMM: (c) 2001 Matthias Toussaint" );
@@ -136,10 +136,8 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
   QPainter p;
   p.begin( prt );
 
-  QPaintDeviceMetrics pdm( prt );
-
-  int w = pdm.width();
-  int h = pdm.height();
+  int w = prt->width();
+  int h = prt->height();
 
   p.setFont( QFont( "Helvetica", 16 ) );
 
@@ -150,7 +148,7 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
   p.setFont( QFont( "Helvetica", 10 ));
 
   QFontMetrics fm = p.fontMetrics();
-  int maxWidth = QMAX( fm.width( tr( "Sampling start:" ) ),
+  int maxWidth = qMax( fm.width( tr( "Sampling start:" ) ),
 					   fm.width( tr( "Sampling resolution:" )));
   int tHeight = fm.height();
 
@@ -162,7 +160,7 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
   p.drawText( 0, tRect.height()+10+tHeight, maxWidth, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
 			  tr( "Sampling resolution:" ) );
   QString tmpStr;
-  tmpStr.sprintf( "%d %s", m_sampleTime, tr( "Seconds" ).latin1() );
+  tmpStr.sprintf( "%d %s", m_sampleTime, tr( "Seconds" ).toLatin1().constData() );
   p.drawText( maxWidth+10, tRect.height()+10+tHeight,
 			  w-maxWidth-10, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
 			  tmpStr );
@@ -287,7 +285,7 @@ void DMMGraph::paintHorizontalGrid( QPainter *p, double yfactor, double ystep, b
 void DMMGraph::paintVerticalGrid( QPainter *p, double xfactor, double xstep,
 							 double maxUnit, double hUnitFact, const QString & hUnit, bool color )
 {
-  int sv = QMAX( 0, scrollbar->value() );
+  int sv = qMax( 0, scrollbar->value() );
 
   if (color)
 	p->setPen( QPen( m_gridColor, 0, Qt::DotLine ) );
@@ -320,7 +318,7 @@ void DMMGraph::paintData( QPainter *p, double xfactor,
 {
   p->setClipRect( m_graphRect );
 
-  int sv = QMAX( 0, scrollbar->value() );
+  int sv = qMax( 0, scrollbar->value() );
 
   // draw cursor
   //
@@ -363,8 +361,11 @@ void DMMGraph::paintData( QPainter *p, double xfactor,
 	  }
 	}
 	if (pCnt)
-	  p->drawPolyline( m_drawArray, 0, pCnt );
-
+	{
+		int pointCount=(pCnt == -1 ) ?  m_drawArray.size() : pCnt;
+		p->drawPolyline(m_drawArray.constData(),pointCount);
+		//p->drawPolyline( m_drawArray, 0, pCnt );
+	}
 	//y = (int)qRound( 1+(m_scaleMax-(*m_arrayInt)[scrollbar->value()])/yfactor );
 	y = (int)qRound( m_graphRect.y()+(m_scaleMax-m_integrationOffset-
 		(*m_arrayInt)[sv]*m_integrationScale)/yfactor );
@@ -411,7 +412,11 @@ void DMMGraph::paintData( QPainter *p, double xfactor,
 	}
   }
   if (pCnt)
-	p->drawPolyline( m_drawArray, 0, pCnt );
+  {
+	  int pointCount=(pCnt == -1 ) ?  m_drawArray.size() : pCnt;
+	  p->drawPolyline(m_drawArray.constData(),pointCount);
+	  //p->drawPolyline( m_drawArray, 0, pCnt );
+  }
 
   y = (int)qRound( m_graphRect.y()+(m_scaleMax-(*m_array)[sv])/yfactor );
 
@@ -634,7 +639,7 @@ void DMMGraph::addValue( double val )
 		(*m_arrayInt)[m_pointer] = (*m_arrayInt)[m_pointer-1]+val;
 	}
 	else
-		(*m_arrayInt)[m_pointer] = QMAX( val, m_integrationThreshold );
+		(*m_arrayInt)[m_pointer] = qMax( val, m_integrationThreshold );
 
 	(*m_array)[m_pointer++] = val;
 	bool resFlag = false;
@@ -653,7 +658,7 @@ void DMMGraph::addValue( double val )
   }
 
   m_sampleCounter++;
-  m_remainingLength = QMAX( 0, m_remainingLength-1 );
+  m_remainingLength = qMax( 0, m_remainingLength-1 );
 
   if (m_sampleCounter == m_sampleTime)
   {
@@ -837,25 +842,25 @@ void DMMGraph::emitInfo()
   {
 	txt.sprintf( "%d/%d - %dweek%s %dday%s %02d:%02d:%02d - %s",
 				 m_pointer, m_length, w, (w>1 ? "s" : ""), d, (d>1 ? "s" : ""), h, m, s,
-				 m_running ? tr( "Sampling" ).latin1() : tr( "Stopped" ).latin1() );
+				 m_running ? tr( "Sampling" ).toLatin1().constData() : tr( "Stopped" ).toLatin1().constData() );
   }
   else if (d)
   {
 	txt.sprintf( "%d/%d - %dday%s %02d:%02d:%02d - %s",
 				 m_pointer, m_length, d, (d>1 ? "s" : ""), h, m, s,
-				 m_running ? tr( "Sampling" ).latin1() : tr( "Stopped" ).latin1() );
+				 m_running ? tr( "Sampling" ).toLatin1().constData() : tr( "Stopped" ).toLatin1().constData() );
   }
   else if (h)
   {
 	txt.sprintf( "%d/%d - %02d:%02d:%02d - %s",
 				 m_pointer, m_length, h, m, s,
-				 m_running ? tr( "Sampling" ).latin1() : tr( "Stopped" ).latin1() );
+				 m_running ? tr( "Sampling" ).toLatin1().constData() : tr( "Stopped" ).toLatin1().constData() );
   }
   else
   {
 	txt.sprintf( "%d/%d - %02d:%02d - %s",
 				 m_pointer, m_length, m, s,
-				 m_running ? tr( "Sampling" ).latin1() : tr( "Stopped" ).latin1() );
+				 m_running ? tr( "Sampling" ).toLatin1().constData() : tr( "Stopped" ).toLatin1().constData() );
   }
 
   Q_EMIT info( txt );
@@ -933,7 +938,7 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
   if (m_scaleMin == m_scaleMax || m_scaleMin == 1e40)
 	  return;
 
-  int sv = QMAX( 0, scrollbar->value() );
+  int sv = qMax( 0, scrollbar->value() );
 
   if (!m_mouseDown)
   {
@@ -945,7 +950,7 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
 	  //cerr << "delta=" << m_mpos.x()-ev->pos().x() << " offset=" << offset << endl;
 	  if (fabs(offset) >= 1)
 	  {
-		scrollbar->setValue( QMIN( scrollbar->maxValue(), sv + (int)qRound(offset) ) );
+		scrollbar->setValue( qMin( scrollbar->maxValue(), sv + (int)qRound(offset) ) );
 		m_mpos = ev->pos();
 	  }
 	}
@@ -953,22 +958,22 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
 	{
 	  if (abs(ev->y()-m_triggerThresholdY) < 3)
 	  {
-		setCursor( Qt::splitVCursor );
+		setCursor( Qt::SplitVCursor );
 		m_cursorMode = Trigger;
 	  }
 	  else if (abs(ev->y()-m_externalThresholdY) < 3)
 	  {
-		setCursor( Qt::splitVCursor );
+		setCursor( Qt::SplitVCursor );
 		m_cursorMode = External;
 	  }
 	  else if (abs(ev->y()-m_integrationThresholdY) < 3)
 	  {
-		setCursor( Qt::splitVCursor );
+		setCursor( Qt::SplitVCursor );
 		m_cursorMode = Integration;
 	  }
 	  else
 	  {
-		setCursor( Qt::arrowCursor );
+		setCursor( Qt::ArrowCursor );
 		m_cursorMode = NoCursor;
 	  }
 	}
@@ -1048,7 +1053,7 @@ void DMMGraph::drawCursor( const QPoint & pos )
   p.setPen( Qt::white );
   p.drawLine( pos.x(), m_graphRect.y(), pos.x(), m_graphRect.height()+m_graphRect.y()-1 );
 
-  int sv = QMAX( 0, scrollbar->value() );
+  int sv = qMax( 0, scrollbar->value() );
 
   if (m_crosshair)
   {
@@ -1066,7 +1071,7 @@ void DMMGraph::drawCursor( const QPoint & pos )
 
 void DMMGraph::fillInfoBox( const QPoint & pos )
 {
-  int sv = QMAX( 0, scrollbar->value() );
+  int sv = qMax( 0, scrollbar->value() );
 
   int x = (int)qRound( (pos.x()-m_graphRect.x())*m_xfactor + sv );
   if (x < 0) x = 0;
@@ -1124,7 +1129,7 @@ void DMMGraph::fillInfoBox( const QPoint & pos )
 
 
 	QString tmpVal;
-	tmpVal.sprintf( "%g %s", val, (const char *)unit.local8Bit() );
+	tmpVal.sprintf( "%g %s", val, (const char *)unit.toLatin1().constData() );
 
 	tmpStr += tmpVal;
 
@@ -1136,9 +1141,7 @@ void DMMGraph::fillInfoBox( const QPoint & pos )
 
 bool DMMGraph::exportDataSLOT()
 {
-  QString fn = QFileDialog::getSaveFileName( QString::null,
-											 "All files (*.*)",
-											 this );
+  QString fn = QFileDialog::getSaveFileName( this,QString(),QString(), "All files (*.*)");
 
   if (!fn.isNull())
   {
@@ -1155,7 +1158,7 @@ bool DMMGraph::exportDataSLOT()
 		  dt.date().day(), dt.date().month(), dt.date().year(),
 		  dt.time().hour(), dt.time().minute(), dt.time().second(),
 		  (*m_array)[i],
-		  m_unit/*.mid( 1, m_unit.length()-2 )*/.latin1() );
+		  m_unit/*.mid( 1, m_unit.length()-2 )*/.toLatin1().constData() );
 
 	  ts << line;
 	}
@@ -1197,9 +1200,7 @@ void DMMGraph::importDataSLOT()
 	}
   }
 
-  QString fn = QFileDialog::getOpenFileName( QString::null,
-											 "All files (*.*)",
-											 this );
+  QString fn = QFileDialog::getOpenFileName( this,QString(),QString(),"All files (*.*)");
 
   int cnt = 0;
   int sample = 0;
@@ -1232,9 +1233,9 @@ void DMMGraph::importDataSLOT()
 		  return;
 		}
 
-		token = QStringList::split( "\t", line );
-		dateToken = QStringList::split( ".", token[0] );
-		timeToken = QStringList::split( ":", token[1] );
+		token =line.split("\t");
+		dateToken = token[0].split(".");
+		timeToken = token[1].split(":");
 
 		QTime startTime = QTime( timeToken[0].toInt(),
 								 timeToken[1].toInt(),
@@ -1256,9 +1257,9 @@ void DMMGraph::importDataSLOT()
 
 		  if (!line.isEmpty())
 		  {
-			token = QStringList::split( "\t", line );
-			dateToken = QStringList::split( ".", token[0] );
-			timeToken = QStringList::split( ":", token[1] );
+			token = line.split("\t");
+			dateToken = token[0].split(".");
+			timeToken = token[1].split(":");
 
 			QTime nowTime = QTime( timeToken[0].toInt(),
 									timeToken[1].toInt(),
@@ -1321,7 +1322,7 @@ void DMMGraph::importDataSLOT()
 	  {
 		if (!line.isEmpty())
 		{
-		  token = QStringList::split( "\t", line );
+		  token = line.split("\t");
 		  (*m_array)[i++] = token[2].toDouble();
 		}
 	  }
@@ -1458,7 +1459,7 @@ void DMMGraph::setExternal( bool on, bool falling, double threshold )
 
 void DMMGraph::drawPoint( PointMode mode, QPainter *p, int x, int y )
 {
-  static QPointArray arr(4);
+  static QPolygon arr(4);
 
   switch (mode)
   {
@@ -1530,37 +1531,37 @@ void DMMGraph::computeUnitFactor()
 
   if (m_unit == "C" || m_unit == "%") return;
 
-  if (QMAX( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) > 1000)
+  if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) > 1000)
   {
 	m_factor /= 1000.;
 	m_prefix = "k";
   }
-  if (QMAX( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) > 1000)
+  if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) > 1000)
   {
 	m_factor /= 1000.;
 	m_prefix = "M";
   }
-  if (QMAX( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) > 1000)
+  if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) > 1000)
   {
 	m_factor /= 1000.;
 	m_prefix = "G";
   }
-  if (QMAX( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
+  if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
   {
 	m_factor *= 1000.;
 	m_prefix = "m";
   }
-  if (QMAX( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
+  if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
   {
 	m_factor *= 1000.;
 	m_prefix = "µ";
   }
-  if (QMAX( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
+  if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
   {
 	m_factor *= 1000.;
 	m_prefix = "n";
   }
-  if (QMAX( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
+  if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
   {
 	m_factor *= 1000.;
 	m_prefix = "p";

@@ -43,7 +43,7 @@ class DMM : public QObject
 		f_dtr=8
 	  };
 
-	  DMM( QObject *parent=0, const char *name=0 );
+	  DMM(QObject *parent, QString &name);
 	  void						setSpeed( int );
 	  void						setDevice( const QString & );
 	  bool						open();
@@ -51,7 +51,6 @@ class DMM : public QObject
 	  QString					errorString() const { return m_error; }
 	  bool						isOpen() const { return m_handle >= 0; }
 	  void						setFormat( ReadEvent::DataFormat );
-	  void						setName( const QString & )Q_DECL_OVERRIDE;
 	  void						setPortSettings( int bits, int stopBits, int parity, bool externalSetup, bool rts, bool cts,
 												 bool dsr, bool dtr );
 	  void						setNumValues( int );

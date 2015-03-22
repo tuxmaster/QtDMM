@@ -23,7 +23,7 @@
 #ifndef CONFIGDLG_HH
 #define CONFIGDLG_HH
 
-#include "uiconfigdlg.h"
+#include "ui_uiconfigdlg.h"
 #include "dmmgraph.h"
 #include "readevent.h"
 

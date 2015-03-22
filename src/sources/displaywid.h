@@ -31,7 +31,7 @@ class DisplayWid : public QWidget
 {
   Q_OBJECT
 	public:
-	  DisplayWid( QWidget *parent=0, const char *name=0 );
+	  DisplayWid( QWidget *parent=0);
 	  virtual	~DisplayWid();
 
 	  void		setValue( int, const QString & );
@@ -113,7 +113,7 @@ class DisplayWid : public QWidget
 	  int		m_minW;
 	  int		m_extraW;
 
-	  void		paintEvent( QPaintEvent *ev ) Q_DECL_OVERRIDE;
+	  void		paintEvent( QPaintEvent *) Q_DECL_OVERRIDE;
 	  void		drawSmallNumber( QPainter *, const QString & str );
 	  void		drawSmallUnit( QPainter *, const QString & str );
 	  void		drawBigNumber( QPainter *, const QString & str );

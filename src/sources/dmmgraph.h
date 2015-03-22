@@ -25,8 +25,7 @@
 
 #include <QtGui>
 #include <QtWidgets>
-
-class QPrinter;
+#include <QPrinter>
 
 class DMMGraph : public QWidget
 {
@@ -80,7 +79,7 @@ class DMMGraph : public QWidget
 		IDImportData
 	  };
 
-	  DMMGraph( QWidget *parent=0, const char *name=0 );
+	  DMMGraph(QWidget *parent=0);
 	  virtual					~DMMGraph();
 
 	  void						setGraphSize( int size, int length );
@@ -188,7 +187,7 @@ class DMMGraph : public QWidget
 	  PointMode                 m_intPointMode;
 	  LineMode                  m_lineMode;
 	  LineMode                  m_intLineMode;
-	  QPointArray               m_drawArray;
+	  QPolygon	                m_drawArray;
 	  double                    m_integrationScale;
 	  double                    m_integrationThreshold;
 	  double                    m_integrationOffset;
@@ -202,7 +201,7 @@ class DMMGraph : public QWidget
 	  int                       m_externalThresholdY;
 	  CursorMode                m_cursorMode;
 	  bool                      m_includeZero;
-	  QPopupMenu                *m_popup;
+	  QMenu		               *m_popup;
 	  bool                      m_mousePan;
 
 	  void						paintEvent( QPaintEvent * )Q_DECL_OVERRIDE;

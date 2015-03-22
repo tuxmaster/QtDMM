@@ -101,8 +101,8 @@
     </layout>
    </item>
    <item>
-    <widget class="QButtonGroup" name="ButtonGroup11">
-     <property name="title">
+    <widget class="QButtonGroup" name="ButtonGroup11" native="true">
+     <property name="title" stdset="0">
       <string>Port settings</string>
      </property>
      <layout class="QGridLayout">
@@ -506,8 +506,8 @@
     </widget>
    </item>
    <item>
-    <widget class="QButtonGroup" name="ui_protocol">
-     <property name="title">
+    <widget class="QButtonGroup" name="ui_protocol" native="true">
+     <property name="title" stdset="0">
       <string>Protocol</string>
      </property>
      <layout class="QGridLayout">
@@ -686,7 +686,7 @@
   <customwidget>
    <class>PrefWidget</class>
    <extends>QWidget</extends>
-   <header location="global">prefwidget.h</header>
+   <header>prefwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -701,9 +701,6 @@
   <tabstop>protocolCombo</tabstop>
   <tabstop>ui_numValues</tabstop>
  </tabstops>
- <includes>
-  <include location="local">prefwidget.h</include>
- </includes>
  <resources/>
  <connections/>
 </ui>

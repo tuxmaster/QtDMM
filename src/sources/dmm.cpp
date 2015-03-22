@@ -32,8 +32,8 @@
 
 #define LOG_OUTPUT
 
-DMM::DMM( QObject *parent, const char *name ) :
-  QObject( parent, name ),
+DMM::DMM(QObject *parent, QString &name) :
+  QObject( parent),
   m_handle( -1 ),
   m_speed( 600 ),
   m_parity( 0 ),
@@ -42,6 +42,7 @@ DMM::DMM( QObject *parent, const char *name ) :
   m_consoleLogging( false ),
   m_externalSetup( false )
 {
+  m_name=name;
   m_readerThread = new ReaderThread( this );
 
   // mt: QThread emits a signal now. no more custom event
@@ -116,7 +117,7 @@ bool DMM::open()
   struct termios attr;
   int    mdlns;
   memset( &attr, 0, sizeof( struct termios ) );
-  m_handle = ::open( m_device.latin1(), O_RDWR | O_NOCTTY | O_NDELAY);
+  m_handle = ::open( m_device.toLatin1(), O_RDWR | O_NOCTTY | O_NDELAY);
 
   if (-1 == m_handle)
   {
@@ -414,11 +415,6 @@ QString DMM::insertCommaIT( const QString & val, int pos )
   else
 	res = val.left(pos) + "." + val.mid(pos);
   return res;
-}
-
-void DMM::setName( const QString & name )
-{
-  m_name = name;
 }
 
 void DMM::setNumValues( int numValues )
@@ -828,13 +824,13 @@ void DMM::readASCII( const QByteArray & data, int id, ReadEvent::DataFormat df )
 	  df == ReadEvent::Voltcraft15Continuous)
   {
 	val     = str.mid( 2, 7 ); //.stripWhiteSpace();
-	unit    = str.mid( 9, 4 ).stripWhiteSpace();
-	special = str.left( 3 ).stripWhiteSpace();
+	unit    = str.mid( 9, 4 ).trimmed();
+	special = str.left( 3 ).trimmed();
   }
   else if (df == ReadEvent::PeakTech10)
   {
 	val     = str.mid( 1, 6 ); //.stripWhiteSpace();
-	unit    = str.mid( 7, 4 ).stripWhiteSpace();
+	unit    = str.mid( 7, 4 ).trimmed();
   }
 
   double d_val = val.toDouble();

@@ -25,7 +25,7 @@
 
 #include "colorbutton.h"
 
-ColorButton::ColorButton( QWidget *parent, const char *name ) : QPushButton( parent, name )
+ColorButton::ColorButton(QWidget *parent) : QPushButton( parent)
 {
   m_color = QColor( 255, 255, 255 );
   setAutoDefault( false );
@@ -42,7 +42,7 @@ void ColorButton::setColor( const QColor & c )
 {
   m_color = c;
 
-  QImage img( 16, 12, 32 );
+  QImage img( 16, 12, QImage::Format_RGB32 );
   img.fill(m_color.rgb());
   for (int i=0; i<16; ++i)
   {
@@ -58,7 +58,7 @@ void ColorButton::setColor( const QColor & c )
 
   QPixmap pix;
   pix.convertFromImage( img );
-  setPixmap( pix );
+  setIcon( pix );
 }
 
 void ColorButton::clickedSLOT()

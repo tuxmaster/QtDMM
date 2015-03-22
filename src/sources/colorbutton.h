@@ -32,7 +32,7 @@ class ColorButton : public QPushButton
 {
   Q_OBJECT
 	public:
-	  ColorButton( QWidget *parent=0, const char *name=0 );
+	  ColorButton( QWidget *parent=0);
 
 
 	  QColor	color() const;

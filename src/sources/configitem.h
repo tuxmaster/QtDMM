@@ -26,7 +26,7 @@
 #include <QtGui>
 #include <QtWidgets>
 
-class ConfigItem : public QListViewItem
+class ConfigItem : public QListWidgetItem
 {
 	public:
 	  ConfigItem(int id, const QPixmap &, const QString & label, QListWidget *parent );

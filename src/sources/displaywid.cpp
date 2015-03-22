@@ -28,7 +28,7 @@
 #include <iostream>
 
 
-DisplayWid::DisplayWid( QWidget *parent, const char *name ) : QWidget( parent, name ),
+DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_paintBar( true ),
   m_numValues( 1 )
 {
@@ -94,7 +94,8 @@ DisplayWid::DisplayWid( QWidget *parent, const char *name ) : QWidget( parent, n
   m_bar[5] = new QBitmap(":/Symbols/fifty_bar.xpm");
   m_bar[6] = new QBitmap(":/Symbols/sixty_bar.xpm");
 
-  setBackgroundMode( Qt::NoBackground );
+  setAttribute(Qt::WA_OpaquePaintEvent);
+  //setBackgroundMode( Qt::NoBackground );
 
   setDisplayMode( 1, true, true, 1 );
 }
@@ -122,7 +123,7 @@ void DisplayWid::setDisplayMode( int dm, bool minMax, bool bar, int numValues )
   m_extraW = (numDigits)*18+30+10;
   m_minW = m_extraW * (m_numValues-1);
 
-  setFixedSize( QMAX( m_minW, digitsW+m_minMaxW ), 76 + (m_showBar ? 26 : 2)+m_extraH );
+  setFixedSize( qMax( m_minW, digitsW+m_minMaxW ), 76 + (m_showBar ? 26 : 2)+m_extraH );
 
   switch (m_displayMode)
   {
@@ -212,7 +213,7 @@ void DisplayWid::setMode( int id, const QString & value )
 void DisplayWid::paintEvent( QPaintEvent * )
 {
   QPixmap pix( width(), height() );
-  pix.fill( colorGroup().background() );
+  pix.fill( palette().window().color() );
   QPainter p;
 
   int numDigits = calcNumDigits( m_displayMode );
@@ -221,7 +222,7 @@ void DisplayWid::paintEvent( QPaintEvent * )
   {
 	p.begin(&pix);
 
-	p.setPen( colorGroup().foreground() );
+	p.setPen( palette().windowText().style() );
 
 	if (m_showMinMax)
 	{
@@ -275,7 +276,7 @@ void DisplayWid::paintEvent( QPaintEvent * )
 	{
 	  QString val;
 
-	  for (unsigned i=0; i<m_value[0].length(); ++i)
+	  for (unsigned i=0; i<(unsigned)m_value[0].length(); ++i)
 	  {
 		if (m_value[0][i].digitValue() != -1)
 		{
@@ -328,7 +329,7 @@ void DisplayWid::paintEvent( QPaintEvent * )
 	  {
 		p.fillRect( off, height()-10,
 					(int)qRound((double)(width()-2*off)*percent ), 5,
-					colorGroup().foreground() );
+					palette().window().color() );
 	  }
 	}
 
@@ -367,80 +368,80 @@ void DisplayWid::drawSmallNumber( QPainter *p, const QString & num )
 
   x += 12;
 
-  for (unsigned i=offset; i<num.length(); i++)
+  for (unsigned i=offset; i<(unsigned)num.length(); i++)
   {
 	if (num[i] == '.')
 	{
 	  p->drawPixmap( x-5, 0, *m_smallDecimal );
 	}
-	else if (num[i].lower() == 'a')
+	else if (num[i].toLower() == 'a')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*0, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'b')
+	else if (num[i].toLower() == 'b')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*1, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'd')
+	else if (num[i].toLower() == 'd')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*2, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'e')
+	else if (num[i].toLower() == 'e')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*3, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'h')
+	else if (num[i].toLower() == 'h')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*4, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'l')
+	else if (num[i].toLower() == 'l')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*5, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'n')
+	else if (num[i].toLower() == 'n')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*6, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'o')
+	else if (num[i].toLower() == 'o')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*7, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'p')
+	else if (num[i].toLower() == 'p')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*8, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'r')
+	else if (num[i].toLower() == 'r')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*9, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 's')
+	else if (num[i].toLower() == 's')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*10, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 't')
+	else if (num[i].toLower() == 't')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*11, 0, 12, 21 );
 	  x += 18;
 	}
-	else if (num[i].lower() == 'y')
+	else if (num[i].toLower() == 'y')
 	{
 	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*12, 0, 12, 21 );
 	  x += 18;
 	}
 	else
 	{
-	  int digit = num[i].latin1()-'0';
+	  int digit = num[i].toLatin1()-'0';
 
 	  if (digit >= 0 && digit <= 9)
 	  {
@@ -634,74 +635,74 @@ void DisplayWid::drawBigNumber( QPainter *p, const QString & num )
 
   x += 28;
 
-  for (unsigned i=offset; i<num.length(); i++)
+  for (unsigned i=offset; i<(unsigned)num.length(); i++)
   {
 	if (num[i] == '.')
 	{
 	  p->drawPixmap( x-11, 0, *m_bigDecimal );
 	  comma = true;
 	}
-	else if (num[i].lower() == 'a')
+	else if (num[i].toLower() == 'a')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*0, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'b')
+	else if (num[i].toLower() == 'b')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*1, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'd')
+	else if (num[i].toLower() == 'd')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*2, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'e')
+	else if (num[i].toLower() == 'e')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*3, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'h')
+	else if (num[i].toLower() == 'h')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*4, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'l')
+	else if (num[i].toLower() == 'l')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*5, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'n')
+	else if (num[i].toLower() == 'n')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*6, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'o')
+	else if (num[i].toLower() == 'o')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*7, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'p')
+	else if (num[i].toLower() == 'p')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*8, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'r')
+	else if (num[i].toLower() == 'r')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*9, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 's')
+	else if (num[i].toLower() == 's')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*10, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 't')
+	else if (num[i].toLower() == 't')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*11, 0, 34, 60 );
 	  x += 49;
 	}
-	else if (num[i].lower() == 'y')
+	else if (num[i].toLower() == 'y')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*12, 0, 34, 60 );
 	  x += 49;
@@ -712,7 +713,7 @@ void DisplayWid::drawBigNumber( QPainter *p, const QString & num )
 	}
 	else
 	{
-	  int digit = num[i].latin1()-'0';
+	  int digit = num[i].toLatin1()-'0';
 
 	  if (digit >= 0 && digit <= 9)
 	  {

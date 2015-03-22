@@ -24,12 +24,13 @@
 #define DMMBAR_HH
 
 #include <QtGui>
+#include <QtWidgets>
 
 class DMMBar : public QWidget
 {
 	Q_OBJECT
 	public:
-	  DMMBar( QWidget *parent=0, const char *name=0 );
+	  DMMBar(QWidget *parent);
 
 	public Q_SLOTS:
 	  void		setValue( double );

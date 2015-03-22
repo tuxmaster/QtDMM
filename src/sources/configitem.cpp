@@ -27,9 +27,9 @@
 #include "configitem.h"
 
 ConfigItem::ConfigItem( int id, const QPixmap & pixmap, const QString & label, QListWidget *parent ) :
-			 QListWidgetItem( parent, label ), m_id( id )
+			 QListWidgetItem(label,parent ), m_id( id )
 {
-  setPixmap( 0, pixmap );
+  setIcon(pixmap);
 }
 
 

@@ -23,7 +23,7 @@
 #ifndef DMMPREFS_HH
 #define DMMPREFS_HH
 
-#include "uidmmprefs.h"
+#include "ui_uidmmprefs.h"
 #include "readevent.h"
 
 struct DMMInfo

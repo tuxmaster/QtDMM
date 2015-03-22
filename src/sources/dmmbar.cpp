@@ -24,7 +24,7 @@
 
 #include "dmmbar.h"
 
-DMMBar::DMMBar( QWidget *parent, const char *name ) : QWidget( parent, name ),
+DMMBar::DMMBar( QWidget *parent ) : QWidget( parent),
   m_value( 0.0 )
 {
 }
