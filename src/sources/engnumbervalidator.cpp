@@ -25,7 +25,7 @@
 #include <math.h>
 #include "engnumbervalidator.h"
 
-EngNumberValidator::EngNumberValidator( QObject *parent, const char *name ) : QValidator( parent, name )
+EngNumberValidator::EngNumberValidator(QObject *parent) : QValidator( parent)
 {
 }
 
@@ -36,8 +36,8 @@ QValidator::State EngNumberValidator::validate( QString & input, int & pos ) con
   static QRegExp doubleRe( "-?\\d+\\.?\\d*"  );
   static QRegExp fullRe( "-?\\d+\\.?\\d*[munpkMGT]?"  );
 
-  input = input.stripWhiteSpace();
-  pos = QMIN( (int)input.length(), pos );
+  input = input.trimmed();
+  pos = qMin( (int)input.length(), pos );
 
   // mt: changed
   if (fullRe.exactMatch( input ))
@@ -53,7 +53,7 @@ double EngNumberValidator::value( const QString & string )
   double factor = 1.;
 
   // mt: added toAscii
-  switch (string[string.length()-1].toAscii())
+  switch (string[string.length()-1].toLatin1())
   {
 	  case 'm':
 		factor = 1e-3;

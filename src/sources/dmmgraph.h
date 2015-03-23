@@ -128,7 +128,7 @@ class DMMGraph : public QWidget
 	  void						connectSLOT( bool on ) { m_connected = on; }
 
 	protected Q_SLOTS:
-	  void						popupSLOT( int );
+	  void						popupSLOT( QAction *action );
 
 	protected:
 	  QScrollBar                *scrollbar;

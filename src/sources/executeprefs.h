@@ -25,7 +25,7 @@
 
 #include <QtCore>
 
-#include "uiexecuteprefs.h"
+#include "ui_uiexecuteprefs.h"
 
 class ExecutePrefs : public UIExecutePrefs
 {

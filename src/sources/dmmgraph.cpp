@@ -72,8 +72,7 @@ DMMGraph::DMMGraph( QWidget *parent) :
   scrollbar->setTracking( true );
   scrollbar->setCursor( Qt::ArrowCursor );
 
-  connect( scrollbar, SIGNAL( valueChanged(int) ),
-		   this, SLOT( update() ));
+  connect( scrollbar, SIGNAL( valueChanged(int) ), this, SLOT( update() ));
 
   m_remainingLength = m_sampleLength;
   emitInfo();
@@ -92,7 +91,7 @@ DMMGraph::DMMGraph( QWidget *parent) :
   setMouseTracking( true );
 
   m_popup = new QMenu( this );
-  connect( m_popup, SIGNAL( activated(int) ),this, SLOT( popupSLOT(int) ));
+  connect( m_popup, SIGNAL(triggered(QAction*)),this, SLOT( popupSLOT(QAction*) ));
 }
 
 void DMMGraph::timerEvent( QTimerEvent * )
@@ -503,9 +502,9 @@ void DMMGraph::setGraphSize( int size, int length )
   m_size = (int)((double)size/m_sampleTime*10.);
   m_length = (int)((double)length/m_sampleTime*10. + 1);
 
-  scrollbar->setMinValue( 0 );
-  scrollbar->setMaxValue( m_length-1-m_size );
-  scrollbar->setLineStep( (m_size-1)/10 );
+  scrollbar->setMinimum(0);
+  scrollbar->setMaximum( m_length-1-m_size );
+  scrollbar->setSingleStep((m_size-1)/10 );
   scrollbar->setPageStep( m_size );
 
   m_array->resize( m_length );
@@ -901,25 +900,57 @@ void DMMGraph::mousePressEvent( QMouseEvent *ev )
 	m_popup->clear();
 
 	if (m_connected)
-		m_popup->insertItem( tr("Disconnect"), IDDisconnect );
+	{
+		QAction *action=new QAction(tr("Disconnect"),m_popup);
+		action->setProperty("ID",IDDisconnect);
+		m_popup->addAction(action);
+		//m_popup->insertItem( tr("Disconnect"), IDDisconnect );
+	}
 	else
-		m_popup->insertItem( tr("Connect"), IDConnect );
-	m_popup->insertSeparator();
+	{
+		QAction *action=new QAction(tr("Connect"),m_popup);
+		action->setProperty("ID",IDConnect);
+		m_popup->addAction(action);
+		//m_popup->insertItem( tr("Connect"), IDConnect );
+	}
+	m_popup->addSeparator();
 
 	if (m_running)
-		m_popup->insertItem( tr("Stop recorder"), IDStopRecorder );
+	{
+		QAction *action=new QAction(tr("Stop recorder"),m_popup);
+		action->setProperty("ID",IDStopRecorder);
+		m_popup->addAction(action);
+		//m_popup->insertItem( tr("Stop recorder"), IDStopRecorder );
+	}
 	else
-		m_popup->insertItem( tr("Start recorder"), IDStartRecorder );
-	m_popup->insertItem( tr("Clear graph"), IDClearGraph );
-	m_popup->insertSeparator();
+	{
+		QAction *action=new QAction(tr("Start recorder"),m_popup);
+		action->setProperty("ID",IDStartRecorder);
+		m_popup->addAction(action);
+		//m_popup->insertItem( tr("Start recorder"), IDStartRecorder );
+	}
+	QAction *action=new QAction(tr("Clear graph"),m_popup);
+	action->setProperty("ID",IDClearGraph);
+	m_popup->addAction(action);
+	//m_popup->insertItem( tr("Clear graph"), IDClearGraph );
+	m_popup->addSeparator();
 
-	m_popup->insertItem( tr("Configure..."), IDConfigure );
+	action=new QAction(tr("Configure..."),m_popup);
+	action->setProperty("ID",IDConfigure);
+	m_popup->addAction(action);
+	//m_popup->insertItem( tr("Configure..."), IDConfigure );
 
 	if (!m_running)
 	{
-	  m_popup->insertSeparator();
-	  m_popup->insertItem( tr("Export data..."), IDExportData );
-	  m_popup->insertItem( tr("Import data..."), IDImportData );
+	  m_popup->addSeparator();
+	  QAction *action=new QAction(tr("Export data..."),m_popup);
+	  action->setProperty("ID",IDExportData);
+	  m_popup->addAction(action);
+	  //m_popup->insertItem( tr("Export data..."), IDExportData );
+	  action=new QAction(tr("Import data..."),m_popup);
+	  action->setProperty("ID",IDImportData);
+	  m_popup->addAction(action);
+	  //m_popup->insertItem( tr("Import data..."), IDImportData );
 	}
 
 	m_popup->popup( ev->globalPos() );
@@ -950,7 +981,7 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
 	  //cerr << "delta=" << m_mpos.x()-ev->pos().x() << " offset=" << offset << endl;
 	  if (fabs(offset) >= 1)
 	  {
-		scrollbar->setValue( qMin( scrollbar->maxValue(), sv + (int)qRound(offset) ) );
+		scrollbar->setValue( qMin( scrollbar->maximum(), sv + (int)qRound(offset) ) );
 		m_mpos = ev->pos();
 	  }
 	}
@@ -1568,9 +1599,9 @@ void DMMGraph::computeUnitFactor()
   }
 }
 
-void DMMGraph::popupSLOT( int id )
+void DMMGraph::popupSLOT(QAction *action )
 {
-  switch (id)
+  switch (action->property("ID").toInt())
   {
 	  case IDConnect:
 		Q_EMIT connectDMM( true );
