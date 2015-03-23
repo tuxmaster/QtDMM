@@ -33,7 +33,7 @@
 
 #include <iostream>
 
-MainWid::MainWid( QWidget *parent, const char *name ) :  UIMainWid( parent, name ),
+MainWid::MainWid( QWidget *parent ) :  UIMainWid( parent ),
   m_display( 0 ),
   m_tipDlg( 0 )
 {

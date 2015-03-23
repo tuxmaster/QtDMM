@@ -28,7 +28,7 @@
 #include "integrationprefs.h"
 #include "simplecfg.h"
 
-IntegrationPrefs::IntegrationPrefs( QWidget *parent, const char *name ) : UIIntegrationPrefs( parent, name )
+IntegrationPrefs::IntegrationPrefs( QWidget *parent) : UIIntegrationPrefs( parent)
 {
   m_label = tr( "Integration" );
   m_description = tr( "<b>Here you can configure the parameter"

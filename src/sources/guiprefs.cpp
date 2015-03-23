@@ -28,7 +28,7 @@
 #include "guiprefs.h"
 #include "simplecfg.h"
 
-GuiPrefs::GuiPrefs( QWidget *parent, const char *name ) : UIGuiPrefs( parent, name )
+GuiPrefs::GuiPrefs( QWidget *parent) : UIGuiPrefs( parent )
 {
   m_label = tr( "GUI settings" );
   m_description = tr( "<b>Here you can configure QtDMM's visual"

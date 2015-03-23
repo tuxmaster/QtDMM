@@ -28,7 +28,7 @@
 #include "simplecfg.h"
 
 
-ExecutePrefs::ExecutePrefs( QWidget *parent, const char *name ) : UIExecutePrefs( parent, name )
+ExecutePrefs::ExecutePrefs( QWidget *parent) : UIExecutePrefs( parent )
 {
   m_label = tr( "External application" );
   m_description = tr( "<b>Here you can configure if an external"

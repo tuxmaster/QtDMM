@@ -27,7 +27,7 @@
 
 #include "printdlg.h"
 
-PrintDlg::PrintDlg( QWidget *parent, const char *name ) : UIPrintDlg( parent, name, true )
+PrintDlg::PrintDlg( QWidget *parent ) : UIPrintDlg( parent,  true )
 {
   connect( configBut, SIGNAL( clicked() ), this, SLOT( configSLOT() ));
   connect( helpBut, SIGNAL( clicked() ),  this, SLOT( helpSLOT() ));

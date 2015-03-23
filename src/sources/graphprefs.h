@@ -24,13 +24,13 @@
 #define GRAPHPREFS_HH
 
 #include <QtGui>
-#include "uigraphprefs.h"
+#include "ui_uigraphprefs.h"
 
 class GraphPrefs : public UIGraphPrefs
 {
   Q_OBJECT
 	public:
-	  GraphPrefs( QWidget *parent=0, const char *name=0 );
+	  GraphPrefs(QWidget *parent=0);
 
 
 	  QColor		bgColor() const;

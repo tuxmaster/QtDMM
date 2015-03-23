@@ -24,13 +24,13 @@
 #define GUIPREFS_HH
 
 #include <QtGui>
-#include "uiguiprefs.h"
+#include "ui_uiguiprefs.h"
 
 class GuiPrefs : public UIGuiPrefs
 {
   Q_OBJECT
 	public:
-	  GuiPrefs( QWidget *parent=0, const char *name=0 );
+	  GuiPrefs(QWidget *parent=0);
 	  bool			showTip() const;
 	  bool			showBar() const;
 	  bool			showMinMax() const;

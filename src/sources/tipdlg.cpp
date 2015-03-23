@@ -78,7 +78,7 @@ const char *TipDlg::s_tipText[] = {
 	0,
 	0 };
 
-TipDlg::TipDlg( QWidget *parent, const char *name ) :  UITipDlg( parent, name ),
+TipDlg::TipDlg(QWidget *parent) :  UITipDlg( parent),
   m_numTips(0),
   m_curTip(0)
 {

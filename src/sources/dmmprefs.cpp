@@ -135,7 +135,7 @@ struct DMMInfo dmm_info[] = {
 							  {"",0,0,0,0,0,0,0,0,0,0,0,0} // End Of List
 							};
 
-DmmPrefs::DmmPrefs( QWidget *parent, const char *name ) : UIDmmPrefs( parent, name )
+DmmPrefs::DmmPrefs( QWidget *parent) : UIDmmPrefs( parent )
 {
   m_label = tr( "Multimeter settings" );
   m_description = tr( "<b>Here you can configure the serial port"

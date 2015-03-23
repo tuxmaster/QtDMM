@@ -30,7 +30,7 @@
 #include "simplecfg.h"
 
 
-GraphPrefs::GraphPrefs( QWidget *parent, const char *name ) : UIGraphPrefs( parent, name )
+GraphPrefs::GraphPrefs( QWidget *parent) : UIGraphPrefs( parent )
 {
   m_label = tr( "Graph settings" );
   m_description = tr( "<b>Here you can configure the colors and"

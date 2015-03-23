@@ -27,7 +27,7 @@
 #include <QtGui>
 #include <QtPrintSupport>
 
-#include "uimainwid.h"
+#include "ui_uimainwid.h"
 
 class DMM;
 class PrintDlg;
@@ -40,7 +40,7 @@ class MainWid : public UIMainWid
 {
   Q_OBJECT
 	public:
-	  MainWid( QWidget *parent=0, const char *name=0 );
+	  MainWid(QWidget *parent=0);
 	  bool			closeWin();
 	  QRect			winRect() const;
 	  bool			saveWindowPosition() const;

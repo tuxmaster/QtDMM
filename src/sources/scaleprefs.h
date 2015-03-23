@@ -25,13 +25,13 @@
 
 #include <QtGui>
 
-#include "uiscaleprefs.h"
+#include "ui_uiscaleprefs.h"
 
 class ScalePrefs : public UIScalePrefs
 {
   Q_OBJECT
 	public:
-	  ScalePrefs( QWidget *parent=0, const char *name=0 );
+	  ScalePrefs(QWidget *parent=0);
 
 	  bool			automaticScale() const;
 	  bool			includeZero() const;

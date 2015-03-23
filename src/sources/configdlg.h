@@ -53,7 +53,7 @@ class ConfigDlg : public UIConfigDlg
 		NumItems
 	  };
 
-	  ConfigDlg( QWidget *parent=0, const char *name=0 );
+	  ConfigDlg(QWidget *parent=0);
 
 	  QString				device() const;
 	  int					speed() const;

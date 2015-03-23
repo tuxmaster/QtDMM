@@ -23,14 +23,14 @@
 #ifndef RECORDERPREFS_HH
 #define RECORDERPREFS_HH
 
-#include "uirecorderprefs.h"
+#include "ui_uirecorderprefs.h"
 #include "dmmgraph.h"
 
 class RecorderPrefs : public UIRecorderPrefs
 {
   Q_OBJECT
 	public:
-	  RecorderPrefs( QWidget *parent=0, const char *name=0 );
+	  RecorderPrefs(QWidget *parent=0);
 	  DMMGraph::SampleMode	sampleMode() const;
 	  int					sampleStep() const;
 	  int					sampleLength() const;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>UIGuiPrefs</class>
- <widget class="PrefWidget" name="UIGuiPrefs">
+ <widget class="QWidget" name="UIGuiPrefs">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -129,7 +129,7 @@
 	 <number>0</number>
 	</property>
 	<item>
-	 <widget class="ColorButton" name="ui_bgColorDisplay" native="true">
+	 <widget class="QPushButton" name="ui_bgColorDisplay" native="true">
 	  <property name="minimumSize">
 	   <size>
 	    <width>50</width>
@@ -180,7 +180,7 @@
 	 <number>0</number>
 	</property>
 	<item>
-	 <widget class="ColorButton" name="ui_textColor" native="true">
+	 <widget class="QPushButton" name="ui_textColor" native="true">
 	  <property name="minimumSize">
 	   <size>
 	    <width>50</width>
@@ -594,17 +594,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>PrefWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">prefwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ColorButton</class>
-   <extends>QWidget</extends>
-   <header>colorbutton.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>ui_showBar</tabstop>
@@ -620,9 +609,6 @@
   <tabstop>ui_tipOfTheDay</tabstop>
  </tabstops>
  <includes>
-  <include location="local">prefwidget.h</include>
-  <include location="local">colorbutton.h</include>
-  <include location="local">colorbutton.h</include>
  </includes>
  <resources/>
  <connections/>

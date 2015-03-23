@@ -24,7 +24,7 @@
 #define PRINTDLG_HH
 
 #include <QtGui>
-#include "uiprintdlg.h"
+#include "ui_uiprintdlg.h"
 
 
 class QPrinter;
@@ -32,7 +32,7 @@ class PrintDlg : public UIPrintDlg
 {
   Q_OBJECT
 	public:
-	  PrintDlg( QWidget *parent=0, const char *name=0 );
+	  PrintDlg(QWidget *parent=0);
 	  void		setPrinter( QPrinter * prt );
 	  QString	title() const { return printTitle->text(); }
 	  QString	comment() const { return printComment->text(); }

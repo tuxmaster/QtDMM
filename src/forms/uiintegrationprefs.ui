@@ -4,7 +4,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>UIIntegrationPrefs</class>
-  <widget class="PrefWidget" name="UIIntegrationPrefs">
+  <widget class="QWidget" name="UIIntegrationPrefs">
     <property name="geometry">
       <rect>
 	<x>0</x>
@@ -80,7 +80,7 @@
 		  <number>5</number>
 		</property>
 		<item>
-		  <widget class="ColorButton" name="ui_intColor">
+		  <widget class="QPushButton" name="ui_intColor">
 		    <property name="minimumSize">
 		      <size>
 			<width>50</width>
@@ -128,7 +128,7 @@
 		  <number>5</number>
 		</property>
 		<item>
-		  <widget class="ColorButton" name="ui_intThresholdColor">
+		  <widget class="QPushButton" name="ui_intThresholdColor">
 		    <property name="minimumSize">
 		      <size>
 			<width>50</width>
@@ -479,36 +479,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
     </layout>
   </widget>
   <customwidgets>
-    <customwidget>
-      <class>ColorButton</class>
-      <extends>QWidget</extends>
-      <header location="local">colorbutton.h</header>
-      <sizehint>
-	<width>-1</width>
-	<height>-1</height>
-      </sizehint>
-      <container>0</container>
-      <sizepolicy>
-	<hordata>5</hordata>
-	<verdata>5</verdata>
-      </sizepolicy>
-      <pixmap>image0</pixmap>
-    </customwidget>
-    <customwidget>
-      <class>PrefWidget</class>
-      <extends>QWidget</extends>
-      <header location="global">prefwidget.h</header>
-      <sizehint>
-	<width>-1</width>
-	<height>-1</height>
-      </sizehint>
-      <container>1</container>
-      <sizepolicy>
-	<hordata>5</hordata>
-	<verdata>5</verdata>
-      </sizepolicy>
-      <pixmap>image0</pixmap>
-    </customwidget>
+
   </customwidgets>
   <tabstops>
     <tabstop>ui_showInt</tabstop>

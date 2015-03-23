@@ -4,7 +4,7 @@
   <comment></comment>
   <exportmacro></exportmacro>
   <class>UIExecutePrefs</class>
-  <widget class="PrefWidget" name="UIExecutePrefs">
+  <widget class="QWidget" name="UIExecutePrefs">
     <property name="geometry">
       <rect>
 	<x>0</x>
@@ -295,21 +295,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
     </layout>
   </widget>
   <customwidgets>
-    <customwidget>
-      <class>PrefWidget</class>
-      <extends>QWidget</extends>
-      <header location="global">prefwidget.h</header>
-      <sizehint>
-	<width>-1</width>
-	<height>-1</height>
-      </sizehint>
-      <container>1</container>
-      <sizepolicy>
-	<hordata>5</hordata>
-	<verdata>5</verdata>
-      </sizepolicy>
-      <pixmap>image1</pixmap>
-    </customwidget>
+
   </customwidgets>
   <tabstops>
     <tabstop>ui_executeCommand</tabstop>

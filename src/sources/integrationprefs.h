@@ -25,13 +25,13 @@
 
 #include <QtGui>
 
-#include "uiintegrationprefs.h"
+#include "ui_uiintegrationprefs.h"
 
 class IntegrationPrefs : public UIIntegrationPrefs
 {
   Q_OBJECT
 	public:
-	  IntegrationPrefs( QWidget *parent=0, const char *name=0 );
+	  IntegrationPrefs(QWidget *parent=0);
 	  double		intScale() const;
 	  double		intThreshold() const;
 	  double		intOffset() const;

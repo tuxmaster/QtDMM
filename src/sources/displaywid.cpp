@@ -625,7 +625,6 @@ void DisplayWid::drawBigNumber( QPainter *p, const QString & num )
   int x = 0;
   int offset = 0;
   while (num[offset] == ' ' && offset<num.length()) ++offset;
-  bool comma = false;
 
   if (num[offset] == '-')
   {
@@ -638,10 +637,7 @@ void DisplayWid::drawBigNumber( QPainter *p, const QString & num )
   for (unsigned i=offset; i<(unsigned)num.length(); i++)
   {
 	if (num[i] == '.')
-	{
-	  p->drawPixmap( x-11, 0, *m_bigDecimal );
-	  comma = true;
-	}
+		p->drawPixmap( x-11, 0, *m_bigDecimal );
 	else if (num[i].toLower() == 'a')
 	{
 	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*0, 0, 34, 60 );
@@ -708,17 +704,13 @@ void DisplayWid::drawBigNumber( QPainter *p, const QString & num )
 	  x += 49;
 	}
 	else if (num[i] == ' ')
-	{
-	  x += 49;
-	}
+		x += 49;
 	else
 	{
 	  int digit = num[i].toLatin1()-'0';
 
 	  if (digit >= 0 && digit <= 9)
-	  {
 		p->drawPixmap( x+2, 2, *m_bigDigit, 34*digit, 0, 34, 60 );
-	  }
 	  x += 49;
 	}
   }

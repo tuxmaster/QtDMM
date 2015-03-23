@@ -22,7 +22,7 @@
 
 #include "prefwidget.h"
 
-PrefWidget::PrefWidget( QWidget *parent, const char *name ) : QWidget( parent, name )
+PrefWidget::PrefWidget(QWidget *parent) : QWidget( parent)
 {
 }
 

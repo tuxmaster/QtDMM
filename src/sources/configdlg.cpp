@@ -38,7 +38,7 @@
 #include <iostream>
 
 
-ConfigDlg::ConfigDlg( QWidget *parent, const char *name ) :  UIConfigDlg( parent, name )
+ConfigDlg::ConfigDlg( QWidget *parent) :  UIConfigDlg( parent )
 {
   setIcon(QPixmap(":/Symbols/icon.xpm"));
 

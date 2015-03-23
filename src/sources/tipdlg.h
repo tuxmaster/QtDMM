@@ -25,13 +25,13 @@
 
 #include <QtCore>
 
-#include "uitipdlg.h"
+#include "ui_uitipdlg.h"
 
 class TipDlg : public UITipDlg
 {
   Q_OBJECT
 	public:
-	  TipDlg( QWidget *parent=0, const char *name=0 );
+	  TipDlg( QWidget *parent=0 );
 
 
 	  bool				showTips() const;
