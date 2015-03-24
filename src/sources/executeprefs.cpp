@@ -28,8 +28,9 @@
 #include "simplecfg.h"
 
 
-ExecutePrefs::ExecutePrefs( QWidget *parent) : UIExecutePrefs( parent )
+ExecutePrefs::ExecutePrefs( QWidget *parent) : QWidget( parent )
 {
+  setupUi(this);
   m_label = tr( "External application" );
   m_description = tr( "<b>Here you can configure if an external"
 					  " command is to be started and when.</b>" );

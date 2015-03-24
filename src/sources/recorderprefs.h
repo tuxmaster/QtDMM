@@ -26,7 +26,7 @@
 #include "ui_uirecorderprefs.h"
 #include "dmmgraph.h"
 
-class RecorderPrefs : public UIRecorderPrefs
+class RecorderPrefs : public QWidget,private Ui::UIRecorderPrefs
 {
   Q_OBJECT
 	public:

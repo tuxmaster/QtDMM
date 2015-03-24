@@ -38,8 +38,9 @@
 #include <iostream>
 
 
-ConfigDlg::ConfigDlg( QWidget *parent) :  UIConfigDlg( parent )
+ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 {
+  setupUi(this);
   setIcon(QPixmap(":/Symbols/icon.xpm"));
 
   ui_list->header()->hide();
@@ -369,7 +370,7 @@ void ConfigDlg::readPrinter( QPrinter * printer )
   m_printer->setOutputToFile( m_cfg->getBool( "Printer", "print-file", false ) );
 }
 
-void ConfigDlg::pageSelectedSLOT(QListViewItem *item )
+void ConfigDlg::pageSelectedSLOT(QListWidgetItem *item )
 {
   int id = ((ConfigItem *)item)->id();
   PrefWidget *wid = (PrefWidget *)ui_stack->widget( id );

@@ -27,7 +27,7 @@
 
 #include "ui_uiexecuteprefs.h"
 
-class ExecutePrefs : public UIExecutePrefs
+class ExecutePrefs : public QWidget, private Ui::UIExecutePrefs
 {
   Q_OBJECT
 	public:

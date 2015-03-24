@@ -355,7 +355,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QButtonGroup" name="ButtonGroup12_2">
+    <widget class="QGroupBox" name="ButtonGroup12_2">
      <property name="title">
       <string>Toolbar</string>
      </property>

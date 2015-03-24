@@ -34,327 +34,327 @@
       </property>
       <item row="1" column="0">
        <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="ui_dataColor">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button so change the color of the data graph in the recorder.</string>
-          </property>
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>&amp;Data</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_dataColor</cstring>
-          </property>
-         </widget>
-        </item>
+	<property name="spacing">
+	 <number>5</number>
+	</property>
+	<property name="margin">
+	 <number>0</number>
+	</property>
+	<item>
+	 <widget class="QPushButton" name="ui_dataColor">
+	  <property name="minimumSize">
+	   <size>
+	    <width>50</width>
+	    <height>0</height>
+	   </size>
+	  </property>
+	  <property name="maximumSize">
+	   <size>
+	    <width>50</width>
+	    <height>32767</height>
+	   </size>
+	  </property>
+	  <property name="whatsThis">
+	   <string>Click this button so change the color of the data graph in the recorder.</string>
+	  </property>
+	  <property name="accessibleName">
+	   <string notr="true"/>
+	  </property>
+	  <property name="accessibleDescription">
+	   <string notr="true"/>
+	  </property>
+	 </widget>
+	</item>
+	<item>
+	 <widget class="QLabel" name="label_2">
+	  <property name="sizePolicy">
+	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+	    <horstretch>0</horstretch>
+	    <verstretch>0</verstretch>
+	   </sizepolicy>
+	  </property>
+	  <property name="text">
+	   <string>&amp;Data</string>
+	  </property>
+	  <property name="wordWrap">
+	   <bool>false</bool>
+	  </property>
+	  <property name="buddy">
+	   <cstring>ui_dataColor</cstring>
+	  </property>
+	 </widget>
+	</item>
        </layout>
       </item>
       <item row="0" column="0">
        <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="ui_bgColor">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button to change the background color of the recorder graph.</string>
-          </property>
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="TextLabel2_2_4">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>&amp;Background</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_bgColor</cstring>
-          </property>
-         </widget>
-        </item>
+	<property name="spacing">
+	 <number>5</number>
+	</property>
+	<property name="margin">
+	 <number>0</number>
+	</property>
+	<item>
+	 <widget class="QPushButton" name="ui_bgColor">
+	  <property name="minimumSize">
+	   <size>
+	    <width>50</width>
+	    <height>0</height>
+	   </size>
+	  </property>
+	  <property name="maximumSize">
+	   <size>
+	    <width>50</width>
+	    <height>32767</height>
+	   </size>
+	  </property>
+	  <property name="whatsThis">
+	   <string>Click this button to change the background color of the recorder graph.</string>
+	  </property>
+	  <property name="accessibleName">
+	   <string notr="true"/>
+	  </property>
+	  <property name="accessibleDescription">
+	   <string notr="true"/>
+	  </property>
+	 </widget>
+	</item>
+	<item>
+	 <widget class="QLabel" name="TextLabel2_2_4">
+	  <property name="sizePolicy">
+	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+	    <horstretch>0</horstretch>
+	    <verstretch>0</verstretch>
+	   </sizepolicy>
+	  </property>
+	  <property name="text">
+	   <string>&amp;Background</string>
+	  </property>
+	  <property name="wordWrap">
+	   <bool>false</bool>
+	  </property>
+	  <property name="buddy">
+	   <cstring>ui_bgColor</cstring>
+	  </property>
+	 </widget>
+	</item>
        </layout>
       </item>
       <item row="0" column="1">
        <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="ui_gridColor">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button to change the color of the grid and grid text in the recorder.</string>
-          </property>
-          <property name="text">
-           <string notr="true"/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="TextLabel3_2_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>&amp;Grid</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_gridColor</cstring>
-          </property>
-         </widget>
-        </item>
+	<property name="spacing">
+	 <number>5</number>
+	</property>
+	<property name="margin">
+	 <number>0</number>
+	</property>
+	<item>
+	 <widget class="QPushButton" name="ui_gridColor">
+	  <property name="minimumSize">
+	   <size>
+	    <width>50</width>
+	    <height>0</height>
+	   </size>
+	  </property>
+	  <property name="maximumSize">
+	   <size>
+	    <width>50</width>
+	    <height>32767</height>
+	   </size>
+	  </property>
+	  <property name="whatsThis">
+	   <string>Click this button to change the color of the grid and grid text in the recorder.</string>
+	  </property>
+	  <property name="text">
+	   <string notr="true"/>
+	  </property>
+	 </widget>
+	</item>
+	<item>
+	 <widget class="QLabel" name="TextLabel3_2_2">
+	  <property name="sizePolicy">
+	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+	    <horstretch>0</horstretch>
+	    <verstretch>0</verstretch>
+	   </sizepolicy>
+	  </property>
+	  <property name="text">
+	   <string>&amp;Grid</string>
+	  </property>
+	  <property name="wordWrap">
+	   <bool>false</bool>
+	  </property>
+	  <property name="buddy">
+	   <cstring>ui_gridColor</cstring>
+	  </property>
+	 </widget>
+	</item>
        </layout>
       </item>
       <item row="1" column="1">
        <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="ui_cursorColor">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button to change the color of the cursor at the current sampling position in the recorder.</string>
-          </property>
-          <property name="text">
-           <string notr="true"/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label2_4">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Cu&amp;rsor</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_cursorColor</cstring>
-          </property>
-         </widget>
-        </item>
+	<property name="spacing">
+	 <number>5</number>
+	</property>
+	<property name="margin">
+	 <number>0</number>
+	</property>
+	<item>
+	 <widget class="QPushButton" name="ui_cursorColor">
+	  <property name="minimumSize">
+	   <size>
+	    <width>50</width>
+	    <height>0</height>
+	   </size>
+	  </property>
+	  <property name="maximumSize">
+	   <size>
+	    <width>50</width>
+	    <height>32767</height>
+	   </size>
+	  </property>
+	  <property name="whatsThis">
+	   <string>Click this button to change the color of the cursor at the current sampling position in the recorder.</string>
+	  </property>
+	  <property name="text">
+	   <string notr="true"/>
+	  </property>
+	 </widget>
+	</item>
+	<item>
+	 <widget class="QLabel" name="label2_4">
+	  <property name="sizePolicy">
+	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+	    <horstretch>0</horstretch>
+	    <verstretch>0</verstretch>
+	   </sizepolicy>
+	  </property>
+	  <property name="text">
+	   <string>Cu&amp;rsor</string>
+	  </property>
+	  <property name="wordWrap">
+	   <bool>false</bool>
+	  </property>
+	  <property name="buddy">
+	   <cstring>ui_cursorColor</cstring>
+	  </property>
+	 </widget>
+	</item>
        </layout>
       </item>
       <item row="2" column="0">
        <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="ui_startColor">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button to change the color of the cursor at the current sampling position in the recorder.</string>
-          </property>
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label2_2_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Start threshold</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_startColor</cstring>
-          </property>
-         </widget>
-        </item>
+	<property name="spacing">
+	 <number>5</number>
+	</property>
+	<property name="margin">
+	 <number>0</number>
+	</property>
+	<item>
+	 <widget class="QPushButton" name="ui_startColor">
+	  <property name="minimumSize">
+	   <size>
+	    <width>50</width>
+	    <height>0</height>
+	   </size>
+	  </property>
+	  <property name="maximumSize">
+	   <size>
+	    <width>50</width>
+	    <height>32767</height>
+	   </size>
+	  </property>
+	  <property name="whatsThis">
+	   <string>Click this button to change the color of the cursor at the current sampling position in the recorder.</string>
+	  </property>
+	  <property name="accessibleName">
+	   <string notr="true"/>
+	  </property>
+	  <property name="accessibleDescription">
+	   <string notr="true"/>
+	  </property>
+	 </widget>
+	</item>
+	<item>
+	 <widget class="QLabel" name="label2_2_2">
+	  <property name="sizePolicy">
+	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+	    <horstretch>0</horstretch>
+	    <verstretch>0</verstretch>
+	   </sizepolicy>
+	  </property>
+	  <property name="text">
+	   <string>Start threshold</string>
+	  </property>
+	  <property name="wordWrap">
+	   <bool>false</bool>
+	  </property>
+	  <property name="buddy">
+	   <cstring>ui_startColor</cstring>
+	  </property>
+	 </widget>
+	</item>
        </layout>
       </item>
       <item row="2" column="1">
        <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="ui_extColor">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button to change the color of the cursor at the current sampling position in the recorder.</string>
-          </property>
-          <property name="accessibleName">
-           <string notr="true"/>
-          </property>
-          <property name="accessibleDescription">
-           <string notr="true"/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label2_3_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>E&amp;xternal threshold</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_extColor</cstring>
-          </property>
-         </widget>
-        </item>
+	<property name="spacing">
+	 <number>5</number>
+	</property>
+	<property name="margin">
+	 <number>0</number>
+	</property>
+	<item>
+	 <widget class="QPushButton" name="ui_extColor">
+	  <property name="minimumSize">
+	   <size>
+	    <width>50</width>
+	    <height>0</height>
+	   </size>
+	  </property>
+	  <property name="maximumSize">
+	   <size>
+	    <width>50</width>
+	    <height>32767</height>
+	   </size>
+	  </property>
+	  <property name="whatsThis">
+	   <string>Click this button to change the color of the cursor at the current sampling position in the recorder.</string>
+	  </property>
+	  <property name="accessibleName">
+	   <string notr="true"/>
+	  </property>
+	  <property name="accessibleDescription">
+	   <string notr="true"/>
+	  </property>
+	 </widget>
+	</item>
+	<item>
+	 <widget class="QLabel" name="label2_3_2">
+	  <property name="sizePolicy">
+	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+	    <horstretch>0</horstretch>
+	    <verstretch>0</verstretch>
+	   </sizepolicy>
+	  </property>
+	  <property name="text">
+	   <string>E&amp;xternal threshold</string>
+	  </property>
+	  <property name="wordWrap">
+	   <bool>false</bool>
+	  </property>
+	  <property name="buddy">
+	   <cstring>ui_extColor</cstring>
+	  </property>
+	 </widget>
+	</item>
        </layout>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="QButtonGroup" name="ButtonGroup11_2" native="true">
+    <widget class="QGroupBox" name="ButtonGroup11_2" native="true">
      <property name="title" stdset="0">
       <string>Drawing style</string>
      </property>
@@ -367,172 +367,172 @@
       </property>
       <item row="1" column="0">
        <widget class="QLabel" name="TextLabel1_3_3_2">
-        <property name="text">
-         <string>Data points:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
+	<property name="text">
+	 <string>Data points:</string>
+	</property>
+	<property name="alignment">
+	 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	</property>
+	<property name="wordWrap">
+	 <bool>false</bool>
+	</property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QComboBox" name="ui_lineMode">
-        <property name="currentIndex">
-         <number>1</number>
-        </property>
-        <item>
-         <property name="text">
-          <string>No line</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Solid line</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Dotted line</string>
-         </property>
-        </item>
+	<property name="currentIndex">
+	 <number>1</number>
+	</property>
+	<item>
+	 <property name="text">
+	  <string>No line</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Solid line</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Dotted line</string>
+	 </property>
+	</item>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="TextLabel1_6_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Data:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
+	<property name="sizePolicy">
+	 <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+	  <horstretch>0</horstretch>
+	  <verstretch>0</verstretch>
+	 </sizepolicy>
+	</property>
+	<property name="text">
+	 <string>Data:</string>
+	</property>
+	<property name="alignment">
+	 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	</property>
+	<property name="wordWrap">
+	 <bool>false</bool>
+	</property>
        </widget>
       </item>
       <item row="0" column="4">
        <spacer name="Spacer3_2_2_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
+	<property name="orientation">
+	 <enum>Qt::Horizontal</enum>
+	</property>
+	<property name="sizeType">
+	 <enum>QSizePolicy::Expanding</enum>
+	</property>
+	<property name="sizeHint" stdset="0">
+	 <size>
+	  <width>20</width>
+	  <height>20</height>
+	 </size>
+	</property>
        </spacer>
       </item>
       <item row="0" column="3">
        <widget class="QSpinBox" name="ui_lineWidth">
-        <property name="maximumSize">
-         <size>
-          <width>50</width>
-          <height>32767</height>
-         </size>
-        </property>
-        <property name="whatsThis">
-         <string>Here you can choose the line width of the data graph in the recorder.</string>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>5</number>
-        </property>
-        <property name="value">
-         <number>2</number>
-        </property>
+	<property name="maximumSize">
+	 <size>
+	  <width>50</width>
+	  <height>32767</height>
+	 </size>
+	</property>
+	<property name="whatsThis">
+	 <string>Here you can choose the line width of the data graph in the recorder.</string>
+	</property>
+	<property name="minimum">
+	 <number>1</number>
+	</property>
+	<property name="maximum">
+	 <number>5</number>
+	</property>
+	<property name="value">
+	 <number>2</number>
+	</property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QLabel" name="TextLabel1">
-        <property name="text">
-         <string>Width:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
+	<property name="text">
+	 <string>Width:</string>
+	</property>
+	<property name="alignment">
+	 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	</property>
+	<property name="wordWrap">
+	 <bool>false</bool>
+	</property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QComboBox" name="ui_pointMode">
-        <item>
-         <property name="text">
-          <string>No points</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Circle</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Square</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Diamond</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>X</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Large Circle</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Large Square</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Large Diamond</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Large X</string>
-         </property>
-        </item>
+	<item>
+	 <property name="text">
+	  <string>No points</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Circle</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Square</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Diamond</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>X</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Large Circle</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Large Square</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Large Diamond</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Large X</string>
+	 </property>
+	</item>
        </widget>
       </item>
       <item row="1" column="2" colspan="3">
        <spacer name="Spacer233">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
+	<property name="orientation">
+	 <enum>Qt::Horizontal</enum>
+	</property>
+	<property name="sizeType">
+	 <enum>QSizePolicy::Expanding</enum>
+	</property>
+	<property name="sizeHint" stdset="0">
+	 <size>
+	  <width>20</width>
+	  <height>20</height>
+	 </size>
+	</property>
        </spacer>
       </item>
      </layout>

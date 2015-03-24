@@ -19,9 +19,7 @@
 	<height>32767</height>
       </size>
     </property>
-    <property name="caption">
-      <string>QFrameForm</string>
-    </property>
+
     <property name="whatsThis">
       <string>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
@@ -35,7 +33,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
 	<number>5</number>
       </property>
       <item>
-	<widget class="QButtonGroup" name="ButtonGroup36">
+	<widget class="QGroupBox" name="ButtonGroup36">
 	  <property name="frameShape">
 	    <enum>QGroupBox::Box</enum>
 	  </property>
@@ -271,7 +269,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
 	</widget>
       </item>
       <item>
-	<widget class="QButtonGroup" name="ButtonGroup37">
+	<widget class="QGroupBox" name="ButtonGroup37">
 	  <property name="title">
 	    <string>Window</string>
 	  </property>

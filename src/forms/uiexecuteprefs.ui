@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0" stdsetdef="1">
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
+
   <class>UIExecutePrefs</class>
   <widget class="QWidget" name="UIExecutePrefs">
     <property name="geometry">
@@ -12,9 +10,6 @@
 	<width>297</width>
 	<height>221</height>
       </rect>
-    </property>
-    <property name="caption">
-      <string>QFrameForm</string>
     </property>
     <layout class="QVBoxLayout">
       <property name="margin">
@@ -34,16 +29,11 @@
 	</widget>
       </item>
       <item>
-	<widget class="QButtonGroup" name="ButtonGroup9">
+	<widget class="QGroupBox" name="ButtonGroup9">
 	  <property name="enabled">
 	    <bool>false</bool>
 	  </property>
-	  <property name="frameShape">
-	    <enum>QGroupBox::Box</enum>
-	  </property>
-	  <property name="frameShadow">
-	    <enum>QGroupBox::Sunken</enum>
-	  </property>
+
 	  <property name="title">
 	    <string>Threshold</string>
 	  </property>
@@ -175,7 +165,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
 	</widget>
       </item>
       <item>
-	<widget class="QButtonGroup" name="ButtonGroup10">
+	<widget class="QGroupBox" name="ButtonGroup10">
 	  <property name="enabled">
 	    <bool>false</bool>
 	  </property>

@@ -37,7 +37,7 @@ class GraphPrefs;
 class IntegrationPrefs;
 class ExecutePrefs;
 
-class ConfigDlg : public UIConfigDlg
+class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 {
   Q_OBJECT
 	public:
@@ -160,7 +160,7 @@ class ConfigDlg : public UIConfigDlg
 	  ExecutePrefs			*m_execute;
 
 	protected Q_SLOTS:
-	  void					pageSelectedSLOT( QListViewItem *item );
+	  void					pageSelectedSLOT( QListWidgetItem *item );
 	  void					factoryDefaultsSLOT();
 
 };

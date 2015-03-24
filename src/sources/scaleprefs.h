@@ -27,7 +27,7 @@
 
 #include "ui_uiscaleprefs.h"
 
-class ScalePrefs : public UIScalePrefs
+class ScalePrefs : public QWidget,private Ui::UIScalePrefs
 {
   Q_OBJECT
 	public:

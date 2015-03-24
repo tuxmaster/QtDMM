@@ -13,10 +13,7 @@
 	<height>366</height>
       </rect>
     </property>
-    <property name="caption">
-      <string>QFrameForm</string>
-    </property>
-    <layout class="QVBoxLayout">
+	<layout class="QVBoxLayout">
       <property name="margin">
 	<number>10</number>
       </property>
@@ -24,13 +21,11 @@
 	<number>5</number>
       </property>
       <item>
-	<widget class="QButtonGroup" name="ButtonGroup1">
+	<widget class="QGroupBox" name="ButtonGroup1">
 	  <property name="title">
 	    <string>Sampling</string>
 	  </property>
-	  <property name="exclusive">
-	    <bool>false</bool>
-	  </property>
+
 	  <layout class="QGridLayout">
 	    <property name="margin">
 	      <number>10</number>
@@ -196,16 +191,12 @@
 	      <number>5</number>
 	    </property>
 	    <item>
-	      <widget class="QButtonGroup" name="ButtonGroup32">
-		<property name="frameShape">
-		  <enum>Q3GroupBox::NoFrame</enum>
-		</property>
+	      <widget class="QGroupBox" name="ButtonGroup32">
+
 		<property name="title">
 		  <string/>
 		</property>
-		<property name="exclusive">
-		  <bool>false</bool>
-		</property>
+
 		<layout class="QVBoxLayout">
 		  <property name="margin">
 		    <number>0</number>
@@ -488,15 +479,9 @@ You have two choices:
 	      </widget>
 	    </item>
 	    <item>
-	      <widget class="QButtonGroup" name="ButtonGroup13">
-		<property name="frameShape">
-		  <enum>QGroupBox::NoFrame</enum>
-		</property>
+	      <widget class="QGroupBox" name="ButtonGroup13">
 		<property name="title">
 		  <string/>
-		</property>
-		<property name="exclusive">
-		  <bool>false</bool>
 		</property>
 		<layout class="QVBoxLayout">
 		  <property name="margin">

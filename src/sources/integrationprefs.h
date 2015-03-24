@@ -27,7 +27,7 @@
 
 #include "ui_uiintegrationprefs.h"
 
-class IntegrationPrefs : public UIIntegrationPrefs
+class IntegrationPrefs : public QWidget,private Ui::UIIntegrationPrefs
 {
   Q_OBJECT
 	public:

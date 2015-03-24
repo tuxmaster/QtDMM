@@ -27,7 +27,7 @@
 
 #include "ui_uitipdlg.h"
 
-class TipDlg : public UITipDlg
+class TipDlg : public QDialog,private Ui::UITipDlg
 {
   Q_OBJECT
 	public:

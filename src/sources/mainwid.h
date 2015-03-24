@@ -36,7 +36,7 @@ class ConfigDlg;
 class DisplayWid;
 class TipDlg;
 
-class MainWid : public UIMainWid
+class MainWid : public QFrame, private Ui::UIMainWid
 {
   Q_OBJECT
 	public:

@@ -26,7 +26,7 @@
 #include <QtGui>
 #include "ui_uiguiprefs.h"
 
-class GuiPrefs : public UIGuiPrefs
+class GuiPrefs : public QWidget, private Ui::UIGuiPrefs
 {
   Q_OBJECT
 	public:

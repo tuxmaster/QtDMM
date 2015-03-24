@@ -43,7 +43,7 @@ struct DMMInfo
   bool  dtr;
 };
 
-class DmmPrefs : public UIDmmPrefs
+class DmmPrefs : public QWidget,private Ui::UIDmmPrefs
 {
   Q_OBJECT
 	public:
