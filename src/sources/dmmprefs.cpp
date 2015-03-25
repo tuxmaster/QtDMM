@@ -135,9 +135,10 @@ struct DMMInfo dmm_info[] = {
 							  {"",0,0,0,0,0,0,0,0,0,0,0,0} // End Of List
 							};
 
-DmmPrefs::DmmPrefs( QWidget *parent) : UIDmmPrefs( parent )
+DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
 {
-  m_label = tr( "Multimeter settings" );
+  setupUi(this);
+  m_label=(tr( "Multimeter settings" ));
   m_description = tr( "<b>Here you can configure the serial port"
 					  " and protocol for your DMM. There is"
 					  " also a number of predefined models.</b>" );
@@ -157,7 +158,7 @@ DmmPrefs::DmmPrefs( QWidget *parent) : UIDmmPrefs( parent )
   connect( ui_load, SIGNAL( clicked() ), this, SLOT( loadSLOT()));
   connect( ui_save, SIGNAL( clicked() ), this, SLOT( saveSLOT()));
 
-  m_path = QDir::currentDirPath();
+  m_path = QDir::currentPath();
 
 #ifdef Q_WS_MACX
   connect( ui_scanPorts, SIGNAL( clicked() ), this, SLOT( scanDevicesSLOT() ));
@@ -192,7 +193,7 @@ QString DmmPrefs::deviceListText() const
   int id = 0;
   while (*dmm_info[id].name)
   {
-	QStringList token = QStringList::split( " ", QString( dmm_info[id].name ) );
+	QStringList token = QString( dmm_info[id].name ).split(" ");
 
 	if (token[0][0] != '*')
 	{
@@ -208,7 +209,7 @@ QString DmmPrefs::deviceListText() const
 	  else
 		text += ", ";
 
-	  for (unsigned i=1; i<token.count(); ++i)
+	  for (unsigned i=1; i<(unsigned)token.count(); ++i)
 	  {
 		if (i!=1)
 			text += " ";
@@ -438,18 +439,14 @@ QString DmmPrefs::device() const
   return port->currentText();
 #else
   QString txt;
-  txt.sprintf( "%s%d", port->currentText().latin1(), portNumber->value() );
+  txt.sprintf( "%s%d", port->currentText().toLatin1().constData(), portNumber->value() );
   return txt;
 #endif
 }
 
 void DmmPrefs::loadSLOT()
 {
-  QString filename = QFileDialog::getOpenFileName( m_path,
-									"DMM description (*.ini)",
-									this,
-									"open file dialog",
-									tr("Load DMM description") );
+  QString filename = QFileDialog::getOpenFileName(this,tr("Load DMM description"), m_path,	tr("DMM description (*.ini)"));
 
   if (!filename.isNull())
   {
@@ -479,12 +476,7 @@ void DmmPrefs::loadSLOT()
 
 void DmmPrefs::saveSLOT()
 {
-  QString filename = QFileDialog::getSaveFileName( m_path,
-									"DMM description (*.ini)",
-									this,
-									"save file dialog",
-									tr("Save DMM description") );
-
+  QString filename = QFileDialog::getSaveFileName(this, tr("Save DMM description"),m_path,tr("DMM description (*.ini)"));
   if (!filename.isNull())
   {
 	QFileInfo info( filename );

@@ -1,322 +1,338 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0" stdsetdef="1">
-
-  <class>UIExecutePrefs</class>
-  <widget class="QWidget" name="UIExecutePrefs">
-    <property name="geometry">
-      <rect>
-	<x>0</x>
-	<y>0</y>
-	<width>297</width>
-	<height>221</height>
-      </rect>
-    </property>
-    <layout class="QVBoxLayout">
+<ui version="4.0">
+ <class>UIExecutePrefs</class>
+ <widget class="PrefWidget" name="UIExecutePrefs">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>347</width>
+    <height>276</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout">
+   <property name="spacing">
+    <number>5</number>
+   </property>
+   <property name="margin">
+    <number>10</number>
+   </property>
+   <item>
+    <widget class="QCheckBox" name="ui_executeCommand">
+     <property name="whatsThis">
+      <string>Check this if you want QtDMM to execute an external command when given thresholds are reached (Falling or raising edge).</string>
+     </property>
+     <property name="text">
+      <string>Execute external command at given threshold</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="ButtonGroup9">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>Threshold</string>
+     </property>
+     <layout class="QGridLayout">
       <property name="margin">
-	<number>10</number>
+       <number>10</number>
       </property>
       <property name="spacing">
-	<number>5</number>
+       <number>5</number>
+      </property>
+      <item row="1" column="1">
+       <widget class="QLabel" name="TextLabel8_2_2_2">
+        <property name="text">
+         <string>Threshold:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="ui_execRaisingThreshold">
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>32767</height>
+         </size>
+        </property>
+        <property name="whatsThis">
+         <string>Threshold for raising edge.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="maxLength">
+         <number>12</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="TextLabel7_2_2_2">
+        <property name="text">
+         <string>Threshold:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="ui_execFallingThreshold">
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>32767</height>
+         </size>
+        </property>
+        <property name="whatsThis">
+         <string>Threshold for falling edge.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+        </property>
+        <property name="text">
+         <string>0.0</string>
+        </property>
+        <property name="maxLength">
+         <number>12</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="ui_execRaising">
+        <property name="whatsThis">
+         <string>Call command on raising edge.</string>
+        </property>
+        <property name="text">
+         <string>&amp;Raising edge</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="ui_execFalling">
+        <property name="whatsThis">
+         <string>Call command on falling edge.</string>
+        </property>
+        <property name="text">
+         <string>&amp;Falling edge</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <spacer name="Spacer4_2_2_2_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::MinimumExpanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="3">
+       <spacer name="Spacer3_3_2_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::MinimumExpanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="ButtonGroup10">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>Command</string>
+     </property>
+     <layout class="QVBoxLayout">
+      <property name="spacing">
+       <number>5</number>
+      </property>
+      <property name="margin">
+       <number>10</number>
       </property>
       <item>
-	<widget class="QCheckBox" name="ui_executeCommand">
-	  <property name="text">
-	    <string>Execute external command at given threshold</string>
-	  </property>
-	  <property name="whatsThis">
-	    <string>Check this if you want QtDMM to execute an external command when given thresholds are reached (Falling or raising edge).</string>
-	  </property>
-	</widget>
+       <layout class="QHBoxLayout">
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_disconnectExec">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="whatsThis">
+           <string>Check this if you want QtDMM to disconnect (close the serial port) before executing the external command.</string>
+          </property>
+          <property name="text">
+           <string>Disconnect before executing command</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer1_9_2_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
       <item>
-	<widget class="QGroupBox" name="ButtonGroup9">
-	  <property name="enabled">
-	    <bool>false</bool>
-	  </property>
-
-	  <property name="title">
-	    <string>Threshold</string>
-	  </property>
-	  <layout class="QGridLayout">
-	    <property name="margin">
-	      <number>10</number>
-	    </property>
-	    <property name="spacing">
-	      <number>5</number>
-	    </property>
-	    <item row="1" column="1">
-	      <widget class="QLabel" name="TextLabel8_2_2_2">
-		<property name="text">
-		  <string>Threshold:</string>
-		</property>
-		<property name="wordWrap">
-		  <bool>false</bool>
-		</property>
-	      </widget>
-	    </item>
-	    <item row="0" column="2">
-	      <widget class="QLineEdit" name="ui_execRaisingThreshold">
-		<property name="maximumSize">
-		  <size>
-		    <width>80</width>
-		    <height>32767</height>
-		  </size>
-		</property>
-		<property name="text">
-		  <string>0</string>
-		</property>
-		<property name="maxLength">
-		  <number>12</number>
-		</property>
-		<property name="whatsThis">
-		  <string>Threshold for raising edge.&lt;p&gt;
-You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
-10k - 10000&lt;br&gt;100m - 0.1</string>
-		</property>
-	      </widget>
-	    </item>
-	    <item row="0" column="1">
-	      <widget class="QLabel" name="TextLabel7_2_2_2">
-		<property name="text">
-		  <string>Threshold:</string>
-		</property>
-		<property name="wordWrap">
-		  <bool>false</bool>
-		</property>
-	      </widget>
-	    </item>
-	    <item row="1" column="2">
-	      <widget class="QLineEdit" name="ui_execFallingThreshold">
-		<property name="maximumSize">
-		  <size>
-		    <width>80</width>
-		    <height>32767</height>
-		  </size>
-		</property>
-		<property name="text">
-		  <string>0.0</string>
-		</property>
-		<property name="maxLength">
-		  <number>12</number>
-		</property>
-		<property name="whatsThis">
-		  <string>Threshold for falling edge.&lt;p&gt;
-You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
-10k - 10000&lt;br&gt;100m - 0.1</string>
-		</property>
-	      </widget>
-	    </item>
-	    <item row="0" column="0">
-	      <widget class="QRadioButton" name="ui_execRaising">
-		<property name="text">
-		  <string>&amp;Raising edge</string>
-		</property>
-		<property name="checked">
-		  <bool>true</bool>
-		</property>
-		<property name="whatsThis">
-		  <string>Call command on raising edge.</string>
-		</property>
-	      </widget>
-	    </item>
-	    <item row="1" column="0">
-	      <widget class="QRadioButton" name="ui_execFalling">
-		<property name="text">
-		  <string>&amp;Falling edge</string>
-		</property>
-		<property name="whatsThis">
-		  <string>Call command on falling edge.</string>
-		</property>
-	      </widget>
-	    </item>
-	    <item row="1" column="3">
-	      <spacer name="Spacer4_2_2_2_2">
-		<property name="sizeHint">
-		  <size>
-		    <width>20</width>
-		    <height>20</height>
-		  </size>
-		</property>
-		<property name="sizeType">
-		  <enum>QSizePolicy::MinimumExpanding</enum>
-		</property>
-		<property name="orientation">
-		  <enum>Qt::Horizontal</enum>
-		</property>
-	      </spacer>
-	    </item>
-	    <item row="0" column="3">
-	      <spacer name="Spacer3_3_2_2">
-		<property name="sizeHint">
-		  <size>
-		    <width>20</width>
-		    <height>20</height>
-		  </size>
-		</property>
-		<property name="sizeType">
-		  <enum>QSizePolicy::MinimumExpanding</enum>
-		</property>
-		<property name="orientation">
-		  <enum>Qt::Horizontal</enum>
-		</property>
-	      </spacer>
-	    </item>
-	  </layout>
-	</widget>
+       <layout class="QHBoxLayout">
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLineEdit" name="ui_commandExec">
+          <property name="whatsThis">
+           <string>Enter here the external command to be executed.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ui_browseExec">
+          <property name="minimumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Browse</string>
+          </property>
+          <property name="whatsThis">
+           <string>Here you can browse your harddisk for the external command (Altenative to directly typing it into the field to the left).</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
-      <item>
-	<widget class="QGroupBox" name="ButtonGroup10">
-	  <property name="enabled">
-	    <bool>false</bool>
-	  </property>
-	  <property name="title">
-	    <string>Command</string>
-	  </property>
-	  <layout class="QVBoxLayout">
-	    <property name="margin">
-	      <number>10</number>
-	    </property>
-	    <property name="spacing">
-	      <number>5</number>
-	    </property>
-	    <item>
-	      <layout class="QHBoxLayout">
-		<property name="margin">
-		  <number>0</number>
-		</property>
-		<property name="spacing">
-		  <number>5</number>
-		</property>
-		<item>
-		  <widget class="QCheckBox" name="ui_disconnectExec">
-		    <property name="sizePolicy">
-		      <sizepolicy>
-			<hsizetype>3</hsizetype>
-			<vsizetype>0</vsizetype>
-		      </sizepolicy>
-		    </property>
-		    <property name="text">
-		      <string>Disconnect before executing command</string>
-		    </property>
-		    <property name="whatsThis">
-		      <string>Check this if you want QtDMM to disconnect (close the serial port) before executing the external command.</string>
-		    </property>
-		  </widget>
-		</item>
-		<item>
-		  <spacer name="Spacer1_9_2_2">
-		    <property name="sizeHint">
-		      <size>
-			<width>20</width>
-			<height>20</height>
-		      </size>
-		    </property>
-		    <property name="sizeType">
-		      <enum>QSizePolicy::Expanding</enum>
-		    </property>
-		    <property name="orientation">
-		      <enum>Qt::Horizontal</enum>
-		    </property>
-		  </spacer>
-		</item>
-	      </layout>
-	    </item>
-	    <item>
-	      <layout class="QHBoxLayout">
-		<property name="margin">
-		  <number>0</number>
-		</property>
-		<property name="spacing">
-		  <number>5</number>
-		</property>
-		<item>
-		  <widget class="QLineEdit" name="ui_commandExec">
-		    <property name="whatsThis">
-		      <string>Enter here the external command to be executed.</string>
-		    </property>
-		  </widget>
-		</item>
-		<item>
-		  <widget class="QPushButton" name="ui_browseExec">
-		    <property name="minimumSize">
-		      <size>
-			<width>24</width>
-			<height>24</height>
-		      </size>
-		    </property>
-		    <property name="text">
-		      <string/>
-		    </property>
-		    <property name="icon">
-		      <pixmap>image0</pixmap>
-		    </property>
-		    <property name="autoDefault">
-		      <bool>false</bool>
-		    </property>
-		    <property name="toolTip">
-		      <string>Browse</string>
-		    </property>
-		    <property name="whatsThis">
-		      <string>Here you can browse your harddisk for the external command (Altenative to directly typing it into the field to the left).</string>
-		    </property>
-		  </widget>
-		</item>
-	      </layout>
-	    </item>
-	  </layout>
-	</widget>
-      </item>
-      <item>
-	<spacer name="Spacer1_8">
-	  <property name="sizeHint">
-	    <size>
-	      <width>20</width>
-	      <height>20</height>
-	    </size>
-	  </property>
-	  <property name="sizeType">
-	    <enum>QSizePolicy::Expanding</enum>
-	  </property>
-	  <property name="orientation">
-	    <enum>Qt::Vertical</enum>
-	  </property>
-	</spacer>
-      </item>
-    </layout>
-  </widget>
-  <customwidgets>
-
-  </customwidgets>
-  <tabstops>
-    <tabstop>ui_executeCommand</tabstop>
-    <tabstop>ui_execRaising</tabstop>
-    <tabstop>ui_execRaisingThreshold</tabstop>
-    <tabstop>ui_execFalling</tabstop>
-    <tabstop>ui_execFallingThreshold</tabstop>
-    <tabstop>ui_disconnectExec</tabstop>
-    <tabstop>ui_commandExec</tabstop>
-    <tabstop>ui_browseExec</tabstop>
-  </tabstops>
-  <images>
-    <image name="image0">
-      <data format="XPM.GZ" length="469">789c9590bd0ac2301080f73cc5d1db8a585b5a1dc447501c0571b85c023ab482d641c4773797c4fe6dfd9221df47e042b2144ec73da4997ab6d4de18f84a0f48cdabaedfe7cbeea3927c0d6e6f204f162a5902c3e1de5839a33be3ca236a45a9a49c4a51f2ca44c4a246942b2eb812d5a2a63285f1ca5ead2c3f65c2ac868e4943d29a30d035eda000f60d878446c83db1211b877fb0c538c3b790fe6d9cfa1653d7c629de1b30e70fbe5bf503eed56990</data>
-    </image>
-    <image name="image1">
-      <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
-    </image>
-  </images>
-  <connections>
-    <connection>
-      <sender>ui_executeCommand</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>ButtonGroup9</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>ui_executeCommand</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>ButtonGroup10</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-  </connections>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="Spacer1_8">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PrefWidget</class>
+   <extends>QWidget</extends>
+   <header>prefwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>ui_executeCommand</tabstop>
+  <tabstop>ui_execRaising</tabstop>
+  <tabstop>ui_execRaisingThreshold</tabstop>
+  <tabstop>ui_execFalling</tabstop>
+  <tabstop>ui_execFallingThreshold</tabstop>
+  <tabstop>ui_disconnectExec</tabstop>
+  <tabstop>ui_commandExec</tabstop>
+  <tabstop>ui_browseExec</tabstop>
+ </tabstops>
+ <includes>
+  <include location="global">prefwidget.h</include>
+ </includes>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>ui_executeCommand</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ButtonGroup9</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ui_executeCommand</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ButtonGroup10</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

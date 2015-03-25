@@ -27,7 +27,7 @@
 
 #include "ui_uiintegrationprefs.h"
 
-class IntegrationPrefs : public QWidget,private Ui::UIIntegrationPrefs
+class IntegrationPrefs : public PrefWidget,private Ui::UIIntegrationPrefs
 {
   Q_OBJECT
 	public:
@@ -44,9 +44,9 @@ class IntegrationPrefs : public QWidget,private Ui::UIIntegrationPrefs
 	  void			setThreshold( double );
 
 	public Q_SLOTS:
-	  virtual void	defaultsSLOT();
-	  virtual void	factoryDefaultsSLOT();
-	  virtual void	applySLOT();
+	  virtual void	defaultsSLOT()Q_DECL_OVERRIDE;
+	  virtual void	factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+	  virtual void	applySLOT()Q_DECL_OVERRIDE;
 
 };
 

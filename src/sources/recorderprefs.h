@@ -26,7 +26,7 @@
 #include "ui_uirecorderprefs.h"
 #include "dmmgraph.h"
 
-class RecorderPrefs : public QWidget,private Ui::UIRecorderPrefs
+class RecorderPrefs : public PrefWidget ,private Ui::UIRecorderPrefs
 {
   Q_OBJECT
 	public:
@@ -40,9 +40,9 @@ class RecorderPrefs : public QWidget,private Ui::UIRecorderPrefs
 	  void					setThreshold( double );
 
 	public Q_SLOTS:
-	  virtual void			defaultsSLOT();
-	  virtual void			factoryDefaultsSLOT();
-	  virtual void			applySLOT();
+	  virtual void			defaultsSLOT()Q_DECL_OVERRIDE;
+	  virtual void			factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+	  virtual void			applySLOT()Q_DECL_OVERRIDE;
 	  void					setSampleTimeSLOT( int sampleTime );
 
 };

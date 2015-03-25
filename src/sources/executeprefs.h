@@ -27,7 +27,7 @@
 
 #include "ui_uiexecuteprefs.h"
 
-class ExecutePrefs : public QWidget, private Ui::UIExecutePrefs
+class ExecutePrefs : public PrefWidget, private Ui::UIExecutePrefs
 {
   Q_OBJECT
 	public:
@@ -40,9 +40,9 @@ class ExecutePrefs : public QWidget, private Ui::UIExecutePrefs
 	  void			setThreshold( double );
 
 	public Q_SLOTS:
-	  virtual void	defaultsSLOT();
-	  virtual void	factoryDefaultsSLOT();
-	  virtual void	applySLOT();
+	  virtual void	defaultsSLOT()Q_DECL_OVERRIDE;
+	  virtual void	factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+	  virtual void	applySLOT()Q_DECL_OVERRIDE;
 
 	protected Q_SLOTS:
 	  void			browseExecSLOT();

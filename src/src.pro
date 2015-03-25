@@ -75,6 +75,7 @@ SOURCES   = sources/colorbutton.cpp \
 	    sources/simplecfg.cpp \
 	    sources/tipdlg.cpp
 
+INCLUDEPATH +=sources
 
 RESOURCES += \
     Resources.qrc

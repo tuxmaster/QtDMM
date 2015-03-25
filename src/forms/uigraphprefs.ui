@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>UIGraphPrefs</class>
- <widget class="QWidget" name="UIGraphPrefs">
+ <widget class="PrefWidget" name="UIGraphPrefs">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>386</width>
-    <height>295</height>
+    <height>313</height>
    </rect>
   </property>
   <property name="caption" stdset="0">
@@ -41,7 +41,7 @@
 	 <number>0</number>
 	</property>
 	<item>
-	 <widget class="QPushButton" name="ui_dataColor">
+	 <widget class="ColorButton" name="ui_dataColor">
 	  <property name="minimumSize">
 	   <size>
 	    <width>50</width>
@@ -95,7 +95,7 @@
 	 <number>0</number>
 	</property>
 	<item>
-	 <widget class="QPushButton" name="ui_bgColor">
+	 <widget class="ColorButton" name="ui_bgColor" native="true">
 	  <property name="minimumSize">
 	   <size>
 	    <width>50</width>
@@ -149,7 +149,7 @@
 	 <number>0</number>
 	</property>
 	<item>
-	 <widget class="QPushButton" name="ui_gridColor">
+	 <widget class="ColorButton" name="ui_gridColor">
 	  <property name="minimumSize">
 	   <size>
 	    <width>50</width>
@@ -200,7 +200,7 @@
 	 <number>0</number>
 	</property>
 	<item>
-	 <widget class="QPushButton" name="ui_cursorColor">
+	 <widget class="ColorButton" name="ui_cursorColor">
 	  <property name="minimumSize">
 	   <size>
 	    <width>50</width>
@@ -251,7 +251,7 @@
 	 <number>0</number>
 	</property>
 	<item>
-	 <widget class="QPushButton" name="ui_startColor">
+	 <widget class="ColorButton" name="ui_startColor">
 	  <property name="minimumSize">
 	   <size>
 	    <width>50</width>
@@ -305,7 +305,7 @@
 	 <number>0</number>
 	</property>
 	<item>
-	 <widget class="QPushButton" name="ui_extColor">
+	 <widget class="ColorButton" name="ui_extColor">
 	  <property name="minimumSize">
 	   <size>
 	    <width>50</width>
@@ -354,8 +354,8 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="ButtonGroup11_2" native="true">
-     <property name="title" stdset="0">
+    <widget class="QGroupBox" name="ButtonGroup11_2">
+     <property name="title">
       <string>Drawing style</string>
      </property>
      <layout class="QGridLayout">
@@ -566,12 +566,29 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PrefWidget</class>
+   <extends>QWidget</extends>
+   <header>prefwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QWidget</extends>
+   <header>colorbutton.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>ui_lineMode</tabstop>
   <tabstop>ui_lineWidth</tabstop>
   <tabstop>ui_pointMode</tabstop>
   <tabstop>ui_crosshair</tabstop>
  </tabstops>
+ <includes>
+  <include location="global">prefwidget.h</include>
+  <include location="global">colorbutton.h</include>
+ </includes>
  <resources/>
  <connections/>
 </ui>

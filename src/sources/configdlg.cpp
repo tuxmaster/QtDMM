@@ -41,7 +41,7 @@
 ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 {
   setupUi(this);
-  setIcon(QPixmap(":/Symbols/icon.xpm"));
+  setWindowIcon(QPixmap(":/Symbols/icon.xpm"));
 
   ui_list->header()->hide();
   ui_list->setItemMargin( 4 );

@@ -28,8 +28,9 @@
 #include "integrationprefs.h"
 #include "simplecfg.h"
 
-IntegrationPrefs::IntegrationPrefs( QWidget *parent) : UIIntegrationPrefs( parent)
+IntegrationPrefs::IntegrationPrefs( QWidget *parent) : PrefWidget( parent)
 {
+  setupUi(this);
   m_label = tr( "Integration" );
   m_description = tr( "<b>Here you can configure the parameter"
 					  " for the integration curve.</b>" );

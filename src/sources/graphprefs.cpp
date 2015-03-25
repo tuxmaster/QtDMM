@@ -30,8 +30,9 @@
 #include "simplecfg.h"
 
 
-GraphPrefs::GraphPrefs( QWidget *parent) : UIGraphPrefs( parent )
+GraphPrefs::GraphPrefs( QWidget *parent) : PrefWidget( parent )
 {
+  setupUi(this);
   m_label = tr( "Graph settings" );
   m_description = tr( "<b>Here you can configure the colors and"
 					  " drawing style for the graph.</b>" );

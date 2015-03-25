@@ -1,993 +1,1144 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0" stdsetdef="1">
-  <author></author>
-  <comment></comment>
-  <exportmacro></exportmacro>
-  <class>UIRecorderPrefs</class>
-  <widget class="QWidget" name="UIRecorderPrefs">
-    <property name="geometry">
-      <rect>
-	<x>0</x>
-	<y>0</y>
-	<width>317</width>
-	<height>366</height>
-      </rect>
-    </property>
-	<layout class="QVBoxLayout">
+<ui version="4.0">
+ <class>UIRecorderPrefs</class>
+ <widget class="PrefWidget" name="UIRecorderPrefs">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>351</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout">
+   <property name="spacing">
+    <number>5</number>
+   </property>
+   <property name="margin">
+    <number>10</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="ButtonGroup1">
+     <property name="title">
+      <string>Sampling</string>
+     </property>
+     <layout class="QGridLayout">
       <property name="margin">
-	<number>10</number>
+       <number>10</number>
       </property>
       <property name="spacing">
-	<number>5</number>
+       <number>5</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="sampLabel">
+        <property name="text">
+         <string>Sample &amp;every:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="buddy">
+         <cstring>sampleEvery</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QComboBox" name="ui_sampleUnit">
+        <property name="whatsThis">
+         <string>Unit for sampling period.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>1/10 Seconds</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Seconds</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Minutes</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Hours</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Days</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <spacer name="Spacer9">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="sampLabel_2">
+        <property name="text">
+         <string>Sample t&amp;ime:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="buddy">
+         <cstring>sampleTime</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QComboBox" name="timeUnit">
+        <property name="whatsThis">
+         <string>Unit for maximum sampling time.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Seconds</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Minutes</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Hours</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Days</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="sampleEvery">
+        <property name="whatsThis">
+         <string>Specify the sampling period. See unit to the right.</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="sampleTime">
+        <property name="whatsThis">
+         <string>Maximum sampling time. When this time expires, the recorder is stopped automatically.</string>
+        </property>
+        <property name="specialValueText">
+         <string>Infinite</string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="GroupBox1">
+     <property name="title">
+      <string>Start</string>
+     </property>
+     <layout class="QVBoxLayout">
+      <property name="spacing">
+       <number>5</number>
+      </property>
+      <property name="margin">
+       <number>10</number>
       </property>
       <item>
-	<widget class="QGroupBox" name="ButtonGroup1">
-	  <property name="title">
-	    <string>Sampling</string>
-	  </property>
-
-	  <layout class="QGridLayout">
-	    <property name="margin">
-	      <number>10</number>
-	    </property>
-	    <property name="spacing">
-	      <number>5</number>
-	    </property>
-	    <item row="0" column="0">
-	      <widget class="QLabel" name="sampLabel">
-		<property name="text">
-		  <string>Sample &amp;every:</string>
-		</property>
-		<property name="alignment">
-		  <set>Qt::AlignVCenter|Qt::AlignRight</set>
-		</property>
-		<property name="buddy">
-		  <cstring>sampleEvery</cstring>
-		</property>
-		<property name="wordWrap">
-		  <bool>false</bool>
-		</property>
-	      </widget>
-	    </item>
-	    <item row="0" column="2">
-	      <widget class="QComboBox" name="ui_sampleUnit">
-		<property name="whatsThis">
-		  <string>Unit for sampling period.</string>
-		</property>
-		<item>
-		  <property name="text">
-		    <string>1/10 Seconds</string>
-		  </property>
-		</item>
-		<item>
-		  <property name="text">
-		    <string>Seconds</string>
-		  </property>
-		</item>
-		<item>
-		  <property name="text">
-		    <string>Minutes</string>
-		  </property>
-		</item>
-		<item>
-		  <property name="text">
-		    <string>Hours</string>
-		  </property>
-		</item>
-		<item>
-		  <property name="text">
-		    <string>Days</string>
-		  </property>
-		</item>
-	      </widget>
-	    </item>
-	    <item row="0" column="3">
-	      <spacer name="Spacer9">
-		<property name="sizeHint">
-		  <size>
-		    <width>20</width>
-		    <height>20</height>
-		  </size>
-		</property>
-		<property name="sizeType">
-		  <enum>QSizePolicy::Expanding</enum>
-		</property>
-		<property name="orientation">
-		  <enum>Qt::Horizontal</enum>
-		</property>
-	      </spacer>
-	    </item>
-	    <item row="1" column="0">
-	      <widget class="QLabel" name="sampLabel_2">
-		<property name="text">
-		  <string>Sample t&amp;ime:</string>
-		</property>
-		<property name="alignment">
-		  <set>Qt::AlignVCenter|Qt::AlignRight</set>
-		</property>
-		<property name="buddy">
-		  <cstring>sampleTime</cstring>
-		</property>
-		<property name="wordWrap">
-		  <bool>false</bool>
-		</property>
-	      </widget>
-	    </item>
-	    <item row="1" column="2">
-	      <widget class="QComboBox" name="timeUnit">
-		<property name="whatsThis">
-		  <string>Unit for maximum sampling time.</string>
-		</property>
-		<item>
-		  <property name="text">
-		    <string>Seconds</string>
-		  </property>
-		</item>
-		<item>
-		  <property name="text">
-		    <string>Minutes</string>
-		  </property>
-		</item>
-		<item>
-		  <property name="text">
-		    <string>Hours</string>
-		  </property>
-		</item>
-		<item>
-		  <property name="text">
-		    <string>Days</string>
-		  </property>
-		</item>
-	      </widget>
-	    </item>
-	    <item row="0" column="1">
-	      <widget class="QSpinBox" name="sampleEvery">
-		<property name="maximum">
-		  <number>99999</number>
-		</property>
-		<property name="minimum">
-		  <number>1</number>
-		</property>
-		<property name="value">
-		  <number>1</number>
-		</property>
-		<property name="whatsThis">
-		  <string>Specify the sampling period. See unit to the right.</string>
-		</property>
-	      </widget>
-	    </item>
-	    <item row="1" column="1">
-	      <widget class="QSpinBox" name="sampleTime">
-		<property name="specialValueText">
-		  <string>Infinite</string>
-		</property>
-		<property name="maximum">
-		  <number>99999</number>
-		</property>
-		<property name="minimum">
-		  <number>0</number>
-		</property>
-		<property name="value">
-		  <number>0</number>
-		</property>
-		<property name="whatsThis">
-		  <string>Maximum sampling time. When this time expires, the recorder is stopped automatically.</string>
-		</property>
-	      </widget>
-	    </item>
-	  </layout>
-	</widget>
-      </item>
-      <item>
-	<widget class="QGroupBox" name="GroupBox1">
-	  <property name="title">
-	    <string>Start</string>
-	  </property>
-	  <layout class="QVBoxLayout">
-	    <property name="margin">
-	      <number>10</number>
-	    </property>
-	    <property name="spacing">
-	      <number>5</number>
-	    </property>
-	    <item>
-	      <widget class="QGroupBox" name="ButtonGroup32">
-
-		<property name="title">
-		  <string/>
-		</property>
-
-		<layout class="QVBoxLayout">
-		  <property name="margin">
-		    <number>0</number>
-		  </property>
-		  <property name="spacing">
-		    <number>5</number>
-		  </property>
-		  <item>
-		    <layout class="QHBoxLayout">
-		      <property name="margin">
-			<number>0</number>
-		      </property>
-		      <property name="spacing">
-			<number>5</number>
-		      </property>
-		      <item>
-			<widget class="QRadioButton" name="manualBut">
-			  <property name="text">
-			    <string>&amp;Manual</string>
-			  </property>
-			  <property name="checked">
-			    <bool>true</bool>
-			  </property>
-			  <property name="whatsThis">
-			    <string>Select this entry if you want to manually start the transient recorder. Use the &lt;b&gt;Start&lt;/b&gt; and &lt;b&gt;Stop&lt;/b&gt; buttons in the main window to start/stop sampling.</string>
-			  </property>
-			</widget>
-		      </item>
-		      <item>
-			<spacer name="Spacer7_2">
-			  <property name="sizeHint">
-			    <size>
-			      <width>20</width>
-			      <height>20</height>
-			    </size>
-			  </property>
-			  <property name="sizeType">
-			    <enum>QSizePolicy::Expanding</enum>
-			  </property>
-			  <property name="orientation">
-			    <enum>Qt::Horizontal</enum>
-			  </property>
-			</spacer>
-		      </item>
-		    </layout>
-		  </item>
-		  <item>
-		    <layout class="QHBoxLayout">
-		      <property name="margin">
-			<number>0</number>
-		      </property>
-		      <property name="spacing">
-			<number>5</number>
-		      </property>
-		      <item>
-			<widget class="QRadioButton" name="predefinedBut">
-			  <property name="text">
-			    <string>&amp;Predefined time</string>
-			  </property>
-			  <property name="whatsThis">
-			    <string>Select this entry if you want the transient recorder to be started at a predefined time.</string>
-			  </property>
-			</widget>
-		      </item>
-		      <item>
-			<spacer name="Spacer8_2">
-			  <property name="sizeHint">
-			    <size>
-			      <width>20</width>
-			      <height>20</height>
-			    </size>
-			  </property>
-			  <property name="sizeType">
-			    <enum>QSizePolicy::Expanding</enum>
-			  </property>
-			  <property name="orientation">
-			    <enum>Qt::Horizontal</enum>
-			  </property>
-			</spacer>
-		      </item>
-		    </layout>
-		  </item>
-		  <item>
-		    <layout class="QHBoxLayout">
-		      <property name="margin">
-			<number>0</number>
-		      </property>
-		      <property name="spacing">
-			<number>5</number>
-		      </property>
-		      <item>
-			<layout class="QHBoxLayout">
-			  <property name="margin">
-			    <number>0</number>
-			  </property>
-			  <property name="spacing">
-			    <number>6</number>
-			  </property>
-			  <item>
-			    <widget class="QLabel" name="TextLabel5">
-			      <property name="sizePolicy">
-				<sizepolicy>
-				  <hsizetype>0</hsizetype>
-				  <vsizetype>1</vsizetype>
-				</sizepolicy>
-			      </property>
-			      <property name="minimumSize">
-				<size>
-				  <width>20</width>
-				  <height>0</height>
-				</size>
-			      </property>
-			      <property name="wordWrap">
-				<bool>false</bool>
-			      </property>
-			    </widget>
-			  </item>
-			  <item>
-			    <layout class="QHBoxLayout">
-			      <property name="margin">
-				<number>0</number>
-			      </property>
-			      <property name="spacing">
-				<number>6</number>
-			      </property>
-			      <item>
-				<widget class="QSpinBox" name="hour">
-				  <property name="enabled">
-				    <bool>false</bool>
-				  </property>
-				  <property name="wrapping">
-				    <bool>true</bool>
-				  </property>
-				  <property name="maximum">
-				    <number>23</number>
-				  </property>
-				  <property name="whatsThis">
-				    <string>Hour of start time.</string>
-				  </property>
-				</widget>
-			      </item>
-			      <item>
-				<widget class="QLabel" name="TextLabel3">
-				  <property name="enabled">
-				    <bool>false</bool>
-				  </property>
-				  <property name="font">
-				    <font>
-				      <bold>true</bold>
-				    </font>
-				  </property>
-				  <property name="text">
-				    <string>:</string>
-				  </property>
-				  <property name="alignment">
-				    <set>Qt::AlignCenter</set>
-				  </property>
-				  <property name="wordWrap">
-				    <bool>false</bool>
-				  </property>
-				</widget>
-			      </item>
-			      <item>
-				<widget class="QSpinBox" name="minute">
-				  <property name="enabled">
-				    <bool>false</bool>
-				  </property>
-				  <property name="wrapping">
-				    <bool>true</bool>
-				  </property>
-				  <property name="maximum">
-				    <number>59</number>
-				  </property>
-				  <property name="whatsThis">
-				    <string>Minutes of start time.</string>
-				  </property>
-				</widget>
-			      </item>
-			      <item>
-				<widget class="QLabel" name="TextLabel4">
-				  <property name="enabled">
-				    <bool>false</bool>
-				  </property>
-				  <property name="font">
-				    <font>
-				      <bold>true</bold>
-				    </font>
-				  </property>
-				  <property name="text">
-				    <string>:</string>
-				  </property>
-				  <property name="alignment">
-				    <set>Qt::AlignCenter</set>
-				  </property>
-				  <property name="wordWrap">
-				    <bool>false</bool>
-				  </property>
-				</widget>
-			      </item>
-			      <item>
-				<widget class="QSpinBox" name="second">
-				  <property name="enabled">
-				    <bool>false</bool>
-				  </property>
-				  <property name="wrapping">
-				    <bool>true</bool>
-				  </property>
-				  <property name="maximum">
-				    <number>59</number>
-				  </property>
-				  <property name="whatsThis">
-				    <string>Seconds of start time.</string>
-				  </property>
-				</widget>
-			      </item>
-			    </layout>
-			  </item>
-			</layout>
-		      </item>
-		      <item>
-			<spacer name="Spacer2_2">
-			  <property name="sizeHint">
-			    <size>
-			      <width>20</width>
-			      <height>20</height>
-			    </size>
-			  </property>
-			  <property name="sizeType">
-			    <enum>QSizePolicy::Expanding</enum>
-			  </property>
-			  <property name="orientation">
-			    <enum>Qt::Horizontal</enum>
-			  </property>
-			</spacer>
-		      </item>
-		    </layout>
-		  </item>
-		  <item>
-		    <layout class="QHBoxLayout">
-		      <property name="margin">
-			<number>0</number>
-		      </property>
-		      <property name="spacing">
-			<number>5</number>
-		      </property>
-		      <item>
-			<widget class="QRadioButton" name="triggerBut">
-			  <property name="text">
-			    <string>&amp;Trigger</string>
-			  </property>
-			  <property name="whatsThis">
-			    <string>Select this entry if you want to automatically trigger the sampling. &lt;p&gt;
+       <widget class="QGroupBox" name="ButtonGroup32">
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QVBoxLayout">
+         <property name="spacing">
+          <number>5</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QRadioButton" name="manualBut">
+             <property name="whatsThis">
+              <string>Select this entry if you want to manually start the transient recorder. Use the &lt;b&gt;Start&lt;/b&gt; and &lt;b&gt;Stop&lt;/b&gt; buttons in the main window to start/stop sampling.</string>
+             </property>
+             <property name="text">
+              <string>&amp;Manual</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="Spacer7_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QRadioButton" name="predefinedBut">
+             <property name="whatsThis">
+              <string>Select this entry if you want the transient recorder to be started at a predefined time.</string>
+             </property>
+             <property name="text">
+              <string>&amp;Predefined time</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="Spacer8_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="TextLabel5">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="wordWrap">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout">
+               <property name="spacing">
+                <number>6</number>
+               </property>
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QSpinBox" name="hour">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Hour of start time.</string>
+                 </property>
+                 <property name="wrapping">
+                  <bool>true</bool>
+                 </property>
+                 <property name="maximum">
+                  <number>23</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="TextLabel3">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="minute">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Minutes of start time.</string>
+                 </property>
+                 <property name="wrapping">
+                  <bool>true</bool>
+                 </property>
+                 <property name="maximum">
+                  <number>59</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="TextLabel4">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="second">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Seconds of start time.</string>
+                 </property>
+                 <property name="wrapping">
+                  <bool>true</bool>
+                 </property>
+                 <property name="maximum">
+                  <number>59</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="Spacer2_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QRadioButton" name="triggerBut">
+             <property name="whatsThis">
+              <string>Select this entry if you want to automatically trigger the sampling. &lt;p&gt;
 You have two choices:
 &lt;ul&gt;
 &lt;li&gt;&lt;b&gt;Raising edge:&lt;/b&gt; Sampling is started when the measured value gets bigger than the given threshold.&lt;/li&gt;
 &lt;li&gt;&lt;b&gt;Falling edge:&lt;/b&gt; Sampling is started when the measured value gets lower than the given threshold.&lt;/li&gt;
 &lt;/ul&gt;</string>
-			  </property>
-			</widget>
-		      </item>
-		      <item>
-			<spacer name="Spacer9_2">
-			  <property name="sizeHint">
-			    <size>
-			      <width>20</width>
-			      <height>20</height>
-			    </size>
-			  </property>
-			  <property name="sizeType">
-			    <enum>QSizePolicy::Expanding</enum>
-			  </property>
-			  <property name="orientation">
-			    <enum>Qt::Horizontal</enum>
-			  </property>
-			</spacer>
-		      </item>
-		    </layout>
-		  </item>
-		</layout>
-	      </widget>
-	    </item>
-	    <item>
-	      <widget class="QGroupBox" name="ButtonGroup13">
-		<property name="title">
-		  <string/>
-		</property>
-		<layout class="QVBoxLayout">
-		  <property name="margin">
-		    <number>0</number>
-		  </property>
-		  <property name="spacing">
-		    <number>0</number>
-		  </property>
-		  <item>
-		    <layout class="QGridLayout">
-		      <property name="margin">
-			<number>0</number>
-		      </property>
-		      <property name="spacing">
-			<number>5</number>
-		      </property>
-		      <item row="0" column="3">
-			<spacer name="Spacer3">
-			  <property name="sizeHint">
-			    <size>
-			      <width>20</width>
-			      <height>20</height>
-			    </size>
-			  </property>
-			  <property name="sizeType">
-			    <enum>QSizePolicy::Expanding</enum>
-			  </property>
-			  <property name="orientation">
-			    <enum>Qt::Horizontal</enum>
-			  </property>
-			</spacer>
-		      </item>
-		      <item row="1" column="2">
-			<widget class="QLineEdit" name="ui_fallingThreshold">
-			  <property name="enabled">
-			    <bool>false</bool>
-			  </property>
-			  <property name="maximumSize">
-			    <size>
-			      <width>80</width>
-			      <height>32767</height>
-			    </size>
-			  </property>
-			  <property name="text">
-			    <string>0.0</string>
-			  </property>
-			  <property name="maxLength">
-			    <number>12</number>
-			  </property>
-			  <property name="whatsThis">
-			    <string>Threshold for falling edge.&lt;p&gt;
-You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
-10k - 10000&lt;br&gt;100m - 0.1</string>
-			  </property>
-			</widget>
-		      </item>
-		      <item row="1" column="3">
-			<spacer name="Spacer4_2">
-			  <property name="sizeHint">
-			    <size>
-			      <width>20</width>
-			      <height>20</height>
-			    </size>
-			  </property>
-			  <property name="sizeType">
-			    <enum>QSizePolicy::Expanding</enum>
-			  </property>
-			  <property name="orientation">
-			    <enum>Qt::Horizontal</enum>
-			  </property>
-			</spacer>
-		      </item>
-		      <item row="0" column="2">
-			<widget class="QLineEdit" name="ui_raisingThreshold">
-			  <property name="enabled">
-			    <bool>false</bool>
-			  </property>
-			  <property name="maximumSize">
-			    <size>
-			      <width>80</width>
-			      <height>32767</height>
-			    </size>
-			  </property>
-			  <property name="text">
-			    <string>0.0</string>
-			  </property>
-			  <property name="maxLength">
-			    <number>12</number>
-			  </property>
-			  <property name="whatsThis">
-			    <string>Threshold for raising edge.&lt;p&gt;
-You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
-10k - 10000&lt;br&gt;100m - 0.1</string>
-			  </property>
-			</widget>
-		      </item>
-		      <item row="0" column="1">
-			<widget class="QLabel" name="TextLabel7">
-			  <property name="enabled">
-			    <bool>false</bool>
-			  </property>
-			  <property name="text">
-			    <string>Threshold:</string>
-			  </property>
-			  <property name="wordWrap">
-			    <bool>false</bool>
-			  </property>
-			</widget>
-		      </item>
-		      <item row="1" column="1">
-			<widget class="QLabel" name="TextLabel8">
-			  <property name="enabled">
-			    <bool>false</bool>
-			  </property>
-			  <property name="text">
-			    <string>Threshold:</string>
-			  </property>
-			  <property name="wordWrap">
-			    <bool>false</bool>
-			  </property>
-			</widget>
-		      </item>
-		      <item row="0" column="0">
-			<layout class="QHBoxLayout">
-			  <property name="margin">
-			    <number>0</number>
-			  </property>
-			  <property name="spacing">
-			    <number>5</number>
-			  </property>
-			  <item>
-			    <widget class="QLabel" name="TextLabel6">
-			      <property name="sizePolicy">
-				<sizepolicy>
-				  <hsizetype>0</hsizetype>
-				  <vsizetype>1</vsizetype>
-				</sizepolicy>
-			      </property>
-			      <property name="minimumSize">
-				<size>
-				  <width>20</width>
-				  <height>0</height>
-				</size>
-			      </property>
-			      <property name="wordWrap">
-				<bool>false</bool>
-			      </property>
-			    </widget>
-			  </item>
-			  <item>
-			    <widget class="QRadioButton" name="raisingBut">
-			      <property name="enabled">
-				<bool>false</bool>
-			      </property>
-			      <property name="text">
-				<string>&amp;Raising edge</string>
-			      </property>
-			      <property name="checked">
-				<bool>true</bool>
-			      </property>
-			      <property name="whatsThis">
-				<string>Trigger sampling on raising edge.</string>
-			      </property>
-			    </widget>
-			  </item>
-			</layout>
-		      </item>
-		      <item row="1" column="0">
-			<layout class="QHBoxLayout">
-			  <property name="margin">
-			    <number>0</number>
-			  </property>
-			  <property name="spacing">
-			    <number>5</number>
-			  </property>
-			  <item>
-			    <widget class="QLabel" name="TextLabel6_2">
-			      <property name="sizePolicy">
-				<sizepolicy>
-				  <hsizetype>0</hsizetype>
-				  <vsizetype>1</vsizetype>
-				</sizepolicy>
-			      </property>
-			      <property name="minimumSize">
-				<size>
-				  <width>20</width>
-				  <height>0</height>
-				</size>
-			      </property>
-			      <property name="wordWrap">
-				<bool>false</bool>
-			      </property>
-			    </widget>
-			  </item>
-			  <item>
-			    <widget class="QRadioButton" name="fallingBut">
-			      <property name="enabled">
-				<bool>false</bool>
-			      </property>
-			      <property name="text">
-				<string>&amp;Falling edge</string>
-			      </property>
-			      <property name="whatsThis">
-				<string>Trigger sampling on falling edge.</string>
-			      </property>
-			    </widget>
-			  </item>
-			</layout>
-		      </item>
-		    </layout>
-		  </item>
-		</layout>
-	      </widget>
-	    </item>
-	    <item>
-	      <layout class="QGridLayout">
-		<property name="margin">
-		  <number>0</number>
-		</property>
-		<property name="spacing">
-		  <number>5</number>
-		</property>
-		<item row="0" column="1">
-		  <widget class="QCheckBox" name="ui_preTrigger">
-		    <property name="enabled">
-		      <bool>false</bool>
-		    </property>
-		    <property name="text">
-		      <string>Pre trigger</string>
-		    </property>
-		  </widget>
-		</item>
-		<item row="1" column="4">
-		  <spacer name="Spacer9_3">
-		    <property name="sizeHint">
-		      <size>
-			<width>20</width>
-			<height>20</height>
-		      </size>
-		    </property>
-		    <property name="sizeType">
-		      <enum>QSizePolicy::Expanding</enum>
-		    </property>
-		    <property name="orientation">
-		      <enum>Qt::Horizontal</enum>
-		    </property>
-		  </spacer>
-		</item>
-		<item row="1" column="2">
-		  <widget class="QSpinBox" name="ui_preTriggerTime">
-		    <property name="enabled">
-		      <bool>false</bool>
-		    </property>
-		    <property name="maximum">
-		      <number>99999</number>
-		    </property>
-		    <property name="minimum">
-		      <number>1</number>
-		    </property>
-		    <property name="value">
-		      <number>1</number>
-		    </property>
-		    <property name="whatsThis">
-		      <string>Maximum sampling time. When this time expires, the recorder is stopped automatically.</string>
-		    </property>
-		  </widget>
-		</item>
-		<item row="1" column="3">
-		  <widget class="QComboBox" name="ui_preTriggerUnit">
-		    <property name="enabled">
-		      <bool>false</bool>
-		    </property>
-		    <property name="whatsThis">
-		      <string>Unit for maximum sampling time.</string>
-		    </property>
-		    <item>
-		      <property name="text">
-			<string>Seconds</string>
-		      </property>
-		    </item>
-		    <item>
-		      <property name="text">
-			<string>Minutes</string>
-		      </property>
-		    </item>
-		    <item>
-		      <property name="text">
-			<string>Hours</string>
-		      </property>
-		    </item>
-		    <item>
-		      <property name="text">
-			<string>Days</string>
-		      </property>
-		    </item>
-		  </widget>
-		</item>
-		<item row="1" column="0">
-		  <widget class="QLabel" name="TextLabel6_2_2_2">
-		    <property name="sizePolicy">
-		      <sizepolicy>
-			<hsizetype>0</hsizetype>
-			<vsizetype>1</vsizetype>
-		      </sizepolicy>
-		    </property>
-		    <property name="minimumSize">
-		      <size>
-			<width>20</width>
-			<height>0</height>
-		      </size>
-		    </property>
-		    <property name="wordWrap">
-		      <bool>false</bool>
-		    </property>
-		  </widget>
-		</item>
-		<item row="0" column="0">
-		  <widget class="QLabel" name="TextLabel6_2_2">
-		    <property name="sizePolicy">
-		      <sizepolicy>
-			<hsizetype>0</hsizetype>
-			<vsizetype>1</vsizetype>
-		      </sizepolicy>
-		    </property>
-		    <property name="minimumSize">
-		      <size>
-			<width>20</width>
-			<height>0</height>
-		      </size>
-		    </property>
-		    <property name="wordWrap">
-		      <bool>false</bool>
-		    </property>
-		  </widget>
-		</item>
-		<item row="0" column="2" rowspan="1" colspan="3">
-		  <spacer name="Spacer10">
-		    <property name="sizeHint">
-		      <size>
-			<width>20</width>
-			<height>20</height>
-		      </size>
-		    </property>
-		    <property name="sizeType">
-		      <enum>QSizePolicy::Expanding</enum>
-		    </property>
-		    <property name="orientation">
-		      <enum>Qt::Horizontal</enum>
-		    </property>
-		  </spacer>
-		</item>
-		<item row="1" column="1">
-		  <widget class="QLabel" name="sampLabel_2_2">
-		    <property name="enabled">
-		      <bool>false</bool>
-		    </property>
-		    <property name="text">
-		      <string>Pre trigger time:</string>
-		    </property>
-		    <property name="alignment">
-		      <set>Qt::AlignVCenter|Qt::AlignRight</set>
-		    </property>
-		    <property name="buddy">
-		      <cstring>sampleTime</cstring>
-		    </property>
-		    <property name="wordWrap">
-		      <bool>false</bool>
-		    </property>
-		  </widget>
-		</item>
-	      </layout>
-	    </item>
-	  </layout>
-	</widget>
+             </property>
+             <property name="text">
+              <string>&amp;Trigger</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="Spacer9_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
       </item>
       <item>
-	<spacer name="Spacer1_2">
-	  <property name="sizeHint">
-	    <size>
-	      <width>20</width>
-	      <height>20</height>
-	    </size>
-	  </property>
-	  <property name="sizeType">
-	    <enum>QSizePolicy::Expanding</enum>
-	  </property>
-	  <property name="orientation">
-	    <enum>Qt::Vertical</enum>
-	  </property>
-	</spacer>
+       <widget class="QGroupBox" name="ButtonGroup13">
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QVBoxLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QGridLayout">
+           <property name="margin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <item row="0" column="3">
+            <spacer name="Spacer3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLineEdit" name="ui_fallingThreshold">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>32767</height>
+              </size>
+             </property>
+             <property name="whatsThis">
+              <string>Threshold for falling edge.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+             </property>
+             <property name="text">
+              <string>0.0</string>
+             </property>
+             <property name="maxLength">
+              <number>12</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <spacer name="Spacer4_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLineEdit" name="ui_raisingThreshold">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>32767</height>
+              </size>
+             </property>
+             <property name="whatsThis">
+              <string>Threshold for raising edge.&lt;p&gt;
+You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</string>
+             </property>
+             <property name="text">
+              <string>0.0</string>
+             </property>
+             <property name="maxLength">
+              <number>12</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="TextLabel7">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Threshold:</string>
+             </property>
+             <property name="wordWrap">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="TextLabel8">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Threshold:</string>
+             </property>
+             <property name="wordWrap">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <layout class="QHBoxLayout">
+             <property name="spacing">
+              <number>5</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="TextLabel6">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="wordWrap">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="raisingBut">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="whatsThis">
+                <string>Trigger sampling on raising edge.</string>
+               </property>
+               <property name="text">
+                <string>&amp;Raising edge</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout">
+             <property name="spacing">
+              <number>5</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="TextLabel6_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="wordWrap">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="fallingBut">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="whatsThis">
+                <string>Trigger sampling on falling edge.</string>
+               </property>
+               <property name="text">
+                <string>&amp;Falling edge</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
       </item>
-    </layout>
-  </widget>
-  <customwidgets>
-  </customwidgets>
-  <tabstops>
-    <tabstop>sampleEvery</tabstop>
-    <tabstop>ui_sampleUnit</tabstop>
-    <tabstop>sampleTime</tabstop>
-    <tabstop>timeUnit</tabstop>
-    <tabstop>manualBut</tabstop>
-    <tabstop>predefinedBut</tabstop>
-    <tabstop>hour</tabstop>
-    <tabstop>minute</tabstop>
-    <tabstop>second</tabstop>
-    <tabstop>triggerBut</tabstop>
-    <tabstop>raisingBut</tabstop>
-    <tabstop>ui_raisingThreshold</tabstop>
-    <tabstop>fallingBut</tabstop>
-    <tabstop>ui_fallingThreshold</tabstop>
-  </tabstops>
-  <images>
-    <image name="image0">
-      <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
-    </image>
-  </images>
-  <connections>
-    <connection>
-      <sender>predefinedBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>hour</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>predefinedBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>TextLabel3</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>predefinedBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>minute</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>predefinedBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>second</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>predefinedBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>TextLabel4</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>triggerBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>raisingBut</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>triggerBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>fallingBut</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>triggerBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>TextLabel7</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>triggerBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>TextLabel8</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>triggerBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>ui_raisingThreshold</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>triggerBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>ui_fallingThreshold</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>raisingBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>TextLabel7</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>raisingBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>ui_raisingThreshold</receiver>
-      <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>raisingBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>TextLabel8</receiver>
-      <slot>setDisabled(bool)</slot>
-    </connection>
-    <connection>
-      <sender>raisingBut</sender>
-      <signal>toggled(bool)</signal>
-      <receiver>ui_fallingThreshold</receiver>
-      <slot>setDisabled(bool)</slot>
-    </connection>
-  </connections>
+      <item>
+       <layout class="QGridLayout">
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="ui_preTrigger">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Pre trigger</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <spacer name="Spacer9_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="2">
+         <widget class="QSpinBox" name="ui_preTriggerTime">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="whatsThis">
+           <string>Maximum sampling time. When this time expires, the recorder is stopped automatically.</string>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QComboBox" name="ui_preTriggerUnit">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="whatsThis">
+           <string>Unit for maximum sampling time.</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Seconds</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Minutes</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Hours</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Days</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="TextLabel6_2_2_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>20</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="TextLabel6_2_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>20</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2" colspan="3">
+         <spacer name="Spacer10">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="sampLabel_2_2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Pre trigger time:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+          <property name="buddy">
+           <cstring>sampleTime</cstring>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="Spacer1_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PrefWidget</class>
+   <extends>QWidget</extends>
+   <header>prefwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>sampleEvery</tabstop>
+  <tabstop>ui_sampleUnit</tabstop>
+  <tabstop>sampleTime</tabstop>
+  <tabstop>timeUnit</tabstop>
+  <tabstop>manualBut</tabstop>
+  <tabstop>predefinedBut</tabstop>
+  <tabstop>hour</tabstop>
+  <tabstop>minute</tabstop>
+  <tabstop>second</tabstop>
+  <tabstop>triggerBut</tabstop>
+  <tabstop>raisingBut</tabstop>
+  <tabstop>ui_raisingThreshold</tabstop>
+  <tabstop>fallingBut</tabstop>
+  <tabstop>ui_fallingThreshold</tabstop>
+ </tabstops>
+ <includes>
+  <include location="global">prefwidget.h</include>
+ </includes>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>predefinedBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>hour</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>predefinedBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TextLabel3</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>predefinedBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>minute</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>predefinedBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>second</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>predefinedBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TextLabel4</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>triggerBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>raisingBut</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>triggerBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>fallingBut</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>triggerBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TextLabel7</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>triggerBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TextLabel8</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>triggerBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ui_raisingThreshold</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>triggerBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ui_fallingThreshold</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>raisingBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TextLabel7</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>raisingBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ui_raisingThreshold</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>raisingBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TextLabel8</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>raisingBut</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ui_fallingThreshold</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

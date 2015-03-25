@@ -28,7 +28,7 @@
 #include "simplecfg.h"
 
 
-ExecutePrefs::ExecutePrefs( QWidget *parent) : QWidget( parent )
+ExecutePrefs::ExecutePrefs( QWidget *parent) : PrefWidget( parent )
 {
   setupUi(this);
   m_label = tr( "External application" );
@@ -116,7 +116,7 @@ QString ExecutePrefs::externalCommand() const
 
 void ExecutePrefs::browseExecSLOT()
 {
-  QString filename = QFileDialog::getOpenFileName( QString::null, "*", this );
+  QString filename = QFileDialog::getOpenFileName(this, QString(),QString(),"*");
 
   if (!filename.isEmpty())
   {

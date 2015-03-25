@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>UIDmmPrefs</class>
- <widget class="QWidget" name="UIDmmPrefs">
+ <widget class="PrefWidget" name="UIDmmPrefs">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,8 +10,7 @@
     <height>679</height>
    </rect>
   </property>
-
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QLabel" name="ui_hint">
      <property name="sizePolicy">
@@ -39,54 +38,54 @@
      <item>
       <widget class="QComboBox" name="ui_model">
        <property name="whatsThis">
-	<string>Here you may select your DMM model. If your DMM is not in the list, try to find working settings and mail them to me (&lt;font color=blue&gt;&lt;u&gt;qtdmm@mtoussaint.de&lt;/u&gt;&lt;/font&gt;). So I can add them to the list in the next release.</string>
+        <string>Here you may select your DMM model. If your DMM is not in the list, try to find working settings and mail them to me (&lt;font color=blue&gt;&lt;u&gt;qtdmm@mtoussaint.de&lt;/u&gt;&lt;/font&gt;). So I can add them to the list in the next release.</string>
        </property>
        <property name="autoCompletion">
-	<bool>true</bool>
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLineEdit" name="ui_filename">
        <property name="enabled">
-	<bool>false</bool>
+        <bool>false</bool>
        </property>
        <property name="readOnly">
-	<bool>true</bool>
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="ui_load">
        <property name="enabled">
-	<bool>false</bool>
+        <bool>false</bool>
        </property>
        <property name="toolTip">
-	<string>Load Settings</string>
+        <string>Load Settings</string>
        </property>
        <property name="text">
-	<string/>
+        <string/>
        </property>
        <property name="icon">
-	<iconset>
-	 <normaloff>image0</normaloff>image0</iconset>
+        <iconset>
+         <normaloff>image0</normaloff>image0</iconset>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="ui_save">
        <property name="enabled">
-	<bool>false</bool>
+        <bool>false</bool>
        </property>
        <property name="toolTip">
-	<string>Save Settings</string>
+        <string>Save Settings</string>
        </property>
        <property name="text">
-	<string/>
+        <string/>
        </property>
        <property name="icon">
-	<iconset>
-	 <normaloff>image1</normaloff>image1</iconset>
+        <iconset>
+         <normaloff>image1</normaloff>image1</iconset>
        </property>
       </widget>
      </item>
@@ -100,553 +99,565 @@
      <layout class="QFormLayout" name="formLayout_6">
       <item row="0" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
-	<item>
-	 <widget class="QCheckBox" name="ui_externalSetup">
-	  <property name="text">
-	   <string>External device setup</string>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="horizontalSpacer">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>40</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <item>
+         <widget class="QCheckBox" name="ui_externalSetup">
+          <property name="text">
+           <string>External device setup</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="1" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
-	<item>
-	 <layout class="QFormLayout" name="formLayout_4">
-	  <item row="0" column="0">
-	   <widget class="QLabel" name="TextLabel2">
-	    <property name="text">
-	     <string>&amp;Port:</string>
-	    </property>
-	    <property name="alignment">
-	     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-	    </property>
-	    <property name="wordWrap">
-	     <bool>false</bool>
-	    </property>
-	    <property name="buddy">
-	     <cstring>port</cstring>
-	    </property>
-	   </widget>
-	  </item>
-	  <item row="0" column="1">
-	   <layout class="QHBoxLayout" name="_3">
-	    <property name="spacing">
-	     <number>2</number>
-	    </property>
-	    <property name="margin">
-	     <number>0</number>
-	    </property>
-	    <item>
-	     <widget class="QComboBox" name="port">
-	      <property name="sizePolicy">
-	       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-		<horstretch>0</horstretch>
-		<verstretch>0</verstretch>
-	       </sizepolicy>
-	      </property>
-	      <property name="whatsThis">
-	       <string>Choose the serial device here. &lt;i&gt;(Hint for DOS people: /dev/ttyS0 corresponds to COM1. /dev/ttyS1 to COM2 ...)&lt;/i&gt;</string>
-	      </property>
-	      <property name="currentIndex">
-	       <number>0</number>
-	      </property>
-	      <item>
-	       <property name="text">
-		<string>/dev/ttyS</string>
-	       </property>
-	      </item>
-	      <item>
-	       <property name="text">
-		<string>/dev/usb/ttyUSB</string>
-	       </property>
-	      </item>
-	      <item>
-	       <property name="text">
-		<string>/dev/ttyUSB</string>
-	       </property>
-	      </item>
-	      <item>
-	       <property name="text">
-		<string>/dev/tty.usbserial</string>
-	       </property>
-	      </item>
-	     </widget>
-	    </item>
-	    <item>
-	     <widget class="QSpinBox" name="portNumber">
-	      <property name="whatsThis">
-	       <string>Enter the number of the port.</string>
-	      </property>
-	     </widget>
-	    </item>
-	    <item>
-	     <widget class="QPushButton" name="ui_scanPorts">
-	      <property name="whatsThis">
-	       <string>Clicke here to scan for new devices.</string>
-	      </property>
-	      <property name="text">
-	       <string>Scan</string>
-	      </property>
-	     </widget>
-	    </item>
-	   </layout>
-	  </item>
-	 </layout>
-	</item>
-	<item>
-	 <layout class="QFormLayout" name="formLayout_5">
-	  <item row="0" column="0">
-	   <widget class="QLabel" name="ui_baudLabel">
-	    <property name="text">
-	     <string>Baud &amp;rate:</string>
-	    </property>
-	    <property name="alignment">
-	     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-	    </property>
-	    <property name="wordWrap">
-	     <bool>false</bool>
-	    </property>
-	    <property name="buddy">
-	     <cstring>baudRate</cstring>
-	    </property>
-	   </widget>
-	  </item>
-	  <item row="0" column="1">
-	   <widget class="QComboBox" name="baudRate">
-	    <property name="whatsThis">
-	     <string>Select the baud rate for the DMM here. If you encounter problems connecting to your DMM try lowering the baud rate. I had some problems with my &lt;b&gt;Metex ME-32&lt;/b&gt;. The Documentation said 1200 baud but it only worked at 600.</string>
-	    </property>
-	    <property name="currentIndex">
-	     <number>0</number>
-	    </property>
-	    <item>
-	     <property name="text">
-	      <string>600 baud</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>1200 baud</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>1800 baud</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>2400 baud</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>4800 baud</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>9600 baud</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>19200 baud</string>
-	     </property>
-	    </item>
-	   </widget>
-	  </item>
-	 </layout>
-	</item>
+        <item>
+         <layout class="QFormLayout" name="formLayout_4">
+          <item row="0" column="0">
+           <widget class="QLabel" name="TextLabel2">
+            <property name="text">
+             <string>&amp;Port:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+            <property name="buddy">
+             <cstring>port</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="_3">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QComboBox" name="port">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="whatsThis">
+               <string>Choose the serial device here. &lt;i&gt;(Hint for DOS people: /dev/ttyS0 corresponds to COM1. /dev/ttyS1 to COM2 ...)&lt;/i&gt;</string>
+              </property>
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>/dev/ttyS</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>/dev/usb/ttyUSB</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>/dev/ttyUSB</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>/dev/tty.usbserial</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="portNumber">
+              <property name="whatsThis">
+               <string>Enter the number of the port.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ui_scanPorts">
+              <property name="whatsThis">
+               <string>Clicke here to scan for new devices.</string>
+              </property>
+              <property name="text">
+               <string>Scan</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="formLayout_5">
+          <item row="0" column="0">
+           <widget class="QLabel" name="ui_baudLabel">
+            <property name="text">
+             <string>Baud &amp;rate:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+            <property name="buddy">
+             <cstring>baudRate</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="baudRate">
+            <property name="whatsThis">
+             <string>Select the baud rate for the DMM here. If you encounter problems connecting to your DMM try lowering the baud rate. I had some problems with my &lt;b&gt;Metex ME-32&lt;/b&gt;. The Documentation said 1200 baud but it only worked at 600.</string>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>600 baud</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1200 baud</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1800 baud</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2400 baud</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4800 baud</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>9600 baud</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>19200 baud</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </item>
       <item row="2" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_4">
-	<item>
-	 <layout class="QFormLayout" name="formLayout_2">
-	  <item row="0" column="0">
-	   <widget class="QLabel" name="ui_bitsLabel">
-	    <property name="text">
-	     <string>&amp;Bits:</string>
-	    </property>
-	    <property name="alignment">
-	     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-	    </property>
-	    <property name="wordWrap">
-	     <bool>false</bool>
-	    </property>
-	    <property name="buddy">
-	     <cstring>bitsCombo</cstring>
-	    </property>
-	   </widget>
-	  </item>
-	  <item row="0" column="1">
-	   <widget class="QComboBox" name="bitsCombo">
-	    <property name="whatsThis">
-	     <string>Number of bits for serial communication.</string>
-	    </property>
-	    <item>
-	     <property name="text">
-	      <string>5 bits</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>6 bits</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>7 bits</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>8 bits</string>
-	     </property>
-	    </item>
-	   </widget>
-	  </item>
-	  <item row="1" column="0">
-	   <widget class="QLabel" name="ui_parityLabel">
-	    <property name="text">
-	     <string>Parit&amp;y</string>
-	    </property>
-	    <property name="alignment">
-	     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-	    </property>
-	    <property name="wordWrap">
-	     <bool>false</bool>
-	    </property>
-	    <property name="buddy">
-	     <cstring>stopBitsCombo</cstring>
-	    </property>
-	   </widget>
-	  </item>
-	  <item row="1" column="1">
-	   <widget class="QComboBox" name="parityCombo">
-	    <property name="whatsThis">
-	     <string>Parity for serial communication. May be None, Odd or Even.</string>
-	    </property>
-	    <item>
-	     <property name="text">
-	      <string>None</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>Even</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>Odd</string>
-	     </property>
-	    </item>
-	   </widget>
-	  </item>
-	 </layout>
-	</item>
-	<item>
-	 <layout class="QFormLayout" name="formLayout_3">
-	  <item row="0" column="0">
-	   <widget class="QLabel" name="ui_stopLabel">
-	    <property name="text">
-	     <string>&amp;Stop bits:</string>
-	    </property>
-	    <property name="alignment">
-	     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-	    </property>
-	    <property name="wordWrap">
-	     <bool>false</bool>
-	    </property>
-	    <property name="buddy">
-	     <cstring>stopBitsCombo</cstring>
-	    </property>
-	   </widget>
-	  </item>
-	  <item row="0" column="1">
-	   <widget class="QComboBox" name="stopBitsCombo">
-	    <property name="whatsThis">
-	     <string>Number of stop bits for serial communication.</string>
-	    </property>
-	    <item>
-	     <property name="text">
-	      <string>1 Stop bit</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>2 Stop bits</string>
-	     </property>
-	    </item>
-	   </widget>
-	  </item>
-	  <item row="1" column="0">
-	   <widget class="QLabel" name="ui_displayLabel">
-	    <property name="text">
-	     <string>&amp;Digits</string>
-	    </property>
-	    <property name="alignment">
-	     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-	    </property>
-	    <property name="wordWrap">
-	     <bool>false</bool>
-	    </property>
-	    <property name="buddy">
-	     <cstring>stopBitsCombo</cstring>
-	    </property>
-	   </widget>
-	  </item>
-	  <item row="1" column="1">
-	   <widget class="QComboBox" name="displayCombo">
-	    <property name="whatsThis">
-	     <string>Number of display digits.
+        <item>
+         <layout class="QFormLayout" name="formLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="ui_bitsLabel">
+            <property name="text">
+             <string>&amp;Bits:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+            <property name="buddy">
+             <cstring>bitsCombo</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="bitsCombo">
+            <property name="whatsThis">
+             <string>Number of bits for serial communication.</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>5 bits</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>6 bits</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>7 bits</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>8 bits</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="ui_parityLabel">
+            <property name="text">
+             <string>Parit&amp;y</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+            <property name="buddy">
+             <cstring>stopBitsCombo</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="parityCombo">
+            <property name="whatsThis">
+             <string>Parity for serial communication. May be None, Odd or Even.</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>None</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Even</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Odd</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="formLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="ui_stopLabel">
+            <property name="text">
+             <string>&amp;Stop bits:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+            <property name="buddy">
+             <cstring>stopBitsCombo</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="stopBitsCombo">
+            <property name="whatsThis">
+             <string>Number of stop bits for serial communication.</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>1 Stop bit</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2 Stop bits</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="ui_displayLabel">
+            <property name="text">
+             <string>&amp;Digits</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+            <property name="buddy">
+             <cstring>stopBitsCombo</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="displayCombo">
+            <property name="whatsThis">
+             <string>Number of display digits.
 &lt;ul&gt;&lt;li&gt;3 1/2 - 2000 Counts&lt;/li&gt;
 &lt;li&gt;3 3/4 - 4000 Counts&lt;/li&gt;
 &lt;li&gt;4 1/2 - 20000 Counts&lt;/li&gt;
 &lt;li&gt;4 3/4 - 40000 Counts&lt;/li&gt;
 &lt;/ul&gt;</string>
-	    </property>
-	    <item>
-	     <property name="text">
-	      <string>2000</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>4000</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>20000</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>50000</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>100000</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>200000</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>400000</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>1000000</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>6000</string>
-	     </property>
-	    </item>
-	    <item>
-	     <property name="text">
-	      <string>40000</string>
-	     </property>
-	    </item>
-	   </widget>
-	  </item>
-	 </layout>
-	</item>
-	<item>
-	 <spacer name="horizontalSpacer_2">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>40</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+            </property>
+            <item>
+             <property name="text">
+              <string>2000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>20000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>50000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>100000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>200000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>400000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1000000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>6000</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>40000</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="3" column="0">
        <layout class="QHBoxLayout" name="_4">
-	<item>
-	 <widget class="QCheckBox" name="uirts">
-	  <property name="text">
-	   <string>RTS</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <widget class="QCheckBox" name="uicts">
-	  <property name="text">
-	   <string>CTS</string>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <widget class="QCheckBox" name="uidsr">
-	  <property name="text">
-	   <string>DSR</string>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <widget class="QCheckBox" name="uidtr">
-	  <property name="text">
-	   <string>DTR</string>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="spacer3">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::Expanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>201</width>
-	    <height>21</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <item>
+         <widget class="QCheckBox" name="uirts">
+          <property name="text">
+           <string>RTS</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="uicts">
+          <property name="text">
+           <string>CTS</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="uidsr">
+          <property name="text">
+           <string>DSR</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="uidtr">
+          <property name="text">
+           <string>DTR</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>201</width>
+            <height>21</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="0">
-	<widget class="QLabel" name="TextLabel1_4">
-	 <property name="text">
-	  <string>&amp;Number of values:</string>
-	 </property>
-	 <property name="wordWrap">
-	  <bool>false</bool>
-	 </property>
-	</widget>
-       </item>
-       <item row="0" column="1">
-	<widget class="QSpinBox" name="ui_numValues">
-	 <property name="whatsThis">
-	  <string>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</string>
-	 </property>
-	 <property name="minimum">
-	  <number>1</number>
-	 </property>
-	 <property name="maximum">
-	  <number>4</number>
-	 </property>
-	</widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <spacer name="Spacer1">
-       <property name="orientation">
-	<enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-	<enum>QSizePolicy::Expanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-	<size>
-	 <width>20</width>
-	 <height>20</height>
-	</size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QComboBox" name="protocolCombo">
-     <property name="whatsThis">
-      <string>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</string>
+    <widget class="QGroupBox" name="ui_protocol">
+     <property name="title">
+      <string>Protocol</string>
      </property>
-     <item>
-      <property name="text">
-       <string>14 bytes ASCII, polling (Metex/Voltcraft)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>11 bytes ASCII, continuous (PeakTech 451)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>14 bytes ASCII, continuous (Voltcraft)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>15 bytes ASCII, continuous (Voltcraft)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>11 bytes binary, continuous (M9803R)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>14 bytes binary, continuous (VC820)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>22 bytes ASCII, continuous (IsoTech)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>11 bytes binary, continuous (VC940)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>14 bytes ASCII/binary, continuous (QM1537)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>9 bytes binary, continuous (RS 22-812)</string>
-      </property>
-     </item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QComboBox" name="protocolCombo">
+        <property name="whatsThis">
+         <string>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>14 bytes ASCII, polling (Metex/Voltcraft)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>11 bytes ASCII, continuous (PeakTech 451)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>14 bytes ASCII, continuous (Voltcraft)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>15 bytes ASCII, continuous (Voltcraft)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>11 bytes binary, continuous (M9803R)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>14 bytes binary, continuous (VC820)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>22 bytes ASCII, continuous (IsoTech)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>11 bytes binary, continuous (VC940)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>14 bytes ASCII/binary, continuous (QM1537)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>9 bytes binary, continuous (RS 22-812)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <layout class="QFormLayout" name="formLayout_8">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="TextLabel1_6">
+            <property name="text">
+             <string>&amp;Number of values:</string>
+            </property>
+            <property name="buddy">
+             <cstring>ui_numValues</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="ui_numValues">
+            <property name="whatsThis">
+             <string>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>4</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="Spacer1_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -710,13 +721,16 @@
     </widget>
    </item>
   </layout>
-  <zorder>ui_hint</zorder>
-  <zorder>ButtonGroup11</zorder>
-  <zorder>message2</zorder>
-  <zorder>message</zorder>
-  <zorder>protocolCombo</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>PrefWidget</class>
+   <extends>QWidget</extends>
+   <header>prefwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>ui_model</tabstop>
   <tabstop>port</tabstop>
@@ -726,6 +740,9 @@
   <tabstop>parityCombo</tabstop>
   <tabstop>displayCombo</tabstop>
  </tabstops>
+ <includes>
+  <include location="global">prefwidget.h</include>
+ </includes>
  <resources/>
  <connections/>
 </ui>

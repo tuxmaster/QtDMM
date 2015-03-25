@@ -26,7 +26,7 @@
 #include <QtGui>
 #include "ui_uigraphprefs.h"
 
-class GraphPrefs : public QWidget,private Ui::UIGraphPrefs
+class GraphPrefs : public PrefWidget,private Ui::UIGraphPrefs
 {
   Q_OBJECT
 	public:

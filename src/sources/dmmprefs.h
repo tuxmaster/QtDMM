@@ -43,7 +43,7 @@ struct DMMInfo
   bool  dtr;
 };
 
-class DmmPrefs : public QWidget,private Ui::UIDmmPrefs
+class DmmPrefs : public PrefWidget ,private Ui::UIDmmPrefs
 {
   Q_OBJECT
 	public:
@@ -67,9 +67,9 @@ class DmmPrefs : public QWidget,private Ui::UIDmmPrefs
 	  QString				deviceListText() const;
 
 	public Q_SLOTS:
-	  virtual void			defaultsSLOT();
-	  virtual void			factoryDefaultsSLOT();
-	  virtual void			applySLOT();
+	  virtual void			defaultsSLOT() Q_DECL_OVERRIDE;
+	  virtual void			factoryDefaultsSLOT() Q_DECL_OVERRIDE;
+	  virtual void			applySLOT() Q_DECL_OVERRIDE;
 
 	protected Q_SLOTS:
 	  void					modelSLOT( int );

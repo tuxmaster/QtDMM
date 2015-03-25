@@ -27,7 +27,7 @@
 
 #include "ui_uiscaleprefs.h"
 
-class ScalePrefs : public QWidget,private Ui::UIScalePrefs
+class ScalePrefs : public PrefWidget,private Ui::UIScalePrefs
 {
   Q_OBJECT
 	public:
@@ -41,9 +41,9 @@ class ScalePrefs : public QWidget,private Ui::UIScalePrefs
 	  int			totalSeconds() const;
 
 	public Q_SLOTS:
-	  virtual void	defaultsSLOT();
-	  virtual void	factoryDefaultsSLOT();
-	  virtual void	applySLOT();
+	  virtual void	defaultsSLOT()Q_DECL_OVERRIDE;
+	  virtual void	factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+	  virtual void	applySLOT()Q_DECL_OVERRIDE;
 
 	  void			setAutoScaleSLOT( bool autoScale );
 	  void			zoomInSLOT( double fac );

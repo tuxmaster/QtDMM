@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>UIIntegrationPrefs</class>
- <widget class="QWidget" name="UIIntegrationPrefs">
+ <widget class="PrefWidget" name="UIIntegrationPrefs">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -472,6 +472,14 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PrefWidget</class>
+   <extends>QWidget</extends>
+   <header>prefwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>ui_showInt</tabstop>
   <tabstop>ui_intLineMode</tabstop>
@@ -481,6 +489,9 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
   <tabstop>ui_intOffset</tabstop>
   <tabstop>ui_intThreshold</tabstop>
  </tabstops>
+ <includes>
+  <include location="global">prefwidget.h</include>
+ </includes>
  <resources/>
  <connections>
   <connection>
