@@ -32,10 +32,10 @@
 #define VERSION_STRING "0.9.5"
 
 
-MainWin::MainWin( QWidget *parent, const char *name ) : QMainWindow( parent, name ),
+MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
   m_running( false )
 {
-  setIcon( QPixmap(":/Symbols/icon.xpm") );
+  setWindowIcon( QPixmap(":/Symbols/icon.xpm") );
 
   m_wid = new MainWid( this );
   setCentralWidget( m_wid );
@@ -51,7 +51,7 @@ MainWin::MainWin( QWidget *parent, const char *name ) : QMainWindow( parent, nam
   QString ver = "QtDMM ";
   ver += VERSION_STRING;
 
-  setCaption( ver );
+  setWindowTitle(ver );
 
   connect( m_wid, SIGNAL( running(bool) ),this, SLOT( runningSLOT(bool) ));
 
@@ -305,19 +305,19 @@ void MainWin::versionSLOT()
 
 void MainWin::createToolBars()
 {
-  m_dmmTB = new QToolBar( this );
+  m_dmmTB = new QToolBar(tr("DMM"), this );
   m_connectAction->addTo( m_dmmTB );
   m_resetAction->addTo( m_dmmTB );
-  addToolBar( m_dmmTB, tr("DMM"), Qt::DockTop, true );
+  addToolBar( m_dmmTB);
 
-  m_graphTB = new QToolBar( this );
+  m_graphTB = new QToolBar( tr("Recorder"), this );
   m_startAction->addTo( m_graphTB );
   m_stopAction->addTo( m_graphTB );
   m_graphTB->addSeparator();
   m_clearAction->addTo( m_graphTB );
-  addToolBar( m_graphTB, tr("Recorder") );
+  addToolBar( m_graphTB);
 
-  m_fileTB = new QToolBar( this );
+  m_fileTB = new QToolBar( tr("File"), this );
   m_printAction->addTo( m_fileTB );
   m_exportAction->addTo( m_fileTB );
   m_importAction->addTo( m_fileTB );
@@ -325,15 +325,15 @@ void MainWin::createToolBars()
   m_configAction->addTo( m_fileTB );
   m_fileTB->addSeparator();
   m_quitAction->addTo( m_fileTB );
-  addToolBar( m_fileTB, tr("File") );
+  addToolBar( m_fileTB );
 
-  m_helpTB = new QToolBar( this );
+  m_helpTB = new QToolBar(tr("Help"), this );
   m_helpAction->addTo( m_helpTB );
-  addToolBar( m_helpTB, tr("Help") );
+  addToolBar( m_helpTB );
 
-  m_displayTB = new QToolBar( this );
+  m_displayTB = new QToolBar(tr("Display"), this );
   m_display = new DisplayWid( m_displayTB );
-  addToolBar( m_displayTB, tr("Display"), Qt::DockTop, true );
+  addToolBar( m_displayTB );
 
   connect( m_displayTB, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
   connect( m_helpTB, SIGNAL( visibilityChanged( bool ) ),  this, SLOT( setToolbarVisibilitySLOT() ));
@@ -346,7 +346,7 @@ void MainWin::createMenu()
 {
   QMenuBar *menu = menuBar();
 
-  QPopupMenu *file = new QPopupMenu( menu );
+  QMenu *file = new QMenu( menu );
   m_exportAction->addTo( file );
   m_importAction->addTo( file );
   file->insertSeparator();
@@ -358,7 +358,7 @@ void MainWin::createMenu()
 
   menu->insertItem( tr("File"), file );
 
-  QPopupMenu *dmm = new QPopupMenu( menu );
+  QMenu *dmm = new QMenu( menu );
   m_connectAction->addTo( dmm );
   m_resetAction->addTo( dmm );
   dmm->insertSeparator();
@@ -366,7 +366,7 @@ void MainWin::createMenu()
 
   menu->insertItem( tr("DMM"), dmm );
 
-  QPopupMenu *recorder = new QPopupMenu( menu );
+  QMenu *recorder = new QMenu( menu );
   m_startAction->addTo( recorder );
   m_stopAction->addTo( recorder );
   recorder->insertSeparator();
@@ -376,7 +376,7 @@ void MainWin::createMenu()
 
   menu->insertItem( tr("Recorder"), recorder );
 
-  QPopupMenu *help = new QPopupMenu( menu );
+  QMenu *help = new QMenu( menu );
   m_versionAction->addTo( help );
   m_showTipsAction->addTo( help );
   m_helpAction->addTo( help );

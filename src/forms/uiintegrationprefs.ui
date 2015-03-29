@@ -28,23 +28,23 @@
      <item>
       <widget class="QCheckBox" name="ui_showInt">
        <property name="text">
-        <string>Show integration</string>
+	<string>Show integration</string>
        </property>
       </widget>
      </item>
      <item>
       <spacer name="Spacer40_2_2">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+	<enum>Qt::Horizontal</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Expanding</enum>
+	<enum>QSizePolicy::Expanding</enum>
        </property>
        <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
+	<size>
+	 <width>20</width>
+	 <height>20</height>
+	</size>
        </property>
       </spacer>
      </item>
@@ -67,98 +67,98 @@
       </property>
       <item row="0" column="0">
        <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="ui_intColor">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button so change the color of the data graph in the recorder.</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_2_2_2_3">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Integration graph</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_intColor</cstring>
-          </property>
-         </widget>
-        </item>
+	<property name="spacing">
+	 <number>5</number>
+	</property>
+	<property name="margin">
+	 <number>0</number>
+	</property>
+	<item>
+	 <widget class="ColorButton" name="ui_intColor" native="true">
+	  <property name="minimumSize">
+	   <size>
+	    <width>50</width>
+	    <height>0</height>
+	   </size>
+	  </property>
+	  <property name="maximumSize">
+	   <size>
+	    <width>50</width>
+	    <height>32767</height>
+	   </size>
+	  </property>
+	  <property name="whatsThis">
+	   <string>Click this button so change the color of the data graph in the recorder.</string>
+	  </property>
+	 </widget>
+	</item>
+	<item>
+	 <widget class="QLabel" name="label_2_2_2_3">
+	  <property name="sizePolicy">
+	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+	    <horstretch>0</horstretch>
+	    <verstretch>0</verstretch>
+	   </sizepolicy>
+	  </property>
+	  <property name="text">
+	   <string>Integration graph</string>
+	  </property>
+	  <property name="wordWrap">
+	   <bool>false</bool>
+	  </property>
+	  <property name="buddy">
+	   <cstring>ui_intColor</cstring>
+	  </property>
+	 </widget>
+	</item>
        </layout>
       </item>
       <item row="0" column="1">
        <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="ui_intThresholdColor">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button so change the color of the data graph in the recorder.</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_2_2_2_2_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Integration threshold</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_intThresholdColor</cstring>
-          </property>
-         </widget>
-        </item>
+	<property name="spacing">
+	 <number>5</number>
+	</property>
+	<property name="margin">
+	 <number>0</number>
+	</property>
+	<item>
+	 <widget class="ColorButton" name="ui_intThresholdColor">
+	  <property name="minimumSize">
+	   <size>
+	    <width>50</width>
+	    <height>0</height>
+	   </size>
+	  </property>
+	  <property name="maximumSize">
+	   <size>
+	    <width>50</width>
+	    <height>32767</height>
+	   </size>
+	  </property>
+	  <property name="whatsThis">
+	   <string>Click this button so change the color of the data graph in the recorder.</string>
+	  </property>
+	 </widget>
+	</item>
+	<item>
+	 <widget class="QLabel" name="label_2_2_2_2_2">
+	  <property name="sizePolicy">
+	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+	    <horstretch>0</horstretch>
+	    <verstretch>0</verstretch>
+	   </sizepolicy>
+	  </property>
+	  <property name="text">
+	   <string>Integration threshold</string>
+	  </property>
+	  <property name="wordWrap">
+	   <bool>false</bool>
+	  </property>
+	  <property name="buddy">
+	   <cstring>ui_intThresholdColor</cstring>
+	  </property>
+	 </widget>
+	</item>
        </layout>
       </item>
      </layout>
@@ -181,172 +181,172 @@
       </property>
       <item row="1" column="0">
        <widget class="QLabel" name="TextLabel1_3_2_2">
-        <property name="text">
-         <string>Point style:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
+	<property name="text">
+	 <string>Point style:</string>
+	</property>
+	<property name="alignment">
+	 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	</property>
+	<property name="wordWrap">
+	 <bool>false</bool>
+	</property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="TextLabel1_5_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Line style:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
+	<property name="sizePolicy">
+	 <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+	  <horstretch>0</horstretch>
+	  <verstretch>0</verstretch>
+	 </sizepolicy>
+	</property>
+	<property name="text">
+	 <string>Line style:</string>
+	</property>
+	<property name="alignment">
+	 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	</property>
+	<property name="wordWrap">
+	 <bool>false</bool>
+	</property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QComboBox" name="ui_intPointMode">
-        <property name="currentIndex">
-         <number>1</number>
-        </property>
-        <item>
-         <property name="text">
-          <string>No points</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Circle</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Square</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Diamond</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>X</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Large Circle</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Large Square</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Large Diamond</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Large X</string>
-         </property>
-        </item>
+	<property name="currentIndex">
+	 <number>1</number>
+	</property>
+	<item>
+	 <property name="text">
+	  <string>No points</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Circle</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Square</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Diamond</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>X</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Large Circle</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Large Square</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Large Diamond</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Large X</string>
+	 </property>
+	</item>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QComboBox" name="ui_intLineMode">
-        <item>
-         <property name="text">
-          <string>No line</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Solid line</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Dotted line</string>
-         </property>
-        </item>
+	<item>
+	 <property name="text">
+	  <string>No line</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Solid line</string>
+	 </property>
+	</item>
+	<item>
+	 <property name="text">
+	  <string>Dotted line</string>
+	 </property>
+	</item>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QLabel" name="TextLabel1_3">
-        <property name="text">
-         <string>Width:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
+	<property name="text">
+	 <string>Width:</string>
+	</property>
+	<property name="alignment">
+	 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	</property>
+	<property name="wordWrap">
+	 <bool>false</bool>
+	</property>
        </widget>
       </item>
       <item row="0" column="3">
        <widget class="QSpinBox" name="ui_intLineWidth">
-        <property name="maximumSize">
-         <size>
-          <width>50</width>
-          <height>32767</height>
-         </size>
-        </property>
-        <property name="whatsThis">
-         <string>Here you can choose the line width of the data graph in the recorder.</string>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>5</number>
-        </property>
-        <property name="value">
-         <number>1</number>
-        </property>
+	<property name="maximumSize">
+	 <size>
+	  <width>50</width>
+	  <height>32767</height>
+	 </size>
+	</property>
+	<property name="whatsThis">
+	 <string>Here you can choose the line width of the data graph in the recorder.</string>
+	</property>
+	<property name="minimum">
+	 <number>1</number>
+	</property>
+	<property name="maximum">
+	 <number>5</number>
+	</property>
+	<property name="value">
+	 <number>1</number>
+	</property>
        </widget>
       </item>
       <item row="1" column="2" colspan="3">
        <spacer name="Spacer3_2_3_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
+	<property name="orientation">
+	 <enum>Qt::Horizontal</enum>
+	</property>
+	<property name="sizeType">
+	 <enum>QSizePolicy::Expanding</enum>
+	</property>
+	<property name="sizeHint" stdset="0">
+	 <size>
+	  <width>20</width>
+	  <height>20</height>
+	 </size>
+	</property>
        </spacer>
       </item>
       <item row="0" column="4">
        <spacer name="Spacer234">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
+	<property name="orientation">
+	 <enum>Qt::Horizontal</enum>
+	</property>
+	<property name="sizeType">
+	 <enum>QSizePolicy::Expanding</enum>
+	</property>
+	<property name="sizeHint" stdset="0">
+	 <size>
+	  <width>20</width>
+	  <height>20</height>
+	 </size>
+	</property>
        </spacer>
       </item>
      </layout>
@@ -369,86 +369,86 @@
       </property>
       <item row="1" column="0">
        <widget class="QLabel" name="TextLabel2_4_2_2">
-        <property name="text">
-         <string>Scale:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
+	<property name="text">
+	 <string>Scale:</string>
+	</property>
+	<property name="alignment">
+	 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	</property>
+	<property name="wordWrap">
+	 <bool>false</bool>
+	</property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="TextLabel3_3_2_2_2">
-        <property name="text">
-         <string>Threshold:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
+	<property name="text">
+	 <string>Threshold:</string>
+	</property>
+	<property name="alignment">
+	 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	</property>
+	<property name="wordWrap">
+	 <bool>false</bool>
+	</property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QLineEdit" name="ui_intScale">
-        <property name="whatsThis">
-         <string>Scaling factor for integration curve.&lt;p&gt;
+	<property name="whatsThis">
+	 <string>Scaling factor for integration curve.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</string>
-        </property>
-        <property name="text">
-         <string>1.0</string>
-        </property>
-        <property name="maxLength">
-         <number>12</number>
-        </property>
+	</property>
+	<property name="text">
+	 <string>1.0</string>
+	</property>
+	<property name="maxLength">
+	 <number>12</number>
+	</property>
        </widget>
       </item>
       <item row="1" column="3">
        <widget class="QLineEdit" name="ui_intOffset">
-        <property name="whatsThis">
-         <string>Amplitude offset for integration curve.&lt;p&gt;
+	<property name="whatsThis">
+	 <string>Amplitude offset for integration curve.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</string>
-        </property>
-        <property name="text">
-         <string>0.0</string>
-        </property>
-        <property name="maxLength">
-         <number>12</number>
-        </property>
+	</property>
+	<property name="text">
+	 <string>0.0</string>
+	</property>
+	<property name="maxLength">
+	 <number>12</number>
+	</property>
        </widget>
       </item>
       <item row="1" column="2">
        <widget class="QLabel" name="TextLabel3_3_2_3">
-        <property name="text">
-         <string>Offset:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
+	<property name="text">
+	 <string>Offset:</string>
+	</property>
+	<property name="alignment">
+	 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+	</property>
+	<property name="wordWrap">
+	 <bool>false</bool>
+	</property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QLineEdit" name="ui_intThreshold">
-        <property name="whatsThis">
-         <string>If sampled value gets below this offset the integration curve is reset to zero.&lt;p&gt;
+	<property name="whatsThis">
+	 <string>If sampled value gets below this offset the integration curve is reset to zero.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</string>
-        </property>
-        <property name="text">
-         <string>0.0</string>
-        </property>
-        <property name="maxLength">
-         <number>12</number>
-        </property>
+	</property>
+	<property name="text">
+	 <string>0.0</string>
+	</property>
+	<property name="maxLength">
+	 <number>12</number>
+	</property>
        </widget>
       </item>
      </layout>
@@ -479,6 +479,11 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
    <header>prefwidget.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>ColorButton</class>
+   <extends>QWidget</extends>
+   <header>colorbutton.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>ui_showInt</tabstop>
@@ -491,6 +496,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
  </tabstops>
  <includes>
   <include location="global">prefwidget.h</include>
+  <include location="global">colorbutton.h</include>
  </includes>
  <resources/>
  <connections>

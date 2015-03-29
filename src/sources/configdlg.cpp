@@ -48,7 +48,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 
   // PREPARE CONFIGURATION FILE
   //
-  QString path = QDir::homeDirPath();
+  QString path = QDir::homePath();
   path += "/.qtdmmrc";
 
   m_cfg = new SimpleCfg( path );
@@ -334,7 +334,7 @@ void ConfigDlg::applySLOT()
   m_cfg->setInt( "Printer", "color", (int)m_printer->colorMode() );
   m_cfg->setString( "Printer", "name", m_printer->printerName() );
   m_cfg->setString( "Printer", "filename", m_printer->outputFileName() );
-  m_cfg->setBool( "Printer", "print-file", m_printer->outputToFile() );
+  m_cfg->setBool( "Printer", "print-file", (m_printer->outputFormat() == QPrinter::PdfFormat) ? true:false );
 
   for (int i=0; i<NumItems; ++i)
   {
@@ -367,7 +367,7 @@ void ConfigDlg::readPrinter( QPrinter * printer )
   m_printer->setColorMode( (QPrinter::ColorMode) m_cfg->getInt( "Printer", "color", 1 ) );
   m_printer->setPrinterName( m_cfg->getString( "Printer", "name", "lp" ) );
   m_printer->setOutputFileName( m_cfg->getString( "Printer", "filename", "" ) );
-  m_printer->setOutputToFile( m_cfg->getBool( "Printer", "print-file", false ) );
+  m_printer->setOutputFormat((m_cfg->getBool( "Printer", "print-file", false )) ? QPrinter::PdfFormat : QPrinter::NativeFormat  );
 }
 
 void ConfigDlg::pageSelectedSLOT(QListWidgetItem *item )

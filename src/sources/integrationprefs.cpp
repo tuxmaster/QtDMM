@@ -47,8 +47,8 @@ void IntegrationPrefs::defaultsSLOT()
 {
   ui_intColor->setColor( QColor( m_cfg->getRGB( "Graph", "integration", Qt::darkBlue )));  // mt: removed .rgb()
   ui_intThresholdColor->setColor( QColor( m_cfg->getRGB( "Graph", "integration-threshold", Qt::darkBlue ))); // mt: removed .rgb()
-  ui_intLineMode->setCurrentItem( m_cfg->getInt( "Graph", "int-line-mode", 0 ));
-  ui_intPointMode->setCurrentItem( m_cfg->getInt( "Graph", "int-point-mode", 1 ));
+  ui_intLineMode->setCurrentIndex( m_cfg->getInt( "Graph", "int-line-mode", 0 ));
+  ui_intPointMode->setCurrentIndex( m_cfg->getInt( "Graph", "int-point-mode", 1 ));
   ui_showInt->setChecked( m_cfg->getBool( "Graph", "show-integration", false ));
   ui_intScale->setText( m_cfg->getString( "Graph", "int-scale", "1.0" ));
   ui_intOffset->setText( m_cfg->getString( "Graph", "int-offset", "0.0" ));
@@ -60,8 +60,8 @@ void IntegrationPrefs::factoryDefaultsSLOT()
 {
   ui_intColor->setColor( Qt::darkBlue );
   ui_intThresholdColor->setColor( Qt::darkBlue );	// mt: removed .rgb()
-  ui_intLineMode->setCurrentItem( 0 );
-  ui_intPointMode->setCurrentItem( 1 );
+  ui_intLineMode->setCurrentIndex( 0 );
+  ui_intPointMode->setCurrentIndex( 1 );
   ui_intLineWidth->setValue( 1 );
   ui_showInt->setChecked( false );
   ui_intScale->setText( "0.1" );
@@ -74,8 +74,8 @@ void IntegrationPrefs::applySLOT()
   m_cfg->setRGB( "Graph", "integration", ui_intColor->color().rgb() );
   m_cfg->setRGB( "Graph", "integration-threshold", ui_intThresholdColor->color().rgb() );
   m_cfg->setInt( "Graph", "int-line-width", ui_intLineWidth->value() );
-  m_cfg->setInt( "Graph", "int-line-mode", ui_intLineMode->currentItem() );
-  m_cfg->setInt( "Graph", "int-point-mode", ui_intPointMode->currentItem() );
+  m_cfg->setInt( "Graph", "int-line-mode", ui_intLineMode->currentIndex() );
+  m_cfg->setInt( "Graph", "int-point-mode", ui_intPointMode->currentIndex() );
   m_cfg->setBool( "Graph", "show-integration", ui_showInt->isChecked() );
   m_cfg->setString( "Graph", "int-scale", ui_intScale->text() );
   m_cfg->setString( "Graph", "int-offset", ui_intOffset->text() );
@@ -124,10 +124,10 @@ int IntegrationPrefs::intLineWidth() const
 
 int IntegrationPrefs::intLineMode() const
 {
-  return ui_intLineMode->currentItem();
+  return ui_intLineMode->currentIndex();
 }
 
 int IntegrationPrefs::intPointMode() const
 {
-  return ui_intPointMode->currentItem();
+  return ui_intPointMode->currentIndex();
 }

@@ -49,8 +49,8 @@ void GraphPrefs::defaultsSLOT()
   ui_startColor->setColor( QColor( m_cfg->getRGB( "Graph", "start-trigger", Qt::magenta )));
   ui_extColor->setColor( QColor( m_cfg->getRGB( "Graph", "external-trigger", Qt::cyan )));
 
-  ui_lineMode->setCurrentItem( m_cfg->getInt( "Graph", "line-mode", 1 ));
-  ui_pointMode->setCurrentItem( m_cfg->getInt( "Graph", "point-mode", 0 ));
+  ui_lineMode->setCurrentIndex( m_cfg->getInt( "Graph", "line-mode", 1 ));
+  ui_pointMode->setCurrentIndex( m_cfg->getInt( "Graph", "point-mode", 0 ));
   ui_crosshair->setChecked( m_cfg->getBool( "Graph", "crosshair-cursor", true ));
 
   ui_lineWidth->setValue( m_cfg->getInt( "Graph", "line-width", 2 ) );
@@ -65,8 +65,8 @@ void GraphPrefs::factoryDefaultsSLOT()
   ui_cursorColor->setColor( Qt::black );
   ui_startColor->setColor( Qt::magenta ); // mt: removed .rgb()
   ui_extColor->setColor( Qt::cyan ); // mt: removed .rgb()
-  ui_lineMode->setCurrentItem( 1 );
-  ui_pointMode->setCurrentItem( 0 );
+  ui_lineMode->setCurrentIndex( 1 );
+  ui_pointMode->setCurrentIndex( 0 );
   ui_lineWidth->setValue( 2 );
   ui_crosshair->setChecked( true );
 
@@ -81,8 +81,8 @@ void GraphPrefs::applySLOT()
   m_cfg->setRGB( "Graph", "start-trigger", ui_startColor->color().rgb() );
   m_cfg->setRGB( "Graph", "external-trigger", ui_extColor->color().rgb() );
   m_cfg->setInt( "Graph", "line-width", ui_lineWidth->value() );
-  m_cfg->setInt( "Graph", "line-mode", ui_lineMode->currentItem() );
-  m_cfg->setInt( "Graph", "point-mode", ui_pointMode->currentItem() );
+  m_cfg->setInt( "Graph", "line-mode", ui_lineMode->currentIndex() );
+  m_cfg->setInt( "Graph", "point-mode", ui_pointMode->currentIndex() );
   m_cfg->setBool( "Graph", "crosshair-cursor", ui_crosshair->isChecked() );
 }
 
@@ -123,12 +123,12 @@ int GraphPrefs::lineWidth() const
 
 int GraphPrefs::lineMode() const
 {
-  return ui_lineMode->currentItem();
+  return ui_lineMode->currentIndex();
 }
 
 int GraphPrefs::pointMode() const
 {
-  return ui_pointMode->currentItem();
+  return ui_pointMode->currentIndex();
 }
 
 bool GraphPrefs::crosshair() const

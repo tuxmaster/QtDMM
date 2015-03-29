@@ -28,30 +28,35 @@
 #include <stdlib.h>
 
 
-void myMessageOutput( QtMsgType type, const char *msg )
+void myMessageOutput( QtMsgType type,const QMessageLogContext &, const QString &msg )
 {
   QString txt = msg;
 
   switch ( type )
   {
 	case QtDebugMsg:
-	  fprintf( stderr, "Debug: %s\n", msg );
-	  //abort();
-	  break;
+		fprintf( stderr, "Debug: %s\n", msg.toUtf8().constData() );
+		//abort();
+		break;
 	case QtWarningMsg:
-	  if (txt.contains( "Absolute index" )) abort();
-	  //fprintf( stderr, "Warning: %s\n", msg );
-	  //abort();
-	  break;
+		if (txt.contains( "Absolute index" ))
+			abort();
+		//fprintf( stderr, "Warning: %s\n", msg );
+		//abort();
+		break;
 	case QtFatalMsg:
-	  fprintf( stderr, "Fatal: %s\n", msg );
-	  //abort();                    // deliberately core dump
+		fprintf( stderr, "Fatal: %s\n", msg.toUtf8().constData() );
+		//abort();                    // deliberately core dump
+		break;
+	case QtCriticalMsg:
+		fprintf( stderr, "Critical: %s\n", msg.toUtf8().constData() );
+		break;
   }
 }
 
 int main( int argc, char **argv )
 {
-  qInstallMsgHandler( myMessageOutput );
+  qInstallMessageHandler( myMessageOutput );
   QApplication app( argc, argv );
 
   MainWin mainWin;
@@ -61,7 +66,6 @@ int main( int argc, char **argv )
   if(parser.isSet("console"))
 	mainWin.setConsoleLogging( true );
 
-  app.setMainWidget( &mainWin );
   mainWin.show();
   mainWin.move( 100, 100 );
 

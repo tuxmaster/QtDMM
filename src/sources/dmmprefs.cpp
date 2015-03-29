@@ -145,11 +145,11 @@ DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
   m_pixmap = new QPixmap( ":/Symbols/dmm.xpm" );
 
   ui_model->clear();
-  ui_model->insertItem( "Manual settings" );
+  ui_model->insertItem(-1,"Manual settings" );
 
   int id = 0;
   while (*dmm_info[id].name)
-	ui_model->insertItem( dmm_info[id++].name );
+	ui_model->addItem(dmm_info[id++].name );
 
   message2->hide();
 
@@ -225,72 +225,72 @@ QString DmmPrefs::deviceListText() const
 
 void DmmPrefs::defaultsSLOT()
 {
-  port->setCurrentItem( m_cfg->getInt( "Port settings", "device", 0 ) );
+  port->setCurrentIndex( m_cfg->getInt( "Port settings", "device", 0 ) );
   portNumber->setValue( m_cfg->getInt( "Port settings", "device-number", 0 ) );
-  baudRate->setCurrentItem( m_cfg->getInt( "Port settings", "baud", 0 ) );
-  bitsCombo->setCurrentItem( m_cfg->getInt( "Port settings", "bits", 7 )-5 );
-  stopBitsCombo->setCurrentItem( m_cfg->getInt( "Port settings", "stop-bits", 2 )-1);
-  parityCombo->setCurrentItem( m_cfg->getInt( "Port settings", "parity", 0 ) );
-  displayCombo->setCurrentItem( m_cfg->getInt( "DMM", "display", 1 ) );
+  baudRate->setCurrentIndex( m_cfg->getInt( "Port settings", "baud", 0 ) );
+  bitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings", "bits", 7 )-5 );
+  stopBitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings", "stop-bits", 2 )-1);
+  parityCombo->setCurrentIndex( m_cfg->getInt( "Port settings", "parity", 0 ) );
+  displayCombo->setCurrentIndex( m_cfg->getInt( "DMM", "display", 1 ) );
   ui_externalSetup->setChecked( m_cfg->getInt( "DMM", "exterrnal-setup", 0 ) == 1 );
 
-  protocolCombo->setCurrentItem( m_cfg->getInt( "DMM", "data-format", 0 ));
+  protocolCombo->setCurrentIndex( m_cfg->getInt( "DMM", "data-format", 0 ));
   ui_numValues->setValue( m_cfg->getInt( "DMM", "number-of-values", 1 ));
 
   QString model = m_cfg->getString( "DMM", "model", "" );
 
-  ui_model->setCurrentItem( 0 );
+  ui_model->setCurrentIndex( 0 );
   int id=0;
   while (*dmm_info[id].name)
   {
 	if (model == dmm_info[id].name)
 	{
-	  ui_model->setCurrentItem( id+1 );
+	  ui_model->setCurrentIndex( id+1 );
 	  break;
 	}
 	id++;
   }
 
-  modelSLOT( ui_model->currentItem() );
+  modelSLOT( ui_model->currentIndex() );
 }
 
 void DmmPrefs::factoryDefaultsSLOT()
 {
-  port->setCurrentItem( 0 );
-  baudRate->setCurrentItem( 0 );
-  bitsCombo->setCurrentItem( 2 );
-  stopBitsCombo->setCurrentItem( 1 );
-  parityCombo->setCurrentItem( 0 );
-  displayCombo->setCurrentItem( 1 );
+  port->setCurrentIndex( 0 );
+  baudRate->setCurrentIndex( 0 );
+  bitsCombo->setCurrentIndex( 2 );
+  stopBitsCombo->setCurrentIndex( 1 );
+  parityCombo->setCurrentIndex( 0 );
+  displayCombo->setCurrentIndex( 1 );
   ui_externalSetup->setChecked( false );
 
-  protocolCombo->setCurrentItem( 0 );
+  protocolCombo->setCurrentIndex( 0 );
   ui_numValues->setValue( 1 );
-  ui_model->setCurrentItem( 0 );
+  ui_model->setCurrentIndex( 0 );
 
-  modelSLOT( ui_model->currentItem() );
+  modelSLOT( ui_model->currentIndex() );
 }
 
 void DmmPrefs::applySLOT()
 {
-  m_cfg->setInt( "Port settings", "device", port->currentItem() );
+  m_cfg->setInt( "Port settings", "device", port->currentIndex() );
   m_cfg->setInt( "Port settings", "device-number", portNumber->value() );
-  m_cfg->setInt( "Port settings", "baud", baudRate->currentItem() );
-  m_cfg->setInt( "Port settings", "bits", bitsCombo->currentItem()+5 );
-  m_cfg->setInt( "Port settings", "stop-bits", stopBitsCombo->currentItem()+1 );
-  m_cfg->setInt( "Port settings", "parity", parityCombo->currentItem() );
+  m_cfg->setInt( "Port settings", "baud", baudRate->currentIndex() );
+  m_cfg->setInt( "Port settings", "bits", bitsCombo->currentIndex()+5 );
+  m_cfg->setInt( "Port settings", "stop-bits", stopBitsCombo->currentIndex()+1 );
+  m_cfg->setInt( "Port settings", "parity", parityCombo->currentIndex() );
 
-  m_cfg->setInt( "DMM", "display", displayCombo->currentItem() );
+  m_cfg->setInt( "DMM", "display", displayCombo->currentIndex() );
   m_cfg->setBool( "DMM", "external-setup", ui_externalSetup->isChecked() );
 
-  m_cfg->setInt( "DMM", "data-format", protocolCombo->currentItem() );
+  m_cfg->setInt( "DMM", "data-format", protocolCombo->currentIndex() );
   m_cfg->setInt( "DMM", "number-of-values", ui_numValues->value() );
-  m_cfg->setString( "DMM", "model", (ui_model->currentItem() == 0 ? "Manual" : dmm_info[ui_model->currentItem()-1].name ));
+  m_cfg->setString( "DMM", "model", (ui_model->currentIndex() == 0 ? "Manual" : dmm_info[ui_model->currentIndex()-1].name ));
 }
 
 void DmmPrefs::externalSetupSLOT()
 {
-  if (ui_model->currentItem() == 0)
+  if (ui_model->currentIndex() == 0)
   {
 	baudRate->setDisabled( ui_externalSetup->isChecked() );
 	bitsCombo->setDisabled( ui_externalSetup->isChecked() );
@@ -327,19 +327,19 @@ void DmmPrefs::modelSLOT( int id )
 	  message->hide();
   else
 	  message->show();
-  if (ui_model->text(id)[0] == '*')
+  if (ui_model->itemText(id)[0] == '*')
 	message2->show();
   else
 	message2->hide();
 
   if (id > 0)
   {
-	baudRate->setCurrentItem( dmm_info[id-1].baud );
-	protocolCombo->setCurrentItem( dmm_info[id-1].protocol );
-	bitsCombo->setCurrentItem( dmm_info[id-1].bits-5 );
-	stopBitsCombo->setCurrentItem( dmm_info[id-1].stopBits-1 );
-	parityCombo->setCurrentItem( dmm_info[id-1].parity );
-	displayCombo->setCurrentItem( dmm_info[id-1].display );
+	baudRate->setCurrentIndex( dmm_info[id-1].baud );
+	protocolCombo->setCurrentIndex( dmm_info[id-1].protocol );
+	bitsCombo->setCurrentIndex( dmm_info[id-1].bits-5 );
+	stopBitsCombo->setCurrentIndex( dmm_info[id-1].stopBits-1 );
+	parityCombo->setCurrentIndex( dmm_info[id-1].parity );
+	displayCombo->setCurrentIndex( dmm_info[id-1].display );
 	ui_numValues->setValue( dmm_info[id-1].numValues );
 	ui_externalSetup->setChecked( dmm_info[id-1].externalSetup );
 	uirts->setChecked( dmm_info[id-1].rts );
@@ -373,22 +373,22 @@ bool DmmPrefs::dtr() const
 
 int DmmPrefs::parity() const
 {
-  return parityCombo->currentItem();
+  return parityCombo->currentIndex();
 }
 
 int DmmPrefs::bits() const
 {
-  return 5+bitsCombo->currentItem();
+  return 5+bitsCombo->currentIndex();
 }
 
 int DmmPrefs::stopBits() const
 {
-  return 1+stopBitsCombo->currentItem();
+  return 1+stopBitsCombo->currentIndex();
 }
 
 int DmmPrefs::speed() const
 {
-  switch (baudRate->currentItem())
+  switch (baudRate->currentIndex())
   {
 	  case 0:
 		return 600;
@@ -420,12 +420,12 @@ int DmmPrefs::numValues() const
 
 ReadEvent::DataFormat DmmPrefs::format() const
 {
-  return (ReadEvent::DataFormat)protocolCombo->currentItem();
+  return (ReadEvent::DataFormat)protocolCombo->currentIndex();
 }
 
 int DmmPrefs::display() const
 {
-  return displayCombo->currentItem();
+  return displayCombo->currentIndex();
 }
 
 QString DmmPrefs::dmmName() const
@@ -457,15 +457,15 @@ void DmmPrefs::loadSLOT()
 	SimpleCfg cfg( filename );
 	cfg.load();
 
-	port->setCurrentItem( cfg.getInt( "Port settings", "device", 0 ) );
+	port->setCurrentIndex( cfg.getInt( "Port settings", "device", 0 ) );
 	portNumber->setValue( cfg.getInt( "Port settings", "device-number", 0 ) );
-	baudRate->setCurrentItem( cfg.getInt( "Port settings", "baud", 0 ) );
-	bitsCombo->setCurrentItem( cfg.getInt( "Port settings", "bits", 7 )-5 );
-	stopBitsCombo->setCurrentItem( cfg.getInt( "Port settings", "stop-bits", 2 )-1);
-	parityCombo->setCurrentItem( cfg.getInt( "Port settings", "parity", 0 ) );
-	displayCombo->setCurrentItem( cfg.getInt( "DMM", "display", 1 ) );
+	baudRate->setCurrentIndex( cfg.getInt( "Port settings", "baud", 0 ) );
+	bitsCombo->setCurrentIndex( cfg.getInt( "Port settings", "bits", 7 )-5 );
+	stopBitsCombo->setCurrentIndex( cfg.getInt( "Port settings", "stop-bits", 2 )-1);
+	parityCombo->setCurrentIndex( cfg.getInt( "Port settings", "parity", 0 ) );
+	displayCombo->setCurrentIndex( cfg.getInt( "DMM", "display", 1 ) );
 	ui_externalSetup->setChecked( cfg.getBool( "DMM", "external-setup", false ) );
-	protocolCombo->setCurrentItem( cfg.getInt( "DMM", "data-format", 0 ));
+	protocolCombo->setCurrentIndex( cfg.getInt( "DMM", "data-format", 0 ));
 	ui_numValues->setValue( cfg.getInt( "DMM", "number-of-values", 1 ));
 	uirts->setChecked( cfg.getBool( "DMM", "rts", true ));
 	uicts->setChecked( cfg.getBool( "DMM", "cts", false ));
@@ -493,16 +493,16 @@ void DmmPrefs::saveSLOT()
 	  "# Contact: qtdmm@mtoussaint.de                                      #\n"
 	  "#####################################################################\n\n" );
 
-	cfg.setInt( "Port settings", "device", port->currentItem() );
+	cfg.setInt( "Port settings", "device", port->currentIndex() );
 	cfg.setInt( "Port settings", "device-number", portNumber->value() );
-	cfg.setInt( "Port settings", "baud", baudRate->currentItem() );
-	cfg.setInt( "Port settings", "bits", bitsCombo->currentItem()+5 );
-	cfg.setInt( "Port settings", "stop-bits", stopBitsCombo->currentItem()+1 );
-	cfg.setInt( "Port settings", "parity", parityCombo->currentItem() );
+	cfg.setInt( "Port settings", "baud", baudRate->currentIndex() );
+	cfg.setInt( "Port settings", "bits", bitsCombo->currentIndex()+5 );
+	cfg.setInt( "Port settings", "stop-bits", stopBitsCombo->currentIndex()+1 );
+	cfg.setInt( "Port settings", "parity", parityCombo->currentIndex() );
 
-	cfg.setInt( "DMM", "display", displayCombo->currentItem() );
+	cfg.setInt( "DMM", "display", displayCombo->currentIndex() );
 	cfg.setBool( "DMM", "external-setup", ui_externalSetup->isChecked() );
-	cfg.setInt( "DMM", "data-format", protocolCombo->currentItem() );
+	cfg.setInt( "DMM", "data-format", protocolCombo->currentIndex() );
 	cfg.setInt( "DMM", "number-of-values", ui_numValues->value() );
 
 	cfg.setBool( "DMM", "rts", uirts->isChecked() );
