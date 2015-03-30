@@ -32,7 +32,7 @@
 
 #define LOG_OUTPUT
 
-DMM::DMM(QObject *parent, QString &name) :
+DMM::DMM(QObject *parent) :
   QObject( parent),
   m_handle( -1 ),
   m_speed( 600 ),
@@ -42,7 +42,6 @@ DMM::DMM(QObject *parent, QString &name) :
   m_consoleLogging( false ),
   m_externalSetup( false )
 {
-  m_name=name;
   m_readerThread = new ReaderThread( this );
 
   // mt: QThread emits a signal now. no more custom event
@@ -675,7 +674,7 @@ void DMM::readVC940Continuous( const QByteArray & data, int id, ReadEvent::DataF
   //printf( "d_val=%f val=%s unit=%s special=%s\n", d_val, val.latin1(), unit.latin1(), special.latin1() );
 
   Q_EMIT value( d_val, val, unit, special, true, id );
-  m_error = tr( "Connected" ) + " (" + m_name + " @ " + m_device + ")";
+  m_error = tr( "Connected %1" ).arg(m_device);
 }
 
 void DMM::readRS22812Continuous( const QByteArray & data, int id, ReadEvent::DataFormat /*df*/ )
@@ -792,7 +791,7 @@ void DMM::readRS22812Continuous( const QByteArray & data, int id, ReadEvent::Dat
 
   Q_EMIT value( d_val, val, unit, special, true, id );
 
-  m_error = tr( "Connected" ) + " (" + m_name + " @ " + m_device + ")";
+  m_error = tr( "Connected %1" ).arg(m_device);
 }
 
 const char *DMM::RS22812Digit( int byte )
@@ -855,7 +854,7 @@ void DMM::readASCII( const QByteArray & data, int id, ReadEvent::DataFormat df )
 
   Q_EMIT value( d_val, val, unit, special, true, id );
 
-  m_error = tr( "Connected" ) + " (" + m_name + " @ " + m_device + ")";
+ m_error = tr( "Connected %1" ).arg(m_device);
 }
 
 void DMM::readQM1537Continuous( const QByteArray & data, int id, ReadEvent::DataFormat /*df*/ )
@@ -991,7 +990,7 @@ void DMM::readQM1537Continuous( const QByteArray & data, int id, ReadEvent::Data
   }
 
   Q_EMIT value( d_val, val, unit, special, showBar, id );
-  m_error = tr( "Connected" ) + " (" + m_name + " @ " + m_device + ")";
+  m_error = tr( "Connected %1" ).arg(m_device);
 }
 
 void DMM::readM9803RContinuous( const QByteArray & data, int id, ReadEvent::DataFormat /*df*/ )
@@ -1241,7 +1240,7 @@ void DMM::readM9803RContinuous( const QByteArray & data, int id, ReadEvent::Data
   }
 
   Q_EMIT value( d_val, val, unit, special, showBar, id );
-  m_error = tr( "Connected" ) + " (" + m_name + " @ " + m_device + ")";
+  m_error = tr( "Connected %1" ).arg(m_device);
 }
 
 void DMM::readIsoTechContinuous(const QByteArray & data, int id, ReadEvent::DataFormat /*df*/)
@@ -1456,7 +1455,7 @@ void DMM::readIsoTechContinuous(const QByteArray & data, int id, ReadEvent::Data
  // printf ("DVAL: %f\n", d_val);
 
   Q_EMIT value( d_val, val, unit, special, true, id );
-  m_error = tr( "Connected" ) + " (" + m_name + " @ " + m_device + ")";
+  m_error = tr( "Connected %1" ).arg(m_device);
 }
 
 void DMM::readVC820Continuous( const QByteArray & data, int id, ReadEvent::DataFormat /*df*/ )
@@ -1584,7 +1583,7 @@ void DMM::readVC820Continuous( const QByteArray & data, int id, ReadEvent::DataF
 
   Q_EMIT value( d_val, val, unit, special, true, id );
 
-  m_error = tr( "Connected" ) + " (" + m_name + " @ " + m_device + ")";
+  m_error = tr( "Connected %1" ).arg(m_device);
 }
 
 const char *DMM::vc820Digit( int byte )

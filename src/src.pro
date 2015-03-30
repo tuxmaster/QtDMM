@@ -1,5 +1,5 @@
 QT       += core gui widgets printsupport
-CONFIG   += c++11
+CONFIG   += c++11 no_keywords
 
 TEMPLATE        = app
 

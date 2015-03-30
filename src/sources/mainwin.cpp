@@ -265,42 +265,19 @@ void MainWin::connectSLOT( bool on )
 
 void MainWin::versionSLOT()
 {
-  QString ver = "QtDMM ";
-  ver += VERSION_STRING;
-  QString msg = "<h1>";
-  msg += ver;
-  msg += "</h1><hr>"
-		 "<div align=right><i>A simple recorder for DMM's</i></div><p>"
-		 "<div align=justify>A simple display software for a variety of digital multimeter. Currently confirmed are:";
-
-  msg += "<table>";
-  msg += m_wid->deviceListText();
-  msg += "</table>";
-
-  msg +=
-		 "Other compatible models may work also.<p>"
-		 "QtDMM features min/max memory and a configurable "
-		 "recorder with import/export and printing function. Sampling may"
-		 " be started manually, at a given time or triggered by a measured threshold. "
-		 "Additionally an external program may be started when given thresholds are reached.</div>"
-		 "<div align=justify><b>QtDMM</b> uses the platform independent toolkit "
-		 "<b>Qt</b> version ";
-  msg += qVersion();
-  msg += " and is licensed under <b>GPL 3</b> (Versions prior to v0.9.0 where licensed under GPL 2)</div><br>"
-		 "&copy; 2001-2014 Matthias Toussaint &nbsp;-&nbsp;&nbsp;<font color=blue><u>qtdmm@mtoussaint.de</u></font>"
-		 "<p><br>The icons (except the DMM icon) have been taken from the KDE project.<p>";
-
-  QMessageBox version( tr("QtDMM: Welcome!" ),
-					   tr( msg ),
-					   QMessageBox::Information,
-					   QMessageBox::Yes | QMessageBox::Default,
-					   Qt::NoButton,
-					   Qt::NoButton );
-
-  version.adjustSize();
-  version.setButtonText( QMessageBox::Yes, tr("Ok") );
-  version.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
-  version.exec();
+  QMessageBox::about(this,tr("QtDMM: Welcome!" ),tr("<h1>QtDMM %1</h1><hr>"\
+													"<div align=right><i>A simple recorder for DMM's</i></div><p>"\
+													"<div align=justify>A simple display software for a variety of digital multimeter. Currently confirmed are:"\
+													"<table>%2</table>Other compatible models may work also.<p>"\
+													"QtDMM features min/max memory and a configurable "\
+													"recorder with import/export and printing function. Sampling may"\
+													" be started manually, at a given time or triggered by a measured threshold. "\
+													"Additionally an external program may be started when given thresholds are reached.</div>"\
+													 "<div align=justify><b>QtDMM</b> uses the platform independent toolkit "\
+													"<b>Qt</b> version %3 and is licensed under <b>GPL 3</b> (Versions prior to v0.9.0 where licensed under GPL 2)</div><br>"\
+													"&copy; 2001-2014 Matthias Toussaint &nbsp;-&nbsp;&nbsp;<font color=blue><u>qtdmm@mtoussaint.de</u></font>"\
+													"<p><br>The icons (except the DMM icon) have been taken from the KDE project.<p>")
+					 .arg(VERSION_STRING).arg(m_wid->deviceListText()).arg(qVersion()));
 }
 
 void MainWin::createToolBars()

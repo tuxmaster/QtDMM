@@ -28,9 +28,9 @@
 #include <QtPrintSupport>
 
 #include "ui_uimainwid.h"
+#include "printdlg.h"
 
 class DMM;
-class PrintDlg;
 class QProcess;
 class ConfigDlg;
 class DisplayWid;

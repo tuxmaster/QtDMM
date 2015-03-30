@@ -59,6 +59,15 @@ int main( int argc, char **argv )
   qInstallMessageHandler( myMessageOutput );
   QApplication app( argc, argv );
 
+  QTranslator QtTranslation;
+  QTranslator AppTranslation;
+
+  QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()),QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+  AppTranslation.load(QString("%1_%2").arg(app.applicationName()).arg(QLocale::system().name()),QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+
+  app.installTranslator(&QtTranslation);
+  app.installTranslator(&AppTranslation);
+
   MainWin mainWin;
 
   QCommandLineParser parser;

@@ -43,7 +43,7 @@ class DMM : public QObject
 		f_dtr=8
 	  };
 
-	  DMM(QObject *parent, QString &name);
+	  DMM(QObject *parent);
 	  void						setSpeed( int );
 	  void						setDevice( const QString & );
 	  bool						open();
@@ -70,7 +70,6 @@ class DMM : public QObject
 	  ReaderThread             *m_readerThread;
 	  tcflag_t                  m_c_cflag;
 	  ReaderThread::ReadStatus	m_oldStatus;
-	  QString                   m_name;
 	  struct termios            m_oldSettings;
 	  bool                      m_consoleLogging;
 	  bool                      m_externalSetup;

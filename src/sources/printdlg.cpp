@@ -29,6 +29,7 @@
 
 PrintDlg::PrintDlg( QWidget *parent ) : UIPrintDlg( parent,  true )
 {
+  setupUi(this);
   connect( configBut, SIGNAL( clicked() ), this, SLOT( configSLOT() ));
   connect( helpBut, SIGNAL( clicked() ),  this, SLOT( helpSLOT() ));
 }
@@ -49,7 +50,7 @@ void PrintDlg::createPrinterString()
 {
   QString txt = m_printer->printerName();
 
-  if (m_printer->outputToFile())
+  if (m_printer->outputFormat() == QPrinter::PdfFormat)
   {
 	txt = "File: ";
 	txt += m_printer->outputFileName();

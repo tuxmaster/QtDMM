@@ -154,7 +154,7 @@
 	      </widget>
 	    </item>
 	    <item>
-	      <widget class="QMultiLineEdit" name="printComment">
+	      <widget class="QTextEdit" name="printComment">
 		<property name="frameShape">
 		  <enum>WinPanel</enum>
 		</property>
@@ -163,9 +163,6 @@
 		</property>
 		<property name="lineWidth">
 		  <number>1</number>
-		</property>
-		<property name="wordWrap">
-		  <enum>WidgetWidth</enum>
 		</property>
 		<property name="whatsThis">
 		  <string>Here you may enter an comment which will be printed on top of the page &lt;i&gt;(Optional)&lt;/i&gt;</string>

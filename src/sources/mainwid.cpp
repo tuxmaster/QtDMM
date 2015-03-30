@@ -37,7 +37,8 @@ MainWid::MainWid( QWidget *parent ) :  UIMainWid( parent ),
   m_display( 0 ),
   m_tipDlg( 0 )
 {
-  setIcon( QPixmap(":/Symbols/icon.xpm") );
+  setupUi(this);
+  setWindowIcon(QPixmap(":/Symbols/icon.xpm") );
 
   m_dmm = new DMM( this );
   m_external = new QProcess( this );
@@ -275,7 +276,6 @@ void MainWid::configRecorderSLOT()
 void MainWid::applySLOT()
 {
   readConfig();
-
   ui_graph->setAlertUnsaved( m_configDlg->alertUnsavedData() );
   m_dmm->setName( m_configDlg->dmmName() );
 }
@@ -377,11 +377,11 @@ void MainWid::readConfig()
 						  m_configDlg->intLineMode(),
 						  m_configDlg->intPointMode() );
 
-  QColorGroup cg = colorGroup();
-  cg.setColor( QColorGroup::Background, m_configDlg->displayBgColor() );
-  cg.setColor( QColorGroup::Foreground, m_configDlg->displayTextColor() );
+  QPalette cg = palette();
+  cg.setColor( QPalette::Window, m_configDlg->displayBgColor() );
+  cg.setColor( QPalette::WindowText, m_configDlg->displayTextColor() );
 
-  m_display->setPalette( QPalette( cg, cg, cg ) );
+  m_display->setPalette(cg);
   m_display->setDisplayMode( m_configDlg->display(), m_configDlg->showMinMax(),
 							 m_configDlg->showBar(), m_configDlg->numValues() );
   m_dmm->setNumValues( m_configDlg->numValues() );
@@ -396,25 +396,19 @@ void MainWid::readConfig()
   if (m_configDlg->sampleMode() == DMMGraph::Time)
   {
 	QString txt;
-	txt.sprintf( "%s %s", tr( "Automatic start at" ).latin1(),
-		m_configDlg->startTime().toString().latin1() );
-
+	txt.sprintf( "%s %s", tr( "Automatic start at" ).toLatin1().constData(),m_configDlg->startTime().toString().toLatin1().constData() );
 	Q_EMIT info( txt );
   }
   else if (m_configDlg->sampleMode() == DMMGraph::Raising)
   {
 	QString txt;
-	txt.sprintf( "%s %g", tr( "Raising threshold" ).latin1(),
-		m_configDlg->raisingThreshold() );
-
-   Q_EMIT info( txt );
+	txt.sprintf( "%s %g", tr( "Raising threshold" ).toLatin1().constData(),m_configDlg->raisingThreshold());
+	Q_EMIT info( txt );
   }
   else if (m_configDlg->sampleMode() == DMMGraph::Falling)
   {
 	QString txt;
-	txt.sprintf( "%s %g", tr( "Falling threshold" ).latin1(),
-		m_configDlg->fallingThreshold() );
-
+	txt.sprintf( "%s %g", tr( "Falling threshold" ).toLatin1().constData(), m_configDlg->fallingThreshold() );
 	Q_EMIT info( txt );
   }
 
@@ -436,13 +430,13 @@ void MainWid::runningSLOT( bool on )
 
 void MainWid::startExternalSLOT()
 {
-  if (m_external->isRunning())
+  if (m_external->state() == QProcess::Running)
   {
 	QString msg;
 	msg.sprintf( tr("<font size=+2><b>Launch error</b></font><p>"
 					"Application %s is still running!<p>"
-					"Do you want to kill it now"),
-					m_configDlg->externalCommand().latin1() );
+					"Do you want to kill it now").toLatin1().constData(),
+					m_configDlg->externalCommand().toLatin1().constData() );
 
 	QMessageBox question( tr("QtDMM: Launch error" ),
 						  msg,
@@ -473,12 +467,13 @@ void MainWid::startExternalSLOT()
   m_external->setArguments( args );
 
   // mt: call with empty string
-  if (!m_external->launch(QString()))
+  m_external->start();
+  if (m_external->state() != QProcess::Starting)
   {
 	QString msg;
 	msg.sprintf( tr("<font size=+2><b>Launch error</b></font><p>"
-					"Couldn't launch %s"),
-					m_configDlg->externalCommand().latin1() );
+					"Couldn't launch %s").toLatin1().constData(),
+					m_configDlg->externalCommand().toLatin1().constData() );
 
 	QMessageBox question( tr("QtDMM: Launch error" ),
 						  msg,
@@ -495,7 +490,7 @@ void MainWid::startExternalSLOT()
   else
   {
 	QString msg;
-	msg.sprintf( tr("Launched %s"), m_configDlg->externalCommand().latin1() );
+	msg.sprintf( tr("Launched %s").toLatin1().constData(), m_configDlg->externalCommand().toLatin1().constData() );
 	Q_EMIT error( msg );
   }
 }
@@ -503,9 +498,7 @@ void MainWid::startExternalSLOT()
 void MainWid::exitedSLOT()
 {
   QString msg;
-  msg.sprintf( "%s terminated with exit code %d.",
-	  m_configDlg->externalCommand().latin1(), m_external->exitStatus() );
-
+  msg.sprintf( "%s terminated with exit code %d.", m_configDlg->externalCommand().toLatin1().constData(), m_external->exitStatus() );
   Q_EMIT error( msg );
 }
 
