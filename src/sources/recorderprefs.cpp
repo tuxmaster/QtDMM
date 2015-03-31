@@ -32,7 +32,7 @@
 #define HOUR_SECS     60*60
 #define DAY_SECS      60*60*24
 
-RecorderPrefs::RecorderPrefs( QWidget *parent) : PrefWidegt( parent)
+RecorderPrefs::RecorderPrefs( QWidget *parent) : PrefWidget( parent)
 {
   setupUi(this);
   m_label = tr( "Recorder settings" );
@@ -50,9 +50,9 @@ RecorderPrefs::RecorderPrefs( QWidget *parent) : PrefWidegt( parent)
 void RecorderPrefs::defaultsSLOT()
 {
   sampleEvery->setValue( m_cfg->getInt( "Sample", "rate", 1 ));
-  ui_sampleUnit->setCurrentItem( m_cfg->getInt( "Sample", "rate-unit", 1 ));
+  ui_sampleUnit->setCurrentIndex( m_cfg->getInt( "Sample", "rate-unit", 1 ));
   sampleTime->setValue( m_cfg->getInt( "Sample", "time", 500 ));
-  timeUnit->setCurrentItem( m_cfg->getInt( "Sample", "time-unit", 0 ));
+  timeUnit->setCurrentIndex( m_cfg->getInt( "Sample", "time-unit", 0 ));
 
   DMMGraph::SampleMode mode = (DMMGraph::SampleMode)m_cfg->getInt( "Start", "mode", 0 );
   if (mode == DMMGraph::Manual)
@@ -80,9 +80,9 @@ void RecorderPrefs::defaultsSLOT()
 void RecorderPrefs::factoryDefaultsSLOT()
 {
   sampleEvery->setValue( 1 );
-  ui_sampleUnit->setCurrentItem( 1 );
+  ui_sampleUnit->setCurrentIndex( 1 );
   sampleTime->setValue( 500 );
-  timeUnit->setCurrentItem( 0 );
+  timeUnit->setCurrentIndex( 0 );
 
   manualBut->setChecked( true );
 
@@ -96,9 +96,9 @@ void RecorderPrefs::factoryDefaultsSLOT()
 void RecorderPrefs::applySLOT()
 {
   m_cfg->setInt( "Sample", "rate", sampleEvery->value() );
-  m_cfg->setInt( "Sample", "rate-unit", ui_sampleUnit->currentItem() );
+  m_cfg->setInt( "Sample", "rate-unit", ui_sampleUnit->currentIndex() );
   m_cfg->setInt( "Sample", "time", sampleTime->value() );
-  m_cfg->setInt( "Sample", "time-unit", timeUnit->currentItem() );
+  m_cfg->setInt( "Sample", "time-unit", timeUnit->currentIndex() );
 
   m_cfg->setInt( "Start", "mode", sampleMode() );
   m_cfg->setInt( "Start", "hour", hour->value() );
@@ -125,7 +125,7 @@ int RecorderPrefs::sampleStep() const
 {
   int thenthOfSec = sampleEvery->text().toInt();
 
-  switch (ui_sampleUnit->currentItem())
+  switch (ui_sampleUnit->currentIndex())
   {
 	  case 1:
 		thenthOfSec *= 10;
@@ -147,7 +147,7 @@ int RecorderPrefs::sampleLength() const
 {
   int thenthOfSec = sampleTime->text().toInt();
 
-  switch (timeUnit->currentItem())
+  switch (timeUnit->currentIndex())
   {
 	  case 0:
 		thenthOfSec *= 10;

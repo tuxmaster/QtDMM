@@ -48,6 +48,7 @@ class DMM : public QObject
 	  void						setDevice( const QString & );
 	  bool						open();
 	  void						close();
+	  void						setName( const QString &name) {m_name=name;}
 	  QString					errorString() const { return m_error; }
 	  bool						isOpen() const { return m_handle >= 0; }
 	  void						setFormat( ReadEvent::DataFormat );
@@ -70,6 +71,7 @@ class DMM : public QObject
 	  ReaderThread             *m_readerThread;
 	  tcflag_t                  m_c_cflag;
 	  ReaderThread::ReadStatus	m_oldStatus;
+	  QString                   m_name;
 	  struct termios            m_oldSettings;
 	  bool                      m_consoleLogging;
 	  bool                      m_externalSetup;

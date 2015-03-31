@@ -67,9 +67,9 @@ void ScalePrefs::defaultsSLOT()
   ui_scaleMax->setText( m_cfg->getString( "Scale", "maximum", "3.999" ));
 
   ui_winSize->setValue( m_cfg->getInt( "Window", "size", 600 ));
-  sizeUnit->setCurrentItem( m_cfg->getInt( "Window", "size-unit", 0 ));
+  sizeUnit->setCurrentIndex( m_cfg->getInt( "Window", "size-unit", 0 ));
   winLength->setValue( m_cfg->getInt( "Window", "length", 3600 ));
-  lengthUnit->setCurrentItem( m_cfg->getInt( "Window", "length-unit", 0 ));
+  lengthUnit->setCurrentIndex(m_cfg->getInt( "Window", "length-unit", 0 ));
 }
 
 void ScalePrefs::factoryDefaultsSLOT()
@@ -81,9 +81,9 @@ void ScalePrefs::factoryDefaultsSLOT()
   ui_scaleMax->setText( "3.999" );
 
   ui_winSize->setValue( 600 );
-  sizeUnit->setCurrentItem( 0 );
+  sizeUnit->setCurrentIndex( 0 );
   winLength->setValue( 3600 );
-  lengthUnit->setCurrentItem( 0 );
+  lengthUnit->setCurrentIndex( 0 );
 }
 
 void ScalePrefs::applySLOT()
@@ -93,9 +93,9 @@ void ScalePrefs::applySLOT()
   m_cfg->setString( "Scale", "minimum", ui_scaleMin->text() );
   m_cfg->setString( "Scale", "maximum", ui_scaleMax->text() );
   m_cfg->setInt( "Window", "size", ui_winSize->value() );
-  m_cfg->setInt( "Window", "size-unit", sizeUnit->currentItem() );
+  m_cfg->setInt( "Window", "size-unit", sizeUnit->currentIndex() );
   m_cfg->setInt( "Window", "length", winLength->value() );
-  m_cfg->setInt( "Window", "length-unit", lengthUnit->currentItem() );
+  m_cfg->setInt( "Window", "length-unit", lengthUnit->currentIndex() );
 }
 
 bool ScalePrefs::includeZero() const
@@ -127,7 +127,7 @@ void ScalePrefs::zoomInSLOT( double fac )
 {
   double size = (double)ui_winSize->value() / fac;
 
-  switch (sizeUnit->currentItem())
+  switch (sizeUnit->currentIndex())
   {
 	case 0:
 	  if (size < 10.0)
@@ -137,21 +137,21 @@ void ScalePrefs::zoomInSLOT( double fac )
 	  if (size < 1.0)
 	  {
 		size *= 60.0;
-		sizeUnit->setCurrentItem( 0 );
+		sizeUnit->setCurrentIndex( 0 );
 	  }
 	  break;
 	case 2:
 	  if (size < 1.0)
 	  {
 		size *= 60.0;
-		sizeUnit->setCurrentItem( 1 );
+		sizeUnit->setCurrentIndex( 1 );
 	  }
 	  break;
 	case 3:
 	  if (size < 1.0)
 	  {
 		size *= 24.0;
-		sizeUnit->setCurrentItem( 2 );
+		sizeUnit->setCurrentIndex( 2 );
 	  }
 	  break;
   }
@@ -185,27 +185,27 @@ void ScalePrefs::zoomOutSLOT( double fac )
 
   if (winSec <= totalSec)
   {
-	switch (sizeUnit->currentItem())
+	switch (sizeUnit->currentIndex())
 	{
 	  case 0:
 		if (size > 600)
 		{
 		  size /= 60.0;
-		  sizeUnit->setCurrentItem( 1 );
+		  sizeUnit->setCurrentIndex( 1 );
 		}
 		break;
 	  case 1:
 		if (size > 300)
 		{
 		  size /= 60.0;
-		  sizeUnit->setCurrentItem( 2 );
+		  sizeUnit->setCurrentIndex( 2 );
 		}
 		break;
 	  case 2:
 		if (size > 48)
 		{
 		  size /= 24.0;
-		  sizeUnit->setCurrentItem( 3 );
+		  sizeUnit->setCurrentIndex( 3 );
 		}
 		break;
 	}
@@ -215,7 +215,7 @@ void ScalePrefs::zoomOutSLOT( double fac )
   else  // clamp to total length
   {
 	ui_winSize->setValue( winLength->value() );
-	sizeUnit->setCurrentItem( lengthUnit->currentItem() );
+	sizeUnit->setCurrentIndex( lengthUnit->currentIndex() );
   }
 
   /*
@@ -239,7 +239,7 @@ int ScalePrefs::windowSeconds() const
 {
   int sec = ui_winSize->text().toInt();
 
-  switch (sizeUnit->currentItem())
+  switch (sizeUnit->currentIndex())
   {
 	  case 1:
 		sec *= MINUTE_SECS;
@@ -258,7 +258,7 @@ int ScalePrefs::totalSeconds() const
 {
   int sec = winLength->text().toInt();
 
-  switch (lengthUnit->currentItem())
+  switch (lengthUnit->currentIndex())
   {
 	case 1:
 	sec *= MINUTE_SECS;

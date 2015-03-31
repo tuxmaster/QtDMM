@@ -28,7 +28,7 @@
 
 
 class QPrinter;
-class PrintDlg : public QDialog,private Ui::UIPrintDlg
+class PrintDlg : public QDialog, private Ui::UIPrintDlg
 {
   Q_OBJECT
 	public:

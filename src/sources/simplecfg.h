@@ -24,6 +24,7 @@
 #define SIMPLECFG_HH
 
 #include <QtCore>
+#include <QRgb>
 
 // I _REALLY_ like writing documentation. Here documentation
 // efficiently hides the code ...
