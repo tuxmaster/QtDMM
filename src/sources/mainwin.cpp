@@ -109,82 +109,50 @@ void MainWin::setConsoleLogging( bool on )
 void MainWin::createActions()
 {
   // mt: changed all QAction into Q3Action
-  m_connectAction = new QAction ( tr("Connect"),
-								  QIcon(QPixmap(":/Symbols/connect_on.xpm")),
-								  tr("Connect"),
-								  Qt::CTRL+Qt::Key_C,
-								  this, 0, true );
+
+  m_connectAction = new QAction(QPixmap(":/Symbols/connect_on.xpm"),tr("Connect"),this);
+  m_connectAction->setShortcut( Qt::CTRL+Qt::Key_C);
   m_connectAction->setWhatsThis( tr("<b>Connect to the Multimeter</b><p>This will establish"
 	  " the serial connection to the dmm. If not connected the serial port is free"
 	  " and can be used by other software." ));
-  m_resetAction   = new QAction ( tr("Reset"),
-								  QIcon(QPixmap(":/Symbols/reset.xpm")),
-								  tr("Reset"),
-								  Qt::CTRL+Qt::Key_R,
-								  this );
+  m_resetAction = new QAction(QPixmap(":/Symbols/reset.xpm"),tr("Reset"),this);
+  m_resetAction->setShortcut(Qt::CTRL+Qt::Key_R);
   m_resetAction->setWhatsThis( tr("<b>Reset min/max values</b><p>The min/max values in the"
 	  " display will be reset. You can activate this option at any time." ));
-  m_startAction   = new QAction ( tr("Start"),
-								  QIcon(QPixmap(":/Symbols/start.xpm")),
-								  tr("Start"),
-								  Qt::CTRL+Qt::Key_S,
-								  this );
+  m_startAction= new QAction(QPixmap(":/Symbols/start.xpm"), tr("Start"),this);
+  m_startAction->setShortcut(Qt::CTRL+Qt::Key_S);
   m_startAction->setWhatsThis( tr("<b>Start the recorder</b><p>If you are in manual mode"
 	  " this will start the recorder. Press F2 to set the recorder options" ));
-  m_stopAction    = new QAction ( tr("Stop"),
-								  QIcon(QPixmap(":/Symbols/stop.xpm")),
-								  tr("Stop"),
-								  Qt::CTRL+Qt::Key_X,
-								  this );
+  m_stopAction= new QAction(QPixmap(":/Symbols/stop.xpm"),tr("Stop"),this);
+  m_stopAction->setShortcut(Qt::CTRL+Qt::Key_X);
   m_stopAction->setWhatsThis( tr("<b>Stop the recorder</b><p>The recorder will be stopped."
 	  " This is independent from the start mode of the recorder" ));
-  m_clearAction   = new QAction ( tr("Clear"),
-								  QIcon(QPixmap(":/Symbols/clear.xpm")),
-								  tr("Clear"),
-								  Qt::Key_Delete,
-								  this );
+  m_clearAction= new QAction(QPixmap(":/Symbols/clear.xpm"),tr("Clear"),this);
+  m_clearAction->setShortcut(Qt::Key_Delete);
   m_clearAction->setWhatsThis( tr("<b>Clear the recorder graph</b><p>If the recorder is already"
 	  " started it will clear the graph and continue recording." ));
-  m_printAction   = new QAction ( tr("Print"),
-								  QIcon(QPixmap(":/Symbols/print.xpm")),
-								  tr("Print ..."),
-								  Qt::CTRL+Qt::Key_P,
-								  this );
+  m_printAction= new QAction(QPixmap(":/Symbols/print.xpm"),tr("Print"),this);
+  m_printAction->setShortcut(Qt::CTRL+Qt::Key_P);
   m_printAction->setWhatsThis( tr("<b>Print recorder graph</b><p>A dialog will open where you can"
 	  " define a title and a comment for your printout. The printer itself can also be configured here."
 	  " To be able to print you need at least one working postscript printer configured in your"
 	  " system. Printing into a file is also supported." ));
-  m_exportAction   = new QAction ( tr("Export"),
-								  QIcon(QPixmap(":/Symbols/export.xpm")),
-								  tr("Export ..."),
-								  Qt::CTRL+Qt::Key_E,
-								  this );
+  m_exportAction= new QAction(QPixmap(":/Symbols/export.xpm"),tr("Export"),this);
+  m_exportAction->setShortcut(Qt::CTRL+Qt::Key_E);
   m_exportAction->setWhatsThis( tr("<b>Export recorder graph</b><p>Here you can export the recorded"
 	  " data as tab separated list. Each line contains the following values (separated by a tab "
 	  "character): date (dd.mm.yyyy) time (hh:mm:ss) value (float) unit." ));
-  m_importAction   = new QAction ( tr("Import"),
-								  QIcon(QPixmap(":/Symbols/import.xpm")),
-								  tr("Import ..."),
-								  Qt::CTRL+Qt::Key_I,
-								  this );
+  m_importAction= new QAction(QPixmap(":/Symbols/import.xpm"),tr("Import"),this);
+  m_importAction->setShortcut(Qt::CTRL+Qt::Key_I);
   m_importAction->setWhatsThis( tr("<b>Import data into recorder</b><p>Here you can import previously"
 	  " exported data files. QtDMM tries to do an educated guess if the file format is correct and"
 	  " rejects import of files which to not match." ));
-  m_configAction   = new QAction ( tr("Configure"),
-								  QIcon(QPixmap(":/Symbols/config.xpm")),
-								  tr("Configure ..."),
-								  Qt::Key_F2,
-								  this );
-  m_configDmmAction   = new QAction ( tr("Configure"),
-								  QIcon(QPixmap(":/Symbols/config.xpm")),
-								  tr("Configure ..."),
-								  Qt::SHIFT+Qt::Key_F2,
-								  this );
-  m_configRecorderAction   = new QAction ( tr("Configure"),
-								  QIcon(QPixmap(":/Symbols/config.xpm")),
-								  tr("Configure ..."),
-								  Qt::CTRL+Qt::Key_F2,
-								  this );
+  m_configAction= new QAction(QPixmap(":/Symbols/config.xpm"),tr("Configure"),this);
+  m_configAction->setShortcut(Qt::Key_F2);
+  m_configDmmAction= new QAction(QPixmap(":/Symbols/config.xpm"),tr("Configure"),this);
+  m_configDmmAction->setShortcut(Qt::SHIFT+Qt::Key_F2);
+  m_configRecorderAction= new QAction(QPixmap(":/Symbols/config.xpm"),tr("Configure"),this);
+  m_configRecorderAction->setShortcut(Qt::CTRL+Qt::Key_F2);
   m_configAction->setWhatsThis( tr("<b>Configure QtDMM</b><p>This will open QtDMM's configuration"
 	  " dialog. Here you can configure it's visual appearance and all options regarding the "
 	  "multimeter hardware and the recorder." ));
@@ -194,26 +162,19 @@ void MainWin::createActions()
   m_configRecorderAction->setWhatsThis( tr("<b>Configure QtDMM</b><p>This will open QtDMM's configuration"
 	  " dialog. Here you can configure it's visual appearance and all options regarding the "
 	  "multimeter hardware and the recorder." ));
-  m_quitAction     = new QAction ( tr("Quit"),
-								  QIcon(QPixmap(":/Symbols/quit.xpm")),
-								  tr("Quit"),
-								  Qt::CTRL+Qt::Key_Q,
-								  this );
+  m_quitAction= new QAction(QPixmap(":/Symbols/quit.xpm"), tr("Quit"),this);
+  m_quitAction->setShortcut(Qt::CTRL+Qt::Key_Q);
   m_quitAction->setWhatsThis( tr("<b>Quit QtDMM</b><p>If the recorder contains unsaved data QtDMM"
 	  " will give you the option to savve your data first." ));
-  m_helpAction     = new QAction ( tr("Help"),
-								  QIcon(QPixmap(":/Symbols/help.xpm")),
-								  tr("Direct Help"),
-								  Qt::SHIFT+Qt::Key_F1,
-								  this );
+  m_helpAction= new QAction(QPixmap(":/Symbols/help.xpm"),tr("Help"),this);
+  m_helpAction->setShortcut(Qt::SHIFT+Qt::Key_F1);
   m_helpAction->setWhatsThis( tr("<b>Direct Help</b><p>Enter the direct help mode. You have done this"
 	  " already when reading this text :)" ));
   m_showTipsAction  = new QAction ( this );
   m_showTipsAction->setText( tr("Show tip of the day") );
-  m_showTipsAction->setMenuText( tr("Tip of the day...") );
+  m_showTipsAction->setWhatsThis( tr("Tip of the day...") );
   m_versionAction  = new QAction ( this );
   m_versionAction->setText( tr("On version") );
-  m_versionAction->setMenuText( tr("On version...") );
   m_versionAction->setWhatsThis( tr("<b>Copyright information</b><p>Show copyright information and some"
 	  " blurb about QtDMM." ));
 
