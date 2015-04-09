@@ -31,7 +31,7 @@ SimpleCfgGroup::SimpleCfgGroup( const QString & name ) :  groupName( name )
 void SimpleCfgGroup::remove( const QString & key )
 {
   if (map.contains(key))
-	map.remove( key );
+    map.remove( key );
 }
 
 bool SimpleCfgGroup::contains( const QString & key )
@@ -41,15 +41,15 @@ bool SimpleCfgGroup::contains( const QString & key )
 
 void SimpleCfgGroup::setString( const QString & key, const QString & val )
 {
-  map.replace( key, val );
+  map.insert( key, val );
 }
 
 QString SimpleCfgGroup::getString( const QString & key, const QString & def )
 {
   if (map.contains( key ))
-	return map[key];
+    return map[key];
   else
-	setString( key, def );
+    setString( key, def );
   return def;
 }
 
@@ -63,9 +63,9 @@ void SimpleCfgGroup::setInt( const QString & key, int val )
 int SimpleCfgGroup::getInt( const QString & key, int def )
 {
   if (map.contains( key ))
-	return map[key].toInt();
+    return map[key].toInt();
   else
-	setInt( key, def );
+    setInt( key, def );
   return def;
 }
 
@@ -79,9 +79,9 @@ void SimpleCfgGroup::setDouble( const QString & key, double val )
 double SimpleCfgGroup::getDouble( const QString & key, double def )
 {
   if (map.contains( key ))
-	return map[key].toDouble();
+    return map[key].toDouble();
   else
-	setDouble( key, def );
+    setDouble( key, def );
   return def;
 }
 
@@ -96,9 +96,9 @@ void SimpleCfgGroup::setRGB( const QString & key, QRgb val )
 QRgb SimpleCfgGroup::getRGB( const QString & key, QRgb def )
 {
   if (map.contains( key ))
-	return map[key].toULong();
+    return map[key].toULong();
   else
-	setRGB( key, def );
+    setRGB( key, def );
   return def;
 }
 
@@ -111,14 +111,14 @@ bool SimpleCfgGroup::getBool( const QString & key, bool def )
 {
   if (map.contains( key ))
   {
-	QString val = map[key].lower();
+    QString val = map[key].toLower();
 
-	if (val == "true" || val == "1" || val == "yes" || val == "on")
-		return true;
-	return false;
+    if (val == "true" || val == "1" || val == "yes" || val == "on")
+        return true;
+    return false;
   }
   else
-	setBool( key, def );
+    setBool( key, def );
   return def;
 }
 
@@ -134,15 +134,15 @@ SimpleCfg::~SimpleCfg()
 void SimpleCfg::remove( const QString & group, const QString & key )
 {
   if (map.contains(group))
-	map[group]->remove( key );
+    map[group]->remove( key );
 }
 
 void SimpleCfg::remove( const QString & group )
 {
   if (map.contains(group))
   {
-	delete map[group];
-	map.remove( group );
+    delete map[group];
+    map.remove( group );
   }
 }
 
@@ -154,49 +154,49 @@ bool SimpleCfg::load()
 
   if (file.open( QIODevice::ReadOnly ))
   {
-	clear();
-	char *buf = new char [1000];
-	while (file.readLine( buf, 999 ) != -1)
-	{
-	  QString line = QString( buf ).stripWhiteSpace();
-	  line = line.simplifyWhiteSpace();
+    clear();
+    char *buf = new char [1000];
+    while (file.readLine( buf, 999 ) != -1)
+    {
+      QString line = QString( buf ).trimmed();
+      line = line.simplified();
 
-	  // Check if comment (good old assembler line comments:)
-	  //
-	  if (line.left(1) != "#" && line.left(1) != ";")
-	  {
-		// Check for group
-		//
-		if (line.left(1) == "[")
-		{
-		  group = line.mid( 1, line.length()-2 );
-		  add( group );
-		}
-		else
-		{
-		  // Search '='
-		  //
-		  int pos;
+      // Check if comment (good old assembler line comments:)
+      //
+      if (line.left(1) != "#" && line.left(1) != ";")
+      {
+        // Check for group
+        //
+        if (line.left(1) == "[")
+        {
+          group = line.mid( 1, line.length()-2 );
+          add( group );
+        }
+        else
+        {
+          // Search '='
+          //
+          int pos;
 
-		  if ((pos = line.find( '=' )) != -1)
-		  {
-			QString key = line.left( pos-1 );
-			QString val;
+          if ((pos = line.indexOf('=' )) != -1)
+          {
+            QString key = line.left( pos-1 );
+            QString val;
 
-			if ((int)line.length()-pos-2 > 0)
-			  val = line.right( line.length()-pos-2 );
-			else
-			  val = "";
+            if ((int)line.length()-pos-2 > 0)
+              val = line.right( line.length()-pos-2 );
+            else
+              val = "";
 
-			setString( group, key, val );
-		  }
-		}
-	  }
-	}
-	file.close();
+            setString( group, key, val );
+          }
+        }
+      }
+    }
+    file.close();
   }
   else
-	return false;
+    return false;
   return true;
 }
 
@@ -206,34 +206,34 @@ bool SimpleCfg::save()
 
   if (file.open( QIODevice::WriteOnly ))
   {
-	QTextStream s(&file);
+    QTextStream s(&file);
 
-	s << m_comment;
+    s << m_comment;
 
-	QMap<QString,SimpleCfgGroup *>::Iterator it;
+    QMap<QString,SimpleCfgGroup *>::Iterator it;
 
-	for (it=map.begin(); it != map.end(); ++it)
-	{
-	  s << "[";
-	  s << it.data()->name();
-	  s << "]\n";
+    for (it=map.begin(); it != map.end(); ++it)
+    {
+      s << "[";
+      s << it.value()->name();
+      s << "]\n";
 
-	  QMap<QString,QString>::Iterator itg;
+      QMap<QString,QString>::Iterator itg;
 
-	  for (itg=it.data()->begin(); itg != it.data()->end(); ++itg)
-	  {
-		s << itg.key();
-		s <<  " = ";
-		s << itg.data();
-		s << "\n";
-	  }
+      for (itg=it.value()->begin(); itg != it.value()->end(); ++itg)
+      {
+        s << itg.key();
+        s <<  " = ";
+        s << itg.value();
+        s << "\n";
+      }
 
-	  s << "\n";
-	}
-	file.close();
+      s << "\n";
+    }
+    file.close();
   }
   else
-	return false;
+    return false;
   return true;
 }
 
@@ -245,14 +245,14 @@ bool SimpleCfg::contains( const QString & group )
 bool SimpleCfg::contains( const QString & group, const QString & key )
 {
   if (map.contains( group ))
-	return map[group]->contains( key );
+    return map[group]->contains( key );
   return false;
 }
 
 void SimpleCfg::add( const QString & group )
 {
   if (map.contains( group ))
-	  return;
+      return;
   SimpleCfgGroup *g = new SimpleCfgGroup( group );
   map.insert( group, g );
 }
@@ -260,12 +260,12 @@ void SimpleCfg::add( const QString & group )
 void SimpleCfg::setString( const QString & group, const QString & key, const QString & val )
 {
   if (map.contains( group ))
-	map[group]->setString( key, val );
+    map[group]->setString( key, val );
   else
   {
-	SimpleCfgGroup *g = new SimpleCfgGroup( group );
-	g->setString( key, val );
-	map.insert( group, g );
+    SimpleCfgGroup *g = new SimpleCfgGroup( group );
+    g->setString( key, val );
+    map.insert( group, g );
   }
 }
 
@@ -273,14 +273,14 @@ QString SimpleCfg::getString( const QString & group, const QString & key, const 
 {
   if (map.contains( group ))
   {
-	SimpleCfgGroup *g = map[group];
-	return g->getString( key, def );
+    SimpleCfgGroup *g = map[group];
+    return g->getString( key, def );
   }
   else
   {
-	SimpleCfgGroup *g = new SimpleCfgGroup( group );
-	g->setString( key, def );
-	map.insert( group, g );
+    SimpleCfgGroup *g = new SimpleCfgGroup( group );
+    g->setString( key, def );
+    map.insert( group, g );
   }
   return def;
 }
@@ -296,14 +296,14 @@ int SimpleCfg::getInt( const QString & group, const QString & key, int def )
 {
   if (map.contains( group ))
   {
-	SimpleCfgGroup *g = map[group];
-	return g->getInt( key, def );
+    SimpleCfgGroup *g = map[group];
+    return g->getInt( key, def );
   }
   else
   {
-	SimpleCfgGroup *g = new SimpleCfgGroup( group );
-	g->setInt( key, def );
-	map.insert( group, g );
+    SimpleCfgGroup *g = new SimpleCfgGroup( group );
+    g->setInt( key, def );
+    map.insert( group, g );
   }
   return def;
 }
@@ -319,14 +319,14 @@ double SimpleCfg::getDouble( const QString & group, const QString & key, double 
 {
   if (map.contains( group ))
   {
-	SimpleCfgGroup *g = map[group];
-	return g->getDouble( key, def );
+    SimpleCfgGroup *g = map[group];
+    return g->getDouble( key, def );
   }
   else
   {
-	SimpleCfgGroup *g = new SimpleCfgGroup( group );
-	g->setDouble( key, def );
-	map.insert( group, g );
+    SimpleCfgGroup *g = new SimpleCfgGroup( group );
+    g->setDouble( key, def );
+    map.insert( group, g );
   }
   return def;
 }
@@ -342,14 +342,14 @@ QRgb SimpleCfg::getRGB( const QString & group, const QString & key, QRgb def )
 {
   if (map.contains( group ))
   {
-	SimpleCfgGroup *g = map[group];
-	return g->getRGB( key, def );
+    SimpleCfgGroup *g = map[group];
+    return g->getRGB( key, def );
   }
   else
   {
-	SimpleCfgGroup *g = new SimpleCfgGroup( group );
-	g->setRGB( key, def );
-	map.insert( group, g );
+    SimpleCfgGroup *g = new SimpleCfgGroup( group );
+    g->setRGB( key, def );
+    map.insert( group, g );
   }
   return def;
 }
@@ -363,14 +363,14 @@ bool SimpleCfg::getBool( const QString & group, const QString & key, bool def )
 {
   if (map.contains( group ))
   {
-	SimpleCfgGroup *g = map[group];
-	return g->getBool( key, def );
+    SimpleCfgGroup *g = map[group];
+    return g->getBool( key, def );
   }
   else
   {
-	SimpleCfgGroup *g = new SimpleCfgGroup( group );
-	g->setBool( key, def );
-	map.insert( group, g );
+    SimpleCfgGroup *g = new SimpleCfgGroup( group );
+    g->setBool( key, def );
+    map.insert( group, g );
   }
   return def;
 }
@@ -379,7 +379,7 @@ void SimpleCfg::clear()
 {
   QMap<QString,SimpleCfgGroup *>::Iterator it;
   for (it=map.begin(); it != map.end(); ++it)
-	delete it.data();
+    delete it.value();
   map.clear();
 }
 
@@ -389,19 +389,19 @@ void SimpleCfg::removeEmpty()
   QStringList list;
   for (git=map.begin(); git != map.end(); ++git)
   {
-	QMap<QString,QString>::Iterator kit;
-	list.clear();
-	for (kit=git.data()->begin(); kit != git.data()->end(); ++kit)
-	{
-	  if (kit.data().isEmpty())
-	  {
-		// value is empty -> shedule for removal
-		list.append( kit.key() );
-	  }
-	}
-	// Now remove empty keys
-	for (QStringList::Iterator rit=list.begin(); rit != list.end(); ++rit )
-		git.data()->remove( *rit );
+    QMap<QString,QString>::Iterator kit;
+    list.clear();
+    for (kit=git.value()->begin(); kit != git.value()->end(); ++kit)
+    {
+      if (kit.value().isEmpty())
+      {
+        // value is empty -> shedule for removal
+        list.append( kit.key() );
+      }
+    }
+    // Now remove empty keys
+    for (QStringList::Iterator rit=list.begin(); rit != list.end(); ++rit )
+        git.value()->remove( *rit );
   }
 }
 

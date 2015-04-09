@@ -221,6 +221,7 @@ class SimpleCfg
 public:
   /// Construct empty configuration with filename
   SimpleCfg( const QString & );
+  ~SimpleCfg();
   /** Set header comment for configuration file
 
 	  \param comment This string will be printed at the beginning of the
