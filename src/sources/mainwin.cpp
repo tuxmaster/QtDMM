@@ -244,29 +244,29 @@ void MainWin::versionSLOT()
 void MainWin::createToolBars()
 {
   m_dmmTB = new QToolBar(tr("DMM"), this );
-  m_connectAction->addTo( m_dmmTB );
-  m_resetAction->addTo( m_dmmTB );
+  m_dmmTB->addAction(m_connectAction);
+  m_dmmTB->addAction(m_resetAction);
   addToolBar( m_dmmTB);
 
   m_graphTB = new QToolBar( tr("Recorder"), this );
-  m_startAction->addTo( m_graphTB );
-  m_stopAction->addTo( m_graphTB );
+  m_graphTB->addAction(m_startAction);
+  m_graphTB->addAction(m_stopAction);
   m_graphTB->addSeparator();
-  m_clearAction->addTo( m_graphTB );
+  m_graphTB->addAction(m_clearAction);
   addToolBar( m_graphTB);
 
   m_fileTB = new QToolBar( tr("File"), this );
-  m_printAction->addTo( m_fileTB );
-  m_exportAction->addTo( m_fileTB );
-  m_importAction->addTo( m_fileTB );
+  m_fileTB->addAction(m_printAction);
+  m_fileTB->addAction(m_exportAction);
+  m_fileTB->addAction(m_importAction);
   m_fileTB->addSeparator();
-  m_configAction->addTo( m_fileTB );
+  m_fileTB->addAction(m_configAction);
   m_fileTB->addSeparator();
-  m_quitAction->addTo( m_fileTB );
+  m_fileTB->addAction(m_quitAction);
   addToolBar( m_fileTB );
 
   m_helpTB = new QToolBar(tr("Help"), this );
-  m_helpAction->addTo( m_helpTB );
+  m_helpTB->addAction(m_helpAction);
   addToolBar( m_helpTB );
 
   m_displayTB = new QToolBar(tr("Display"), this );
@@ -284,43 +284,39 @@ void MainWin::createMenu()
 {
   QMenuBar *menu = menuBar();
 
-  QMenu *file = new QMenu( menu );
-  m_exportAction->addTo( file );
-  m_importAction->addTo( file );
-  file->insertSeparator();
-  m_printAction->addTo( file );
-  file->insertSeparator();
-  m_configAction->addTo( file );
-  file->insertSeparator();
-  m_quitAction->addTo( file );
+  QMenu *file = new QMenu(tr("File"), menu );
+  file->addAction(m_exportAction);
+  file->addAction(m_importAction);
+  file->addSeparator();
+  file->addAction(m_printAction);
+  file->addSeparator();
+  file->addAction(m_configAction);
+  file->addSeparator();
+  file->addAction(m_quitAction);
+  menu->addMenu(file );
 
-  menu->insertItem( tr("File"), file );
+  QMenu *dmm = new QMenu(tr("DMM"), menu );
+  dmm->addAction(m_connectAction);
+  dmm->addAction(m_resetAction);
+  dmm->addSeparator();
+  dmm->addAction(m_configDmmAction);
+  menu->addMenu(dmm);
 
-  QMenu *dmm = new QMenu( menu );
-  m_connectAction->addTo( dmm );
-  m_resetAction->addTo( dmm );
-  dmm->insertSeparator();
-  m_configDmmAction->addTo( dmm );
+  QMenu *recorder = new QMenu(tr("Recorder"), menu );
+  recorder->addAction(m_startAction);
+  recorder->addAction(m_stopAction);
+  recorder->addSeparator();
+  recorder->addAction(m_clearAction);
+  recorder->addSeparator();
+  recorder->addAction(m_configRecorderAction);
+  menu->addMenu(  recorder );
 
-  menu->insertItem( tr("DMM"), dmm );
-
-  QMenu *recorder = new QMenu( menu );
-  m_startAction->addTo( recorder );
-  m_stopAction->addTo( recorder );
-  recorder->insertSeparator();
-  m_clearAction->addTo( recorder );
-  recorder->insertSeparator();
-  m_configRecorderAction->addTo( recorder );
-
-  menu->insertItem( tr("Recorder"), recorder );
-
-  QMenu *help = new QMenu( menu );
-  m_versionAction->addTo( help );
-  m_showTipsAction->addTo( help );
-  m_helpAction->addTo( help );
-
-  menu->insertSeparator();
-  menu->insertItem( tr("Help"), help );
+  QMenu *help = new QMenu( tr("Help"),menu );
+  help->addAction(m_versionAction);
+  help->addAction(m_showTipsAction);
+  help->addAction(m_helpAction);
+  menu->addSeparator();
+  menu->addMenu(  help );
 
 }
 
