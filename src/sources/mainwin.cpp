@@ -59,12 +59,12 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
 
   m_error = new QLabel( statusBar() );
   m_error->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-  statusBar()->addWidget( m_error, 2, true );
+  statusBar()->addWidget( m_error);
   m_error->setLineWidth( 1 );
 
   m_info = new QLabel( statusBar() );
   m_info->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-  statusBar()->addWidget( m_info, 1, true );
+  statusBar()->addWidget( m_info );
   m_info->setLineWidth( 1 );
 
   connect( m_wid, SIGNAL( error( const QString & ) ), m_error, SLOT( setText( const QString & ) ));
@@ -341,15 +341,15 @@ void MainWin::setToolbarVisibilitySLOT()
 
 void MainWin::setConnectSLOT( bool on )
 {
-  m_connectAction->setOn( on );
+  m_connectAction->setChecked(on );
 }
 
 void MainWin::toolbarVisibilitySLOT( bool disp, bool dmm, bool graph, bool file, bool help )
 {
-  m_dmmTB->setShown( dmm );
-  m_graphTB->setShown( graph );
-  m_fileTB->setShown( file );
-  m_helpTB->setShown( help );
-  m_displayTB->setShown( disp );
+  m_dmmTB->setVisible(dmm );
+  m_graphTB->setVisible( graph );
+  m_fileTB->setVisible( file );
+  m_helpTB->setVisible( help );
+  m_displayTB->setVisible( disp );
 }
 
