@@ -109,7 +109,7 @@ void TipDlg::setShowTipsSLOT( bool on )
 
 void TipDlg::previousSLOT()
 {
-  m_curTip = (--m_curTip);
+  --m_curTip;
   if (m_curTip < 0)
 	  m_curTip = m_numTips-1;
   showTipText();
@@ -117,7 +117,8 @@ void TipDlg::previousSLOT()
 
 void TipDlg::nextSLOT()
 {
-  m_curTip = (++m_curTip) % m_numTips;
+  ++m_curTip;
+  m_curTip = m_curTip % m_numTips;
   showTipText();
 }
 
