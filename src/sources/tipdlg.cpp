@@ -83,7 +83,7 @@ TipDlg::TipDlg(QWidget *parent) :  QDialog( parent),
   m_curTip(0)
 {
   setupUi(this);
-  ui_tip->setPaper(palette().background().color());
+  ui_tip->setTextBackgroundColor(palette().background().color());
 
   connect( ui_closeBut, SIGNAL( clicked() ),this, SLOT( closeSLOT() ));
   connect( ui_previousBut, SIGNAL( clicked() ),this, SLOT( previousSLOT() ));
