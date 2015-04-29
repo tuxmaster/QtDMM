@@ -236,7 +236,7 @@ void MainWin::versionSLOT()
 													"Additionally an external program may be started when given thresholds are reached.</div>"\
 													 "<div align=justify><b>QtDMM</b> uses the platform independent toolkit "\
 													"<b>Qt</b> version %3 and is licensed under <b>GPL 3</b> (Versions prior to v0.9.0 where licensed under GPL 2)</div><br>"\
-													"&copy; 2001-2014 Matthias Toussaint &nbsp;-&nbsp;&nbsp;<font color=blue><u>qtdmm@mtoussaint.de</u></font>"\
+													"&copy; 2001-2014 Matthias Toussaint &nbsp;-&nbsp;&nbsp;<font color=blue><u><a href='mailto:qtdmm@mtoussaint.de'>qtdmm@mtoussaint.de</a></u></font>"\
 													"<p><br>The icons (except the DMM icon) have been taken from the KDE project.<p>")
 					 .arg(VERSION_STRING).arg(m_wid->deviceListText()).arg(qVersion()));
 }
