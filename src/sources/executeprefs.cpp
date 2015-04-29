@@ -56,14 +56,13 @@ void ExecutePrefs::defaultsSLOT()
   ui_commandExec->setText( m_cfg->getString( "External", "command", "" ));
 }
 
-void
-ExecutePrefs::factoryDefaultsSLOT()
+void ExecutePrefs::factoryDefaultsSLOT()
 {
   ui_executeCommand->setChecked( false );
 
   ui_execRaising->setChecked( true );
-  ui_execRaisingThreshold->setText( "" );
-  ui_execFallingThreshold->setText( "" );
+  ui_execRaisingThreshold->setText( "0" );
+  ui_execFallingThreshold->setText( "0.1" );
 
   ui_disconnectExec->setChecked( false );
   ui_commandExec->setText( "" );
@@ -92,8 +91,8 @@ bool ExecutePrefs::externalFalling() const
 double ExecutePrefs::externalThreshold() const
 {
   if (ui_execFalling->isChecked())
-	return EngNumberValidator::value( ui_execFallingThreshold->text() );
-  return EngNumberValidator::value( ui_execRaisingThreshold->text() );
+	return EngNumberValidator::value( ui_execFallingThreshold->text() == "" ? "0" : ui_execFallingThreshold->text());
+  return EngNumberValidator::value( ui_execRaisingThreshold->text() == "" ? "0" : ui_execRaisingThreshold->text() );
 }
 
 void ExecutePrefs::setThreshold( double value )
