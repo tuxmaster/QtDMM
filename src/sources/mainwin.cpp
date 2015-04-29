@@ -166,13 +166,13 @@ void MainWin::createActions()
   m_quitAction->setShortcut(Qt::CTRL+Qt::Key_Q);
   m_quitAction->setWhatsThis( tr("<b>Quit QtDMM</b><p>If the recorder contains unsaved data QtDMM"
 	  " will give you the option to savve your data first." ));
-  m_helpAction= new QAction(QPixmap(":/Symbols/help.xpm"),tr("Help"),this);
+  m_helpAction= new QAction(QPixmap(":/Symbols/help.xpm"),tr("Direct Help"),this);
   m_helpAction->setShortcut(Qt::SHIFT+Qt::Key_F1);
   m_helpAction->setWhatsThis( tr("<b>Direct Help</b><p>Enter the direct help mode. You have done this"
 	  " already when reading this text :)" ));
   m_showTipsAction  = new QAction ( this );
-  m_showTipsAction->setText( tr("Show tip of the day") );
-  m_showTipsAction->setWhatsThis( tr("Tip of the day...") );
+  m_showTipsAction->setText(  tr("Tip of the day") );
+  m_showTipsAction->setWhatsThis(tr("Show tip of the day"));
   m_versionAction  = new QAction ( this );
   m_versionAction->setText( tr("On version") );
   m_versionAction->setWhatsThis( tr("<b>Copyright information</b><p>Show copyright information and some"
@@ -180,21 +180,21 @@ void MainWin::createActions()
 
   connect( m_connectAction, SIGNAL( toggled(bool) ),m_wid, SLOT( connectSLOT(bool) ));
   connect( m_connectAction, SIGNAL( toggled(bool) ),this, SLOT( connectSLOT(bool) ));
-  connect( m_resetAction, SIGNAL( activated() ), m_wid, SLOT( resetSLOT() ));
-  connect( m_startAction, SIGNAL( activated() ), m_wid, SLOT( startSLOT() ));
-  connect( m_stopAction, SIGNAL( activated() ), m_wid, SLOT( stopSLOT() ));
-  connect( m_clearAction, SIGNAL( activated() ),m_wid, SLOT( clearSLOT() ));
-  connect( m_printAction, SIGNAL( activated() ), m_wid, SLOT( printSLOT() ));
-  connect( m_importAction, SIGNAL( activated() ),m_wid, SLOT( importSLOT() ));
-  connect( m_exportAction, SIGNAL( activated() ),m_wid, SLOT( exportSLOT() ));
-  connect( m_configAction, SIGNAL( activated() ),m_wid, SLOT( configSLOT() ));
-  connect( m_configDmmAction, SIGNAL( activated() ),m_wid, SLOT( configDmmSLOT() ));
-  connect( m_configRecorderAction, SIGNAL( activated() ), m_wid, SLOT( configRecorderSLOT() ));
-  connect( m_quitAction, SIGNAL( activated() ),this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_quitAction, SIGNAL( activated() ), m_wid, SLOT( quitSLOT() ));
-  connect( m_helpAction, SIGNAL( activated() ),m_wid, SLOT( helpSLOT() ));
-  connect( m_showTipsAction, SIGNAL( activated() ),m_wid, SLOT( showTipsSLOT() ));
-  connect( m_versionAction, SIGNAL( activated() ), this, SLOT( versionSLOT() ));
+  connect( m_resetAction, SIGNAL( triggered() ), m_wid, SLOT( resetSLOT() ));
+  connect( m_startAction, SIGNAL( triggered() ), m_wid, SLOT( startSLOT() ));
+  connect( m_stopAction, SIGNAL( triggered() ), m_wid, SLOT( stopSLOT() ));
+  connect( m_clearAction, SIGNAL( triggered() ),m_wid, SLOT( clearSLOT() ));
+  connect( m_printAction, SIGNAL( triggered() ), m_wid, SLOT( printSLOT() ));
+  connect( m_importAction, SIGNAL( triggered() ),m_wid, SLOT( importSLOT() ));
+  connect( m_exportAction, SIGNAL( triggered() ),m_wid, SLOT( exportSLOT() ));
+  connect( m_configAction, SIGNAL( triggered() ),m_wid, SLOT( configSLOT() ));
+  connect( m_configDmmAction, SIGNAL( triggered() ),m_wid, SLOT( configDmmSLOT() ));
+  connect( m_configRecorderAction, SIGNAL( triggered() ), m_wid, SLOT( configRecorderSLOT() ));
+  connect( m_quitAction, SIGNAL( triggered() ),this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( m_quitAction, SIGNAL( triggered() ), m_wid, SLOT( quitSLOT() ));
+  connect( m_helpAction, SIGNAL( triggered() ),m_wid, SLOT( helpSLOT() ));
+  connect( m_showTipsAction, SIGNAL( triggered() ),m_wid, SLOT( showTipsSLOT() ));
+  connect( m_versionAction, SIGNAL( triggered() ), this, SLOT( versionSLOT() ));
 
 }
 
@@ -316,7 +316,7 @@ void MainWin::createMenu()
   help->addAction(m_showTipsAction);
   help->addAction(m_helpAction);
   menu->addSeparator();
-  menu->addMenu(  help );
+  menu->addMenu( help );
 
 }
 
