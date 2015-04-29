@@ -34,33 +34,33 @@ class TipDlg : public QDialog,private Ui::UITipDlg
 	  TipDlg( QWidget *parent=0 );
 
 
-	  bool				showTips() const;
+	  bool						showTips() const;
 
-	  static const char	*s_tipText[];
+	  static const QStringList	s_tipText;
 
-	  void				setCurrentTip( int c );
-	  int				currentTip() const { return m_curTip; }
+	  void						setCurrentTip( int c );
+	  int						currentTip() const { return m_curTip; }
 
 	Q_SIGNALS:
-	  void				showTips( bool );
-	  void				currentTip( int );
+	  void						showTips( bool );
+	  void						currentTip( int );
 
 	public Q_SLOTS:
-	  void				setShowTipsSLOT( bool );
+	  void						setShowTipsSLOT( bool );
 
 	protected:
-	  int				m_numTips;
-	  int				m_curTip;
-	  QString			m_formatTip;
+	  int						m_numTips;
+	  int						m_curTip;
+	  QString					m_formatTip;
 
-	  void				showTipText();
-	  void				closeEvent( QCloseEvent * )Q_DECL_OVERRIDE;
+	  void						showTipText();
+	  void						closeEvent( QCloseEvent * )Q_DECL_OVERRIDE;
 
 	protected Q_SLOTS:
-	  void				nextSLOT();
-	  void				previousSLOT();
-	  void				closeSLOT();
-	  void				showTipsSLOT( bool );
+	  void						nextSLOT();
+	  void						previousSLOT();
+	  void						closeSLOT();
+	  void						showTipsSLOT( bool );
 
 };
 
