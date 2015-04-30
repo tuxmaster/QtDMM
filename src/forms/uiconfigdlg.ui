@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>QtDMM: Preferences</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../Resources.qrc">
+    <normaloff>:/Symbols/icon.xpm</normaloff>:/Symbols/icon.xpm</iconset>
+  </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
@@ -253,6 +257,8 @@
   <tabstop>ui_ok</tabstop>
   <tabstop>ui_cancel</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../Resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

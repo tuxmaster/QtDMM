@@ -41,9 +41,7 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
   setCentralWidget( m_wid );
 
   createActions();
-  /*createMenu();
-  createToolBars();
-*/
+
   m_display = new DisplayWid( toolBarDisplay );
   m_wid->setDisplay( m_display );
 
@@ -75,7 +73,6 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
   connect( m_wid, SIGNAL( toolbarVisibility( bool, bool, bool, bool, bool )),
 		   this, SLOT( toolbarVisibilitySLOT( bool, bool, bool, bool, bool ) ));
 
-  //connect( m_wid, SIGNAL( connectDMM( bool ) ),m_connectAction, SLOT( setOn( bool ) ));
   connect( m_wid, SIGNAL( connectDMM( bool ) ),action_Connect, SLOT( setChecked(bool) ));
 
   QRect winRect = m_wid->winRect();

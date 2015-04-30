@@ -41,7 +41,6 @@
 ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 {
   setupUi(this);
-  setWindowIcon(QPixmap(":/Symbols/icon.xpm"));
 
   //ui_list->header()->hide();
   //ui_list->setItemMargin( 4 );
@@ -113,50 +112,14 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
   //
   //ui_list->setSorting( -1 );
 
-  m_execute = new ExecutePrefs( ui_stack );
-  m_execute->setId( ConfigDlg::External );
-  new ConfigItem( m_execute->id(),
-				  m_execute->pixmap(),
-				  m_execute->label(),
+  m_recorder = new RecorderPrefs( ui_stack );
+  m_recorder->setId( ConfigDlg::Recorder );
+  new ConfigItem( m_recorder->id(),
+				  m_recorder->pixmap(),
+				  m_recorder->label(),
 				  ui_list );
-  m_execute->setCfg( m_cfg );
-  ui_stack->insertWidget( m_execute->id(),m_execute);
-
-  m_integration = new IntegrationPrefs( ui_stack );
-  m_integration->setId( ConfigDlg::Integration );
-  new ConfigItem( m_integration->id(),
-				  m_integration->pixmap(),
-				  m_integration->label(),
-				  ui_list );
-  m_integration->setCfg( m_cfg );
-  ui_stack->insertWidget( m_integration->id() ,m_integration);
-
-  m_graph = new GraphPrefs( ui_stack );
-  m_graph->setId( ConfigDlg::Graph );
-  new ConfigItem( m_graph->id(),
-				  m_graph->pixmap(),
-				  m_graph->label(),
-				  ui_list );
-  m_graph->setCfg( m_cfg );
-  ui_stack->insertWidget( m_graph->id(),m_graph );
-
-  m_gui = new GuiPrefs( ui_stack );
-  m_gui->setId( ConfigDlg::GUI );
-  new ConfigItem( m_gui->id(),
-				  m_gui->pixmap(),
-				  m_gui->label(),
-				  ui_list );
-  m_gui->setCfg( m_cfg );
-  ui_stack->insertWidget( m_gui->id(),m_gui );
-
-  m_dmm = new DmmPrefs( ui_stack );
-  m_dmm->setId( ConfigDlg::DMM );
-  new ConfigItem( m_dmm->id(),
-				  m_dmm->pixmap(),
-				  m_dmm->label(),
-				  ui_list );
-  m_dmm->setCfg( m_cfg );
-  ui_stack->insertWidget(  m_dmm->id() ,m_dmm);
+  m_recorder->setCfg( m_cfg );
+  ui_stack->insertWidget( m_recorder->id() ,m_recorder);
 
   m_scale = new ScalePrefs( ui_stack );
   m_scale->setId( ConfigDlg::Scale );
@@ -167,23 +130,59 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
   m_scale->setCfg( m_cfg );
   ui_stack->insertWidget( m_scale->id() ,m_scale);
 
-  m_recorder = new RecorderPrefs( ui_stack );
-  m_recorder->setId( ConfigDlg::Recorder );
-  new ConfigItem( m_recorder->id(),
-				  m_recorder->pixmap(),
-				  m_recorder->label(),
+  m_dmm = new DmmPrefs( ui_stack );
+  m_dmm->setId( ConfigDlg::DMM );
+  new ConfigItem( m_dmm->id(),
+				  m_dmm->pixmap(),
+				  m_dmm->label(),
 				  ui_list );
-  m_recorder->setCfg( m_cfg );
-  ui_stack->insertWidget( m_recorder->id() ,m_recorder);
+  m_dmm->setCfg( m_cfg );
+  ui_stack->insertWidget(  m_dmm->id() ,m_dmm);
+
+  m_gui = new GuiPrefs( ui_stack );
+  m_gui->setId( ConfigDlg::GUI );
+  new ConfigItem( m_gui->id(),
+				  m_gui->pixmap(),
+				  m_gui->label(),
+				  ui_list );
+  m_gui->setCfg( m_cfg );
+  ui_stack->insertWidget( m_gui->id(),m_gui );
+
+  m_graph = new GraphPrefs( ui_stack );
+  m_graph->setId( ConfigDlg::Graph );
+  new ConfigItem( m_graph->id(),
+				  m_graph->pixmap(),
+				  m_graph->label(),
+				  ui_list );
+  m_graph->setCfg( m_cfg );
+  ui_stack->insertWidget( m_graph->id(),m_graph );
+
+  m_integration = new IntegrationPrefs( ui_stack );
+  m_integration->setId( ConfigDlg::Integration );
+  new ConfigItem( m_integration->id(),
+				  m_integration->pixmap(),
+				  m_integration->label(),
+				  ui_list );
+  m_integration->setCfg( m_cfg );
+  ui_stack->insertWidget( m_integration->id() ,m_integration);
+
+  m_execute = new ExecutePrefs( ui_stack );
+  m_execute->setId( ConfigDlg::External );
+  new ConfigItem( m_execute->id(),
+				  m_execute->pixmap(),
+				  m_execute->label(),
+				  ui_list );
+  m_execute->setCfg( m_cfg );
+  ui_stack->insertWidget( m_execute->id(),m_execute);
 
   // Connections
-  //
+
   connect( ui_ok, SIGNAL( clicked() ), this, SLOT( applySLOT() ));
   connect( ui_apply, SIGNAL( clicked() ), this, SLOT( applySLOT() ));
   connect( ui_cancel, SIGNAL( clicked() ), this, SLOT( cancelSLOT() ));
   connect( ui_factoryDefaults, SIGNAL( clicked() ), this, SLOT( factoryDefaultsSLOT() ));
 
-  connect( ui_list, SIGNAL( selectionChanged( QListWidgetItem * ) ),  this, SLOT( pageSelectedSLOT(QListWidgetItem*)));
+  connect( ui_list, SIGNAL( currentItemChanged( QListWidgetItem *, QListWidgetItem *) ),  this, SLOT( pageSelectedSLOT(QListWidgetItem*)));
 
   // init stuff
   //
@@ -370,7 +369,6 @@ void ConfigDlg::pageSelectedSLOT(QListWidgetItem *item )
 {
   int id = ((ConfigItem *)item)->id();
   PrefWidget *wid = (PrefWidget *)ui_stack->widget( id );
-
   ui_stack->setCurrentWidget( wid );
 
   ui_helpText->setText( wid->description() );
