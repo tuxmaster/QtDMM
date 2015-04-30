@@ -31,6 +31,7 @@ class GuiPrefs : public PrefWidget, private Ui::UIGuiPrefs
   Q_OBJECT
 	public:
 	  GuiPrefs(QWidget *parent=0);
+	  ~GuiPrefs();
 	  bool			showTip() const;
 	  bool			showBar() const;
 	  bool			showMinMax() const;

@@ -80,7 +80,7 @@ class DMMGraph : public QWidget
 	  };
 
 	  DMMGraph(QWidget *parent=0);
-
+	  ~DMMGraph();
 	  void						setGraphSize( int size, int length );
 	  void						addValue( double );
 	  void						setUnit( const QString & );

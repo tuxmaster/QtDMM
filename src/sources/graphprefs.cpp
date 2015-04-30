@@ -38,6 +38,10 @@ GraphPrefs::GraphPrefs( QWidget *parent) : PrefWidget( parent )
 					  " drawing style for the graph.</b>" );
   m_pixmap = new QPixmap(":/Symbols/graph.xpm" );
 }
+GraphPrefs::~GraphPrefs()
+{
+	delete m_pixmap;
+}
 
 void GraphPrefs::defaultsSLOT()
 {

@@ -77,8 +77,7 @@ DMMGraph::DMMGraph( QWidget *parent) :
   m_remainingLength = m_sampleLength;
   emitInfo();
 
-  m_infoBox = new QLabel( 0, 0, Qt::FramelessWindowHint |
-								Qt::Tool );
+  m_infoBox = new QLabel( 0, this, Qt::FramelessWindowHint |Qt::Tool );
   m_infoBox->resize( 100, 50 );
   m_infoBox->setFrameStyle( QFrame::Box | QFrame::Plain );
   m_infoBox->setPalette( QToolTip::palette() );
@@ -92,6 +91,11 @@ DMMGraph::DMMGraph( QWidget *parent) :
 
   m_popup = new QMenu( this );
   connect( m_popup, SIGNAL(triggered(QAction*)),this, SLOT( popupSLOT(QAction*) ));
+}
+DMMGraph::~DMMGraph()
+{
+	delete m_array;
+	delete m_arrayInt;
 }
 
 void DMMGraph::timerEvent( QTimerEvent * )

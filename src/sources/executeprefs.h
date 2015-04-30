@@ -32,6 +32,7 @@ class ExecutePrefs : public PrefWidget, private Ui::UIExecutePrefs
   Q_OBJECT
 	public:
 	  ExecutePrefs(QWidget *parent=0);
+	  ~ExecutePrefs();
 	  bool			startExternal() const;
 	  bool			externalFalling() const;
 	  double		externalThreshold() const;

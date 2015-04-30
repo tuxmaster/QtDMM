@@ -191,6 +191,10 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
   ui_undo->hide();
   adjustSize();
 }
+ConfigDlg::~ConfigDlg()
+{
+	delete m_cfg;
+}
 
 QString ConfigDlg::deviceListText() const
 {

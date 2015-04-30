@@ -48,6 +48,10 @@ ScalePrefs::ScalePrefs( QWidget *parent ) : PrefWidget( parent )
   ui_scaleMin->setValidator( validator );
   ui_scaleMax->setValidator( validator );
 }
+ScalePrefs::~ScalePrefs()
+{
+	delete m_pixmap;
+}
 
 void ScalePrefs::defaultsSLOT()
 {

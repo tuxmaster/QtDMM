@@ -168,7 +168,10 @@ DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
   ui_scanPorts->hide();
 #endif
 }
-
+DmmPrefs::~DmmPrefs()
+{
+	delete m_pixmap;
+}
 
 void DmmPrefs::scanDevicesSLOT()
 {

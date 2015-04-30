@@ -43,6 +43,10 @@ ExecutePrefs::ExecutePrefs( QWidget *parent) : PrefWidget( parent )
 
   connect( ui_browseExec, SIGNAL( clicked() ), this, SLOT( browseExecSLOT() ));
 }
+ExecutePrefs::~ExecutePrefs()
+{
+	delete m_pixmap;
+}
 
 void ExecutePrefs::defaultsSLOT()
 {

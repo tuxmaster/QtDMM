@@ -46,6 +46,10 @@ RecorderPrefs::RecorderPrefs( QWidget *parent) : PrefWidget( parent)
   ui_raisingThreshold->setValidator( validator );
   ui_fallingThreshold->setValidator( validator );
 }
+RecorderPrefs::~RecorderPrefs()
+{
+	delete m_pixmap;
+}
 
 void RecorderPrefs::defaultsSLOT()
 {

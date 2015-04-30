@@ -32,7 +32,7 @@ class ScalePrefs : public PrefWidget,private Ui::UIScalePrefs
   Q_OBJECT
 	public:
 	  ScalePrefs(QWidget *parent=0);
-
+	  ~ScalePrefs();
 	  bool			automaticScale() const;
 	  bool			includeZero() const;
 	  double		scaleMin() const;

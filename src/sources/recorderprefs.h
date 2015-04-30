@@ -31,6 +31,7 @@ class RecorderPrefs : public PrefWidget ,private Ui::UIRecorderPrefs
   Q_OBJECT
 	public:
 	  RecorderPrefs(QWidget *parent=0);
+	  ~RecorderPrefs();
 	  DMMGraph::SampleMode	sampleMode() const;
 	  int					sampleStep() const;
 	  int					sampleLength() const;

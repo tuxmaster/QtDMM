@@ -38,6 +38,10 @@ GuiPrefs::GuiPrefs( QWidget *parent) : PrefWidget( parent )
 
   connect( ui_tipOfTheDay, SIGNAL( toggled( bool ) ), this, SIGNAL( showTips( bool ) ));
 }
+GuiPrefs::~GuiPrefs()
+{
+	delete m_pixmap;
+}
 
 void GuiPrefs::defaultsSLOT()
 {

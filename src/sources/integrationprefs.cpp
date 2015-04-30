@@ -42,6 +42,10 @@ IntegrationPrefs::IntegrationPrefs( QWidget *parent) : PrefWidget( parent)
   ui_intThreshold->setValidator( validator );
   ui_intOffset->setValidator( validator );
 }
+IntegrationPrefs::~IntegrationPrefs()
+{
+	delete m_pixmap;
+}
 
 void IntegrationPrefs::defaultsSLOT()
 {

@@ -102,10 +102,60 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
 
 DisplayWid::~DisplayWid()
 {
-  delete m_bigDigit;
-  delete m_smallDigit;
-  delete m_bigDecimal;
-  delete m_smallDecimal;
+	delete m_bigDigit;
+	delete m_bigSpecialChar;
+	delete m_bigDecimal;
+	delete m_bigMinus;
+	delete m_bigG;
+	delete m_bigM;
+	delete m_bigk;
+	delete m_bigm;
+	delete m_bigu;
+	delete m_bign;
+	delete m_bigp;
+	delete m_bigHz;
+	delete m_bigF;
+	delete m_bigV;
+	delete m_bigA;
+	delete m_bigH;
+	delete m_bigW;
+	delete m_bigDBM;
+	delete m_bigOhm;
+	delete m_bigDeg;
+	delete m_bigPercent;
+	delete m_smallDigit;
+	delete m_smallSpecialChar;
+	delete m_smallDecimal;
+	delete m_smallMinus;
+	delete m_smallG;
+	delete m_smallM;
+	delete m_smallk;
+	delete m_smallm;
+	delete m_smallu;
+	delete m_smalln;
+	delete m_smallp;
+	delete m_smallHz;
+	delete m_smallF;
+	delete m_smallV;
+	delete m_smallA;
+	delete m_smallH;
+	delete m_smallW;
+	delete m_smallDBM;
+	delete m_smallOhm;
+	delete m_smallDeg;
+	delete m_smallPercent;
+	delete m_minStr;
+	delete m_maxStr;
+	delete m_diode;
+	delete m_ac;
+	delete m_dc;
+	delete m_bar[0];
+	delete m_bar[1];
+	delete m_bar[2];
+	delete m_bar[3];
+	delete m_bar[4];
+	delete m_bar[5];
+	delete m_bar[6];
 }
 
 void DisplayWid::setDisplayMode( int dm, bool minMax, bool bar, int numValues )
