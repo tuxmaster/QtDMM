@@ -67,8 +67,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>image0</normaloff>image0</iconset>
+        <iconset resource="../Resources.qrc">
+         <normaloff>:/Symbols/import.xpm</normaloff>:/Symbols/import.xpm</iconset>
        </property>
       </widget>
      </item>
@@ -84,8 +84,8 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>image1</normaloff>image1</iconset>
+        <iconset resource="../Resources.qrc">
+         <normaloff>:/Symbols/export.xpm</normaloff>:/Symbols/export.xpm</iconset>
        </property>
       </widget>
      </item>
@@ -685,7 +685,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;u&gt;&lt;font color=blue&gt;qtdmm@mtoussaint.de&lt;/font&gt;&lt;/u&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>
@@ -694,6 +694,9 @@
       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
      </property>
      <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="openExternalLinks">
       <bool>true</bool>
      </property>
     </widget>
@@ -707,7 +710,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>If you have a DMM not listed above and find manual settings that work, please report to &lt;font color=blue&gt;&lt;u&gt;qtdmm@mtoussaint.de&lt;/u&gt;&lt;/font&gt;. This way future users of this DMM can benefit from your help.</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>
@@ -716,6 +719,9 @@
       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
      </property>
      <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="openExternalLinks">
       <bool>true</bool>
      </property>
     </widget>
@@ -743,6 +749,8 @@
  <includes>
   <include location="global">prefwidget.h</include>
  </includes>
- <resources/>
+ <resources>
+  <include location="../Resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

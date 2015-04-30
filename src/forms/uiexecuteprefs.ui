@@ -251,6 +251,10 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
           <property name="text">
            <string/>
           </property>
+          <property name="icon">
+           <iconset resource="../Resources.qrc">
+            <normaloff>:/Symbols/import.xpm</normaloff>:/Symbols/import.xpm</iconset>
+          </property>
           <property name="autoDefault">
            <bool>false</bool>
           </property>
@@ -300,7 +304,9 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
  <includes>
   <include location="global">prefwidget.h</include>
  </includes>
- <resources/>
+ <resources>
+  <include location="../Resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>ui_executeCommand</sender>
