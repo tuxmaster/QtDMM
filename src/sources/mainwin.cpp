@@ -35,15 +35,16 @@
 MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
   m_running( false )
 {
-  setWindowIcon( QPixmap(":/Symbols/icon.xpm") );
+  setupUi(this);
 
   m_wid = new MainWid( this );
   setCentralWidget( m_wid );
 
   createActions();
-  createMenu();
+  /*createMenu();
   createToolBars();
-
+*/
+  m_display = new DisplayWid( toolBarDisplay );
   m_wid->setDisplay( m_display );
 
   setMinimumSize( 500, 450 );
@@ -74,10 +75,12 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
   connect( m_wid, SIGNAL( toolbarVisibility( bool, bool, bool, bool, bool )),
 		   this, SLOT( toolbarVisibilitySLOT( bool, bool, bool, bool, bool ) ));
 
-  connect( m_wid, SIGNAL( connectDMM( bool ) ),m_connectAction, SLOT( setOn( bool ) ));
+  //connect( m_wid, SIGNAL( connectDMM( bool ) ),m_connectAction, SLOT( setOn( bool ) ));
+  connect( m_wid, SIGNAL( connectDMM( bool ) ),action_Connect, SLOT( setChecked(bool) ));
 
   QRect winRect = m_wid->winRect();
-  m_wid->applySLOT();
+
+   m_wid->applySLOT();
 
   //std::cerr << "WR: " << winRect.x() << " " << winRect.y()
   //    << " " << winRect.width() << " " << winRect.height() << std::endl;
@@ -108,93 +111,28 @@ void MainWin::setConsoleLogging( bool on )
 
 void MainWin::createActions()
 {
-  // mt: changed all QAction into Q3Action
+  connect( action_Connect, SIGNAL( toggled(bool) ),m_wid, SLOT( connectSLOT(bool) ));
+  connect( action_Connect, SIGNAL( toggled(bool) ),this, SLOT( connectSLOT(bool) ));
+  connect( action_Reset, SIGNAL( triggered() ), m_wid, SLOT( resetSLOT() ));
+  connect( action_Start, SIGNAL( triggered() ), m_wid, SLOT( startSLOT() ));
+  connect( action_Stop, SIGNAL( triggered() ), m_wid, SLOT( stopSLOT() ));
+  connect( action_Clear, SIGNAL( triggered() ),m_wid, SLOT( clearSLOT() ));
+  connect( action_Print, SIGNAL( triggered() ), m_wid, SLOT( printSLOT() ));
+  connect( action_Import, SIGNAL( triggered() ),m_wid, SLOT( importSLOT() ));
+  connect( action_Export, SIGNAL( triggered() ),m_wid, SLOT( exportSLOT() ));
+  connect( action_Configure, SIGNAL( triggered() ),m_wid, SLOT( configSLOT() ));
+  connect( action_ConfigureDMM, SIGNAL( triggered() ),m_wid, SLOT( configDmmSLOT() ));
+  connect( actionConfigureRecorder,SIGNAL(triggered()),m_wid,SLOT (configRecorderSLOT()));
+  connect( action_Quit, SIGNAL( triggered() ),this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( action_Quit, SIGNAL( triggered() ), m_wid, SLOT( quitSLOT() ));
+  connect( action_Direct_help, SIGNAL( triggered() ),m_wid, SLOT( helpSLOT() ));
+  connect( action_Tipp_of_the_day, SIGNAL( triggered() ),m_wid, SLOT( showTipsSLOT() ));
 
-  m_connectAction = new QAction(QPixmap(":/Symbols/connect_on.xpm"),tr("Connect"),this);
-  m_connectAction->setShortcut( Qt::CTRL+Qt::Key_C);
-  m_connectAction->setWhatsThis( tr("<b>Connect to the Multimeter</b><p>This will establish"
-	  " the serial connection to the dmm. If not connected the serial port is free"
-	  " and can be used by other software." ));
-  m_resetAction = new QAction(QPixmap(":/Symbols/reset.xpm"),tr("Reset"),this);
-  m_resetAction->setShortcut(Qt::CTRL+Qt::Key_R);
-  m_resetAction->setWhatsThis( tr("<b>Reset min/max values</b><p>The min/max values in the"
-	  " display will be reset. You can activate this option at any time." ));
-  m_startAction= new QAction(QPixmap(":/Symbols/start.xpm"), tr("Start"),this);
-  m_startAction->setShortcut(Qt::CTRL+Qt::Key_S);
-  m_startAction->setWhatsThis( tr("<b>Start the recorder</b><p>If you are in manual mode"
-	  " this will start the recorder. Press F2 to set the recorder options" ));
-  m_stopAction= new QAction(QPixmap(":/Symbols/stop.xpm"),tr("Stop"),this);
-  m_stopAction->setShortcut(Qt::CTRL+Qt::Key_X);
-  m_stopAction->setWhatsThis( tr("<b>Stop the recorder</b><p>The recorder will be stopped."
-	  " This is independent from the start mode of the recorder" ));
-  m_clearAction= new QAction(QPixmap(":/Symbols/clear.xpm"),tr("Clear"),this);
-  m_clearAction->setShortcut(Qt::Key_Delete);
-  m_clearAction->setWhatsThis( tr("<b>Clear the recorder graph</b><p>If the recorder is already"
-	  " started it will clear the graph and continue recording." ));
-  m_printAction= new QAction(QPixmap(":/Symbols/print.xpm"),tr("Print"),this);
-  m_printAction->setShortcut(Qt::CTRL+Qt::Key_P);
-  m_printAction->setWhatsThis( tr("<b>Print recorder graph</b><p>A dialog will open where you can"
-	  " define a title and a comment for your printout. The printer itself can also be configured here."
-	  " To be able to print you need at least one working postscript printer configured in your"
-	  " system. Printing into a file is also supported." ));
-  m_exportAction= new QAction(QPixmap(":/Symbols/export.xpm"),tr("Export"),this);
-  m_exportAction->setShortcut(Qt::CTRL+Qt::Key_E);
-  m_exportAction->setWhatsThis( tr("<b>Export recorder graph</b><p>Here you can export the recorded"
-	  " data as tab separated list. Each line contains the following values (separated by a tab "
-	  "character): date (dd.mm.yyyy) time (hh:mm:ss) value (float) unit." ));
-  m_importAction= new QAction(QPixmap(":/Symbols/import.xpm"),tr("Import"),this);
-  m_importAction->setShortcut(Qt::CTRL+Qt::Key_I);
-  m_importAction->setWhatsThis( tr("<b>Import data into recorder</b><p>Here you can import previously"
-	  " exported data files. QtDMM tries to do an educated guess if the file format is correct and"
-	  " rejects import of files which to not match." ));
-  m_configAction= new QAction(QPixmap(":/Symbols/config.xpm"),tr("Configure"),this);
-  m_configAction->setShortcut(Qt::Key_F2);
-  m_configDmmAction= new QAction(QPixmap(":/Symbols/config.xpm"),tr("Configure"),this);
-  m_configDmmAction->setShortcut(Qt::SHIFT+Qt::Key_F2);
-  m_configRecorderAction= new QAction(QPixmap(":/Symbols/config.xpm"),tr("Configure"),this);
-  m_configRecorderAction->setShortcut(Qt::CTRL+Qt::Key_F2);
-  m_configAction->setWhatsThis( tr("<b>Configure QtDMM</b><p>This will open QtDMM's configuration"
-	  " dialog. Here you can configure it's visual appearance and all options regarding the "
-	  "multimeter hardware and the recorder." ));
-  m_configDmmAction->setWhatsThis( tr("<b>Configure QtDMM</b><p>This will open QtDMM's configuration"
-	  " dialog. Here you can configure it's visual appearance and all options regarding the "
-	  "multimeter hardware and the recorder." ));
-  m_configRecorderAction->setWhatsThis( tr("<b>Configure QtDMM</b><p>This will open QtDMM's configuration"
-	  " dialog. Here you can configure it's visual appearance and all options regarding the "
-	  "multimeter hardware and the recorder." ));
-  m_quitAction= new QAction(QPixmap(":/Symbols/quit.xpm"), tr("Quit"),this);
-  m_quitAction->setShortcut(Qt::CTRL+Qt::Key_Q);
-  m_quitAction->setWhatsThis( tr("<b>Quit QtDMM</b><p>If the recorder contains unsaved data QtDMM"
-	  " will give you the option to savve your data first." ));
-  m_helpAction= new QAction(QPixmap(":/Symbols/help.xpm"),tr("Direct Help"),this);
-  m_helpAction->setShortcut(Qt::SHIFT+Qt::Key_F1);
-  m_helpAction->setWhatsThis( tr("<b>Direct Help</b><p>Enter the direct help mode. You have done this"
-	  " already when reading this text :)" ));
-  m_showTipsAction  = new QAction ( this );
-  m_showTipsAction->setText(  tr("Tip of the day") );
-  m_showTipsAction->setWhatsThis(tr("Show tip of the day"));
-  m_versionAction  = new QAction ( this );
-  m_versionAction->setText( tr("On version") );
-  m_versionAction->setWhatsThis( tr("<b>Copyright information</b><p>Show copyright information and some"
-	  " blurb about QtDMM." ));
-
-  connect( m_connectAction, SIGNAL( toggled(bool) ),m_wid, SLOT( connectSLOT(bool) ));
-  connect( m_connectAction, SIGNAL( toggled(bool) ),this, SLOT( connectSLOT(bool) ));
-  connect( m_resetAction, SIGNAL( triggered() ), m_wid, SLOT( resetSLOT() ));
-  connect( m_startAction, SIGNAL( triggered() ), m_wid, SLOT( startSLOT() ));
-  connect( m_stopAction, SIGNAL( triggered() ), m_wid, SLOT( stopSLOT() ));
-  connect( m_clearAction, SIGNAL( triggered() ),m_wid, SLOT( clearSLOT() ));
-  connect( m_printAction, SIGNAL( triggered() ), m_wid, SLOT( printSLOT() ));
-  connect( m_importAction, SIGNAL( triggered() ),m_wid, SLOT( importSLOT() ));
-  connect( m_exportAction, SIGNAL( triggered() ),m_wid, SLOT( exportSLOT() ));
-  connect( m_configAction, SIGNAL( triggered() ),m_wid, SLOT( configSLOT() ));
-  connect( m_configDmmAction, SIGNAL( triggered() ),m_wid, SLOT( configDmmSLOT() ));
-  connect( m_configRecorderAction, SIGNAL( triggered() ), m_wid, SLOT( configRecorderSLOT() ));
-  connect( m_quitAction, SIGNAL( triggered() ),this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_quitAction, SIGNAL( triggered() ), m_wid, SLOT( quitSLOT() ));
-  connect( m_helpAction, SIGNAL( triggered() ),m_wid, SLOT( helpSLOT() ));
-  connect( m_showTipsAction, SIGNAL( triggered() ),m_wid, SLOT( showTipsSLOT() ));
-  connect( m_versionAction, SIGNAL( triggered() ), this, SLOT( versionSLOT() ));
+  connect( toolBarDisplay, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( toolBarHelp, SIGNAL( visibilityChanged( bool ) ),  this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( toolBarFile, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( toolBarRecorder, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
+  connect( toolBarDMM, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
 
 }
 
@@ -202,29 +140,26 @@ void MainWin::runningSLOT( bool on )
 {
   m_running = on;
 
-  m_startAction->setEnabled( !on );
-  m_stopAction->setEnabled( on );
-  m_printAction->setEnabled( !on );
-  m_exportAction->setEnabled( !on );
-  m_importAction->setEnabled( !on );
+  action_Stop->setEnabled( !on );
+  action_Stop->setEnabled( on );
+  action_Print->setEnabled( !on );
+  action_Export->setEnabled( !on );
+  action_Import->setEnabled( !on );
 }
 
 void MainWin::connectSLOT( bool on )
 {
-  m_startAction->setEnabled( on );
-  m_stopAction->setEnabled( on );
-
-  m_startAction->setEnabled( on );
-  m_stopAction->setEnabled( on && m_running );
-  m_printAction->setEnabled( !(on || m_running) );
-  m_exportAction->setEnabled( !(on || m_running) );
-  m_importAction->setEnabled( !(on || m_running) );
+  action_Start->setEnabled( on );
+  action_Stop->setEnabled( on && m_running );
+  action_Print->setEnabled( !(on || m_running) );
+  action_Export->setEnabled( !(on || m_running) );
+  action_Import->setEnabled( !(on || m_running) );
 
   if (!on)
 	  m_running = false;
 }
 
-void MainWin::versionSLOT()
+void MainWin::on_action_On_version_triggered()
 {
   QMessageBox::about(this,tr("QtDMM: Welcome!" ),tr("<h1>QtDMM %1</h1><hr>"\
 													"<div align=right><i>A simple recorder for DMM's</i></div><p>"\
@@ -241,85 +176,6 @@ void MainWin::versionSLOT()
 					 .arg(VERSION_STRING).arg(m_wid->deviceListText()).arg(qVersion()));
 }
 
-void MainWin::createToolBars()
-{
-  m_dmmTB = new QToolBar(tr("DMM"), this );
-  m_dmmTB->addAction(m_connectAction);
-  m_dmmTB->addAction(m_resetAction);
-  addToolBar( m_dmmTB);
-
-  m_graphTB = new QToolBar( tr("Recorder"), this );
-  m_graphTB->addAction(m_startAction);
-  m_graphTB->addAction(m_stopAction);
-  m_graphTB->addSeparator();
-  m_graphTB->addAction(m_clearAction);
-  addToolBar( m_graphTB);
-
-  m_fileTB = new QToolBar( tr("File"), this );
-  m_fileTB->addAction(m_printAction);
-  m_fileTB->addAction(m_exportAction);
-  m_fileTB->addAction(m_importAction);
-  m_fileTB->addSeparator();
-  m_fileTB->addAction(m_configAction);
-  m_fileTB->addSeparator();
-  m_fileTB->addAction(m_quitAction);
-  addToolBar( m_fileTB );
-
-  m_helpTB = new QToolBar(tr("Help"), this );
-  m_helpTB->addAction(m_helpAction);
-  addToolBar( m_helpTB );
-
-  m_displayTB = new QToolBar(tr("Display"), this );
-  m_display = new DisplayWid( m_displayTB );
-  addToolBar( m_displayTB );
-
-  connect( m_displayTB, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_helpTB, SIGNAL( visibilityChanged( bool ) ),  this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_fileTB, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_graphTB, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
-  connect( m_dmmTB, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
-}
-
-void MainWin::createMenu()
-{
-  QMenuBar *menu = menuBar();
-
-  QMenu *file = new QMenu(tr("File"), menu );
-  file->addAction(m_exportAction);
-  file->addAction(m_importAction);
-  file->addSeparator();
-  file->addAction(m_printAction);
-  file->addSeparator();
-  file->addAction(m_configAction);
-  file->addSeparator();
-  file->addAction(m_quitAction);
-  menu->addMenu(file );
-
-  QMenu *dmm = new QMenu(tr("DMM"), menu );
-  dmm->addAction(m_connectAction);
-  dmm->addAction(m_resetAction);
-  dmm->addSeparator();
-  dmm->addAction(m_configDmmAction);
-  menu->addMenu(dmm);
-
-  QMenu *recorder = new QMenu(tr("Recorder"), menu );
-  recorder->addAction(m_startAction);
-  recorder->addAction(m_stopAction);
-  recorder->addSeparator();
-  recorder->addAction(m_clearAction);
-  recorder->addSeparator();
-  recorder->addAction(m_configRecorderAction);
-  menu->addMenu(  recorder );
-
-  QMenu *help = new QMenu( tr("Help"),menu );
-  help->addAction(m_versionAction);
-  help->addAction(m_showTipsAction);
-  help->addAction(m_helpAction);
-  menu->addSeparator();
-  menu->addMenu( help );
-
-}
-
 void MainWin::closeEvent( QCloseEvent *ev )
 {
   setToolbarVisibilitySLOT();
@@ -332,24 +188,24 @@ void MainWin::closeEvent( QCloseEvent *ev )
 
 void MainWin::setToolbarVisibilitySLOT()
 {
-  m_wid->setToolbarVisibility( m_displayTB->isVisible(),
-							   m_dmmTB->isVisible(),
-							   m_graphTB->isVisible(),
-							   m_fileTB->isVisible(),
-							   m_helpTB->isVisible() );
+  m_wid->setToolbarVisibility( toolBarDisplay->isVisible(),
+							   toolBarDMM->isVisible(),
+							   toolBarRecorder->isVisible(),
+							   toolBarFile->isVisible(),
+							   toolBarHelp->isVisible() );
 }
 
 void MainWin::setConnectSLOT( bool on )
 {
-  m_connectAction->setChecked(on );
+  action_Connect->setChecked(on );
 }
 
 void MainWin::toolbarVisibilitySLOT( bool disp, bool dmm, bool graph, bool file, bool help )
 {
-  m_dmmTB->setVisible(dmm );
-  m_graphTB->setVisible( graph );
-  m_fileTB->setVisible( file );
-  m_helpTB->setVisible( help );
-  m_displayTB->setVisible( disp );
+  toolBarDMM->setVisible(dmm );
+  toolBarRecorder->setVisible( graph );
+  toolBarFile->setVisible( file );
+  toolBarHelp->setVisible( help );
+  toolBarDisplay->setVisible( disp );
 }
 

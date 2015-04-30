@@ -26,55 +26,36 @@
 #include <QtGui>
 #include <QtWidgets>
 
+#include "ui_uimainwin.h"
+
 class MainWid;
 class DisplayWid;
 
 // mt: changed all QAction into Q3Action
-class MainWin : public QMainWindow
+class MainWin : public QMainWindow, private Ui::UIMainWin
 {
   Q_OBJECT
 	public:
 	  MainWin(QWidget *parent=0);
-	  void setConsoleLogging( bool );
+	  void			setConsoleLogging( bool );
 
 	protected Q_SLOTS:
-	  void runningSLOT( bool );
-	  void connectSLOT( bool );
-	  void versionSLOT();
-	  void setConnectSLOT( bool );
-	  void toolbarVisibilitySLOT( bool, bool, bool, bool, bool );
-	  void setToolbarVisibilitySLOT();
+	  void			runningSLOT( bool );
+	  void			connectSLOT( bool );
+	  void			on_action_On_version_triggered();
+	  void			setConnectSLOT( bool );
+	  void			toolbarVisibilitySLOT( bool, bool, bool, bool, bool );
+	  void			setToolbarVisibilitySLOT();
 
 	protected:
 	  MainWid       *m_wid;
-	  QToolBar      *m_dmmTB;
-	  QToolBar		*m_graphTB;
-	  QToolBar		*m_fileTB;
-	  QToolBar	    *m_helpTB;
-	  QToolBar		*m_displayTB;
 	  DisplayWid	*m_display;
-	  QAction		*m_connectAction;
-	  QAction		*m_resetAction;
-	  QAction		*m_startAction;
-	  QAction		*m_stopAction;
-	  QAction		*m_clearAction;
-	  QAction		*m_printAction;
-	  QAction		*m_exportAction;
-	  QAction		*m_importAction;
-	  QAction		*m_configAction;
-	  QAction		*m_configDmmAction;
-	  QAction		*m_configRecorderAction;
-	  QAction		*m_quitAction;
-	  QAction		*m_helpAction;
-	  QAction		*m_showTipsAction;
-	  QAction		*m_versionAction;
 	  bool			m_running;
 	  QLabel		*m_error;
 	  QLabel		*m_info;
 
 	  void			createToolBars();
 	  void			createActions();
-	  void			createMenu();
 	  void			closeEvent( QCloseEvent * )Q_DECL_OVERRIDE;
 };
 
