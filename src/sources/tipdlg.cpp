@@ -65,9 +65,9 @@ const QStringList TipDlg::s_tipText = {
 	" informations about window settings and other preferences."
 	" If you want to get rid of QtDMM don't"
 	" forget to remove this file too.<br>If you want to stay with it, you may want "
-	"to write an email to me explaining what could be improved."
-	"<table width=\"100%\"><tr><td>Matthias Toussaint</td><td><font color=blue><u>qtdmm@mtoussaint.de"
-	"</td></tr></table></u></font>")};
+	"to write an email to me explaining what could be improved.<br>"
+	"Matthias Toussaint <font color=blue><u><a href='mailto:qtdmm@mtoussaint.de'>qtdmm@mtoussaint.de</a>"
+	"</u></font>")};
 
 TipDlg::TipDlg(QWidget *parent) :  QDialog( parent),
   m_numTips(0),
