@@ -24,7 +24,8 @@ FORMS =      forms/uiconfigdlg.ui \
 	     forms/uiprintdlg.ui \
 	     forms/uirecorderprefs.ui \
 	     forms/uiscaleprefs.ui \
-	     forms/uitipdlg.ui
+	     forms/uitipdlg.ui \
+    forms/uimainwin.ui
 
 HEADERS   = sources/colorbutton.h \
 	    sources/configdlg.h \
