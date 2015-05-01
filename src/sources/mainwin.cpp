@@ -58,12 +58,12 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
 
   m_error = new QLabel( statusBar() );
   m_error->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-  statusBar()->addWidget( m_error);
+  statusBar()->addWidget( m_error,20);
   m_error->setLineWidth( 1 );
 
   m_info = new QLabel( statusBar() );
   m_info->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-  statusBar()->addWidget( m_info );
+  statusBar()->addWidget( m_info,10 );
   m_info->setLineWidth( 1 );
 
   connect( m_wid, SIGNAL( error( const QString & ) ), m_error, SLOT( setText( const QString & ) ));
