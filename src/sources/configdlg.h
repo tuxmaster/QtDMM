@@ -132,14 +132,14 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 
 	public Q_SLOTS:
 	  void					connectSLOT( bool );
-	  void					applySLOT();
+	  void					on_ui_buttonBox_accepted();
 	  void					setSampleTimeSLOT( int );
 	  void					setGraphSizeSLOT( int,int );
 	  void					setShowTipsSLOT( bool );
 	  void					setCurrentTipSLOT( int );
 	  void					zoomInSLOT( double );
 	  void					zoomOutSLOT( double );
-	  void					cancelSLOT();
+	  void					on_ui_buttonBox_rejected();
 	  void					thresholdChangedSLOT( DMMGraph::CursorMode, double );
 
 	Q_SIGNALS:
@@ -158,10 +158,12 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 	  GraphPrefs			*m_graph;
 	  IntegrationPrefs		*m_integration;
 	  ExecutePrefs			*m_execute;
+	  bool					m_buttonBox_OK;
 
 	protected Q_SLOTS:
 	  void					on_ui_list_currentItemChanged( QListWidgetItem *current ,QListWidgetItem *);
 	  void					on_ui_factoryDefaults_clicked();
+	  void					on_ui_buttonBox_clicked(QAbstractButton *button);
 
 };
 

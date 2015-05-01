@@ -20,13 +20,7 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout">
-   <property name="spacing">
-    <number>5</number>
-   </property>
-   <property name="margin">
-    <number>10</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout">
      <property name="spacing">
@@ -182,13 +176,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout">
-     <property name="spacing">
-      <number>5</number>
-     </property>
-     <property name="margin">
-      <number>0</number>
-     </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <spacer name="Spacer61">
        <property name="orientation">
@@ -206,41 +194,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="ui_apply">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>32767</width>
-         <height>32767</height>
-        </size>
-       </property>
-       <property name="whatsThis">
-        <string>Click this button so change the color of the data graph in the recorder.</string>
-       </property>
-       <property name="text">
-        <string>&amp;Apply</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ui_ok">
-       <property name="text">
-        <string>&amp;Ok</string>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ui_cancel">
-       <property name="text">
-        <string>&amp;Cancel</string>
+      <widget class="QDialogButtonBox" name="ui_buttonBox">
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
        </property>
       </widget>
      </item>
@@ -253,9 +209,6 @@
   <tabstop>ui_list</tabstop>
   <tabstop>ui_undo</tabstop>
   <tabstop>ui_factoryDefaults</tabstop>
-  <tabstop>ui_apply</tabstop>
-  <tabstop>ui_ok</tabstop>
-  <tabstop>ui_cancel</tabstop>
  </tabstops>
  <resources>
   <include location="../Resources.qrc"/>

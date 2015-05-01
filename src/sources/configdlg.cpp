@@ -40,6 +40,7 @@
 
 ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 {
+  m_buttonBox_OK=false;
   setupUi(this);
 
   //ui_list->header()->hide();
@@ -175,15 +176,10 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
   m_execute->setCfg( m_cfg );
   ui_stack->insertWidget( m_execute->id(),m_execute);
 
-  // Connections
-
-  connect( ui_ok, SIGNAL( clicked() ), this, SLOT( applySLOT() ));
-  connect( ui_apply, SIGNAL( clicked() ), this, SLOT( applySLOT() ));
-  connect( ui_cancel, SIGNAL( clicked() ), this, SLOT( cancelSLOT() ));
 
    // init stuff
   //
-  cancelSLOT();
+  on_ui_buttonBox_rejected();
   showPage( DMM );
   ui_undo->hide();
   adjustSize();
@@ -243,14 +239,14 @@ void ConfigDlg::setSampleTimeSLOT( int sampleTime )
 {
   m_recorder->setSampleTimeSLOT( sampleTime );
 
-  applySLOT();
+  on_ui_buttonBox_accepted();
 }
 
 void ConfigDlg::setGraphSizeSLOT( int size, int length )
 {
   m_scale->setGraphSizeSLOT( size, length );
 
-  applySLOT();
+  on_ui_buttonBox_accepted();
 }
 
 void ConfigDlg::connectSLOT( bool /*connected*/ )
@@ -276,7 +272,7 @@ void ConfigDlg::setWinRect( const QRect & rect )
   m_winRect = rect;
 }
 
-void ConfigDlg::cancelSLOT()
+void ConfigDlg::on_ui_buttonBox_rejected()
 {
   m_cfg->clear();
   m_cfg->load();
@@ -309,7 +305,7 @@ int ConfigDlg::currentTipId() const
   return m_cfg->getInt( "QtDMM", "tip-id", 0 );
 }
 
-void ConfigDlg::applySLOT()
+void ConfigDlg::on_ui_buttonBox_accepted()
 {
   m_cfg->setInt( "Custom colors", "count", QColorDialog::customCount() );
 
@@ -341,17 +337,24 @@ void ConfigDlg::applySLOT()
 
   Q_EMIT accepted();
 
-  if (sender() == ui_ok)
+  if ((sender() == ui_buttonBox) && m_buttonBox_OK)
   {
 	hide();
   }
+}
+void ConfigDlg::on_ui_buttonBox_clicked(QAbstractButton *button)
+{
+	if(ui_buttonBox->buttonRole(button)==QDialogButtonBox::AcceptRole)
+		m_buttonBox_OK=true;
+	else
+		m_buttonBox_OK=false;
 }
 
 void ConfigDlg::writePrinter( QPrinter * printer )
 {
   m_printer = printer;
 
-  applySLOT();
+  on_ui_buttonBox_accepted();
 }
 
 void ConfigDlg::readPrinter( QPrinter * printer )

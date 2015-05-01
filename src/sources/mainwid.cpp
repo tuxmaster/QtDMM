@@ -52,7 +52,7 @@ MainWid::MainWid( QWidget *parent ) :  QFrame( parent ),
   m_printDlg->hide();
 
   connect( m_dmm, SIGNAL( value( double, const QString &, const QString &, const QString &, bool, int )),
-           this,  SLOT( valueSLOT( double, const QString &, const QString &, const QString &, bool, int )));
+		   this,  SLOT( valueSLOT( double, const QString &, const QString &, const QString &, bool, int )));
   connect( m_dmm, SIGNAL( error( const QString & ) ),this, SIGNAL( error( const QString & )));
   connect( ui_graph, SIGNAL( info( const QString & ) ),this, SIGNAL( info( const QString & ) ));
   connect( ui_graph, SIGNAL( error( const QString & ) ),this, SIGNAL( error( const QString & ) ));
@@ -72,14 +72,14 @@ MainWid::MainWid( QWidget *parent ) :  QFrame( parent ),
   connect( ui_graph, SIGNAL( zoomOut( double ) ), m_configDlg, SLOT( zoomOutSLOT( double ) ));
   connect( ui_graph, SIGNAL( zoomIn( double ) ), m_configDlg, SLOT( zoomInSLOT( double ) ));
   connect( ui_graph, SIGNAL( thresholdChanged( DMMGraph::CursorMode, double ) ),
-           m_configDlg, SLOT( thresholdChangedSLOT( DMMGraph::CursorMode, double ) ));
+		   m_configDlg, SLOT( thresholdChangedSLOT( DMMGraph::CursorMode, double ) ));
 
   //resetSLOT();
 
   startTimer( 100 );
 
   if (m_configDlg->showTip())
-    showTipsSLOT();
+	showTipsSLOT();
 }
 
 QString MainWid::deviceListText() const
@@ -101,37 +101,37 @@ bool MainWid::closeWin()
 {
   m_dmm->close();
   m_configDlg->setWinRect( parentRect() );
-  m_configDlg->applySLOT();
+  m_configDlg->on_ui_buttonBox_accepted();
 
   Q_EMIT setConnect( false );
 
   if (ui_graph->dirty() && m_configDlg->alertUnsavedData())
   {
-    QMessageBox question( tr("QtDMM: Unsaved data" ),
-                          tr("<font size=+2><b>Unsaved data</b></font><p>"
-                             "You still have unsaved measured data in memory."
-                             " If you quit now it will be lost."
-                             "<p>Do you want to export your unsaved data first?" ),
-                             QMessageBox::Information,
-                             QMessageBox::Yes | QMessageBox::Default,
-                             QMessageBox::No,
-                             QMessageBox::Cancel | QMessageBox::Escape );
+	QMessageBox question( tr("QtDMM: Unsaved data" ),
+						  tr("<font size=+2><b>Unsaved data</b></font><p>"
+							 "You still have unsaved measured data in memory."
+							 " If you quit now it will be lost."
+							 "<p>Do you want to export your unsaved data first?" ),
+							 QMessageBox::Information,
+							 QMessageBox::Yes | QMessageBox::Default,
+							 QMessageBox::No,
+							 QMessageBox::Cancel | QMessageBox::Escape );
 
-    question.setButtonText( QMessageBox::Yes, tr("Export data first") );
-    question.setButtonText( QMessageBox::No, tr("Quit without saving") );
-    question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
+	question.setButtonText( QMessageBox::Yes, tr("Export data first") );
+	question.setButtonText( QMessageBox::No, tr("Quit without saving") );
+	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 
-    switch (question.exec())
-    {
-        case QMessageBox::Yes:
-          return ui_graph->exportDataSLOT();
+	switch (question.exec())
+	{
+		case QMessageBox::Yes:
+		  return ui_graph->exportDataSLOT();
 
-        case QMessageBox::No:
-          break;
+		case QMessageBox::No:
+		  break;
 
-        case QMessageBox::Cancel:
-          return false;
-    }
+		case QMessageBox::Cancel:
+		  return false;
+	}
   }
 
   return true;
@@ -168,11 +168,11 @@ void MainWid::timerEvent( QTimerEvent * )
 void MainWid::valueSLOT( double dval, const QString & val, const QString & u,const QString & s,  bool showBar,int id )
 {
 /*  cerr << "valueSLOT " << dval
-       << " val=" << val.latin1()
-       << " u=" << u.latin1()
-       << " s=" << s.latin1()
-       << " showBar=" << showBar
-       << " id=" << id << endl;  */
+	   << " val=" << val.latin1()
+	   << " u=" << u.latin1()
+	   << " s=" << s.latin1()
+	   << " showBar=" << showBar
+	   << " id=" << id << endl;  */
 
   m_display->setShowBar( showBar );
   m_display->setValue( id, val );
@@ -185,28 +185,28 @@ void MainWid::valueSLOT( double dval, const QString & val, const QString & u,con
 
   if (0 == id)
   {
-    if (m_lastUnit != s)
-    {
-      resetSLOT();
-      ui_graph->setUnit( u );
-    }
-    m_lastUnit = s;
+	if (m_lastUnit != s)
+	{
+	  resetSLOT();
+	  ui_graph->setUnit( u );
+	}
+	m_lastUnit = s;
 
-    if (dval > m_max)
-    {
-      m_max = dval;
-      m_display->setMaxUnit( u );
-      m_display->setMaxValue( val );
-    }
+	if (dval > m_max)
+	{
+	  m_max = dval;
+	  m_display->setMaxUnit( u );
+	  m_display->setMaxValue( val );
+	}
 
-    if (dval < m_min)
-    {
-      m_min = dval;
-      m_display->setMinUnit( u );
-      m_display->setMinValue( val );
-    }
+	if (dval < m_min)
+	{
+	  m_min = dval;
+	  m_display->setMinUnit( u );
+	  m_display->setMinValue( val );
+	}
 
-    m_dval = dval;
+	m_dval = dval;
   }
 
   m_display->update();
@@ -227,13 +227,13 @@ void MainWid::connectSLOT( bool on )
 {
   if (on)
   {
-    m_dmm->open();
-    ui_graph->clearSLOT();
+	m_dmm->open();
+	ui_graph->clearSLOT();
   }
   else
   {
-    m_dmm->close();
-    ui_graph->stopSLOT();
+	m_dmm->close();
+	ui_graph->stopSLOT();
   }
 
   m_configDlg->connectSLOT( on );
@@ -283,7 +283,7 @@ void MainWid::applySLOT()
 void MainWid::zoomedSLOT()
 {
   ui_graph->setGraphSize( m_configDlg->windowSeconds(),
-                          m_configDlg->totalSeconds() );
+						  m_configDlg->totalSeconds() );
 }
 
 void MainWid::exportSLOT()
@@ -302,8 +302,8 @@ void MainWid::printSLOT()
 
   if (m_printDlg->exec())
   {
-    m_configDlg->writePrinter( &m_printer );
-    ui_graph->print( &m_printer, m_printDlg->title(), m_printDlg->comment() );
+	m_configDlg->writePrinter( &m_printer );
+	ui_graph->print( &m_printer, m_printDlg->title(), m_printDlg->comment() );
   }
 }
 
@@ -328,21 +328,21 @@ void MainWid::readConfig()
 
   if (m_dmm->isOpen())
   {
-    m_dmm->close();
-    reopen = true;
+	m_dmm->close();
+	reopen = true;
   }
 
   m_dmm->setDevice( m_configDlg->device() );
   m_dmm->setSpeed( m_configDlg->speed() );
   m_dmm->setFormat( m_configDlg->format() );
   m_dmm->setPortSettings( m_configDlg->bits(), m_configDlg->stopBits(),
-                          m_configDlg->parity(), m_configDlg->externalSetup(),
-                          m_configDlg->rts(), m_configDlg->cts(),
-                          m_configDlg->dsr(), m_configDlg->dtr()
-                        );
+						  m_configDlg->parity(), m_configDlg->externalSetup(),
+						  m_configDlg->rts(), m_configDlg->cts(),
+						  m_configDlg->dsr(), m_configDlg->dtr()
+						);
 
   ui_graph->setGraphSize( m_configDlg->windowSeconds(),
-                          m_configDlg->totalSeconds() );
+						  m_configDlg->totalSeconds() );
   ui_graph->setStartTime( m_configDlg->startTime() );
   ui_graph->setMode( m_configDlg->sampleMode() );
 
@@ -352,30 +352,30 @@ void MainWid::readConfig()
   ui_graph->setCrosshair( m_configDlg->crosshair() );
 
   ui_graph->setThresholds( m_configDlg->fallingThreshold(),
-                           m_configDlg->raisingThreshold() );
+						   m_configDlg->raisingThreshold() );
 
   ui_graph->setScale( m_configDlg->automaticScale(),
-                      m_configDlg->includeZero(),
-                      m_configDlg->scaleMin(),
-                      m_configDlg->scaleMax() );
+					  m_configDlg->includeZero(),
+					  m_configDlg->scaleMin(),
+					  m_configDlg->scaleMax() );
 
   ui_graph->setColors( m_configDlg->bgColor(),
-                       m_configDlg->gridColor(),
-                       m_configDlg->dataColor(),
-                       m_configDlg->cursorColor(),
-                       m_configDlg->startColor(),
-                       m_configDlg->externalColor(),
-                       m_configDlg->intColor(),
-                       m_configDlg->intThresholdColor() );
+					   m_configDlg->gridColor(),
+					   m_configDlg->dataColor(),
+					   m_configDlg->cursorColor(),
+					   m_configDlg->startColor(),
+					   m_configDlg->externalColor(),
+					   m_configDlg->intColor(),
+					   m_configDlg->intThresholdColor() );
 
   ui_graph->setExternal( m_configDlg->startExternal(),
-                         m_configDlg->externalFalling(),
-                         m_configDlg->externalThreshold() );
+						 m_configDlg->externalFalling(),
+						 m_configDlg->externalThreshold() );
 
   ui_graph->setLineStyle( m_configDlg->lineMode(),
-                          m_configDlg->pointMode(),
-                          m_configDlg->intLineMode(),
-                          m_configDlg->intPointMode() );
+						  m_configDlg->pointMode(),
+						  m_configDlg->intLineMode(),
+						  m_configDlg->intPointMode() );
 
   QPalette cg = palette();
   cg.setColor( QPalette::Window, m_configDlg->displayBgColor() );
@@ -383,44 +383,44 @@ void MainWid::readConfig()
 
   m_display->setPalette(cg);
   m_display->setDisplayMode( m_configDlg->display(), m_configDlg->showMinMax(),
-                             m_configDlg->showBar(), m_configDlg->numValues() );
+							 m_configDlg->showBar(), m_configDlg->numValues() );
   m_dmm->setNumValues( m_configDlg->numValues() );
 
   ui_graph->setLine( m_configDlg->lineWidth(), m_configDlg->intLineWidth() );
 
   ui_graph->setIntegration( m_configDlg->showIntegration(),
-                            m_configDlg->intScale(),
-                            m_configDlg->intThreshold(),
-                            m_configDlg->intOffset() );
+							m_configDlg->intScale(),
+							m_configDlg->intThreshold(),
+							m_configDlg->intOffset() );
 
   if (m_configDlg->sampleMode() == DMMGraph::Time)
   {
-    QString txt;
-    txt.sprintf( "%s %s", tr( "Automatic start at" ).toLatin1().constData(),m_configDlg->startTime().toString().toLatin1().constData() );
-    Q_EMIT info( txt );
+	QString txt;
+	txt.sprintf( "%s %s", tr( "Automatic start at" ).toLatin1().constData(),m_configDlg->startTime().toString().toLatin1().constData() );
+	Q_EMIT info( txt );
   }
   else if (m_configDlg->sampleMode() == DMMGraph::Raising)
   {
-    QString txt;
-    txt.sprintf( "%s %g", tr( "Raising threshold" ).toLatin1().constData(),m_configDlg->raisingThreshold());
-    Q_EMIT info( txt );
+	QString txt;
+	txt.sprintf( "%s %g", tr( "Raising threshold" ).toLatin1().constData(),m_configDlg->raisingThreshold());
+	Q_EMIT info( txt );
   }
   else if (m_configDlg->sampleMode() == DMMGraph::Falling)
   {
-    QString txt;
-    txt.sprintf( "%s %g", tr( "Falling threshold" ).toLatin1().constData(), m_configDlg->fallingThreshold() );
-    Q_EMIT info( txt );
+	QString txt;
+	txt.sprintf( "%s %g", tr( "Falling threshold" ).toLatin1().constData(), m_configDlg->fallingThreshold() );
+	Q_EMIT info( txt );
   }
 
   Q_EMIT useTextLabel( m_configDlg->useTextLabel() );
   Q_EMIT toolbarVisibility( m_configDlg->showDisplay(),
-                          m_configDlg->showDmmToolbar(),
-                          m_configDlg->showGraphToolbar(),
-                          m_configDlg->showFileToolbar(),
-                          m_configDlg->showHelpToolbar() );
+						  m_configDlg->showDmmToolbar(),
+						  m_configDlg->showGraphToolbar(),
+						  m_configDlg->showFileToolbar(),
+						  m_configDlg->showHelpToolbar() );
 
   if (reopen)
-    m_dmm->open();
+	m_dmm->open();
 }
 
 void MainWid::runningSLOT( bool on )
@@ -432,35 +432,35 @@ void MainWid::startExternalSLOT()
 {
   if (m_external->state() == QProcess::Running)
   {
-    QString msg;
-    msg.sprintf( tr("<font size=+2><b>Launch error</b></font><p>"
-                    "Application %s is still running!<p>"
-                    "Do you want to kill it now").toLatin1().constData(),
-                    m_configDlg->externalCommand().toLatin1().constData() );
+	QString msg;
+	msg.sprintf( tr("<font size=+2><b>Launch error</b></font><p>"
+					"Application %s is still running!<p>"
+					"Do you want to kill it now").toLatin1().constData(),
+					m_configDlg->externalCommand().toLatin1().constData() );
 
-    QMessageBox question( tr("QtDMM: Launch error" ),
-                          msg,
-                             QMessageBox::Information,
-                             QMessageBox::Yes | QMessageBox::Default,
-                             QMessageBox::No,
-                             Qt::NoButton );
+	QMessageBox question( tr("QtDMM: Launch error" ),
+						  msg,
+							 QMessageBox::Information,
+							 QMessageBox::Yes | QMessageBox::Default,
+							 QMessageBox::No,
+							 Qt::NoButton );
 
-    question.setButtonText( QMessageBox::Yes, tr("Yes, kill it!") );
-    question.setButtonText( QMessageBox::Yes, tr("No, keep running") );
-    question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
+	question.setButtonText( QMessageBox::Yes, tr("Yes, kill it!") );
+	question.setButtonText( QMessageBox::Yes, tr("No, keep running") );
+	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 
-    switch (question.exec())
-    {
-        case QMessageBox::Yes:
-          m_external->kill();
-          break;
-        default:
-          return;
-    }
+	switch (question.exec())
+	{
+		case QMessageBox::Yes:
+		  m_external->kill();
+		  break;
+		default:
+		  return;
+	}
   }
 
   if (m_configDlg->disconnectExternal())
-    Q_EMIT setConnect( false );
+	Q_EMIT setConnect( false );
 
   QStringList args;
   args.append( m_configDlg->externalCommand() );
@@ -470,28 +470,28 @@ void MainWid::startExternalSLOT()
   m_external->start();
   if (m_external->state() != QProcess::Starting)
   {
-    QString msg;
-    msg.sprintf( tr("<font size=+2><b>Launch error</b></font><p>"
-                    "Couldn't launch %s").toLatin1().constData(),
-                    m_configDlg->externalCommand().toLatin1().constData() );
+	QString msg;
+	msg.sprintf( tr("<font size=+2><b>Launch error</b></font><p>"
+					"Couldn't launch %s").toLatin1().constData(),
+					m_configDlg->externalCommand().toLatin1().constData() );
 
-    QMessageBox question( tr("QtDMM: Launch error" ),
-                          msg,
-                             QMessageBox::Information,
-                             QMessageBox::Yes | QMessageBox::Default,
-                             Qt::NoButton,
-                             Qt::NoButton );
+	QMessageBox question( tr("QtDMM: Launch error" ),
+						  msg,
+							 QMessageBox::Information,
+							 QMessageBox::Yes | QMessageBox::Default,
+							 Qt::NoButton,
+							 Qt::NoButton );
 
-    question.setButtonText( QMessageBox::Yes, tr("Bummer!") );
-    question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
+	question.setButtonText( QMessageBox::Yes, tr("Bummer!") );
+	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 
-    question.exec();
+	question.exec();
   }
   else
   {
-    QString msg;
-    msg.sprintf( tr("Launched %s").toLatin1().constData(), m_configDlg->externalCommand().toLatin1().constData() );
-    Q_EMIT error( msg );
+	QString msg;
+	msg.sprintf( tr("Launched %s").toLatin1().constData(), m_configDlg->externalCommand().toLatin1().constData() );
+	Q_EMIT error( msg );
   }
 }
 
@@ -506,17 +506,17 @@ void MainWid::showTipsSLOT()
 {
   if (!m_tipDlg)
   {
-    m_tipDlg = new TipDlg( this );
+	m_tipDlg = new TipDlg( this );
 
-    m_tipDlg->setShowTipsSLOT( m_configDlg->showTip() );
-    m_tipDlg->setCurrentTip( m_configDlg->currentTipId() );
+	m_tipDlg->setShowTipsSLOT( m_configDlg->showTip() );
+	m_tipDlg->setCurrentTip( m_configDlg->currentTipId() );
 
-    connect( m_tipDlg, SIGNAL( showTips( bool ) ),
-             m_configDlg, SLOT( setShowTipsSLOT( bool ) ));
-    connect( m_configDlg, SIGNAL( showTips( bool ) ),
-             m_tipDlg, SLOT( setShowTipsSLOT( bool ) ));
-    connect( m_tipDlg, SIGNAL( currentTip( int ) ),
-             m_configDlg, SLOT( setCurrentTipSLOT( int ) ));
+	connect( m_tipDlg, SIGNAL( showTips( bool ) ),
+			 m_configDlg, SLOT( setShowTipsSLOT( bool ) ));
+	connect( m_configDlg, SIGNAL( showTips( bool ) ),
+			 m_tipDlg, SLOT( setShowTipsSLOT( bool ) ));
+	connect( m_tipDlg, SIGNAL( currentTip( int ) ),
+			 m_configDlg, SLOT( setCurrentTipSLOT( int ) ));
 
   }
 
