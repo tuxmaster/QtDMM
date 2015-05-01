@@ -46,7 +46,7 @@ class ExecutePrefs : public PrefWidget, private Ui::UIExecutePrefs
 	  virtual void	applySLOT()Q_DECL_OVERRIDE;
 
 	protected Q_SLOTS:
-	  void			browseExecSLOT();
+	  void			on_ui_browseExec_clicked();
 
 };
 

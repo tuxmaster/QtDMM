@@ -41,7 +41,7 @@ class GuiPrefs : public PrefWidget, private Ui::UIGuiPrefs
 	  QColor		displayTextColor() const;
 	  bool			saveWindowPosition() const;
 	  bool			saveWindowSize() const;
-	  void			setShowTipsSLOT( bool on );
+	  void			on_ui_tipOfTheDay_toggled( bool on );
 	  bool			showDmmToolbar() const;
 	  bool			showGraphToolbar() const;
 	  bool			showFileToolbar() const;

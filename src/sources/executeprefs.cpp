@@ -41,7 +41,6 @@ ExecutePrefs::ExecutePrefs( QWidget *parent) : PrefWidget( parent )
   ui_execRaisingThreshold->setValidator( validator );
   ui_execFallingThreshold->setValidator( validator );
 
-  connect( ui_browseExec, SIGNAL( clicked() ), this, SLOT( browseExecSLOT() ));
 }
 ExecutePrefs::~ExecutePrefs()
 {
@@ -117,7 +116,7 @@ QString ExecutePrefs::externalCommand() const
   return ui_commandExec->text();
 }
 
-void ExecutePrefs::browseExecSLOT()
+void ExecutePrefs::on_ui_browseExec_clicked()
 {
   QString filename = QFileDialog::getOpenFileName(this, QString(),QString(),"*");
 

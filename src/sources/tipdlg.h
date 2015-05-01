@@ -57,10 +57,10 @@ class TipDlg : public QDialog,private Ui::UITipDlg
 	  void						closeEvent( QCloseEvent * )Q_DECL_OVERRIDE;
 
 	protected Q_SLOTS:
-	  void						nextSLOT();
-	  void						previousSLOT();
-	  void						closeSLOT();
-	  void						showTipsSLOT( bool );
+	  void						on_ui_nextBut_clicked();
+	  void						on_ui_previousBut_clicked();
+	  void						on_ui_closeBut_clicked();
+	  void						on_ui_showTip_toggled( bool );
 
 };
 

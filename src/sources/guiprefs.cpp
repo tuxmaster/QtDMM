@@ -35,8 +35,6 @@ GuiPrefs::GuiPrefs( QWidget *parent) : PrefWidget( parent )
   m_description = tr( "<b>Here you can configure QtDMM's visual"
 					  " appearance and behaviour.</b>" );
   m_pixmap = new QPixmap(":/Symbols/gui.xpm" );
-
-  connect( ui_tipOfTheDay, SIGNAL( toggled( bool ) ), this, SIGNAL( showTips( bool ) ));
 }
 GuiPrefs::~GuiPrefs()
 {
@@ -188,7 +186,7 @@ bool GuiPrefs::saveWindowSize() const
   return ui_saveWindowSize->isChecked();
 }
 
-void GuiPrefs::setShowTipsSLOT( bool on )
+void GuiPrefs::on_ui_tipOfTheDay_toggled( bool on )
 {
   ui_tipOfTheDay->setChecked( on );
 }

@@ -75,10 +75,6 @@ TipDlg::TipDlg(QWidget *parent) :  QDialog( parent),
 {
   setupUi(this);
   ui_tip->setStyleSheet(QString("background-color: %1;").arg(palette().background().color().name()));
-  connect( ui_closeBut, SIGNAL( clicked() ),this, SLOT( closeSLOT() ));
-  connect( ui_previousBut, SIGNAL( clicked() ),this, SLOT( previousSLOT() ));
-  connect( ui_nextBut, SIGNAL( clicked() ), this, SLOT( nextSLOT() ));
-  connect( ui_showTip, SIGNAL( toggled(bool) ),this, SLOT( showTipsSLOT(bool) ));
 
   // count tips
   m_numTips=s_tipText.size();
@@ -95,7 +91,7 @@ void TipDlg::setShowTipsSLOT( bool on )
   ui_showTip->setChecked( !on );
 }
 
-void TipDlg::previousSLOT()
+void TipDlg::on_ui_previousBut_clicked()
 {
   --m_curTip;
   if (m_curTip < 0)
@@ -103,7 +99,7 @@ void TipDlg::previousSLOT()
   showTipText();
 }
 
-void TipDlg::nextSLOT()
+void TipDlg::on_ui_nextBut_clicked()
 {
   ++m_curTip;
   m_curTip = m_curTip % m_numTips;
@@ -122,19 +118,19 @@ void TipDlg::setCurrentTip( int num )
   showTipText();
 }
 
-void TipDlg::closeSLOT()
+void TipDlg::on_ui_closeBut_clicked()
 {
-  nextSLOT();
+  on_ui_nextBut_clicked();
   hide();
 }
 
 void TipDlg::closeEvent( QCloseEvent *ev )
 {
-  nextSLOT();
+  on_ui_nextBut_clicked();
   ev->accept();
 }
 
-void TipDlg::showTipsSLOT( bool on )
+void TipDlg::on_ui_showTip_toggled( bool on )
 {
   Q_EMIT showTips( !on );
 }

@@ -41,8 +41,8 @@ class PrintDlg : public QDialog, private Ui::UIPrintDlg
 	  QPrinter	*m_printer;
 
 	protected Q_SLOTS:
-	  void		configSLOT();
-	  void		helpSLOT();
+	  void		on_configBut_clicked();
+	  void		on_helpBut_clicked();
 	  void		createPrinterString();
 
 };

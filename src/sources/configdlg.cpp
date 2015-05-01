@@ -509,7 +509,7 @@ bool ConfigDlg::saveWindowSize() const
 
 void ConfigDlg::setShowTipsSLOT( bool on )
 {
-  m_gui->setShowTipsSLOT( on );
+  m_gui->on_ui_tipOfTheDay_toggled( on );
 }
 
 bool ConfigDlg::showDmmToolbar() const

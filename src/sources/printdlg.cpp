@@ -30,8 +30,6 @@
 PrintDlg::PrintDlg( QWidget *parent ) : QDialog( parent)
 {
   setupUi(this);
-  connect( configBut, SIGNAL( clicked() ), this, SLOT( configSLOT() ));
-  connect( helpBut, SIGNAL( clicked() ),  this, SLOT( helpSLOT() ));
 }
 
 void PrintDlg::setPrinter( QPrinter * prt )
@@ -40,7 +38,7 @@ void PrintDlg::setPrinter( QPrinter * prt )
   createPrinterString();
 }
 
-void PrintDlg::configSLOT()
+void PrintDlg::on_configBut_clicked()
 {
   static QPrintDialog* dlgprinter=0;
   if(!dlgprinter)
@@ -78,7 +76,7 @@ void PrintDlg::createPrinterString()
   printBut->setEnabled( true );
 }
 
-void PrintDlg::helpSLOT()
+void PrintDlg::on_helpBut_clicked()
 {
   QWhatsThis::enterWhatsThisMode();
 }
