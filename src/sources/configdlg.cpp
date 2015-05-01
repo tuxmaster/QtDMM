@@ -182,7 +182,6 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
   connect( ui_cancel, SIGNAL( clicked() ), this, SLOT( cancelSLOT() ));
   connect( ui_factoryDefaults, SIGNAL( clicked() ), this, SLOT( factoryDefaultsSLOT() ));
 
-  connect( ui_list, SIGNAL( currentItemChanged( QListWidgetItem *, QListWidgetItem *) ),  this, SLOT( pageSelectedSLOT(QListWidgetItem*)));
 
   // init stuff
   //
@@ -369,9 +368,9 @@ void ConfigDlg::readPrinter( QPrinter * printer )
   m_printer->setOutputFormat((m_cfg->getBool( "Printer", "print-file", false )) ? QPrinter::PdfFormat : QPrinter::NativeFormat  );
 }
 
-void ConfigDlg::pageSelectedSLOT(QListWidgetItem *item )
+void ConfigDlg::on_ui_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *)
 {
-  int id = ((ConfigItem *)item)->id();
+  int id = ((ConfigItem *)current)->id();
   PrefWidget *wid = (PrefWidget *)ui_stack->widget( id );
   ui_stack->setCurrentWidget( wid );
 

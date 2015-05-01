@@ -160,7 +160,7 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 	  ExecutePrefs			*m_execute;
 
 	protected Q_SLOTS:
-	  void					pageSelectedSLOT( QListWidgetItem *item );
+	  void					on_ui_list_currentItemChanged( QListWidgetItem *current ,QListWidgetItem *);
 	  void					factoryDefaultsSLOT();
 
 };
