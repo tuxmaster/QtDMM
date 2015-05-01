@@ -180,10 +180,8 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
   connect( ui_ok, SIGNAL( clicked() ), this, SLOT( applySLOT() ));
   connect( ui_apply, SIGNAL( clicked() ), this, SLOT( applySLOT() ));
   connect( ui_cancel, SIGNAL( clicked() ), this, SLOT( cancelSLOT() ));
-  connect( ui_factoryDefaults, SIGNAL( clicked() ), this, SLOT( factoryDefaultsSLOT() ));
 
-
-  // init stuff
+   // init stuff
   //
   cancelSLOT();
   showPage( DMM );
@@ -222,7 +220,7 @@ void ConfigDlg::showPage( ConfigDlg::PageType page )
   }
 }
 
-void ConfigDlg::factoryDefaultsSLOT()
+void ConfigDlg::on_ui_factoryDefaults_clicked()
 {
   ((PrefWidget *)ui_stack->currentWidget())->factoryDefaultsSLOT();
 }

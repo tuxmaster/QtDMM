@@ -161,7 +161,7 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 
 	protected Q_SLOTS:
 	  void					on_ui_list_currentItemChanged( QListWidgetItem *current ,QListWidgetItem *);
-	  void					factoryDefaultsSLOT();
+	  void					on_ui_factoryDefaults_clicked();
 
 };
 
