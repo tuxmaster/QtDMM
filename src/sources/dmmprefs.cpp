@@ -145,7 +145,7 @@ DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
   m_pixmap = new QPixmap( ":/Symbols/dmm.xpm" );
 
   ui_model->clear();
-  ui_model->insertItem(-1,"Manual settings" );
+  ui_model->insertItem(-1,tr("Manual settings") );
 
   int id = 0;
   while (*dmm_info[id].name)
@@ -153,17 +153,11 @@ DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
 
   message2->hide();
 
-  connect( ui_model, SIGNAL( activated( int ) ),  this, SLOT( modelSLOT( int )));
-  connect( ui_externalSetup, SIGNAL( toggled( bool ) ),   this, SLOT( externalSetupSLOT()));
-  connect( ui_load, SIGNAL( clicked() ), this, SLOT( loadSLOT()));
-  connect( ui_save, SIGNAL( clicked() ), this, SLOT( saveSLOT()));
-
   m_path = QDir::currentPath();
 
 #ifdef Q_WS_MACX
-  connect( ui_scanPorts, SIGNAL( clicked() ), this, SLOT( scanDevicesSLOT() ));
   portNumber->hide();
-  scanDevicesSLOT();
+  on_ui_scanPorts_clicked();
 #else
   ui_scanPorts->hide();
 #endif
@@ -173,7 +167,7 @@ DmmPrefs::~DmmPrefs()
 	delete m_pixmap;
 }
 
-void DmmPrefs::scanDevicesSLOT()
+void DmmPrefs::on_ui_scanPorts_clicked()
 {
 #ifdef Q_WS_MACX
   port->clear();
@@ -254,7 +248,7 @@ void DmmPrefs::defaultsSLOT()
 	id++;
   }
 
-  modelSLOT( ui_model->currentIndex() );
+  on_ui_model_activated( ui_model->currentIndex() );
 }
 
 void DmmPrefs::factoryDefaultsSLOT()
@@ -271,7 +265,7 @@ void DmmPrefs::factoryDefaultsSLOT()
   ui_numValues->setValue( 1 );
   ui_model->setCurrentIndex( 0 );
 
-  modelSLOT( ui_model->currentIndex() );
+  on_ui_model_activated( ui_model->currentIndex() );
 }
 
 void DmmPrefs::applySLOT()
@@ -291,7 +285,7 @@ void DmmPrefs::applySLOT()
   m_cfg->setString( "DMM", "model", (ui_model->currentIndex() == 0 ? "Manual" : dmm_info[ui_model->currentIndex()-1].name ));
 }
 
-void DmmPrefs::externalSetupSLOT()
+void DmmPrefs::on_ui_externalSetup_toggled()
 {
   if (ui_model->currentIndex() == 0)
   {
@@ -302,7 +296,7 @@ void DmmPrefs::externalSetupSLOT()
   }
 }
 
-void DmmPrefs::modelSLOT( int id )
+void DmmPrefs::on_ui_model_activated( int id )
 {
   ui_filename->setDisabled( id != 0 );
   ui_save->setDisabled( id != 0 );
@@ -447,7 +441,7 @@ QString DmmPrefs::device() const
 #endif
 }
 
-void DmmPrefs::loadSLOT()
+void DmmPrefs::on_ui_load_clicked()
 {
   QString filename = QFileDialog::getOpenFileName(this,tr("Load DMM description"), m_path,	tr("DMM description (*.ini)"));
 
@@ -477,7 +471,7 @@ void DmmPrefs::loadSLOT()
   }
 }
 
-void DmmPrefs::saveSLOT()
+void DmmPrefs::on_ui_save_clicked()
 {
   QString filename = QFileDialog::getSaveFileName(this, tr("Save DMM description"),m_path,tr("DMM description (*.ini)"));
   if (!filename.isNull())

@@ -72,12 +72,11 @@ class DmmPrefs : public PrefWidget ,private Ui::UIDmmPrefs
 	  virtual void			applySLOT() Q_DECL_OVERRIDE;
 
 	protected Q_SLOTS:
-	  void					modelSLOT( int );
-	  void					loadSLOT();
-	  void					saveSLOT();
-	  // empty function as damn moc doesn't know about defines
-	  void					scanDevicesSLOT();
-	  void					externalSetupSLOT();
+	  void					on_ui_model_activated( int );
+	  void					on_ui_load_clicked();
+	  void					on_ui_save_clicked();
+	  void					on_ui_scanPorts_clicked();
+	  void					on_ui_externalSetup_toggled();
 
 	protected:
 	  QString				m_path;
