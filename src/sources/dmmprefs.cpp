@@ -22,6 +22,7 @@
 
 #include <QtGui>
 #include <QtWidgets>
+#include <QSerialPortInfo>
 
 #include "dmmprefs.h"
 #include "simplecfg.h"
@@ -162,6 +163,8 @@ DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
 #else
   ui_scanPorts->hide();
 #endif
+  for(auto port: QSerialPortInfo::availablePorts())
+	qDebug()<<port.portName()<<"--"<<port.manufacturer()<<"--"<<port.description()<<"--"<<port.systemLocation();
 }
 DmmPrefs::~DmmPrefs()
 {

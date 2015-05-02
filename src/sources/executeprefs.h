@@ -31,7 +31,7 @@ class ExecutePrefs : public PrefWidget, private Ui::UIExecutePrefs
 {
   Q_OBJECT
 	public:
-	  ExecutePrefs(QWidget *parent=0);
+	  ExecutePrefs(QWidget *parent=Q_NULLPTR);
 	  ~ExecutePrefs();
 	  bool			startExternal() const;
 	  bool			externalFalling() const;

@@ -31,7 +31,7 @@ class IntegrationPrefs : public PrefWidget,private Ui::UIIntegrationPrefs
 {
   Q_OBJECT
 	public:
-	  IntegrationPrefs(QWidget *parent=0);
+	  IntegrationPrefs(QWidget *parent=Q_NULLPTR);
 	  ~IntegrationPrefs();
 	  double		intScale() const;
 	  double		intThreshold() const;

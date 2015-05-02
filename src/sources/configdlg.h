@@ -53,7 +53,7 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 		NumItems
 	  };
 
-	  ConfigDlg(QWidget *parent=0);
+	  ConfigDlg(QWidget *parent=Q_NULLPTR);
 	  QString				device() const;
 	  int					speed() const;
 	  int					windowSeconds() const;

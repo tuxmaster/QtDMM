@@ -31,7 +31,7 @@ class DisplayWid : public QWidget
 {
   Q_OBJECT
 	public:
-	  DisplayWid( QWidget *parent=0);
+	  DisplayWid( QWidget *parent=Q_NULLPTR);
 	  virtual	~DisplayWid();
 
 	  void		setValue( int, const QString & );

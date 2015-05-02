@@ -31,7 +31,7 @@ class TipDlg : public QDialog,private Ui::UITipDlg
 {
   Q_OBJECT
 	public:
-	  TipDlg( QWidget *parent=0 );
+	  TipDlg( QWidget *parent=Q_NULLPTR );
 
 
 	  bool						showTips() const;

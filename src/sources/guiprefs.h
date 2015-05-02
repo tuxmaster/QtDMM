@@ -30,7 +30,7 @@ class GuiPrefs : public PrefWidget, private Ui::UIGuiPrefs
 {
   Q_OBJECT
 	public:
-	  GuiPrefs(QWidget *parent=0);
+	  GuiPrefs(QWidget *parent=Q_NULLPTR);
 	  ~GuiPrefs();
 	  bool			showTip() const;
 	  bool			showBar() const;

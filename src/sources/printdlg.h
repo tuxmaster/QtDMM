@@ -32,7 +32,7 @@ class PrintDlg : public QDialog, private Ui::UIPrintDlg
 {
   Q_OBJECT
 	public:
-	  PrintDlg(QWidget *parent=0);
+	  PrintDlg(QWidget *parent=Q_NULLPTR);
 	  void		setPrinter( QPrinter * prt );
 	  QString	title() const { return printTitle->text(); }
 	  QString	comment() const { return printComment->toPlainText(); }

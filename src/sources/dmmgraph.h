@@ -79,7 +79,7 @@ class DMMGraph : public QWidget
 		IDImportData
 	  };
 
-	  DMMGraph(QWidget *parent=0);
+	  DMMGraph(QWidget *parent=Q_NULLPTR);
 	  ~DMMGraph();
 	  void						setGraphSize( int size, int length );
 	  void						addValue( double );

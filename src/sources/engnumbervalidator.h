@@ -29,7 +29,7 @@
 class EngNumberValidator : public QValidator
 {
 	public:
-	  EngNumberValidator( QObject *parent=0);
+	  EngNumberValidator( QObject *parent=Q_NULLPTR);
 	  QValidator::State	validate( QString &, int & ) const Q_DECL_OVERRIDE;
 
 	  static double		value( const QString & );

@@ -30,7 +30,7 @@ class GraphPrefs : public PrefWidget,private Ui::UIGraphPrefs
 {
   Q_OBJECT
 	public:
-	  GraphPrefs(QWidget *parent=0);
+	  GraphPrefs(QWidget *parent=Q_NULLPTR);
 	  ~GraphPrefs();
 	  QColor		bgColor() const;
 	  QColor		gridColor() const;

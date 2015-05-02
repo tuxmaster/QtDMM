@@ -36,7 +36,7 @@ class MainWin : public QMainWindow, private Ui::UIMainWin
 {
   Q_OBJECT
 	public:
-	  MainWin(QWidget *parent=0);
+	  MainWin(QWidget *parent=Q_NULLPTR);
 	  void			setConsoleLogging( bool );
 
 	protected Q_SLOTS:

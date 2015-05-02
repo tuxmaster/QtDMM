@@ -31,7 +31,7 @@ class ScalePrefs : public PrefWidget,private Ui::UIScalePrefs
 {
   Q_OBJECT
 	public:
-	  ScalePrefs(QWidget *parent=0);
+	  ScalePrefs(QWidget *parent=Q_NULLPTR);
 	  ~ScalePrefs();
 	  bool			automaticScale() const;
 	  bool			includeZero() const;

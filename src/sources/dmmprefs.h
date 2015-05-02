@@ -47,7 +47,7 @@ class DmmPrefs : public PrefWidget ,private Ui::UIDmmPrefs
 {
   Q_OBJECT
 	public:
-	  DmmPrefs( QWidget *parent=0);
+	  DmmPrefs( QWidget *parent=Q_NULLPTR);
 	  ~DmmPrefs();
 	  int					parity() const;
 	  int					bits() const;

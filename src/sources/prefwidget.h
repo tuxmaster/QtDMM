@@ -33,7 +33,7 @@ class PrefWidget : public QWidget
 {
   Q_OBJECT
 	public:
-	  PrefWidget( QWidget *parent=0);
+	  PrefWidget( QWidget *parent=Q_NULLPTR);
 	  QString		label() const { return m_label; }
 	  QString		description() const { return m_description; }
 	  QPixmap		pixmap() const { return *m_pixmap; }
