@@ -27,7 +27,7 @@
 #include "dmmgraph.h"
 #include "readevent.h"
 
-class SimpleCfg;
+class Settings;
 class QPrinter;
 class RecorderPrefs;
 class ScalePrefs;
@@ -54,7 +54,6 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 	  };
 
 	  ConfigDlg(QWidget *parent=0);
-	  ~ConfigDlg();
 	  QString				device() const;
 	  int					speed() const;
 	  int					windowSeconds() const;
@@ -148,7 +147,6 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 	  void					zoomed();
 
 	protected:
-	  SimpleCfg				*m_cfg;
 	  QPrinter				*m_printer;
 	  QRect					m_winRect;
 	  RecorderPrefs			*m_recorder;
@@ -164,6 +162,9 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 	  void					on_ui_list_currentItemChanged( QListWidgetItem *current ,QListWidgetItem *);
 	  void					on_ui_factoryDefaults_clicked();
 	  void					on_ui_buttonBox_clicked(QAbstractButton *button);
+
+	private:
+	  Settings				*m_settings;
 
 };
 

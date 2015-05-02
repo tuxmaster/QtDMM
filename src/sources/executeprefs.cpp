@@ -25,7 +25,7 @@
 
 #include "engnumbervalidator.h"
 #include "executeprefs.h"
-#include "simplecfg.h"
+#include "Settings.h"
 
 
 ExecutePrefs::ExecutePrefs( QWidget *parent) : PrefWidget( parent )
@@ -49,14 +49,14 @@ ExecutePrefs::~ExecutePrefs()
 
 void ExecutePrefs::defaultsSLOT()
 {
-  ui_executeCommand->setChecked( m_cfg->getBool( "External", "exec", false ));
+  ui_executeCommand->setChecked( m_cfg->getBool( "External/exec"));
 
-  ui_execRaising->setChecked( m_cfg->getBool( "External", "raising", true ));
-  ui_execRaisingThreshold->setText( m_cfg->getString( "External", "raising-threshold", "" ));
-  ui_execFallingThreshold->setText( m_cfg->getString( "External", "falling-threshold", "" ));
+  ui_execRaising->setChecked( m_cfg->getBool( "External/raising", true ));
+  ui_execRaisingThreshold->setText( m_cfg->getString( "External/raising-threshold"));
+  ui_execFallingThreshold->setText( m_cfg->getString( "External/falling-threshold"));
 
-  ui_disconnectExec->setChecked( m_cfg->getBool( "External", "disconnect", false ));
-  ui_commandExec->setText( m_cfg->getString( "External", "command", "" ));
+  ui_disconnectExec->setChecked( m_cfg->getBool( "External/disconnect"));
+  ui_commandExec->setText( m_cfg->getString( "External/command"));
 }
 
 void ExecutePrefs::factoryDefaultsSLOT()
@@ -73,12 +73,12 @@ void ExecutePrefs::factoryDefaultsSLOT()
 
 void ExecutePrefs::applySLOT()
 {
-  m_cfg->setBool( "External", "exec", startExternal() );
-  m_cfg->setBool( "External", "raising", !externalFalling() );
-  m_cfg->setString( "External", "raising-threshold", ui_execRaisingThreshold->text() );
-  m_cfg->setString( "External", "falling-threshold", ui_execFallingThreshold->text() );
-  m_cfg->setBool( "External", "disconnect", disconnectExternal() );
-  m_cfg->setString( "External", "command", externalCommand() );
+  m_cfg->setBool( "External/exec", startExternal() );
+  m_cfg->setBool( "External/raising", !externalFalling() );
+  m_cfg->setString( "External/raising-threshold", ui_execRaisingThreshold->text() );
+  m_cfg->setString( "External/falling-threshold", ui_execFallingThreshold->text() );
+  m_cfg->setBool( "External/disconnect", disconnectExternal() );
+  m_cfg->setString( "External/command", externalCommand() );
 }
 
 bool ExecutePrefs::startExternal() const

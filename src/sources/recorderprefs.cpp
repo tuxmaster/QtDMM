@@ -26,7 +26,7 @@
 
 #include "engnumbervalidator.h"
 #include "recorderprefs.h"
-#include  "simplecfg.h"
+#include  "Settings.h"
 
 #define MINUTE_SECS   60
 #define HOUR_SECS     60*60
@@ -53,12 +53,12 @@ RecorderPrefs::~RecorderPrefs()
 
 void RecorderPrefs::defaultsSLOT()
 {
-  sampleEvery->setValue( m_cfg->getInt( "Sample", "rate", 1 ));
-  ui_sampleUnit->setCurrentIndex( m_cfg->getInt( "Sample", "rate-unit", 1 ));
-  sampleTime->setValue( m_cfg->getInt( "Sample", "time", 500 ));
-  timeUnit->setCurrentIndex( m_cfg->getInt( "Sample", "time-unit", 0 ));
+  sampleEvery->setValue( m_cfg->getInt( "Sample/rate", 1 ));
+  ui_sampleUnit->setCurrentIndex( m_cfg->getInt( "Sample/rate-unit", 1 ));
+  sampleTime->setValue( m_cfg->getInt( "Sample/time", 500 ));
+  timeUnit->setCurrentIndex( m_cfg->getInt( "Sample/time-unit"));
 
-  DMMGraph::SampleMode mode = (DMMGraph::SampleMode)m_cfg->getInt( "Start", "mode", 0 );
+  DMMGraph::SampleMode mode = (DMMGraph::SampleMode)m_cfg->getInt( "Start/mode");
   if (mode == DMMGraph::Manual)
 	manualBut->setChecked( true );
   else if (mode == DMMGraph::Time)
@@ -74,11 +74,11 @@ void RecorderPrefs::defaultsSLOT()
 	fallingBut->setChecked( true );
   }
 
-  hour->setValue( m_cfg->getInt( "Start", "hour", 0 ));
-  minute->setValue( m_cfg->getInt( "Start", "minute", 0 ));
-  second->setValue( m_cfg->getInt( "Start", "second", 0 ));
-  ui_raisingThreshold->setText( m_cfg->getString( "Start", "raising-threshold", "0.0" ));
-  ui_fallingThreshold->setText( m_cfg->getString( "Start", "falling-threshold", "0.0" ));
+  hour->setValue( m_cfg->getInt( "Start/hour"));
+  minute->setValue( m_cfg->getInt( "Start/minute"));
+  second->setValue( m_cfg->getInt( "Start/second"));
+  ui_raisingThreshold->setText( m_cfg->getString( "Start/raising-threshold", "0.0" ));
+  ui_fallingThreshold->setText( m_cfg->getString( "Start/falling-threshold", "0.0" ));
 }
 
 void RecorderPrefs::factoryDefaultsSLOT()
@@ -99,17 +99,17 @@ void RecorderPrefs::factoryDefaultsSLOT()
 
 void RecorderPrefs::applySLOT()
 {
-  m_cfg->setInt( "Sample", "rate", sampleEvery->value() );
-  m_cfg->setInt( "Sample", "rate-unit", ui_sampleUnit->currentIndex() );
-  m_cfg->setInt( "Sample", "time", sampleTime->value() );
-  m_cfg->setInt( "Sample", "time-unit", timeUnit->currentIndex() );
+  m_cfg->setInt( "Sample/rate", sampleEvery->value() );
+  m_cfg->setInt( "Sample/rate-unit", ui_sampleUnit->currentIndex() );
+  m_cfg->setInt( "Sample/time", sampleTime->value() );
+  m_cfg->setInt( "Sample/time-unit", timeUnit->currentIndex() );
 
-  m_cfg->setInt( "Start", "mode", sampleMode() );
-  m_cfg->setInt( "Start", "hour", hour->value() );
-  m_cfg->setInt( "Start", "minute", minute->value() );
-  m_cfg->setInt( "Start", "second", second->value() );
-  m_cfg->setString( "Start", "raising-threshold", ui_raisingThreshold->text() );
-  m_cfg->setString( "Start", "falling-threshold", ui_fallingThreshold->text() );
+  m_cfg->setInt( "Start/mode", sampleMode() );
+  m_cfg->setInt( "Start/hour", hour->value() );
+  m_cfg->setInt( "Start/minute", minute->value() );
+  m_cfg->setInt( "Start/second", second->value() );
+  m_cfg->setString( "Start/raising-threshold", ui_raisingThreshold->text() );
+  m_cfg->setString( "Start/falling-threshold", ui_fallingThreshold->text() );
 }
 
 DMMGraph::SampleMode RecorderPrefs::sampleMode() const

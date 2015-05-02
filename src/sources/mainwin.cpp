@@ -28,8 +28,9 @@
 #include "mainwin.h"
 #include "mainwid.h"
 #include "displaywid.h"
+#include "config.h"
 
-#define VERSION_STRING "0.9.5"
+
 
 
 MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
@@ -47,10 +48,7 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
 
   setMinimumSize( 500, 450 );
 
-  QString ver = "QtDMM ";
-  ver += VERSION_STRING;
-
-  setWindowTitle(ver );
+  setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(APP_VERSION) );
 
   connect( m_wid, SIGNAL( running(bool) ),this, SLOT( runningSLOT(bool) ));
 
@@ -170,7 +168,7 @@ void MainWin::on_action_On_version_triggered()
 													"<b>Qt</b> version %3 and is licensed under <b>GPL 3</b> (Versions prior to v0.9.0 where licensed under GPL 2)</div><br>"\
 													"&copy; 2001-2014 Matthias Toussaint &nbsp;-&nbsp;&nbsp;<font color=blue><u><a href='mailto:qtdmm@mtoussaint.de'>qtdmm@mtoussaint.de</a></u></font>"\
 													"<p><br>The icons (except the DMM icon) have been taken from the KDE project.<p>")
-					 .arg(VERSION_STRING).arg(m_wid->deviceListText()).arg(qVersion()));
+					 .arg(APP_VERSION).arg(m_wid->deviceListText()).arg(qVersion()));
 }
 
 void MainWin::closeEvent( QCloseEvent *ev )

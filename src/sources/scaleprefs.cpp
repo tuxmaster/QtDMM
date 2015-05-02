@@ -26,7 +26,7 @@
 
 #include "engnumbervalidator.h"
 #include "scaleprefs.h"
-#include "simplecfg.h"
+#include "Settings.h"
 
 #include <iostream>
 
@@ -55,25 +55,25 @@ ScalePrefs::~ScalePrefs()
 
 void ScalePrefs::defaultsSLOT()
 {
-  bool autoScale = m_cfg->getBool( "Scale", "automatic", true );
+  bool autoScale = m_cfg->getBool( "Scale/automatic", true );
   if (autoScale)
 	autoScaleBut->setChecked( true );
   else
 	manualScaleBut->setChecked( true );
 
-  bool includeZero = m_cfg->getBool( "Scale", "automatic-include-zero", true );
+  bool includeZero = m_cfg->getBool( "Scale/automatic-include-zero", true );
   if (includeZero)
 	ui_includeZero->setChecked( true );
   else
 	ui_includeZero->setChecked( false );
 
-  ui_scaleMin->setText( m_cfg->getString( "Scale", "minimum", "-3.999" ));
-  ui_scaleMax->setText( m_cfg->getString( "Scale", "maximum", "3.999" ));
+  ui_scaleMin->setText( m_cfg->getString( "Scale/minimum", "-3.999" ));
+  ui_scaleMax->setText( m_cfg->getString( "Scale/maximum", "3.999" ));
 
-  ui_winSize->setValue( m_cfg->getInt( "Window", "size", 600 ));
-  sizeUnit->setCurrentIndex( m_cfg->getInt( "Window", "size-unit", 0 ));
-  winLength->setValue( m_cfg->getInt( "Window", "length", 3600 ));
-  lengthUnit->setCurrentIndex(m_cfg->getInt( "Window", "length-unit", 0 ));
+  ui_winSize->setValue( m_cfg->getInt( "Window/size", 600 ));
+  sizeUnit->setCurrentIndex( m_cfg->getInt( "Window/size-unit"));
+  winLength->setValue( m_cfg->getInt( "Window/length", 3600 ));
+  lengthUnit->setCurrentIndex(m_cfg->getInt( "Window/length-unit"));
 }
 
 void ScalePrefs::factoryDefaultsSLOT()
@@ -92,14 +92,14 @@ void ScalePrefs::factoryDefaultsSLOT()
 
 void ScalePrefs::applySLOT()
 {
-  m_cfg->setBool( "Scale", "automatic", automaticScale() );
-  m_cfg->setBool( "Scale", "automatic-include-zero", includeZero() );
-  m_cfg->setString( "Scale", "minimum", ui_scaleMin->text() );
-  m_cfg->setString( "Scale", "maximum", ui_scaleMax->text() );
-  m_cfg->setInt( "Window", "size", ui_winSize->value() );
-  m_cfg->setInt( "Window", "size-unit", sizeUnit->currentIndex() );
-  m_cfg->setInt( "Window", "length", winLength->value() );
-  m_cfg->setInt( "Window", "length-unit", lengthUnit->currentIndex() );
+  m_cfg->setBool( "Scale/automatic", automaticScale() );
+  m_cfg->setBool( "Scale/automatic-include-zero", includeZero() );
+  m_cfg->setString( "Scale/minimum", ui_scaleMin->text() );
+  m_cfg->setString( "Scale/maximum", ui_scaleMax->text() );
+  m_cfg->setInt( "Window/size", ui_winSize->value() );
+  m_cfg->setInt( "Window/size-unit", sizeUnit->currentIndex() );
+  m_cfg->setInt( "Window/length", winLength->value() );
+  m_cfg->setInt( "Window/length-unit", lengthUnit->currentIndex() );
 }
 
 bool ScalePrefs::includeZero() const

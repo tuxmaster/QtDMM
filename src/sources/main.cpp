@@ -23,6 +23,8 @@
 #include <QtGui>
 
 #include "mainwin.h"
+#include "config.h"
+
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -58,6 +60,10 @@ int main( int argc, char **argv )
 {
   qInstallMessageHandler( myMessageOutput );
   QApplication app( argc, argv );
+
+  app.setApplicationName(APP_NAME);
+  app.setApplicationVersion(APP_VERSION);
+  app.setOrganizationName(APP_ORGANIZATION);
 
   QTranslator QtTranslation;
   QTranslator AppTranslation;

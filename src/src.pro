@@ -25,7 +25,7 @@ FORMS =      forms/uiconfigdlg.ui \
 	     forms/uirecorderprefs.ui \
 	     forms/uiscaleprefs.ui \
 	     forms/uitipdlg.ui \
-    forms/uimainwin.ui
+	     forms/uimainwin.ui
 
 HEADERS   = sources/colorbutton.h \
 	    sources/configdlg.h \
@@ -49,7 +49,9 @@ HEADERS   = sources/colorbutton.h \
 	    sources/recorderprefs.h \
 	    sources/scaleprefs.h \
 	    sources/simplecfg.h \
-	    sources/tipdlg.h
+	    sources/tipdlg.h \
+	    sources/Settings.h \
+	    sources/config.h
 
 SOURCES   = sources/colorbutton.cpp \
 	    sources/configdlg.cpp \
@@ -74,7 +76,8 @@ SOURCES   = sources/colorbutton.cpp \
 	    sources/recorderprefs.cpp \
 	    sources/scaleprefs.cpp \
 	    sources/simplecfg.cpp \
-	    sources/tipdlg.cpp
+	    sources/tipdlg.cpp \
+	    sources/Settings.cpp
 
 INCLUDEPATH +=sources
 

@@ -26,7 +26,7 @@
 #include "colorbutton.h"
 #include "engnumbervalidator.h"
 #include "integrationprefs.h"
-#include "simplecfg.h"
+#include "Settings.h"
 
 IntegrationPrefs::IntegrationPrefs( QWidget *parent) : PrefWidget( parent)
 {
@@ -49,15 +49,24 @@ IntegrationPrefs::~IntegrationPrefs()
 
 void IntegrationPrefs::defaultsSLOT()
 {
-  ui_intColor->setColor( QColor( m_cfg->getRGB( "Graph", "integration", Qt::darkBlue )));  // mt: removed .rgb()
-  ui_intThresholdColor->setColor( QColor( m_cfg->getRGB( "Graph", "integration-threshold", Qt::darkBlue ))); // mt: removed .rgb()
-  ui_intLineMode->setCurrentIndex( m_cfg->getInt( "Graph", "int-line-mode", 0 ));
-  ui_intPointMode->setCurrentIndex( m_cfg->getInt( "Graph", "int-point-mode", 1 ));
-  ui_showInt->setChecked( m_cfg->getBool( "Graph", "show-integration", false ));
-  ui_intScale->setText( m_cfg->getString( "Graph", "int-scale", "1.0" ));
-  ui_intOffset->setText( m_cfg->getString( "Graph", "int-offset", "0.0" ));
-  ui_intThreshold->setText( m_cfg->getString( "Graph", "int-threshold", "0.0" ));
-  ui_intLineWidth->setValue( m_cfg->getInt( "Graph", "int-line-width", 2 ) );
+  if(!m_cfg->fileConverted())
+  {
+	  ui_intColor->setColor( m_cfg->getColor( "Graph/integration", Qt::darkBlue ));  // mt: removed .rgb()
+	  ui_intThresholdColor->setColor( m_cfg->getColor( "Graph/integration-threshold", Qt::darkBlue )); // mt: removed .rgb()
+  }
+  else
+  {
+	  ui_intColor->setColor(Qt::darkBlue);
+	  ui_intThresholdColor->setColor(Qt::darkBlue);
+	  m_cfg->save();
+  }
+  ui_intLineMode->setCurrentIndex( m_cfg->getInt( "Graph/int-line-mode"));
+  ui_intPointMode->setCurrentIndex( m_cfg->getInt( "Graph/int-point-mode", 1 ));
+  ui_showInt->setChecked( m_cfg->getBool( "Graph/show-integration"));
+  ui_intScale->setText( m_cfg->getString( "Graph/int-scale", "1.0" ));
+  ui_intOffset->setText( m_cfg->getString( "Graph/int-offset", "0.0" ));
+  ui_intThreshold->setText( m_cfg->getString( "Graph/int-threshold", "0.0" ));
+  ui_intLineWidth->setValue( m_cfg->getInt( "Graph/int-line-width", 2 ) );
 }
 
 void IntegrationPrefs::factoryDefaultsSLOT()
@@ -75,15 +84,15 @@ void IntegrationPrefs::factoryDefaultsSLOT()
 
 void IntegrationPrefs::applySLOT()
 {
-  m_cfg->setRGB( "Graph", "integration", ui_intColor->color().rgb() );
-  m_cfg->setRGB( "Graph", "integration-threshold", ui_intThresholdColor->color().rgb() );
-  m_cfg->setInt( "Graph", "int-line-width", ui_intLineWidth->value() );
-  m_cfg->setInt( "Graph", "int-line-mode", ui_intLineMode->currentIndex() );
-  m_cfg->setInt( "Graph", "int-point-mode", ui_intPointMode->currentIndex() );
-  m_cfg->setBool( "Graph", "show-integration", ui_showInt->isChecked() );
-  m_cfg->setString( "Graph", "int-scale", ui_intScale->text() );
-  m_cfg->setString( "Graph", "int-offset", ui_intOffset->text() );
-  m_cfg->setString( "Graph", "int-threshold", ui_intThreshold->text() );
+  m_cfg->setColor( "Graph/integration", ui_intColor->color());
+  m_cfg->setColor( "Graph/integration-threshold", ui_intThresholdColor->color());
+  m_cfg->setInt( "Graph/int-line-width", ui_intLineWidth->value() );
+  m_cfg->setInt( "Graph/int-line-mode", ui_intLineMode->currentIndex() );
+  m_cfg->setInt( "Graph/int-point-mode", ui_intPointMode->currentIndex() );
+  m_cfg->setBool( "Graph/show-integration", ui_showInt->isChecked() );
+  m_cfg->setString( "Graph/int-scale", ui_intScale->text() );
+  m_cfg->setString( "Graph/int-offset", ui_intOffset->text() );
+  m_cfg->setString( "Graph/int-threshold", ui_intThreshold->text() );
 }
 
 double IntegrationPrefs::intScale() const

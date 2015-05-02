@@ -27,7 +27,7 @@
 
 #include "colorbutton.h"
 #include "graphprefs.h"
-#include "simplecfg.h"
+#include "Settings.h"
 
 
 GraphPrefs::GraphPrefs( QWidget *parent) : PrefWidget( parent )
@@ -46,18 +46,30 @@ GraphPrefs::~GraphPrefs()
 void GraphPrefs::defaultsSLOT()
 {
   // mt: removed .rgb()
-  ui_bgColor->setColor( QColor( m_cfg->getRGB( "Graph", "background", Qt::white )));
-  ui_gridColor->setColor( QColor( m_cfg->getRGB( "Graph", "grid", Qt::gray )));
-  ui_dataColor->setColor( QColor( m_cfg->getRGB( "Graph", "data", Qt::blue )));
-  ui_cursorColor->setColor( QColor( m_cfg->getRGB( "Graph", "cursor", Qt::black )));
-  ui_startColor->setColor( QColor( m_cfg->getRGB( "Graph", "start-trigger", Qt::magenta )));
-  ui_extColor->setColor( QColor( m_cfg->getRGB( "Graph", "external-trigger", Qt::cyan )));
+  if(!m_cfg->fileConverted())
+  {
+	  ui_bgColor->setColor(m_cfg->getColor( "Graph/background"));
+	  ui_gridColor->setColor(m_cfg->getColor( "Graph/grid", Qt::gray ));
+	  ui_dataColor->setColor( m_cfg->getColor( "Graph/data", Qt::blue ));
+	  ui_cursorColor->setColor(m_cfg->getColor( "Graph/cursor", Qt::black ));
+	  ui_startColor->setColor(m_cfg->getColor( "Graph/start-trigger", Qt::magenta ));
+	  ui_extColor->setColor(m_cfg->getColor( "Graph/external-trigger", Qt::cyan ));
+  }
+  else
+  {
+	  ui_bgColor->setColor(Qt::white);
+	  ui_gridColor->setColor(Qt::gray);
+	  ui_dataColor->setColor(Qt::blue );
+	  ui_cursorColor->setColor(Qt::black );
+	  ui_startColor->setColor(Qt::magenta );
+	  ui_extColor->setColor(Qt::cyan );
+	  m_cfg->save();
+  }
+  ui_lineMode->setCurrentIndex( m_cfg->getInt( "Graph/line-mode", 1 ));
+  ui_pointMode->setCurrentIndex( m_cfg->getInt( "Graph/point-mode"));
+  ui_crosshair->setChecked( m_cfg->getBool( "Graph/crosshair-cursor", true ));
 
-  ui_lineMode->setCurrentIndex( m_cfg->getInt( "Graph", "line-mode", 1 ));
-  ui_pointMode->setCurrentIndex( m_cfg->getInt( "Graph", "point-mode", 0 ));
-  ui_crosshair->setChecked( m_cfg->getBool( "Graph", "crosshair-cursor", true ));
-
-  ui_lineWidth->setValue( m_cfg->getInt( "Graph", "line-width", 2 ) );
+  ui_lineWidth->setValue( m_cfg->getInt( "Graph/line-width", 2 ) );
 
 }
 
@@ -78,16 +90,16 @@ void GraphPrefs::factoryDefaultsSLOT()
 
 void GraphPrefs::applySLOT()
 {
-  m_cfg->setRGB( "Graph", "background", ui_bgColor->color().rgb() );
-  m_cfg->setRGB( "Graph", "grid", ui_gridColor->color().rgb() );
-  m_cfg->setRGB( "Graph", "data", ui_dataColor->color().rgb() );
-  m_cfg->setRGB( "Graph", "cursor", ui_cursorColor->color().rgb() );
-  m_cfg->setRGB( "Graph", "start-trigger", ui_startColor->color().rgb() );
-  m_cfg->setRGB( "Graph", "external-trigger", ui_extColor->color().rgb() );
-  m_cfg->setInt( "Graph", "line-width", ui_lineWidth->value() );
-  m_cfg->setInt( "Graph", "line-mode", ui_lineMode->currentIndex() );
-  m_cfg->setInt( "Graph", "point-mode", ui_pointMode->currentIndex() );
-  m_cfg->setBool( "Graph", "crosshair-cursor", ui_crosshair->isChecked() );
+  m_cfg->setColor( "Graph/background", ui_bgColor->color());
+  m_cfg->setColor( "Graph/grid", ui_gridColor->color());
+  m_cfg->setColor( "Graph/data", ui_dataColor->color());
+  m_cfg->setColor( "Graph/cursor", ui_cursorColor->color());
+  m_cfg->setColor( "Graph/start-trigger", ui_startColor->color());
+  m_cfg->setColor( "Graph/external-trigger", ui_extColor->color());
+  m_cfg->setInt( "Graph/line-width", ui_lineWidth->value() );
+  m_cfg->setInt( "Graph/line-mode", ui_lineMode->currentIndex() );
+  m_cfg->setInt( "Graph/point-mode", ui_pointMode->currentIndex() );
+  m_cfg->setBool( "Graph/crosshair-cursor", ui_crosshair->isChecked() );
 }
 
 QColor GraphPrefs::bgColor() const

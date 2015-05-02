@@ -25,6 +25,7 @@
 
 #include "dmmprefs.h"
 #include "simplecfg.h"
+#include "Settings.h"
 
 
 // when all needed parameter are found this hardcoded version will
@@ -222,19 +223,19 @@ QString DmmPrefs::deviceListText() const
 
 void DmmPrefs::defaultsSLOT()
 {
-  port->setCurrentIndex( m_cfg->getInt( "Port settings", "device", 0 ) );
-  portNumber->setValue( m_cfg->getInt( "Port settings", "device-number", 0 ) );
-  baudRate->setCurrentIndex( m_cfg->getInt( "Port settings", "baud", 0 ) );
-  bitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings", "bits", 7 )-5 );
-  stopBitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings", "stop-bits", 2 )-1);
-  parityCombo->setCurrentIndex( m_cfg->getInt( "Port settings", "parity", 0 ) );
-  displayCombo->setCurrentIndex( m_cfg->getInt( "DMM", "display", 1 ) );
-  ui_externalSetup->setChecked( m_cfg->getInt( "DMM", "exterrnal-setup", 0 ) == 1 );
+  port->setCurrentIndex( m_cfg->getInt( "Port settings/device"));
+  portNumber->setValue( m_cfg->getInt( "Port settings/device-number"));
+  baudRate->setCurrentIndex( m_cfg->getInt( "Port settings/baud"));
+  bitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings/bits", 7)-5 );
+  stopBitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings/stop-bits", 2 )-1);
+  parityCombo->setCurrentIndex( m_cfg->getInt( "Port settings/parity"));
+  displayCombo->setCurrentIndex( m_cfg->getInt( "DMM/display", 1 ));
+  ui_externalSetup->setChecked( m_cfg->getInt( "DMM/exterrnal-setup") == 1 );
 
-  protocolCombo->setCurrentIndex( m_cfg->getInt( "DMM", "data-format", 0 ));
-  ui_numValues->setValue( m_cfg->getInt( "DMM", "number-of-values", 1 ));
+  protocolCombo->setCurrentIndex( m_cfg->getInt( "DMM/data-format"));
+  ui_numValues->setValue( m_cfg->getInt( "DMM/number-of-values", 1 ));
 
-  QString model = m_cfg->getString( "DMM", "model", "" );
+  QString model = m_cfg->getString( "DMM/model");
 
   ui_model->setCurrentIndex( 0 );
   int id=0;
@@ -270,19 +271,19 @@ void DmmPrefs::factoryDefaultsSLOT()
 
 void DmmPrefs::applySLOT()
 {
-  m_cfg->setInt( "Port settings", "device", port->currentIndex() );
-  m_cfg->setInt( "Port settings", "device-number", portNumber->value() );
-  m_cfg->setInt( "Port settings", "baud", baudRate->currentIndex() );
-  m_cfg->setInt( "Port settings", "bits", bitsCombo->currentIndex()+5 );
-  m_cfg->setInt( "Port settings", "stop-bits", stopBitsCombo->currentIndex()+1 );
-  m_cfg->setInt( "Port settings", "parity", parityCombo->currentIndex() );
+  m_cfg->setInt( "Port settings/device", port->currentIndex() );
+  m_cfg->setInt( "Port settings/device-number", portNumber->value() );
+  m_cfg->setInt( "Port settings/baud", baudRate->currentIndex() );
+  m_cfg->setInt( "Port settings/bits", bitsCombo->currentIndex()+5 );
+  m_cfg->setInt( "Port settings/stop-bits", stopBitsCombo->currentIndex()+1 );
+  m_cfg->setInt( "Port settings/parity", parityCombo->currentIndex() );
 
-  m_cfg->setInt( "DMM", "display", displayCombo->currentIndex() );
-  m_cfg->setBool( "DMM", "external-setup", ui_externalSetup->isChecked() );
+  m_cfg->setInt( "DMM/display", displayCombo->currentIndex() );
+  m_cfg->setBool( "DMM/external-setup", ui_externalSetup->isChecked() );
 
-  m_cfg->setInt( "DMM", "data-format", protocolCombo->currentIndex() );
-  m_cfg->setInt( "DMM", "number-of-values", ui_numValues->value() );
-  m_cfg->setString( "DMM", "model", (ui_model->currentIndex() == 0 ? "Manual" : dmm_info[ui_model->currentIndex()-1].name ));
+  m_cfg->setInt( "DMM/data-format", protocolCombo->currentIndex() );
+  m_cfg->setInt( "DMM/number-of-values", ui_numValues->value() );
+  m_cfg->setString( "DMM/model", (ui_model->currentIndex() == 0 ? "Manual" : dmm_info[ui_model->currentIndex()-1].name ));
 }
 
 void DmmPrefs::on_ui_externalSetup_toggled()

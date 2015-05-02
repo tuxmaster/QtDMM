@@ -33,7 +33,8 @@
 #include "integrationprefs.h"
 #include "recorderprefs.h"
 #include "scaleprefs.h"
-#include "simplecfg.h"
+//#include "simplecfg.h"
+#include "Settings.h"
 
 #include <iostream>
 
@@ -48,30 +49,20 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 
   // PREPARE CONFIGURATION FILE
   //
-  QString path = QDir::homePath();
-  path += "/.qtdmmrc";
+  QString path = QString("%1/.qtdmmrc").arg(QDir::homePath());
 
-  m_cfg = new SimpleCfg( path );
-  m_cfg->setComment( "#####################################################################\n"
-					 "# This file was automagically created by QtDMM a simple DMM readout #\n"
-					 "# software. QtDMM is copyright  by Matthias Toussaint. Don't change #\n"
-					 "# this file unless you know what you are doing.                     #\n"
-					 "#                                                                   #\n"
-					 "# Contact: qtdmm@mtoussaint.de                                      #\n"
-					 "#####################################################################\n\n" );
+  m_settings=new Settings(this,path);
 
   // Check if configuration file exists. If not welcome user
-  //
-  QFile cfg( path );
 
-  if (!cfg.exists())
+  if(!m_settings->fileExists())
   {
 	QMessageBox welcome( tr("QtDMM: Welcome!" ),
 						 tr("<font size=+2><b>Welcome!</b></font><p>"
 							"This seems to be your first invocation of QtDMM "
 							"(Or you have deleted it's configuration file).<p>QtDMM"
-							" has created the file ~/.qtdmmrc in your home directory"
-							" to save its settings."),
+							" has created the file %1 in your home directory"
+							" to save its settings.").arg(m_settings->fileName()),
 						 QMessageBox::Information,
 						 QMessageBox::Yes | QMessageBox::Default,
 						 Qt::NoButton,
@@ -80,15 +71,12 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 	welcome.setButtonText( QMessageBox::Yes, tr("Continue") );
 	welcome.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 	welcome.exec();
-
-	m_cfg->save();
   }
   else
   {
-	m_cfg->load();
 
-	int version  = m_cfg->getInt( "QtDMM", "version", 0 );
-	int revision = m_cfg->getInt( "QtDMM", "revision", 0 );
+	int version  = m_settings->getInt("QtDMM/version");
+	int revision = m_settings->getInt( "QtDMM/revision");
 
 	if ((version <= 0 && revision < 84) || version >= 7)
 	{
@@ -107,6 +95,11 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 	  welcome.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
 	  welcome.exec();
 	}
+	if(m_settings->fileConverted())
+		QMessageBox::information(0,tr("QtDMM: Welcome!"),
+								 tr("Your config file has convertet to the new format.\n"
+									"Please check your color settings, because it can't be converted automatic.\n"
+									"Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old"));
   }
 
   // CREATE PAGES (Top page last)
@@ -119,7 +112,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 				  m_recorder->pixmap(),
 				  m_recorder->label(),
 				  ui_list );
-  m_recorder->setCfg( m_cfg );
+  m_recorder->setCfg( m_settings );
   ui_stack->insertWidget( m_recorder->id() ,m_recorder);
 
   m_scale = new ScalePrefs( ui_stack );
@@ -128,7 +121,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 				  m_scale->pixmap(),
 				  m_scale->label(),
 				  ui_list );
-  m_scale->setCfg( m_cfg );
+  m_scale->setCfg( m_settings );
   ui_stack->insertWidget( m_scale->id() ,m_scale);
 
   m_dmm = new DmmPrefs( ui_stack );
@@ -137,7 +130,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 				  m_dmm->pixmap(),
 				  m_dmm->label(),
 				  ui_list );
-  m_dmm->setCfg( m_cfg );
+  m_dmm->setCfg( m_settings );
   ui_stack->insertWidget(  m_dmm->id() ,m_dmm);
 
   m_gui = new GuiPrefs( ui_stack );
@@ -146,7 +139,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 				  m_gui->pixmap(),
 				  m_gui->label(),
 				  ui_list );
-  m_gui->setCfg( m_cfg );
+  m_gui->setCfg( m_settings );
   ui_stack->insertWidget( m_gui->id(),m_gui );
 
   m_graph = new GraphPrefs( ui_stack );
@@ -155,7 +148,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 				  m_graph->pixmap(),
 				  m_graph->label(),
 				  ui_list );
-  m_graph->setCfg( m_cfg );
+  m_graph->setCfg( m_settings );
   ui_stack->insertWidget( m_graph->id(),m_graph );
 
   m_integration = new IntegrationPrefs( ui_stack );
@@ -164,7 +157,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 				  m_integration->pixmap(),
 				  m_integration->label(),
 				  ui_list );
-  m_integration->setCfg( m_cfg );
+  m_integration->setCfg( m_settings );
   ui_stack->insertWidget( m_integration->id() ,m_integration);
 
   m_execute = new ExecutePrefs( ui_stack );
@@ -173,7 +166,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 				  m_execute->pixmap(),
 				  m_execute->label(),
 				  ui_list );
-  m_execute->setCfg( m_cfg );
+  m_execute->setCfg( m_settings );
   ui_stack->insertWidget( m_execute->id(),m_execute);
 
 
@@ -183,10 +176,6 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
   showPage( DMM );
   ui_undo->hide();
   adjustSize();
-}
-ConfigDlg::~ConfigDlg()
-{
-	delete m_cfg;
 }
 
 QString ConfigDlg::deviceListText() const
@@ -224,28 +213,24 @@ void ConfigDlg::on_ui_factoryDefaults_clicked()
 void ConfigDlg::zoomInSLOT( double fac )
 {
   m_scale->zoomInSLOT( fac );
-
   Q_EMIT zoomed();
 }
 
 void ConfigDlg::zoomOutSLOT( double fac )
 {
   m_scale->zoomOutSLOT( fac );
-
   Q_EMIT zoomed();
 }
 
 void ConfigDlg::setSampleTimeSLOT( int sampleTime )
 {
   m_recorder->setSampleTimeSLOT( sampleTime );
-
   on_ui_buttonBox_accepted();
 }
 
 void ConfigDlg::setGraphSizeSLOT( int size, int length )
 {
   m_scale->setGraphSizeSLOT( size, length );
-
   on_ui_buttonBox_accepted();
 }
 
@@ -257,10 +242,10 @@ void ConfigDlg::connectSLOT( bool /*connected*/ )
 
 QRect ConfigDlg::winRect() const
 {
-  QRect rect( m_cfg->getInt( "Position", "x", 0 ),
-			  m_cfg->getInt( "Position", "y", 0 ),
-			  m_cfg->getInt( "Position", "width", 500 ),
-			  m_cfg->getInt( "Position", "height", 350 ) );
+  QRect rect( m_settings->getInt( "Position/x"),
+			  m_settings->getInt( "Position/y"),
+			  m_settings->getInt( "Position/width", 500 ),
+			  m_settings->getInt( "Position/height", 350 ) );
 
   //std::cerr << "WRFC: " << rect.x() << " " << rect.y() << " " << rect.width()
   //    << " " << rect.height() << std::endl;
@@ -274,73 +259,51 @@ void ConfigDlg::setWinRect( const QRect & rect )
 
 void ConfigDlg::on_ui_buttonBox_rejected()
 {
-  m_cfg->clear();
-  m_cfg->load();
-
-  int count = m_cfg->getInt( "Custom colors", "count", 0 );
-
+  m_settings->clear();
+  int count = m_settings->getInt("Custom colors/count");
   for (int i=0; i<count; i++)
-  {
-	QString color;
-	color.sprintf( "color_%d", i );
-	QColorDialog::setCustomColor( i, m_cfg->getRGB( "Custom colors", color, Qt::white ) );
-  }
-
+	QColorDialog::setCustomColor( i, m_settings->getColor( QString("Custom colors/color_%1").arg(i)));
   for (int i=0; i<NumItems; ++i)
-  {
 	((PrefWidget *)ui_stack->widget( i ))->defaultsSLOT();
-  }
-
   hide();
 }
 
 void ConfigDlg::setCurrentTipSLOT( int id )
 {
-  m_cfg->setInt( "QtDMM", "tip-id", id );
-  m_cfg->save();
+  m_settings->setInt("QtDMM/tip-id", id );
+  m_settings->save();
 }
 
 int ConfigDlg::currentTipId() const
 {
-  return m_cfg->getInt( "QtDMM", "tip-id", 0 );
+  return m_settings->getInt( "QtDMM/tip-id");
 }
 
 void ConfigDlg::on_ui_buttonBox_accepted()
 {
-  m_cfg->setInt( "Custom colors", "count", QColorDialog::customCount() );
+  m_settings->setInt( "Custom colors/count", QColorDialog::customCount() );
 
   for (int i=0; i<QColorDialog::customCount(); i++)
-  {
-	QString color;
-	color.sprintf( "color_%d", i );
-	m_cfg->setRGB( "Custom colors", color, QColorDialog::customColor( i ).rgb() );
-  }
+	m_settings->setColor( QString("Custom colors/color_%1").arg(i), QColorDialog::customColor(i));
+  m_settings->setInt( "Position/x", m_winRect.x() );
+  m_settings->setInt( "Position/y", m_winRect.y() );
+  m_settings->setInt( "Position/width", m_winRect.width() );
+  m_settings->setInt( "Position/height", m_winRect.height() );
 
-  m_cfg->setInt( "Position", "x", m_winRect.x() );
-  m_cfg->setInt( "Position", "y", m_winRect.y() );
-  m_cfg->setInt( "Position", "width", m_winRect.width() );
-  m_cfg->setInt( "Position", "height", m_winRect.height() );
-
-  m_cfg->setInt( "Printer", "page-size", (int)m_printer->pageSize() );
-  m_cfg->setInt( "Printer", "page-orientation", (int)m_printer->orientation() );
-  m_cfg->setInt( "Printer", "color", (int)m_printer->colorMode() );
-  m_cfg->setString( "Printer", "name", m_printer->printerName() );
-  m_cfg->setString( "Printer", "filename", m_printer->outputFileName() );
-  m_cfg->setBool( "Printer", "print-file", (m_printer->outputFormat() == QPrinter::PdfFormat) ? true:false );
+  m_settings->setInt( "Printer/page-size", (int)m_printer->pageSize() );
+  m_settings->setInt( "Printer/page-orientation", (int)m_printer->orientation() );
+  m_settings->setInt( "Printer/color", (int)m_printer->colorMode() );
+  m_settings->setString( "Printer/name", m_printer->printerName() );
+  m_settings->setString( "Printer/filename", m_printer->outputFileName() );
+  m_settings->setBool( "Printer/print-file", (m_printer->outputFormat() == QPrinter::PdfFormat) ? true:false );
 
   for (int i=0; i<NumItems; ++i)
-  {
 	((PrefWidget *)ui_stack->widget( i ))->applySLOT();
-  }
-
-  m_cfg->save();
-
+  m_settings->save();
   Q_EMIT accepted();
 
   if ((sender() == ui_buttonBox) && m_buttonBox_OK)
-  {
 	hide();
-  }
 }
 void ConfigDlg::on_ui_buttonBox_clicked(QAbstractButton *button)
 {
@@ -353,7 +316,6 @@ void ConfigDlg::on_ui_buttonBox_clicked(QAbstractButton *button)
 void ConfigDlg::writePrinter( QPrinter * printer )
 {
   m_printer = printer;
-
   on_ui_buttonBox_accepted();
 }
 
@@ -361,12 +323,12 @@ void ConfigDlg::readPrinter( QPrinter * printer )
 {
   m_printer = printer;
 
-  m_printer->setPageSize( (QPrinter::PageSize) m_cfg->getInt( "Printer", "page-size", 0 ) );
-  m_printer->setOrientation( (QPrinter::Orientation) m_cfg->getInt( "Printer", "page-orientation", 0 ) );
-  m_printer->setColorMode( (QPrinter::ColorMode) m_cfg->getInt( "Printer", "color", 1 ) );
-  m_printer->setPrinterName( m_cfg->getString( "Printer", "name", "lp" ) );
-  m_printer->setOutputFileName( m_cfg->getString( "Printer", "filename", "" ) );
-  m_printer->setOutputFormat((m_cfg->getBool( "Printer", "print-file", false )) ? QPrinter::PdfFormat : QPrinter::NativeFormat  );
+  m_printer->setPageSize( (QPrinter::PageSize) m_settings->getInt( "Printer/page-size") );
+  m_printer->setOrientation( (QPrinter::Orientation) m_settings->getInt( "Printer/page-orientation") );
+  m_printer->setColorMode( (QPrinter::ColorMode) m_settings->getInt( "Printer/color", 1 ) );
+  m_printer->setPrinterName( m_settings->getString( "Printer/name", "lp" ) );
+  m_printer->setOutputFileName( m_settings->getString( "Printer/filename") );
+  m_printer->setOutputFormat((m_settings->getBool( "Printer/print-file")) ? QPrinter::PdfFormat : QPrinter::NativeFormat  );
 }
 
 void ConfigDlg::on_ui_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *)

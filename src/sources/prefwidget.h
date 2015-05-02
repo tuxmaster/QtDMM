@@ -26,7 +26,8 @@
 #include <QtGui>
 #include <QtWidgets>
 
-class SimpleCfg;
+//class SimpleCfg;
+class Settings;
 
 class PrefWidget : public QWidget
 {
@@ -40,7 +41,8 @@ class PrefWidget : public QWidget
 	  void			setId( int id ) { m_id = id; }
 	  int			id() const { return m_id; }
 
-	  void			setCfg( SimpleCfg *cfg ) { m_cfg = cfg; }
+	  //void			setCfg( SimpleCfg *cfg ) { m_cfg = cfg; }
+		void			setCfg( Settings *cfg ) { m_cfg = cfg; }
 
 	public Q_SLOTS:
 	  virtual void	defaultsSLOT() = 0;
@@ -48,7 +50,8 @@ class PrefWidget : public QWidget
 	  virtual void	applySLOT() = 0;
 
 	protected:
-	  SimpleCfg		*m_cfg;
+		Settings	*m_cfg;
+	  //SimpleCfg		*m_cfg;
 	  QString		m_label;
 	  QString		m_description;
 	  QPixmap		*m_pixmap;
