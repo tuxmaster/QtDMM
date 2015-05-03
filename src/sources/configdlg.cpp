@@ -33,7 +33,6 @@
 #include "integrationprefs.h"
 #include "recorderprefs.h"
 #include "scaleprefs.h"
-//#include "simplecfg.h"
 #include "Settings.h"
 
 #include <iostream>

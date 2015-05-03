@@ -25,7 +25,6 @@
 #include <QSerialPortInfo>
 
 #include "dmmprefs.h"
-#include "simplecfg.h"
 #include "Settings.h"
 
 
@@ -455,23 +454,22 @@ void DmmPrefs::on_ui_load_clicked()
 	m_path = info.filePath();
 	ui_filename->setText( info.fileName() );
 
-	SimpleCfg cfg( filename );
-	cfg.load();
+	QSettings cfg(filename,QSettings::IniFormat);
 
-	port->setCurrentIndex( cfg.getInt( "Port settings", "device", 0 ) );
-	portNumber->setValue( cfg.getInt( "Port settings", "device-number", 0 ) );
-	baudRate->setCurrentIndex( cfg.getInt( "Port settings", "baud", 0 ) );
-	bitsCombo->setCurrentIndex( cfg.getInt( "Port settings", "bits", 7 )-5 );
-	stopBitsCombo->setCurrentIndex( cfg.getInt( "Port settings", "stop-bits", 2 )-1);
-	parityCombo->setCurrentIndex( cfg.getInt( "Port settings", "parity", 0 ) );
-	displayCombo->setCurrentIndex( cfg.getInt( "DMM", "display", 1 ) );
-	ui_externalSetup->setChecked( cfg.getBool( "DMM", "external-setup", false ) );
-	protocolCombo->setCurrentIndex( cfg.getInt( "DMM", "data-format", 0 ));
-	ui_numValues->setValue( cfg.getInt( "DMM", "number-of-values", 1 ));
-	uirts->setChecked( cfg.getBool( "DMM", "rts", true ));
-	uicts->setChecked( cfg.getBool( "DMM", "cts", false ));
-	uidsr->setChecked( cfg.getBool( "DMM", "dsr", false ));
-	uidtr->setChecked( cfg.getBool( "DMM", "dtr", false ));
+	port->setCurrentIndex( cfg.value("Port settings/device", 0 ).toInt());
+	portNumber->setValue( cfg.value( "Port settings/device-number", 0 ).toInt() );
+	baudRate->setCurrentIndex( cfg.value( "Port settings/baud", 0 ).toInt() );
+	bitsCombo->setCurrentIndex( cfg.value( "Port settings/bits", 7 ).toInt()-5 );
+	stopBitsCombo->setCurrentIndex( cfg.value( "Port settings/stop-bits", 2 ).toInt()-1);
+	parityCombo->setCurrentIndex( cfg.value( "Port settings/parity", 0 ).toInt() );
+	displayCombo->setCurrentIndex( cfg.value( "DMM/display", 1 ).toInt() );
+	ui_externalSetup->setChecked( cfg.value( "DMM/external-setup", false ).toBool() );
+	protocolCombo->setCurrentIndex( cfg.value( "DMM/data-format", 0 ).toInt());
+	ui_numValues->setValue( cfg.value( "DMM/number-of-values", 1 ).toInt());
+	uirts->setChecked( cfg.value( "DMM/rts", true ).toBool());
+	uicts->setChecked( cfg.value( "DMM/cts", false ).toBool());
+	uidsr->setChecked( cfg.value( "DMM/dsr", false ).toBool());
+	uidtr->setChecked( cfg.value( "DMM/dtr", false ).toBool());
   }
 }
 
@@ -484,33 +482,22 @@ void DmmPrefs::on_ui_save_clicked()
 	m_path = info.filePath();
 	ui_filename->setText( info.fileName() );
 
-	SimpleCfg cfg( filename );
-	cfg.setComment(
-	  "#####################################################################\n"
-	  "# This file was automagically created by QtDMM a simple DMM readout #\n"
-	  "# software. QtDMM is copyright  by Matthias Toussaint. Don't change #\n"
-	  "# this file unless you know what you are doing.                     #\n"
-	  "#                                                                   #\n"
-	  "# Contact: qtdmm@mtoussaint.de                                      #\n"
-	  "#####################################################################\n\n" );
+	QSettings cfg(filename,QSettings::IniFormat);
+	cfg.setValue( "Port settings/device", port->currentIndex() );
+	cfg.setValue( "Port settings/device-number", portNumber->value() );
+	cfg.setValue( "Port settings/baud", baudRate->currentIndex() );
+	cfg.setValue( "Port settings/bits", bitsCombo->currentIndex()+5 );
+	cfg.setValue( "Port settings/stop-bits", stopBitsCombo->currentIndex()+1 );
+	cfg.setValue( "Port settings/parity", parityCombo->currentIndex() );
 
-	cfg.setInt( "Port settings", "device", port->currentIndex() );
-	cfg.setInt( "Port settings", "device-number", portNumber->value() );
-	cfg.setInt( "Port settings", "baud", baudRate->currentIndex() );
-	cfg.setInt( "Port settings", "bits", bitsCombo->currentIndex()+5 );
-	cfg.setInt( "Port settings", "stop-bits", stopBitsCombo->currentIndex()+1 );
-	cfg.setInt( "Port settings", "parity", parityCombo->currentIndex() );
+	cfg.setValue( "DMM/display", displayCombo->currentIndex() );
+	cfg.setValue( "DMM/external-setup", ui_externalSetup->isChecked() );
+	cfg.setValue( "DMM/data-format", protocolCombo->currentIndex() );
+	cfg.setValue( "DMM/number-of-values", ui_numValues->value() );
 
-	cfg.setInt( "DMM", "display", displayCombo->currentIndex() );
-	cfg.setBool( "DMM", "external-setup", ui_externalSetup->isChecked() );
-	cfg.setInt( "DMM", "data-format", protocolCombo->currentIndex() );
-	cfg.setInt( "DMM", "number-of-values", ui_numValues->value() );
-
-	cfg.setBool( "DMM", "rts", uirts->isChecked() );
-	cfg.setBool( "DMM", "cts", uicts->isChecked() );
-	cfg.setBool( "DMM", "dsr", uidsr->isChecked() );
-	cfg.setBool( "DMM", "dtr", uidtr->isChecked() );
-
-	cfg.save();
+	cfg.setValue( "DMM/rts", uirts->isChecked() );
+	cfg.setValue( "DMM/cts", uicts->isChecked() );
+	cfg.setValue( "DMM/dsr", uidsr->isChecked() );
+	cfg.setValue( "DMM/dtr", uidtr->isChecked() );
   }
 }

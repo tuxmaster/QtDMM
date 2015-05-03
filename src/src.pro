@@ -48,7 +48,6 @@ HEADERS   = sources/colorbutton.h \
 	    sources/readevent.h \
 	    sources/recorderprefs.h \
 	    sources/scaleprefs.h \
-	    sources/simplecfg.h \
 	    sources/tipdlg.h \
 	    sources/Settings.h \
 	    sources/config.h
@@ -75,7 +74,6 @@ SOURCES   = sources/colorbutton.cpp \
 	    sources/readevent.cpp \
 	    sources/recorderprefs.cpp \
 	    sources/scaleprefs.cpp \
-	    sources/simplecfg.cpp \
 	    sources/tipdlg.cpp \
 	    sources/Settings.cpp
 
