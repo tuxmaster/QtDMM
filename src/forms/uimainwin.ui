@@ -246,6 +246,9 @@
    </property>
   </action>
   <action name="action_Connect">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../Resources.qrc">
      <normaloff>:/Symbols/connect_on.xpm</normaloff>:/Symbols/connect_on.xpm</iconset>

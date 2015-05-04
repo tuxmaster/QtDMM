@@ -161,44 +161,7 @@
                <string>Choose the serial device here. &lt;i&gt;(Hint for DOS people: /dev/ttyS0 corresponds to COM1. /dev/ttyS1 to COM2 ...)&lt;/i&gt;</string>
               </property>
               <property name="currentIndex">
-               <number>0</number>
-              </property>
-              <item>
-               <property name="text">
-                <string>/dev/ttyS</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/usb/ttyUSB</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/ttyUSB</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>/dev/tty.usbserial</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="portNumber">
-              <property name="whatsThis">
-               <string>Enter the number of the port.</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="ui_scanPorts">
-              <property name="whatsThis">
-               <string>Clicke here to scan for new devices.</string>
-              </property>
-              <property name="text">
-               <string>Scan</string>
+               <number>-1</number>
               </property>
              </widget>
             </item>

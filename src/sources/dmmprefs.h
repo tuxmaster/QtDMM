@@ -75,11 +75,13 @@ class DmmPrefs : public PrefWidget ,private Ui::UIDmmPrefs
 	  void					on_ui_model_activated( int );
 	  void					on_ui_load_clicked();
 	  void					on_ui_save_clicked();
-	  void					on_ui_scanPorts_clicked();
 	  void					on_ui_externalSetup_toggled();
 
 	protected:
 	  QString				m_path;
+
+	private:
+	  QStringListModel		*m_portlist;
 
 };
 

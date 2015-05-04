@@ -106,8 +106,8 @@ void MainWin::setConsoleLogging( bool on )
 
 void MainWin::createActions()
 {
-  connect( action_Connect, SIGNAL( toggled(bool) ),m_wid, SLOT( connectSLOT(bool) ));
-  connect( action_Connect, SIGNAL( toggled(bool) ),this, SLOT( connectSLOT(bool) ));
+  connect( action_Connect, SIGNAL( triggered(bool) ),m_wid, SLOT( connectSLOT(bool) ));
+  connect( action_Connect, SIGNAL( triggered(bool) ),this, SLOT( connectSLOT(bool) ));
   connect( action_Reset, SIGNAL( triggered() ), m_wid, SLOT( resetSLOT() ));
   connect( action_Start, SIGNAL( triggered() ), m_wid, SLOT( startSLOT() ));
   connect( action_Stop, SIGNAL( triggered() ), m_wid, SLOT( stopSLOT() ));

@@ -37,7 +37,7 @@ DMM::DMM(QObject *parent) :
   m_handle( -1 ),
   m_speed( 600 ),
   m_parity( 0 ),
-  m_device( "/dev/ttyS0" ),
+  m_device( "" ),
   m_oldStatus( ReaderThread::NotConnected ),
   m_consoleLogging( false ),
   m_externalSetup( false )

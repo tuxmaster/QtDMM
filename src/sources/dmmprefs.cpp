@@ -139,6 +139,13 @@ struct DMMInfo dmm_info[] = {
 DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
 {
   setupUi(this);
+  m_portlist=new QStringListModel(this);
+  QStringList portlist;
+  for(auto port: QSerialPortInfo::availablePorts())
+	  portlist<<port.systemLocation();
+	  //qDebug()<<port.portName()<<"--"<<port.manufacturer()<<"--"<<port.description()<<"--"<<port.systemLocation();
+  m_portlist->setStringList(portlist);
+  port->setModel(m_portlist);
   m_label=(tr( "Multimeter settings" ));
   m_description = tr( "<b>Here you can configure the serial port"
 					  " and protocol for your DMM. There is"
@@ -156,32 +163,10 @@ DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
 
   m_path = QDir::currentPath();
 
-#ifdef Q_WS_MACX
-  portNumber->hide();
-  on_ui_scanPorts_clicked();
-#else
-  ui_scanPorts->hide();
-#endif
-  for(auto port: QSerialPortInfo::availablePorts())
-	qDebug()<<port.portName()<<"--"<<port.manufacturer()<<"--"<<port.description()<<"--"<<port.systemLocation();
 }
 DmmPrefs::~DmmPrefs()
 {
 	delete m_pixmap;
-}
-
-void DmmPrefs::on_ui_scanPorts_clicked()
-{
-#ifdef Q_WS_MACX
-  port->clear();
-  QDir dir( "/dev" );
-  QStringList files = dir.entryList( "cu.*", QDir::System );
-  for (unsigned i=0; i<files.count(); ++i)
-	port->insertItem( QString( "/dev/" ) + files[i] );
-  files = dir.entryList( "tty.*", QDir::System );
-  for (unsigned i=0; i<files.count(); ++i)
-	port->insertItem( QString( "/dev/" ) + files[i] );
-#endif
 }
 
 QString DmmPrefs::deviceListText() const
@@ -225,8 +210,7 @@ QString DmmPrefs::deviceListText() const
 
 void DmmPrefs::defaultsSLOT()
 {
-  port->setCurrentIndex( m_cfg->getInt( "Port settings/device"));
-  portNumber->setValue( m_cfg->getInt( "Port settings/device-number"));
+  port->setCurrentText( m_cfg->getString( "Port settings/device"));
   baudRate->setCurrentIndex( m_cfg->getInt( "Port settings/baud"));
   bitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings/bits", 7)-5 );
   stopBitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings/stop-bits", 2 )-1);
@@ -273,8 +257,7 @@ void DmmPrefs::factoryDefaultsSLOT()
 
 void DmmPrefs::applySLOT()
 {
-  m_cfg->setInt( "Port settings/device", port->currentIndex() );
-  m_cfg->setInt( "Port settings/device-number", portNumber->value() );
+  m_cfg->setString( "Port settings/device", port->currentText() );
   m_cfg->setInt( "Port settings/baud", baudRate->currentIndex() );
   m_cfg->setInt( "Port settings/bits", bitsCombo->currentIndex()+5 );
   m_cfg->setInt( "Port settings/stop-bits", stopBitsCombo->currentIndex()+1 );
@@ -435,13 +418,7 @@ QString DmmPrefs::dmmName() const
 
 QString DmmPrefs::device() const
 {
-#ifdef Q_WS_MACX
-  return port->currentText();
-#else
-  QString txt;
-  txt.sprintf( "%s%d", port->currentText().toLatin1().constData(), portNumber->value() );
-  return txt;
-#endif
+	return port->currentText();
 }
 
 void DmmPrefs::on_ui_load_clicked()
@@ -457,7 +434,6 @@ void DmmPrefs::on_ui_load_clicked()
 	QSettings cfg(filename,QSettings::IniFormat);
 
 	port->setCurrentIndex( cfg.value("Port settings/device", 0 ).toInt());
-	portNumber->setValue( cfg.value( "Port settings/device-number", 0 ).toInt() );
 	baudRate->setCurrentIndex( cfg.value( "Port settings/baud", 0 ).toInt() );
 	bitsCombo->setCurrentIndex( cfg.value( "Port settings/bits", 7 ).toInt()-5 );
 	stopBitsCombo->setCurrentIndex( cfg.value( "Port settings/stop-bits", 2 ).toInt()-1);
@@ -484,7 +460,6 @@ void DmmPrefs::on_ui_save_clicked()
 
 	QSettings cfg(filename,QSettings::IniFormat);
 	cfg.setValue( "Port settings/device", port->currentIndex() );
-	cfg.setValue( "Port settings/device-number", portNumber->value() );
 	cfg.setValue( "Port settings/baud", baudRate->currentIndex() );
 	cfg.setValue( "Port settings/bits", bitsCombo->currentIndex()+5 );
 	cfg.setValue( "Port settings/stop-bits", stopBitsCombo->currentIndex()+1 );
