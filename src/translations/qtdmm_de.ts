@@ -8,7 +8,7 @@
         <location filename="../sources/configdlg.cpp" line="82"/>
         <location filename="../sources/configdlg.cpp" line="98"/>
         <source>QtDMM: Welcome!</source>
-        <translation type="unfinished"></translation>
+        <translation>QtDMM: Willkommen!</translation>
     </message>
     <message>
         <location filename="../sources/configdlg.cpp" line="60"/>
@@ -19,81 +19,90 @@
         <location filename="../sources/configdlg.cpp" line="70"/>
         <location filename="../sources/configdlg.cpp" line="93"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortsetzen</translation>
     </message>
     <message>
         <location filename="../sources/configdlg.cpp" line="83"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You seem to have upgraded &lt;b&gt;QtDMM&lt;/b&gt; from a version prior to 0.8.4 Please check your configuration. There are some new parameter to be configured.&lt;p&gt;Thank you for choosing &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;p&gt;Wie es ausschaut, wurde &lt;b&gt;QtDMM&lt;/b&gt; von einer Version vor 0.8.4 aktualisiert. Bitte überprüfen Sie die Konfiguration. Es gibt einige neue Parameter.&lt;p&gt;Danke das Sie &lt;b&gt;QtDMM&lt;/b&gt; benutzen.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../sources/configdlg.cpp" line="99"/>
         <source>Your config file has convertet to the new format.
 Please check your color settings, because it can&apos;t be converted automatic.
+Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old.</source>
+        <translation>Ihre Konfiguration wurde in ein neues Format überführt.
+Bitte überprüfen Sie die Farbeinstellungen, da diese nicht konvertiert werden konnten.
+Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
+    </message>
+    <message>
+        <source>Your config file has convertet to the new format.
+Please check your color settings, because it can&apos;t be converted automatic.
 Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ihre Konfiguration wurde in ein neues Format überführt.
+Bitte überprüfen Sie die Farbeinstellungen, da diese nicht konvertiert werden konnten.
+Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
     </message>
 </context>
 <context>
     <name>DMM</name>
     <message>
         <location filename="../sources/dmm.cpp" line="126"/>
-        <source>Access denied for</source>
-        <translation type="unfinished"></translation>
+        <source>Access denied for %1.</source>
+        <translation>Zugriff auf %1 verweigert.</translation>
+    </message>
+    <message>
+        <location filename="../sources/dmm.cpp" line="131"/>
+        <source>No such device %1.</source>
+        <translation>%1 existiert nicht.</translation>
     </message>
     <message>
         <location filename="../sources/dmm.cpp" line="134"/>
-        <source>No such device</source>
-        <translation type="unfinished"></translation>
+        <source>Error opening %1.
+DMM connected and switched on?</source>
+        <translation>Fehler beim Öffnen von %1.
+Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../sources/dmm.cpp" line="140"/>
-        <source>Error opening</source>
-        <translation type="unfinished"></translation>
+        <location filename="../sources/dmm.cpp" line="211"/>
+        <source>Error configuring serial port %1.</source>
+        <translation>Fehler beim Konfigurieren des Anschlusses %1.</translation>
     </message>
     <message>
-        <location filename="../sources/dmm.cpp" line="144"/>
-        <location filename="../sources/dmm.cpp" line="383"/>
-        <location filename="../sources/dmm.cpp" line="391"/>
-        <source>DMM connected and switched on?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../sources/dmm.cpp" line="221"/>
-        <source>Error configuring serial port.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../sources/dmm.cpp" line="273"/>
+        <location filename="../sources/dmm.cpp" line="260"/>
         <source>Connecting ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinde ...</translation>
     </message>
     <message>
-        <location filename="../sources/dmm.cpp" line="291"/>
-        <location filename="../sources/dmm.cpp" line="395"/>
+        <location filename="../sources/dmm.cpp" line="278"/>
+        <location filename="../sources/dmm.cpp" line="369"/>
         <source>Not connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../sources/dmm.cpp" line="379"/>
-        <source>Read error on device</source>
-        <translation type="unfinished"></translation>
+        <location filename="../sources/dmm.cpp" line="365"/>
+        <source>Read error on device %1.
+DMM connected and switched on?</source>
+        <translation>Lesefehler auf %1.
+Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../sources/dmm.cpp" line="387"/>
-        <source>Timeout on device</source>
-        <translation type="unfinished"></translation>
+        <location filename="../sources/dmm.cpp" line="367"/>
+        <source>Timeout on device %1.
+DMM connected and switched on?</source>
+        <translation>Wartezeit abgelaufr für %1.
+Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../sources/dmm.cpp" line="677"/>
-        <location filename="../sources/dmm.cpp" line="794"/>
-        <location filename="../sources/dmm.cpp" line="857"/>
-        <location filename="../sources/dmm.cpp" line="993"/>
-        <location filename="../sources/dmm.cpp" line="1243"/>
-        <location filename="../sources/dmm.cpp" line="1458"/>
-        <location filename="../sources/dmm.cpp" line="1586"/>
+        <location filename="../sources/dmm.cpp" line="650"/>
+        <location filename="../sources/dmm.cpp" line="767"/>
+        <location filename="../sources/dmm.cpp" line="830"/>
+        <location filename="../sources/dmm.cpp" line="966"/>
+        <location filename="../sources/dmm.cpp" line="1216"/>
+        <location filename="../sources/dmm.cpp" line="1431"/>
+        <location filename="../sources/dmm.cpp" line="1559"/>
         <source>Connected %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbunden %1</translation>
     </message>
 </context>
 <context>
@@ -220,35 +229,35 @@ Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
 <context>
     <name>DmmPrefs</name>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="142"/>
-        <source>Multimeter settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../sources/dmmprefs.cpp" line="143"/>
-        <source>&lt;b&gt;Here you can configure the serial port and protocol for your DMM. There is also a number of predefined models.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../sources/dmmprefs.cpp" line="149"/>
+        <source>Multimeter settings</source>
+        <translation>Multimeter Einstellungen</translation>
+    </message>
+    <message>
+        <location filename="../sources/dmmprefs.cpp" line="150"/>
+        <source>&lt;b&gt;Here you can configure the serial port and protocol for your DMM. There is also a number of predefined models.&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Hier können Sie den Anschluss und das Protokoll für Ihr DMM einstellen. Es gibt schon eine Reihe vorkonfigurierter Modelle.&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../sources/dmmprefs.cpp" line="156"/>
         <source>Manual settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="449"/>
+        <location filename="../sources/dmmprefs.cpp" line="426"/>
         <source>Load DMM description</source>
-        <translation type="unfinished"></translation>
+        <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="449"/>
-        <location filename="../sources/dmmprefs.cpp" line="478"/>
+        <location filename="../sources/dmmprefs.cpp" line="426"/>
+        <location filename="../sources/dmmprefs.cpp" line="454"/>
         <source>DMM description (*.ini)</source>
-        <translation type="unfinished"></translation>
+        <translation>DMM Beschreibung (*.ini)</translation>
     </message>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="478"/>
+        <location filename="../sources/dmmprefs.cpp" line="454"/>
         <source>Save DMM description</source>
-        <translation type="unfinished"></translation>
+        <translation>DMM Beschreibung speichern</translation>
     </message>
 </context>
 <context>
@@ -256,12 +265,12 @@ Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
     <message>
         <location filename="../sources/executeprefs.cpp" line="34"/>
         <source>External application</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe Anwendung</translation>
     </message>
     <message>
         <location filename="../sources/executeprefs.cpp" line="35"/>
         <source>&lt;b&gt;Here you can configure if an external command is to be started and when.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Hier kann eine externe Anwendung sowie deren Startzeitpunkt konfiguriert werden.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -269,12 +278,12 @@ Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
     <message>
         <location filename="../sources/graphprefs.cpp" line="36"/>
         <source>Graph settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Graphen Einstellung</translation>
     </message>
     <message>
         <location filename="../sources/graphprefs.cpp" line="37"/>
         <source>&lt;b&gt;Here you can configure the colors and drawing style for the graph.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Hier werden die Farben und die Linienart für den Graphen eingestellt.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -282,12 +291,12 @@ Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
     <message>
         <location filename="../sources/guiprefs.cpp" line="34"/>
         <source>GUI settings</source>
-        <translation type="unfinished"></translation>
+        <translation>GUI Einstellungen</translation>
     </message>
     <message>
         <location filename="../sources/guiprefs.cpp" line="35"/>
         <source>&lt;b&gt;Here you can configure QtDMM&apos;s visual appearance and behaviour.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Hier wird das Erscheinungsbild von QtDMM eingestellt.</translation>
     </message>
 </context>
 <context>
@@ -382,7 +391,7 @@ Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
     <message>
         <location filename="../sources/mainwin.cpp" line="159"/>
         <source>QtDMM: Welcome!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">QtDMM: Willkommen!</translation>
     </message>
     <message>
         <location filename="../sources/mainwin.cpp" line="159"/>
@@ -495,32 +504,32 @@ Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="326"/>
+        <location filename="../forms/uidmmprefs.ui" line="289"/>
         <source>Parit&amp;y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="342"/>
+        <location filename="../forms/uidmmprefs.ui" line="305"/>
         <source>Parity for serial communication. May be None, Odd or Even.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="346"/>
+        <location filename="../forms/uidmmprefs.ui" line="309"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="351"/>
+        <location filename="../forms/uidmmprefs.ui" line="314"/>
         <source>Even</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="356"/>
+        <location filename="../forms/uidmmprefs.ui" line="319"/>
         <source>Odd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="417"/>
+        <location filename="../forms/uidmmprefs.ui" line="380"/>
         <source>Number of display digits.
 &lt;ul&gt;&lt;li&gt;3 1/2 - 2000 Counts&lt;/li&gt;
 &lt;li&gt;3 3/4 - 4000 Counts&lt;/li&gt;
@@ -530,107 +539,107 @@ Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="426"/>
+        <location filename="../forms/uidmmprefs.ui" line="389"/>
         <source>2000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="431"/>
+        <location filename="../forms/uidmmprefs.ui" line="394"/>
         <source>4000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="436"/>
+        <location filename="../forms/uidmmprefs.ui" line="399"/>
         <source>20000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="441"/>
+        <location filename="../forms/uidmmprefs.ui" line="404"/>
         <source>50000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="446"/>
+        <location filename="../forms/uidmmprefs.ui" line="409"/>
         <source>100000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="451"/>
+        <location filename="../forms/uidmmprefs.ui" line="414"/>
         <source>200000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="456"/>
+        <location filename="../forms/uidmmprefs.ui" line="419"/>
         <source>400000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="461"/>
+        <location filename="../forms/uidmmprefs.ui" line="424"/>
         <source>1000000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="466"/>
+        <location filename="../forms/uidmmprefs.ui" line="429"/>
         <source>6000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="471"/>
+        <location filename="../forms/uidmmprefs.ui" line="434"/>
         <source>40000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="688"/>
+        <location filename="../forms/uidmmprefs.ui" line="651"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="713"/>
+        <location filename="../forms/uidmmprefs.ui" line="676"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="299"/>
+        <location filename="../forms/uidmmprefs.ui" line="262"/>
         <source>Number of bits for serial communication.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="303"/>
+        <location filename="../forms/uidmmprefs.ui" line="266"/>
         <source>5 bits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="308"/>
+        <location filename="../forms/uidmmprefs.ui" line="271"/>
         <source>6 bits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="313"/>
+        <location filename="../forms/uidmmprefs.ui" line="276"/>
         <source>7 bits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="318"/>
+        <location filename="../forms/uidmmprefs.ui" line="281"/>
         <source>8 bits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="283"/>
+        <location filename="../forms/uidmmprefs.ui" line="246"/>
         <source>&amp;Bits:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="384"/>
+        <location filename="../forms/uidmmprefs.ui" line="347"/>
         <source>Number of stop bits for serial communication.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="388"/>
+        <location filename="../forms/uidmmprefs.ui" line="351"/>
         <source>1 Stop bit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="393"/>
+        <location filename="../forms/uidmmprefs.ui" line="356"/>
         <source>2 Stop bits</source>
         <translation type="unfinished"></translation>
     </message>
@@ -645,92 +654,57 @@ Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="168"/>
-        <source>/dev/ttyS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uidmmprefs.ui" line="173"/>
-        <source>/dev/usb/ttyUSB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uidmmprefs.ui" line="178"/>
-        <source>/dev/ttyUSB</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uidmmprefs.ui" line="183"/>
-        <source>/dev/tty.usbserial</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uidmmprefs.ui" line="191"/>
-        <source>Enter the number of the port.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uidmmprefs.ui" line="198"/>
-        <source>Clicke here to scan for new devices.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uidmmprefs.ui" line="201"/>
-        <source>Scan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uidmmprefs.ui" line="230"/>
+        <location filename="../forms/uidmmprefs.ui" line="193"/>
         <source>Select the baud rate for the DMM here. If you encounter problems connecting to your DMM try lowering the baud rate. I had some problems with my &lt;b&gt;Metex ME-32&lt;/b&gt;. The Documentation said 1200 baud but it only worked at 600.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="237"/>
+        <location filename="../forms/uidmmprefs.ui" line="200"/>
         <source>600 baud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="242"/>
+        <location filename="../forms/uidmmprefs.ui" line="205"/>
         <source>1200 baud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="247"/>
+        <location filename="../forms/uidmmprefs.ui" line="210"/>
         <source>1800 baud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="252"/>
+        <location filename="../forms/uidmmprefs.ui" line="215"/>
         <source>2400 baud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="257"/>
+        <location filename="../forms/uidmmprefs.ui" line="220"/>
         <source>4800 baud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="262"/>
+        <location filename="../forms/uidmmprefs.ui" line="225"/>
         <source>9600 baud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="267"/>
+        <location filename="../forms/uidmmprefs.ui" line="230"/>
         <source>19200 baud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="401"/>
+        <location filename="../forms/uidmmprefs.ui" line="364"/>
         <source>&amp;Digits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="368"/>
+        <location filename="../forms/uidmmprefs.ui" line="331"/>
         <source>&amp;Stop bits:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="214"/>
+        <location filename="../forms/uidmmprefs.ui" line="177"/>
         <source>Baud &amp;rate:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -740,92 +714,92 @@ Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="498"/>
+        <location filename="../forms/uidmmprefs.ui" line="461"/>
         <source>RTS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="508"/>
+        <location filename="../forms/uidmmprefs.ui" line="471"/>
         <source>CTS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="515"/>
+        <location filename="../forms/uidmmprefs.ui" line="478"/>
         <source>DSR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="522"/>
+        <location filename="../forms/uidmmprefs.ui" line="485"/>
         <source>DTR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="550"/>
+        <location filename="../forms/uidmmprefs.ui" line="513"/>
         <source>Protocol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="556"/>
+        <location filename="../forms/uidmmprefs.ui" line="519"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="560"/>
+        <location filename="../forms/uidmmprefs.ui" line="523"/>
         <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="565"/>
+        <location filename="../forms/uidmmprefs.ui" line="528"/>
         <source>11 bytes ASCII, continuous (PeakTech 451)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="570"/>
+        <location filename="../forms/uidmmprefs.ui" line="533"/>
         <source>14 bytes ASCII, continuous (Voltcraft)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="575"/>
+        <location filename="../forms/uidmmprefs.ui" line="538"/>
         <source>15 bytes ASCII, continuous (Voltcraft)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="580"/>
+        <location filename="../forms/uidmmprefs.ui" line="543"/>
         <source>11 bytes binary, continuous (M9803R)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="585"/>
+        <location filename="../forms/uidmmprefs.ui" line="548"/>
         <source>14 bytes binary, continuous (VC820)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="590"/>
+        <location filename="../forms/uidmmprefs.ui" line="553"/>
         <source>22 bytes ASCII, continuous (IsoTech)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="595"/>
+        <location filename="../forms/uidmmprefs.ui" line="558"/>
         <source>11 bytes binary, continuous (VC940)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="600"/>
+        <location filename="../forms/uidmmprefs.ui" line="563"/>
         <source>14 bytes ASCII/binary, continuous (QM1537)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="605"/>
+        <location filename="../forms/uidmmprefs.ui" line="568"/>
         <source>9 bytes binary, continuous (RS 22-812)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="620"/>
+        <location filename="../forms/uidmmprefs.ui" line="583"/>
         <source>&amp;Number of values:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="630"/>
+        <location filename="../forms/uidmmprefs.ui" line="593"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1437,7 +1411,7 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="134"/>
-        <location filename="../forms/uimainwin.ui" line="403"/>
+        <location filename="../forms/uimainwin.ui" line="406"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1493,14 +1467,14 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="218"/>
-        <location filename="../forms/uimainwin.ui" line="286"/>
+        <location filename="../forms/uimainwin.ui" line="289"/>
         <source>&amp;Configure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="221"/>
-        <location filename="../forms/uimainwin.ui" line="289"/>
-        <location filename="../forms/uimainwin.ui" line="363"/>
+        <location filename="../forms/uimainwin.ui" line="292"/>
+        <location filename="../forms/uimainwin.ui" line="366"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will open QtDMM&apos;s configuration dialog. Here you can configure it&apos;s visual appearance and all options regarding the multimeter hardware and the recorder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1525,127 +1499,127 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="254"/>
+        <location filename="../forms/uimainwin.ui" line="257"/>
         <source>&amp;Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="257"/>
+        <location filename="../forms/uimainwin.ui" line="260"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Connect to the Multimeter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will establish the serial connection to the dmm. If not connected the serial port is free and can be used by other software.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="260"/>
+        <location filename="../forms/uimainwin.ui" line="263"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="272"/>
+        <location filename="../forms/uimainwin.ui" line="275"/>
         <source>&amp;Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="275"/>
+        <location filename="../forms/uimainwin.ui" line="278"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Reset min/max values&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The min/max values in the display will be reset. You can activate this option at any time. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="278"/>
+        <location filename="../forms/uimainwin.ui" line="281"/>
         <source>Ctrl+R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="292"/>
+        <location filename="../forms/uimainwin.ui" line="295"/>
         <source>Shift+F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="307"/>
+        <location filename="../forms/uimainwin.ui" line="310"/>
         <source>&amp;Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="310"/>
+        <location filename="../forms/uimainwin.ui" line="313"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Start the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If you are in manual mode this will start the recorder. Press F2 to set the recorder options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="313"/>
+        <location filename="../forms/uimainwin.ui" line="316"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="328"/>
+        <location filename="../forms/uimainwin.ui" line="331"/>
         <source>S&amp;top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="331"/>
+        <location filename="../forms/uimainwin.ui" line="334"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Stop the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The recorder will be stopped. This is independent from the start mode of the recorder. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="334"/>
+        <location filename="../forms/uimainwin.ui" line="337"/>
         <source>Ctrl+X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="346"/>
+        <location filename="../forms/uimainwin.ui" line="349"/>
         <source>&amp;Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="349"/>
+        <location filename="../forms/uimainwin.ui" line="352"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clear the recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder is already started it will clear the graph and continue recording.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="352"/>
+        <location filename="../forms/uimainwin.ui" line="355"/>
         <source>Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="360"/>
+        <location filename="../forms/uimainwin.ui" line="363"/>
         <source>C&amp;onfigure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="366"/>
+        <location filename="../forms/uimainwin.ui" line="369"/>
         <source>Ctrl+F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="374"/>
+        <location filename="../forms/uimainwin.ui" line="377"/>
         <source>&amp;On version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="377"/>
+        <location filename="../forms/uimainwin.ui" line="380"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="385"/>
+        <location filename="../forms/uimainwin.ui" line="388"/>
         <source>&amp;Tipp of the day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="388"/>
+        <location filename="../forms/uimainwin.ui" line="391"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show tip of the day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="400"/>
+        <location filename="../forms/uimainwin.ui" line="403"/>
         <source>&amp;Direct Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="406"/>
+        <location filename="../forms/uimainwin.ui" line="409"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direct Help&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enter the direct help mode. You have done this already when reading this text :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="409"/>
+        <location filename="../forms/uimainwin.ui" line="412"/>
         <source>Shift+F1</source>
         <translation type="unfinished"></translation>
     </message>

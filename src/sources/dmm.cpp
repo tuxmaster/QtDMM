@@ -123,25 +123,15 @@ bool DMM::open()
 	switch (errno)
 	{
 		case EACCES:
-		  m_error = tr( "Access denied for" );
-		  m_error += " ";
-		  m_error += m_device;
-		  m_error += ". ";
+		  m_error = tr( "Access denied for %1.").arg(m_device);
 		  break;
 		case ENXIO:
 		case ENODEV:
 		case ENOENT:
-		  m_error = tr( "No such device" );
-		  m_error += " ";
-		  m_error += m_device;
-		  m_error += ". ";
+		  m_error = tr( "No such device %1." ).arg(m_device);
 		  break;
 		default:
-		  m_error = tr( "Error opening" );
-		  m_error += " ";
-		  m_error += m_device;
-		  m_error += ". ";
-		  m_error += tr( "DMM connected and switched on?" );
+		  m_error = tr( "Error opening %1.\nDMM connected and switched on?" ).arg(m_device);
 		  break;
 	}
 	Q_EMIT error( m_error );
@@ -218,10 +208,7 @@ bool DMM::open()
 	  cfsetispeed( &attr, B19200 );
 	}
 
-	m_error = tr( "Error configuring serial port." );
-	m_error += " ";
-	m_error += m_device;
-	m_error += ". ";
+	m_error = tr( "Error configuring serial port %1." ).arg(m_device);
 
 	if (-1 == tcsetattr( m_handle, TCSANOW, &attr ))
 	{
@@ -375,25 +362,11 @@ void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat 
 	else
 	{
 	  if (ReaderThread::Error == m_readerThread->status())
-	  {
-		m_error = tr( "Read error on device" );
-		m_error += " ";
-		m_error += m_device;
-		m_error += ". ";
-		m_error += tr( "DMM connected and switched on?" );
-	  }
+		  m_error = tr( "Read error on device %1.\nDMM connected and switched on?" ).arg(m_device);
 	  else if (ReaderThread::Timeout == m_readerThread->status())
-	  {
-		m_error = tr( "Timeout on device" );
-		m_error += " ";
-		m_error += m_device;
-		m_error += ". ";
-		m_error += tr( "DMM connected and switched on?" );
-	  }
+		  m_error = tr( "Timeout on device %1.\nDMM connected and switched on?" ).arg(m_device);
 	  else if (ReaderThread::NotConnected == m_readerThread->status())
-	  {
-		m_error = tr( "Not connected" );
-	  }
+		  m_error = tr( "Not connected" );
 	}
 	if (m_oldStatus != m_readerThread->status())
 		Q_EMIT error( m_error );

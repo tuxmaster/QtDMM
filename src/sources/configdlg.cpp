@@ -98,7 +98,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 		QMessageBox::information(0,tr("QtDMM: Welcome!"),
 								 tr("Your config file has convertet to the new format.\n"
 									"Please check your color settings, because it can't be converted automatic.\n"
-									"Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old"));
+									"Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old."));
   }
 
   // CREATE PAGES (Top page last)
