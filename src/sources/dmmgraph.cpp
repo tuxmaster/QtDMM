@@ -128,10 +128,7 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
   if (!title.isEmpty())
 	prt->setDocName( title );
   else
-  {
-	QString tmpStr;
-	tmpStr.sprintf( "QtDMM: %s", QDateTime::currentDateTime().toString().toLatin1().constData());
-  }
+	  prt->setDocName(tr("QtDMM: %1").arg(QDateTime::currentDateTime().toString()));
 
   prt->setCreator( "QtDMM: (c) 2001 Matthias Toussaint" );
   prt->setPrintProgram( "QtDMM: (c) 2001 Matthias Toussaint" );
@@ -162,11 +159,9 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
 
   p.drawText( 0, tRect.height()+10+tHeight, maxWidth, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
 			  tr( "Sampling resolution:" ) );
-  QString tmpStr;
-  tmpStr.sprintf( "%d %s", m_sampleTime, tr( "Seconds" ).toLatin1().constData() );
   p.drawText( maxWidth+10, tRect.height()+10+tHeight,
 			  w-maxWidth-10, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
-			  tmpStr );
+			  tr("%1 Seconds").arg(m_sampleTime) );
 
   //p.setFont( QFont( "Helvetica", 10 ));
 
@@ -196,10 +191,10 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
 }
 
 void DMMGraph::paint( QPainter *p, int w, int h,
-				 double xfactor, double xstep,
-				 double yfactor, double ystep,
-				 double maxUnit, double hUnitFact, const QString & hUnit,
-				 bool color, bool printer )
+					  double xfactor, double xstep,
+					  double yfactor, double ystep,
+					  double maxUnit, double hUnitFact, const QString & hUnit,
+					  bool color, bool printer )
 {
   p->setBrush( m_bgColor );
   p->setPen( Qt::black );
@@ -251,7 +246,7 @@ void DMMGraph::paintHorizontalGrid( QPainter *p, double yfactor, double ystep, b
 	if (y>m_graphRect.y()+m_fontHeight && y<m_graphRect.y()+m_graphRect.height())
 	{
 	  p->drawLine( m_graphRect.x()-3, y, m_graphRect.x()+m_graphRect.width(), y );
-	  scaleVal.sprintf( "%g", val*m_factor );
+	  scaleVal=QString("%1").arg(val*m_factor );
 	  p->drawText( 1, y-10, m_graphRect.x()-4, 20, Qt::AlignRight | Qt::AlignVCenter, scaleVal );
 	}
 	val += ystep;
@@ -268,25 +263,18 @@ void DMMGraph::paintHorizontalGrid( QPainter *p, double yfactor, double ystep, b
 	if (y>m_graphRect.y()+m_fontHeight && y<m_graphRect.y()+m_graphRect.height())
 	{
 	  p->drawLine( m_graphRect.x()-3, y, m_graphRect.x()+m_graphRect.width(), y );
-	  scaleVal.sprintf( "%g", val*m_factor );
+	  scaleVal=QString("%1").arg(val*m_factor );
 	  p->drawText( 1, y-10, m_graphRect.x()-4, 20, Qt::AlignRight | Qt::AlignVCenter, scaleVal );
 	}
 	val -= ystep;
   }
 
   if (!m_unit.isEmpty())
-  {
-	QString tmp = "[";
-	tmp += m_prefix;
-	tmp += m_unit;
-	tmp += "]";
-
-	p->drawText( 4, 4, 40, 20, Qt::AlignLeft | Qt::AlignTop, tmp ); //m_unit );
-  }
+	  p->drawText( 4, 4, 40, 20, Qt::AlignLeft | Qt::AlignTop, QString("[%1%2]").arg(m_prefix).arg(m_unit) ); //m_unit );
 }
 
 void DMMGraph::paintVerticalGrid( QPainter *p, double xfactor, double xstep,
-							 double maxUnit, double hUnitFact, const QString & hUnit, bool color )
+								  double maxUnit, double hUnitFact, const QString & hUnit, bool color )
 {
   int sv = qMax( 0, scrollbar->value() );
 
@@ -317,7 +305,7 @@ void DMMGraph::paintVerticalGrid( QPainter *p, double xfactor, double xstep,
 }
 
 void DMMGraph::paintData( QPainter *p, double xfactor,
-					 double yfactor, bool color, bool printer )
+						  double yfactor, bool color, bool printer )
 {
   p->setClipRect( m_graphRect );
 
@@ -842,30 +830,14 @@ void DMMGraph::emitInfo()
   QString txt;
 
   if (w)
-  {
-	txt.sprintf( "%d/%d - %dweek%s %dday%s %02d:%02d:%02d - %s",
-				 m_pointer, m_length, w, (w>1 ? "s" : ""), d, (d>1 ? "s" : ""), h, m, s,
-				 m_running ? tr( "Sampling" ).toLatin1().constData() : tr( "Stopped" ).toLatin1().constData() );
-  }
+	txt=QString("%1/%2 - %3week%4 %5day&6 %7:%8:%9 - %10").arg(m_pointer).arg(m_length).arg(w).arg((w>1 ? "s" : "")).arg(d).arg((d>1 ? "s" : "")).arg(h).arg(m).arg(s)
+														  .arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
   else if (d)
-  {
-	txt.sprintf( "%d/%d - %dday%s %02d:%02d:%02d - %s",
-				 m_pointer, m_length, d, (d>1 ? "s" : ""), h, m, s,
-				 m_running ? tr( "Sampling" ).toLatin1().constData() : tr( "Stopped" ).toLatin1().constData() );
-  }
+	  txt=QString("%1/%2 - %3day%4 %5:%6:%7 - %8").arg(m_pointer).arg(m_length).arg(d).arg((d>1 ? "s" : "")).arg(h).arg(m).arg(s).arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
   else if (h)
-  {
-	txt.sprintf( "%d/%d - %02d:%02d:%02d - %s",
-				 m_pointer, m_length, h, m, s,
-				 m_running ? tr( "Sampling" ).toLatin1().constData() : tr( "Stopped" ).toLatin1().constData() );
-  }
+	  txt=QString("%1/%2 - %3:%4:%5 - %6").arg(m_pointer).arg(m_length).arg(h).arg(m).arg(s).arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
   else
-  {
-	txt.sprintf( "%d/%d - %02d:%02d - %s",
-				 m_pointer, m_length, m, s,
-				 m_running ? tr( "Sampling" ).toLatin1().constData() : tr( "Stopped" ).toLatin1().constData() );
-  }
-
+	  txt=QString("%1/%2 - %3:%4 - %5").arg(m_pointer).arg(m_length).arg(m).arg(s).arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
   Q_EMIT info( txt );
 }
 
@@ -1160,14 +1132,8 @@ void DMMGraph::fillInfoBox( const QPoint & pos )
 	  prefix = "G";
 	}
 
-	QString unit = prefix + m_unit;
-
-
-	QString tmpVal;
-	tmpVal.sprintf( "%g %s", val, (const char *)unit.toLatin1().constData() );
-
-	tmpStr += tmpVal;
-
+	QString tmpVal=QString("%1 %2%3").arg(val).arg(prefix).arg(m_unit);
+	tmpStr.append(tmpVal);
   }
 
   m_infoBox->setText( tmpStr );
@@ -1176,7 +1142,7 @@ void DMMGraph::fillInfoBox( const QPoint & pos )
 
 bool DMMGraph::exportDataSLOT()
 {
-  QString fn = QFileDialog::getSaveFileName( this,QString(),QString(), "All files (*.*)");
+  QString fn = QFileDialog::getSaveFileName( this,QString(),QString(), tr("All files (*.*)"));
 
   if (!fn.isNull())
   {
@@ -1188,16 +1154,10 @@ bool DMMGraph::exportDataSLOT()
 	for (int i=0; i<m_pointer; i++)
 	{
 	  QDateTime dt = m_graphStartDateTime.addSecs( i*(int)qRound(m_sampleTime/10.) );
-	  QString line;
-	  line.sprintf( "%02d.%02d.%04d\t%02d:%02d:%02d\t%06g\t%s\n",
-		  dt.date().day(), dt.date().month(), dt.date().year(),
-		  dt.time().hour(), dt.time().minute(), dt.time().second(),
-		  (*m_array)[i],
-		  m_unit/*.mid( 1, m_unit.length()-2 )*/.toLatin1().constData() );
-
+	  QString line=QString("%1.%2.%3\t%4:%5:%6\t%7\t%8\n").arg(dt.date().day()).arg(dt.date().month()).arg(dt.date().year()).arg(dt.time().hour())
+														  .arg(dt.time().minute()).arg(dt.time().second()).arg((*m_array)[i]).arg(m_unit);
 	  ts << line;
 	}
-
 	m_dirty = false;
 
 	file.close();
@@ -1235,7 +1195,7 @@ void DMMGraph::importDataSLOT()
 	}
   }
 
-  QString fn = QFileDialog::getOpenFileName( this,QString(),QString(),"All files (*.*)");
+  QString fn = QFileDialog::getOpenFileName( this,QString(),QString(),tr("All files (*.*)"));
 
   int cnt = 0;
   int sample = 0;
@@ -1453,9 +1413,9 @@ bool DMMGraph::computeMinMax( double val )
 }
 
 void DMMGraph::setColors( const QColor & bg, const QColor & grid,
-					 const QColor & data, const QColor & cursor,
-					 const QColor & start, const QColor & external,
-					 const QColor & integration, const QColor & intThreshold )
+						  const QColor & data, const QColor & cursor,
+						  const QColor & start, const QColor & external,
+						  const QColor & integration, const QColor & intThreshold )
 {
   m_bgColor           = bg;
   m_gridColor         = grid;

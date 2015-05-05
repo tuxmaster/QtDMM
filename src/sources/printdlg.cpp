@@ -52,24 +52,21 @@ void PrintDlg::createPrinterString()
   QString txt = m_printer->printerName();
 
   if (m_printer->outputFormat() == QPrinter::PdfFormat)
-  {
-	txt = "File: ";
-	txt += m_printer->outputFileName();
-  }
-  txt += " ";
+	  txt = QString("File: %1").arg(m_printer->outputFileName());
 
-  txt += m_printer->pageLayout().pageSize().name();
-  txt += " ";
+  txt.append(" ");
+  txt.append( m_printer->pageLayout().pageSize().name());
+  txt.append( " ");
 
   if (m_printer->orientation() == QPrinter::Landscape)
-	txt += "Landscape";
+	txt.append( "Landscape");
   else
-	txt += "Portrait";
+	txt.append("Portrait");
 
   if (m_printer->colorMode() == QPrinter::Color)
-	txt += " Color";
+	txt.append(" Color");
   else
-	txt += " Grayscale";
+	txt.append(" Grayscale");
 
   printerLabel->setText( txt );
 
