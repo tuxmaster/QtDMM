@@ -419,7 +419,7 @@ void MainWid::startExternalSLOT()
   {
 	QMessageBox question( tr("QtDMM: Launch error" ),
 						  tr("<font size=+2><b>Launch error</b></font><p>"
-							 "Application %s is still running!<p>"
+							 "Application %1 is still running!<p>"
 							 "Do you want to kill it now").arg(m_configDlg->externalCommand()),
 						  QMessageBox::Information,
 						  QMessageBox::Yes | QMessageBox::Default,
@@ -453,7 +453,7 @@ void MainWid::startExternalSLOT()
   {
 	QMessageBox question( tr("QtDMM: Launch error" ),
 						  tr("<font size=+2><b>Launch error</b></font><p>"
-							 "Couldn't launch %s").arg(m_configDlg->externalCommand()),
+							 "Couldn't launch %1").arg(m_configDlg->externalCommand()),
 						  QMessageBox::Information,
 						  QMessageBox::Yes | QMessageBox::Default,
 						  Qt::NoButton,
