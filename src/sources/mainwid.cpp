@@ -394,7 +394,7 @@ void MainWid::readConfig()
 							m_configDlg->intOffset() );
 
   if (m_configDlg->sampleMode() == DMMGraph::Time)
-	  Q_EMIT info( tr("%Automatic start at %1").arg(m_configDlg->startTime().toString()) );
+	  Q_EMIT info( tr("Automatic start at %1").arg(m_configDlg->startTime().toString()) );
   else if (m_configDlg->sampleMode() == DMMGraph::Raising)
 	  Q_EMIT info( tr("Raising threshold %1").arg(m_configDlg->raisingThreshold()) );
   else if (m_configDlg->sampleMode() == DMMGraph::Falling)
