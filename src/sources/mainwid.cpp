@@ -31,8 +31,6 @@
 #include "displaywid.h"
 #include "tipdlg.h"
 
-#include <iostream>
-
 MainWid::MainWid( QWidget *parent ) :  QFrame( parent ),
   m_display( 0 ),
   m_tipDlg( 0 )
@@ -419,18 +417,14 @@ void MainWid::startExternalSLOT()
 {
   if (m_external->state() == QProcess::Running)
   {
-	QString msg;
-	msg.sprintf( tr("<font size=+2><b>Launch error</b></font><p>"
-					"Application %s is still running!<p>"
-					"Do you want to kill it now").toLatin1().constData(),
-					m_configDlg->externalCommand().toLatin1().constData() );
-
 	QMessageBox question( tr("QtDMM: Launch error" ),
-						  msg,
-							 QMessageBox::Information,
-							 QMessageBox::Yes | QMessageBox::Default,
-							 QMessageBox::No,
-							 Qt::NoButton );
+						  tr("<font size=+2><b>Launch error</b></font><p>"
+							 "Application %s is still running!<p>"
+							 "Do you want to kill it now").arg(m_configDlg->externalCommand()),
+						  QMessageBox::Information,
+						  QMessageBox::Yes | QMessageBox::Default,
+						  QMessageBox::No,
+						  Qt::NoButton );
 
 	question.setButtonText( QMessageBox::Yes, tr("Yes, kill it!") );
 	question.setButtonText( QMessageBox::Yes, tr("No, keep running") );
@@ -457,17 +451,13 @@ void MainWid::startExternalSLOT()
   m_external->start();
   if (m_external->state() != QProcess::Starting)
   {
-	QString msg;
-	msg.sprintf( tr("<font size=+2><b>Launch error</b></font><p>"
-					"Couldn't launch %s").toLatin1().constData(),
-					m_configDlg->externalCommand().toLatin1().constData() );
-
 	QMessageBox question( tr("QtDMM: Launch error" ),
-						  msg,
-							 QMessageBox::Information,
-							 QMessageBox::Yes | QMessageBox::Default,
-							 Qt::NoButton,
-							 Qt::NoButton );
+						  tr("<font size=+2><b>Launch error</b></font><p>"
+							 "Couldn't launch %s").arg(m_configDlg->externalCommand()),
+						  QMessageBox::Information,
+						  QMessageBox::Yes | QMessageBox::Default,
+						  Qt::NoButton,
+						  Qt::NoButton );
 
 	question.setButtonText( QMessageBox::Yes, tr("Bummer!") );
 	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
@@ -475,18 +465,12 @@ void MainWid::startExternalSLOT()
 	question.exec();
   }
   else
-  {
-	QString msg;
-	msg.sprintf( tr("Launched %s").toLatin1().constData(), m_configDlg->externalCommand().toLatin1().constData() );
-	Q_EMIT error( msg );
-  }
+	  Q_EMIT error( tr("Launched %1").arg(m_configDlg->externalCommand()) );
 }
 
 void MainWid::exitedSLOT()
 {
-  QString msg;
-  msg.sprintf( "%s terminated with exit code %d.", m_configDlg->externalCommand().toLatin1().constData(), m_external->exitStatus() );
-  Q_EMIT error( msg );
+  Q_EMIT error( tr("%1 terminated with exit code %2.").arg(m_configDlg->externalCommand()).arg(m_external->exitStatus()) );
 }
 
 void MainWid::showTipsSLOT()
