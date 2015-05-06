@@ -394,24 +394,11 @@ void MainWid::readConfig()
 							m_configDlg->intOffset() );
 
   if (m_configDlg->sampleMode() == DMMGraph::Time)
-  {
-	QString txt;
-	txt.sprintf( "%s %s", tr( "Automatic start at" ).toLatin1().constData(),m_configDlg->startTime().toString().toLatin1().constData() );
-	Q_EMIT info( txt );
-  }
+	  Q_EMIT info( tr("%Automatic start at %1").arg(m_configDlg->startTime().toString()) );
   else if (m_configDlg->sampleMode() == DMMGraph::Raising)
-  {
-	QString txt;
-	txt.sprintf( "%s %g", tr( "Raising threshold" ).toLatin1().constData(),m_configDlg->raisingThreshold());
-	Q_EMIT info( txt );
-  }
+	  Q_EMIT info( tr("Raising threshold %1").arg(m_configDlg->raisingThreshold()) );
   else if (m_configDlg->sampleMode() == DMMGraph::Falling)
-  {
-	QString txt;
-	txt.sprintf( "%s %g", tr( "Falling threshold" ).toLatin1().constData(), m_configDlg->fallingThreshold() );
-	Q_EMIT info( txt );
-  }
-
+	  Q_EMIT info( tr("Falling threshold %1").arg(m_configDlg->fallingThreshold()) );
   Q_EMIT useTextLabel( m_configDlg->useTextLabel() );
   Q_EMIT toolbarVisibility( m_configDlg->showDisplay(),
 						  m_configDlg->showDmmToolbar(),
