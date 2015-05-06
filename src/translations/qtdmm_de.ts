@@ -307,7 +307,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../sources/guiprefs.cpp" line="35"/>
         <source>&lt;b&gt;Here you can configure QtDMM&apos;s visual appearance and behaviour.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Hier wird das Erscheinungsbild von QtDMM eingestellt.</translation>
+        <translation>&lt;b&gt;Hier wird das Erscheinungsbild von QtDMM eingestellt.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -326,75 +326,84 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../sources/mainwid.cpp" line="110"/>
+        <location filename="../sources/mainwid.cpp" line="108"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="111"/>
+        <location filename="../sources/mainwid.cpp" line="109"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Es befinden sich ungesicherte Daten im Speicher. Wenn Sie das Programm beenden gehen diese verloren.&lt;p&gt;Sollen diese vorher exportiert werden?</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="120"/>
+        <location filename="../sources/mainwid.cpp" line="118"/>
         <source>Export data first</source>
         <translation>Daten erst exportieren</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="121"/>
+        <location filename="../sources/mainwid.cpp" line="119"/>
         <source>Quit without saving</source>
         <translation>Beenden ohne speichern</translation>
     </message>
     <message>
+        <location filename="../sources/mainwid.cpp" line="395"/>
+        <source>Automatic start at %1</source>
+        <translation>Automatisch starten bei %1</translation>
+    </message>
+    <message>
         <location filename="../sources/mainwid.cpp" line="397"/>
-        <source>%Automatic start at %1</source>
-        <translation type="unfinished"></translation>
+        <source>Raising threshold %1</source>
+        <translation>Grenzwert steigent %1</translation>
     </message>
     <message>
         <location filename="../sources/mainwid.cpp" line="399"/>
-        <source>Raising threshold %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../sources/mainwid.cpp" line="401"/>
         <source>Falling threshold %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Grenzwert fallend %1</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="423"/>
+        <location filename="../sources/mainwid.cpp" line="455"/>
+        <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
+        <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Konnte %1 nicht starten</translation>
+    </message>
+    <message>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %s is still running!&lt;p&gt;Do you want to kill it now</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s is still running!&lt;p&gt;Do you want to kill it now</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="428"/>
-        <location filename="../sources/mainwid.cpp" line="465"/>
+        <location filename="../sources/mainwid.cpp" line="468"/>
+        <source>Launched %1</source>
+        <translation>%1 gestartet</translation>
+    </message>
+    <message>
+        <location filename="../sources/mainwid.cpp" line="473"/>
+        <source>%1 terminated with exit code %2.</source>
+        <translation>%1 mit dem Rückgabecode %2 beendet.</translation>
+    </message>
+    <message>
+        <location filename="../sources/mainwid.cpp" line="420"/>
+        <location filename="../sources/mainwid.cpp" line="454"/>
         <source>QtDMM: Launch error</source>
-        <translation type="unfinished"></translation>
+        <translation>QtDMM: Startfehler</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="435"/>
+        <location filename="../sources/mainwid.cpp" line="421"/>
+        <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now</source>
+        <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %1 läuft noch.&lt;p&gt;Soll es getötet werden</translation>
+    </message>
+    <message>
+        <location filename="../sources/mainwid.cpp" line="429"/>
         <source>Yes, kill it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja, töten!</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="436"/>
+        <location filename="../sources/mainwid.cpp" line="430"/>
         <source>No, keep running</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein, es laufen lassen</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="461"/>
-        <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../sources/mainwid.cpp" line="472"/>
+        <location filename="../sources/mainwid.cpp" line="462"/>
         <source>Bummer!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../sources/mainwid.cpp" line="480"/>
-        <source>Launched %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinfall!</translation>
     </message>
 </context>
 <context>
