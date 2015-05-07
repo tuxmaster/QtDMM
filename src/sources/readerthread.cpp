@@ -186,25 +186,39 @@ void ReaderThread::readDMM()
   m_id = 0;
   memset( m_buffer, 0, 20 );
 
-  if (m_format == ReadEvent::Metex14)
-	readMetex14();
-  else if (m_format == ReadEvent::Voltcraft14Continuous)
-	readVoltcraft14Continuous();
-  else if (m_format == ReadEvent::Voltcraft15Continuous)
-	readVoltcraft15Continuous();
-  else if (m_format == ReadEvent::M9803RContinuous)
-	readM9803RContinuous();
-  else if (m_format == ReadEvent::PeakTech10)
-	readPeakTech10();
-  else if (m_format == ReadEvent::IsoTech)
-	readIsoTech();
-  else if (m_format == ReadEvent::QM1537Continuous)
-	readQM1537Continuous();
-  else if (m_format == ReadEvent::VC940Continuous)
-	readVC940();
-  else if (m_format == ReadEvent::RS22812Continuous)
-	readRS22812Continuous();
-
+  switch(m_format)
+  {
+	  case ReadEvent::Metex14:
+		  readMetex14();
+		  break;
+	  case ReadEvent::Voltcraft14Continuous:
+		  readVoltcraft14Continuous();
+		  break;
+	  case ReadEvent::Voltcraft15Continuous:
+		  readVoltcraft15Continuous();
+		  break;
+	  case ReadEvent::M9803RContinuous:
+		  readM9803RContinuous();
+		  break;
+	  case ReadEvent::PeakTech10:
+		  readPeakTech10();
+		  break;
+	  case ReadEvent::IsoTech:
+		  readIsoTech();
+		  break;
+	  case ReadEvent::QM1537Continuous:
+		  readQM1537Continuous();
+		  break;
+	  case ReadEvent::VC820Continuous:
+		  readVC820();
+		  break;
+	  case ReadEvent::VC940Continuous:
+		  readVC940();
+		  break;
+	  case ReadEvent::RS22812Continuous:
+		  readRS22812Continuous();
+		  break;
+  }
 }
 
 bool ReaderThread::checkFormat()
