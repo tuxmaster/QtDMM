@@ -27,72 +27,75 @@
 
 #include <iostream>
 
-
+QBitmap *BitmapHelper(const QString &file)
+{
+		return new QBitmap(QPixmap(file).createMaskFromColor(Qt::black,Qt::MaskOutColor));
+}
 DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_paintBar( true ),
   m_numValues( 1 )
 {
 
-  m_bigDigit = new QBitmap(":/Symbols/numbers.xpm");
-  m_bigSpecialChar = new QBitmap(":/Symbols/specialchars.xpm");
+  m_bigDigit = BitmapHelper(":/Symbols/numbers.xpm");
+  m_bigSpecialChar =BitmapHelper(":/Symbols/specialchars.xpm");
 
-  m_bigDecimal = new QBitmap(":/Symbols/decimal.xpm");
-  m_bigMinus = new QBitmap(":/Symbols/minus.xpm");
-  m_bigG =new QBitmap(":/Symbols/G.xpm");
-  m_bigM = new QBitmap(":/Symbols/M.xpm");
-  m_bigk = new QBitmap(":/Symbols/k.xpm");
-  m_bigm = new QBitmap(":/Symbols/m.xpm");
-  m_bigu = new QBitmap(":/Symbols/µ.xpm");
-  m_bign = new QBitmap(":/Symbols/n.xpm");
-  m_bigp = new QBitmap(":/Symbols/p.xpm");
-  m_bigHz = new QBitmap(":/Symbols/Hz.xpm");
-  m_bigF = new QBitmap(":/Symbols/F.xpm");
-  m_bigV = new QBitmap(":/Symbols/V.xpm");
-  m_bigA = new QBitmap(":/Symbols/A.xpm");
-  m_bigH = new QBitmap(":/Symbols/H.xpm");
-  m_bigW = new QBitmap(":/Symbols/W.xpm");
-  m_bigDBM = new QBitmap(":/Symbols/DBM.xpm");
-  m_bigOhm = new QBitmap(":/Symbols/Ohm.xpm");
-  m_bigDeg = new QBitmap(":/Symbols/deg.xpm");
-  m_bigPercent = new QBitmap(":/Symbols/percent.xpm");
+  m_bigDecimal =  BitmapHelper(":/Symbols/decimal.xpm");
+  m_bigMinus =  BitmapHelper(":/Symbols/minus.xpm");
+  m_bigG = BitmapHelper(":/Symbols/G.xpm");
+  m_bigM =  BitmapHelper(":/Symbols/M.xpm");
+  m_bigk =  BitmapHelper(":/Symbols/k.xpm");
+  m_bigm =  BitmapHelper(":/Symbols/m.xpm");
+  m_bigu =  BitmapHelper(":/Symbols/µ.xpm");
+  m_bign =  BitmapHelper(":/Symbols/n.xpm");
+  m_bigp =  BitmapHelper(":/Symbols/p.xpm");
+  m_bigHz =  BitmapHelper(":/Symbols/Hz.xpm");
+  m_bigF =  BitmapHelper(":/Symbols/F.xpm");
+  m_bigV =  BitmapHelper(":/Symbols/V.xpm");
+  m_bigA =  BitmapHelper(":/Symbols/A.xpm");
+  m_bigH =  BitmapHelper(":/Symbols/H.xpm");
+  m_bigW =  BitmapHelper(":/Symbols/W.xpm");
+  m_bigDBM =  BitmapHelper(":/Symbols/DBM.xpm");
+  m_bigOhm =  BitmapHelper(":/Symbols/Ohm.xpm");
+  m_bigDeg =  BitmapHelper(":/Symbols/deg.xpm");
+  m_bigPercent =  BitmapHelper(":/Symbols/percent.xpm");
 
-  m_smallDigit = new QBitmap(":/Symbols/numbers_small.xpm");
-  m_smallSpecialChar = new QBitmap(":/Symbols/specialchars_small.xpm");
+  m_smallDigit =  BitmapHelper(":/Symbols/numbers_small.xpm");
+  m_smallSpecialChar =  BitmapHelper(":/Symbols/specialchars_small.xpm");
 
-  m_smallDecimal = new QBitmap(":/Symbols/decimal_small.xpm");
-  m_smallMinus = new QBitmap(":/Symbols/minus_small.xpm");
-  m_smallG = new QBitmap(":/Symbols/G_small.xpm");
-  m_smallM = new QBitmap(":/Symbols/M_small.xpm");
-  m_smallk = new QBitmap(":/Symbols/k_small.xpm");
-  m_smallm = new QBitmap(":/Symbols/m_small.xpm");
-  m_smallu = new QBitmap(":/Symbols/µ_small.xpm");
-  m_smalln = new QBitmap(":/Symbols/n_small.xpm");
-  m_smallp = new QBitmap(":/Symbols/p_small.xpm");
-  m_smallHz = new QBitmap(":/Symbols/Hz_small.xpm");
-  m_smallF = new QBitmap(":/Symbols/F_small.xpm");
-  m_smallV = new QBitmap(":/Symbols/V_small.xpm");
-  m_smallA = new QBitmap(":/Symbols/A_small.xpm");
-  m_smallH = new QBitmap(":/Symbols/H_small.xpm");
-  m_smallW = new QBitmap(":/Symbols/W_small.xpm");
-  m_smallDBM = new QBitmap(":/Symbols/DBM_small.xpm");
-  m_smallOhm = new QBitmap(":/Symbols/Ohm_small.xpm");
-  m_smallDeg = new QBitmap(":/Symbols/deg_small.xpm");
-  m_smallPercent = new QBitmap(":/Symbols/percent_small.xpm");
+  m_smallDecimal =  BitmapHelper(":/Symbols/decimal_small.xpm");
+  m_smallMinus =  BitmapHelper(":/Symbols/minus_small.xpm");
+  m_smallG =  BitmapHelper(":/Symbols/G_small.xpm");
+  m_smallM =  BitmapHelper(":/Symbols/M_small.xpm");
+  m_smallk =  BitmapHelper(":/Symbols/k_small.xpm");
+  m_smallm =  BitmapHelper(":/Symbols/m_small.xpm");
+  m_smallu =  BitmapHelper(":/Symbols/µ_small.xpm");
+  m_smalln =  BitmapHelper(":/Symbols/n_small.xpm");
+  m_smallp =  BitmapHelper(":/Symbols/p_small.xpm");
+  m_smallHz =  BitmapHelper(":/Symbols/Hz_small.xpm");
+  m_smallF =  BitmapHelper(":/Symbols/F_small.xpm");
+  m_smallV =  BitmapHelper(":/Symbols/V_small.xpm");
+  m_smallA =  BitmapHelper(":/Symbols/A_small.xpm");
+  m_smallH =  BitmapHelper(":/Symbols/H_small.xpm");
+  m_smallW =  BitmapHelper(":/Symbols/W_small.xpm");
+  m_smallDBM =  BitmapHelper(":/Symbols/DBM_small.xpm");
+  m_smallOhm =  BitmapHelper(":/Symbols/Ohm_small.xpm");
+  m_smallDeg =  BitmapHelper(":/Symbols/deg_small.xpm");
+  m_smallPercent =  BitmapHelper(":/Symbols/percent_small.xpm");
 
-  m_minStr = new QBitmap(":/Symbols/min_str.xpm");
-  m_maxStr = new QBitmap(":/Symbols/max_str.xpm");
+  m_minStr =  BitmapHelper(":/Symbols/min_str.xpm");
+  m_maxStr =  BitmapHelper(":/Symbols/max_str.xpm");
 
-  m_diode = new QBitmap(":/Symbols/diode.xpm");
-  m_ac = new QBitmap(":/Symbols/ac.xpm");
-  m_dc = new QBitmap(":/Symbols/dc.xpm");
+  m_diode =  BitmapHelper(":/Symbols/diode.xpm");
+  m_ac =  BitmapHelper(":/Symbols/ac.xpm");
+  m_dc =  BitmapHelper(":/Symbols/dc.xpm");
 
-  m_bar[0] = new QBitmap(":/Symbols/null_bar.xpm");
-  m_bar[1] = new QBitmap(":/Symbols/ten_bar.xpm");
-  m_bar[2] = new QBitmap(":/Symbols/twenty_bar.xpm");
-  m_bar[3] = new QBitmap(":/Symbols/thirty_bar.xpm");
-  m_bar[4] = new QBitmap(":/Symbols/fourty_bar.xpm");
-  m_bar[5] = new QBitmap(":/Symbols/fifty_bar.xpm");
-  m_bar[6] = new QBitmap(":/Symbols/sixty_bar.xpm");
+  m_bar[0] =  BitmapHelper(":/Symbols/null_bar.xpm");
+  m_bar[1] =  BitmapHelper(":/Symbols/ten_bar.xpm");
+  m_bar[2] =  BitmapHelper(":/Symbols/twenty_bar.xpm");
+  m_bar[3] =  BitmapHelper(":/Symbols/thirty_bar.xpm");
+  m_bar[4] =  BitmapHelper(":/Symbols/fourty_bar.xpm");
+  m_bar[5] =  BitmapHelper(":/Symbols/fifty_bar.xpm");
+  m_bar[6] =  BitmapHelper(":/Symbols/sixty_bar.xpm");
 
   setAttribute(Qt::WA_OpaquePaintEvent);
   //setBackgroundMode( Qt::NoBackground );
