@@ -79,10 +79,11 @@ int main( int argc, char **argv )
   MainWin mainWin;
 
   QCommandLineParser parser;
+  parser.addOption(QCommandLineOption("console"));
+
   parser.process(app);
   if(parser.isSet("console"))
 	mainWin.setConsoleLogging( true );
-
   mainWin.show();
   mainWin.move( 100, 100 );
 
