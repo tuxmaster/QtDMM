@@ -408,7 +408,7 @@ void DisplayWid::drawSmallNumber( QPainter *p, const QString & num )
   int offset = 0;
   if(!num.isEmpty())
   {
-	  while (num[offset] == ' ' && offset<num.length())
+	  while (num[offset] == ' ' && offset<num.length()-1)
 		++offset;
 	  if (num[offset] == '-')
 	  {
@@ -640,7 +640,8 @@ void DisplayWid::drawBigNumber( QPainter *p, const QString & num )
   int offset = 0;
   if(!num.isEmpty())
   {
-	  while (num[offset] == ' ' && offset<num.length()) ++offset;
+	  while (num[offset] == ' ' && offset<num.length()-1)
+		  ++offset;
 
 	  if (num[offset] == '-')
 	  {
