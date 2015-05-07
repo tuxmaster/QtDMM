@@ -46,8 +46,6 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
   m_display = new DisplayWid( toolBarDisplay );
   m_wid->setDisplay( m_display );
 
-  setMinimumSize( 500, 450 );
-
   setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(APP_VERSION) );
 
   connect( m_wid, SIGNAL( running(bool) ),this, SLOT( runningSLOT(bool) ));

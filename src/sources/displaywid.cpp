@@ -384,7 +384,6 @@ void DisplayWid::paintEvent( QPaintEvent * )
 	}
 
 	p.translate( 6, 76 );
-
 	for (int i=1; i<m_numValues; ++i)
 	{
 	  drawSmallNumber( &p, m_value[i] );
@@ -407,15 +406,16 @@ void DisplayWid::drawSmallNumber( QPainter *p, const QString & num )
 {
   int x = 0;
   int offset = 0;
-
-  while (num[offset] == ' ' && offset<num.length()) ++offset;
-
-  if (num[offset] == '-')
+  if(!num.isEmpty())
   {
-	p->drawPixmap( 0, 9, *m_smallMinus );
-	offset++;
+	  while (num[offset] == ' ' && offset<num.length())
+		++offset;
+	  if (num[offset] == '-')
+	  {
+		p->drawPixmap( 0, 9, *m_smallMinus );
+		offset++;
+	  }
   }
-
   x += 12;
 
   for (unsigned i=offset; i<(unsigned)num.length(); i++)
@@ -492,7 +492,6 @@ void DisplayWid::drawSmallNumber( QPainter *p, const QString & num )
 	else
 	{
 	  int digit = num[i].toLatin1()-'0';
-
 	  if (digit >= 0 && digit <= 9)
 	  {
 		p->drawPixmap( x, 0, *m_smallDigit, 12*digit, 0, 12, 21 );
@@ -507,82 +506,65 @@ void DisplayWid::drawBigUnit( QPainter *p, const QString & str )
   int index = 0;
   int x = 0;
 
-  if (str[0] == 'G')
+  if(!str.isEmpty())
   {
-	p->drawPixmap( x, 0, *m_bigG );
-	x += m_bigG->width()+2;
-	index++;
-  }
-  else if (str[0] == 'M')
-  {
-	p->drawPixmap( x, 0, *m_bigM );
-	x += m_bigM->width()+2;
-	index++;
-  }
-  else if (str[0] == 'k')
-  {
-	p->drawPixmap( x, 0, *m_bigk );
-	x += m_bigk->width()+2;
-	index++;
-  }
-  else if (str[0] == 'm')
-  {
-	p->drawPixmap( x, 0, *m_bigm );
-	x += m_bigm->width()+2;
-	index++;
-  }
-  else if (str[0] == 'u')
-  {
-	p->drawPixmap( x, 3, *m_bigu );
-	x += m_bigu->width()+2;
-	index++;
-  }
-  else if (str[0] == 'n')
-  {
-	p->drawPixmap( x, 0, *m_bign );
-	x += m_bign->width()+2;
-	index++;
-  }
+	  if (str[0] == 'G')
+	  {
+		p->drawPixmap( x, 0, *m_bigG );
+		x += m_bigG->width()+2;
+		index++;
+	  }
+	  else if (str[0] == 'M')
+	  {
+		p->drawPixmap( x, 0, *m_bigM );
+		x += m_bigM->width()+2;
+		index++;
+	  }
+	  else if (str[0] == 'k')
+	  {
+		p->drawPixmap( x, 0, *m_bigk );
+		x += m_bigk->width()+2;
+		index++;
+	  }
+	  else if (str[0] == 'm')
+	  {
+		p->drawPixmap( x, 0, *m_bigm );
+		x += m_bigm->width()+2;
+		index++;
+	  }
+	  else if (str[0] == 'u')
+	  {
+		p->drawPixmap( x, 3, *m_bigu );
+		x += m_bigu->width()+2;
+		index++;
+	  }
+	  else if (str[0] == 'n')
+	  {
+		p->drawPixmap( x, 0, *m_bign );
+		x += m_bign->width()+2;
+		index++;
+	  }
 
-  if (str.mid(index) == "Ohm")
-  {
-	p->drawPixmap( x, 0, *m_bigOhm );
-  }
-  else if (str.mid(index) == "C")
-  {
-	p->drawPixmap( x, 0, *m_bigDeg );
-  }
-  else if (str.mid(index) == "Hz")
-  {
-	p->drawPixmap( x, 0, *m_bigHz );
-  }
-  else if (str.mid(index) == "F") // ignore Farenheit
-  {
-	p->drawPixmap( x, 0, *m_bigF );
-  }
-  else if (str.mid(index) == "H")
-  {
-	p->drawPixmap( x, 0, *m_bigH );
-  }
-  else if (str.mid(index) == "W")
-  {
-	p->drawPixmap( x, 0, *m_bigW );
-  }
-  else if (str.mid(index) == "dBm")
-  {
-	p->drawPixmap( x, 0, *m_bigDBM );
-  }
-  else if (str.mid(index) == "A")
-  {
-	p->drawPixmap( x, 0, *m_bigA );
-  }
-  else if (str.mid(index) == "V")
-  {
-	p->drawPixmap( x, 0, *m_bigV );
-  }
-  else if (str.mid(index) == "%")
-  {
-	p->drawPixmap( x, 0, *m_bigPercent );
+	  if (str.mid(index) == "Ohm")
+		p->drawPixmap( x, 0, *m_bigOhm );
+	  else if (str.mid(index) == "C")
+		p->drawPixmap( x, 0, *m_bigDeg );
+	  else if (str.mid(index) == "Hz")
+		p->drawPixmap( x, 0, *m_bigHz );
+	  else if (str.mid(index) == "F") // ignore Farenheit
+		p->drawPixmap( x, 0, *m_bigF );
+	  else if (str.mid(index) == "H")
+		p->drawPixmap( x, 0, *m_bigH );
+	  else if (str.mid(index) == "W")
+		p->drawPixmap( x, 0, *m_bigW );
+	  else if (str.mid(index) == "dBm")
+		p->drawPixmap( x, 0, *m_bigDBM );
+	  else if (str.mid(index) == "A")
+		p->drawPixmap( x, 0, *m_bigA );
+	  else if (str.mid(index) == "V")
+		p->drawPixmap( x, 0, *m_bigV );
+	  else if (str.mid(index) == "%")
+		p->drawPixmap( x, 0, *m_bigPercent );
   }
 }
 
@@ -591,82 +573,64 @@ void DisplayWid::drawSmallUnit( QPainter *p, const QString & str )
   int index = 0;
   int x = 0;
 
-  if (str[0] == 'G')
+  if(!str.isEmpty())
   {
-	p->drawPixmap( x, 0, *m_smallG );
-	x += m_smallG->width()+1;
-	index++;
-  }
-  else if (str[0] == 'M')
-  {
-	p->drawPixmap( x, 0, *m_smallM );
-	x += m_smallM->width()+1;
-	index++;
-  }
-  else if (str[0] == 'k')
-  {
-	p->drawPixmap( x, 0, *m_smallk );
-	x += m_smallk->width()+1;
-	index++;
-  }
-  else if (str[0] == 'm')
-  {
-	p->drawPixmap( x, 0, *m_smallm );
-	x += m_smallm->width()+1;
-	index++;
-  }
-  else if (str[0] == 'u')
-  {
-	p->drawPixmap( x, 3, *m_smallu );
-	x += m_smallu->width()+1;
-	index++;
-  }
-  else if (str[0] == 'n')
-  {
-	p->drawPixmap( x, 0, *m_smalln );
-	x += m_smalln->width()+1;
-	index++;
-  }
-
-  if (str.mid(index) == "Ohm")
-  {
-	p->drawPixmap( x, 0, *m_smallOhm );
-  }
-  else if (str.mid(index) == "C")
-  {
-	p->drawPixmap( x, 0, *m_smallDeg );
-  }
-  else if (str.mid(index) == "Hz")
-  {
-	p->drawPixmap( x, 0, *m_smallHz );
-  }
-  else if (str.mid(index) == "F")
-  {
-	p->drawPixmap( x, 0, *m_smallF );
-  }
-  else if (str.mid(index) == "H")
-  {
-	p->drawPixmap( x, 0, *m_smallH );
-  }
-  else if (str.mid(index) == "W")
-  {
-	p->drawPixmap( x, 0, *m_smallW );
-  }
-  else if (str.mid(index) == "dBm")
-  {
-	p->drawPixmap( x, 0, *m_smallDBM );
-  }
-  else if (str.mid(index) == "A")
-  {
-	p->drawPixmap( x, 0, *m_smallA );
-  }
-  else if (str.mid(index) == "V")
-  {
-	p->drawPixmap( x, 0, *m_smallV );
-  }
-  else if (str.mid(index) == "%")
-  {
-	p->drawPixmap( x, 0, *m_smallPercent );
+	  if (str[0] == 'G')
+	  {
+		p->drawPixmap( x, 0, *m_smallG );
+		x += m_smallG->width()+1;
+		index++;
+	  }
+	  else if (str[0] == 'M')
+	  {
+		p->drawPixmap( x, 0, *m_smallM );
+		x += m_smallM->width()+1;
+		index++;
+	  }
+	  else if (str[0] == 'k')
+	  {
+		p->drawPixmap( x, 0, *m_smallk );
+		x += m_smallk->width()+1;
+		index++;
+	  }
+	  else if (str[0] == 'm')
+	  {
+		p->drawPixmap( x, 0, *m_smallm );
+		x += m_smallm->width()+1;
+		index++;
+	  }
+	  else if (str[0] == 'u')
+	  {
+		p->drawPixmap( x, 3, *m_smallu );
+		x += m_smallu->width()+1;
+		index++;
+	  }
+	  else if (str[0] == 'n')
+	  {
+		p->drawPixmap( x, 0, *m_smalln );
+		x += m_smalln->width()+1;
+		index++;
+	  }
+	  if (str.mid(index) == "Ohm")
+		p->drawPixmap( x, 0, *m_smallOhm );
+	  else if (str.mid(index) == "C")
+		p->drawPixmap( x, 0, *m_smallDeg );
+	  else if (str.mid(index) == "Hz")
+		p->drawPixmap( x, 0, *m_smallHz );
+	  else if (str.mid(index) == "F")
+		p->drawPixmap( x, 0, *m_smallF );
+	  else if (str.mid(index) == "H")
+		p->drawPixmap( x, 0, *m_smallH );
+	  else if (str.mid(index) == "W")
+		p->drawPixmap( x, 0, *m_smallW );
+	  else if (str.mid(index) == "dBm")
+		p->drawPixmap( x, 0, *m_smallDBM );
+	  else if (str.mid(index) == "A")
+		p->drawPixmap( x, 0, *m_smallA );
+	  else if (str.mid(index) == "V")
+		p->drawPixmap( x, 0, *m_smallV );
+	  else if (str.mid(index) == "%")
+		p->drawPixmap( x, 0, *m_smallPercent );
   }
 }
 
@@ -674,14 +638,16 @@ void DisplayWid::drawBigNumber( QPainter *p, const QString & num )
 {
   int x = 0;
   int offset = 0;
-  while (num[offset] == ' ' && offset<num.length()) ++offset;
-
-  if (num[offset] == '-')
+  if(!num.isEmpty())
   {
-	p->drawPixmap( x, 0, *m_bigMinus );
-	offset++;
-  }
+	  while (num[offset] == ' ' && offset<num.length()) ++offset;
 
+	  if (num[offset] == '-')
+	  {
+		p->drawPixmap( x, 0, *m_bigMinus );
+		offset++;
+	  }
+  }
   x += 28;
 
   for (unsigned i=offset; i<(unsigned)num.length(); i++)

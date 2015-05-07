@@ -71,7 +71,6 @@ SOURCES   = sources/colorbutton.cpp \
 	    sources/prefwidget.cpp \
 	    sources/printdlg.cpp \
 	    sources/readerthread.cpp \
-	    sources/readevent.cpp \
 	    sources/recorderprefs.cpp \
 	    sources/scaleprefs.cpp \
 	    sources/tipdlg.cpp \
