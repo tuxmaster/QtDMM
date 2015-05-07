@@ -33,7 +33,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_numValues( 1 )
 {
 
-  m_bigDigit = new QBitmap(":/Symbols/numbers.xmp");
+  m_bigDigit = new QBitmap(":/Symbols/numbers.xpm");
   m_bigSpecialChar = new QBitmap(":/Symbols/specialchars.xpm");
 
   m_bigDecimal = new QBitmap(":/Symbols/decimal.xpm");
@@ -41,7 +41,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_bigG =new QBitmap(":/Symbols/G.xpm");
   m_bigM = new QBitmap(":/Symbols/M.xpm");
   m_bigk = new QBitmap(":/Symbols/k.xpm");
-  m_bigm = new QBitmap(":/Symbols/m_xpm");
+  m_bigm = new QBitmap(":/Symbols/m.xpm");
   m_bigu = new QBitmap(":/Symbols/µ.xpm");
   m_bign = new QBitmap(":/Symbols/n.xpm");
   m_bigp = new QBitmap(":/Symbols/p.xpm");
