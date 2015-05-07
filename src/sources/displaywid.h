@@ -121,6 +121,7 @@ class DisplayWid : public QWidget
 
 	private:
 	  int		calcNumDigits( int );
+	  QBitmap*	BitmapHelper(const QString &file)const;
 
 };
 

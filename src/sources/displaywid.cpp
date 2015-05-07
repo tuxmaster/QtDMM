@@ -27,10 +27,6 @@
 
 #include <iostream>
 
-QBitmap *BitmapHelper(const QString &file)
-{
-		return new QBitmap(QPixmap(file).createMaskFromColor(Qt::black,Qt::MaskOutColor));
-}
 DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_paintBar( true ),
   m_numValues( 1 )
@@ -762,4 +758,9 @@ int DisplayWid::calcNumDigits( int dm )
   }
 
   return numDigits;
+}
+
+QBitmap* DisplayWid::BitmapHelper(const QString &file) const
+{
+		return new QBitmap(QPixmap(file).createMaskFromColor(Qt::black,Qt::MaskOutColor));
 }
