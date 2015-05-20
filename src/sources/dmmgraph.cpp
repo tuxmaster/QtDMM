@@ -1195,7 +1195,7 @@ void DMMGraph::importDataSLOT()
 	}
   }
 
-  QString fn = QFileDialog::getOpenFileName( this,QString(),QString(),tr("All files (*.*)"));
+  QString fn = QFileDialog::getOpenFileName(this,tr("Load data"));
 
   int cnt = 0;
   int sample = 0;
