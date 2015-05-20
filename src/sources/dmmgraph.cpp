@@ -1155,7 +1155,7 @@ bool DMMGraph::exportDataSLOT()
 	{
 	  QDateTime dt = m_graphStartDateTime.addSecs( i*(int)qRound(m_sampleTime/10.) );
 	  QString line=QString("%1.%2.%3\t%4:%5:%6\t%7\t%8\n").arg(dt.date().day()).arg(dt.date().month()).arg(dt.date().year()).arg(dt.time().hour())
-														  .arg(dt.time().minute()).arg(dt.time().second()).arg((*m_array)[i]).arg(m_unit);
+														  .arg(dt.time().minute()).arg(dt.time().second()).arg((*m_array)[i],0,'f').arg(m_unit);
 	  ts << line;
 	}
 	m_dirty = false;
@@ -1219,7 +1219,7 @@ void DMMGraph::importDataSLOT()
 
 	  if (!line.isNull())
 	  {
-		QRegExp re( "[0-9]+\\.[0-9]+\\.[0-9]+\t[0-9]+:[0-9]+:[0-9]+\t[0-9]*\\.[0-9]+\t.*" );
+		QRegExp re( "[0-9]+\\.[0-9]+\\.[0-9]+\t[0-9]+:[0-9]+:[0-9]+\t[-]?[0-9]*\\.[0-9]+\t.*");
 	// mt: changed (ups, was obsolete in Qt3 already)
 		if (!re.exactMatch(line))
 		{
