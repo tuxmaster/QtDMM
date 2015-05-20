@@ -1142,7 +1142,7 @@ void DMMGraph::fillInfoBox( const QPoint & pos )
 
 bool DMMGraph::exportDataSLOT()
 {
-  QString fn = QFileDialog::getSaveFileName( this,QString(),QString(), tr("All files (*.*)"));
+  QString fn = QFileDialog::getSaveFileName( this,tr("Export data"));
 
   if (!fn.isNull())
   {
@@ -1195,7 +1195,7 @@ void DMMGraph::importDataSLOT()
 	}
   }
 
-  QString fn = QFileDialog::getOpenFileName(this,tr("Load data"));
+  QString fn = QFileDialog::getOpenFileName(this,tr("Import data"));
 
   int cnt = 0;
   int sample = 0;
