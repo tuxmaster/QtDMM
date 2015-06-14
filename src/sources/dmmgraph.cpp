@@ -25,13 +25,16 @@
 #include <QPen>
 
 #include "dmmgraph.h"
+#include "Settings.h"
 
 #include <math.h> // RedHat needs it
 #include <cstdlib>
 #include <iostream>
 
-
-DMMGraph::DMMGraph( QWidget *parent) :
+DMMGraph::DMMGraph(QWidget *parent):DMMGraph(parent,Q_NULLPTR)
+{
+}
+DMMGraph::DMMGraph(QWidget *parent, Settings *settings) :
   QWidget( parent),
   m_size( 600 ),
   m_length( 3600 ),
@@ -61,6 +64,7 @@ DMMGraph::DMMGraph( QWidget *parent) :
   m_includeZero( false ),
   m_mousePan( false )
 {
+  m_cfg=settings;
   // mt: changed from QArray to QVector
   m_array    = new QVector<double> (m_length);
   m_arrayInt = new QVector<double> (m_length);
@@ -1142,11 +1146,12 @@ void DMMGraph::fillInfoBox( const QPoint & pos )
 
 bool DMMGraph::exportDataSLOT()
 {
-  QString fn = QFileDialog::getSaveFileName( this,tr("Export data"));
-
+  QDir path;
+  QString fn = QFileDialog::getSaveFileName( this,tr("Export data"),m_cfg->getString("QtDMM/LastUsesPath",""));
   if (!fn.isNull())
   {
 	QFile file( fn );
+	m_cfg->setString("QtDMM/LastUsesPath",path.absoluteFilePath(fn));
 	file.open( QIODevice::WriteOnly );
 
 	QTextStream ts( &file );
@@ -1194,8 +1199,8 @@ void DMMGraph::importDataSLOT()
 		  return;
 	}
   }
-
-  QString fn = QFileDialog::getOpenFileName(this,tr("Import data"));
+  QDir path;
+  QString fn = QFileDialog::getOpenFileName(this,tr("Import data"),m_cfg->getString("QtDMM/LastUsesPath",""));
 
   int cnt = 0;
   int sample = 0;
@@ -1204,6 +1209,7 @@ void DMMGraph::importDataSLOT()
 
   if (!fn.isNull())
   {
+	m_cfg->setString("QtDMM/LastUsesPath",path.absoluteFilePath(fn));
 	// First pass -> figure out size and sample time
 	QFile file( fn );
 

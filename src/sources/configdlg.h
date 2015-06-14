@@ -54,6 +54,7 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 	  };
 
 	  ConfigDlg(QWidget *parent=Q_NULLPTR);
+	  Settings				*getSettings() {return m_settings;}
 	  QString				device() const;
 	  int					speed() const;
 	  int					windowSeconds() const;

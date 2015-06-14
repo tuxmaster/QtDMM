@@ -72,6 +72,8 @@ MainWid::MainWid( QWidget *parent ) :  QFrame( parent ),
   connect( ui_graph, SIGNAL( thresholdChanged( DMMGraph::CursorMode, double ) ),
 		   m_configDlg, SLOT( thresholdChangedSLOT( DMMGraph::CursorMode, double ) ));
 
+  ui_graph->setSettings(m_configDlg->getSettings());
+
   //resetSLOT();
 
   startTimer( 100 );

@@ -27,6 +27,8 @@
 #include <QtWidgets>
 #include <QPrinter>
 
+class Settings;
+
 class DMMGraph : public QWidget
 {
   Q_OBJECT
@@ -79,6 +81,7 @@ class DMMGraph : public QWidget
 		IDImportData
 	  };
 
+	  DMMGraph(QWidget *parent,Settings *settings);
 	  DMMGraph(QWidget *parent=Q_NULLPTR);
 	  ~DMMGraph();
 	  void						setGraphSize( int size, int length );
@@ -102,6 +105,7 @@ class DMMGraph : public QWidget
 	  void						setCrosshair( bool on ) { m_crosshair = on; }
 	  void						setLineStyle( int, int, int, int );
 	  void						setIntegration( bool, double, double, double );
+	  void						setSettings(Settings *settings) {m_cfg=settings;}
 
 	Q_SIGNALS:
 	  void						info( const QString & );
@@ -234,6 +238,7 @@ class DMMGraph : public QWidget
 
 	private:
 	  Qt::PenStyle				penStyle( LineMode );
+	  Settings					*m_cfg;
 
 };
 
