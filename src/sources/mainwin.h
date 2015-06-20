@@ -46,6 +46,7 @@ class MainWin : public QMainWindow, private Ui::UIMainWin
 	  void			setConnectSLOT( bool );
 	  void			toolbarVisibilitySLOT( bool, bool, bool, bool, bool );
 	  void			setToolbarVisibilitySLOT();
+	  void			setUseTextLabel(bool on);
 
 	protected:
 	  MainWid       *m_wid;

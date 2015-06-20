@@ -25,33 +25,27 @@
 #include "mainwin.h"
 #include "config.h"
 
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-
 
 void myMessageOutput( QtMsgType type,const QMessageLogContext &, const QString &msg )
 {
-  QString txt = msg;
-
   switch ( type )
   {
 	case QtDebugMsg:
-		fprintf( stderr, "Debug: %s\n", msg.toUtf8().constData() );
-		//abort();
+#ifdef QT_DEBUG
+		  qDebug()<<"Debug: "<<msg;
+#endif
 		break;
 	case QtWarningMsg:
-		if (txt.contains( "Absolute index" ))
+		if (msg.contains( "Absolute index" ))
 			abort();
-		//fprintf( stderr, "Warning: %s\n", msg );
-		//abort();
+		else
+			qWarning()<<"Warning: "<<msg;
 		break;
 	case QtFatalMsg:
-		fprintf( stderr, "Fatal: %s\n", msg.toUtf8().constData() );
-		//abort();                    // deliberately core dump
+		 qFatal(QString("Fatal: %1").arg(msg).toUtf8());
 		break;
 	case QtCriticalMsg:
-		fprintf( stderr, "Critical: %s\n", msg.toUtf8().constData() );
+		  qCritical()<<"Critial: "<<msg;
 		break;
   }
 }

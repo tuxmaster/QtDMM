@@ -185,7 +185,7 @@ QString ConfigDlg::deviceListText() const
 void ConfigDlg::showPage( ConfigDlg::PageType page )
 {
   ConfigItem *item;
-  PrefWidget *wid;
+  PrefWidget *wid=Q_NULLPTR;
   for (uint entry=0;entry<= (uint)ui_list->count();entry++)
   {
 	  item=dynamic_cast<ConfigItem *> (ui_list->item(entry));

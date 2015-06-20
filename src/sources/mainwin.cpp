@@ -64,7 +64,7 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
 
   connect( m_wid, SIGNAL( error( const QString & ) ), m_error, SLOT( setText( const QString & ) ));
   connect( m_wid, SIGNAL( info( const QString & ) ), m_info, SLOT( setText( const QString & ) ));
-  connect( m_wid, SIGNAL( useTextLabel( bool ) ), this, SLOT( setUsesTextLabel( bool ) ));
+  connect( m_wid, SIGNAL( useTextLabel( bool ) ), this, SLOT( setUseTextLabel( bool ) ));
   connect( m_wid, SIGNAL( setConnect( bool ) ), this, SLOT( setConnectSLOT( bool ) ));
   connect( m_wid, SIGNAL( toolbarVisibility( bool, bool, bool, bool, bool )),
 		   this, SLOT( toolbarVisibilitySLOT( bool, bool, bool, bool, bool ) ));
@@ -100,6 +100,17 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
 void MainWin::setConsoleLogging( bool on )
 {
   m_wid->setConsoleLogging( on );
+}
+
+void MainWin::setUseTextLabel(bool on)
+{
+	Qt::ToolButtonStyle Style=Qt::ToolButtonTextUnderIcon;
+	if(!on)
+		Style=Qt::ToolButtonIconOnly;
+	toolBarDMM->setToolButtonStyle(Style);
+	toolBarRecorder->setToolButtonStyle(Style);
+	toolBarFile->setToolButtonStyle(Style);
+	toolBarHelp->setToolButtonStyle(Style);
 }
 
 void MainWin::createActions()

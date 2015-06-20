@@ -142,8 +142,10 @@ DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
   m_portlist=new QStringListModel(this);
   QStringList portlist;
   for(auto port: QSerialPortInfo::availablePorts())
+  {
 	  portlist<<port.systemLocation();
-	  //qDebug()<<port.portName()<<"--"<<port.manufacturer()<<"--"<<port.description()<<"--"<<port.systemLocation();
+	  qDebug()<<port.portName()<<"--"<<port.manufacturer()<<"--"<<port.description()<<"--"<<port.systemLocation();
+  }
   m_portlist->setStringList(portlist);
   port->setModel(m_portlist);
   m_label=(tr( "Multimeter settings" ));

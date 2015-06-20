@@ -60,7 +60,7 @@ MainWid::MainWid( QWidget *parent ) :  QFrame( parent ),
   connect( ui_graph, SIGNAL( sampleTime( int ) ), m_configDlg, SLOT( setSampleTimeSLOT( int ) ));
   connect( ui_graph, SIGNAL( graphSize( int,int ) ), m_configDlg, SLOT( setGraphSizeSLOT( int,int ) ));
   connect( ui_graph, SIGNAL( externalTriggered() ),this, SLOT( startExternalSLOT() ));
-  connect( m_external, SIGNAL( processExited() ), this, SLOT( exitedSLOT() ));
+  connect( m_external, SIGNAL( finished(int,QProcess::ExitStatus)), this, SLOT( exitedSLOT() ));
   connect( ui_graph, SIGNAL( configure() ), this, SLOT( configSLOT() ));
   connect( ui_graph, SIGNAL( exportData() ),this, SLOT( exportSLOT() ));
   connect( ui_graph, SIGNAL( importData() ), this, SLOT( importSLOT() ));
