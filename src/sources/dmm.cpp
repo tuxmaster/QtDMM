@@ -302,61 +302,42 @@ void DMM::timerEvent( QTimerEvent * )
 	m_readerThread->startRead();
 }
 
-// mt: removed the QCustomEvent. As QThread can emit signals in Qt4
-// I've changed it into a signal
 void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat df )
-//DMM::customEvent( QCustomEvent *ev )
 {
-  //if (QEvent::User == ev->type())
-  {
 	if (ReaderThread::Ok == m_readerThread->status())
 	{
-	  //ReadEvent *re = (ReadEvent *)ev;
-
 	  if (m_consoleLogging)
 	  {
 		for (int i=0; i<data.size(); ++i)
-		//for (int i=0; i<re->length(); ++i)
-		{
-		  fprintf( stdout, "%02X ", data[i] & 0x0ff );
-		  //fprintf( stdout, "%02X ", re->string()[i] & 0x0ff );
-		}
+			fprintf( stdout, "%02X ", data[i] & 0x0ff );
 		fprintf( stdout, "\n" );
 	  }
-
 	  switch (df)
 	  {
 		  case ReadEvent::Metex14:
 		  case ReadEvent::PeakTech10:
 		  case ReadEvent::Voltcraft14Continuous:
 		  case ReadEvent::Voltcraft15Continuous:
-			readASCII( data, id, df );
-			//readASCII( re );
-			break;
+				readASCII( data, id, df );
+			   break;
 		  case ReadEvent::M9803RContinuous:
-			readM9803RContinuous( data, id, df );
-			//readM9803RContinuous( re );
-			break;
+				readM9803RContinuous( data, id, df );
+			   break;
 		  case ReadEvent::VC820Continuous:
-			readVC820Continuous( data, id, df );
-			//readVC820Continuous( re );
-			break;
+				readVC820Continuous( data, id, df );
+			   break;
 		  case ReadEvent::IsoTech:
-			readIsoTechContinuous( data, id, df );
-			//readIsoTechContinuous( re );
-			break;
+				readIsoTechContinuous( data, id, df );
+			   break;
 		  case ReadEvent::VC940Continuous:
-			readVC940Continuous( data, id, df );
-			//readVC940Continuous( re );
-			break;
+				readVC940Continuous( data, id, df );
+			   break;
 		  case ReadEvent::QM1537Continuous:
-			readQM1537Continuous( data, id, df );
-			//readQM1537Continuous( re );
-			break;
+				readQM1537Continuous( data, id, df );
+			   break;
 		  case ReadEvent::RS22812Continuous:
-			readRS22812Continuous( data, id, df );
-			//readRS22812Continuous( re );
-			break;
+				readRS22812Continuous( data, id, df );
+			   break;
 	  }
 	}
 	else
@@ -371,7 +352,6 @@ void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat 
 	if (m_oldStatus != m_readerThread->status())
 		Q_EMIT error( m_error );
 	m_oldStatus = m_readerThread->status();
-  }
 }
 
 QString DMM::insertComma( const QString & val, int pos )
