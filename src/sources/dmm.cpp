@@ -116,6 +116,7 @@ bool DMM::open()
 	}
 	Q_EMIT error( m_error );
 	delete m_handle;
+	m_handle=Q_NULLPTR;
 	return false;
   }
 
@@ -127,6 +128,7 @@ bool DMM::open()
 	{
 		Q_EMIT error( m_error );
 		delete m_handle;
+		m_handle=Q_NULLPTR;
 		return false;
 	}
   }

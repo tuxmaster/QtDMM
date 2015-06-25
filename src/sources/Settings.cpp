@@ -42,6 +42,8 @@ Settings::Settings(QObject *parent, const QString &fileName) : Settings(parent)
 		old->deleteLater();
 		m_fileExists=true;
 		//rename old config file
+		if(QFile::exists(QString("%1.old").arg(fileName)))
+			QFile::remove(QString("%1.old").arg(fileName));
 		file.rename(QString("%1.old").arg(fileName));
 		m_fileConverted=true;
 	}
