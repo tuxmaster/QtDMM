@@ -56,7 +56,6 @@ DMM::DMM(QObject *parent) :
 
   m_readerThread->start();
 
-  //m_c_cflag = CS7 | PARODD | CSTOPB | CREAD | CLOCAL;
 }
 
 void DMM::setPortSettings( QSerialPort::DataBits bits, QSerialPort::StopBits stopBits, QSerialPort::Parity parity, bool externalSetup,
@@ -99,9 +98,9 @@ bool DMM::open()
   m_handle=new QSerialPort(this);
   m_handle->setPortName(m_device);
 
-  int errorCode=m_handle->open(QIODevice::ReadWrite);
-  if( errorCode != QSerialPort::NoError)
+  if( !m_handle->open(QIODevice::ReadWrite))
   {
+	int errorCode=m_handle->error();
 	switch(errorCode)
 	{
 		case QSerialPort::PermissionError:
