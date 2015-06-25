@@ -23,6 +23,8 @@
 #ifndef DMMPREFS_HH
 #define DMMPREFS_HH
 
+#include <QtSerialPort>
+
 #include "ui_uidmmprefs.h"
 #include "readevent.h"
 
@@ -49,9 +51,9 @@ class DmmPrefs : public PrefWidget ,private Ui::UIDmmPrefs
 	public:
 	  DmmPrefs( QWidget *parent=Q_NULLPTR);
 	  ~DmmPrefs();
-	  int					parity() const;
-	  int					bits() const;
-	  int					stopBits() const;
+	  QSerialPort::Parity	parity() const;
+	  QSerialPort::DataBits bits() const;
+	  QSerialPort::StopBits stopBits() const;
 	  int					speed() const;
 	  int					numValues() const;
 	  bool					externalSetup() const;

@@ -23,6 +23,8 @@
 #ifndef CONFIGDLG_HH
 #define CONFIGDLG_HH
 
+#include <QtSerialPort>
+
 #include "ui_uiconfigdlg.h"
 #include "dmmgraph.h"
 #include "readevent.h"
@@ -72,7 +74,7 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 	  bool					showMinMax() const;
 	  bool					showBar() const;
 	  ReadEvent::DataFormat	format() const;
-	  int					parity() const;
+	  QSerialPort::Parity	parity() const;
 	  bool					externalSetup() const;
 	  int					display() const;
 	  int					bits() const;

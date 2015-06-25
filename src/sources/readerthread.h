@@ -28,12 +28,10 @@
 
 #define FIFO_LENGTH 100
 
-class QSocketNotifier;
-
-class ReaderThread : public QThread
+class QSerialPort;
+class ReaderThread : public QObject
 {
   Q_OBJECT
-
 	public:
 	  enum ReadStatus
 	  {
@@ -42,13 +40,11 @@ class ReaderThread : public QThread
 		Error,
 		NotConnected
 	  };
-
 	  ReaderThread( QObject *receiver );
-
-
-	  void					run()Q_DECL_OVERRIDE;
+	  void					run();
+	  void					start();
 	  void					startRead();
-	  void					setHandle( int handle );
+	  void					setHandle( QSerialPort *handle );
 	  void					setFormat( ReadEvent::DataFormat );
 
 	  ReadStatus			status() const { return m_status; }
@@ -59,13 +55,11 @@ class ReaderThread : public QThread
 
 	protected:
 	  QObject				*m_receiver;
-	  int                   m_handle;
 	  ReadStatus            m_status;
 	  bool                  m_readValue;
 	  char                  m_fifo[FIFO_LENGTH];
 	  char                  m_buffer[FIFO_LENGTH];
 	  ReadEvent::DataFormat	m_format;
-	  QSocketNotifier		*m_notifier;
 	  int                   m_length;
 	  bool                  m_sendRequest;
 	  int                   m_id;
@@ -87,8 +81,13 @@ class ReaderThread : public QThread
 	  bool					checkFormat();
 
 	protected Q_SLOTS:
-	  void					socketNotifierSLOT( int );
+	  void					socketNotifierSLOT();
 
+	private:
+	  QSerialPort			*m_serialPort;
+
+	private Q_SLOTS:
+	  void					timer();
 };
 
 #endif // READERTHREAD_HH

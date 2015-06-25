@@ -34,13 +34,19 @@
 
 DMM::DMM(QObject *parent) :
   QObject( parent),
-  m_handle( -1 ),
+  m_handle( Q_NULLPTR ),
   m_speed( 600 ),
-  m_parity( 0 ),
+  m_parity( QSerialPort::NoParity ),
+  m_stopBits(QSerialPort::OneStop),
+  m_dataBits(QSerialPort::Data7),
   m_device( "" ),
   m_oldStatus( ReaderThread::NotConnected ),
   m_consoleLogging( false ),
-  m_externalSetup( false )
+  m_externalSetup( false ),
+  m_dtr(false),
+  m_rts(false),
+  m_cts(false),
+  m_dsr(false)
 {
   m_readerThread = new ReaderThread( this );
 
@@ -50,55 +56,32 @@ DMM::DMM(QObject *parent) :
 
   m_readerThread->start();
 
-  m_c_cflag = CS7 | PARODD | CSTOPB | CREAD | CLOCAL;
+  //m_c_cflag = CS7 | PARODD | CSTOPB | CREAD | CLOCAL;
 }
 
-void DMM::setPortSettings( int bits, int stopBits, int parity, bool externalSetup,
+void DMM::setPortSettings( QSerialPort::DataBits bits, QSerialPort::StopBits stopBits, QSerialPort::Parity parity, bool externalSetup,
 						   bool rts, bool cts, bool dsr, bool dtr )
 {
   m_externalSetup = externalSetup;
   m_parity  = parity;
-  m_c_cflag = CREAD | CLOCAL;
-  m_flags = (rts?f_rts:0)|(cts?f_cts:0)|(dsr?f_dsr:0)|(dtr?f_dtr:0);
-
-  if (stopBits == 2)
-  {
-	m_c_cflag |= CSTOPB;
-  }
-  switch (bits)
-  {
-  case 5:
-	m_c_cflag |= CS5;
-	break;
-  case 6:
-	m_c_cflag |= CS6;
-	break;
-  case 7:
-	m_c_cflag |= CS7;
-	break;
-  case 8:
-	m_c_cflag |= CS8;
-	break;
-  default:
-	m_c_cflag |= CS7;
-	break;
-  }
-  switch (parity)
-  {
-  case 0:     // None
-	break;
-  case 1:     // Even
-	m_c_cflag |= PARENB;
-	break;
-  case 2:     // Odd
-	m_c_cflag |= PARENB;
-	m_c_cflag |= PARODD;
-  }
+  m_stopBits=stopBits;
+  m_dataBits=bits;
+  m_dtr=dtr;
+  m_rts=rts;
+  m_cts=cts;
+  m_dsr=dsr;
 }
 
 void DMM::setFormat( ReadEvent::DataFormat format )
 {
   m_readerThread->setFormat( format );
+}
+
+bool DMM::isOpen() const
+{
+	if(!m_handle)
+		return false;
+	return m_handle->isOpen();
 }
 
 void DMM::setSpeed( int speed )
@@ -113,160 +96,47 @@ void DMM::setDevice( const QString & device )
 
 bool DMM::open()
 {
-  struct termios attr;
-  int    mdlns;
-  memset( &attr, 0, sizeof( struct termios ) );
-  m_handle = ::open( m_device.toLatin1(), O_RDWR | O_NOCTTY | O_NDELAY);
+  m_handle=new QSerialPort(this);
+  m_handle->setPortName(m_device);
 
-  if (-1 == m_handle)
+  int errorCode=m_handle->open(QIODevice::ReadWrite);
+  if( errorCode != QSerialPort::NoError)
   {
-	switch (errno)
+	switch(errorCode)
 	{
-		case EACCES:
-		  m_error = tr( "Access denied for %1.").arg(m_device);
-		  break;
-		case ENXIO:
-		case ENODEV:
-		case ENOENT:
-		  m_error = tr( "No such device %1." ).arg(m_device);
-		  break;
+		case QSerialPort::PermissionError:
+			m_error = tr( "Access denied for %1.").arg(m_device);
+			break;
+		case QSerialPort::DeviceNotFoundError:
+			m_error = tr( "No such device %1." ).arg(m_device);
+			break;
 		default:
-		  m_error = tr( "Error opening %1.\nDMM connected and switched on?" ).arg(m_device);
-		  break;
+			m_error = tr( "Error opening %1.\nDMM connected and switched on?" ).arg(m_device);
+			break;
 	}
 	Q_EMIT error( m_error );
+	delete m_handle;
 	return false;
   }
 
   if (!m_externalSetup)
   {
-	fcntl( m_handle, F_SETFL, 0 );
-	tcgetattr( m_handle, &m_oldSettings );
-
-	attr.c_oflag = 0;
-	attr.c_lflag = 0;
-	//attr.c_iflag = IGNBRK;
-	attr.c_cflag = m_c_cflag;
-
-	// According to Thomas Hoffman flags should be like this
-	//
-	if (0 == m_parity)          // Ignore parity errors
-	{
-	  attr.c_iflag = IGNBRK | IGNPAR ;
-	}
-	else
-	{
-	  attr.c_iflag = IGNBRK | INPCK | ISTRIP;
-	}
-	/*
-	if (0 == m_parity)          // Ignore parity errors
-	{
-	  attr.c_iflag = IGNBRK | IGNPAR | INPCK;
-	}
-	else
-	{
-	  attr.c_iflag = IGNBRK | IGNPAR;
-	}
-	*/
-	//attr.c_cflag = CS7 | CSTOPB | CREAD | CLOCAL;
-	attr.c_cc[VTIME]= 0;
-	attr.c_cc[VMIN]= 1;
-
-	if (600 == m_speed)
-	{
-	  cfsetospeed( &attr, B600 );
-	  cfsetispeed( &attr, B600 );
-	}
-	else if (1200 == m_speed)
-	{
-	  cfsetospeed( &attr, B1200 );
-	  cfsetispeed( &attr, B1200 );
-	}
-	else if (1800 == m_speed)
-	{
-	  cfsetospeed( &attr, B1800 );
-	  cfsetispeed( &attr, B1800 );
-	}
-	else if (2400 == m_speed)
-	{
-	  cfsetospeed( &attr, B2400 );
-	  cfsetispeed( &attr, B2400 );
-	}
-	else if (4800 == m_speed)
-	{
-	  cfsetospeed( &attr, B4800 );
-	  cfsetispeed( &attr, B4800 );
-	}
-	else if (9600 == m_speed)
-	{
-	  cfsetospeed( &attr, B9600 );
-	  cfsetispeed( &attr, B9600 );
-	}
-	else if (19200 == m_speed)
-	{
-	  cfsetospeed( &attr, B19200 );
-	  cfsetispeed( &attr, B19200 );
-	}
-
 	m_error = tr( "Error configuring serial port %1." ).arg(m_device);
-
-	if (-1 == tcsetattr( m_handle, TCSANOW, &attr ))
+	if((!m_handle->setParity(m_parity)) || (!m_handle->setBaudRate(m_speed)) || (!m_handle->setStopBits(m_stopBits)) ||
+	   (!m_handle->setDataBits(m_dataBits)) || (!m_handle->setDataTerminalReady(m_dtr)) || (!m_handle->setRequestToSend(m_rts)))
 	{
-	  ::close(m_handle);
-	  m_handle = -1;
-
-	  Q_EMIT error( m_error );
-
-	  return false;
+		Q_EMIT error( m_error );
+		delete m_handle;
+		return false;
 	}
-
-	mdlns = 0;
-	if (-1 == ioctl( m_handle, TIOCMGET, &mdlns ))
-	{
-	  ::close(m_handle);
-	  m_handle = -1;
-
-	  Q_EMIT error( m_error );
-
-	  return false;
-	}
-
-	if (m_flags & f_rts) mdlns |= TIOCM_RTS;
-	else     mdlns &= ~TIOCM_RTS;
-
-	if (m_flags & f_cts) mdlns |= TIOCM_CTS;
-	else     mdlns &= ~TIOCM_CTS;
-
-	if (m_flags & f_dtr) mdlns |= TIOCM_DTR;
-	else     mdlns &= ~TIOCM_DTR;
-
-	if (m_flags & f_dsr) mdlns |= TIOCM_DSR;
-	else     mdlns &= ~TIOCM_DSR;
-
-	//mdlns &= ~TIOCM_RTS;
-	if (-1 == ioctl( m_handle, TIOCMSET, &mdlns ))
-	{
-	  ::close(m_handle);
-	  m_handle = -1;
-
-	  Q_EMIT error( m_error );
-
-	  return false;
-	}
-
-	tcsetattr( m_handle, TCSAFLUSH, &attr );
   }
-
   m_error = tr( "Connecting ..." );
   Q_EMIT error( m_error );
-
   m_readerThread->setHandle( m_handle );
-
   timerEvent( 0 );
 
   // mt: added timer id
   m_delayTimer = startTimer( 1000 );
-
   return true;
 }
 
@@ -278,25 +148,23 @@ void DMM::close()
   m_error = tr( "Not connected" );
   Q_EMIT error( m_error );
 
-  m_readerThread->setHandle( -1 );
+  m_readerThread->setHandle( Q_NULLPTR );
 
-  if (-1 != m_handle)
+  if (m_handle)
   {
 	if (!m_externalSetup)
 	{
-	  // restore
-	  ::tcsetattr( m_handle, TCSANOW, &m_oldSettings );
+	  m_handle->close();
+	  delete m_handle;
+	  m_handle=Q_NULLPTR;
 	}
-	::close( m_handle );
-	m_handle = -1;
   }
-
   m_oldStatus = ReaderThread::NotConnected;
 }
 
 void DMM::timerEvent( QTimerEvent * )
 {
-  if (-1 == m_handle)
+  if (!m_handle)
 	Q_EMIT error( m_error );
   else
 	m_readerThread->startRead();

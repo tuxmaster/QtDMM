@@ -216,7 +216,24 @@ void DmmPrefs::defaultsSLOT()
   baudRate->setCurrentIndex( m_cfg->getInt( "Port settings/baud"));
   bitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings/bits", 7)-5 );
   stopBitsCombo->setCurrentIndex( m_cfg->getInt( "Port settings/stop-bits", 2 )-1);
-  parityCombo->setCurrentIndex( m_cfg->getInt( "Port settings/parity"));
+  int pValue;
+  switch(m_cfg->getInt( "Port settings/parity"))
+  {
+	  case QSerialPort::NoParity:
+		  pValue=0;
+		  break;
+	  case QSerialPort::EvenParity:
+		  pValue=1;
+		  break;
+	  case QSerialPort::OddParity:
+		  pValue=2;
+		  break;
+	  default:
+		   qWarning()<<"Wrong parity value. Using None";
+		   pValue=0;
+		  break;
+  }
+  parityCombo->setCurrentIndex(pValue);
   displayCombo->setCurrentIndex( m_cfg->getInt( "DMM/display", 1 ));
   ui_externalSetup->setChecked( m_cfg->getInt( "DMM/exterrnal-setup") == 1 );
 
@@ -356,19 +373,36 @@ bool DmmPrefs::dtr() const
   return uidtr->isChecked();
 }
 
-int DmmPrefs::parity() const
+QSerialPort::Parity DmmPrefs::parity() const
 {
-  return parityCombo->currentIndex();
+  QSerialPort::Parity rValue;
+  switch(parityCombo->currentIndex())
+  {
+	  case 0:
+		  rValue=QSerialPort::NoParity;
+		  break;
+	  case 1:
+		  rValue=QSerialPort::EvenParity;
+		  break;
+	  case 2:
+		  rValue=QSerialPort::OddParity;
+		  break;
+	  default:
+		  qWarning()<<"Wrong parity value. Using None";
+		  rValue=QSerialPort::NoParity;
+		  break;
+  }
+  return rValue;
 }
 
-int DmmPrefs::bits() const
+QSerialPort::DataBits DmmPrefs::bits() const
 {
-  return 5+bitsCombo->currentIndex();
+  return (QSerialPort::DataBits)(5+bitsCombo->currentIndex());
 }
 
-int DmmPrefs::stopBits() const
+QSerialPort::StopBits DmmPrefs::stopBits() const
 {
-  return 1+stopBitsCombo->currentIndex();
+  return (QSerialPort::StopBits)(1+stopBitsCombo->currentIndex());
 }
 
 int DmmPrefs::speed() const

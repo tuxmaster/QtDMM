@@ -607,7 +607,7 @@ bool ConfigDlg::dtr() const
   return m_dmm->dtr();
 }
 
-int ConfigDlg::parity() const
+QSerialPort::Parity ConfigDlg::parity() const
 {
   return m_dmm->parity();
 }

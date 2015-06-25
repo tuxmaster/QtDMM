@@ -24,12 +24,14 @@
 #define DMM_HH
 
 #include <QtCore>
+#include <QtSerialPort>
 
 #include "readerthread.h"
 #include "readevent.h"
-#include <fcntl.h>
+
+/*#include <fcntl.h>
 #include <sys/termios.h>
-#include <sys/ioctl.h>
+#include <sys/ioctl.h>*/
 
 class DMM : public QObject
 {
@@ -50,9 +52,9 @@ class DMM : public QObject
 	  void						close();
 	  void						setName( const QString &name) {m_name=name;}
 	  QString					errorString() const { return m_error; }
-	  bool						isOpen() const { return m_handle >= 0; }
+	  bool						isOpen() const;
 	  void						setFormat( ReadEvent::DataFormat );
-	  void						setPortSettings( int bits, int stopBits, int parity, bool externalSetup, bool rts, bool cts,
+	  void						setPortSettings(QSerialPort::DataBits bits, QSerialPort::StopBits stopBits, QSerialPort::Parity parity, bool externalSetup, bool rts, bool cts,
 												 bool dsr, bool dtr );
 	  void						setNumValues( int );
 	  void						setConsoleLogging( bool on ) { m_consoleLogging = on; }
@@ -63,18 +65,24 @@ class DMM : public QObject
 	  void						error( const QString & );
 
 	protected:
-	  int                       m_handle;
+	  QSerialPort               *m_handle;
 	  int                       m_speed;
-	  int                       m_parity;
+	  QSerialPort::Parity       m_parity;
+	  QSerialPort::StopBits		m_stopBits;
+	  QSerialPort::DataBits		m_dataBits;
 	  QString                   m_device;
 	  QString                   m_error;
 	  ReaderThread             *m_readerThread;
-	  tcflag_t                  m_c_cflag;
+	  //tcflag_t                  m_c_cflag;
 	  ReaderThread::ReadStatus	m_oldStatus;
 	  QString                   m_name;
-	  struct termios            m_oldSettings;
+	  //struct termios            m_oldSettings;
 	  bool                      m_consoleLogging;
 	  bool                      m_externalSetup;
+	  bool						m_dtr;
+	  bool						m_rts;
+	  bool						m_cts;
+	  bool						m_dsr;
 	  int                       m_flags;
 	  // mt: added
 	  int						m_delayTimer;

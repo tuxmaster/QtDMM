@@ -22,6 +22,7 @@
 
 #include <QtGui>
 #include <QtWidgets>
+#include <QtSerialPort>
 
 #include "readerthread.h"
 #include <unistd.h>
@@ -29,17 +30,17 @@
 #include <iostream>
 
 ReaderThread::ReaderThread( QObject *receiver ) :
-  QThread(),
+  QObject(receiver),
   m_receiver( receiver ),
   m_readValue( false ),
   m_format( ReadEvent::Metex14 ),
-  m_notifier( 0 ),
   m_length( 0 ),
   m_sendRequest( true ),
   m_id( 0 ),
   m_numValues( 1 )
 {
   m_buffer[14] = '\0';
+  m_serialPort=Q_NULLPTR;
 }
 
 void ReaderThread::setFormat( ReadEvent::DataFormat format )
@@ -47,39 +48,34 @@ void ReaderThread::setFormat( ReadEvent::DataFormat format )
   m_format = format;
 }
 
-void ReaderThread::setHandle( int handle )
+void ReaderThread::setHandle( QSerialPort *handle )
 {
-  delete m_notifier;
-  m_notifier = 0;
+  m_serialPort=handle;
 
-  m_handle = handle;
   m_readValue = false;
 
-  if (-1 == m_handle)
+  if (!m_serialPort)
   {
 	m_status = ReaderThread::NotConnected;
 	m_readValue = false;
   }
   else
-  {
-	m_notifier = new QSocketNotifier( m_handle, QSocketNotifier::Read );
-
-	connect( m_notifier, SIGNAL( activated(int) ), this, SLOT( socketNotifierSLOT(int) ));
-  }
+	connect(m_serialPort,SIGNAL(readRead()),this,SLOT(socketNotifierSLOT));
 }
 
-void ReaderThread::run()
+void ReaderThread::start()
 {
-  while (1)
-  {
+	QTimer *timer=new QTimer(this);
+	connect(timer,SIGNAL(timeout()),this,SLOT(timer()));
+	timer->start(10);
+}
+void ReaderThread::timer()
+{
 	if (m_readValue)
 	{
-	  //std::cerr << "going to read" << std::endl;
-	  readDMM();
-	  m_readValue = false;
+		readDMM();
+		m_readValue = false;
 	}
-	msleep( 10 );
-  }
 }
 
 void ReaderThread::startRead()
@@ -89,18 +85,9 @@ void ReaderThread::startRead()
   m_sendRequest = true;
 }
 
-void ReaderThread::socketNotifierSLOT( int socket )
+void ReaderThread::socketNotifierSLOT()
 {
   //std::cerr << "socket call" << std::endl;
-
-  if (m_handle != socket)
-	  return;
-
-  if (-1 == m_handle)
-  {
-	m_status = ReaderThread::NotConnected;
-	return;
-  }
 
   int  retval;
   char byte;
@@ -108,7 +95,7 @@ void ReaderThread::socketNotifierSLOT( int socket )
   m_status = ReaderThread::Ok;
 
   {
-	retval = ::read( m_handle, &byte, 1);
+	retval = m_serialPort->read( &byte, 1);
 
 	if (-1 == retval)
 	{
@@ -526,8 +513,8 @@ void ReaderThread::readMetex14()
   if (m_sendRequest)
   {
 	/* TODO: Errorhandling */
-	size_t ret = ::write( m_handle, "D\n", 2 );
-	if (ret != 2) m_status = Error;
+	if (m_serialPort->write("D\n",2) != 2)
+		m_status = Error;
 	//std::cerr << "WROTE: " << ret << std::endl;
 	m_sendRequest = false;
   }
