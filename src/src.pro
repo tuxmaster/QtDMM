@@ -81,4 +81,5 @@ INCLUDEPATH +=sources
 RESOURCES += \
     Resources.qrc
 
-OTHER_FILES += qtdmm.spec
+OTHER_FILES += ../QtDMM.spec \
+	       ../QtDMM.desktop
