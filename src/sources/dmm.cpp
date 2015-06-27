@@ -24,11 +24,8 @@
 
 #include "dmm.h"
 
-#include <unistd.h>
-#include <errno.h>
 #include <stdio.h>
 #include <iostream>
-#include <math.h>
 
 #define LOG_OUTPUT
 
@@ -1355,18 +1352,6 @@ void DMM::readVC820Continuous( const QByteArray & data, int id, ReadEvent::DataF
 	unit    = "%";
 	special = "PC";
   }
-  /* Can't find the reason for this any more
-  else if (in[13] & 0x04)
-  {
-	unit    = "C";
-	special = "TE";
-  }
-  else if (in[13] & 0x02)
-  {
-	unit    = "F";
-	special = "TE";
-  }
-  */
   else if (in[13] & 0x01)
   {
 	unit    = "C";

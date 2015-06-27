@@ -94,7 +94,6 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_bar[6] =  BitmapHelper(":/Symbols/sixty_bar.xpm");
 
   setAttribute(Qt::WA_OpaquePaintEvent);
-  //setBackgroundMode( Qt::NoBackground );
 
   setDisplayMode( 1, true, true, 1 );
 }

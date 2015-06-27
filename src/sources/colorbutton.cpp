@@ -73,12 +73,3 @@ void ColorButton::clickedSLOT()
 	Q_EMIT valueChanged( c );
   }
 }
-/*
-void
-ColorButton::drawButtonLabel( QPainter *p )
-{
-  p->setBrush( color() );
-  p->drawRoundRect( 6, 6, width()-12, height()-12, 30, 30 );
-}
-*/
-

@@ -27,9 +27,6 @@
 #include "dmmgraph.h"
 #include "Settings.h"
 
-#include <math.h> // RedHat needs it
-#include <cstdlib>
-#include <iostream>
 
 DMMGraph::DMMGraph(QWidget *parent):DMMGraph(parent,Q_NULLPTR)
 {

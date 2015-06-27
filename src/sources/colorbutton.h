@@ -47,8 +47,6 @@ class ColorButton : public QPushButton
 
 	protected:
 	  QColor	m_color;
-	//  void drawButtonLabel( QPainter * );
-
 };
 
 #endif // COLORBUTTON_HH

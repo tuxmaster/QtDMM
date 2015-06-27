@@ -23,7 +23,6 @@
 #include <QtGui>
 #include <QtWidgets>
 
-#include <iostream>
 
 #include "mainwin.h"
 #include "mainwid.h"
@@ -75,23 +74,13 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
 
    m_wid->applySLOT();
 
-  //std::cerr << "WR: " << winRect.x() << " " << winRect.y()
-  //    << " " << winRect.width() << " " << winRect.height() << std::endl;
-  //adjustSize();
 
   if (!winRect.isEmpty())
   {
-	//std::cerr << "ISNT EMPTY" << std::endl;
 	if (m_wid->saveWindowPosition())
-	{
-	  move( winRect.x(), winRect.y() );
-	  //std::cerr << "MOVE: " << winRect.x() << " " <<  winRect.y() << std::endl;
-	}
+		 move( winRect.x(), winRect.y() );
 	if (m_wid->saveWindowSize())
-	{
-	  //std::cerr << "RESIZE: " << winRect.width() << " " <<  winRect.height() << std::endl;
-	  resize( winRect.width(), winRect.height() );
-	}
+		resize( winRect.width(), winRect.height() );
 	else
 		resize( 640, 480 );
   }

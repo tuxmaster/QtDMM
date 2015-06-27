@@ -43,11 +43,6 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
   m_buttonBox_OK=false;
   setupUi(this);
 
-  //ui_list->header()->hide();
-  //ui_list->setItemMargin( 4 );
-
-  // PREPARE CONFIGURATION FILE
-  //
   QString path = QString("%1/.qtdmmrc").arg(QDir::homePath());
 
   m_settings=new Settings(this,path);
@@ -102,8 +97,6 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
   }
 
   // CREATE PAGES (Top page last)
-  //
-  //ui_list->setSorting( -1 );
 
   m_recorder = new RecorderPrefs( ui_stack );
   m_recorder->setId( ConfigDlg::Recorder );
@@ -235,8 +228,7 @@ void ConfigDlg::setGraphSizeSLOT( int size, int length )
 
 void ConfigDlg::connectSLOT( bool /*connected*/ )
 {
-  //ui_ok->setDisabled( connected );
-  //ui_apply->setDisabled( connected );
+
 }
 
 QRect ConfigDlg::winRect() const
@@ -246,8 +238,6 @@ QRect ConfigDlg::winRect() const
 			  m_settings->getInt( "Position/width", 500 ),
 			  m_settings->getInt( "Position/height", 350 ) );
 
-  //std::cerr << "WRFC: " << rect.x() << " " << rect.y() << " " << rect.width()
-  //    << " " << rect.height() << std::endl;
   return rect;
 }
 

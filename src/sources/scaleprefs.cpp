@@ -28,7 +28,6 @@
 #include "scaleprefs.h"
 #include "Settings.h"
 
-#include <iostream>
 
 #define MINUTE_SECS   60
 #define HOUR_SECS     60*60
@@ -162,22 +161,6 @@ void ScalePrefs::zoomInSLOT( double fac )
 
   ui_winSize->setValue( (int)size );
 
-  /*
-  double val = ui_winSize->value();
-
-  if (val > 10)
-  {
-	val /= fac;
-  }
-  else
-  {
-	val /= 2.;
-  }
-
-  val = QMAX( 1, val );
-
-  ui_winSize->setValue( (int)val );
-  */
 }
 
 void ScalePrefs::zoomOutSLOT( double fac )
@@ -222,21 +205,6 @@ void ScalePrefs::zoomOutSLOT( double fac )
 	sizeUnit->setCurrentIndex( lengthUnit->currentIndex() );
   }
 
-  /*
-  double val = ui_winSize->value();
-
-  if (val > 10)
-  {
-	val *= fac;
-  }
-  else
-  {
-	val *= 2.;
-  }
-
-  val = QMAX( 2, val );
-  ui_winSize->setValue( (int)val );
-  */
 }
 
 int ScalePrefs::windowSeconds() const

@@ -29,21 +29,11 @@
 #include "readerthread.h"
 #include "readevent.h"
 
-/*#include <fcntl.h>
-#include <sys/termios.h>
-#include <sys/ioctl.h>*/
-
 class DMM : public QObject
 {
   Q_OBJECT
 
 	public:
-	  enum {
-		f_rts=1,
-		f_cts=2,
-		f_dsr=4,
-		f_dtr=8
-	  };
 
 	  DMM(QObject *parent);
 	  void						setSpeed( int );
@@ -73,10 +63,8 @@ class DMM : public QObject
 	  QString                   m_device;
 	  QString                   m_error;
 	  ReaderThread             *m_readerThread;
-	  //tcflag_t                  m_c_cflag;
 	  ReaderThread::ReadStatus	m_oldStatus;
 	  QString                   m_name;
-	  //struct termios            m_oldSettings;
 	  bool                      m_consoleLogging;
 	  bool                      m_externalSetup;
 	  bool						m_dtr;
@@ -84,11 +72,9 @@ class DMM : public QObject
 	  bool						m_cts;
 	  bool						m_dsr;
 	  int                       m_flags;
-	  // mt: added
 	  int						m_delayTimer;
 
 	  void						timerEvent( QTimerEvent * ) Q_DECL_OVERRIDE;
-	  //void customEvent( QCustomEvent * );
 	  QString					insertComma( const QString &, int );
 	  QString					insertCommaIT( const QString &, int );
 
