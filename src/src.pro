@@ -80,3 +80,5 @@ INCLUDEPATH +=sources
 
 RESOURCES += \
     Resources.qrc
+
+OTHER_FILES += qtdmm.spec
