@@ -60,7 +60,7 @@ void ReaderThread::setHandle( QSerialPort *handle )
 	m_readValue = false;
   }
   else
-	connect(m_serialPort,SIGNAL(readRead()),this,SLOT(socketNotifierSLOT));
+	connect(m_serialPort,SIGNAL(readyRead()),this,SLOT(socketNotifierSLOT()));
 }
 
 void ReaderThread::start()
