@@ -208,7 +208,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../sources/dmmgraph.cpp" line="1147"/>
         <source>Export data</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten exportieren</translation>
     </message>
     <message>
         <source>All files (*.*)</source>
@@ -237,7 +237,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../sources/dmmgraph.cpp" line="1200"/>
         <source>Import data</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten importieren</translation>
     </message>
     <message>
         <location filename="../sources/dmmgraph.cpp" line="1229"/>
@@ -424,7 +424,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../sources/mainwin.cpp" line="157"/>
         <source>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;A simple recorder for DMM&apos;s&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;A simple display software for a variety of digital multimeter. Currently confirmed are:&lt;table&gt;%2&lt;/table&gt;Other compatible models may work also.&lt;p&gt;QtDMM features min/max memory and a configurable recorder with import/export and printing function. Sampling may be started manually, at a given time or triggered by a measured threshold. Additionally an external program may be started when given thresholds are reached.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; uses the platform independent toolkit &lt;b&gt;Qt&lt;/b&gt; version %3 and is licensed under &lt;b&gt;GPL 3&lt;/b&gt; (Versions prior to v0.9.0 where licensed under GPL 2)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;The icons (except the DMM icon) have been taken from the KDE project.&lt;p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;Ein einfacher Datenrekorder für DMM&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;Ein einfaches Anzeigeprogramm für eine Vielzahl von DMM&apos;s. Aktuell bestätigt sind:&lt;table&gt;%2&lt;/table&gt;Andere kompatible Modelle sollten ebenfalls funktionieren.&lt;p&gt;QtDMM stellt die Funktionen Min/Max Werte halten, ein konfigurierbaren Datenrekorder mit Daten im/export Funktion sowie ein Druckfunktion zur Verfügung. Die Datenaufzeichnung kann manuell, durch einen Grenzwert oder durch eine Zeitfunktion ausgelöst werden. Desweiteren kann ein externes Programm beim erreichen eines Grenzwertes gestartet werden.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; wurde mit der Platformunabhängigen &lt;b&gt;Qt&lt;/b&gt; Bibliothek in der Version %3 welche unter der &lt;b&gt;GPLv3&lt;/b&gt; lizensiert ist erstellt.(Versionen vor 0.9.0 wurden unter der GPLv2 Lizenz veröffentlicht)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;Die Symbole (bis auf das DMM Symbol) stammen von dem KDE Projekt.&lt;p&gt;</translation>
     </message>
 </context>
 <context>
@@ -457,33 +457,33 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <name>TipDlg</name>
     <message>
         <location filename="../sources/tipdlg.cpp" line="30"/>
-        <source>&lt;font size=+2&gt;Welcome&lt;/font&gt;&lt;p&gt;QtDMM is a small DMM (Digital Multi Meter) readout software for Linux/UNIX and since version 0.8.11 for Mac OSX. If you don&apos;t want to see the tips of the day you can switch them of with the checkbox below this text. The tips can be switched on again at any time in the preferences dialog.</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;font size=+2&gt;Welcome&lt;/font&gt;&lt;p&gt;QtDMM is a small DMM (Digital Multi Meter) readout software for Linux/UNIX and since version 0.8.11 for Mac OSX. Windows is also supported since 0.9.5. If you don&apos;t want to see the tips of the day you can switch them of with the checkbox below this text. The tips can be switched on again at any time in the preferences dialog.</source>
+        <translation>&lt;font size=+2&gt;Willkommen&lt;/font&gt;&lt;p&gt;QtDMM ist ein kleins Programm um DMM&apos;s (Digitalmultimeter) unter Linux/UNIX und seit Version 0.8.11 auch unter Mac OSX auszulesen. Windows wird seit Verision 0.9.5 ebenfalls unterstützt. Wenn Sie die Tipps des Tages nicht mehr sehen wollen, so können Sie diese durch ankreuzen des Feldes weiter unten abschalten. Die Tipps könnnen Sie wieder in de Einstellungen erscheinen lassen.</translation>
     </message>
     <message>
         <location filename="../sources/tipdlg.cpp" line="39"/>
-        <source>&lt;font size=+2&gt;QtDMM can&apos;t connect?&lt;/font&gt;&lt;p&gt;Make shure you have read/write permission for the device the multimeter is connected to. In doubt call a:&lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;device&amp;gt;&lt;/tt&gt; (as root).&lt;br&gt;&lt;tt&gt;&amp;lt;device&amp;gt;&lt;/tt&gt; will be something like &lt;tt&gt;ttyS0&lt;/tt&gt; or &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt;. This depend on your configuration.</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;font size=+2&gt;QtDMM can&apos;t connect?&lt;/font&gt;&lt;p&gt;Make shure you have read/write permission for the device the multimeter is connected to. In doubt call a:&lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;device&amp;gt;&lt;/tt&gt; (as root) under unix like systems.&lt;br&gt;&lt;tt&gt;&amp;lt;device&amp;gt;&lt;/tt&gt; will be something like &lt;tt&gt;ttyS0&lt;/tt&gt; or &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt;. This depend on your configuration. For Windows check the group policies.</source>
+        <translation>&lt;font size=+2&gt;QtDMM kann keine Verbindung aufbauen?&lt;/font&gt;&lt;p&gt;Überprüfen Sie, ob Sie berechtigt sind, auf die Schnittstelle zugreifen(Lesen und Schreiben) zu drüfen an der das DMM angeschlossen ist. Im Zweifelsfall bei unixartigen Systemen den Befehl &lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;Gerät&amp;gt;&lt;/tt&gt; (als root) aufrufen.&lt;br&gt;&lt;tt&gt;&amp;lt;Gerät&amp;gt;&lt;/tt&gt; könnte sowas wie &lt;tt&gt;ttyS0&lt;/tt&gt; oder &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt; sein. Dies hängt von der Konfiguration ab. Unter Windows überpürfen Sie bitte die Gruppenrichtlinien.</translation>
     </message>
     <message>
         <location filename="../sources/tipdlg.cpp" line="46"/>
         <source>&lt;font size=+2&gt;Quick help&lt;/font&gt;&lt;p&gt;Click on the context help button in the titlebar of the window. You can click any of the controls or windows of QtDMM to get context sensitive help. This works in all windows of QtDMM. Most newer windowmangers support this feature. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+2&gt;Schnellhilfe&lt;/font&gt;&lt;p&gt;Klicken auf die Schaltfläche für die kontextabhängige Hilfe in der Symbolleiste. Nun können Sie auf jedes Steuerelement innerhalb der QtDMM Anwendung klicken um die jeweilige Hilfe aufzurufen. Dies funktioniert in allen Fenstern von QtDMM. Die meisten neuren Systeme unterstützen dies(Trifft nur für unixartige Systeme zu). </translation>
     </message>
     <message>
         <location filename="../sources/tipdlg.cpp" line="52"/>
         <source>&lt;font size=+2&gt;Preferences&lt;/font&gt;&lt;p&gt;To configure QtDMM go to the preferences dialog. The preferences dialog can be reached by &lt;b&gt;File-&gt;Configure&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+2&gt;Einstellungen&lt;/font&gt;&lt;p&gt;Um QtDMM zu konfigurieren gehen Sie bitte rufen Sie bitte den Einstellungsdialog auf. Dieser befindet sich unter den Punkt &lt;b&gt;Datei-&gt;Konfigurieren&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../sources/tipdlg.cpp" line="56"/>
         <source>&lt;font size=+2&gt;Measuring averaged values&lt;/font&gt;&lt;p&gt;If you want averaged values just increase the&quot;Sample every&quot; value in the Recorder settings. If you set it to 10sec and your DMM gives a value approx. every second, you&apos;ll get the average of the ten last measurements in the graph</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+2&gt;Messung von Durchschnittswerten&lt;/font&gt;&lt;p&gt;Wenn Durchschnittswerte gewünscht sind, bitte den Wert für &quot;Messen alle&quot; in den Rekordereinstellungen erhöhen. Wenn der Wert auf 10 Sekunden gesetz ist und das DMM einen Wert jede Sekunde liefert, dann erscheint im Graphen der Durchschnittswert für die letzten 10 Messungen</translation>
     </message>
     <message>
         <location filename="../sources/tipdlg.cpp" line="63"/>
-        <source>&lt;font size=+2&gt;Configuration file&lt;/font&gt;&lt;p&gt;QtDMM writes a small configuration file (~/.qtdmmrc). It contains informations about window settings and other preferences. If you want to get rid of QtDMM don&apos;t forget to remove this file too.&lt;br&gt;If you want to stay with it, you may want to write an email to me explaining what could be improved.&lt;br&gt;Matthias Toussaint &lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;font size=+2&gt;Configuration file&lt;/font&gt;&lt;p&gt;QtDMM writes a small configuration file (/QtDMM/QtDMM.conf). The path of it is platfom depend. It contains informations about window settings and other preferences. If you want to get rid of QtDMM don&apos;t forget to remove this file too.&lt;br&gt;If you want to stay with it, you may want to write an email to me explaining what could be improved.&lt;br&gt;Matthias Toussaint &lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;</source>
+        <translation>&lt;font size=+2&gt;Konfugurationsdatei&lt;/font&gt;&lt;p&gt;QtDMM erstellt eine kleine Datei (/QtDMM/QtDMM.conf). Der Pfad zu ihr hängt vom Betriessystem ab. Sie enthält die Einstellungen für das Progogramm . Wenn Sie QtDMM nicht mehr mögen so löschen Sie bitte auch diese Datei.&lt;br&gt;Wenn es Ihenen gefällt, können Sie mir eine E-Mail mit Verbesserungsvorschlägen schicken.&lt;br&gt;Matthias Toussaint &lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;</translation>
     </message>
 </context>
 <context>
@@ -1502,7 +1502,7 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
         <location filename="../forms/uimainwin.ui" line="242"/>
         <location filename="../forms/uimainwin.ui" line="313"/>
         <source>&amp;Configure</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="245"/>
@@ -1614,7 +1614,7 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
     <message>
         <location filename="../forms/uimainwin.ui" line="387"/>
         <source>C&amp;onfigure</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="393"/>
@@ -1750,7 +1750,7 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="35"/>
         <source>Sample &amp;every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Messen &amp;:</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="51"/>

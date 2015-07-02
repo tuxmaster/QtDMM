@@ -29,7 +29,7 @@
 const QStringList TipDlg::s_tipText = {
 	tr("<font size=+2>Welcome</font><p>QtDMM is a small DMM "
 	"(Digital Multi Meter) readout software for Linux/UNIX"
-	" and since version 0.8.11 for Mac OSX."
+	" and since version 0.8.11 for Mac OSX. Windows is also supported since 0.9.5."
 	" If you don't want to see the tips of the day you "
 	"can switch them of with"
 	" the checkbox below this text. The tips can be switched "
@@ -39,9 +39,9 @@ const QStringList TipDlg::s_tipText = {
 	tr("<font size=+2>QtDMM can't connect?</font><p>"
 	"Make shure you have read/write permission for the device"
 	" the multimeter is connected to. In doubt call a:<br>"
-		" <tt>chmod a+rw /dev/&lt;device&gt;</tt> (as root).<br>"
+		" <tt>chmod a+rw /dev/&lt;device&gt;</tt> (as root) under unix like systems.<br>"
 	"<tt>&lt;device&gt;</tt> will be something like <tt>ttyS0</tt>"
-	" or <tt>usb/ttyUSB0</tt>. This depend on your configuration."),
+	" or <tt>usb/ttyUSB0</tt>. This depend on your configuration. For Windows check the group policies."),
 
 	tr("<font size=+2>Quick help</font><p>"
 	"Click on the context help button in the titlebar of the window."
@@ -61,7 +61,7 @@ const QStringList TipDlg::s_tipText = {
 		" the ten last measurements in the graph"),
 
 	tr("<font size=+2>Configuration file</font><p>"
-	"QtDMM writes a small configuration file (~/.qtdmmrc). It contains"
+	"QtDMM writes a small configuration file (/QtDMM/QtDMM.conf). The path of it is platfom depend. It contains"
 	" informations about window settings and other preferences."
 	" If you want to get rid of QtDMM don't"
 	" forget to remove this file too.<br>If you want to stay with it, you may want "
