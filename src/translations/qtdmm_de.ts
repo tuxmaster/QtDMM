@@ -624,7 +624,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="651"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, das es funkioniert, dann melden Sie es bitte an: &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="676"/>
@@ -639,52 +639,52 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="266"/>
         <source>5 bits</source>
-        <translation type="unfinished"></translation>
+        <translation>5 Bits</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="271"/>
         <source>6 bits</source>
-        <translation type="unfinished"></translation>
+        <translation>6 Bits</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="276"/>
         <source>7 bits</source>
-        <translation type="unfinished"></translation>
+        <translation>7 Bits</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="281"/>
         <source>8 bits</source>
-        <translation type="unfinished"></translation>
+        <translation>8 Bits</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="246"/>
         <source>&amp;Bits:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="347"/>
         <source>Number of stop bits for serial communication.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der Stoppbits.</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="351"/>
         <source>1 Stop bit</source>
-        <translation type="unfinished"></translation>
+        <translation>1 Stoppbit</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="356"/>
         <source>2 Stop bits</source>
-        <translation type="unfinished"></translation>
+        <translation>2 Stoppbits</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="131"/>
         <source>&amp;Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anschluß:</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="161"/>
         <source>Choose the serial device here. &lt;i&gt;(Hint for DOS people: /dev/ttyS0 corresponds to COM1. /dev/ttyS1 to COM2 ...)&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier bitte den seriellen Anschluß wählen.&lt;i&gt;(Für Unixumsteiger: /dev/ttyS0 entspricht COM1 und so weiter)&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="193"/>
@@ -694,82 +694,82 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="200"/>
         <source>600 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>600 Baud</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="205"/>
         <source>1200 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>1200 Baud</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="210"/>
         <source>1800 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>1800 Baud</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="215"/>
         <source>2400 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>2400 Baud</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="220"/>
         <source>4800 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>4800 Baud</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="225"/>
         <source>9600 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>9600 Baud</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="230"/>
         <source>19200 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>19200 Baud</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="364"/>
         <source>&amp;Digits</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;tellen</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="331"/>
         <source>&amp;Stop bits:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Stoppbits:</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="177"/>
         <source>Baud &amp;rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Baud&amp;rate:</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="105"/>
         <source>External device setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe Steuerung</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="461"/>
         <source>RTS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="471"/>
         <source>CTS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="478"/>
         <source>DSR</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="485"/>
         <source>DTR</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="513"/>
         <source>Protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokoll</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="519"/>
@@ -829,12 +829,12 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="583"/>
         <source>&amp;Number of values:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anzahl der Werte:</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="593"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
-        <translation type="unfinished"></translation>
+        <translation>Einige Multimeter senden verschiedenen Zeile mit verschiedenen Messwerten. Hier kann die Anzahl der zu ignorieren Zeilen eingetragen werden.( Das bedeutet, QtDMM verarbeitet nur die erste Zeile).</translation>
     </message>
 </context>
 <context>
@@ -842,97 +842,101 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="26"/>
         <source>Execute external command at given threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein externes Programm ausführen, sobald ein Grenzwert erreicht ist</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="23"/>
         <source>Check this if you want QtDMM to execute an external command when given thresholds are reached (Falling or raising edge).</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ankreuzen, wenn beim erreichen eines Grenzwertes ein externes Programm aufgerufen werden soll.</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="36"/>
         <source>Threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>Grenzwert</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="48"/>
         <location filename="../forms/uiexecuteprefs.ui" line="79"/>
         <source>Threshold:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grenzwert:</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="69"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="64"/>
         <source>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberer Grenzwert.&lt;p&gt;
+Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="100"/>
         <source>0.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="95"/>
         <source>Threshold for falling edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterer Grenzwert.&lt;p&gt;
+Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="113"/>
         <source>&amp;Raising edge</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Oberer Grenzwert</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="110"/>
         <source>Call command on raising edge.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm beim erreichen des oberen Grenzwertes aufrufen.</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="126"/>
         <source>&amp;Falling edge</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Unterer Grenzwert</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="123"/>
         <source>Call command on falling edge.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm beim erreichen des unteren Grenzwertes aufrufen.</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="171"/>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="200"/>
         <source>Disconnect before executing command</source>
-        <translation type="unfinished"></translation>
+        <translation>Vor start die Verbindung trennen</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="197"/>
         <source>Check this if you want QtDMM to disconnect (close the serial port) before executing the external command.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ankreuzen, wenn vor Programmausführen die Verbindung zum Multimeter getrennt werden soll.</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="233"/>
         <source>Enter here the external command to be executed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier das auszuführende Programm eintragen.</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="246"/>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchsuchen</translation>
     </message>
     <message>
         <location filename="../forms/uiexecuteprefs.ui" line="249"/>
         <source>Here you can browse your harddisk for the external command (Altenative to directly typing it into the field to the left).</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier kann der Computer nach dem auszuführenen Programm durchsucht werden( Alternativ kann links das Programm eingegeben werden).</translation>
     </message>
 </context>
 <context>
@@ -1382,17 +1386,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
 <context>
     <name>UIMainWid</name>
     <message>
-        <location filename="../forms/uimainwid.ui" line="17"/>
-        <source>QtDMM 0.4.1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uimainwid.ui" line="23"/>
-        <source>QtDMM 0.4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uimainwid.ui" line="64"/>
+        <location filename="../forms/uimainwid.ui" line="71"/>
         <source>This is the plotting area for the transient recorder. It is widely configurable by clicking the &lt;b&gt;config ...&lt;/b&gt; button to the right. Data aquisition may be started by hand, at a specific time or automatically triggered by the measured value itself &lt;i&gt;(See configuration dialog)&lt;/i&gt;&lt;p&gt;
 The maximum resolution for data aquisition is 1/10th of a second, but may also be configured to sample once a week or what ever you want.
 &lt;p&gt;
@@ -1502,7 +1496,7 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
         <location filename="../forms/uimainwin.ui" line="242"/>
         <location filename="../forms/uimainwin.ui" line="313"/>
         <source>&amp;Configure</source>
-        <translation type="unfinished">&amp;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="245"/>
@@ -2068,61 +2062,47 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
     <message>
         <location filename="../forms/uitipdlg.ui" line="17"/>
         <source>QtDMM: Tip of the day</source>
-        <translation type="unfinished"></translation>
+        <translation>QtDMM Tipp des Tages</translation>
     </message>
     <message>
-        <location filename="../forms/uitipdlg.ui" line="58"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Cantarell&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uitipdlg.ui" line="77"/>
-        <source>Calvin :)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uitipdlg.ui" line="124"/>
+        <location filename="../forms/uitipdlg.ui" line="150"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Don&apos;t show tips again&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Check this if you don&apos;t want to see the tip of the day at startup. You can activate the tips at any time in the preferences again.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+1&gt;&lt;b&gt;Keine Tipps mehr zeigen&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dies ankreuzen, wenn keine Tipps beim Starten mehr gewünscht sind. Dies kann jederzeit in den Einstellungen wieder geändert werden.</translation>
     </message>
     <message>
-        <location filename="../forms/uitipdlg.ui" line="127"/>
+        <location filename="../forms/uitipdlg.ui" line="153"/>
         <source>Don&apos;t show tips again</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Tipps mehr zeigen</translation>
     </message>
     <message>
-        <location filename="../forms/uitipdlg.ui" line="140"/>
+        <location filename="../forms/uitipdlg.ui" line="166"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Previous&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Go to previous tip.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+1&gt;&lt;b&gt;Vorigen&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Den Tipp davor anzeigen.</translation>
     </message>
     <message>
-        <location filename="../forms/uitipdlg.ui" line="143"/>
+        <location filename="../forms/uitipdlg.ui" line="169"/>
         <source>&amp;Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vorigen</translation>
     </message>
     <message>
-        <location filename="../forms/uitipdlg.ui" line="159"/>
+        <location filename="../forms/uitipdlg.ui" line="185"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Next&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Go to next tip.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uitipdlg.ui" line="162"/>
-        <source>&amp;Next</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+1&gt;&lt;b&gt;Nächsten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Den nächsten Tipp anzeigen.</translation>
     </message>
     <message>
         <location filename="../forms/uitipdlg.ui" line="188"/>
-        <source>&lt;font size=+1&gt;&lt;b&gt;Close&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Close this dialog.</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Next</source>
+        <translation>&amp;Nächsten</translation>
     </message>
     <message>
-        <location filename="../forms/uitipdlg.ui" line="191"/>
+        <location filename="../forms/uitipdlg.ui" line="214"/>
+        <source>&lt;font size=+1&gt;&lt;b&gt;Close&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Close this dialog.</source>
+        <translation>&lt;font size=+1&gt;&lt;b&gt;Schließen&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dieses Fenster schließen.</translation>
+    </message>
+    <message>
+        <location filename="../forms/uitipdlg.ui" line="217"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schließen</translation>
     </message>
 </context>
 </TS>
