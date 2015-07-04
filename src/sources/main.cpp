@@ -62,10 +62,15 @@ int main( int argc, char **argv )
   QTranslator QtTranslation;
   QTranslator AppTranslation;
 
-  QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()),QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-  AppTranslation.load(QString("%1_%2").arg(app.applicationName()).arg(QLocale::system().name()),QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+  QString QtTranslationPath=QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+  QString AppTranslationPath=QtTranslationPath;
+#ifdef Q_OS_WIN
+  AppTranslationPath="./";
+#endif
+  QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()),QtTranslationPath);
+  AppTranslation.load(QString("%1_%2").arg(app.applicationName()).arg(QLocale::system().name()),AppTranslationPath);
 
-  if(!AppTranslation.isEmpty())
+  if((!AppTranslation.isEmpty()) && (!QtTranslation.isEmpty()))
   {
 	app.installTranslator(&QtTranslation);
 	app.installTranslator(&AppTranslation);
