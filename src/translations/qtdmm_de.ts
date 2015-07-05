@@ -1095,78 +1095,78 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../forms/uiguiprefs.ui" line="35"/>
         <source>Display</source>
-        <translation>Anzeige</translation>
+        <translation>DMM Anzeige</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="73"/>
         <source>Show bargraph</source>
-        <translation type="unfinished"></translation>
+        <translation>Bargraph</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="118"/>
         <source>Show Min/Max</source>
-        <translation type="unfinished"></translation>
+        <translation>Min/Max</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="152"/>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeigen</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="191"/>
         <source>Click this button to change the color of the numerical display for the dmm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die Farbe der Anzeige des DMM&apos;s zu ändern.</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="204"/>
         <source>Back&amp;ground</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hintergrund</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="251"/>
         <source>Click this button to change the color of the text in the numerical display.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die Farbe der Texte im DMM zu ändern.</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="264"/>
         <source>&amp;Text</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Text</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="282"/>
         <source>At program exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei Programmende</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="320"/>
         <source>When this option is checked QtDMM will alert you if you are going to overwrite or loose unsaved data (import, quit).</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn diese Option ausgewählt ist, dann wird vor dem Überschreiben des internen Speichers gefragt ob die Daten gesichert werden sollen.</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="323"/>
         <source>Alert unsaved data</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung bei ungesicherten Daten</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="368"/>
         <location filename="../forms/uiguiprefs.ui" line="416"/>
         <source>When this option is checked the window position and size saved and restored in the next session.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn diese Option ausgewäht ist, wird die Fenstergroße und die -position gepeichert und beim nächten Starten wiederhergestellt.</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="371"/>
         <source>Save window position</source>
-        <translation type="unfinished"></translation>
+        <translation>Fensterposition speichern</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="419"/>
         <source>Save window size</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenstergröße speichern</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="450"/>
         <source>Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeugleisten</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="488"/>
@@ -1175,37 +1175,37 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
         <location filename="../forms/uiguiprefs.ui" line="632"/>
         <location filename="../forms/uiguiprefs.ui" line="680"/>
         <source>Check this if you want text labels in the toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier ankreuzen, wenn unter den Symbolen auch der Text erscheinen soll.</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="491"/>
         <source>Icons with text label</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbole mit Text</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="539"/>
         <source>DMM toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>DMM</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="587"/>
         <source>File toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="635"/>
         <source>Help toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="683"/>
         <source>Graph toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Graphen</translation>
     </message>
     <message>
         <location filename="../forms/uiguiprefs.ui" line="714"/>
         <source>Show tip of the day</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipp des Tages anzeigen</translation>
     </message>
 </context>
 <context>
@@ -1213,165 +1213,171 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="31"/>
         <source>Show integration</source>
-        <translation type="unfinished"></translation>
+        <translation>Integration anzeigen</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="59"/>
         <source>Colors</source>
-        <translation type="unfinished">Farben</translation>
+        <translation>Farben</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="91"/>
         <location filename="../forms/uiintegrationprefs.ui" line="139"/>
         <source>Click this button so change the color of the data graph in the recorder.</source>
-        <translation type="unfinished">Hier klicken um die Farbe des Graphen zu ändern.</translation>
+        <translation>Hier klicken um die Farbe des Graphen zu ändern.</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="104"/>
         <source>Integration graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Integrationsgraphen</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="152"/>
         <source>Integration threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>Integrationsgrenzwert</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="173"/>
         <source>Drawing style</source>
-        <translation type="unfinished">Linienart</translation>
+        <translation>Linienart</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="185"/>
         <source>Point style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkte:</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="204"/>
         <source>Line style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Linien:</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="221"/>
         <source>No points</source>
-        <translation type="unfinished">Keine Punkte</translation>
+        <translation>Keine Punkte</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="226"/>
         <source>Circle</source>
-        <translation type="unfinished">Kreise</translation>
+        <translation>Kreise</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="231"/>
         <source>Square</source>
-        <translation type="unfinished">Rechtecke</translation>
+        <translation>Rechtecke</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="236"/>
         <source>Diamond</source>
-        <translation type="unfinished">Diamanten</translation>
+        <translation>Diamanten</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="241"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="246"/>
         <source>Large Circle</source>
-        <translation type="unfinished">Große Kreise</translation>
+        <translation>Große Kreise</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="251"/>
         <source>Large Square</source>
-        <translation type="unfinished">Große Rechecke</translation>
+        <translation>Große Rechecke</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="256"/>
         <source>Large Diamond</source>
-        <translation type="unfinished">Große Diamanten</translation>
+        <translation>Große Diamanten</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="261"/>
         <source>Large X</source>
-        <translation type="unfinished">Großes X</translation>
+        <translation>Großes X</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="270"/>
         <source>No line</source>
-        <translation type="unfinished">Keine Linie</translation>
+        <translation>Keine Linie</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="275"/>
         <source>Solid line</source>
-        <translation type="unfinished">Durchgehende Linie</translation>
+        <translation>Durchgehende Linie</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="280"/>
         <source>Dotted line</source>
-        <translation type="unfinished">Gepunktete Linie</translation>
+        <translation>Gepunktete Linie</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="288"/>
         <source>Width:</source>
-        <translation type="unfinished">Breite:</translation>
+        <translation>Breite:</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="307"/>
         <source>Here you can choose the line width of the data graph in the recorder.</source>
-        <translation type="unfinished">Hier kann die Liniendarstellung des Datengraphen geändert werden.</translation>
+        <translation>Hier kann die Liniendarstellung des Datengraphen geändert werden.</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="361"/>
         <source>Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Graphen</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="373"/>
         <source>Scale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalierung:</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="386"/>
         <source>Threshold:</source>
-        <translation type="unfinished">Grenzwert:</translation>
+        <translation>Grenzwert:</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="404"/>
         <source>1.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="399"/>
         <source>Scaling factor for integration curve.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalierung für die Integrationskurve.&lt;p&gt;
+Hier können die Werte mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="419"/>
         <location filename="../forms/uiintegrationprefs.ui" line="447"/>
         <source>0.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="414"/>
         <source>Amplitude offset for integration curve.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompensation für die Kurve der Amplitude.&lt;p&gt;
+Hier können die Werte mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="429"/>
         <source>Offset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompensation:</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="442"/>
         <source>If sampled value gets below this offset the integration curve is reset to zero.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn ein Messwert diesen Wert unterschreitet, wird die Integrationskurve auf Null zurückgesetzt.&lt;p&gt;
+Hier können die Werte mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
 </context>
 <context>
@@ -1382,7 +1388,10 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
 The maximum resolution for data aquisition is 1/10th of a second, but may also be configured to sample once a week or what ever you want.
 &lt;p&gt;
 &lt;b&gt;Note:&lt;/b&gt; Connecting to the DMM as well as a change of the measuring unit automatically clears the graph.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist das Zeichenfeld für den Rekorder. Es ist in vielen Teilen durch die Auswahl des Punktes &lt;b&gt;Konfigurations&lt;/b&gt; nach einem Rechtsklick anpassbar. Die Datensammlung kann per Hand, zu einer bestimmten Zeit oder durch einen Messwert ausgelöst werden. Mehr finden Sie im &lt;i&gt;Konfigurationsdialog&lt;/i&gt;.&lt;p&gt;
+Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedarf kann es auch auf einmal die Woche oder was auch immer gewünscht ist geändert werden.
+&lt;p&gt;
+&lt;b&gt;Hinweis:&lt;/b&gt; Das Vebinden zum DMM sowie die Veränderung des Messbereiches löscht automatisch den Graphen.</translation>
     </message>
 </context>
 <context>
@@ -1446,7 +1455,7 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
     <message>
         <location filename="../forms/uimainwin.ui" line="191"/>
         <source>Ctrl+E</source>
-        <translation></translation>
+        <translation>Strg+E</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="203"/>
@@ -1482,114 +1491,114 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
         <location filename="../forms/uimainwin.ui" line="239"/>
         <location filename="../forms/uimainwin.ui" line="310"/>
         <source>&amp;Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="242"/>
         <location filename="../forms/uimainwin.ui" line="313"/>
         <location filename="../forms/uimainwin.ui" line="387"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will open QtDMM&apos;s configuration dialog. Here you can configure it&apos;s visual appearance and all options regarding the multimeter hardware and the recorder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;QtDMM konfigurieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Dies öffnen das Konfugurationsfenster für QtDMM. Hier kann die visuelle Erscheinung, alle Optionen die die Datenaufzeichnung betreffen sowie die Einstellungen für das DMM festgelegt werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="245"/>
         <source>F2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="257"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Beenden</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="260"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Quit QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder contains unsaved data QtDMM will give you the option to savve your data first.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;QtDMM Beenden&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wenn der Datenrekorder ungespeicherte Daten enthällt, haben Sie die Möglichkeit diese vorher zu speichern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="263"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+B</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="278"/>
         <source>&amp;Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verbinden</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="281"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Connect to the Multimeter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will establish the serial connection to the dmm. If not connected the serial port is free and can be used by other software.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Verbindung zum DMM herstellen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Die baut die serielle Verbindung zum DMM auf.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="284"/>
         <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+V</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="296"/>
         <source>&amp;Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zurücksetzen</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="299"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Reset min/max values&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The min/max values in the display will be reset. You can activate this option at any time. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Min/Max Werte zurücksetzen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Die Min/Max Werte in der Anzeige werden zurückgesetzt. Diese Option kann jederzeit aktiviert werden. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="302"/>
         <source>Ctrl+R</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+Z</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="316"/>
         <source>Shift+F2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="331"/>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Starten</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="334"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Start the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If you are in manual mode this will start the recorder. Press F2 to set the recorder options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder starten&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Startet den Rekorder wenn sich dieser im manuellen Modus befindet. F2 drücken für die Rekordereinstellungen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="337"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+S</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="352"/>
         <source>S&amp;top</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anhalten</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="355"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Stop the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The recorder will be stopped. This is independent from the start mode of the recorder. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Hällt den Rekorder an&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Der Rekoder wird angehalten. Dies ist unabhängig von dem gewählten Startmodus. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="358"/>
         <source>Ctrl+X</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+A</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="370"/>
         <source>&amp;Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Löschen</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="373"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clear the recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder is already started it will clear the graph and continue recording.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lösche den Graphen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wenn der Rekorder läuft, wird der Graph gelöscht und es wird weiter aufgezeichnet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="376"/>
         <source>Del</source>
-        <translation type="unfinished"></translation>
+        <translation>Enf</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="384"/>
@@ -1599,42 +1608,42 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
     <message>
         <location filename="../forms/uimainwin.ui" line="390"/>
         <source>Ctrl+F2</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+F2</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="398"/>
         <source>&amp;On version</source>
-        <translation type="unfinished"></translation>
+        <translation>Ü&amp;ber die Version</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="401"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Urheber Information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zeigt die Information zum Urheber sowie etwas Werbung zu QtDMM an. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="409"/>
         <source>&amp;Tipp of the day</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tipp des Tages</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="412"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show tip of the day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeigt den Tipp des Tages an.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="424"/>
         <source>&amp;Direct Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Direkte Hilfe</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="430"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direct Help&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enter the direct help mode. You have done this already when reading this text :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direkte Hilfe&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Schalten in den direkten Hilfemodus um. Dies haben Sie bereits duch lesen des Textes getan :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="433"/>
         <source>Shift+F1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
