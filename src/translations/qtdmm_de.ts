@@ -1651,82 +1651,82 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../forms/uiprintdlg.ui" line="17"/>
         <source>QtDMM: Print graph ...</source>
-        <translation type="unfinished"></translation>
+        <translation>QtDMM: Graph drucken</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="23"/>
         <source>Print ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucken ...</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="58"/>
         <source>Printer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Drucker:</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="83"/>
         <source>Please select printer -&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte ein Drucker wählen -&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="89"/>
         <source>This label shows the currently selected printer. Click the button to the right to configure the printer. &lt;i&gt;(You have to select a printer in order to be able to print)&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier wird der aktuell ausgewählte Drucker angezeigt. Um diesen zu ändern auf die rechte Schaltfläche klicken. &lt;i&gt;(Zum drucken muss ein Drucker ausgewählt werden)&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="99"/>
         <source>Configure ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren ...</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="105"/>
         <source>Click here to configure the printer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den Drucker zu konfigurieren.</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="129"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="142"/>
         <source>Enter a title for the document &lt;i&gt;(Optional)&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier ein Titel für das Dokument eintragen. &lt;i&gt;(optional)&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="149"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommentar</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="168"/>
         <source>Here you may enter an comment which will be printed on top of the page &lt;i&gt;(Optional)&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier kann ein Kommentar angegeben werden, der dann am Anfang der Seite ausgegeben wird. &lt;i&gt;(optional)&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="201"/>
         <source>Direct help (SHIFT+F1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Direkthilfe (Umschalt+F1)</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="227"/>
         <source>&amp;Print</source>
-        <translation type="unfinished">&amp;Drucken</translation>
+        <translation>&amp;Drucken</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="233"/>
         <source>Click here to print.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um zu drucken.</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="240"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
     <message>
         <location filename="../forms/uiprintdlg.ui" line="243"/>
         <source>Click here to abort printing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um den Druckvorgang abzubrechen.</translation>
     </message>
 </context>
 <context>
