@@ -629,12 +629,12 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="676"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, welches hier nicht aufgeführt ist, aber Sie aber passende Einstellungen gefunden haben, so teilen Sie es bitte &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt; mit. So können zukümpftige Versionen von Ihrer Hilfe profitieren.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="262"/>
         <source>Number of bits for serial communication.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der Bits für die Übertragung.</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="266"/>
@@ -689,7 +689,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="193"/>
         <source>Select the baud rate for the DMM here. If you encounter problems connecting to your DMM try lowering the baud rate. I had some problems with my &lt;b&gt;Metex ME-32&lt;/b&gt;. The Documentation said 1200 baud but it only worked at 600.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier die Baudrate für das DMM auswählen. Wenn Probleme mit der Verbindung zum DMM auftreten, bitte die Baudrate verringern. Es sind Probleme mit dem &lt;b&gt;Metex ME-32&lt;/b&gt; bekannt. Laut Dokumentation soll es mit 1200 Baud laufen, aber tatsächlich geht es nur mit 600 Baud.</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="200"/>
@@ -774,57 +774,58 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="519"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Hier wird das Kommunikationsprotokoll ausgewählt. Wenn Sie kein &quot;offiziell&quot; unterstützes DMM benutzte, versuchen Sie eines der bereits vorhanden Protokolle. Mit etwas etwas Glück passt eines. Wenn Sie eins finden, teilen Sie es bitte dem Autor mit.</translatorcomment>
+        <translation>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="523"/>
         <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
-        <translation type="unfinished"></translation>
+        <translation>14 Bytes ASCII, auf Abfrage (Metex/Voltcraft)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="528"/>
         <source>11 bytes ASCII, continuous (PeakTech 451)</source>
-        <translation type="unfinished"></translation>
+        <translation>11 Bytes ASCII, kontinuierlich (PeakTech 451)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="533"/>
         <source>14 bytes ASCII, continuous (Voltcraft)</source>
-        <translation type="unfinished"></translation>
+        <translation>14 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="538"/>
         <source>15 bytes ASCII, continuous (Voltcraft)</source>
-        <translation type="unfinished"></translation>
+        <translation>15 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="543"/>
         <source>11 bytes binary, continuous (M9803R)</source>
-        <translation type="unfinished"></translation>
+        <translation>11 Bytes binär, kontinuierlich (M9803R)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="548"/>
         <source>14 bytes binary, continuous (VC820)</source>
-        <translation type="unfinished"></translation>
+        <translation>14 Bytes binär, kontinuierlich (VC820)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="553"/>
         <source>22 bytes ASCII, continuous (IsoTech)</source>
-        <translation type="unfinished"></translation>
+        <translation>22 Bytes ASCII, kontinuierlich (IsoTech)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="558"/>
         <source>11 bytes binary, continuous (VC940)</source>
-        <translation type="unfinished"></translation>
+        <translation>11 Bytes binär, kontinuierlich (VC940)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="563"/>
         <source>14 bytes ASCII/binary, continuous (QM1537)</source>
-        <translation type="unfinished"></translation>
+        <translation>14 Bytes ASCII/Binär, kontinuierlich (QM1537)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="568"/>
         <source>9 bytes binary, continuous (RS 22-812)</source>
-        <translation type="unfinished"></translation>
+        <translation>9 Bytes binär, kontinuierlich (RS 22-812)</translation>
     </message>
     <message>
         <location filename="../forms/uidmmprefs.ui" line="583"/>
@@ -942,277 +943,267 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
 <context>
     <name>UIGraphPrefs</name>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="14"/>
-        <source>QFrameForm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="26"/>
+        <location filename="../forms/uigraphprefs.ui" line="35"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Farben</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="58"/>
+        <location filename="../forms/uigraphprefs.ui" line="85"/>
         <source>Click this button so change the color of the data graph in the recorder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die Farbe des Graphen zu ändern.</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="77"/>
+        <location filename="../forms/uigraphprefs.ui" line="104"/>
         <source>&amp;Data</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Daten</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="112"/>
+        <location filename="../forms/uigraphprefs.ui" line="148"/>
         <source>Click this button to change the background color of the recorder graph.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die Hintergrundfarbe des Graphen zu ändern.</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="131"/>
+        <location filename="../forms/uigraphprefs.ui" line="167"/>
         <source>&amp;Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hintergrund</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="166"/>
+        <location filename="../forms/uigraphprefs.ui" line="211"/>
         <source>Click this button to change the color of the grid and grid text in the recorder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die Farbe des Gitters und der Achenbeschriftung zu ändern.</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="182"/>
+        <location filename="../forms/uigraphprefs.ui" line="227"/>
         <source>&amp;Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gitter</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="217"/>
-        <location filename="../forms/uigraphprefs.ui" line="268"/>
-        <location filename="../forms/uigraphprefs.ui" line="322"/>
+        <location filename="../forms/uigraphprefs.ui" line="271"/>
+        <location filename="../forms/uigraphprefs.ui" line="331"/>
+        <location filename="../forms/uigraphprefs.ui" line="394"/>
         <source>Click this button to change the color of the cursor at the current sampling position in the recorder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="233"/>
-        <source>Cu&amp;rsor</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die Farbe des Cursors zu ändern.</translation>
     </message>
     <message>
         <location filename="../forms/uigraphprefs.ui" line="287"/>
+        <source>Cu&amp;rsor</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="350"/>
         <source>Start threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>Start Grenzwert</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="341"/>
+        <location filename="../forms/uigraphprefs.ui" line="413"/>
         <source>E&amp;xternal threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Externer Grenzwert</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="359"/>
+        <location filename="../forms/uigraphprefs.ui" line="431"/>
         <source>Drawing style</source>
-        <translation type="unfinished"></translation>
+        <translation>Linienart</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="371"/>
+        <location filename="../forms/uigraphprefs.ui" line="452"/>
         <source>Data points:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datenpunkte:</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="388"/>
+        <location filename="../forms/uigraphprefs.ui" line="469"/>
         <source>No line</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Linie</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="393"/>
+        <location filename="../forms/uigraphprefs.ui" line="474"/>
         <source>Solid line</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchgehende Linie</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="398"/>
+        <location filename="../forms/uigraphprefs.ui" line="479"/>
         <source>Dotted line</source>
-        <translation type="unfinished"></translation>
+        <translation>Gepunktete Linie</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="412"/>
+        <location filename="../forms/uigraphprefs.ui" line="493"/>
         <source>Data:</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten:</translation>
     </message>
     <message>
-        <location filename="../forms/uigraphprefs.ui" line="447"/>
+        <location filename="../forms/uigraphprefs.ui" line="528"/>
         <source>Here you can choose the line width of the data graph in the recorder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="463"/>
-        <source>Width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="477"/>
-        <source>No points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="482"/>
-        <source>Circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="487"/>
-        <source>Square</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="492"/>
-        <source>Diamond</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="497"/>
-        <source>X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="502"/>
-        <source>Large Circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="507"/>
-        <source>Large Square</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="512"/>
-        <source>Large Diamond</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uigraphprefs.ui" line="517"/>
-        <source>Large X</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier kann die Liniendarstellung des Datengraphen geändert werden.</translation>
     </message>
     <message>
         <location filename="../forms/uigraphprefs.ui" line="544"/>
+        <source>Width:</source>
+        <translation>Breite:</translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="558"/>
+        <source>No points</source>
+        <translation>Keine Punkte</translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="563"/>
+        <source>Circle</source>
+        <translation>Kreise</translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="568"/>
+        <source>Square</source>
+        <translation>Rechtecke</translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="573"/>
+        <source>Diamond</source>
+        <translation>Diamanten</translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="578"/>
+        <source>X</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="583"/>
+        <source>Large Circle</source>
+        <translation>Große Kreise</translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="588"/>
+        <source>Large Square</source>
+        <translation>Große Rechecke</translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="593"/>
+        <source>Large Diamond</source>
+        <translation>Große Diamanten</translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="598"/>
+        <source>Large X</source>
+        <translation>Großes X</translation>
+    </message>
+    <message>
+        <location filename="../forms/uigraphprefs.ui" line="625"/>
         <source>Crosshair cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Fadenkreuzcursor</translation>
     </message>
 </context>
 <context>
     <name>UIGuiPrefs</name>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="14"/>
-        <source>QFrameForm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/uiguiprefs.ui" line="26"/>
+        <location filename="../forms/uiguiprefs.ui" line="35"/>
         <source>Display</source>
-        <translation type="unfinished">Anzeige</translation>
+        <translation>Anzeige</translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="46"/>
+        <location filename="../forms/uiguiprefs.ui" line="73"/>
         <source>Show bargraph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="82"/>
+        <location filename="../forms/uiguiprefs.ui" line="118"/>
         <source>Show Min/Max</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="116"/>
+        <location filename="../forms/uiguiprefs.ui" line="152"/>
         <source>Show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="146"/>
+        <location filename="../forms/uiguiprefs.ui" line="191"/>
         <source>Click this button to change the color of the numerical display for the dmm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="159"/>
+        <location filename="../forms/uiguiprefs.ui" line="204"/>
         <source>Back&amp;ground</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="197"/>
+        <location filename="../forms/uiguiprefs.ui" line="251"/>
         <source>Click this button to change the color of the text in the numerical display.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="210"/>
+        <location filename="../forms/uiguiprefs.ui" line="264"/>
         <source>&amp;Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="228"/>
+        <location filename="../forms/uiguiprefs.ui" line="282"/>
         <source>At program exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="248"/>
+        <location filename="../forms/uiguiprefs.ui" line="320"/>
         <source>When this option is checked QtDMM will alert you if you are going to overwrite or loose unsaved data (import, quit).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="251"/>
+        <location filename="../forms/uiguiprefs.ui" line="323"/>
         <source>Alert unsaved data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="287"/>
-        <location filename="../forms/uiguiprefs.ui" line="326"/>
+        <location filename="../forms/uiguiprefs.ui" line="368"/>
+        <location filename="../forms/uiguiprefs.ui" line="416"/>
         <source>When this option is checked the window position and size saved and restored in the next session.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="290"/>
+        <location filename="../forms/uiguiprefs.ui" line="371"/>
         <source>Save window position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="329"/>
+        <location filename="../forms/uiguiprefs.ui" line="419"/>
         <source>Save window size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="360"/>
+        <location filename="../forms/uiguiprefs.ui" line="450"/>
         <source>Toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="380"/>
-        <location filename="../forms/uiguiprefs.ui" line="419"/>
-        <location filename="../forms/uiguiprefs.ui" line="458"/>
-        <location filename="../forms/uiguiprefs.ui" line="497"/>
+        <location filename="../forms/uiguiprefs.ui" line="488"/>
         <location filename="../forms/uiguiprefs.ui" line="536"/>
+        <location filename="../forms/uiguiprefs.ui" line="584"/>
+        <location filename="../forms/uiguiprefs.ui" line="632"/>
+        <location filename="../forms/uiguiprefs.ui" line="680"/>
         <source>Check this if you want text labels in the toolbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="383"/>
+        <location filename="../forms/uiguiprefs.ui" line="491"/>
         <source>Icons with text label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="422"/>
+        <location filename="../forms/uiguiprefs.ui" line="539"/>
         <source>DMM toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="461"/>
+        <location filename="../forms/uiguiprefs.ui" line="587"/>
         <source>File toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="500"/>
+        <location filename="../forms/uiguiprefs.ui" line="635"/>
         <source>Help toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="539"/>
+        <location filename="../forms/uiguiprefs.ui" line="683"/>
         <source>Graph toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uiguiprefs.ui" line="570"/>
+        <location filename="../forms/uiguiprefs.ui" line="714"/>
         <source>Show tip of the day</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1227,13 +1218,13 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="59"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Farben</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="91"/>
         <location filename="../forms/uiintegrationprefs.ui" line="139"/>
         <source>Click this button so change the color of the data graph in the recorder.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hier klicken um die Farbe des Graphen zu ändern.</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="104"/>
@@ -1248,7 +1239,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="173"/>
         <source>Drawing style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Linienart</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="185"/>
@@ -1263,22 +1254,22 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="221"/>
         <source>No points</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Keine Punkte</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="226"/>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kreise</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="231"/>
         <source>Square</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rechtecke</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="236"/>
         <source>Diamond</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Diamanten</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="241"/>
@@ -1288,47 +1279,47 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="246"/>
         <source>Large Circle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Große Kreise</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="251"/>
         <source>Large Square</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Große Rechecke</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="256"/>
         <source>Large Diamond</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Große Diamanten</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="261"/>
         <source>Large X</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Großes X</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="270"/>
         <source>No line</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Keine Linie</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="275"/>
         <source>Solid line</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Durchgehende Linie</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="280"/>
         <source>Dotted line</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gepunktete Linie</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="288"/>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Breite:</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="307"/>
         <source>Here you can choose the line width of the data graph in the recorder.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hier kann die Liniendarstellung des Datengraphen geändert werden.</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="361"/>
@@ -1343,7 +1334,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="386"/>
         <source>Threshold:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Grenzwert:</translation>
     </message>
     <message>
         <location filename="../forms/uiintegrationprefs.ui" line="404"/>
@@ -1397,256 +1388,251 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
 <context>
     <name>UIMainWin</name>
     <message>
-        <location filename="../forms/uimainwin.ui" line="20"/>
-        <source>MainWindow</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../forms/uimainwin.ui" line="38"/>
+        <location filename="../forms/uimainwin.ui" line="35"/>
         <source>&amp;File</source>
         <translation>D&amp;atei</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="51"/>
+        <location filename="../forms/uimainwin.ui" line="48"/>
         <source>&amp;DMM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="60"/>
+        <location filename="../forms/uimainwin.ui" line="57"/>
         <source>&amp;Recorder</source>
         <translation>&amp;Rekorder</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="71"/>
+        <location filename="../forms/uimainwin.ui" line="68"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="85"/>
+        <location filename="../forms/uimainwin.ui" line="82"/>
         <source>DMM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="101"/>
+        <location filename="../forms/uimainwin.ui" line="98"/>
         <source>Recorder</source>
         <translation>Rekorder</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="119"/>
+        <location filename="../forms/uimainwin.ui" line="116"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="140"/>
-        <location filename="../forms/uimainwin.ui" line="430"/>
+        <location filename="../forms/uimainwin.ui" line="137"/>
+        <location filename="../forms/uimainwin.ui" line="427"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="167"/>
+        <location filename="../forms/uimainwin.ui" line="164"/>
         <source>Display</source>
         <translation>Anzeige</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="188"/>
+        <location filename="../forms/uimainwin.ui" line="185"/>
         <source>&amp;Export</source>
         <translation>&amp;Export</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="191"/>
+        <location filename="../forms/uimainwin.ui" line="188"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Export recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Here you can export the recorded data as tab separated list. Each line contains the following values (separated by a tab character): date (dd.mm.yyyy) time (hh:mm:ss) value (float) unit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder Graphen exportieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hier können die aufgezeichneten Daten als eine Liste durch Tabulatoren getrennt exportiert werden. Jede Zeile enthält die folgenden Werte (getrennt durch einen Tabulator): Datum (tt.mm.jjjj) Zeit (ss:mm:SS) Wert (Fließkomma) Einheit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="194"/>
+        <location filename="../forms/uimainwin.ui" line="191"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="206"/>
+        <location filename="../forms/uimainwin.ui" line="203"/>
         <source>&amp;Import</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="209"/>
+        <location filename="../forms/uimainwin.ui" line="206"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Import data into recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Here you can import previously exported data files. QtDMM tries to do an educated guess if the file format is correct and rejects import of files which to not match.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Importiert Daten in den Rekorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hier können zuvor exportierte Daten importiert werden. QtDMM versucht das Format zu lesen und verweigert den Import von ungültigen Dateien.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="212"/>
+        <location filename="../forms/uimainwin.ui" line="209"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="224"/>
+        <location filename="../forms/uimainwin.ui" line="221"/>
         <source>&amp;Print</source>
         <translation>&amp;Drucken</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="227"/>
+        <location filename="../forms/uimainwin.ui" line="224"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Print recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A dialog will open where you can define a title and a comment for your printout. The printer itself can also be configured here. To be able to print you need at least one working postscript printer configured in your system. Printing into a file is also supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder Graphen drucken&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ein einem Fenster kann der Titel und ein Kommentar frür den Ausdruck festgelegt werden. Der Drucker selbst kann hier auch ausgewält werden. Um drucken zu können, wird ein PostScript fähiger Drucker benötigt.. Printing into a file is also supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder Graphen drucken&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Es öffnet sich ein Fenster,indem der Titel und ein Kommentar für den Ausdruck festgelegt werden kann. Der Drucker selbst kann hier auch ausgewält werden. Der Ausdruck in eine Datei(PDF) ist ebenfalls möglich.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="230"/>
+        <location filename="../forms/uimainwin.ui" line="227"/>
         <source>Ctrl+P</source>
         <translation>Strg+D</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="242"/>
-        <location filename="../forms/uimainwin.ui" line="313"/>
+        <location filename="../forms/uimainwin.ui" line="239"/>
+        <location filename="../forms/uimainwin.ui" line="310"/>
         <source>&amp;Configure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="245"/>
-        <location filename="../forms/uimainwin.ui" line="316"/>
-        <location filename="../forms/uimainwin.ui" line="390"/>
+        <location filename="../forms/uimainwin.ui" line="242"/>
+        <location filename="../forms/uimainwin.ui" line="313"/>
+        <location filename="../forms/uimainwin.ui" line="387"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will open QtDMM&apos;s configuration dialog. Here you can configure it&apos;s visual appearance and all options regarding the multimeter hardware and the recorder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="248"/>
+        <location filename="../forms/uimainwin.ui" line="245"/>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="260"/>
+        <location filename="../forms/uimainwin.ui" line="257"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="263"/>
+        <location filename="../forms/uimainwin.ui" line="260"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Quit QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder contains unsaved data QtDMM will give you the option to savve your data first.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="266"/>
+        <location filename="../forms/uimainwin.ui" line="263"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="281"/>
+        <location filename="../forms/uimainwin.ui" line="278"/>
         <source>&amp;Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="284"/>
+        <location filename="../forms/uimainwin.ui" line="281"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Connect to the Multimeter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will establish the serial connection to the dmm. If not connected the serial port is free and can be used by other software.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="287"/>
+        <location filename="../forms/uimainwin.ui" line="284"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="299"/>
+        <location filename="../forms/uimainwin.ui" line="296"/>
         <source>&amp;Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="302"/>
+        <location filename="../forms/uimainwin.ui" line="299"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Reset min/max values&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The min/max values in the display will be reset. You can activate this option at any time. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="305"/>
+        <location filename="../forms/uimainwin.ui" line="302"/>
         <source>Ctrl+R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="319"/>
+        <location filename="../forms/uimainwin.ui" line="316"/>
         <source>Shift+F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="334"/>
+        <location filename="../forms/uimainwin.ui" line="331"/>
         <source>&amp;Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="337"/>
+        <location filename="../forms/uimainwin.ui" line="334"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Start the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If you are in manual mode this will start the recorder. Press F2 to set the recorder options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="340"/>
+        <location filename="../forms/uimainwin.ui" line="337"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="355"/>
+        <location filename="../forms/uimainwin.ui" line="352"/>
         <source>S&amp;top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="358"/>
+        <location filename="../forms/uimainwin.ui" line="355"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Stop the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The recorder will be stopped. This is independent from the start mode of the recorder. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="361"/>
+        <location filename="../forms/uimainwin.ui" line="358"/>
         <source>Ctrl+X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="373"/>
+        <location filename="../forms/uimainwin.ui" line="370"/>
         <source>&amp;Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="376"/>
+        <location filename="../forms/uimainwin.ui" line="373"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clear the recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder is already started it will clear the graph and continue recording.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="379"/>
+        <location filename="../forms/uimainwin.ui" line="376"/>
         <source>Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="387"/>
+        <location filename="../forms/uimainwin.ui" line="384"/>
         <source>C&amp;onfigure</source>
         <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="393"/>
+        <location filename="../forms/uimainwin.ui" line="390"/>
         <source>Ctrl+F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="401"/>
+        <location filename="../forms/uimainwin.ui" line="398"/>
         <source>&amp;On version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="404"/>
+        <location filename="../forms/uimainwin.ui" line="401"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="412"/>
+        <location filename="../forms/uimainwin.ui" line="409"/>
         <source>&amp;Tipp of the day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="415"/>
+        <location filename="../forms/uimainwin.ui" line="412"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show tip of the day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="427"/>
+        <location filename="../forms/uimainwin.ui" line="424"/>
         <source>&amp;Direct Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="433"/>
+        <location filename="../forms/uimainwin.ui" line="430"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direct Help&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enter the direct help mode. You have done this already when reading this text :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/uimainwin.ui" line="436"/>
+        <location filename="../forms/uimainwin.ui" line="433"/>
         <source>Shift+F1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1744,7 +1730,7 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="35"/>
         <source>Sample &amp;every:</source>
-        <translation>Messen &amp;:</translation>
+        <translation>Messen &amp;alle:</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="51"/>
@@ -1883,25 +1869,29 @@ You have two choices:
         <source>Threshold for falling edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Unterer Grenzwert.&lt;p&gt;
+Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="565"/>
         <source>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Oberer Grenzwert.&lt;p&gt;
+Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="583"/>
         <location filename="../forms/uirecorderprefs.ui" line="596"/>
         <source>Threshold:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Grenzwert:</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="639"/>
         <source>&amp;Raising edge</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Oberer Grenzwert</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="636"/>
@@ -1911,7 +1901,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="684"/>
         <source>&amp;Falling edge</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Unterer Grenzwert</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="681"/>
@@ -1936,7 +1926,9 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
         <source>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Oberer Grenzwert.&lt;p&gt;
+Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="34"/>

@@ -11,13 +11,22 @@
    </rect>
   </property>
   <property name="caption" stdset="0">
-   <string>QFrameForm</string>
+   <string/>
   </property>
   <layout class="QVBoxLayout">
    <property name="spacing">
     <number>5</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>10</number>
+   </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="rightMargin">
+    <number>10</number>
+   </property>
+   <property name="bottomMargin">
     <number>10</number>
    </property>
    <item>
@@ -26,7 +35,16 @@
       <string>Display</string>
      </property>
      <layout class="QGridLayout">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
        <number>10</number>
       </property>
       <property name="spacing">
@@ -34,189 +52,225 @@
       </property>
       <item row="1" column="0" colspan="2">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_showBar">
-	  <property name="text">
-	   <string>Show bargraph</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer34">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::MinimumExpanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_showBar">
+          <property name="text">
+           <string>Show bargraph</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer34">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::MinimumExpanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="1" column="2" colspan="2">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_showMinMax">
-	  <property name="text">
-	   <string>Show Min/Max</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer34_2">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::MinimumExpanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_showMinMax">
+          <property name="text">
+           <string>Show Min/Max</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer34_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::MinimumExpanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="0" column="0">
        <widget class="QCheckBox" name="ui_showDisplay">
-	<property name="sizePolicy">
-	 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-	  <horstretch>0</horstretch>
-	  <verstretch>0</verstretch>
-	 </sizepolicy>
-	</property>
-	<property name="text">
-	 <string>Show</string>
-	</property>
-	<property name="checked">
-	 <bool>true</bool>
-	</property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Show</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item row="0" column="1" colspan="2">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>5</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="ColorButton" name="ui_bgColorDisplay" native="true">
-	  <property name="minimumSize">
-	   <size>
-	    <width>50</width>
-	    <height>0</height>
-	   </size>
-	  </property>
-	  <property name="maximumSize">
-	   <size>
-	    <width>50</width>
-	    <height>32767</height>
-	   </size>
-	  </property>
-	  <property name="whatsThis">
-	   <string>Click this button to change the color of the numerical display for the dmm.</string>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <widget class="QLabel" name="TextLabel2_2_2">
-	  <property name="sizePolicy">
-	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-	    <horstretch>0</horstretch>
-	    <verstretch>0</verstretch>
-	   </sizepolicy>
-	  </property>
-	  <property name="text">
-	   <string>Back&amp;ground</string>
-	  </property>
-	  <property name="alignment">
-	   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-	  </property>
-	  <property name="wordWrap">
-	   <bool>false</bool>
-	  </property>
-	  <property name="buddy">
-	   <cstring>ui_bgColorDisplay</cstring>
-	  </property>
-	 </widget>
-	</item>
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="ColorButton" name="ui_bgColorDisplay" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>32767</height>
+           </size>
+          </property>
+          <property name="whatsThis">
+           <string>Click this button to change the color of the numerical display for the dmm.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="TextLabel2_2_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Back&amp;ground</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+          <property name="buddy">
+           <cstring>ui_bgColorDisplay</cstring>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="0" column="3">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>5</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="ColorButton" name="ui_textColor">
-	  <property name="minimumSize">
-	   <size>
-	    <width>50</width>
-	    <height>0</height>
-	   </size>
-	  </property>
-	  <property name="maximumSize">
-	   <size>
-	    <width>50</width>
-	    <height>32767</height>
-	   </size>
-	  </property>
-	  <property name="whatsThis">
-	   <string>Click this button to change the color of the text in the numerical display.</string>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <widget class="QLabel" name="TextLabel2_2_3">
-	  <property name="sizePolicy">
-	   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-	    <horstretch>0</horstretch>
-	    <verstretch>0</verstretch>
-	   </sizepolicy>
-	  </property>
-	  <property name="text">
-	   <string>&amp;Text</string>
-	  </property>
-	  <property name="wordWrap">
-	   <bool>false</bool>
-	  </property>
-	  <property name="buddy">
-	   <cstring>ui_textColor</cstring>
-	  </property>
-	 </widget>
-	</item>
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="ColorButton" name="ui_textColor" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>32767</height>
+           </size>
+          </property>
+          <property name="whatsThis">
+           <string>Click this button to change the color of the text in the numerical display.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="TextLabel2_2_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>&amp;Text</string>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+          <property name="buddy">
+           <cstring>ui_textColor</cstring>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -228,7 +282,16 @@
       <string>At program exit</string>
      </property>
      <layout class="QGridLayout">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
        <number>10</number>
       </property>
       <property name="spacing">
@@ -236,119 +299,146 @@
       </property>
       <item row="0" column="0" colspan="2">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_alertUnsavedData">
-	  <property name="whatsThis">
-	   <string>When this option is checked QtDMM will alert you if you are going to overwrite or loose unsaved data (import, quit).</string>
-	  </property>
-	  <property name="text">
-	   <string>Alert unsaved data</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer1_10">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::MinimumExpanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_alertUnsavedData">
+          <property name="whatsThis">
+           <string>When this option is checked QtDMM will alert you if you are going to overwrite or loose unsaved data (import, quit).</string>
+          </property>
+          <property name="text">
+           <string>Alert unsaved data</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer1_10">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::MinimumExpanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="1" column="0">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_saveWindowPos">
-	  <property name="whatsThis">
-	   <string>When this option is checked the window position and size saved and restored in the next session.</string>
-	  </property>
-	  <property name="text">
-	   <string>Save window position</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer2_3">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::MinimumExpanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_saveWindowPos">
+          <property name="whatsThis">
+           <string>When this option is checked the window position and size saved and restored in the next session.</string>
+          </property>
+          <property name="text">
+           <string>Save window position</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer2_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::MinimumExpanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="1" column="1">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_saveWindowSize">
-	  <property name="whatsThis">
-	   <string>When this option is checked the window position and size saved and restored in the next session.</string>
-	  </property>
-	  <property name="text">
-	   <string>Save window size</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer2_3_2">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::MinimumExpanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_saveWindowSize">
+          <property name="whatsThis">
+           <string>When this option is checked the window position and size saved and restored in the next session.</string>
+          </property>
+          <property name="text">
+           <string>Save window size</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer2_3_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::MinimumExpanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
      </layout>
@@ -360,7 +450,16 @@
       <string>Toolbar</string>
      </property>
      <layout class="QGridLayout">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
        <number>10</number>
       </property>
       <property name="spacing">
@@ -368,197 +467,242 @@
       </property>
       <item row="0" column="0" colspan="2">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_textLabel">
-	  <property name="whatsThis">
-	   <string>Check this if you want text labels in the toolbar.</string>
-	  </property>
-	  <property name="text">
-	   <string>Icons with text label</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer3_4_2">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::Expanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_textLabel">
+          <property name="whatsThis">
+           <string>Check this if you want text labels in the toolbar.</string>
+          </property>
+          <property name="text">
+           <string>Icons with text label</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer3_4_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="1" column="0">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_dmmToolBar">
-	  <property name="whatsThis">
-	   <string>Check this if you want text labels in the toolbar.</string>
-	  </property>
-	  <property name="text">
-	   <string>DMM toolbar</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer3_4_2_2">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::Expanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_dmmToolBar">
+          <property name="whatsThis">
+           <string>Check this if you want text labels in the toolbar.</string>
+          </property>
+          <property name="text">
+           <string>DMM toolbar</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer3_4_2_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="2" column="0">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_fileToolBar">
-	  <property name="whatsThis">
-	   <string>Check this if you want text labels in the toolbar.</string>
-	  </property>
-	  <property name="text">
-	   <string>File toolbar</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer3_4_2_3">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::Expanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_fileToolBar">
+          <property name="whatsThis">
+           <string>Check this if you want text labels in the toolbar.</string>
+          </property>
+          <property name="text">
+           <string>File toolbar</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer3_4_2_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="2" column="1">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_helpToolBar">
-	  <property name="whatsThis">
-	   <string>Check this if you want text labels in the toolbar.</string>
-	  </property>
-	  <property name="text">
-	   <string>Help toolbar</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer3_4_2_4">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::Expanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_helpToolBar">
+          <property name="whatsThis">
+           <string>Check this if you want text labels in the toolbar.</string>
+          </property>
+          <property name="text">
+           <string>Help toolbar</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer3_4_2_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item row="1" column="1">
        <layout class="QHBoxLayout">
-	<property name="spacing">
-	 <number>0</number>
-	</property>
-	<property name="margin">
-	 <number>0</number>
-	</property>
-	<item>
-	 <widget class="QCheckBox" name="ui_graphToolBar">
-	  <property name="whatsThis">
-	   <string>Check this if you want text labels in the toolbar.</string>
-	  </property>
-	  <property name="text">
-	   <string>Graph toolbar</string>
-	  </property>
-	  <property name="checked">
-	   <bool>true</bool>
-	  </property>
-	 </widget>
-	</item>
-	<item>
-	 <spacer name="Spacer3_4_2_4_2">
-	  <property name="orientation">
-	   <enum>Qt::Horizontal</enum>
-	  </property>
-	  <property name="sizeType">
-	   <enum>QSizePolicy::Expanding</enum>
-	  </property>
-	  <property name="sizeHint" stdset="0">
-	   <size>
-	    <width>20</width>
-	    <height>20</height>
-	   </size>
-	  </property>
-	 </spacer>
-	</item>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="ui_graphToolBar">
+          <property name="whatsThis">
+           <string>Check this if you want text labels in the toolbar.</string>
+          </property>
+          <property name="text">
+           <string>Graph toolbar</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="Spacer3_4_2_4_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
      </layout>
