@@ -1734,7 +1734,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="23"/>
         <source>Sampling</source>
-        <translation type="unfinished">Beproben</translation>
+        <translation>Beproben</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="35"/>
@@ -1744,118 +1744,118 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="51"/>
         <source>Unit for sampling period.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einheit des Messintervalls.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="55"/>
         <source>1/10 Seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>1/10 Sekunde</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="60"/>
         <location filename="../forms/uirecorderprefs.ui" line="119"/>
         <location filename="../forms/uirecorderprefs.ui" line="758"/>
         <source>Seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="65"/>
         <location filename="../forms/uirecorderprefs.ui" line="124"/>
         <location filename="../forms/uirecorderprefs.ui" line="763"/>
         <source>Minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuten</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="70"/>
         <location filename="../forms/uirecorderprefs.ui" line="129"/>
         <location filename="../forms/uirecorderprefs.ui" line="768"/>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Stunden</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="75"/>
         <location filename="../forms/uirecorderprefs.ui" line="134"/>
         <location filename="../forms/uirecorderprefs.ui" line="773"/>
         <source>Days</source>
-        <translation type="unfinished"></translation>
+        <translation>Tage</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="99"/>
         <source>Sample t&amp;ime:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Messdauer:</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="115"/>
         <location filename="../forms/uirecorderprefs.ui" line="754"/>
         <source>Unit for maximum sampling time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einheit für die Messdauer.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="142"/>
         <source>Specify the sampling period. See unit to the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier wird der Intervall der Messungen angegeben.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="161"/>
         <source>Infinite</source>
-        <translation type="unfinished"></translation>
+        <translation>Unendlich</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="158"/>
         <location filename="../forms/uirecorderprefs.ui" line="735"/>
         <source>Maximum sampling time. When this time expires, the recorder is stopped automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die maximal Messdauer. Wenn der Wert erreicht ist, wird der Rekorder automatisch angehalten.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="180"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="215"/>
         <source>&amp;Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Manuell</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="212"/>
         <source>Select this entry if you want to manually start the transient recorder. Use the &lt;b&gt;Start&lt;/b&gt; and &lt;b&gt;Stop&lt;/b&gt; buttons in the main window to start/stop sampling.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie diesen Punkt, wenn Sie den Rekorder per Hand starten wollen. Benutzen Sie dazu die Schaltfächen &lt;b&gt;Starten&lt;/b&gt; und &lt;b&gt;Anhalten&lt;/b&gt; in der Werkzeugleiste im Hauptfenster.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="254"/>
         <source>&amp;Predefined time</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Festgelegte Zeit</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="251"/>
         <source>Select this entry if you want the transient recorder to be started at a predefined time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie diesen Eintrag, wenn die Messerie zu einem bestimmten Zeitpunkt starten soll.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="325"/>
         <source>Hour of start time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stunde.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="347"/>
         <location filename="../forms/uirecorderprefs.ui" line="385"/>
         <source>:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="363"/>
         <source>Minutes of start time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Minute.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="401"/>
         <source>Seconds of start time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunde.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="452"/>
         <source>&amp;Trigger</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schwellwert</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="444"/>
@@ -1865,20 +1865,25 @@ You have two choices:
 &lt;li&gt;&lt;b&gt;Raising edge:&lt;/b&gt; Sampling is started when the measured value gets bigger than the given threshold.&lt;/li&gt;
 &lt;li&gt;&lt;b&gt;Falling edge:&lt;/b&gt; Sampling is started when the measured value gets lower than the given threshold.&lt;/li&gt;
 &lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie diesen Eintrag, wenn die Messungen beim erreichen eines Grenzwerts automatisch starten sollen. &lt;p&gt;
+Es gibt folgende Möglichkeiten:
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;Steigende Grenze:&lt;/b&gt; Die Messungen starten, wenn der Messwert größer ist als der angegebene Grenzwert ist.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Fallende Grenze:&lt;/b&gt; Die Messungen starten, wenn der Messwert kleiner ist als der angegebene Grenzwert ist.&lt;/li&gt;
+&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="530"/>
         <location filename="../forms/uirecorderprefs.ui" line="570"/>
         <source>0.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="525"/>
         <source>Threshold for falling edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished">Unterer Grenzwert.&lt;p&gt;
+        <translation>Unterer Grenzwert.&lt;p&gt;
 Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
@@ -1887,7 +1892,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
         <source>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished">Oberer Grenzwert.&lt;p&gt;
+        <translation>Oberer Grenzwert.&lt;p&gt;
 Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
@@ -1895,27 +1900,27 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
         <location filename="../forms/uirecorderprefs.ui" line="583"/>
         <location filename="../forms/uirecorderprefs.ui" line="596"/>
         <source>Threshold:</source>
-        <translation type="unfinished">Grenzwert:</translation>
+        <translation>Grenzwert:</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="639"/>
         <source>&amp;Raising edge</source>
-        <translation type="unfinished">&amp;Oberer Grenzwert</translation>
+        <translation>&amp;Oberer Grenzwert</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="636"/>
         <source>Trigger sampling on raising edge.</source>
-        <translation type="unfinished"></translation>
+        <translation>Starten der Messreihe beim Überschreiten des Grenzwertes.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="684"/>
         <source>&amp;Falling edge</source>
-        <translation type="unfinished">&amp;Unterer Grenzwert</translation>
+        <translation>&amp;Unterer Grenzwert</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="681"/>
         <source>Trigger sampling on falling edge.</source>
-        <translation type="unfinished"></translation>
+        <translation>Starten der Messreihe beim Unterschreiten des Grenzwertes.</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="709"/>
@@ -1935,34 +1940,34 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
         <source>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished">Oberer Grenzwert.&lt;p&gt;
+        <translation>Oberer Grenzwert.&lt;p&gt;
 Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="34"/>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Skalierung</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="49"/>
         <source>Au&amp;tomatic</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Automatisch</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="46"/>
         <source>Select this entry if you want automatic scaling of the vertical scale in the transient recorder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie diesen Punkt, wenn der Graph automatisch skaliert werden soll.</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="80"/>
         <source>Include zero line</source>
-        <translation type="unfinished"></translation>
+        <translation>Inklusive Nulllinie</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="111"/>
         <source>&amp;Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Manuell</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="108"/>
