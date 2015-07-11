@@ -31,7 +31,6 @@ fi
 %build
 qmake-qt5
 make %{?_smp_mflags}
-lrelease-qt5 src/src.pro
 
 %install
 mkdir -p %{buildroot}/usr/bin
