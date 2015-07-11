@@ -1972,95 +1972,99 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="108"/>
         <source>Select this entry if you want to set the minimum and maximum value for the scale manually. If selected enter the minimum and maximum values below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diesen Punkte auswählen, wenn Sie selber die obere und untere Skalengrenze festlegen wollen. Wenn der Punkt ausgewählt wurde, können weiter unten die Werte eingesetzt werden.</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="142"/>
         <source>M&amp;inimum:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="181"/>
         <source>-3.999</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="176"/>
         <source>Enter the minimum scale value here.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier den minimalen Skalenwert eintragen.&lt;p&gt;
+Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="194"/>
         <source>Ma&amp;ximum:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="233"/>
         <source>3.999</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="228"/>
         <source>Enter the maximum scale value here.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier den maximalen Skalenwert eintragen.&lt;p&gt;
+Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben werden.&lt;br&gt;Beispiele:&lt;br&gt;
+10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="264"/>
         <source>Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenster</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="276"/>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Breite</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="292"/>
         <source>Max. &amp;length:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Maximale Länge:</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="324"/>
         <source>Unit for visible window width.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einheit für den sichbaren Bereich des Graphen.</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="328"/>
         <location filename="../forms/uiscaleprefs.ui" line="352"/>
         <source>Seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="333"/>
         <location filename="../forms/uiscaleprefs.ui" line="357"/>
         <source>Minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuten</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="338"/>
         <location filename="../forms/uiscaleprefs.ui" line="362"/>
         <source>Hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Stunden</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="343"/>
         <location filename="../forms/uiscaleprefs.ui" line="367"/>
         <source>Days</source>
-        <translation type="unfinished"></translation>
+        <translation>Tage</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="375"/>
         <source>Size (in time) of the visible part of the recorder graph. See unit to the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitlicher Rahmen für den sichbaren Bereich des Graphen.</translation>
     </message>
     <message>
         <location filename="../forms/uiscaleprefs.ui" line="391"/>
         <source>Maximum length (in time) of the recorder graph. If this time is reached the first recorded values will be discarded. It will not stop recording.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximale Aufzeichnungsdauer für den Graphen. Wenn die Grenze erreicht ist, werden die Rekorderdaten von vorne überschrieben. Die Aufzeichnung wird nicht angehalten.</translation>
     </message>
 </context>
 <context>
