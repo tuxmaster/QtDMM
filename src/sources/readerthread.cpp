@@ -56,11 +56,11 @@ void ReaderThread::setHandle( QSerialPort *handle )
 
   if (!m_serialPort)
   {
-	m_status = ReaderThread::NotConnected;
-	m_readValue = false;
+    m_status = ReaderThread::NotConnected;
+    m_readValue = false;
   }
   else
-	connect(m_serialPort,SIGNAL(readyRead()),this,SLOT(socketNotifierSLOT()));
+    connect(m_serialPort,SIGNAL(readyRead()),this,SLOT(socketNotifierSLOT()));
 }
 
 void ReaderThread::start()
@@ -94,7 +94,7 @@ void ReaderThread::socketNotifierSLOT()
 
   m_status = ReaderThread::Ok;
 
-  {
+
 	retval = m_serialPort->read( &byte, 1);
 
 	if (-1 == retval)
@@ -137,33 +137,33 @@ void ReaderThread::socketNotifierSLOT()
 	  else
 		m_length = (m_length+1) % FIFO_LENGTH;
 	}
-  }
+
 }
 
 int  ReaderThread::formatLength() const
 {
   switch (m_format)
   {
-	  case ReadEvent::Metex14:
-		return 14;
-	  case ReadEvent::Voltcraft14Continuous:
-		return 14;
-	  case ReadEvent::Voltcraft15Continuous:
-		return 15;
-	  case ReadEvent::M9803RContinuous:
-		return 11;
-	  case ReadEvent::PeakTech10:
-		return 11;
-	  case ReadEvent::VC820Continuous:
-		return 14;
-	  case ReadEvent::IsoTech:
-		return 22;
-	  case ReadEvent::VC940Continuous:
-		return 11;
-	  case ReadEvent::QM1537Continuous:
-		return 14;
-	  case ReadEvent::RS22812Continuous:
-		return 9;
+      case ReadEvent::Metex14:
+        return 14;
+      case ReadEvent::Voltcraft14Continuous:
+        return 14;
+      case ReadEvent::Voltcraft15Continuous:
+        return 15;
+      case ReadEvent::M9803RContinuous:
+        return 11;
+      case ReadEvent::PeakTech10:
+        return 11;
+      case ReadEvent::VC820Continuous:
+        return 14;
+      case ReadEvent::IsoTech:
+        return 22;
+      case ReadEvent::VC940Continuous:
+        return 11;
+      case ReadEvent::QM1537Continuous:
+        return 14;
+      case ReadEvent::RS22812Continuous:
+        return 9;
   }
   return 0;
 }
@@ -175,36 +175,36 @@ void ReaderThread::readDMM()
 
   switch(m_format)
   {
-	  case ReadEvent::Metex14:
-		  readMetex14();
-		  break;
-	  case ReadEvent::Voltcraft14Continuous:
-		  readVoltcraft14Continuous();
-		  break;
-	  case ReadEvent::Voltcraft15Continuous:
-		  readVoltcraft15Continuous();
-		  break;
-	  case ReadEvent::M9803RContinuous:
-		  readM9803RContinuous();
-		  break;
-	  case ReadEvent::PeakTech10:
-		  readPeakTech10();
-		  break;
-	  case ReadEvent::IsoTech:
-		  readIsoTech();
-		  break;
-	  case ReadEvent::QM1537Continuous:
-		  readQM1537Continuous();
-		  break;
-	  case ReadEvent::VC820Continuous:
-		  readVC820();
-		  break;
-	  case ReadEvent::VC940Continuous:
-		  readVC940();
-		  break;
-	  case ReadEvent::RS22812Continuous:
-		  readRS22812Continuous();
-		  break;
+      case ReadEvent::Metex14:
+          readMetex14();
+          break;
+      case ReadEvent::Voltcraft14Continuous:
+          readVoltcraft14Continuous();
+          break;
+      case ReadEvent::Voltcraft15Continuous:
+          readVoltcraft15Continuous();
+          break;
+      case ReadEvent::M9803RContinuous:
+          readM9803RContinuous();
+          break;
+      case ReadEvent::PeakTech10:
+          readPeakTech10();
+          break;
+      case ReadEvent::IsoTech:
+          readIsoTech();
+          break;
+      case ReadEvent::QM1537Continuous:
+          readQM1537Continuous();
+          break;
+      case ReadEvent::VC820Continuous:
+          readVC820();
+          break;
+      case ReadEvent::VC940Continuous:
+          readVC940();
+          break;
+      case ReadEvent::RS22812Continuous:
+          readRS22812Continuous();
+          break;
   }
 }
 
@@ -212,64 +212,64 @@ bool ReaderThread::checkFormat()
 {
   if (m_format == ReadEvent::Metex14)
   {
-	if (m_fifo[m_length] == 0x0d)
-		return true;
+    if (m_fifo[m_length] == 0x0d)
+        return true;
   }
   else if (m_format == ReadEvent::Voltcraft14Continuous)
   {
-	if (m_fifo[m_length] == 0x0d)
-		return true;
+    if (m_fifo[m_length] == 0x0d)
+        return true;
   }
   else if (m_format == ReadEvent::Voltcraft15Continuous)
   {
-	if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] == 0x0d && m_fifo[m_length] == 0x0a)
-		return true;
+    if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] == 0x0d && m_fifo[m_length] == 0x0a)
+        return true;
   }
   else if (m_format == ReadEvent::M9803RContinuous && m_length >= 10)
   {
-	if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] == 0x0d && m_fifo[m_length] == 0x0a)
-		return true;
+    if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] == 0x0d && m_fifo[m_length] == 0x0a)
+        return true;
   }
   else if (m_format == ReadEvent::VC940Continuous && m_length >= 12)
   {
-	if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] == 0x0d && m_fifo[m_length] == 0x0a)
-		return true;
+    if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] == 0x0d && m_fifo[m_length] == 0x0a)
+        return true;
   }
   else if (m_format == ReadEvent::PeakTech10 && m_length >= 11)
   {
-	if (m_fifo[(m_length-11+FIFO_LENGTH)%FIFO_LENGTH] == '#')
-		return true;
+    if (m_fifo[(m_length-11+FIFO_LENGTH)%FIFO_LENGTH] == '#')
+        return true;
   }
   else if (m_format == ReadEvent::VC820Continuous)// && m_length >= 13)
   {
-	//fprintf( stderr, "CHECK: %02x %02x %s\n", m_fifo[m_length], (m_fifo[m_length] & 0xf0),
-	//         ((m_fifo[m_length] & 0xf0) == 0xe0) ? "OK" : "BAD" );
-	if ((m_fifo[m_length] & 0xf0) == 0xe0)
-		return true;
-	//if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] & 0xf0 == 0xe0) return true;
+    //fprintf( stderr, "CHECK: %02x %02x %s\n", m_fifo[m_length], (m_fifo[m_length] & 0xf0),
+    //         ((m_fifo[m_length] & 0xf0) == 0xe0) ? "OK" : "BAD" );
+    if ((m_fifo[m_length] & 0xf0) == 0xe0)
+        return true;
+    //if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] & 0xf0 == 0xe0) return true;
   }
   else if (m_format == ReadEvent::IsoTech && m_length >= 22)
   {
-	for (int i=0; i<11; ++i)
-	{
-	  if (m_fifo[m_length-22+i] != m_fifo[m_length-22+11+i])
-		return false;
-	}
-	if (m_fifo[m_length-22+9] != 0x0d ||  m_fifo[m_length-22+10] != 0x0a)
-		return false;
-	return true;
+    for (int i=0; i<11; ++i)
+    {
+      if (m_fifo[m_length-22+i] != m_fifo[m_length-22+11+i])
+        return false;
+    }
+    if (m_fifo[m_length-22+9] != 0x0d ||  m_fifo[m_length-22+10] != 0x0a)
+        return false;
+    return true;
   }
   else if (m_format == ReadEvent::QM1537Continuous)
   {
-	if (m_fifo[m_length] == 0x0d)
-		return true;
+    if (m_fifo[m_length] == 0x0d)
+        return true;
   }
   else if (m_format == ReadEvent::RS22812Continuous)
   {
-	unsigned int checksum = 0x00;
-	unsigned char byte;
-	char mode, unit, multiplier, dp, minmax, rs232;
-	int offset = 0;
+    unsigned int checksum = 0x00;
+    unsigned char byte;
+    char mode, unit, multiplier, dp, minmax, rs232;
+    int offset = 0;
 
 	if (m_length > 9)
 		offset = m_length - 9;
@@ -512,11 +512,11 @@ void ReaderThread::readMetex14()
 {
   if (m_sendRequest)
   {
-	/* TODO: Errorhandling */
-	if (m_serialPort->write("D\n",2) != 2)
-		m_status = Error;
-	//std::cerr << "WROTE: " << ret << std::endl;
-	m_sendRequest = false;
+    /* TODO: Errorhandling */
+    if (m_serialPort->write("D\n",2) != 2)
+        m_status = Error;
+    //std::cerr << "WROTE: " << ret << std::endl;
+    m_sendRequest = false;
   }
 }
 
