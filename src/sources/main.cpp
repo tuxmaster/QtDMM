@@ -30,9 +30,9 @@ void myMessageOutput( QtMsgType type,const QMessageLogContext &, const QString &
 {
   switch ( type )
   {
-	case QtDebugMsg:
+    case QtDebugMsg:
 #ifdef QT_DEBUG
-		  qDebug()<<"Debug: "<<msg;
+          qDebug()<<"Debug: "<<msg;
 #endif
 		break;
 	case QtWarningMsg:
@@ -46,6 +46,9 @@ void myMessageOutput( QtMsgType type,const QMessageLogContext &, const QString &
 		break;
 	case QtCriticalMsg:
 		  qCritical()<<"Critial: "<<msg;
+		break;
+	case QtInfoMsg:
+		  qInfo()<<"Info: "<<msg;
 		break;
   }
 }
@@ -67,13 +70,14 @@ int main( int argc, char **argv )
 #ifdef Q_OS_WIN
   AppTranslationPath="./";
 #endif
+
   QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()),QtTranslationPath);
-  AppTranslation.load(QString("%1_%2").arg(app.applicationName()).arg(QLocale::system().name()),AppTranslationPath);
+  AppTranslation.load(QString("%1_%2").arg(app.applicationName().toLower()).arg(QLocale::system().name()),AppTranslationPath);
 
   if((!AppTranslation.isEmpty()) && (!QtTranslation.isEmpty()))
   {
-	app.installTranslator(&QtTranslation);
-	app.installTranslator(&AppTranslation);
+    app.installTranslator(&QtTranslation);
+    app.installTranslator(&AppTranslation);
   }
   MainWin mainWin;
 
@@ -82,7 +86,7 @@ int main( int argc, char **argv )
 
   parser.process(app);
   if(parser.isSet("console"))
-	mainWin.setConsoleLogging( true );
+    mainWin.setConsoleLogging( true );
   mainWin.show();
   mainWin.move( 100, 100 );
 
