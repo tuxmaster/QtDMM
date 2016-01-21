@@ -165,7 +165,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
    // init stuff
   //
   on_ui_buttonBox_rejected();
-  showPage( DMM );
+  showPage( (ConfigDlg::PageType)m_settings->getInt("Config/LastItem",DMM));
   ui_undo->hide();
   adjustSize();
 }
@@ -177,12 +177,10 @@ QString ConfigDlg::deviceListText() const
 
 void ConfigDlg::showPage( ConfigDlg::PageType page )
 {
-  ConfigItem *item;
   PrefWidget *wid=Q_NULLPTR;
   for (uint entry=0;entry<= (uint)ui_list->count();entry++)
   {
-	  item=dynamic_cast<ConfigItem *> (ui_list->item(entry));
-	  if (item->id() == page)
+	  if (dynamic_cast<ConfigItem *> (ui_list->item(entry))->id() == page)
 	  {
 		  ui_list->setCurrentRow(entry);
 		  ui_stack->setCurrentIndex(page);
@@ -285,6 +283,7 @@ void ConfigDlg::on_ui_buttonBox_accepted()
   m_settings->setString( "Printer/name", m_printer->printerName() );
   m_settings->setString( "Printer/filename", m_printer->outputFileName() );
   m_settings->setBool( "Printer/print-file", (m_printer->outputFormat() == QPrinter::PdfFormat) ? true:false );
+  m_settings->setInt("Config/LastItem",dynamic_cast<ConfigItem *>(ui_list->currentItem())->id());
 
   for (int i=0; i<NumItems; ++i)
 	((PrefWidget *)ui_stack->widget( i ))->applySLOT();
