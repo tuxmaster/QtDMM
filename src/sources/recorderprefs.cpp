@@ -37,8 +37,8 @@ RecorderPrefs::RecorderPrefs( QWidget *parent) : PrefWidget( parent)
   setupUi(this);
   m_label = tr( "Recorder settings" );
   m_description = tr( "<b>Here you can configure the sampling"
-					  " frequency and start options for the"
-					  " recorder.</b>" );
+                      " frequency and start options for the"
+                      " recorder.</b>" );
   m_pixmap = new QPixmap(":/Symbols/recorder.xpm" );
 
   EngNumberValidator *validator = new EngNumberValidator( this );
@@ -48,7 +48,7 @@ RecorderPrefs::RecorderPrefs( QWidget *parent) : PrefWidget( parent)
 }
 RecorderPrefs::~RecorderPrefs()
 {
-	delete m_pixmap;
+    delete m_pixmap;
 }
 
 void RecorderPrefs::defaultsSLOT()
@@ -60,18 +60,18 @@ void RecorderPrefs::defaultsSLOT()
 
   DMMGraph::SampleMode mode = (DMMGraph::SampleMode)m_cfg->getInt( "Start/mode");
   if (mode == DMMGraph::Manual)
-	manualBut->setChecked( true );
+    manualBut->setChecked( true );
   else if (mode == DMMGraph::Time)
-	predefinedBut->setChecked( true );
+    predefinedBut->setChecked( true );
   if (mode == DMMGraph::Raising)
   {
-	triggerBut->setChecked( true );
-	raisingBut->setChecked( true );
+    triggerBut->setChecked( true );
+    raisingBut->setChecked( true );
   }
   if (mode == DMMGraph::Falling)
   {
-	triggerBut->setChecked( true );
-	fallingBut->setChecked( true );
+    triggerBut->setChecked( true );
+    fallingBut->setChecked( true );
   }
 
   hour->setValue( m_cfg->getInt( "Start/hour"));
@@ -115,12 +115,12 @@ void RecorderPrefs::applySLOT()
 DMMGraph::SampleMode RecorderPrefs::sampleMode() const
 {
   if (predefinedBut->isChecked())
-	return DMMGraph::Time;
+    return DMMGraph::Time;
   if (triggerBut->isChecked())
   {
-	if (raisingBut->isChecked())
-		return DMMGraph::Raising;
-	return DMMGraph::Falling;
+    if (raisingBut->isChecked())
+        return DMMGraph::Raising;
+    return DMMGraph::Falling;
   }
   return DMMGraph::Manual;
 }
@@ -131,18 +131,18 @@ int RecorderPrefs::sampleStep() const
 
   switch (ui_sampleUnit->currentIndex())
   {
-	  case 1:
-		thenthOfSec *= 10;
-		break;
-	  case 2:
-		thenthOfSec *= MINUTE_SECS * 10;
-		break;
-	  case 3:
-		thenthOfSec *= HOUR_SECS * 10;
-		break;
-	  case 4:
-		thenthOfSec *= DAY_SECS * 10;
-		break;
+      case 0:
+        thenthOfSec *= 10;
+        break;
+      case 1:
+        thenthOfSec *= MINUTE_SECS * 10;
+        break;
+      case 2:
+        thenthOfSec *= HOUR_SECS * 10;
+        break;
+      case 3:
+        thenthOfSec *= DAY_SECS * 10;
+        break;
   }
   return thenthOfSec;
 }
@@ -153,18 +153,18 @@ int RecorderPrefs::sampleLength() const
 
   switch (timeUnit->currentIndex())
   {
-	  case 0:
-		thenthOfSec *= 10;
-		break;
-	  case 1:
-		thenthOfSec *= MINUTE_SECS*10;
-		break;
-	  case 2:
-		thenthOfSec *= HOUR_SECS*10;
-		break;
-	  case 3:
-		thenthOfSec *= DAY_SECS*10;
-		break;
+      case 0:
+        thenthOfSec *= 10;
+        break;
+      case 1:
+        thenthOfSec *= MINUTE_SECS*10;
+        break;
+      case 2:
+        thenthOfSec *= HOUR_SECS*10;
+        break;
+      case 3:
+        thenthOfSec *= DAY_SECS*10;
+        break;
   }
   return thenthOfSec;
 }
@@ -182,9 +182,9 @@ double RecorderPrefs::raisingThreshold() const
 void RecorderPrefs::setThreshold( double value )
 {
   if (raisingBut->isChecked())
-	ui_raisingThreshold->setText( EngNumberValidator::engValue( value ) );
+    ui_raisingThreshold->setText( EngNumberValidator::engValue( value ) );
   else
-	ui_fallingThreshold->setText( EngNumberValidator::engValue( value ) );
+    ui_fallingThreshold->setText( EngNumberValidator::engValue( value ) );
 }
 
 QTime RecorderPrefs::startTime() const
