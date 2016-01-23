@@ -171,7 +171,7 @@
          <string>Maximum sampling time. When this time expires, the recorder is stopped automatically.</string>
         </property>
         <property name="specialValueText">
-         <string>Infinite</string>
+         <string>∞</string>
         </property>
         <property name="minimum">
          <number>0</number>

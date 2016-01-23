@@ -215,32 +215,32 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1177"/>
+        <location filename="../sources/dmmgraph.cpp" line="1176"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1178"/>
+        <location filename="../sources/dmmgraph.cpp" line="1177"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Beim Importieren werden alle bisherigen Messwerte gelöscht.&lt;p&gt;Möchten Sie zu ersten die bisherigen Daten exportieren?</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1186"/>
+        <location filename="../sources/dmmgraph.cpp" line="1185"/>
         <source>Export data first</source>
         <translation>Daten zu erst exportieren</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1187"/>
+        <location filename="../sources/dmmgraph.cpp" line="1186"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importieren und Daten löschen</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1200"/>
+        <location filename="../sources/dmmgraph.cpp" line="1199"/>
         <source>Import data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1229"/>
+        <location filename="../sources/dmmgraph.cpp" line="1228"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Diese Datei scheint nicht gültig zu sein</translation>
     </message>
@@ -1795,9 +1795,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>Hier wird der Intervall der Messungen angegeben.</translation>
     </message>
     <message>
-        <location filename="../forms/uirecorderprefs.ui" line="174"/>
         <source>Infinite</source>
-        <translation>Unendlich</translation>
+        <translation type="vanished">Unendlich</translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="171"/>
@@ -1829,6 +1828,11 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <location filename="../forms/uirecorderprefs.ui" line="300"/>
         <source>Select this entry if you want the transient recorder to be started at a predefined time.</source>
         <translation>Wählen Sie diesen Eintrag, wenn die Messerie zu einem bestimmten Zeitpunkt starten soll.</translation>
+    </message>
+    <message>
+        <location filename="../forms/uirecorderprefs.ui" line="174"/>
+        <source>∞</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../forms/uirecorderprefs.ui" line="401"/>
