@@ -49,14 +49,14 @@ DMM::DMM(QObject *parent) :
 
   // mt: QThread emits a signal now. no more custom event
   connect( m_readerThread, SIGNAL(readEvent(const QByteArray &, int, ReadEvent::DataFormat)),
-	   this, SLOT(readEventSLOT(const QByteArray &, int, ReadEvent::DataFormat)));
+       this, SLOT(readEventSLOT(const QByteArray &, int, ReadEvent::DataFormat)));
 
   m_readerThread->start();
 
 }
 
 void DMM::setPortSettings( QSerialPort::DataBits bits, QSerialPort::StopBits stopBits, QSerialPort::Parity parity, bool externalSetup,
-						   bool rts, bool cts, bool dsr, bool dtr )
+                           bool rts, bool cts, bool dsr, bool dtr )
 {
   m_externalSetup = externalSetup;
   m_parity  = parity;
@@ -97,36 +97,36 @@ bool DMM::open()
 
   if( !m_handle->open(QIODevice::ReadWrite))
   {
-	int errorCode=m_handle->error();
-	switch(errorCode)
-	{
-		case QSerialPort::PermissionError:
-			m_error = tr( "Access denied for %1.").arg(m_device);
-			break;
-		case QSerialPort::DeviceNotFoundError:
-			m_error = tr( "No such device %1." ).arg(m_device);
-			break;
-		default:
-			m_error = tr( "Error opening %1.\nDMM connected and switched on?" ).arg(m_device);
-			break;
-	}
-	Q_EMIT error( m_error );
-	delete m_handle;
-	m_handle=Q_NULLPTR;
-	return false;
+    int errorCode=m_handle->error();
+    switch(errorCode)
+    {
+        case QSerialPort::PermissionError:
+            m_error = tr( "Access denied for %1.").arg(m_device);
+            break;
+        case QSerialPort::DeviceNotFoundError:
+            m_error = tr( "No such device %1." ).arg(m_device);
+            break;
+        default:
+            m_error = tr( "Error opening %1.\nDMM connected and switched on?" ).arg(m_device);
+            break;
+    }
+    Q_EMIT error( m_error );
+    delete m_handle;
+    m_handle=Q_NULLPTR;
+    return false;
   }
 
   if (!m_externalSetup)
   {
-	m_error = tr( "Error configuring serial port %1." ).arg(m_device);
-	if((!m_handle->setParity(m_parity)) || (!m_handle->setBaudRate(m_speed)) || (!m_handle->setStopBits(m_stopBits)) ||
-	   (!m_handle->setDataBits(m_dataBits)) || (!m_handle->setDataTerminalReady(m_dtr)) || (!m_handle->setRequestToSend(m_rts)))
-	{
-		Q_EMIT error( m_error );
-		delete m_handle;
-		m_handle=Q_NULLPTR;
-		return false;
-	}
+    m_error = tr( "Error configuring serial port %1." ).arg(m_device);
+    if((!m_handle->setParity(m_parity)) || (!m_handle->setBaudRate(m_speed)) || (!m_handle->setStopBits(m_stopBits)) ||
+       (!m_handle->setDataBits(m_dataBits)) || (!m_handle->setDataTerminalReady(m_dtr)) || (!m_handle->setRequestToSend(m_rts)))
+    {
+        Q_EMIT error( m_error );
+        delete m_handle;
+        m_handle=Q_NULLPTR;
+        return false;
+    }
   }
   m_error = tr( "Connecting ..." );
   Q_EMIT error( m_error );
@@ -150,12 +150,12 @@ void DMM::close()
 
   if (m_handle)
   {
-	if (!m_externalSetup)
-	{
-	  m_handle->close();
-	  delete m_handle;
-	  m_handle=Q_NULLPTR;
-	}
+    if (!m_externalSetup)
+    {
+      m_handle->close();
+      delete m_handle;
+      m_handle=Q_NULLPTR;
+    }
   }
   m_oldStatus = ReaderThread::NotConnected;
 }
@@ -163,9 +163,9 @@ void DMM::close()
 void DMM::timerEvent( QTimerEvent * )
 {
   if (!m_handle)
-	Q_EMIT error( m_error );
+    Q_EMIT error( m_error );
   else
-	m_readerThread->startRead();
+    m_readerThread->startRead();
 }
 
 void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat df )
@@ -176,7 +176,7 @@ void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat 
 	  {
 		for (int i=0; i<data.size(); ++i)
 			fprintf( stdout, "%02X ", data[i] & 0x0ff );
-		fprintf( stdout, "\n" );
+		fprintf( stdout, "\r\n" );
 	  }
 	  switch (df)
 	  {
@@ -229,9 +229,9 @@ QString DMM::insertCommaIT( const QString & val, int pos )
 {
   QString res;
   if (val[0] == '-' || val[0] == ' ')
-	res = val.left(pos+1) + "." + val.mid(pos+1);
+    res = val.left(pos+1) + "." + val.mid(pos+1);
   else
-	res = val.left(pos) + "." + val.mid(pos);
+    res = val.left(pos) + "." + val.mid(pos);
   return res;
 }
 
@@ -260,231 +260,231 @@ void DMM::readVC940Continuous( const QByteArray & data, int id, ReadEvent::DataF
   for (int i=0; i<4; ++i)
    val += str[i];
   if (data[4] != 'A')
-	val += str[4];
+    val += str[4];
   switch (function)
   {
-	case 0:
-	  val = insertCommaIT( val, 3 );
-	  special = "AC";
-	  unit = "mV";
-	  scale = 1e-3;
-	  break;
-	case 1:
-	  val = insertCommaIT( val, range );
-	  special = "DC";
-	  unit = "V";
-	  break;
-	case 2:
-	  val = insertCommaIT( val, range );
-	  special = "AC";
-	  unit = "V";
-	  break;
-	case 3:
-	  val = insertCommaIT( val, 3 );
-	  special = "DC";
-	  unit = "mV";
-	  scale = 1e-3;
-	  break;
-	case 4:
-	  unit = "Ohm";
-	  switch (range)
-	  {
-		case 1:
-		  val = insertCommaIT( val, 3 );
-		  break;
-		case 2:
-		  val = insertCommaIT( val, 1 );
-		  unit = "kOhm";
-		  scale = 1e3;
-		  break;
-		case 3:
-		  val = insertCommaIT( val, 2 );
-		  unit = "kOhm";
-		  scale = 1e3;
-		  break;
-		case 4:
-		  val = insertCommaIT( val, 3 );
-		  unit = "kOhm";
-		  scale = 1e3;
-		  break;
-		case 5:
-		  val = insertCommaIT( val, 1 );
-		  unit = "MOhm";
-		  scale = 1e6;
-		  break;
-		case 6:
-		  val = insertCommaIT( val, 2 );
-		  unit = "MOhm";
-		  scale = 1e6;
-		  break;
-	  }
-	  special = "OH";
-	  break;
-	case 5:
-	  unit = "F";
-	  switch (range)
-	  {
-		case 1:
-		  val = insertCommaIT( val, 2 );
-		  unit = "nF";
-		  scale = 1e-9;
-		  break;
-		case 2:
-		  val = insertCommaIT( val, 3 );
-		  unit = "nF";
-		  scale = 1e-9;
-		  break;
-		case 3:
-		  val = insertCommaIT( val, 1 );
-		  unit = "uF";
-		  scale = 1e-6;
-		  break;
-		case 4:
-		  val = insertCommaIT( val, 2 );
-		  unit = "uF";
-		  scale = 1e-6;
-		  break;
-		case 5:
-		  val = insertCommaIT( val, 3 );
-		  unit = "uF";
-		  scale = 1e-6;
-		  break;
-		case 6:
-		  val = insertCommaIT( val, 4 );
-		  unit = "uF";
-		  scale = 1e-6;
-		  break;
-		case 7:
-		  val = insertCommaIT( val, 2 );
-		  unit = "mF";
-		  scale = 1e-3;
-		  break;
-	  }
-	  special = "CA";
-	  break;
-	case 6:
-	  special = "TE";
-	  unit = "C";
-	  val = insertCommaIT( val, 4 );
-	  break;
-	case 7:
-	  if (mode & 0x01)
-	  {
-		// can't handle AC+DC
-		special = "AC";
-	  }
-	  else
-		  special = "DC";
-	  switch (range)
-	  {
-		case 0:
-		  val = insertCommaIT( val, 3 );
-		  break;
-		case 1:
-		  val = insertCommaIT( val, 4 );
-		  break;
-	  }
-	  unit = "uA";
-	  scale = 1e-6;
-	  break;
-	case 8:
-	  if (mode & 0x01)
-	  {
-		// can't handle AC+DC
-		special = "AC";
-	  }
-	  else
-		  special = "DC";
-	  switch (range)
-	  {
-		case 0:
-		  val = insertCommaIT( val, 2 );
-		  break;
-		case 1:
-		  val = insertCommaIT( val, 3 );
-		  break;
-	  }
-	  unit = "mA";
-	  scale = 1e-3;
-	  break;
-	case 9:
-	  if (mode & 0x01)
-	  {
-		// can't handle AC+DC
-		special = "AC";
-	  }
-	  else
-		  special = "DC";
-	  val = insertCommaIT( val, 2 );
-	  unit = "A";
-	  break;
-	case 10:   // buzzer
-	  special = "OH";
-	  unit = "Ohm";
-	  val = insertCommaIT( val, 3 );
-	  break;
-	case 11:
-	  special = "DI";
-	  unit = "V";
-	  val = insertCommaIT( val, 1 );
-	  break;
-	case 12:
-	  if (mode2 & 0x04)
-	  {
-		special = "PC";
-		unit = "%";
-		val = insertCommaIT( val, 3 );
-	  }
-	  else
-	  {
-		special = "FR";
-		unit = "Hz";
-		switch (range)
-		{
-		  case 0:
-			val = insertCommaIT( val, 2 );
-			break;
-		  case 1:
-			val = insertCommaIT( val, 3 );
-			break;
-		  case 2:
-			val = insertCommaIT( val, 1 );
-			unit = "kHz";
-			scale = 1e3;
-			break;
-		  case 3:
-			val = insertCommaIT( val, 2 );
-			unit = "kHz";
-			scale = 1e3;
-			break;
-		  case 4:
-			val = insertCommaIT( val, 3 );
-			unit = "kHz";
-			scale = 1e3;
-			break;
-		  case 5:
-			val = insertCommaIT( val, 1 );
-			unit = "MHz";
-			scale = 1e6;
-			break;
-		  case 6:
-			val = insertCommaIT( val, 2 );
-			unit = "MHz";
-			scale = 1e6;
-			break;
-		  case 7:
-			val = insertCommaIT( val, 3 );
-			unit = "MHz";
-			scale = 1e6;
-			break;
-		}
-	  }
-	  break;
-	case 13:
-	  special = "TE";
-	  unit = "F";
-	  val = insertCommaIT( val, 4 );
-	  break;
+    case 0:
+      val = insertCommaIT( val, 3 );
+      special = "AC";
+      unit = "mV";
+      scale = 1e-3;
+      break;
+    case 1:
+      val = insertCommaIT( val, range );
+      special = "DC";
+      unit = "V";
+      break;
+    case 2:
+      val = insertCommaIT( val, range );
+      special = "AC";
+      unit = "V";
+      break;
+    case 3:
+      val = insertCommaIT( val, 3 );
+      special = "DC";
+      unit = "mV";
+      scale = 1e-3;
+      break;
+    case 4:
+      unit = "Ohm";
+      switch (range)
+      {
+        case 1:
+          val = insertCommaIT( val, 3 );
+          break;
+        case 2:
+          val = insertCommaIT( val, 1 );
+          unit = "kOhm";
+          scale = 1e3;
+          break;
+        case 3:
+          val = insertCommaIT( val, 2 );
+          unit = "kOhm";
+          scale = 1e3;
+          break;
+        case 4:
+          val = insertCommaIT( val, 3 );
+          unit = "kOhm";
+          scale = 1e3;
+          break;
+        case 5:
+          val = insertCommaIT( val, 1 );
+          unit = "MOhm";
+          scale = 1e6;
+          break;
+        case 6:
+          val = insertCommaIT( val, 2 );
+          unit = "MOhm";
+          scale = 1e6;
+          break;
+      }
+      special = "OH";
+      break;
+    case 5:
+      unit = "F";
+      switch (range)
+      {
+        case 1:
+          val = insertCommaIT( val, 2 );
+          unit = "nF";
+          scale = 1e-9;
+          break;
+        case 2:
+          val = insertCommaIT( val, 3 );
+          unit = "nF";
+          scale = 1e-9;
+          break;
+        case 3:
+          val = insertCommaIT( val, 1 );
+          unit = "uF";
+          scale = 1e-6;
+          break;
+        case 4:
+          val = insertCommaIT( val, 2 );
+          unit = "uF";
+          scale = 1e-6;
+          break;
+        case 5:
+          val = insertCommaIT( val, 3 );
+          unit = "uF";
+          scale = 1e-6;
+          break;
+        case 6:
+          val = insertCommaIT( val, 4 );
+          unit = "uF";
+          scale = 1e-6;
+          break;
+        case 7:
+          val = insertCommaIT( val, 2 );
+          unit = "mF";
+          scale = 1e-3;
+          break;
+      }
+      special = "CA";
+      break;
+    case 6:
+      special = "TE";
+      unit = "C";
+      val = insertCommaIT( val, 4 );
+      break;
+    case 7:
+      if (mode & 0x01)
+      {
+        // can't handle AC+DC
+        special = "AC";
+      }
+      else
+          special = "DC";
+      switch (range)
+      {
+        case 0:
+          val = insertCommaIT( val, 3 );
+          break;
+        case 1:
+          val = insertCommaIT( val, 4 );
+          break;
+      }
+      unit = "uA";
+      scale = 1e-6;
+      break;
+    case 8:
+      if (mode & 0x01)
+      {
+        // can't handle AC+DC
+        special = "AC";
+      }
+      else
+          special = "DC";
+      switch (range)
+      {
+        case 0:
+          val = insertCommaIT( val, 2 );
+          break;
+        case 1:
+          val = insertCommaIT( val, 3 );
+          break;
+      }
+      unit = "mA";
+      scale = 1e-3;
+      break;
+    case 9:
+      if (mode & 0x01)
+      {
+        // can't handle AC+DC
+        special = "AC";
+      }
+      else
+          special = "DC";
+      val = insertCommaIT( val, 2 );
+      unit = "A";
+      break;
+    case 10:   // buzzer
+      special = "OH";
+      unit = "Ohm";
+      val = insertCommaIT( val, 3 );
+      break;
+    case 11:
+      special = "DI";
+      unit = "V";
+      val = insertCommaIT( val, 1 );
+      break;
+    case 12:
+      if (mode2 & 0x04)
+      {
+        special = "PC";
+        unit = "%";
+        val = insertCommaIT( val, 3 );
+      }
+      else
+      {
+        special = "FR";
+        unit = "Hz";
+        switch (range)
+        {
+          case 0:
+            val = insertCommaIT( val, 2 );
+            break;
+          case 1:
+            val = insertCommaIT( val, 3 );
+            break;
+          case 2:
+            val = insertCommaIT( val, 1 );
+            unit = "kHz";
+            scale = 1e3;
+            break;
+          case 3:
+            val = insertCommaIT( val, 2 );
+            unit = "kHz";
+            scale = 1e3;
+            break;
+          case 4:
+            val = insertCommaIT( val, 3 );
+            unit = "kHz";
+            scale = 1e3;
+            break;
+          case 5:
+            val = insertCommaIT( val, 1 );
+            unit = "MHz";
+            scale = 1e6;
+            break;
+          case 6:
+            val = insertCommaIT( val, 2 );
+            unit = "MHz";
+            scale = 1e6;
+            break;
+          case 7:
+            val = insertCommaIT( val, 3 );
+            unit = "MHz";
+            scale = 1e6;
+            break;
+        }
+      }
+      break;
+    case 13:
+      special = "TE";
+      unit = "F";
+      val = insertCommaIT( val, 4 );
+      break;
 
   }
 
@@ -506,106 +506,106 @@ void DMM::readRS22812Continuous( const QByteArray & data, int id, ReadEvent::Dat
 
   if (m_consoleLogging)
   {
-	for (int i=0; i<data.size(); ++i)
-		fprintf( stdout, "%02X ", in[i] & 0x0ff );
-	fprintf( stdout, "\n" );
+    for (int i=0; i<data.size(); ++i)
+        fprintf( stdout, "%02X ", in[i] & 0x0ff );
+    fprintf( stdout, "\n" );
   }
 
   // check for overflow else find sign and fill in digits
   //
   if (((in[3] & 0x0f7) == 0x000) &&
-	  ((in[4] & 0x0f7) == 0x027) &&
-	  ((in[5] & 0x0f7) == 0x0d7))
+      ((in[4] & 0x0f7) == 0x027) &&
+      ((in[5] & 0x0f7) == 0x0d7))
   {
-	val = "   0L ";
+    val = "   0L ";
   }
   else
   {
-	if(in[7] & 0x08)
-		val = " -";   // negative;
-	else
-		val = "  ";
-	// create string;
-	//
-	for (int i=0; i<4; ++i)
-		val += RS22812Digit( in[6-i] );
+    if(in[7] & 0x08)
+        val = " -";   // negative;
+    else
+        val = "  ";
+    // create string;
+    //
+    for (int i=0; i<4; ++i)
+        val += RS22812Digit( in[6-i] );
   }
 
   // find comma (really decimal point) [germans use commas instead of decimal points] position
   //
   if (in[3] & 0x08)
-	val = insertComma( val, 3 );
+    val = insertComma( val, 3 );
   else if (in[4] & 0x08)
-	val = insertComma( val, 2 );
+    val = insertComma( val, 2 );
   else if(in[5] & 0x08)
-	val = insertComma( val, 1 );
+    val = insertComma( val, 1 );
 
   double d_val = val.toDouble();
 
   // try to find some special modes
   //
   if (in[7] & 0x40)
-	special = "DI";
+    special = "DI";
   if (in[7] & 0x04)
-	special = "AC";
+    special = "AC";
   else
-	special = "DC";
+    special = "DC";
 
   // try to find mode
   //
   if (in[1] & 0x08)
   {
-	unit    = "F";
-	special = "CA";
+    unit    = "F";
+    special = "CA";
   }
   else if (in[1] & 0x40)
   {
-	unit    = "Ohm";
-	special = "OH";
+    unit    = "Ohm";
+    special = "OH";
   }
   else if (in[1] & 0x04)
-	unit = "A";
+    unit = "A";
   else if (in[1] & 0x80)
   {
-	unit    = "Hz";
-	special = "HZ";
+    unit    = "Hz";
+    special = "HZ";
   }
   else if (in[1] & 0x02)
-	unit = "V";
+    unit = "V";
   else if (in[2] & 0x80)
   {
-	unit    = "%";
-	special = "PC";
+    unit    = "%";
+    special = "PC";
   }
   else
-	std::cerr << "Unknown unit!" << std::endl;
+    std::cerr << "Unknown unit!" << std::endl;
 
   // try to find prefix
   //
   if (in[2] & 0x40)
   {
-	d_val /= 1e9;
-	unit.prepend( "n" );
+    d_val /= 1e9;
+    unit.prepend( "n" );
   }
   else if (in[2] & 0x80)
   {
-	d_val /= 1e6;
-	unit.prepend( "u" );
+    d_val /= 1e6;
+    unit.prepend( "u" );
   }
   else if (in[1] & 0x01)
   {
-	d_val /= 1e3;
-	unit.prepend( "m" );
+    d_val /= 1e3;
+    unit.prepend( "m" );
   }
   else if (in[1] & 0x20)
   {
-	d_val *= 1e3;
-	unit.prepend( "k" );
+    d_val *= 1e3;
+    unit.prepend( "k" );
   }
   else if (in[1] & 0x10)
   {
-	d_val *= 1e6;
-	unit.prepend( "M" );
+    d_val *= 1e6;
+    unit.prepend( "M" );
   }
 
   Q_EMIT value( d_val, val, unit, special, true, id );
@@ -622,8 +622,8 @@ const char *DMM::RS22812Digit( int byte )
 
   for (int n=0; n<10; n++)
   {
-	if (byte == digit[n])
-		return c_digit[n];
+    if (byte == digit[n])
+        return c_digit[n];
   }
   return 0;
 }
@@ -638,17 +638,17 @@ void DMM::readASCII( const QByteArray & data, int id, ReadEvent::DataFormat df )
   QString str(data);
 
   if (df == ReadEvent::Metex14 ||
-	  df == ReadEvent::Voltcraft14Continuous ||
-	  df == ReadEvent::Voltcraft15Continuous)
+      df == ReadEvent::Voltcraft14Continuous ||
+      df == ReadEvent::Voltcraft15Continuous)
   {
-	val     = str.mid( 2, 7 ); //.stripWhiteSpace();
-	unit    = str.mid( 9, 4 ).trimmed();
-	special = str.left( 3 ).trimmed();
+    val     = str.mid( 2, 7 ); //.stripWhiteSpace();
+    unit    = str.mid( 9, 4 ).trimmed();
+    special = str.left( 3 ).trimmed();
   }
   else if (df == ReadEvent::PeakTech10)
   {
-	val     = str.mid( 1, 6 ); //.stripWhiteSpace();
-	unit    = str.mid( 7, 4 ).trimmed();
+    val     = str.mid( 1, 6 ); //.stripWhiteSpace();
+    unit    = str.mid( 7, 4 ).trimmed();
   }
 
   double d_val = val.toDouble();
@@ -657,19 +657,19 @@ void DMM::readASCII( const QByteArray & data, int id, ReadEvent::DataFormat df )
   //    << " unit=" << unit.latin1() << " special=" << special.latin1() << std::endl;
 
   if (unit.left(1) == "p")
-	d_val /= 1.0E12;
+    d_val /= 1.0E12;
   else if (unit.left(1) == "n")
-	d_val /= 1.0E9;
+    d_val /= 1.0E9;
   else if (unit.left(1) == "u")
-	d_val /= 1.0E6;
+    d_val /= 1.0E6;
   else if (unit.left(1) == "m")
-	d_val /= 1.0E3;
+    d_val /= 1.0E3;
   else if (unit.left(1) == "k")
-	d_val *= 1.0E3;
+    d_val *= 1.0E3;
   else if (unit.left(1) == "M")
-	d_val *= 1.0E6;
+    d_val *= 1.0E6;
   else if (unit.left(1) == "G")
-	d_val *= 1.0E9;
+    d_val *= 1.0E9;
 
   Q_EMIT value( d_val, val, unit, special, true, id );
 
@@ -684,25 +684,25 @@ void DMM::readQM1537Continuous( const QByteArray & data, int id, ReadEvent::Data
   const char *pStr = data.data();
 
   if (pStr[0]!=0x0A)
-	  return;
+      return;
   if (pStr[1] == '-')
-	val = " -";
+    val = " -";
   else
-	val = "  ";
+    val = "  ";
 
   if ((pStr[2] == ';') &&
-	  (pStr[3] == '0') &&
-	  (pStr[4] == ':') &&
-	  (pStr[5] == ';'))
+      (pStr[3] == '0') &&
+      (pStr[4] == ':') &&
+      (pStr[5] == ';'))
   {
-	 val += "  0L";
+     val += "  0L";
   }
   else
   {
-	val += pStr[2];
-	val += pStr[3];
-	val += pStr[4];
-	val += pStr[5];
+    val += pStr[2];
+    val += pStr[3];
+    val += pStr[4];
+    val += pStr[5];
   }
 
   bool showBar = true;
@@ -711,16 +711,16 @@ void DMM::readQM1537Continuous( const QByteArray & data, int id, ReadEvent::Data
 
   switch (pStr[7])
   {
-	case 0x31:
-	  val = insertComma (val,1);
-	  break;
-	case 0x32:
-	  val = insertComma (val,2);
-	  break;
-	case 0x34:
-	  val = insertComma (val,3);
-	  break;
-	// default case is no comma/decimal point at all.
+    case 0x31:
+      val = insertComma (val,1);
+      break;
+    case 0x32:
+      val = insertComma (val,2);
+      break;
+    case 0x34:
+      val = insertComma (val,3);
+      break;
+    // default case is no comma/decimal point at all.
   }
 
   double d_val = val.toDouble();
@@ -728,84 +728,84 @@ void DMM::readQM1537Continuous( const QByteArray & data, int id, ReadEvent::Data
   /* OK, now let's figure out what we're looking at. */
   if (pStr[11] & 0x80)
   {
-	/* Voltage, including diode test */
-	unit = "V";
-	if (pStr[10] & 0x04)
-	{
-	  /* Diode test */
-	  special = "DI";
-	  unit = "V";
-	}
-	else
-	  doACDC = true;
+    /* Voltage, including diode test */
+    unit = "V";
+    if (pStr[10] & 0x04)
+    {
+      /* Diode test */
+      special = "DI";
+      unit = "V";
+    }
+    else
+      doACDC = true;
   }
   else if (pStr[11] & 0x40)
   {
-	/* Current */
-	unit = "A";
-	doACDC = true;
+    /* Current */
+    unit = "A";
+    doACDC = true;
   }
   else if (pStr[11] & 0x20)
   {
-	/* Resistance, including continuity test */
-	unit = "Ohm";
-	special = "OH";
+    /* Resistance, including continuity test */
+    unit = "Ohm";
+    special = "OH";
   }
   else if (pStr[11] & 0x08)
   {
-	/* Frequency */
-	unit = "Hz";
-	special = "HZ";
+    /* Frequency */
+    unit = "Hz";
+    special = "HZ";
   }
   else if (pStr[11] & 0x04)
   {
-	/* Capacitance */
-	unit = "F";
-	special = "CA";
+    /* Capacitance */
+    unit = "F";
+    special = "CA";
   }
   else if (pStr[10] & 0x02)
   {
-	/* Duty cycle */
-	unit = "%";
-	special = "PC";
-	doUnits = false;
+    /* Duty cycle */
+    unit = "%";
+    special = "PC";
+    doUnits = false;
   }
 
   if (doACDC)
   {
-	if (pStr[8] & 0x08)
-	  special = "AC";
-	else
-	  special = "DC";
+    if (pStr[8] & 0x08)
+      special = "AC";
+    else
+      special = "DC";
   }
 
   if (doUnits)
   {
-	if (pStr[9] & 0x02)
-	{
-	  d_val /= 1e9;
-	  unit.prepend ('n');
-	}
-	else if (pStr[10] & 0x80)
-	{
-	  d_val /= 1e6;
-	  unit.prepend ('u');
-	}
-	else if (pStr[10] & 0x40)
-	{
-	  d_val /= 1e3;
-	  unit.prepend ('m');
-	}
-	else if (pStr[10] & 0x20)
-	{
-	  d_val *= 1e3;
-	  unit.prepend ('k');
-	}
-	else if (pStr[10] & 0x10)
-	{
-	  d_val *= 1e6;
-	  unit.prepend ('M');
-	}
+    if (pStr[9] & 0x02)
+    {
+      d_val /= 1e9;
+      unit.prepend ('n');
+    }
+    else if (pStr[10] & 0x80)
+    {
+      d_val /= 1e6;
+      unit.prepend ('u');
+    }
+    else if (pStr[10] & 0x40)
+    {
+      d_val /= 1e3;
+      unit.prepend ('m');
+    }
+    else if (pStr[10] & 0x20)
+    {
+      d_val *= 1e3;
+      unit.prepend ('k');
+    }
+    else if (pStr[10] & 0x10)
+    {
+      d_val *= 1e6;
+      unit.prepend ('M');
+    }
   }
 
   Q_EMIT value( d_val, val, unit, special, showBar, id );
@@ -819,14 +819,14 @@ void DMM::readM9803RContinuous( const QByteArray & data, int id, ReadEvent::Data
   QString unit;
 
   if (data[0] & 0x01)
-	val = "  0L";
+    val = "  0L";
   else
   {
-	val = data[0] == 0x08 ? " -" : "  ";
-	val += QChar( '0'+data[4] );
-	val += QChar( '0'+data[3] );
-	val += QChar( '0'+data[2] );
-	val += QChar( '0'+data[1] );
+    val = data[0] == 0x08 ? " -" : "  ";
+    val += QChar( '0'+data[4] );
+    val += QChar( '0'+data[3] );
+    val += QChar( '0'+data[2] );
+    val += QChar( '0'+data[1] );
   }
 
   double d_val = val.toDouble();
@@ -835,227 +835,227 @@ void DMM::readM9803RContinuous( const QByteArray & data, int id, ReadEvent::Data
 
   switch (data[5])
   {
-	case 0x00:
-	  switch (data[6])
-	  {
-		case 0x00:
-		  unit = "mV";
-		  val = insertComma( val, 3 );
-		  d_val /= 10000.;
-		  break;
-		case 0x01:
-		  unit = "V";
-		  val = insertComma( val, 1 );
-		  d_val /= 1000.;
-		  break;
-		case 0x02:
-		  unit = "V";
-		  val = insertComma( val, 2 );
-		  d_val /= 100.;
-		  break;
-		case 0x03:
-		  unit = "V";
-		  val = insertComma( val, 3 );
-		  d_val /= 10.;
-		  break;
-		case 0x04:
-		  unit = "V";
-		  break;
-	  }
-	  special = "DC";
-	  break;
-	case 0x01:
-	  switch (data[6])
-	  {
-		case 0x00:
-		  unit = "mV";
-		  val = insertComma( val, 3 );
-		  d_val /= 10000.;
-		  break;
-		case 0x01:
-		  unit = "V";
-		  val = insertComma( val, 1 );
-		  d_val /= 1000.;
-		  break;
-		case 0x02:
-		  unit = "V";
-		  val = insertComma( val, 2 );
-		  d_val /= 100.;
-		  break;
-		case 0x03:
-		  unit = "V";
-		  val = insertComma( val, 3 );
-		  d_val /= 10.;
-		  break;
-		case 0x04:
-		  unit = "V";
-		  break;
-	  }
-	  special = "AC";
-	  break;
-	case 0x02:
-	  switch (data[6])
-	  {
-		case 0x00:
-		  unit = "mA";
-		  val = insertComma( val, 1 );
-		  d_val /= 1000.;
-		  break;
-		case 0x01:
-		  unit = "mA";
-		  val = insertComma( val, 2 );
-		  d_val /= 100.;
-		  break;
-		case 0x02:
-		  unit = "mA";
-		  val = insertComma( val, 3 );
-		  d_val /= 10.;
-		  break;
-	  }
-	  special = "DC";
-	  break;
-	case 0x03:
-	  switch (data[6])
-	  {
-		case 0x00:
-		  unit = "mA";
-		  val = insertComma( val, 1 );
-		  d_val /= 1000.;
-		  break;
-		case 0x01:
-		  unit = "mA";
-		  val = insertComma( val, 2 );
-		  d_val /= 100.;
-		  break;
-		case 0x02:
-		  unit = "mA";
-		  val = insertComma( val, 3 );
-		  d_val /= 10.;
-		  break;
-	  }
-	  special = "AC";
-	  break;
-	case 0x04:
-	  switch (data[6])
-	  {
-		case 0x00:
-		  unit = "Ohm";
-		  val = insertComma( val, 1 );
-		  d_val /= 10.;
-		  break;
-		case 0x01:
-		  unit = "kOhm";
-		  val = insertComma( val, 1 );
-		  d_val /= 1000.;
-		  break;
-		case 0x02:
-		  unit = "kOhm";
-		  val = insertComma( val, 2 );
-		  d_val /= 100.;
-		  break;
-		case 0x03:
-		  unit = "kOhm";
-		  val = insertComma( val, 3 );
-		  d_val /= 10.;
-		  break;
-		case 0x04:
-		  unit = "kOhm";
-		  break;
-		case 0x05:
-		  unit = "MOhm";
-		  val = insertComma( val, 2 );
-		  d_val /= 100.;
-		  break;
-	  }
-	  special = "OH";
-	  break;
-	case 0x05:
-	  switch (data[6])
-	  {
-		case 0x00:
-		  unit = "Ohm";
-		  val = insertComma( val, 3 );
-		  d_val /= 10.;
-		  break;
-	  }
-	  special = "OH";
-	  break;
-	case 0x06:
-	  unit = "V";
-	  val = insertComma( val, 1 );
-	  d_val /= 1000.;
-	  special = "DI";
-	  break;
-	case 0x08:
-	  unit = "A";
-	  val = insertComma( val, 2 );
-	  d_val /= 100.;
-	  special = "DC";
-	  break;
-	case 0x09:
-	  unit = "A";
-	  val = insertComma( val, 2 );
-	  d_val /= 100.;
-	  special = "AC";
-	  break;
-	case 0x0A:
-	  showBar = false;
-	  switch (data[6])
-	  {
-		case 0x00:
-		  unit = "kHz";
-		  val = insertComma( val, 1 );
-			//d_val /= 1000.;
-		  break;
-		case 0x01:
-		  unit = "kHz";
-		  val = insertComma( val, 2 );
-		  d_val *= 10.;
-		  break;
-		case 0x05:
-		  unit = "Hz";
-		  val = insertComma( val, 2 );
-		  d_val /= 100.;
-		  break;
-		case 0x06:
-		  unit = "Hz";
-		  val = insertComma( val, 3 );
-		  d_val /= 10.;
-		  break;
-	  }
-	  special = "HZ";
-	  break;
-	case 0x0C:
-	  switch (data[6])
-	  {
-		case 0x00:
-		  unit = "nF";
-		  val = insertComma( val, 1 );
-		  d_val /= 1e12;
-		  break;
-		case 0x01:
-		  unit = "nF";
-		  val = insertComma( val, 2 );
-		  d_val /= 1e11;
-		  break;
-		case 0x02:
-		  unit = "nF";
-		  val = insertComma( val, 3 );
-		  d_val /= 1e10;
-		  break;
-		case 0x03:
-		  unit = "uF";
-		  val = insertComma( val, 1 );
-		  d_val /= 1e9;
-		  break;
-		case 0x04:
-		  unit = "uF";
-		  val = insertComma( val, 2 );
-		  d_val /= 1e8;
-		  break;
-	  }
-	  special = "CA";
-	  break;
+    case 0x00:
+      switch (data[6])
+      {
+        case 0x00:
+          unit = "mV";
+          val = insertComma( val, 3 );
+          d_val /= 10000.;
+          break;
+        case 0x01:
+          unit = "V";
+          val = insertComma( val, 1 );
+          d_val /= 1000.;
+          break;
+        case 0x02:
+          unit = "V";
+          val = insertComma( val, 2 );
+          d_val /= 100.;
+          break;
+        case 0x03:
+          unit = "V";
+          val = insertComma( val, 3 );
+          d_val /= 10.;
+          break;
+        case 0x04:
+          unit = "V";
+          break;
+      }
+      special = "DC";
+      break;
+    case 0x01:
+      switch (data[6])
+      {
+        case 0x00:
+          unit = "mV";
+          val = insertComma( val, 3 );
+          d_val /= 10000.;
+          break;
+        case 0x01:
+          unit = "V";
+          val = insertComma( val, 1 );
+          d_val /= 1000.;
+          break;
+        case 0x02:
+          unit = "V";
+          val = insertComma( val, 2 );
+          d_val /= 100.;
+          break;
+        case 0x03:
+          unit = "V";
+          val = insertComma( val, 3 );
+          d_val /= 10.;
+          break;
+        case 0x04:
+          unit = "V";
+          break;
+      }
+      special = "AC";
+      break;
+    case 0x02:
+      switch (data[6])
+      {
+        case 0x00:
+          unit = "mA";
+          val = insertComma( val, 1 );
+          d_val /= 1000.;
+          break;
+        case 0x01:
+          unit = "mA";
+          val = insertComma( val, 2 );
+          d_val /= 100.;
+          break;
+        case 0x02:
+          unit = "mA";
+          val = insertComma( val, 3 );
+          d_val /= 10.;
+          break;
+      }
+      special = "DC";
+      break;
+    case 0x03:
+      switch (data[6])
+      {
+        case 0x00:
+          unit = "mA";
+          val = insertComma( val, 1 );
+          d_val /= 1000.;
+          break;
+        case 0x01:
+          unit = "mA";
+          val = insertComma( val, 2 );
+          d_val /= 100.;
+          break;
+        case 0x02:
+          unit = "mA";
+          val = insertComma( val, 3 );
+          d_val /= 10.;
+          break;
+      }
+      special = "AC";
+      break;
+    case 0x04:
+      switch (data[6])
+      {
+        case 0x00:
+          unit = "Ohm";
+          val = insertComma( val, 1 );
+          d_val /= 10.;
+          break;
+        case 0x01:
+          unit = "kOhm";
+          val = insertComma( val, 1 );
+          d_val /= 1000.;
+          break;
+        case 0x02:
+          unit = "kOhm";
+          val = insertComma( val, 2 );
+          d_val /= 100.;
+          break;
+        case 0x03:
+          unit = "kOhm";
+          val = insertComma( val, 3 );
+          d_val /= 10.;
+          break;
+        case 0x04:
+          unit = "kOhm";
+          break;
+        case 0x05:
+          unit = "MOhm";
+          val = insertComma( val, 2 );
+          d_val /= 100.;
+          break;
+      }
+      special = "OH";
+      break;
+    case 0x05:
+      switch (data[6])
+      {
+        case 0x00:
+          unit = "Ohm";
+          val = insertComma( val, 3 );
+          d_val /= 10.;
+          break;
+      }
+      special = "OH";
+      break;
+    case 0x06:
+      unit = "V";
+      val = insertComma( val, 1 );
+      d_val /= 1000.;
+      special = "DI";
+      break;
+    case 0x08:
+      unit = "A";
+      val = insertComma( val, 2 );
+      d_val /= 100.;
+      special = "DC";
+      break;
+    case 0x09:
+      unit = "A";
+      val = insertComma( val, 2 );
+      d_val /= 100.;
+      special = "AC";
+      break;
+    case 0x0A:
+      showBar = false;
+      switch (data[6])
+      {
+        case 0x00:
+          unit = "kHz";
+          val = insertComma( val, 1 );
+            //d_val /= 1000.;
+          break;
+        case 0x01:
+          unit = "kHz";
+          val = insertComma( val, 2 );
+          d_val *= 10.;
+          break;
+        case 0x05:
+          unit = "Hz";
+          val = insertComma( val, 2 );
+          d_val /= 100.;
+          break;
+        case 0x06:
+          unit = "Hz";
+          val = insertComma( val, 3 );
+          d_val /= 10.;
+          break;
+      }
+      special = "HZ";
+      break;
+    case 0x0C:
+      switch (data[6])
+      {
+        case 0x00:
+          unit = "nF";
+          val = insertComma( val, 1 );
+          d_val /= 1e12;
+          break;
+        case 0x01:
+          unit = "nF";
+          val = insertComma( val, 2 );
+          d_val /= 1e11;
+          break;
+        case 0x02:
+          unit = "nF";
+          val = insertComma( val, 3 );
+          d_val /= 1e10;
+          break;
+        case 0x03:
+          unit = "uF";
+          val = insertComma( val, 1 );
+          d_val /= 1e9;
+          break;
+        case 0x04:
+          unit = "uF";
+          val = insertComma( val, 2 );
+          d_val /= 1e8;
+          break;
+      }
+      special = "CA";
+      break;
   }
 
   Q_EMIT value( d_val, val, unit, special, showBar, id );
@@ -1082,194 +1082,194 @@ void DMM::readIsoTechContinuous(const QByteArray & data, int id, ReadEvent::Data
 
   switch(typecode)
   {
-	case 0xb:
-	  // voltage
-	  if (rangecode < 4)
-		rangecode += 5;
-	  rangecode -= 4;
-	  multiplier = pow(10, rangecode - 4);
-	  if (acdccode == 0x8)
-		special = "DC";
-	  else
-		 special = "AC";
-	  switch (rangecode)
-	  {
-		case 0:
-		  val = insertCommaIT(val, 3);
-		  unit = "mV";
-		  break;
-		case 1:
-		  val = insertCommaIT(val, 1);
-		  unit = "V";
-		  break;
-		case 2:
-		  val = insertCommaIT(val, 2);
-		  unit = "V";
-		  break;
-		case 3:
-		  val = insertCommaIT(val, 3);
-		  unit = "V";
-		  break;
-		case 4:
-		  unit = "V";
-		  break;
-		default:
-		  // error
-			  ;
-	  }
-	  break;
-	case 0x3:
-	  // resistance
-	  multiplier = pow(10,rangecode - 1);
-	  special = "OH";
-	  switch (rangecode)
-	  {
-		case 0:
-		  val = insertCommaIT(val, 3);
-		  unit = "Ohm";
-		  break;
-		case 1:
-		  val = insertCommaIT(val, 1);
-		  unit = "kOhm";
-		  break;
-		case 2:
-		  val = insertCommaIT(val, 2);
-		  unit = "kOhm";
-		  break;
-		case 3:
-		  val = insertCommaIT(val, 3);
-		  unit = "kOhm";
-		  break;
-		case 4:
-		  val = insertCommaIT(val, 1);
-		  unit = "MOhm";
-		  break;
-		case 5:
-		  val = insertCommaIT(val, 2);
-		  unit = "MOhm";
-		  break;
-		default:
-		  // error
-		  ;
-	  }
-	  break;
+    case 0xb:
+      // voltage
+      if (rangecode < 4)
+        rangecode += 5;
+      rangecode -= 4;
+      multiplier = pow(10, rangecode - 4);
+      if (acdccode == 0x8)
+        special = "DC";
+      else
+         special = "AC";
+      switch (rangecode)
+      {
+        case 0:
+          val = insertCommaIT(val, 3);
+          unit = "mV";
+          break;
+        case 1:
+          val = insertCommaIT(val, 1);
+          unit = "V";
+          break;
+        case 2:
+          val = insertCommaIT(val, 2);
+          unit = "V";
+          break;
+        case 3:
+          val = insertCommaIT(val, 3);
+          unit = "V";
+          break;
+        case 4:
+          unit = "V";
+          break;
+        default:
+          // error
+              ;
+      }
+      break;
+    case 0x3:
+      // resistance
+      multiplier = pow(10,rangecode - 1);
+      special = "OH";
+      switch (rangecode)
+      {
+        case 0:
+          val = insertCommaIT(val, 3);
+          unit = "Ohm";
+          break;
+        case 1:
+          val = insertCommaIT(val, 1);
+          unit = "kOhm";
+          break;
+        case 2:
+          val = insertCommaIT(val, 2);
+          unit = "kOhm";
+          break;
+        case 3:
+          val = insertCommaIT(val, 3);
+          unit = "kOhm";
+          break;
+        case 4:
+          val = insertCommaIT(val, 1);
+          unit = "MOhm";
+          break;
+        case 5:
+          val = insertCommaIT(val, 2);
+          unit = "MOhm";
+          break;
+        default:
+          // error
+          ;
+      }
+      break;
    case 0x1:
-	  // diode
-	  multiplier = 0.001;
-	  val = insertCommaIT(val,1);
-	  unit = "V";
-	  break;
+      // diode
+      multiplier = 0.001;
+      val = insertCommaIT(val,1);
+      unit = "V";
+      break;
    case 0xd:
-	  // current micro
-	  multiplier = pow(10,rangecode - 7);
-	  special = "DC";
-	  if (rangecode == 0)
-	  {
-		val = insertCommaIT(val,3);
-		unit = "uA";
-	  }
-	  else
-	  {
-		val = insertCommaIT(val,1);
-		unit = "mA";
-	  }
-	  break;
+      // current micro
+      multiplier = pow(10,rangecode - 7);
+      special = "DC";
+      if (rangecode == 0)
+      {
+        val = insertCommaIT(val,3);
+        unit = "uA";
+      }
+      else
+      {
+        val = insertCommaIT(val,1);
+        unit = "mA";
+      }
+      break;
    case 0x0:
-	  // current
-	  multiplier = pow(10,rangecode - 3);
-	  unit = "A";
-	  val = insertCommaIT(val,rangecode + 1);
-	  if (acdccode == 0x8)
-		special = "DC";
-	  else
-		special = "AC";
-	  break;
+      // current
+      multiplier = pow(10,rangecode - 3);
+      unit = "A";
+      val = insertCommaIT(val,rangecode + 1);
+      if (acdccode == 0x8)
+        special = "DC";
+      else
+        special = "AC";
+      break;
    case 0x2:
-	  // frequency
-	  special = "HZ";
-	  multiplier = pow(10,rangecode);
-	  switch (rangecode)
-	  {
-		case 0x0:
-		  val = insertCommaIT(val, 1);
-		  unit = "kHz";
-		  break;
-		case 0x1:
-		  val = insertCommaIT(val, 2);
-		  unit = "kHz";
-		  break;
-		case 0x2:
-		  val = insertCommaIT(val, 3);
-		  unit = "kHz";
-		  break;
-		case 0x3:
-		  val = insertCommaIT(val, 1);
-		  unit = "MHz";
-		  break;
-		case 0x4:
-		  val = insertCommaIT(val, 2);
-		  unit = "MHz";
-		  break;
-		default:
-		  // error
-		  ;
+      // frequency
+      special = "HZ";
+      multiplier = pow(10,rangecode);
+      switch (rangecode)
+      {
+        case 0x0:
+          val = insertCommaIT(val, 1);
+          unit = "kHz";
+          break;
+        case 0x1:
+          val = insertCommaIT(val, 2);
+          unit = "kHz";
+          break;
+        case 0x2:
+          val = insertCommaIT(val, 3);
+          unit = "kHz";
+          break;
+        case 0x3:
+          val = insertCommaIT(val, 1);
+          unit = "MHz";
+          break;
+        case 0x4:
+          val = insertCommaIT(val, 2);
+          unit = "MHz";
+          break;
+        default:
+          // error
+          ;
 
 	  }
 	  break;
    case 0x6:
-	  // capacity
-	  special = "CA";
-	  multiplier = pow(10, rangecode - 12);
-	  switch (rangecode)
-	  {
-		case 0x0:
-		  val = insertCommaIT(val, 1);
-		  unit = "nF";
-		  break;
-		case 0x1:
-		  val = insertCommaIT(val, 2);
-		  unit = "nF";
-		  break;
-		case 0x2:
-		  val = insertCommaIT(val, 3);
-		  unit = "nF";
-		  break;
-		case 0x3:
-		  val = insertCommaIT(val, 1);
-		  unit = "uF";
-		  break;
-		case 0x4:
-		  val = insertCommaIT(val, 2);
-		  unit = "uF";
-		  break;
-		case 0x5:
-		  val = insertCommaIT(val, 3);
-		  unit = "uF";
-		  break;
-		case 0x6:
-		  val = insertCommaIT(val, 1);
-		  unit = "mF";
-		  break;
-		default:
-		  // error
-		  ;
-	  }
-	  break;
+      // capacity
+      special = "CA";
+      multiplier = pow(10, rangecode - 12);
+      switch (rangecode)
+      {
+        case 0x0:
+          val = insertCommaIT(val, 1);
+          unit = "nF";
+          break;
+        case 0x1:
+          val = insertCommaIT(val, 2);
+          unit = "nF";
+          break;
+        case 0x2:
+          val = insertCommaIT(val, 3);
+          unit = "nF";
+          break;
+        case 0x3:
+          val = insertCommaIT(val, 1);
+          unit = "uF";
+          break;
+        case 0x4:
+          val = insertCommaIT(val, 2);
+          unit = "uF";
+          break;
+        case 0x5:
+          val = insertCommaIT(val, 3);
+          unit = "uF";
+          break;
+        case 0x6:
+          val = insertCommaIT(val, 1);
+          unit = "mF";
+          break;
+        default:
+          // error
+          ;
+      }
+      break;
    default:
-	  // error - unknown type of measurement
-	  ;
+      // error - unknown type of measurement
+      ;
    }
   d_val *= multiplier;
 
   if (tmpstring[16] & 0x01)
-	val = "  0L";
+    val = "  0L";
   if (tmpstring[16] & 0x4)
   {
-	d_val = - d_val;
-	val = " -" + val;
+    d_val = - d_val;
+    val = " -" + val;
   }
   else
-	val = "  " + val;
+    val = "  " + val;
 
  // printf ("DVAL: %f\n", d_val);
 
@@ -1288,104 +1288,104 @@ void DMM::readVC820Continuous( const QByteArray & data, int id, ReadEvent::DataF
   // check for overload else find sign and fill in digits
   //
   if (((in[3] & 0x07) == 0x07) &&
-	  ((in[4] & 0x0f) == 0x0d) &&
-	  ((in[5] & 0x07) == 0x06) &&
-	  ((in[6] & 0x0f) == 0x08))
+      ((in[4] & 0x0f) == 0x0d) &&
+      ((in[5] & 0x07) == 0x06) &&
+      ((in[6] & 0x0f) == 0x08))
   {
-	val = "  0L";
+    val = "  0L";
   }
   else
   {
-	if(in[1] & 0x08)
-		val = " -";   // negative;
-	else
-		val = "  ";
-	// create string;
-	//
-	for (int i=0; i<4; ++i)
-		val += vc820Digit( ((in[1+2*i] << 4 ) & 0xf0) | (in[2+2*i] & 0x0f) );
+    if(in[1] & 0x08)
+        val = " -";   // negative;
+    else
+        val = "  ";
+    // create string;
+    //
+    for (int i=0; i<4; ++i)
+        val += vc820Digit( ((in[1+2*i] << 4 ) & 0xf0) | (in[2+2*i] & 0x0f) );
   }
 
   // find comma position
   //
   if (in[3] & 0x08)
-	val = insertComma( val, 1 );
+    val = insertComma( val, 1 );
   else if (in[5] & 0x08)
-	val = insertComma( val, 2 );
+    val = insertComma( val, 2 );
   else if(in[7] & 0x08)
-	val = insertComma( val, 3 );
+    val = insertComma( val, 3 );
 
   double d_val = val.toDouble();
 
   // try to find some special modes
   //
   if (in[9] & 0x01)
-	special = "DI";
+    special = "DI";
   if (in[0] & 0x08)
-	special = "AC";
+    special = "AC";
   else
-	special = "DC";
+    special = "DC";
 
   // try to find mode
   //
   if (in[11] & 0x08)
   {
-	unit    = "F";
-	special = "CA";
+    unit    = "F";
+    special = "CA";
   }
   else if (in[11] & 0x04)
   {
-	unit    = "Ohm";
-	special = "OH";
+    unit    = "Ohm";
+    special = "OH";
   }
   else if (in[12] & 0x08)
-	 unit = "A";
+     unit = "A";
   else if (in[12] & 0x02)
   {
-	unit    = "Hz";
-	special = "HZ";
+    unit    = "Hz";
+    special = "HZ";
   }
   else if (in[12] & 0x04)
-	unit = "V";
+    unit = "V";
   else if (in[10] & 0x04)
   {
-	unit    = "%";
-	special = "PC";
+    unit    = "%";
+    special = "PC";
   }
   else if (in[13] & 0x01)
   {
-	unit    = "C";
-	special = "TE";
+    unit    = "C";
+    special = "TE";
   }
   else
-	std::cerr << "Unknown unit!" << std::endl;
+    std::cerr << "Unknown unit!" << std::endl;
 
   // try to find prefix
   //
   if (in[9] & 0x04)
   {
-	d_val /= 1e9;
-	unit.prepend( "n" );
+    d_val /= 1e9;
+    unit.prepend( "n" );
   }
   else if (in[9] & 0x08)
   {
-	d_val /= 1e6;
-	unit.prepend( "u" );
+    d_val /= 1e6;
+    unit.prepend( "u" );
   }
   else if (in[10] & 0x08)
   {
-	d_val /= 1e3;
-	unit.prepend( "m" );
+    d_val /= 1e3;
+    unit.prepend( "m" );
   }
   else if (in[9] & 0x02)
   {
-	d_val *= 1e3;
-	unit.prepend( "k" );
+    d_val *= 1e3;
+    unit.prepend( "k" );
   }
   else if (in[10] & 0x02)
   {
-	d_val *= 1e6;
-	unit.prepend( "M" );
+    d_val *= 1e6;
+    unit.prepend( "M" );
   }
 
   Q_EMIT value( d_val, val, unit, special, true, id );
@@ -1402,8 +1402,8 @@ const char *DMM::vc820Digit( int byte )
 
   for (int n=0; n<10; n++)
   {
-	if (byte == digit[n])
-		return c_digit[n];
+    if (byte == digit[n])
+        return c_digit[n];
   }
   return 0;
 }

@@ -111,7 +111,7 @@ void DMMGraph::paintEvent( QPaintEvent * )
   p.begin( &pix );
 
   paint( &p, width(), height()-16, m_xfactor, m_xstep, m_yfactor, m_ystep,
-		 m_maxUnit, m_hUnitFact, m_hUnit, true, false );
+         m_maxUnit, m_hUnitFact, m_hUnit, true, false );
 
   p.end();
   p.begin( this );
@@ -119,17 +119,17 @@ void DMMGraph::paintEvent( QPaintEvent * )
 
   if (m_mouseDown)
   {
-	drawCursor( m_mpos );
-	fillInfoBox( m_mpos );
+    drawCursor( m_mpos );
+    fillInfoBox( m_mpos );
   }
 }
 
 void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comment )
 {
   if (!title.isEmpty())
-	prt->setDocName( title );
+    prt->setDocName( title );
   else
-	  prt->setDocName(tr("QtDMM: %1").arg(QDateTime::currentDateTime().toString()));
+      prt->setDocName(tr("QtDMM: %1").arg(QDateTime::currentDateTime().toString()));
 
   prt->setCreator( "QtDMM: (c) 2001 Matthias Toussaint" );
   prt->setPrintProgram( "QtDMM: (c) 2001 Matthias Toussaint" );
@@ -150,26 +150,26 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
 
   QFontMetrics fm = p.fontMetrics();
   int maxWidth = qMax( fm.width( tr( "Sampling start:" ) ),
-					   fm.width( tr( "Sampling resolution:" )));
+                       fm.width( tr( "Sampling resolution:" )));
   int tHeight = fm.height();
 
   p.drawText( 0, tRect.height()+10, maxWidth, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
-			  tr( "Sampling start:" ) );
+              tr( "Sampling start:" ) );
   p.drawText( maxWidth+10, tRect.height()+10, w-maxWidth-10, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
-			  m_graphStartDateTime.toString() );
+              m_graphStartDateTime.toString() );
 
   p.drawText( 0, tRect.height()+10+tHeight, maxWidth, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
-			  tr( "Sampling resolution:" ) );
+              tr( "Sampling resolution:" ) );
   p.drawText( maxWidth+10, tRect.height()+10+tHeight,
-			  w-maxWidth-10, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
-			  tr("%1 Seconds").arg(m_sampleTime) );
+              w-maxWidth-10, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
+              tr("%1 Seconds").arg(m_sampleTime) );
 
   //p.setFont( QFont( "Helvetica", 10 ));
 
   QRect cRect = p.boundingRect( 0, 0, w, h, Qt::AlignTop | Qt::AlignLeft | Qt::TextWordWrap, comment );
 
   p.drawText( 0, tRect.height()+20+2*tHeight, w, cRect.height(),
-			  Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, comment );
+              Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, comment );
 
   h -= tRect.height()+30+2*tHeight+cRect.height();
 
@@ -186,7 +186,7 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
   p.translate( 0, tRect.height()+30+2*tHeight+cRect.height() );
 
   paint( &p, w, h, xfactor, xstep, yfactor, ystep,
-		 maxUnit, hUnitFact, hUnit, prt->colorMode() == QPrinter::Color, true );
+         maxUnit, hUnitFact, hUnit, prt->colorMode() == QPrinter::Color, true );
 
   p.end();
 }
@@ -203,19 +203,19 @@ void DMMGraph::paint( QPainter *p, int w, int h,
 
   if (m_scaleMin != m_scaleMax)
   {
-	paintHorizontalGrid( p, yfactor, ystep, color );
-	paintVerticalGrid( p, xfactor, xstep, maxUnit, hUnitFact, hUnit, color );
-	paintData( p, xfactor, yfactor, color, printer );
-	paintThresholds( p, xfactor, yfactor, color, printer );
+    paintHorizontalGrid( p, yfactor, ystep, color );
+    paintVerticalGrid( p, xfactor, xstep, maxUnit, hUnitFact, hUnit, color );
+    paintData( p, xfactor, yfactor, color, printer );
+    paintThresholds( p, xfactor, yfactor, color, printer );
   }
 }
 
 void DMMGraph::paintHorizontalGrid( QPainter *p, double yfactor, double ystep, bool color )
 {
   if (color)
-	p->setPen( m_gridColor );
+    p->setPen( m_gridColor );
   else
-	p->setPen( Qt::black );
+    p->setPen( Qt::black );
 
   // draw border
   //
@@ -226,12 +226,12 @@ void DMMGraph::paintHorizontalGrid( QPainter *p, double yfactor, double ystep, b
   int y = (int)qRound( m_graphRect.y()+(m_scaleMax)/yfactor );
 
   if (y>m_graphRect.y()+m_fontHeight && y<m_graphRect.y()+m_graphRect.height())
-	p->drawLine( m_graphRect.x()-3, y, m_graphRect.x()+m_graphRect.width(), y );
+    p->drawLine( m_graphRect.x()-3, y, m_graphRect.x()+m_graphRect.width(), y );
 
   if (color)
-	p->setPen( QPen( m_gridColor, 0, Qt::DotLine ) );
+    p->setPen( QPen( m_gridColor, 0, Qt::DotLine ) );
   else
-	p->setPen( QPen( Qt::black, 0, Qt::DotLine ) );
+    p->setPen( QPen( Qt::black, 0, Qt::DotLine ) );
 
   QString scaleVal;
 
@@ -242,7 +242,7 @@ void DMMGraph::paintHorizontalGrid( QPainter *p, double yfactor, double ystep, b
 
   while (val < m_scaleMax)
   {
-	y = (int)qRound( m_graphRect.y()+(m_scaleMax-val)/yfactor );
+    y = (int)qRound( m_graphRect.y()+(m_scaleMax-val)/yfactor );
 
 	if (y>m_graphRect.y()+m_fontHeight && y<m_graphRect.y()+m_graphRect.height())
 	{
@@ -259,7 +259,7 @@ void DMMGraph::paintHorizontalGrid( QPainter *p, double yfactor, double ystep, b
 
   while (val > m_scaleMin)
   {
-	y = (int)qRound( m_graphRect.y()+(m_scaleMax-val)/yfactor );
+    y = (int)qRound( m_graphRect.y()+(m_scaleMax-val)/yfactor );
 
 	if (y>m_graphRect.y()+m_fontHeight && y<m_graphRect.y()+m_graphRect.height())
 	{
@@ -271,42 +271,42 @@ void DMMGraph::paintHorizontalGrid( QPainter *p, double yfactor, double ystep, b
   }
 
   if (!m_unit.isEmpty())
-	  p->drawText( 4, 4, 40, 20, Qt::AlignLeft | Qt::AlignTop, QString("[%1%2]").arg(m_prefix).arg(m_unit) ); //m_unit );
+      p->drawText( 4, 4, 40, 20, Qt::AlignLeft | Qt::AlignTop, QString("[%1%2]").arg(m_prefix).arg(m_unit) ); //m_unit );
 }
 
 void DMMGraph::paintVerticalGrid( QPainter *p, double xfactor, double xstep,
-								  double maxUnit, double hUnitFact, const QString & hUnit, bool color )
+                                  double maxUnit, double hUnitFact, const QString & hUnit, bool color )
 {
   int sv = qMax( 0, scrollbar->value() );
 
   if (color)
-	p->setPen( QPen( m_gridColor, 0, Qt::DotLine ) );
+    p->setPen( QPen( m_gridColor, 0, Qt::DotLine ) );
   else
-	p->setPen( QPen( Qt::black, 0, Qt::DotLine ) );
+    p->setPen( QPen( Qt::black, 0, Qt::DotLine ) );
 
   QString scaleVal;
   double val = xstep;
   while (val < maxUnit)
   {
-	int x = m_graphRect.x() + (int)qRound( 1+(val)/hUnitFact - sv/xfactor );
-	if (x > m_graphRect.x() && x < m_graphRect.x()+m_graphRect.width()-1)
-	{
-	  p->drawLine( x, m_graphRect.y(), x, m_graphRect.y()+m_graphRect.height()+3 );
-	  if (x > m_graphRect.x() && x < m_graphRect.x()+m_graphRect.width()-1)
-	  {
-		scaleVal.sprintf( "%g", val );
-		p->drawText( x-20, m_graphRect.y()+m_graphRect.height()+3,
-					 40, m_fontHeight-3, Qt::AlignCenter, scaleVal );
-	  }
-	}
-	val += xstep;
+    int x = m_graphRect.x() + (int)qRound( 1+(val)/hUnitFact - sv/xfactor );
+    if (x > m_graphRect.x() && x < m_graphRect.x()+m_graphRect.width()-1)
+    {
+      p->drawLine( x, m_graphRect.y(), x, m_graphRect.y()+m_graphRect.height()+3 );
+      if (x > m_graphRect.x() && x < m_graphRect.x()+m_graphRect.width()-1)
+      {
+        scaleVal.sprintf( "%g", val );
+        p->drawText( x-20, m_graphRect.y()+m_graphRect.height()+3,
+                     40, m_fontHeight-3, Qt::AlignCenter, scaleVal );
+      }
+    }
+    val += xstep;
   }
   p->drawText( width()-40, m_graphRect.y()+m_graphRect.height(),
-			   36, 20, Qt::AlignRight | Qt::AlignVCenter, hUnit );
+               36, 20, Qt::AlignRight | Qt::AlignVCenter, hUnit );
 }
 
 void DMMGraph::paintData( QPainter *p, double xfactor,
-						  double yfactor, bool color, bool printer )
+                          double yfactor, bool color, bool printer )
 {
   p->setClipRect( m_graphRect );
 
@@ -318,8 +318,8 @@ void DMMGraph::paintData( QPainter *p, double xfactor,
 
   if (!printer && x>m_graphRect.x() && x <= m_graphRect.x()+m_graphRect.width()-1)
   {
-	p->setPen( m_cursorColor );
-	p->drawLine( x, 6, x, m_graphRect.y()+m_graphRect.height()-1 );
+    p->setPen( m_cursorColor );
+    p->drawLine( x, 6, x, m_graphRect.y()+m_graphRect.height()-1 );
   }
 
   // draw integration curve
@@ -329,9 +329,9 @@ void DMMGraph::paintData( QPainter *p, double xfactor,
 
   if (m_showIntegration)
   {
-	y = (int)qRound( m_graphRect.y()+
-		(m_scaleMax-m_integrationOffset-
-		  (*m_arrayInt)[sv]*m_integrationScale)/yfactor );
+    y = (int)qRound( m_graphRect.y()+
+        (m_scaleMax-m_integrationOffset-
+          (*m_arrayInt)[sv]*m_integrationScale)/yfactor );
 
 	if (color)
 		p->setPen( QPen( m_intColor, m_intLineWidth,penStyle( m_intLineMode ), Qt::RoundCap, Qt::RoundJoin ) );
@@ -386,43 +386,43 @@ void DMMGraph::paintData( QPainter *p, double xfactor,
   y = (int)qRound( m_graphRect.y()+(m_scaleMax-(*m_array)[sv])/yfactor );
 
   if (color)
-	p->setPen( QPen( m_dataColor, m_lineWidth, penStyle( m_lineMode ), Qt::RoundCap, Qt::RoundJoin ) );
+    p->setPen( QPen( m_dataColor, m_lineWidth, penStyle( m_lineMode ), Qt::RoundCap, Qt::RoundJoin ) );
   else
-	p->setPen( QPen( Qt::black, m_lineWidth, penStyle( m_lineMode ), Qt::RoundCap, Qt::RoundJoin ) );
+    p->setPen( QPen( Qt::black, m_lineWidth, penStyle( m_lineMode ), Qt::RoundCap, Qt::RoundJoin ) );
 
   pCnt = 1;
   m_drawArray.setPoint( 0, QPoint( m_graphRect.x(), y ) );
 
   for (int i=sv+1; i<m_pointer; i++)
   {
-	int x = (int)qRound( (i-sv)/xfactor ) + m_graphRect.x();
-	if (x <= m_graphRect.x()+m_graphRect.width())
-	{
-	  int y = (int)qRound( m_graphRect.y()+(m_scaleMax-(*m_array)[i])/yfactor );
+    int x = (int)qRound( (i-sv)/xfactor ) + m_graphRect.x();
+    if (x <= m_graphRect.x()+m_graphRect.width())
+    {
+      int y = (int)qRound( m_graphRect.y()+(m_scaleMax-(*m_array)[i])/yfactor );
 
 	  m_drawArray.setPoint( pCnt++, QPoint( x, y ) );
 	}
   }
   if (pCnt)
   {
-	  int pointCount=(pCnt == -1 ) ?  m_drawArray.size() : pCnt;
-	  p->drawPolyline(m_drawArray.constData(),pointCount);
-	  //p->drawPolyline( m_drawArray, 0, pCnt );
+      int pointCount=(pCnt == -1 ) ?  m_drawArray.size() : pCnt;
+      p->drawPolyline(m_drawArray.constData(),pointCount);
+      //p->drawPolyline( m_drawArray, 0, pCnt );
   }
 
   y = (int)qRound( m_graphRect.y()+(m_scaleMax-(*m_array)[sv])/yfactor );
 
   if (color)
-	p->setPen( m_dataColor );
+    p->setPen( m_dataColor );
   else
-	p->setPen( Qt::black );
+    p->setPen( Qt::black );
 
   for (int i=sv+1; i<m_pointer; i++)
   {
-	int x = (int)qRound( (i-sv)/xfactor ) + m_graphRect.x();
-	if (x <= m_graphRect.x()+m_graphRect.width())
-	{
-	  int y = (int)qRound( m_graphRect.y()+(m_scaleMax-(*m_array)[i])/yfactor );
+    int x = (int)qRound( (i-sv)/xfactor ) + m_graphRect.x();
+    if (x <= m_graphRect.x()+m_graphRect.width())
+    {
+      int y = (int)qRound( m_graphRect.y()+(m_scaleMax-(*m_array)[i])/yfactor );
 
 	  drawPoint( m_pointMode, p, x, y );
 	}
@@ -435,10 +435,10 @@ void DMMGraph::paintThresholds( QPainter *p, double /* xfactor */, double /*yfac
 {
   if (m_startExternal)
   {
-	if (printer && !color)
-		p->setPen( Qt::gray );
-	else
-		p->setPen( m_externalColor );
+    if (printer && !color)
+        p->setPen( Qt::gray );
+    else
+        p->setPen( m_externalColor );
 
 	p->drawLine( m_graphRect.x(), m_externalThresholdY,
 				 m_graphRect.x()+m_graphRect.width(), m_externalThresholdY );
@@ -446,10 +446,10 @@ void DMMGraph::paintThresholds( QPainter *p, double /* xfactor */, double /*yfac
 
   if (m_showIntegration)
   {
-	if (printer && !color)
-		p->setPen( Qt::darkGray );
-	else
-		p->setPen( m_intThresholdColor );
+    if (printer && !color)
+        p->setPen( Qt::darkGray );
+    else
+        p->setPen( m_intThresholdColor );
 
 	p->drawLine( m_graphRect.x(), m_integrationThresholdY,
 				 m_graphRect.x()+m_graphRect.width(), m_integrationThresholdY );
@@ -457,10 +457,10 @@ void DMMGraph::paintThresholds( QPainter *p, double /* xfactor */, double /*yfac
 
   if (m_mode == Raising || m_mode == Falling)
   {
-	if (printer && !color)
-		p->setPen( Qt::gray );
-	else
-		p->setPen( m_startColor );
+    if (printer && !color)
+        p->setPen( Qt::gray );
+    else
+        p->setPen( m_startColor );
 
 	p->drawLine( m_graphRect.x(), m_triggerThresholdY,
 				 m_graphRect.x()+m_graphRect.width(), m_triggerThresholdY );
@@ -480,7 +480,7 @@ void DMMGraph::resizeEvent( QResizeEvent * )
 
   m_yfactor = createYScale( m_graphRect.height(), m_ystep );
   m_xfactor = createTimeScale( m_graphRect.width(), m_xstep, m_hUnitFact,
-							   m_maxUnit, m_hUnit );
+                               m_maxUnit, m_hUnit );
 
   m_externalThresholdY = (int)qRound( m_graphRect.y()+(m_scaleMax-m_externalThreshold)/m_yfactor );
   m_integrationThresholdY = (int)qRound( m_graphRect.y()+(m_scaleMax-m_integrationThreshold)/m_yfactor );
@@ -503,7 +503,7 @@ void DMMGraph::setGraphSize( int size, int length )
   m_array->resize( m_length );
   m_arrayInt->resize( m_length );
   if (m_pointer >= m_length)
-	m_pointer = m_length-1;
+    m_pointer = m_length-1;
 
   m_drawArray.resize( m_length );
 
@@ -544,8 +544,8 @@ void DMMGraph::addValue( double val )
 {
   if (m_mode == DMMGraph::Time && !m_running)
   {
-	// we may miss the start due to aliasing otherwise
-	int diff = m_startTime.secsTo( QTime::currentTime() );
+    // we may miss the start due to aliasing otherwise
+    int diff = m_startTime.secsTo( QTime::currentTime() );
 
 	if (diff >= 0 && diff < 2)
 	{
@@ -556,57 +556,57 @@ void DMMGraph::addValue( double val )
 
   if (m_mode == DMMGraph::Raising && !m_running)
   {
-	if (m_lastValValid)
-	{
-	  if (m_lastVal < m_raisingThreshold && val >= m_raisingThreshold)
-	  {
-		qApp->beep();
-		startSLOT();
-	  }
-	}
+    if (m_lastValValid)
+    {
+      if (m_lastVal < m_raisingThreshold && val >= m_raisingThreshold)
+      {
+        qApp->beep();
+        startSLOT();
+      }
+    }
   }
 
   if (m_mode == DMMGraph::Falling && !m_running)
   {
-	if (m_lastValValid)
-	{
-	  if (m_lastVal > m_fallingThreshold && val <= m_fallingThreshold)
-	  {
-		qApp->beep();
-		startSLOT();
-	  }
-	}
+    if (m_lastValValid)
+    {
+      if (m_lastVal > m_fallingThreshold && val <= m_fallingThreshold)
+      {
+        qApp->beep();
+        startSLOT();
+      }
+    }
   }
 
   if (!m_externalStarted && m_running && m_startExternal)
   {
-	if (m_externalFalling &&
-		m_lastVal > m_externalThreshold &&
-		val <= m_externalThreshold)
-	{
-	  m_externalStarted = true;
-	  Q_EMIT externalTriggered();
-	}
-	else if (!m_externalFalling &&
-			 m_lastVal < m_externalThreshold &&
-			 val >= m_externalThreshold)
-	{
-	  m_externalStarted = true;
-	  Q_EMIT externalTriggered();
-	}
+    if (m_externalFalling &&
+        m_lastVal > m_externalThreshold &&
+        val <= m_externalThreshold)
+    {
+      m_externalStarted = true;
+      Q_EMIT externalTriggered();
+    }
+    else if (!m_externalFalling &&
+             m_lastVal < m_externalThreshold &&
+             val >= m_externalThreshold)
+    {
+      m_externalStarted = true;
+      Q_EMIT externalTriggered();
+    }
   }
 
   m_lastValValid = true;
   m_lastVal = val;
 
   if (!m_running)
-	  return;
+      return;
 
   m_sum += val;
 
   if (0 == m_sampleCounter)
   {
-	m_dirty = true;
+    m_dirty = true;
 
 	if (!m_first)
 		val = m_sum / (double)m_sampleTime;
@@ -646,7 +646,7 @@ void DMMGraph::addValue( double val )
 	if (resFlag)
 	  resizeEvent( 0 );
 
-	//update();
+    //update();
   }
 
   m_sampleCounter++;
@@ -654,15 +654,15 @@ void DMMGraph::addValue( double val )
 
   if (m_sampleCounter == m_sampleTime)
   {
-	m_sampleCounter = 0;
-	emitInfo();
+    m_sampleCounter = 0;
+    emitInfo();
   }
 
   if (0 == m_remainingLength && m_sampleLength != 0)
   {
-	qApp->beep();
-	stopSLOT();
-	return;
+    qApp->beep();
+    stopSLOT();
+    return;
   }
 }
 
@@ -682,21 +682,21 @@ double DMMGraph::createYScale( int h, double & ystep )
 
   do
   {
-	if (ddiv > one && ddiv <= two)
-	{
-	  ystep = one;
-	  gotcha = true;
-	}
-	else if (ddiv > two && ddiv <= five)
-	{
-	  ystep = two;
-	  gotcha = true;
-	}
-	else if (ddiv > five && ddiv < one*10.)
-	{
-	  ystep = five;
-	  gotcha = true;
-	}
+    if (ddiv > one && ddiv <= two)
+    {
+      ystep = one;
+      gotcha = true;
+    }
+    else if (ddiv > two && ddiv <= five)
+    {
+      ystep = two;
+      gotcha = true;
+    }
+    else if (ddiv > five && ddiv < one*10.)
+    {
+      ystep = five;
+      gotcha = true;
+    }
 
 	one  *= 10.;
 	two  *= 10.;
@@ -721,10 +721,10 @@ double DMMGraph::createTimeScale( int w, double & xstep, double & hUnitFact, dou
 
   if (ddiv > 60)
   {
-	ddiv /= 60;
-	hUnit = tr( "[min]" );
-	hUnitFact /= 60;
-	maxUnit /= 60;
+    ddiv /= 60;
+    hUnit = tr( "[min]" );
+    hUnitFact /= 60;
+    maxUnit /= 60;
 
 	if (ddiv > 60)
 	{
@@ -754,21 +754,21 @@ double DMMGraph::createTimeScale( int w, double & xstep, double & hUnitFact, dou
 
   do
   {
-	if (ddiv > one && ddiv <= two)
-	{
-	  xstep = one;
-	  gotcha = true;
-	}
-	else if (ddiv > two && ddiv <= five)
-	{
-	  xstep = two;
-	  gotcha = true;
-	}
-	else if (ddiv > five && ddiv < one*10.)
-	{
-	  xstep = five;
-	  gotcha = true;
-	}
+    if (ddiv > one && ddiv <= two)
+    {
+      xstep = one;
+      gotcha = true;
+    }
+    else if (ddiv > two && ddiv <= five)
+    {
+      xstep = two;
+      gotcha = true;
+    }
+    else if (ddiv > five && ddiv < one*10.)
+    {
+      xstep = five;
+      gotcha = true;
+    }
 
 	one  *= 10.;
 	two  *= 10.;
@@ -782,17 +782,17 @@ double DMMGraph::createTimeScale( int w, double & xstep, double & hUnitFact, dou
 void DMMGraph::setUnit( const QString & unit )
 {
   if (unit.left(1) == "n")
-	m_unit = unit.mid( 1 );
+    m_unit = unit.mid( 1 );
   else if (unit.left(1) == "u")
-	m_unit = unit.mid( 1 );
+    m_unit = unit.mid( 1 );
   else if (unit.left(1) == "m")
-	m_unit = unit.mid( 1 );
+    m_unit = unit.mid( 1 );
   else if (unit.left(1) == "k")
-	m_unit = unit.mid( 1 );
+    m_unit = unit.mid( 1 );
   else if (unit.left(1) == "M")
-	m_unit = unit.mid( 1 );
+    m_unit = unit.mid( 1 );
   else
-	m_unit = unit;
+    m_unit = unit;
 
   return;
 }
@@ -802,13 +802,13 @@ void DMMGraph::clearSLOT()
   m_pointer = 0;
   if (m_autoScale)
   {
-	if (m_includeZero)
-		m_scaleMin = m_scaleMax = 0;
-	else
-	{
-	  m_scaleMin =  1e40;
-	  m_scaleMax = -1e40;
-	}
+    if (m_includeZero)
+        m_scaleMin = m_scaleMax = 0;
+    else
+    {
+      m_scaleMin =  1e40;
+      m_scaleMax = -1e40;
+    }
   }
 
   m_graphStartDateTime = QDateTime::currentDateTime();
@@ -831,33 +831,33 @@ void DMMGraph::emitInfo()
   QString txt;
 
   if (w)
-	txt=QString("%1/%2 - %3week%4 %5day&6 %7:%8:%9 - %10").arg(m_pointer).arg(m_length).arg(w).arg((w>1 ? "s" : "")).arg(d).arg((d>1 ? "s" : "")).arg(h).arg(m).arg(s)
-														  .arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
+    txt=QString("%1/%2 - %3week%4 %5day&6 %7:%8:%9 - %10").arg(m_pointer).arg(m_length).arg(w).arg((w>1 ? "s" : "")).arg(d).arg((d>1 ? "s" : "")).arg(h).arg(m).arg(s)
+                                                          .arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
   else if (d)
-	  txt=QString("%1/%2 - %3day%4 %5:%6:%7 - %8").arg(m_pointer).arg(m_length).arg(d).arg((d>1 ? "s" : "")).arg(h).arg(m).arg(s).arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
+      txt=QString("%1/%2 - %3day%4 %5:%6:%7 - %8").arg(m_pointer).arg(m_length).arg(d).arg((d>1 ? "s" : "")).arg(h).arg(m).arg(s).arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
   else if (h)
-	  txt=QString("%1/%2 - %3:%4:%5 - %6").arg(m_pointer).arg(m_length).arg(h).arg(m).arg(s).arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
+      txt=QString("%1/%2 - %3:%4:%5 - %6").arg(m_pointer).arg(m_length).arg(h).arg(m).arg(s).arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
   else
-	  txt=QString("%1/%2 - %3:%4 - %5").arg(m_pointer).arg(m_length).arg(m).arg(s).arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
+      txt=QString("%1/%2 - %3:%4 - %5").arg(m_pointer).arg(m_length).arg(m).arg(s).arg(m_running ? tr( "Sampling" ):tr( "Stopped" ));
   Q_EMIT info( txt );
 }
 
 void DMMGraph::wheelEvent( QWheelEvent *ev )
 {
   if (ev->delta() > 0)
-	Q_EMIT zoomOut( 1.1 );
+    Q_EMIT zoomOut( 1.1 );
   else
-	Q_EMIT zoomIn( 1.1 );
+    Q_EMIT zoomIn( 1.1 );
 }
 
 void DMMGraph::mousePressEvent( QMouseEvent *ev )
 {
   if (ev->button() == Qt::LeftButton)
   {
-	if (m_scaleMin == m_scaleMax || m_scaleMin == 1e40)
-		return;
-	if (ev->x() < m_graphRect.x())
-		return;
+    if (m_scaleMin == m_scaleMax || m_scaleMin == 1e40)
+        return;
+    if (ev->x() < m_graphRect.x())
+        return;
 
 	m_mouseDown = true;
 	m_mousePan = false;
@@ -874,7 +874,7 @@ void DMMGraph::mousePressEvent( QMouseEvent *ev )
   }
   else if(ev->button() == Qt::RightButton)
   {
-	m_popup->clear();
+    m_popup->clear();
 
 	if (m_connected)
 	{
@@ -930,29 +930,29 @@ void DMMGraph::mousePressEvent( QMouseEvent *ev )
 	  //m_popup->insertItem( tr("Import data..."), IDImportData );
 	}
 
-	m_popup->popup( ev->globalPos() );
+    m_popup->popup( ev->globalPos() );
   }
   else if (ev->button() == Qt::MidButton)
   {
-	m_mouseDown = false;
-	m_mousePan = true;
+    m_mouseDown = false;
+    m_mousePan = true;
 
-	m_mpos = ev->pos();
+    m_mpos = ev->pos();
   }
 }
 
 void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
 {
   if (m_scaleMin == m_scaleMax || m_scaleMin == 1e40)
-	  return;
+      return;
 
   int sv = qMax( 0, scrollbar->value() );
 
   if (!m_mouseDown)
   {
-	if (m_mousePan)
-	{
-	  //cerr << "delta: " << m_mpos.x()-ev->pos().x() << " " << m_mpos.y()-ev->pos().y() << endl;
+    if (m_mousePan)
+    {
+      //cerr << "delta: " << m_mpos.x()-ev->pos().x() << " " << m_mpos.y()-ev->pos().y() << endl;
 
 	  double offset = (m_mpos.x()-ev->pos().x())*m_xfactor;
 	  //cerr << "delta=" << m_mpos.x()-ev->pos().x() << " offset=" << offset << endl;
@@ -988,7 +988,7 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
   }
   else if (m_cursorMode == Trigger)
   {
-	m_triggerThresholdY = ev->y();
+    m_triggerThresholdY = ev->y();
 
 	if (m_mode == Raising)
 	{
@@ -1003,51 +1003,51 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
 	  Q_EMIT thresholdChanged( Trigger, m_fallingThreshold );
 	}
 
-	update();
+    update();
   }
   else if (m_cursorMode == External)
   {
-	m_externalThresholdY = ev->y();
-	m_externalThreshold = m_scaleMax - ( m_externalThresholdY - m_graphRect.y()) * m_yfactor;
+    m_externalThresholdY = ev->y();
+    m_externalThreshold = m_scaleMax - ( m_externalThresholdY - m_graphRect.y()) * m_yfactor;
 
 	Q_EMIT thresholdChanged( External, m_externalThreshold );
 	update();
   }
   else if (m_cursorMode == Integration)
   {
-	m_integrationThresholdY = ev->y();
-	m_integrationThreshold = m_scaleMax - ( m_integrationThresholdY - m_graphRect.y()) * m_yfactor;
+    m_integrationThresholdY = ev->y();
+    m_integrationThreshold = m_scaleMax - ( m_integrationThresholdY - m_graphRect.y()) * m_yfactor;
 
 	Q_EMIT thresholdChanged( Integration, m_integrationThreshold );
 	update();
   }
   else if (m_cursorMode == NoCursor)
   {
-	drawCursor( m_mpos );
-	if (ev->x() < 51)
-	{
-	  drawCursor( QPoint( 51, ev->y() ));
-	  m_mpos = QPoint( 51, ev->y() );
-	}
-	else
-	{
-	  drawCursor( ev->pos() );
-	  m_mpos = ev->pos();
-	}
-	m_infoBox->move( ev->globalPos().x()+4, ev->globalPos().y()+4 );
-	fillInfoBox( ev->pos() );
+    drawCursor( m_mpos );
+    if (ev->x() < 51)
+    {
+      drawCursor( QPoint( 51, ev->y() ));
+      m_mpos = QPoint( 51, ev->y() );
+    }
+    else
+    {
+      drawCursor( ev->pos() );
+      m_mpos = ev->pos();
+    }
+    m_infoBox->move( ev->globalPos().x()+4, ev->globalPos().y()+4 );
+    fillInfoBox( ev->pos() );
   }
 }
 
 void DMMGraph::mouseReleaseEvent( QMouseEvent * )
 {
   if (m_scaleMin == m_scaleMax || m_scaleMin == 1e40)
-	  return;
+      return;
 
   if (m_mouseDown)
   {
-	drawCursor( m_mpos );
-	m_infoBox->hide();
+    drawCursor( m_mpos );
+    m_infoBox->hide();
   }
   m_mouseDown = false;
   m_mousePan = false;
@@ -1065,8 +1065,8 @@ void DMMGraph::drawCursor( const QPoint & pos )
 
   if (m_crosshair)
   {
-	int x = (int)qRound( (pos.x()-m_graphRect.x())*m_xfactor + sv );
-	if (x < 0) x = 0;
+    int x = (int)qRound( (pos.x()-m_graphRect.x())*m_xfactor + sv );
+    if (x < 0) x = 0;
 
 	if (x < m_pointer)
 	{
@@ -1090,7 +1090,7 @@ void DMMGraph::fillInfoBox( const QPoint & pos )
 
   if (x < m_pointer)
   {
-	tmpStr += "\n";
+    tmpStr += "\n";
 
 	QString prefix ="";
 	double val = (*m_array)[x];
@@ -1147,24 +1147,23 @@ bool DMMGraph::exportDataSLOT()
   QString fn = QFileDialog::getSaveFileName( this,tr("Export data"),m_cfg->getString("QtDMM/LastUsesPath",""));
   if (!fn.isNull())
   {
-	QFile file( fn );
-	m_cfg->setString("QtDMM/LastUsesPath",path.absoluteFilePath(fn));
-	file.open( QIODevice::WriteOnly );
+    QFile file( fn );
+    m_cfg->setString("QtDMM/LastUsesPath",path.absoluteFilePath(fn));
+    file.open( QIODevice::WriteOnly );
 
-	QTextStream ts( &file );
+    QTextStream ts( &file );
 
 	for (int i=0; i<m_pointer; i++)
 	{
 	  QDateTime dt = m_graphStartDateTime.addSecs( i*(int)qRound(m_sampleTime/10.) );
-	  QString line=QString("%1.%2.%3\t%4:%5:%6\t%7\t%8\n").arg(dt.date().day()).arg(dt.date().month()).arg(dt.date().year()).arg(dt.time().hour())
-														  .arg(dt.time().minute()).arg(dt.time().second()).arg((*m_array)[i],0,'f').arg(m_unit);
+	  QString line=QString("%1\t%2\t%3\n").arg(dt.toString("dd.MM.yyyy\tHH:mm:ss")).arg((*m_array)[i],0,'f').arg(m_unit);
 	  ts << line;
 	}
 	m_dirty = false;
 
 	file.close();
 
-	return true;
+    return true;
   }
 
   return false;
@@ -1174,14 +1173,14 @@ void DMMGraph::importDataSLOT()
 {
   if (m_dirty && m_alertUnsaved)
   {
-	QMessageBox question( tr("QtDMM: Unsaved data" ),
-						  tr("<font size=+2><b>Unsaved data</b></font><p>"
-							 "Importing data will overwrite your measured data"
-							 "<p>Do you want to export your unsaved data first?" ),
-							 QMessageBox::Information,
-							 QMessageBox::Yes | QMessageBox::Default,
-							 QMessageBox::No,
-							 QMessageBox::Cancel | QMessageBox::Escape );
+    QMessageBox question( tr("QtDMM: Unsaved data" ),
+                          tr("<font size=+2><b>Unsaved data</b></font><p>"
+                             "Importing data will overwrite your measured data"
+                             "<p>Do you want to export your unsaved data first?" ),
+                             QMessageBox::Information,
+                             QMessageBox::Yes | QMessageBox::Default,
+                             QMessageBox::No,
+                             QMessageBox::Cancel | QMessageBox::Escape );
 
 	question.setButtonText( QMessageBox::Yes, tr("Export data first") );
 	question.setButtonText( QMessageBox::No, tr("Import & overwrite data") );
@@ -1206,9 +1205,9 @@ void DMMGraph::importDataSLOT()
 
   if (!fn.isNull())
   {
-	m_cfg->setString("QtDMM/LastUsesPath",path.absoluteFilePath(fn));
-	// First pass -> figure out size and sample time
-	QFile file( fn );
+    m_cfg->setString("QtDMM/LastUsesPath",path.absoluteFilePath(fn));
+    // First pass -> figure out size and sample time
+    QFile file( fn );
 
 	QStringList token;
 	QStringList dateToken;
@@ -1297,10 +1296,10 @@ void DMMGraph::importDataSLOT()
 	}
 
   /*  if (cnt*m_sampleTime > length)
-	{
-	  if (size > cnt*m_sampleTime) size = cnt*m_sampleTime;
-	  emit graphSize( size, cnt*m_sampleTime );
-	  setGraphSize( size, cnt*m_sampleTime );
+    {
+      if (size > cnt*m_sampleTime) size = cnt*m_sampleTime;
+      emit graphSize( size, cnt*m_sampleTime );
+      setGraphSize( size, cnt*m_sampleTime );
   }*/
 
 	m_scaleMin =  1e40;
@@ -1361,20 +1360,20 @@ void DMMGraph::setScale( bool autoScale, bool includeZero, double min, double ma
 
   if (!autoScale)
   {
-	m_scaleMin = min;
-	m_scaleMax = max;
+    m_scaleMin = min;
+    m_scaleMax = max;
 
-	computeUnitFactor();
+    computeUnitFactor();
   }
   else
   {
-	if (m_includeZero)
-		m_scaleMin = m_scaleMax = 0;
-	else
-	{
-	  m_scaleMin =  1e40;
-	  m_scaleMax = -1e40;
-	}
+    if (m_includeZero)
+        m_scaleMin = m_scaleMax = 0;
+    else
+    {
+      m_scaleMin =  1e40;
+      m_scaleMax = -1e40;
+    }
 
 
 	for (int i=0; i<m_pointer; i++)
@@ -1383,7 +1382,7 @@ void DMMGraph::setScale( bool autoScale, bool includeZero, double min, double ma
 	  computeMinMax( val );
 	}
 
-	computeUnitFactor();
+    computeUnitFactor();
   }
 
   resizeEvent( 0 );
@@ -1395,21 +1394,21 @@ bool DMMGraph::computeMinMax( double val )
 
   if (val > m_scaleMax*0.95)
   {
-	if (val > 0)
-		m_scaleMax = val*1.2;
-	else
-		m_scaleMax = val/1.2;
+    if (val > 0)
+        m_scaleMax = val*1.2;
+    else
+        m_scaleMax = val/1.2;
 
-	ret = true;
+    ret = true;
   }
   if (val < m_scaleMin*0.95)
   {
-	if (val > 0)
-		m_scaleMin = val/1.2;
-	else
-		m_scaleMin = val*1.2;
+    if (val > 0)
+        m_scaleMin = val/1.2;
+    else
+        m_scaleMin = val*1.2;
 
-	ret = true;
+    ret = true;
   }
 
   return ret;
@@ -1461,42 +1460,42 @@ void DMMGraph::drawPoint( PointMode mode, QPainter *p, int x, int y )
 
   switch (mode)
   {
-	  case NoPoint:
-		return;
-	  case Square:
-		p->drawRect( x-2, y-2, 5, 5 );
-		return;
-	  case Circle:
-		p->drawEllipse( x-2, y-2, 5, 5 );
-		return;
-	  case Diamond:
-		arr.setPoint( 0, QPoint( x-3, y ) );
-		arr.setPoint( 1, QPoint( x, y+3 ) );
-		arr.setPoint( 2, QPoint( x+3, y ) );
-		arr.setPoint( 3, QPoint( x, y-3 ) );
-		p->drawPolygon( arr );
-		return;
-	  case X:
-		p->drawLine( x-3, y-3, x+3, y+3 );
-		p->drawLine( x+3, y-3, x-3, y+3 );
-		return;
-	  case LargeSquare:
-		p->drawRect( x-3, y-3, 7, 7 );
-		return;
-	  case LargeCircle:
-		p->drawEllipse( x-3, y-3, 7, 7 );
-		return;
-	  case LargeDiamond:
-		arr.setPoint( 0, QPoint( x-4, y ) );
-		arr.setPoint( 1, QPoint( x, y+4 ) );
-		arr.setPoint( 2, QPoint( x+4, y ) );
-		arr.setPoint( 3, QPoint( x, y-4 ) );
-		p->drawPolygon( arr );
-		return;
-	  case LargeX:
-		p->drawLine( x-4, y-4, x+4, y+4 );
-		p->drawLine( x+4, y-4, x-4, y+4 );
-		return;
+      case NoPoint:
+        return;
+      case Square:
+        p->drawRect( x-2, y-2, 5, 5 );
+        return;
+      case Circle:
+        p->drawEllipse( x-2, y-2, 5, 5 );
+        return;
+      case Diamond:
+        arr.setPoint( 0, QPoint( x-3, y ) );
+        arr.setPoint( 1, QPoint( x, y+3 ) );
+        arr.setPoint( 2, QPoint( x+3, y ) );
+        arr.setPoint( 3, QPoint( x, y-3 ) );
+        p->drawPolygon( arr );
+        return;
+      case X:
+        p->drawLine( x-3, y-3, x+3, y+3 );
+        p->drawLine( x+3, y-3, x-3, y+3 );
+        return;
+      case LargeSquare:
+        p->drawRect( x-3, y-3, 7, 7 );
+        return;
+      case LargeCircle:
+        p->drawEllipse( x-3, y-3, 7, 7 );
+        return;
+      case LargeDiamond:
+        arr.setPoint( 0, QPoint( x-4, y ) );
+        arr.setPoint( 1, QPoint( x, y+4 ) );
+        arr.setPoint( 2, QPoint( x+4, y ) );
+        arr.setPoint( 3, QPoint( x, y-4 ) );
+        p->drawPolygon( arr );
+        return;
+      case LargeX:
+        p->drawLine( x-4, y-4, x+4, y+4 );
+        p->drawLine( x+4, y-4, x-4, y+4 );
+        return;
   }
 }
 
@@ -1504,12 +1503,12 @@ Qt::PenStyle DMMGraph::penStyle( LineMode mode )
 {
   switch (mode)
   {
-	  case NoLine:
-		return Qt::NoPen;
-	  case Solid:
-		return Qt::SolidLine;
-	  case Dot:
-		return Qt::DotLine;
+      case NoLine:
+        return Qt::NoPen;
+      case Solid:
+        return Qt::SolidLine;
+      case Dot:
+        return Qt::DotLine;
   }
   return Qt::SolidLine;
 }
@@ -1531,38 +1530,38 @@ void DMMGraph::computeUnitFactor()
 
   if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) > 1000)
   {
-	m_factor /= 1000.;
-	m_prefix = "k";
+    m_factor /= 1000.;
+    m_prefix = "k";
   }
   if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) > 1000)
   {
-	m_factor /= 1000.;
-	m_prefix = "M";
+    m_factor /= 1000.;
+    m_prefix = "M";
   }
   if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) > 1000)
   {
-	m_factor /= 1000.;
-	m_prefix = "G";
+    m_factor /= 1000.;
+    m_prefix = "G";
   }
   if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
   {
-	m_factor *= 1000.;
-	m_prefix = "m";
+    m_factor *= 1000.;
+    m_prefix = "m";
   }
   if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
   {
-	m_factor *= 1000.;
-	m_prefix = "µ";
+    m_factor *= 1000.;
+    m_prefix = "µ";
   }
   if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
   {
-	m_factor *= 1000.;
-	m_prefix = "n";
+    m_factor *= 1000.;
+    m_prefix = "n";
   }
   if (qMax( fabs(m_scaleMax*m_factor), fabs(m_scaleMin*m_factor)) < 1)
   {
-	m_factor *= 1000.;
-	m_prefix = "p";
+    m_factor *= 1000.;
+    m_prefix = "p";
   }
 }
 
@@ -1570,29 +1569,29 @@ void DMMGraph::popupSLOT(QAction *action )
 {
   switch (action->property("ID").toInt())
   {
-	  case IDConnect:
-		Q_EMIT connectDMM( true );
-		break;
-	  case IDDisconnect:
-		Q_EMIT connectDMM( false );
-		break;
-	  case IDStopRecorder:
-		stopSLOT();
-		break;
-	  case IDStartRecorder:
-		startSLOT();
-		break;
-	  case IDClearGraph:
-		clearSLOT();
-		break;
-	  case IDConfigure:
-		Q_EMIT configure();
-		break;
-	  case IDExportData:
-		Q_EMIT exportData();
-		break;
-	  case IDImportData:
-		Q_EMIT importData();
-		break;
+      case IDConnect:
+        Q_EMIT connectDMM( true );
+        break;
+      case IDDisconnect:
+        Q_EMIT connectDMM( false );
+        break;
+      case IDStopRecorder:
+        stopSLOT();
+        break;
+      case IDStartRecorder:
+        startSLOT();
+        break;
+      case IDClearGraph:
+        clearSLOT();
+        break;
+      case IDConfigure:
+        Q_EMIT configure();
+        break;
+      case IDExportData:
+        Q_EMIT exportData();
+        break;
+      case IDImportData:
+        Q_EMIT importData();
+        break;
   }
 }
