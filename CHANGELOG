@@ -2,6 +2,9 @@ XX/XX/2016 0.9.6
 	   - code clean up
 	   - fix translation loading
 	   - fix message handler
+	   - fix file export (leading zero of the time stamp)
+	   - fix console logging on Windows.
+	   - remove 1/10s sample rate -> don't work with most devices.
 
 14/07/2015 0.9.5
 	   - Port to Qt5
