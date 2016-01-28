@@ -1,4 +1,4 @@
-XX/XX/2016 0.9.6
+28/01/2016 0.9.6
 	   - Code clean up
 	   - fix translation loading
 	   - Fix message handler
@@ -6,6 +6,7 @@ XX/XX/2016 0.9.6
 	   - Fix console logging on Windows
 	   - Remove 1/10s sample rate -> don't work with most devices
 	   - Use infinity sign to set endless recoder
+	   - Fix hang of M-4660A
 
 14/07/2015 0.9.5
 	   - Port to Qt5
