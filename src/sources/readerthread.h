@@ -82,6 +82,7 @@ class ReaderThread : public QObject
 
 	protected Q_SLOTS:
 	  void					socketNotifierSLOT();
+	  void					socketClose();
 
 	private:
 	  QSerialPort			*m_serialPort;
