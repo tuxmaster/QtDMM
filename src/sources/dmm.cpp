@@ -2009,17 +2009,17 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
     } // else
 
     if (!l_bParserError) {
-    // Always update the primary display (ID 0)
-    Q_EMIT value(d_val1, val1, unit1, special, l_bShowBar, 0);
-    if (in[20] == 0x31) { // LCD need Dual display
-        // Enable or update the secondary display (ID 1)
-        Q_EMIT value(d_val2, val2, unit2, special, l_bShowBar, 1); // Keep the l_bShowBar flag!
-    } else {
-        // Disable the secondary display (ID 1) as it is currently unused
-        Q_EMIT value(0, "", "", "", l_bShowBar, 1); // Keep the l_bShowBar flag!
-    } // else
+        // Always update the primary display (ID 0)
+        Q_EMIT value(d_val1, val1, unit1, special, l_bShowBar, 0);
+        if (in[20] == 0x31) { // LCD need Dual display
+            // Enable or update the secondary display (ID 1)
+            Q_EMIT value(d_val2, val2, unit2, special, l_bShowBar, 1); // Keep the l_bShowBar flag!
+        } else {
+            // Disable the secondary display (ID 1) as it is currently unused
+            Q_EMIT value(0, "", "", "", l_bShowBar, 1); // Keep the l_bShowBar flag!
+        } // else
 
-    m_error = tr( "Connected %1" ).arg(m_device);
+        m_error = tr( "Connected %1" ).arg(m_device);
     } else {
         // Parser error
         m_error = tr( "Parser errors on %1" ).arg(m_device);
