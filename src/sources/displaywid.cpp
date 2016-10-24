@@ -377,7 +377,7 @@ void DisplayWid::paintEvent( QPaintEvent * )
 	  {
 		p.fillRect( off, height()-10,
 					(int)qRound((double)(width()-2*off)*percent ), 5,
-					palette().window().color() );
+					palette().windowText().color() );
 	  }
 	}
 
