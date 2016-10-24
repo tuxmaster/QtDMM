@@ -1896,7 +1896,7 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
         if (l_FunctionSelectCode == 0x30) {
             // Measurement mode: Active power + Apparent power
             unit1   = "W";
-            unit2   = "W";  // TODO: Symbol for "VA"?
+            unit2   = "VA";
             special = "AC";
             switch (l_FactorIndex) {
                 case 0:

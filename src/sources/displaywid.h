@@ -60,6 +60,7 @@ class DisplayWid : public QWidget
 	  QBitmap	*m_bigHz;
 	  QBitmap	*m_bigF;
 	  QBitmap	*m_bigV;
+	  QBitmap	*m_bigVA;
 	  QBitmap	*m_bigA;
 	  QBitmap	*m_bigH;
 	  QBitmap	*m_bigW;
@@ -82,6 +83,7 @@ class DisplayWid : public QWidget
 	  QPixmap	*m_smallHz;
 	  QPixmap	*m_smallF;
 	  QPixmap	*m_smallV;
+	  QPixmap	*m_smallVA;
 	  QPixmap	*m_smallA;
 	  QPixmap	*m_smallH;
 	  QPixmap	*m_smallW;
