@@ -74,6 +74,7 @@ class ReaderThread : public QObject
 	  void					readIsoTech();
 	  void					readQM1537Continuous();
 	  void					readVC820();
+	  void					readVC870();
 	  void					readVC940();
 	  void					readRS22812Continuous();
 

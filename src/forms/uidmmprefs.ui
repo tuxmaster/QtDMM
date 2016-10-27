@@ -568,6 +568,11 @@
           <string>9 bytes binary, continuous (RS 22-812)</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>23 bytes ASCII, continuous (VC870)</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

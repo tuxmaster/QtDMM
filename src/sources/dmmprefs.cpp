@@ -42,6 +42,7 @@
 //              7: VC940
 //              8: QM1537
 //              9: 9 binary bytes continuous (22-812)
+//             10: 23 bytes continuous (VC870)
 //    bits
 //    stopBits
 //    number of values (For DMM's that send several lines at once)
@@ -121,6 +122,7 @@ struct DMMInfo dmm_info[] = {
 							  {"Voltcraft VC 670", 4, 2, 7, 1, 1, 0, 3, 0, 0,1,1,1},
 							  {"Voltcraft VC 820", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},
 							  {"Voltcraft VC 840", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},
+							  {"Voltcraft VC 870", 5, 10, 8, 1, 2, 0, 9, 0, 0,1,1,1},
 							  {"Voltcraft VC 920", 3, 7, 7, 1, 1, 2, 9, 0, 0,1,1,1},
 							  {"Voltcraft VC 940", 3, 7, 7, 1, 1, 2, 9, 0, 0,1,1,1},
 
