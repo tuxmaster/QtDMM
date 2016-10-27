@@ -1912,7 +1912,7 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
             } // switch
         } else if (l_FunctionSelectCode == 0x31) {
             // Measurement mode: Power factor + Frequency
-            unit1   = "";   // TODO: Symbol for power factor (cos phi)?
+            unit1   = "cosphi";
             unit2   = "Hz";
             special = "AC";
             switch (l_FactorIndex) {

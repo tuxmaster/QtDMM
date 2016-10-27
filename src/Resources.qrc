@@ -16,6 +16,7 @@
         <file alias="H.xpm">xpm/H.xpm</file>
         <file alias="V.xpm">xpm/V.xpm</file>
         <file alias="VA.xpm">xpm/VA.xpm</file>
+        <file alias="cosphi.xpm">xpm/cosphi.xpm</file>
         <file alias="W.xpm">xpm/W.xpm</file>
         <file alias="DBM.xpm">xpm/DBM.xpm</file>
         <file alias="Ohm.xpm">xpm/Ohm.xpm</file>
@@ -36,6 +37,7 @@
         <file alias="A_small.xpm">xpm/A_small.xpm</file>
         <file alias="V_small.xpm">xpm/V_small.xpm</file>
         <file alias="VA_small.xpm">xpm/VA_small.xpm</file>
+        <file alias="cosphi_small.xpm">xpm/cosphi_small.xpm</file>
         <file alias="H_small.xpm">xpm/H_small.xpm</file>
         <file alias="W_small.xpm">xpm/W_small.xpm</file>
         <file alias="DBM_small.xpm">xpm/DBM_small.xpm</file>

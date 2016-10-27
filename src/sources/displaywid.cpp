@@ -48,6 +48,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_bigF =  BitmapHelper(":/Symbols/F.xpm");
   m_bigV =  BitmapHelper(":/Symbols/V.xpm");
   m_bigVA =  BitmapHelper(":/Symbols/VA.xpm");
+  m_bigcosphi =  BitmapHelper(":/Symbols/cosphi.xpm");
   m_bigA =  BitmapHelper(":/Symbols/A.xpm");
   m_bigH =  BitmapHelper(":/Symbols/H.xpm");
   m_bigW =  BitmapHelper(":/Symbols/W.xpm");
@@ -72,6 +73,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_smallF =  BitmapHelper(":/Symbols/F_small.xpm");
   m_smallV =  BitmapHelper(":/Symbols/V_small.xpm");
   m_smallVA =  BitmapHelper(":/Symbols/VA_small.xpm");
+  m_smallcosphi =  BitmapHelper(":/Symbols/cosphi_small.xpm");
   m_smallA =  BitmapHelper(":/Symbols/A_small.xpm");
   m_smallH =  BitmapHelper(":/Symbols/H_small.xpm");
   m_smallW =  BitmapHelper(":/Symbols/W_small.xpm");
@@ -117,6 +119,7 @@ DisplayWid::~DisplayWid()
 	delete m_bigF;
 	delete m_bigV;
 	delete m_bigVA;
+	delete m_bigcosphi;
 	delete m_bigA;
 	delete m_bigH;
 	delete m_bigW;
@@ -139,6 +142,7 @@ DisplayWid::~DisplayWid()
 	delete m_smallF;
 	delete m_smallV;
 	delete m_smallVA;
+	delete m_smallcosphi;
 	delete m_smallA;
 	delete m_smallH;
 	delete m_smallW;
@@ -567,6 +571,8 @@ void DisplayWid::drawBigUnit( QPainter *p, const QString & str )
 		p->drawPixmap( x, 0, *m_bigV );
 	  else if (str.mid(index) == "VA")
 		p->drawPixmap( x, 0, *m_bigVA );
+	  else if (str.mid(index) == "cosphi")
+		p->drawPixmap( x, 0, *m_bigcosphi );
 	  else if (str.mid(index) == "%")
 		p->drawPixmap( x, 0, *m_bigPercent );
   }
@@ -635,6 +641,8 @@ void DisplayWid::drawSmallUnit( QPainter *p, const QString & str )
 		p->drawPixmap( x, 0, *m_smallV );
 	  else if (str.mid(index) == "VA")
 		p->drawPixmap( x, 0, *m_smallVA );
+	  else if (str.mid(index) == "cosphi")
+		p->drawPixmap( x, 0, *m_smallcosphi );
 	  else if (str.mid(index) == "%")
 		p->drawPixmap( x, 0, *m_smallPercent );
   }
