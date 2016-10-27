@@ -1618,11 +1618,11 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
                     unit2    = "nF";
                     break;
                 case 2:
-                    // 4000 nF
+                    // 4 uF
                     l_Factor = 1e-10;
-                    l_DotPos = 5;
-                    unit1    = "nF";
-                    unit2    = "nF";
+                    l_DotPos = 2;
+                    unit1    = "uF";
+                    unit2    = "uF";
                     break;
                 case 3:
                     // 40 uF
@@ -1639,11 +1639,11 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
                     unit2    = "uF";
                     break;
                 case 5:
-                    // 4 mF
+                    // 4000 uF
                     l_Factor = 1e-7;
-                    l_DotPos = 2;
-                    unit1    = "mF";
-                    unit2    = "mF";
+                    l_DotPos = 5;
+                    unit1    = "uF";
+                    unit2    = "uF";
                     break;
                 case 6:
                     // 40 mF
