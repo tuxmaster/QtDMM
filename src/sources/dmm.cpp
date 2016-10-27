@@ -1686,62 +1686,64 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
             // Measurement mode: Frequency
             special = "FR";
             l_bShowBar = false;
+            
+            // The frequency mode was tested using a "Fluke and Philips" PM5193 programmable synthesizer / function generator (50 MHz)
             switch (l_FactorIndex) {
                 case 0:
-                    // 40 Hz
-                    l_Factor = 1e-3;
+                    // Range 40 Hz: 20 Hz is displayed as "20.000 Hz"
+                    l_Factor = 1e-3; // is Hz
                     l_DotPos = 3;
                     unit1    = "Hz";
                     unit2    = "Hz";
                     break;
                 case 1:
-                    // 400 Hz
-                    l_Factor = 1e-2;
+                    // Range 400 Hz: 200 Hz is displayed as "200.00 Hz"
+                    l_Factor = 1e-2; // is Hz
                     l_DotPos = 4;
                     unit1    = "Hz";
                     unit2    = "Hz";
                     break;
                 case 2:
-                    // 4000 Hz
-                    l_Factor = 1e-1;
-                    l_DotPos = 5;
-                    unit1    = "Hz";
-                    unit2    = "Hz";
+                    // Range 4 kHz: 2 kHz is displayed as "2.0000 kHz"
+                    l_Factor = 1e-1; // is Hz
+                    l_DotPos = 2;
+                    unit1    = "kHz";
+                    unit2    = "kHz";
                     break;
                 case 3:
-                    // 40000 Hz
-                    l_Factor = 1;
-                    l_DotPos = 0;     // TODO: wrong
-                    unit1    = "Hz";  // TODO: wrong
-                    unit2    = "Hz";  // TODO: wrong
+                    // Range 40 kHz: 20 kHz is displayed as "20.000 kHz"
+                    l_Factor = 1; // is Hz
+                    l_DotPos = 3;
+                    unit1    = "kHz";
+                    unit2    = "kHz";
                     break;
                 case 4:
-                    // 40 kHz
-                    l_Factor = 1e1;
-                    l_DotPos = 3;     // TODO: wrong
-                    unit1    = "kHz"; // TODO: check
-                    unit2    = "kHz"; // TODO: check
+                    // Range 400 kHz: 200 kHz is displayed as "200.00 kHz"
+                    l_Factor = 1e1; // is Hz
+                    l_DotPos = 4;
+                    unit1    = "kHz";
+                    unit2    = "kHz";
                     break;
                 case 5:
-                    // 400 kHz
-                    l_Factor = 1e2;
-                    l_DotPos = 3;
-                    unit1    = "Hz";  // TODO: wrong
-                    unit2    = "Hz";  // TODO: wrong
+                    // Range 4 Mhz: 2 MHz is displayed as "2.0000 MHz"
+                    l_Factor = 1e2; // is Hz
+                    l_DotPos = 2;
+                    unit1    = "MHz";
+                    unit2    = "MHz";
                     break;
                 case 6:
-                    // ???
-                    l_Factor = 1e3;
+                    // Range 40 Mhz: 20 MHz is displayed as "20.000 MHz"
+                    l_Factor = 1e3; // is Hz
                     l_DotPos = 3;
-                    unit1    = "Hz";  // TODO: wrong
-                    unit2    = "Hz";  // TODO: wrong
+                    unit1    = "MHz";
+                    unit2    = "MHz";
                     break;
                 case 7:
-                    // ???
-                    l_Factor = 1e4;
-                    l_DotPos = 3;
-                    unit1    = "Hz";  // TODO: wrong
-                    unit2    = "Hz";  // TODO: wrong
+                    // Range 400 Mhz: 50 MHz is displayed as "050.00 MHz"
+                    l_Factor = 1e4; // is Hz
+                    l_DotPos = 4;
+                    unit1    = "MHz";
+                    unit2    = "MHz";
                     break;
                 default:
                     l_bParserError = true;
