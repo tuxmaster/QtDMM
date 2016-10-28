@@ -39,7 +39,8 @@ class ReadEvent
 		IsoTech,
 		VC940Continuous,
 		QM1537Continuous,
-		RS22812Continuous
+		RS22812Continuous,
+		VC870Continuous,
 	  };
 };
 #endif // READEVENT_HH

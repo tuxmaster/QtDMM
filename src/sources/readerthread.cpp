@@ -163,6 +163,8 @@ int  ReaderThread::formatLength() const
 		return 11;
 	  case ReadEvent::VC820Continuous:
 		return 14;
+	  case ReadEvent::VC870Continuous:
+		return 23;
 	  case ReadEvent::IsoTech:
 		return 22;
 	  case ReadEvent::VC940Continuous:
@@ -204,6 +206,9 @@ void ReaderThread::readDMM()
 		  break;
 	  case ReadEvent::VC820Continuous:
 		  readVC820();
+		  break;
+	  case ReadEvent::VC870Continuous:
+		  readVC870();
 		  break;
 	  case ReadEvent::VC940Continuous:
 		  readVC940();
@@ -253,6 +258,11 @@ bool ReaderThread::checkFormat()
 	if ((m_fifo[m_length] & 0xf0) == 0xe0)
 		return true;
 	//if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] & 0xf0 == 0xe0) return true;
+  }
+  else if (m_format == ReadEvent::VC870Continuous)
+  {
+	if ((m_length) && (m_fifo[m_length - 1] == 0x0d) && (m_fifo[m_length] == 0x0a))
+		return true;
   }
   else if (m_format == ReadEvent::IsoTech && m_length >= 22)
   {
@@ -548,6 +558,10 @@ void ReaderThread::readQM1537Continuous()
 }
 
 void ReaderThread::readVC820()
+{
+}
+
+void ReaderThread::readVC870()
 {
 }
 

@@ -80,6 +80,7 @@ class DMM : public QObject
 
 	  void						readASCII( const QByteArray & data, int id, ReadEvent::DataFormat df );
 	  void						readVC820Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
+	  void						readVC870Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
 	  void						readM9803RContinuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
 	  void						readIsoTechContinuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
 	  void						readVC940Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
