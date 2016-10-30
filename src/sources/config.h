@@ -19,7 +19,7 @@
 #define CONFIG_H
 
 #define APP_NAME			"QtDMM"
-#define APP_VERSION			"0.9.7"
+#define APP_VERSION			"0.9.8"
 #define APP_ORGANIZATION	APP_NAME
 
 #endif // CONFIG_H

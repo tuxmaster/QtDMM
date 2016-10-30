@@ -4,7 +4,7 @@ CONFIG   += c++14 no_keywords
 TEMPLATE        = app
 
 TARGET    = qtdmm
-VERSION   = 0.9.7
+VERSION   = 0.9.8
 DESTDIR   = ../bin
 
 UI_DIR=../tmp/ui
