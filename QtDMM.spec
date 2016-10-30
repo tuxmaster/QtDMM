@@ -42,7 +42,8 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications QtDMM.desktop
 %doc AUTHORS COPYING LICENSE README CHANGELOG
 
 %changelog
-* XXXXX Frank Büttner <frank@familie-büttner.de> 0.9.7-1
+* Sun Oct 30 2016 Frank Büttner <frank@familie-büttner.de> 0.9.7-1
+- update to 0.9.7
 
 * Thu Jan 28 2016 Frank Büttner <frank@familie-büttner.de> 0.9.6-1
 - update to 0.9.6
