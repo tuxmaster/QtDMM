@@ -1,5 +1,6 @@
 QT       += core gui widgets printsupport serialport
 CONFIG   += c++14 no_keywords
+QMAKE_LFLAGS += -fuse-ld=gold
 
 TEMPLATE        = app
 
