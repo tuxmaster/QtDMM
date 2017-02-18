@@ -68,6 +68,8 @@ struct DMMInfo dmm_info[] = {
 
 							  {"ELV M9803R", 5, 4, 7, 1, 1, 1, 1, 0, 0,1,1,1},       // no image
 
+							  {"HoldPeak HP-90EPC", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},       // no image
+
 							  {"Iso-Tech IDM 73", 6, 6, 7, 1, 1, 2, 8, 0, 0,1,1,1},   // no image
 
 							  {"MASTECH MAS-343", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
@@ -96,7 +98,6 @@ struct DMMInfo dmm_info[] = {
 							  {"PeakTech 4360", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
 							  {"PeakTech 4390", 5, 0, 7, 2, 4, 0, 1, 0, 0,1,1,1},
 							  {"PeakTech 451", 0, 1, 7, 2, 1, 0, 1, 0, 0,1,1,1},       // no image
-
 							  {"Radioshack 22-805 DMM", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
 							  {"Radioshack RS22-168A", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},   // no image
 							  {"Radioshack 22-812", 4, 9, 8, 1, 1, 0, 1, 0, 0,1,1,1},
