@@ -1,5 +1,5 @@
 Name:		QtDMM
-Version:	0.9.8
+Version:	1.0.0
 Release:	1%{?dist}
 Summary:	Application for dmm's
 Summary(de):	Anwendung für DMM's
@@ -43,6 +43,7 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications QtDMM.desktop
 
 %changelog
 * Frank Büttner <frank@familie-büttner.de> 0.9.8-1
+- update to 1.0.0
 
 * Sun Oct 30 2016 Frank Büttner <frank@familie-büttner.de> 0.9.7-1
 - update to 0.9.7

@@ -5,7 +5,7 @@ QMAKE_LFLAGS += -fuse-ld=gold
 TEMPLATE        = app
 
 TARGET    = qtdmm
-VERSION   = 0.9.8
+VERSION   = 1.0.0
 DESTDIR   = ../bin
 
 UI_DIR=../tmp/ui
