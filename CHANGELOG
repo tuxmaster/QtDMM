@@ -1,6 +1,7 @@
-XX/XX/XXXX 0.9.8
-	   - Use gold linker
-	   - Added HoldPeak HP-90EPC (tstenner)
+06/08/2017 0.9.8
+	   - Use gold linker.
+	   - Added HoldPeak HP-90EPC (tstenner).
+	   - Use pkgconfig for spec file.
 
 30/10/2016 0.9.7
 	   - Added Voltcraft VC870 (Florian Evers)
