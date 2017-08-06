@@ -72,5 +72,5 @@ QtDMM 0.9.0 is distributed under the GNU Public License, version 3.
 
 Plans(Help/Pull requests welcome):
 
-	1.0.0 Switch to the Qt chart module for the graph. (QChart branche)
+	1.0.0 Switch to the Qt chart module for the graph. (QChart branch)
 	2.0.0 Spit to measuring/recording process to an seperate backgound daemon.
