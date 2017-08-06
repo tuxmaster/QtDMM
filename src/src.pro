@@ -1,4 +1,4 @@
-QT       += core gui widgets printsupport serialport
+QT       += core gui widgets printsupport serialport charts
 CONFIG   += c++14 no_keywords
 QMAKE_LFLAGS += -fuse-ld=gold
 

@@ -10,7 +10,7 @@ Source0:	%{name}-%{version}.tar.xz
 
 %global lname qtdmm
 
-BuildRequires:	qt5-qtserialport-devel qt5-qttools-devel desktop-file-utils
+BuildRequires:	pkgconfig(Qt5SerialPort) pgkconfig(Qt5Help) pkgconfig(Qt5Charts) desktop-file-utils
 
 %description
 Application for dmm's.
