@@ -1,5 +1,8 @@
 Makefile
 bin/
-src/Makefile
+src/Makefile*
+src/object_script*
+src/qtdmm_resource.rc
 src/translations/qtdmm_de.qm
 tmp/
+.qmake.stash

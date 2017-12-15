@@ -1,7 +1,8 @@
 QT       += core gui widgets printsupport serialport
 CONFIG   += c++14 no_keywords
-QMAKE_LFLAGS += -fuse-ld=gold
-
+if (linux-g++) {
+    QMAKE_LFLAGS += -fuse-ld=gold
+}
 TEMPLATE        = app
 
 TARGET    = qtdmm
@@ -18,7 +19,11 @@ TRANSLATIONS    =  translations/qtdmm_de.ts
 QMAKE_EXTRA_COMPILERS += lrelease
 lrelease.input         = TRANSLATIONS
 lrelease.output        = ${QMAKE_FILE_BASE}.qm
-lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease-qt5 ${QMAKE_FILE_IN} -qm translations/${QMAKE_FILE_BASE}.qm
+if (linux-g++) {
+    lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease-qt5 ${QMAKE_FILE_IN} -qm translations/${QMAKE_FILE_BASE}.qm
+} else {
+    lrelease.commands      = $$[QT_INSTALL_BINS]/../../../bin/qt5/lrelease ${QMAKE_FILE_IN} -qm translations/${QMAKE_FILE_BASE}.qm
+}
 lrelease.CONFIG       += no_link target_predeps
 
 FORMS =      forms/uiconfigdlg.ui \
