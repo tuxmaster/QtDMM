@@ -147,7 +147,11 @@ DmmPrefs::DmmPrefs( QWidget *parent) : PrefWidget( parent )
   QStringList portlist;
   for(auto port: QSerialPortInfo::availablePorts())
   {
+#ifdef Q_OS_WIN
+	  portlist<<port.portName();
+#else
 	  portlist<<port.systemLocation();
+#endif
 	  qDebug()<<port.portName()<<"--"<<port.manufacturer()<<"--"<<port.description()<<"--"<<port.systemLocation();
   }
   m_portlist->setStringList(portlist);
