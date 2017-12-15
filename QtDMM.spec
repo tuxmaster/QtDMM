@@ -31,7 +31,7 @@ mkdir -p %{buildroot}%_qt5_translationdir
 mkdir -p %{buildroot}%{_datadir}/pixmaps
 install bin/qtdmm %{buildroot}/usr/bin/qtdmm
 install -m 644 src/translations/*.qm %{buildroot}%_qt5_translationdir/
-install -m 644 .pics/large/qtdmm.png %{buildroot}%{_datadir}/pixmaps/qtdmm.png
+install -m 644 pics/large/qtdmm.png %{buildroot}%{_datadir}/pixmaps/qtdmm.png
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications QtDMM.desktop
 %find_lang %{lname} --with-qt
 
