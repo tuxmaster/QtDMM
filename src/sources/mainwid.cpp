@@ -335,7 +335,7 @@ void MainWid::readConfig()
   m_dmm->setDevice( m_configDlg->device() );
   m_dmm->setSpeed( m_configDlg->speed() );
   m_dmm->setFormat( m_configDlg->format() );
-  m_dmm->setPortSettings( (QSerialPort::DataBits)m_configDlg->bits(), (QSerialPort::StopBits)m_configDlg->stopBits(),
+  m_dmm->setPortSettings( static_cast<QSerialPort::DataBits>(m_configDlg->bits()), static_cast<QSerialPort::StopBits>(m_configDlg->stopBits()),
 						  m_configDlg->parity(), m_configDlg->externalSetup(),
 						  m_configDlg->rts(), m_configDlg->cts(),
 						  m_configDlg->dsr(), m_configDlg->dtr()

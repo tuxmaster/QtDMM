@@ -128,7 +128,7 @@ void ScalePrefs::setAutoScaleSLOT( bool autoScale )
 
 void ScalePrefs::zoomInSLOT( double fac )
 {
-  double size = (double)ui_winSize->value() / fac;
+  double size = static_cast<double>(ui_winSize->value()) / fac;
 
   switch (sizeUnit->currentIndex())
   {
@@ -159,16 +159,16 @@ void ScalePrefs::zoomInSLOT( double fac )
 	  break;
   }
 
-  ui_winSize->setValue( (int)size );
+  ui_winSize->setValue( static_cast<int>(size ));
 
 }
 
 void ScalePrefs::zoomOutSLOT( double fac )
 {
-  double size = (double)ui_winSize->value() * fac;
+  double size = static_cast<double>(ui_winSize->value()) * fac;
 
-  double winSec = (double)windowSeconds() * fac;
-  double totalSec = (double)totalSeconds();
+  double winSec = static_cast<double>(windowSeconds()) * fac;
+  double totalSec = static_cast<double>(totalSeconds());
 
   if (winSec <= totalSec)
   {
@@ -197,7 +197,7 @@ void ScalePrefs::zoomOutSLOT( double fac )
 		break;
 	}
 
-	ui_winSize->setValue( (int)size );
+	ui_winSize->setValue( static_cast<int>(size));
   }
   else  // clamp to total length
   {

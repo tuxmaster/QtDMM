@@ -290,7 +290,7 @@ bool ReaderThread::checkFormat()
 	if (m_length > 9)
 		offset = m_length - 9;
 	// mode
-	byte = (unsigned char)(m_fifo[offset]);
+	byte = static_cast<unsigned char>(m_fifo[offset]);
 	mode = byte;
 	if (mode > 25)
 	{
@@ -303,7 +303,7 @@ bool ReaderThread::checkFormat()
 	minmax = 0;
 	if (m_length >= 1)
 	{
-	  byte = (unsigned char)(m_fifo[offset + 1]);
+	  byte = static_cast<unsigned char>(m_fifo[offset + 1]);
 	  if (byte & 0x01) // m
 		multiplier++;
 	  if (byte & 0x02) { // V
@@ -407,7 +407,7 @@ bool ReaderThread::checkFormat()
 	}
 	if (m_length >= 2)
 	{
-	  byte = (unsigned char)(m_fifo[offset + 2]);
+	  byte = static_cast<unsigned char>(m_fifo[offset + 2]);
 	  if (byte & 0x01) // MIN
 		minmax++;
 	  if (byte & 0x02) // REL
@@ -462,17 +462,17 @@ bool ReaderThread::checkFormat()
 	dp = 0;
 	if (m_length >= 3)
 	{
-	  byte = (unsigned char)(m_fifo[offset + 3]);
+	  byte = static_cast<unsigned char>(m_fifo[offset + 3]);
 	  if (byte & 0x08)
 		dp++;
 	  if (m_length >= 4)
 	  {
-		byte = (unsigned char)(m_fifo[offset + 4]);
+		byte = static_cast<unsigned char>(m_fifo[offset + 4]);
 		if (byte & 0x08)
 		  dp++;
 		if (m_length >= 5)
 		{
-		  byte = (unsigned char)(m_fifo[offset + 5]);
+		  byte = static_cast<unsigned char>(m_fifo[offset + 5]);
 		  if (byte & 0x08)
 			dp++;
 		}
@@ -482,7 +482,7 @@ bool ReaderThread::checkFormat()
 		return false;
 	if (m_length >= 6)
 	{
-	  byte = (unsigned char)(m_fifo[offset + 6]);
+	  byte = static_cast<unsigned char>(m_fifo[offset + 6]);
 	  if (byte & 0x08) // MAX
 		minmax++;
 	  if (minmax > 1)
@@ -494,7 +494,7 @@ bool ReaderThread::checkFormat()
 	if (m_length >= 7)
 	{
 	  rs232 = 0;
-	  byte = (unsigned char)(m_fifo[offset + 7]);
+	  byte = static_cast<unsigned char>(m_fifo[offset + 7]);
 	  if (byte & 0x02) // RS232
 		rs232++;
 	  if (rs232 != 1)
@@ -508,10 +508,10 @@ bool ReaderThread::checkFormat()
 	  // XXX compute and validate checksum
 	  for (int i=0; i<8; ++i)
 	  {
-		byte = (unsigned char)(m_fifo[offset + i] & 0x0ff);
+		byte = static_cast<unsigned char>(m_fifo[offset + i] & 0x0ff);
 		checksum += byte;
 	  }
-	  byte = (unsigned char)(m_fifo[offset + 8] & 0x0ff);
+	  byte = static_cast<unsigned char>(m_fifo[offset + 8] & 0x0ff);
 	  if (((checksum + 57) & 0x0ff) == byte)
 		return true;
 	  else

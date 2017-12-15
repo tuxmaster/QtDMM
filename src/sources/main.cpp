@@ -30,9 +30,9 @@ void myMessageOutput( QtMsgType type,const QMessageLogContext &, const QString &
 {
   switch ( type )
   {
-    case QtDebugMsg:
+	case QtDebugMsg:
 #ifdef QT_DEBUG
-          qDebug()<<"Debug: "<<msg;
+		  qDebug()<<"Debug: "<<msg;
 #endif
 		break;
 	case QtWarningMsg:
@@ -43,7 +43,6 @@ void myMessageOutput( QtMsgType type,const QMessageLogContext &, const QString &
 		break;
 	case QtFatalMsg:
 		 qFatal(QString("Fatal: %1").arg(msg).toUtf8());
-		break;
 	case QtCriticalMsg:
 		  qCritical()<<"Critial: "<<msg;
 		break;
@@ -76,8 +75,8 @@ int main( int argc, char **argv )
 
   if((!AppTranslation.isEmpty()) && (!QtTranslation.isEmpty()))
   {
-    app.installTranslator(&QtTranslation);
-    app.installTranslator(&AppTranslation);
+	app.installTranslator(&QtTranslation);
+	app.installTranslator(&AppTranslation);
   }
   MainWin mainWin;
 
@@ -86,7 +85,7 @@ int main( int argc, char **argv )
 
   parser.process(app);
   if(parser.isSet("console"))
-    mainWin.setConsoleLogging( true );
+	mainWin.setConsoleLogging( true );
   mainWin.show();
   mainWin.move( 100, 100 );
 

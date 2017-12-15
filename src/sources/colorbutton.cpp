@@ -46,14 +46,14 @@ void ColorButton::setColor( const QColor & c )
   img.fill(m_color.rgb());
   for (int i=0; i<16; ++i)
   {
-	((QRgb *)img.scanLine(0))[i] = 0;
-	((QRgb *)img.scanLine(11))[i] = 0;
+	reinterpret_cast<QRgb*>(img.scanLine(0))[i] = 0;
+	reinterpret_cast<QRgb*>(img.scanLine(11))[i] = 0;
   }
 
   for (int i=0; i<12; ++i)
   {
-	((QRgb *)img.scanLine(i))[0] = 0;
-	((QRgb *)img.scanLine(i))[15] = 0;
+	reinterpret_cast<QRgb*>(img.scanLine(i))[0] = 0;
+	reinterpret_cast<QRgb*>(img.scanLine(i))[15] = 0;
   }
 
   QPixmap pix;
