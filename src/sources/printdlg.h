@@ -28,6 +28,7 @@
 
 
 class QPrinter;
+namespace qtdmm {
 class PrintDlg : public QDialog, private Ui::UIPrintDlg
 {
   Q_OBJECT
@@ -46,5 +47,5 @@ class PrintDlg : public QDialog, private Ui::UIPrintDlg
 	  void		createPrinterString();
 
 };
-
+}
 #endif // PRINTDLG_HH

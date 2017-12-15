@@ -46,7 +46,7 @@ MainWid::MainWid( QWidget *parent ) :  QFrame( parent ),
 
   m_configDlg->readPrinter( &m_printer );
 
-  m_printDlg = new PrintDlg( this );
+  m_printDlg = new qtdmm::PrintDlg( this );
   m_printDlg->hide();
 
   connect( m_dmm, SIGNAL( value( double, const QString &, const QString &, const QString &, bool, int )),

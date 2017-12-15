@@ -26,7 +26,7 @@
 #include <QtPrintSupport>
 
 #include "printdlg.h"
-
+namespace qtdmm {
 PrintDlg::PrintDlg( QWidget *parent ) : QDialog( parent)
 {
   setupUi(this);
@@ -76,4 +76,5 @@ void PrintDlg::createPrinterString()
 void PrintDlg::on_helpBut_clicked()
 {
   QWhatsThis::enterWhatsThisMode();
+}
 }
