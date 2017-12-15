@@ -1,5 +1,8 @@
 QT       += core gui widgets printsupport serialport
 CONFIG   += c++14 no_keywords
+
+DEFINES += QT_DEPRECATED_WARNINGS
+
 if (linux-g++) {
     QMAKE_LFLAGS += -fuse-ld=gold
 }
