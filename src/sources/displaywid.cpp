@@ -217,6 +217,7 @@ void DisplayWid::setDisplayMode( int dm, bool minMax, bool bar, int numValues )
 
   case 8:
 	m_range = 6000;
+	break;
 
   case 9:
 	m_range = 40000;
@@ -332,14 +333,14 @@ void DisplayWid::paintEvent( QPaintEvent * )
 	{
 	  QString val;
 
-	  for (unsigned i=0; i<(unsigned)m_value[0].length(); ++i)
+	  for (unsigned i=0; i<static_cast<unsigned>(m_value[0].length()); ++i)
 	  {
 		if (m_value[0][i].digitValue() != -1)
 		{
 		  val += m_value[0][i];
 		}
 	  }
-	  double percent = val.toDouble() / (double)m_range;
+	  double percent = val.toDouble() / static_cast<double>(m_range);
 
 	  int step = width()-18;
 	  int off = 0;
@@ -384,7 +385,7 @@ void DisplayWid::paintEvent( QPaintEvent * )
 	  if (m_paintBar)
 	  {
 		p.fillRect( off, height()-10,
-					(int)qRound((double)(width()-2*off)*percent ), 5,
+					static_cast<int>(qRound(static_cast<double>((width()-2*off))*percent)), 5,
 					palette().windowText().color() );
 	  }
 	}
@@ -424,7 +425,7 @@ void DisplayWid::drawSmallNumber( QPainter *p, const QString & num )
   }
   x += 12;
 
-  for (unsigned i=offset; i<(unsigned)num.length(); i++)
+  for (unsigned i=offset; i<static_cast<unsigned>(num.length()); i++)
   {
 	if (num[i] == '.')
 	{
@@ -665,7 +666,7 @@ void DisplayWid::drawBigNumber( QPainter *p, const QString & num )
   }
   x += 28;
 
-  for (unsigned i=offset; i<(unsigned)num.length(); i++)
+  for (unsigned i=offset; i<static_cast<unsigned>(num.length()); i++)
   {
 	if (num[i] == '.')
 		p->drawPixmap( x-11, 0, *m_bigDecimal );

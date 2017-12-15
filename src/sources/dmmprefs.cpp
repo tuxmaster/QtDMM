@@ -200,7 +200,7 @@ QString DmmPrefs::deviceListText() const
 	  else
 		text += ", ";
 
-	  for (unsigned i=1; i<(unsigned)token.count(); ++i)
+	  for (unsigned i=1; i<static_cast<unsigned>(token.count()); ++i)
 	  {
 		if (i!=1)
 			text += " ";
@@ -401,12 +401,12 @@ QSerialPort::Parity DmmPrefs::parity() const
 
 QSerialPort::DataBits DmmPrefs::bits() const
 {
-  return (QSerialPort::DataBits)(5+bitsCombo->currentIndex());
+  return static_cast<QSerialPort::DataBits>(5+bitsCombo->currentIndex());
 }
 
 QSerialPort::StopBits DmmPrefs::stopBits() const
 {
-  return (QSerialPort::StopBits)(1+stopBitsCombo->currentIndex());
+  return static_cast<QSerialPort::StopBits>(1+stopBitsCombo->currentIndex());
 }
 
 int DmmPrefs::speed() const
@@ -443,7 +443,7 @@ int DmmPrefs::numValues() const
 
 ReadEvent::DataFormat DmmPrefs::format() const
 {
-  return (ReadEvent::DataFormat)protocolCombo->currentIndex();
+  return static_cast<ReadEvent::DataFormat>(protocolCombo->currentIndex());
 }
 
 int DmmPrefs::display() const

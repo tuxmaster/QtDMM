@@ -3,6 +3,9 @@ CONFIG   += c++14 no_keywords
 if (linux-g++) {
     QMAKE_LFLAGS += -fuse-ld=gold
 }
+gcc {
+    QMAKE_CXXFLAGS += -Wold-style-cast
+}
 TEMPLATE        = app
 
 TARGET    = qtdmm

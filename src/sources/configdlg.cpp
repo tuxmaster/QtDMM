@@ -165,7 +165,7 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
    // init stuff
   //
   on_ui_buttonBox_rejected();
-  showPage( (ConfigDlg::PageType)m_settings->getInt("Config/LastItem",DMM));
+  showPage( static_cast<ConfigDlg::PageType>(m_settings->getInt("Config/LastItem",DMM)));
   ui_undo->hide();
   adjustSize();
 }
@@ -178,7 +178,7 @@ QString ConfigDlg::deviceListText() const
 void ConfigDlg::showPage( ConfigDlg::PageType page )
 {
   PrefWidget *wid=Q_NULLPTR;
-  for (uint entry=0;entry<= (uint)ui_list->count();entry++)
+  for (int entry=0;entry<= static_cast<int>(ui_list->count());entry++)
   {
 	  if (dynamic_cast<ConfigItem *> (ui_list->item(entry))->id() == page)
 	  {
@@ -197,7 +197,7 @@ void ConfigDlg::showPage( ConfigDlg::PageType page )
 
 void ConfigDlg::on_ui_factoryDefaults_clicked()
 {
-  ((PrefWidget *)ui_stack->currentWidget())->factoryDefaultsSLOT();
+  dynamic_cast<PrefWidget*>(ui_stack->currentWidget())->factoryDefaultsSLOT();
 }
 
 void ConfigDlg::zoomInSLOT( double fac )
@@ -251,7 +251,7 @@ void ConfigDlg::on_ui_buttonBox_rejected()
   for (int i=0; i<count; i++)
 	QColorDialog::setCustomColor( i, m_settings->getColor( QString("Custom colors/color_%1").arg(i)));
   for (int i=0; i<NumItems; ++i)
-	((PrefWidget *)ui_stack->widget( i ))->defaultsSLOT();
+	dynamic_cast<PrefWidget *>(ui_stack->widget(i))->defaultsSLOT();
   hide();
 }
 
@@ -277,16 +277,16 @@ void ConfigDlg::on_ui_buttonBox_accepted()
   m_settings->setInt( "Position/width", m_winRect.width() );
   m_settings->setInt( "Position/height", m_winRect.height() );
 
-  m_settings->setInt( "Printer/page-size", (int)m_printer->pageSize() );
-  m_settings->setInt( "Printer/page-orientation", (int)m_printer->orientation() );
-  m_settings->setInt( "Printer/color", (int)m_printer->colorMode() );
+  m_settings->setInt( "Printer/page-size", static_cast<int>(m_printer->pageSize()));
+  m_settings->setInt( "Printer/page-orientation", static_cast<int>(m_printer->orientation()));
+  m_settings->setInt( "Printer/color", static_cast<int>(m_printer->colorMode()));
   m_settings->setString( "Printer/name", m_printer->printerName() );
   m_settings->setString( "Printer/filename", m_printer->outputFileName() );
   m_settings->setBool( "Printer/print-file", (m_printer->outputFormat() == QPrinter::PdfFormat) ? true:false );
   m_settings->setInt("Config/LastItem",dynamic_cast<ConfigItem *>(ui_list->currentItem())->id());
 
   for (int i=0; i<NumItems; ++i)
-	((PrefWidget *)ui_stack->widget( i ))->applySLOT();
+	dynamic_cast<PrefWidget*>(ui_stack->widget(i))->applySLOT();
   m_settings->save();
   Q_EMIT accepted();
 
@@ -311,9 +311,9 @@ void ConfigDlg::readPrinter( QPrinter * printer )
 {
   m_printer = printer;
 
-  m_printer->setPageSize( (QPrinter::PageSize) m_settings->getInt( "Printer/page-size") );
-  m_printer->setOrientation( (QPrinter::Orientation) m_settings->getInt( "Printer/page-orientation") );
-  m_printer->setColorMode( (QPrinter::ColorMode) m_settings->getInt( "Printer/color", 1 ) );
+  m_printer->setPageSize(static_cast<QPrinter::PageSize>(m_settings->getInt("Printer/page-size")));
+  m_printer->setOrientation(static_cast<QPrinter::Orientation>(m_settings->getInt( "Printer/page-orientation")));
+  m_printer->setColorMode(static_cast<QPrinter::ColorMode>(m_settings->getInt( "Printer/color", 1 )));
   m_printer->setPrinterName( m_settings->getString( "Printer/name", "lp" ) );
   m_printer->setOutputFileName( m_settings->getString( "Printer/filename") );
   m_printer->setOutputFormat((m_settings->getBool( "Printer/print-file")) ? QPrinter::PdfFormat : QPrinter::NativeFormat  );
@@ -321,8 +321,8 @@ void ConfigDlg::readPrinter( QPrinter * printer )
 
 void ConfigDlg::on_ui_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *)
 {
-  int id = ((ConfigItem *)current)->id();
-  PrefWidget *wid = (PrefWidget *)ui_stack->widget( id );
+  int id = dynamic_cast<ConfigItem *>(current)->id();
+  PrefWidget *wid = dynamic_cast<PrefWidget *>(ui_stack->widget(id));
   ui_stack->setCurrentWidget( wid );
 
   ui_helpText->setText( wid->description() );

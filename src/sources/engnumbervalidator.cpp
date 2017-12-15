@@ -37,7 +37,7 @@ QValidator::State EngNumberValidator::validate( QString & input, int & pos ) con
   static QRegExp fullRe( "-?\\d+\\.?\\d*[munpkMGT]?"  );
 
   input = input.trimmed();
-  pos = qMin( (int)input.length(), pos );
+  pos = qMin( static_cast<int>(input.length()), pos );
 
   // mt: changed
   if (fullRe.exactMatch( input ))
@@ -130,7 +130,7 @@ QString EngNumberValidator::engValue( double value )
   }
 
   QString str;
-  str.setNum( ((int)qRound( value * 10. )) / 10. );
+  str.setNum( (static_cast<int>(qRound( value * 10. ))) / 10. );
   str += suffix;
 
   return str;
