@@ -119,7 +119,7 @@ void MainWin::createActions()
   connect( action_Quit, SIGNAL( triggered() ),this, SLOT( setToolbarVisibilitySLOT() ));
   connect( action_Quit, SIGNAL( triggered() ), m_wid, SLOT( quitSLOT() ));
   connect( action_Direct_help, SIGNAL( triggered() ),m_wid, SLOT( helpSLOT() ));
-  connect( action_Tipp_of_the_day, SIGNAL( triggered() ),m_wid, SLOT( showTipsSLOT() ));
+  connect( action_Tip_of_the_day, SIGNAL( triggered() ),m_wid, SLOT( showTipsSLOT() ));
 
   connect( toolBarDisplay, SIGNAL( visibilityChanged( bool ) ), this, SLOT( setToolbarVisibilitySLOT() ));
   connect( toolBarHelp, SIGNAL( visibilityChanged( bool ) ),  this, SLOT( setToolbarVisibilitySLOT() ));

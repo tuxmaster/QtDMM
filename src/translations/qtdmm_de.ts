@@ -75,34 +75,40 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
         <location filename="../sources/dmm.cpp" line="146"/>
-        <location filename="../sources/dmm.cpp" line="216"/>
+        <location filename="../sources/dmm.cpp" line="219"/>
         <source>Not connected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../sources/dmm.cpp" line="212"/>
+        <location filename="../sources/dmm.cpp" line="215"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation>Lesefehler auf %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../sources/dmm.cpp" line="214"/>
+        <location filename="../sources/dmm.cpp" line="217"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Wartezeit abgelaufr für %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../sources/dmm.cpp" line="496"/>
-        <location filename="../sources/dmm.cpp" line="613"/>
+        <location filename="../sources/dmm.cpp" line="499"/>
+        <location filename="../sources/dmm.cpp" line="616"/>
         <location filename="../sources/dmm.cpp" line="676"/>
         <location filename="../sources/dmm.cpp" line="812"/>
         <location filename="../sources/dmm.cpp" line="1062"/>
         <location filename="../sources/dmm.cpp" line="1277"/>
         <location filename="../sources/dmm.cpp" line="1393"/>
+        <location filename="../sources/dmm.cpp" line="2024"/>
         <source>Connected %1</source>
         <translation>Verbunden %1</translation>
+    </message>
+    <message>
+        <location filename="../sources/dmm.cpp" line="2027"/>
+        <source>Parser errors on %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -130,83 +136,83 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>%1 Sekunden</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="718"/>
+        <location filename="../sources/dmmgraph.cpp" line="716"/>
         <source>[sec]</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="725"/>
+        <location filename="../sources/dmmgraph.cpp" line="723"/>
         <source>[min]</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="735"/>
+        <location filename="../sources/dmmgraph.cpp" line="733"/>
         <source>[hour]</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="743"/>
+        <location filename="../sources/dmmgraph.cpp" line="741"/>
         <source>[day]</source>
         <translation></translation>
     </message>
     <message>
+        <location filename="../sources/dmmgraph.cpp" line="833"/>
         <location filename="../sources/dmmgraph.cpp" line="835"/>
         <location filename="../sources/dmmgraph.cpp" line="837"/>
         <location filename="../sources/dmmgraph.cpp" line="839"/>
-        <location filename="../sources/dmmgraph.cpp" line="841"/>
         <source>Sampling</source>
         <translation>Beproben</translation>
     </message>
     <message>
+        <location filename="../sources/dmmgraph.cpp" line="833"/>
         <location filename="../sources/dmmgraph.cpp" line="835"/>
         <location filename="../sources/dmmgraph.cpp" line="837"/>
         <location filename="../sources/dmmgraph.cpp" line="839"/>
-        <location filename="../sources/dmmgraph.cpp" line="841"/>
         <source>Stopped</source>
         <translation>Angehalten</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="881"/>
+        <location filename="../sources/dmmgraph.cpp" line="879"/>
         <source>Disconnect</source>
         <translation>Trennen</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="888"/>
+        <location filename="../sources/dmmgraph.cpp" line="886"/>
         <source>Connect</source>
         <translation>Verbinden</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="897"/>
+        <location filename="../sources/dmmgraph.cpp" line="895"/>
         <source>Stop recorder</source>
         <translation>Rekorder anhalten</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="904"/>
+        <location filename="../sources/dmmgraph.cpp" line="902"/>
         <source>Start recorder</source>
         <translation>Rekorder starten</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="909"/>
+        <location filename="../sources/dmmgraph.cpp" line="907"/>
         <source>Clear graph</source>
         <translation>Graphen löschen</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="915"/>
+        <location filename="../sources/dmmgraph.cpp" line="913"/>
         <source>Configure...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="923"/>
+        <location filename="../sources/dmmgraph.cpp" line="921"/>
         <source>Export data...</source>
         <translation>Daten exportieren ...</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="927"/>
+        <location filename="../sources/dmmgraph.cpp" line="925"/>
         <source>Import data...</source>
         <translation>Daten importieren ...</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1147"/>
+        <location filename="../sources/dmmgraph.cpp" line="1145"/>
         <source>Export data</source>
         <translation>Daten exportieren</translation>
     </message>
@@ -215,32 +221,32 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1176"/>
+        <location filename="../sources/dmmgraph.cpp" line="1174"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1177"/>
+        <location filename="../sources/dmmgraph.cpp" line="1175"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Beim Importieren werden alle bisherigen Messwerte gelöscht.&lt;p&gt;Möchten Sie zu ersten die bisherigen Daten exportieren?</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1185"/>
+        <location filename="../sources/dmmgraph.cpp" line="1183"/>
         <source>Export data first</source>
         <translation>Daten zu erst exportieren</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1186"/>
+        <location filename="../sources/dmmgraph.cpp" line="1184"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importieren und Daten löschen</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1199"/>
+        <location filename="../sources/dmmgraph.cpp" line="1197"/>
         <source>Import data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1228"/>
+        <location filename="../sources/dmmgraph.cpp" line="1226"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Diese Datei scheint nicht gültig zu sein</translation>
     </message>
@@ -248,33 +254,33 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DmmPrefs</name>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="151"/>
+        <location filename="../sources/dmmprefs.cpp" line="159"/>
         <source>Multimeter settings</source>
         <translation>Multimeter Einstellungen</translation>
     </message>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="152"/>
+        <location filename="../sources/dmmprefs.cpp" line="160"/>
         <source>&lt;b&gt;Here you can configure the serial port and protocol for your DMM. There is also a number of predefined models.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Hier können Sie den Anschluss und das Protokoll für Ihr DMM einstellen. Es gibt schon eine Reihe vorkonfigurierter Modelle.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="158"/>
+        <location filename="../sources/dmmprefs.cpp" line="166"/>
         <source>Manual settings</source>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="462"/>
+        <location filename="../sources/dmmprefs.cpp" line="470"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="462"/>
-        <location filename="../sources/dmmprefs.cpp" line="490"/>
+        <location filename="../sources/dmmprefs.cpp" line="470"/>
+        <location filename="../sources/dmmprefs.cpp" line="498"/>
         <source>DMM description (*.ini)</source>
         <translation>DMM Beschreibung (*.ini)</translation>
     </message>
     <message>
-        <location filename="../sources/dmmprefs.cpp" line="490"/>
+        <location filename="../sources/dmmprefs.cpp" line="498"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
@@ -461,9 +467,13 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>&lt;font size=+2&gt;Willkommen&lt;/font&gt;&lt;p&gt;QtDMM ist ein kleins Programm um DMM&apos;s (Digitalmultimeter) unter Linux/UNIX und seit Version 0.8.11 auch unter Mac OSX auszulesen. Windows wird seit Verision 0.9.5 ebenfalls unterstützt. Wenn Sie die Tipps des Tages nicht mehr sehen wollen, so können Sie diese durch ankreuzen des Feldes weiter unten abschalten. Die Tipps könnnen Sie wieder in de Einstellungen erscheinen lassen.</translation>
     </message>
     <message>
-        <location filename="../sources/tipdlg.cpp" line="39"/>
         <source>&lt;font size=+2&gt;QtDMM can&apos;t connect?&lt;/font&gt;&lt;p&gt;Make shure you have read/write permission for the device the multimeter is connected to. In doubt call a:&lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;device&amp;gt;&lt;/tt&gt; (as root) under unix like systems.&lt;br&gt;&lt;tt&gt;&amp;lt;device&amp;gt;&lt;/tt&gt; will be something like &lt;tt&gt;ttyS0&lt;/tt&gt; or &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt;. This depend on your configuration. For Windows check the group policies.</source>
-        <translation>&lt;font size=+2&gt;QtDMM kann keine Verbindung aufbauen?&lt;/font&gt;&lt;p&gt;Überprüfen Sie, ob Sie berechtigt sind, auf die Schnittstelle zugreifen(Lesen und Schreiben) zu drüfen an der das DMM angeschlossen ist. Im Zweifelsfall bei unixartigen Systemen den Befehl &lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;Gerät&amp;gt;&lt;/tt&gt; (als root) aufrufen.&lt;br&gt;&lt;tt&gt;&amp;lt;Gerät&amp;gt;&lt;/tt&gt; könnte sowas wie &lt;tt&gt;ttyS0&lt;/tt&gt; oder &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt; sein. Dies hängt von der Konfiguration ab. Unter Windows überpürfen Sie bitte die Gruppenrichtlinien.</translation>
+        <translation type="vanished">&lt;font size=+2&gt;QtDMM kann keine Verbindung aufbauen?&lt;/font&gt;&lt;p&gt;Überprüfen Sie, ob Sie berechtigt sind, auf die Schnittstelle zugreifen(Lesen und Schreiben) zu drüfen an der das DMM angeschlossen ist. Im Zweifelsfall bei unixartigen Systemen den Befehl &lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;Gerät&amp;gt;&lt;/tt&gt; (als root) aufrufen.&lt;br&gt;&lt;tt&gt;&amp;lt;Gerät&amp;gt;&lt;/tt&gt; könnte sowas wie &lt;tt&gt;ttyS0&lt;/tt&gt; oder &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt; sein. Dies hängt von der Konfiguration ab. Unter Windows überpürfen Sie bitte die Gruppenrichtlinien.</translation>
+    </message>
+    <message>
+        <location filename="../sources/tipdlg.cpp" line="39"/>
+        <source>&lt;font size=+2&gt;QtDMM can&apos;t connect?&lt;/font&gt;&lt;p&gt;Make sure you have read/write permission for the device the multimeter is connected to. In doubt call a:&lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;device&amp;gt;&lt;/tt&gt; (as root) under unix like systems.&lt;br&gt;&lt;tt&gt;&amp;lt;device&amp;gt;&lt;/tt&gt; will be something like &lt;tt&gt;ttyS0&lt;/tt&gt; or &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt;. This depend on your configuration. For Windows check the group policies.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../sources/tipdlg.cpp" line="46"/>
@@ -622,12 +632,17 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="651"/>
+        <location filename="../forms/uidmmprefs.ui" line="573"/>
+        <source>23 bytes ASCII, continuous (VC870)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/uidmmprefs.ui" line="656"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, das es funkioniert, dann melden Sie es bitte an: &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="676"/>
+        <location filename="../forms/uidmmprefs.ui" line="681"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, welches hier nicht aufgeführt ist, aber Sie aber passende Einstellungen gefunden haben, so teilen Sie es bitte &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt; mit. So können zukümpftige Versionen von Ihrer Hilfe profitieren.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -828,12 +843,12 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>9 Bytes binär, kontinuierlich (RS 22-812)</translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="583"/>
+        <location filename="../forms/uidmmprefs.ui" line="588"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Anzahl der Werte:</translation>
     </message>
     <message>
-        <location filename="../forms/uidmmprefs.ui" line="593"/>
+        <location filename="../forms/uidmmprefs.ui" line="598"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Einige Multimeter senden verschiedenen Zeile mit verschiedenen Messwerten. Hier kann die Anzahl der zu ignorieren Zeilen eingetragen werden.( Das bedeutet, QtDMM verarbeitet nur die erste Zeile).</translation>
     </message>
@@ -1622,8 +1637,12 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="409"/>
-        <source>&amp;Tipp of the day</source>
+        <source>&amp;Tip of the day</source>
         <translation>&amp;Tipp des Tages</translation>
+    </message>
+    <message>
+        <source>&amp;Tipp of the day</source>
+        <translation type="vanished">&amp;Tipp des Tages</translation>
     </message>
     <message>
         <location filename="../forms/uimainwin.ui" line="412"/>
@@ -1649,82 +1668,82 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
 <context>
     <name>UIPrintDlg</name>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="17"/>
+        <location filename="../forms/uiprintdlg.ui" line="14"/>
         <source>QtDMM: Print graph ...</source>
         <translation>QtDMM: Graph drucken</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="23"/>
+        <location filename="../forms/uiprintdlg.ui" line="17"/>
         <source>Print ...</source>
         <translation>Drucken ...</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="58"/>
+        <location filename="../forms/uiprintdlg.ui" line="71"/>
         <source>Printer:</source>
         <translation>Drucker:</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="83"/>
+        <location filename="../forms/uiprintdlg.ui" line="96"/>
         <source>Please select printer -&gt;</source>
         <translation>Bitte ein Drucker wählen -&gt;</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="89"/>
+        <location filename="../forms/uiprintdlg.ui" line="87"/>
         <source>This label shows the currently selected printer. Click the button to the right to configure the printer. &lt;i&gt;(You have to select a printer in order to be able to print)&lt;/i&gt;</source>
         <translation>Hier wird der aktuell ausgewählte Drucker angezeigt. Um diesen zu ändern auf die rechte Schaltfläche klicken. &lt;i&gt;(Zum drucken muss ein Drucker ausgewählt werden)&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="99"/>
+        <location filename="../forms/uiprintdlg.ui" line="115"/>
         <source>Configure ...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="105"/>
+        <location filename="../forms/uiprintdlg.ui" line="112"/>
         <source>Click here to configure the printer.</source>
         <translation>Hier klicken um den Drucker zu konfigurieren.</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="129"/>
+        <location filename="../forms/uiprintdlg.ui" line="151"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="142"/>
+        <location filename="../forms/uiprintdlg.ui" line="161"/>
         <source>Enter a title for the document &lt;i&gt;(Optional)&lt;/i&gt;</source>
         <translation>Hier ein Titel für das Dokument eintragen. &lt;i&gt;(optional)&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="149"/>
+        <location filename="../forms/uiprintdlg.ui" line="171"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="168"/>
+        <location filename="../forms/uiprintdlg.ui" line="181"/>
         <source>Here you may enter an comment which will be printed on top of the page &lt;i&gt;(Optional)&lt;/i&gt;</source>
         <translation>Hier kann ein Kommentar angegeben werden, der dann am Anfang der Seite ausgegeben wird. &lt;i&gt;(optional)&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="201"/>
+        <location filename="../forms/uiprintdlg.ui" line="223"/>
         <source>Direct help (SHIFT+F1)</source>
         <translation>Direkthilfe (Umschalt+F1)</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="227"/>
+        <location filename="../forms/uiprintdlg.ui" line="262"/>
         <source>&amp;Print</source>
         <translation>&amp;Drucken</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="233"/>
+        <location filename="../forms/uiprintdlg.ui" line="259"/>
         <source>Click here to print.</source>
         <translation>Hier klicken um zu drucken.</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="240"/>
+        <location filename="../forms/uiprintdlg.ui" line="275"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../forms/uiprintdlg.ui" line="243"/>
+        <location filename="../forms/uiprintdlg.ui" line="272"/>
         <source>Click here to abort printing.</source>
         <translation>Hier klicken um den Druckvorgang abzubrechen.</translation>
     </message>

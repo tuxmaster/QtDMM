@@ -37,7 +37,7 @@ const QStringList TipDlg::s_tipText = {
 	 " in the preferences dialog."),
 
 	tr("<font size=+2>QtDMM can't connect?</font><p>"
-	"Make shure you have read/write permission for the device"
+	"Make sure you have read/write permission for the device"
 	" the multimeter is connected to. In doubt call a:<br>"
 		" <tt>chmod a+rw /dev/&lt;device&gt;</tt> (as root) under unix like systems.<br>"
 	"<tt>&lt;device&gt;</tt> will be something like <tt>ttyS0</tt>"

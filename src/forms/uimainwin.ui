@@ -68,7 +68,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="action_On_version"/>
-    <addaction name="action_Tipp_of_the_day"/>
+    <addaction name="action_Tip_of_the_day"/>
     <addaction name="action_Direct_help"/>
    </widget>
    <addaction name="menu_File"/>
@@ -404,9 +404,9 @@
     <bool>false</bool>
    </property>
   </action>
-  <action name="action_Tipp_of_the_day">
+  <action name="action_Tip_of_the_day">
    <property name="text">
-    <string>&amp;Tipp of the day</string>
+    <string>&amp;Tip of the day</string>
    </property>
    <property name="whatsThis">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show tip of the day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
