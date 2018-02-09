@@ -473,7 +473,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../sources/tipdlg.cpp" line="39"/>
         <source>&lt;font size=+2&gt;QtDMM can&apos;t connect?&lt;/font&gt;&lt;p&gt;Make sure you have read/write permission for the device the multimeter is connected to. In doubt call a:&lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;device&amp;gt;&lt;/tt&gt; (as root) under unix like systems.&lt;br&gt;&lt;tt&gt;&amp;lt;device&amp;gt;&lt;/tt&gt; will be something like &lt;tt&gt;ttyS0&lt;/tt&gt; or &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt;. This depend on your configuration. For Windows check the group policies.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+2&gt;QtDMM kann keine Verbindung aufbauen?&lt;/font&gt;&lt;p&gt;Überprüfen Sie, ob Sie berechtigt sind, auf die Schnittstelle zugreifen(Lesen und Schreiben) zu drüfen an der das DMM angeschlossen ist. Im Zweifelsfall bei unixartigen Systemen den Befehl &lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;Gerät&amp;gt;&lt;/tt&gt; (als root) aufrufen.&lt;br&gt;&lt;tt&gt;&amp;lt;Gerät&amp;gt;&lt;/tt&gt; könnte sowas wie &lt;tt&gt;ttyS0&lt;/tt&gt; oder &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt; sein. Dies hängt von der Konfiguration ab. Unter Windows überpürfen Sie bitte die Gruppenrichtlinien.</translation>
     </message>
     <message>
         <location filename="../sources/tipdlg.cpp" line="46"/>
