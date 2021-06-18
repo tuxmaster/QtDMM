@@ -149,8 +149,8 @@ void DMMGraph::print( QPrinter *prt, const QString & title, const QString & comm
   p.setFont( QFont( "Helvetica", 10 ));
 
   QFontMetrics fm = p.fontMetrics();
-  int maxWidth = qMax( fm.width( tr( "Sampling start:" ) ),
-					   fm.width( tr( "Sampling resolution:" )));
+  int maxWidth = qMax( fm.horizontalAdvance( tr( "Sampling start:" ) ),
+					   fm.horizontalAdvance( tr( "Sampling resolution:" )));
   int tHeight = fm.height();
 
   p.drawText( 0, tRect.height()+10, maxWidth, tHeight, Qt::AlignLeft | Qt::AlignVCenter,
@@ -294,7 +294,7 @@ void DMMGraph::paintVerticalGrid( QPainter *p, double xfactor, double xstep,
 	  p->drawLine( x, m_graphRect.y(), x, m_graphRect.y()+m_graphRect.height()+3 );
 	  if (x > m_graphRect.x() && x < m_graphRect.x()+m_graphRect.width()-1)
 	  {
-		scaleVal.sprintf( "%g", val );
+		scaleVal.asprintf( "%g", val );
 		p->drawText( x-20, m_graphRect.y()+m_graphRect.height()+3,
 					 40, m_fontHeight-3, Qt::AlignCenter, scaleVal );
 	  }
@@ -469,7 +469,7 @@ void DMMGraph::resizeEvent( QResizeEvent * )
 {
   QFontMetrics fm = fontMetrics();
 
-  int xOff = fm.width( "-999.99" );
+  int xOff = fm.horizontalAdvance( "-999.99" );
   m_fontHeight = fm.height() + 4;
 
   m_graphRect = QRect(xOff, 5, width()-5-xOff, height()-16-5-m_fontHeight );
@@ -842,7 +842,7 @@ void DMMGraph::emitInfo()
 
 void DMMGraph::wheelEvent( QWheelEvent *ev )
 {
-  if (ev->delta() > 0)
+  if (ev->angleDelta().x() > 0)
 	Q_EMIT zoomOut( 1.1 );
   else
 	Q_EMIT zoomIn( 1.1 );

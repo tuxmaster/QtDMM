@@ -277,8 +277,8 @@ void ConfigDlg::on_ui_buttonBox_accepted()
   m_settings->setInt( "Position/width", m_winRect.width() );
   m_settings->setInt( "Position/height", m_winRect.height() );
 
-  m_settings->setInt( "Printer/page-size", static_cast<int>(m_printer->pageSize()));
-  m_settings->setInt( "Printer/page-orientation", static_cast<int>(m_printer->orientation()));
+  m_settings->setInt( "Printer/page-size", static_cast<int>(m_printer->pageLayout().pageSize().id()));
+  m_settings->setInt( "Printer/page-orientation", static_cast<int>(m_printer->pageLayout().orientation()));
   m_settings->setInt( "Printer/color", static_cast<int>(m_printer->colorMode()));
   m_settings->setString( "Printer/name", m_printer->printerName() );
   m_settings->setString( "Printer/filename", m_printer->outputFileName() );
@@ -311,8 +311,8 @@ void ConfigDlg::readPrinter( QPrinter * printer )
 {
   m_printer = printer;
 
-  m_printer->setPageSize(static_cast<QPrinter::PageSize>(m_settings->getInt("Printer/page-size")));
-  m_printer->setOrientation(static_cast<QPrinter::Orientation>(m_settings->getInt( "Printer/page-orientation")));
+  m_printer->setPageSize(QPageSize(static_cast<QPageSize::PageSizeId>(m_settings->getInt("Printer/page-size"))));
+  m_printer->setPageOrientation(static_cast<QPageLayout::Orientation>(m_settings->getInt( "Printer/page-orientation")));
   m_printer->setColorMode(static_cast<QPrinter::ColorMode>(m_settings->getInt( "Printer/color", 1 )));
   m_printer->setPrinterName( m_settings->getString( "Printer/name", "lp" ) );
   m_printer->setOutputFileName( m_settings->getString( "Printer/filename") );

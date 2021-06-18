@@ -74,7 +74,7 @@ TipDlg::TipDlg(QWidget *parent) :  QDialog( parent),
   m_curTip(0)
 {
   setupUi(this);
-  ui_tip->setStyleSheet(QString("background-color: %1;").arg(palette().background().color().name()));
+  ui_tip->setStyleSheet(QString("background-color: %1;").arg(palette().window().color().name()));
 
   // count tips
   m_numTips=s_tipText.size();

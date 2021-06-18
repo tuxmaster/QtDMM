@@ -58,7 +58,7 @@ void PrintDlg::createPrinterString()
   txt.append( m_printer->pageLayout().pageSize().name());
   txt.append( " ");
 
-  if (m_printer->orientation() == QPrinter::Landscape)
+  if (m_printer->pageLayout().orientation() == QPageLayout::Landscape)
 	txt.append( "Landscape");
   else
 	txt.append("Portrait");
