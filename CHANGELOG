@@ -3,6 +3,7 @@
              original branch)
 	   - Fix compile for Windows using mingw
 	   - Code clean up
+
 06/08/2017 0.9.8
 	   - Use gold linker.
 	   - Added HoldPeak HP-90EPC (tstenner).
