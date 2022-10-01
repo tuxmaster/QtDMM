@@ -40,9 +40,6 @@
        <property name="whatsThis">
         <string>Here you may select your DMM model. If your DMM is not in the list, try to find working settings and mail them to me (&lt;font color=blue&gt;&lt;u&gt;qtdmm@mtoussaint.de&lt;/u&gt;&lt;/font&gt;). So I can add them to the list in the next release.</string>
        </property>
-       <property name="autoCompletion">
-        <bool>true</bool>
-       </property>
       </widget>
      </item>
      <item>
