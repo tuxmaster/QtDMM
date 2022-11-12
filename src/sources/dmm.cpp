@@ -2047,7 +2047,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
        fprintf( stdout, "\r\n" );
     }
 
-    if (data[13u] & 0x02)
+    if (data[19u] & 0x02)
     {
         val = "-";
     }
