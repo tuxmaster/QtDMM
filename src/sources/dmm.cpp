@@ -2063,7 +2063,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
 
         if (false == convOk)
         {
-            m_error = tr( "Parser errors on %1" ).arg(m_device);
+            m_error = tr( "Digit parse fail on %1" ).arg(m_device);
             return;
         }
     }
@@ -2100,7 +2100,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
             case 0x02u: d_val *= 0.001; unit[0u] = 'm'; break;
             case 0x10u: d_val *= 1000000; unit[0u] = 'M'; break;
             case 0x20u: d_val *= 1000; unit[0u] = 'K'; break;
-            default: convOk = false; break;
+            default: break;
             }
 
             switch (static_cast<uint8_t>(data[21u] & 0xCCu))
