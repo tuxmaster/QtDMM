@@ -207,6 +207,9 @@ void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat 
 		  case ReadEvent::RS22812Continuous:
 				readRS22812Continuous( data, id, df );
 			   break;
+          case ReadEvent::DO3122Continuous:
+                readDO32122Continuous( data, id, df );
+               break;
 	  }
 	}
 	else
@@ -2026,4 +2029,96 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
         // Parser error
         m_error = tr( "Parser errors on %1" ).arg(m_device);
     } // else
+}
+
+void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent::DataFormat /*df*/ )
+{
+    QString val = "";
+    QString special = "";
+    QString unit = "";
+    double d_val;
+    int idx;
+    bool convOk;
+
+    if (data[13u] & 0x02)
+    {
+        val = "-";
+    }
+
+    for (idx = 9; idx > 5; idx--)
+    {
+        if (data[idx] & 0x80)
+        val += DO3122Digit(data[idx]);
+    }
+
+    d_val = val.toDouble(&convOk);
+
+    if (convOk)
+    {
+        switch (data[4u] & 0x0fu)
+        {
+        case 1:
+            special = "Diode";
+            break;
+
+        case 2:
+            special = "AC";
+            break;
+
+        case 4:
+            special = "DC";
+            break;
+
+        default:
+            break;
+        }
+
+        switch (static_cast<uint8_t>(data[14u] & 0xffu))
+        {
+        case 0x01u:
+            unit = "°C";
+            break;
+
+        case 0x02u:
+            unit = "°F";
+            break;
+
+        case 0x10u:
+            unit = "m";
+            d_val *= 0.001;
+            break;
+
+        case 0x20u:
+            unit = "u";
+            d_val *= 0.000001;
+            break;
+
+        case 0x40u:
+            unit = "n";
+            d_val *= 0.000000001;
+            break;
+
+        case 0x80u:
+            unit = "p";
+            d_val *= 0.000000000001;
+            break;
+        }
+
+        Q_EMIT value(d_val, val, unit, special, false, 0);
+    }
+}
+
+const char *DMM::DO3122Digit( int byte )
+{
+  int           digit[10] = { 0x5f, 0x06, 0x3b, 0x2f, 0x66, 0x6d, 0x7c, 0x03, 0x7f, 0x67 };
+  const char *c_digit[10] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
+  byte &= 0x07f;
+
+  for (int n=0; n<10; n++)
+  {
+    if (byte == digit[n])
+        return c_digit[n];
+  }
+  return 0;
 }

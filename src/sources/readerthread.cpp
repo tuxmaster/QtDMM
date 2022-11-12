@@ -173,13 +173,15 @@ int  ReaderThread::formatLength() const
 		return 14;
 	  case ReadEvent::RS22812Continuous:
 		return 9;
+      case ReadEvent::DO3122Continuous:
+        return 21;
   }
   return 0;
 }
 
 void ReaderThread::readDMM()
 {
-  memset( m_buffer, 0, 20 );
+  memset( m_buffer, 0, 23 );
 
   switch(m_format)
   {
@@ -216,6 +218,9 @@ void ReaderThread::readDMM()
 	  case ReadEvent::RS22812Continuous:
 		  readRS22812Continuous();
 		  break;
+      case ReadEvent::DO3122Continuous:
+          readDO3122Continuous();
+          break;
   }
 }
 
@@ -521,6 +526,28 @@ bool ReaderThread::checkFormat()
 	  }
 	}
   }
+  else if ( (m_format == ReadEvent::DO3122Continuous) && (m_length >= 21) )
+  {
+      int offset = 0;
+
+      offset = m_length - 21;
+
+      if ( (static_cast<uint8_t>(m_fifo[offset]) != 0xAAu)
+           || (static_cast<uint8_t>(m_fifo[offset + 1]) != 0x55u)
+           || (static_cast<uint8_t>(m_fifo[offset + 2]) != 0x52u)
+           || (static_cast<uint8_t>(m_fifo[offset + 3]) != 0x24u) )
+      {
+          return false;
+      }
+
+      if (static_cast<uint8_t>(m_fifo[offset + 4]) != 0x01u)
+      {
+          (void)fprintf(stderr, "bad mode %#x\n", static_cast<uint8_t>(m_fifo[offset + 4]));
+          return false;
+      }
+
+      return true;
+  }
   return false;
 }
 
@@ -574,5 +601,9 @@ void ReaderThread::readPeakTech10()
 }
 
 void ReaderThread::readRS22812Continuous()
+{
+}
+
+void ReaderThread::readDO3122Continuous()
 {
 }

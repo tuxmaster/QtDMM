@@ -77,6 +77,7 @@ class ReaderThread : public QObject
 	  void					readVC870();
 	  void					readVC940();
 	  void					readRS22812Continuous();
+      void                  readDO3122Continuous();
 
 	  int					formatLength() const;
 	  bool					checkFormat();
