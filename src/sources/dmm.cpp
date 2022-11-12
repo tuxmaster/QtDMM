@@ -2109,6 +2109,11 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
         }
 
         Q_EMIT value(d_val, val, unit, special, false, 0);
+        m_error = tr( "Connected %1" ).arg(m_device);
+    }
+    else
+    {
+        m_error = tr( "Parser errors on %1" ).arg(m_device);
     }
 }
 
