@@ -529,7 +529,7 @@ bool ReaderThread::checkFormat()
 	  }
 	}
   }
-  else if ( (m_format == ReadEvent::DO3122Continuous) && (m_length >= 22) )
+  else if ( m_format == ReadEvent::DO3122Continuous )
   {
       if ( (static_cast<uint8_t>(m_fifo[(m_length-21+FIFO_LENGTH)%FIFO_LENGTH]) != 0xAAu)
            || (static_cast<uint8_t>(m_fifo[(m_length-20+FIFO_LENGTH)%FIFO_LENGTH]) != 0x55u)
