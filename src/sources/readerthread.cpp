@@ -39,7 +39,7 @@ ReaderThread::ReaderThread( QObject *receiver ) :
   m_id( 0 ),
   m_numValues( 1 )
 {
-  m_buffer[14] = '\0';
+  m_buffer[23u] = '\0';
   m_serialPort=Q_NULLPTR;
 }
 
@@ -147,7 +147,6 @@ void ReaderThread::socketNotifierSLOT()
 	  else
 		m_length = (m_length+1) % FIFO_LENGTH;
 	}
-
 }
 
 int  ReaderThread::formatLength() const
