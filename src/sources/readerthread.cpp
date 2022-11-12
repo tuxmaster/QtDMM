@@ -39,7 +39,6 @@ ReaderThread::ReaderThread( QObject *receiver ) :
   m_id( 0 ),
   m_numValues( 1 )
 {
-  m_buffer[23u] = '\0';
   m_serialPort=Q_NULLPTR;
 }
 
@@ -98,6 +97,7 @@ void ReaderThread::socketNotifierSLOT()
 
   int  retval;
   char byte;
+  QByteArray dataOut;
 
   m_status = ReaderThread::Ok;
 
@@ -126,10 +126,12 @@ void ReaderThread::socketNotifierSLOT()
 
         fprintf( stderr, "Format Ok!\n" );
 
+        dataOut = QByteArray();
+
 		for (int i=0; i<formatLength(); ++i)
 		{
-		  m_buffer[i] = m_fifo[m_length];
-          fprintf( stderr, "%02X ", static_cast<uint8_t>(m_buffer[i]));
+          dataOut.append(m_fifo[m_length]);
+          fprintf( stderr, "%02X ", static_cast<uint8_t>(dataOut[i]));
 		  m_length = (m_length+1)%FIFO_LENGTH;
 		}
 
@@ -138,7 +140,7 @@ void ReaderThread::socketNotifierSLOT()
 		m_sendRequest = true;
 		m_length = 0;
 
-		Q_EMIT readEvent( m_buffer, m_id, m_format );
+        Q_EMIT readEvent(dataOut, m_id, m_format );
 		//QApplication::postEvent( m_receiver,
 		//    new ReadEvent( m_buffer, formatLength(), m_id, m_format ) );
 
@@ -183,8 +185,6 @@ int  ReaderThread::formatLength() const
 
 void ReaderThread::readDMM()
 {
-  memset( m_buffer, 0, 23 );
-
   switch(m_format)
   {
 	  case ReadEvent::Metex14:
