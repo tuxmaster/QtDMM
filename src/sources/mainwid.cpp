@@ -49,6 +49,8 @@ MainWid::MainWid( QWidget *parent ) :  QFrame( parent ),
   m_printDlg = new qtdmm::PrintDlg( this );
   m_printDlg->hide();
 
+  setConsoleLogging(true);
+
   connect( m_dmm, SIGNAL( value( double, const QString &, const QString &, const QString &, bool, int )),
 		   this,  SLOT( valueSLOT( double, const QString &, const QString &, const QString &, bool, int )));
   connect( m_dmm, SIGNAL( error( const QString & ) ),this, SIGNAL( error( const QString & )));
