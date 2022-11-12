@@ -530,7 +530,7 @@ bool ReaderThread::checkFormat()
   {
       int offset = 0;
 
-      offset = m_length - 21;
+      offset = m_length - 22;
 
       if ( (static_cast<uint8_t>(m_fifo[offset]) != 0xAAu)
            || (static_cast<uint8_t>(m_fifo[offset + 1]) != 0x55u)

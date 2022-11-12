@@ -174,8 +174,6 @@ void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat 
 	{
 	  if (m_consoleLogging)
 	  {
-         fprintf( stdout, "RCV: %d : ", data.size());
-
 		 for (int i=0; i<data.size(); ++i)
 			fprintf( stdout, "%02X ", data[i] & 0x0ff );
 		 fprintf( stdout, "\r\n" );
@@ -2041,6 +2039,13 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
     double d_val;
     int idx;
     bool convOk;
+
+    if (m_consoleLogging)
+    {
+       for (int i=0; i<22; ++i)
+          fprintf( stdout, "%02X ", data[i] & 0x0ff );
+       fprintf( stdout, "\r\n" );
+    }
 
     if (data[13u] & 0x02)
     {
