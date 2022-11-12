@@ -89,7 +89,7 @@ class DMM : public QObject
       void						readDO32122Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
 	  const char				*vc820Digit( int );
 	  const char				*RS22812Digit( int );
-      const char                *DO3122Digit( int );
+      const char                *DO3122Digit( int byte, bool *convOk );
 
 	protected Q_SLOTS:
 	  void						readEventSLOT( const QByteArray & str, int id, ReadEvent::DataFormat df );

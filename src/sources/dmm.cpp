@@ -174,6 +174,8 @@ void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat 
 	{
 	  if (m_consoleLogging)
 	  {
+         fprintf( stdout, "RCV: %d : ", data.size());
+
 		 for (int i=0; i<data.size(); ++i)
 			fprintf( stdout, "%02X ", data[i] & 0x0ff );
 		 fprintf( stdout, "\r\n" );
@@ -2052,7 +2054,13 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
             val += '.';
         }
 
-        val += DO3122Digit(data[idx]);
+        val += DO3122Digit(data[idx], &convOk);
+
+        if (false == convOk)
+        {
+            m_error = tr( "Parser errors on %1" ).arg(m_device);
+            return;
+        }
     }
 
     d_val = val.toDouble(&convOk);
@@ -2120,7 +2128,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
     }
 }
 
-const char *DMM::DO3122Digit( int byte )
+const char *DMM::DO3122Digit( int byte, bool *convOk )
 {
   int           digit[10] = { 0x5f, 0x06, 0x3b, 0x2f, 0x66, 0x6d, 0x7c, 0x03, 0x7f, 0x67 };
   const char *c_digit[10] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -2132,5 +2140,7 @@ const char *DMM::DO3122Digit( int byte )
     if (byte == digit[n])
         return c_digit[n];
   }
+
+  *convOk = false;
   return 0;
 }
