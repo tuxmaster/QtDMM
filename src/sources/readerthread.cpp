@@ -531,21 +531,17 @@ bool ReaderThread::checkFormat()
   }
   else if ( (m_format == ReadEvent::DO3122Continuous) && (m_length >= 22) )
   {
-      int offset = 0;
-
-      offset = m_length - 22;
-
-      if ( (static_cast<uint8_t>(m_fifo[offset]) != 0xAAu)
-           || (static_cast<uint8_t>(m_fifo[offset + 1]) != 0x55u)
-           || (static_cast<uint8_t>(m_fifo[offset + 2]) != 0x52u)
-           || (static_cast<uint8_t>(m_fifo[offset + 3]) != 0x24u) )
+      if ( (static_cast<uint8_t>(m_fifo[(m_length - 22+FIFO_LENGTH)%FIFO_LENGTH]) != 0xAAu)
+           || (static_cast<uint8_t>(m_fifo[(m_length - 21+FIFO_LENGTH)%FIFO_LENGTH]) != 0x55u)
+           || (static_cast<uint8_t>(m_fifo[(m_length - 20+FIFO_LENGTH)%FIFO_LENGTH]) != 0x52u)
+           || (static_cast<uint8_t>(m_fifo[(m_length - 19+FIFO_LENGTH)%FIFO_LENGTH]) != 0x24u) )
       {
           return false;
       }
 
-      if (static_cast<uint8_t>(m_fifo[offset + 4]) != 0x01u)
+      if (static_cast<uint8_t>(m_fifo[(m_length - 18+FIFO_LENGTH)%FIFO_LENGTH]) != 0x01u)
       {
-          (void)fprintf(stderr, "bad mode %#x\n", static_cast<uint8_t>(m_fifo[offset + 4]));
+          (void)fprintf(stderr, "bad mode %#x\n", static_cast<uint8_t>(m_fifo[(m_length - 18+FIFO_LENGTH)%FIFO_LENGTH]));
           return false;
       }
 
