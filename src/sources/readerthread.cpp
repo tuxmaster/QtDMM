@@ -93,29 +93,17 @@ void ReaderThread::startRead()
 
 void ReaderThread::socketNotifierSLOT()
 {
-  //std::cerr << "socket call" << std::endl;
+      //std::cerr << "socket call" << std::endl;
 
-  int  retval;
-  char byte;
-  QByteArray dataOut;
+      int  retval;
+      char byte;
+      QByteArray dataOut;
 
-  m_status = ReaderThread::Ok;
+      m_status = ReaderThread::Ok;
 
+    while((retval = m_serialPort->read( &byte, 1)) > 0)
+    {
 
-	retval = m_serialPort->read( &byte, 1);
-
-	if (-1 == retval)
-	{
-	  m_status = ReaderThread::Error;
-	  return;
-	}
-	else if (0 == retval)
-	{
-	  m_status = ReaderThread::Timeout;
-	  return;
-	}
-	else
-	{
 	  m_fifo[m_length] = byte;
 
       fprintf( stderr, "%02X ", static_cast<uint8_t>(byte) );
@@ -149,6 +137,11 @@ void ReaderThread::socketNotifierSLOT()
 	  else
 		m_length = (m_length+1) % FIFO_LENGTH;
 	}
+
+    if (-1 == retval)
+    {
+        m_status = ReaderThread::Error;
+    }
 }
 
 int  ReaderThread::formatLength() const
