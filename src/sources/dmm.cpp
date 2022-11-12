@@ -2047,7 +2047,11 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
 
     for (idx = 9; idx > 5; idx--)
     {
-        if (data[idx] & 0x80)
+        if (data[idx] & 0x80u)
+        {
+            val += '.';
+        }
+
         val += DO3122Digit(data[idx]);
     }
 
@@ -2057,15 +2061,15 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
     {
         switch (data[4u] & 0x0fu)
         {
-        case 1:
+        case 0x01u:
             special = "Diode";
             break;
 
-        case 2:
+        case 0x02u:
             special = "AC";
             break;
 
-        case 4:
+        case 0x04u:
             special = "DC";
             break;
 
