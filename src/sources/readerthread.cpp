@@ -118,19 +118,22 @@ void ReaderThread::socketNotifierSLOT()
 	{
 	  m_fifo[m_length] = byte;
 
-	  //fprintf( stderr, "READ: %02X - %02X %d\n", (unsigned)byte, (unsigned)byte & 0xf0, m_length );
+      fprintf( stderr, "%02X ", static_cast<uint8_t>(byte) );
 
 	  if (checkFormat())
 	  {
 		m_length = (m_length-formatLength()+1+FIFO_LENGTH)%FIFO_LENGTH;
 
-		//fprintf( stderr, "Format Ok!\n" );
+        fprintf( stderr, "Format Ok!\n" );
 
 		for (int i=0; i<formatLength(); ++i)
 		{
 		  m_buffer[i] = m_fifo[m_length];
+          fprintf( stderr, "%02X ", static_cast<uint8_t>(m_buffer[i]));
 		  m_length = (m_length+1)%FIFO_LENGTH;
 		}
+
+        fprintf( stderr, "\n" );
 
 		m_sendRequest = true;
 		m_length = 0;
