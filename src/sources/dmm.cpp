@@ -2072,7 +2072,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
 
     if (convOk)
     {
-        switch (data[4u] & 0x0fu)
+        switch (data[10u] & 0x0fu)
         {
         case 0x01u: special = "Diode"; break;
         case 0x02u: special = "AC"; break;
@@ -2080,9 +2080,9 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
         default: convOk = false; break;
         }
 
-        if (data[14u] != 0u && data[15u] == 0u)
+        if (data[20u] != 0u && data[21u] == 0u)
         {
-            switch (static_cast<uint8_t>(data[14u] & 0xffu))
+            switch (static_cast<uint8_t>(data[20u] & 0xffu))
             {
             case 0x01u: unit = "°C"; break;
             case 0x02u: unit = "°F"; break;
@@ -2092,23 +2092,23 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
             default: convOk = false; break;
             }
         }
-        else if (data[15u] != 0u)
+        else if (data[21u] != 0u)
         {
-            switch (static_cast<uint8_t>(data[15u] & 0x33u))
+            switch (static_cast<uint8_t>(data[21u] & 0x33u))
             {
-            case 0x01u: d_val *= 0.000001; unit[0] = 'u'; break;
-            case 0x02u: d_val *= 0.001; unit[0] = 'm'; break;
-            case 0x10u: d_val *= 1000000; unit[0] = 'M'; break;
-            case 0x20u: d_val *= 1000; unit[0] = 'K'; break;
+            case 0x01u: d_val *= 0.000001; unit[0u] = 'u'; break;
+            case 0x02u: d_val *= 0.001; unit[0u] = 'm'; break;
+            case 0x10u: d_val *= 1000000; unit[0u] = 'M'; break;
+            case 0x20u: d_val *= 1000; unit[0u] = 'K'; break;
             default: convOk = false; break;
             }
 
-            switch (static_cast<uint8_t>(data[15u] & 0xCCu))
+            switch (static_cast<uint8_t>(data[21u] & 0xCCu))
             {
-            case 0x04u: unit[1] = 'A'; break;
-            case 0x08u: unit[1] = 'V'; break;
-            case 0x40u: unit[1] = 'R'; break;
-            case 0x80u: unit[1] = 'H'; unit += 'z'; break;
+            case 0x04u: unit[1u] = 'A'; break;
+            case 0x08u: unit[1u] = 'V'; break;
+            case 0x40u: unit[1u] = 'R'; break;
+            case 0x80u: unit[1u] = 'H'; unit += 'z'; break;
             default: convOk = false; break;
             }
         }
