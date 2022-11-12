@@ -174,7 +174,7 @@ int  ReaderThread::formatLength() const
 	  case ReadEvent::RS22812Continuous:
 		return 9;
       case ReadEvent::DO3122Continuous:
-        return 21;
+        return 22;
   }
   return 0;
 }
@@ -526,7 +526,7 @@ bool ReaderThread::checkFormat()
 	  }
 	}
   }
-  else if ( (m_format == ReadEvent::DO3122Continuous) && (m_length >= 21) )
+  else if ( (m_format == ReadEvent::DO3122Continuous) && (m_length >= 22) )
   {
       int offset = 0;
 
