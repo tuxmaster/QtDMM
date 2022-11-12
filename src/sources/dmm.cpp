@@ -2135,7 +2135,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
 
 const char *DMM::DO3122Digit( int byte, bool *convOk )
 {
-  int           digit[10] = { 0x5f, 0x06, 0x3b, 0x2f, 0x66, 0x6d, 0x7c, 0x03, 0x7f, 0x67 };
+  int           digit[10] = { 0x5f, 0x06, 0x3b, 0x2f, 0x66, 0x6d, 0x7c, 0x07, 0x7f, 0x67 };
   const char *c_digit[10] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
   byte &= 0x07f;
