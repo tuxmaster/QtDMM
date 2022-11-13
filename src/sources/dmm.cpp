@@ -2038,7 +2038,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
     QString unit;
     double d_val;
     int idx;
-    bool convOk;
+    bool convOk = false;
     bool showbar = true;
 
     if (m_consoleLogging)
@@ -2048,32 +2048,48 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
        fprintf( stdout, "\r\n" );
     }
 
-    if (data[19u] & 0x02)
+    // Check for overload
+    if ( (data[6u] == 0x80) && (data[7u] == 0x58u) && (data[8u] == 0x5fu) && (data[9u] == 0x00u) )
     {
-        val = "-";
+        val = "OL";
+        d_val = 0.0;
     }
-
-    for (idx = 9; idx > 5; idx--)
+    else
     {
-        if (data[idx] & 0x80u)
+        if (data[10u] & 0x08)
         {
-            val += '.';
+            val = "-";
         }
 
-        val += DO3122Digit(data[idx], &convOk);
-
-        if (false == convOk)
+        for (idx = 9; idx > 5; idx--)
         {
-            m_error = tr( "Digit parse fail on %1" ).arg(m_device);
-            return;
-        }
-    }
+            // Check for blank
+            if (data[idx] == 0u)
+            {
+                continue;
+            }
 
-    d_val = val.toDouble(&convOk);
+            // Check for .dp
+            if (data[idx] & 0x80u)
+            {
+                val += '.';
+            }
+
+            val += DO3122Digit(data[idx], &convOk);
+
+            if (false == convOk)
+            {
+                m_error = tr( "Digit parse fail on %1" ).arg(m_device);
+                return;
+            }
+        }
+
+        d_val = val.toDouble(&convOk);
+    }
 
     if (convOk)
     {
-        switch (data[10u] & 0x0fu)
+        switch (data[10u] & 0x07u)
         {
         case 0x01u: special = "Diode"; break;
         case 0x02u: special = "AC"; break;
@@ -2136,7 +2152,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
 
 const char *DMM::DO3122Digit( int byte, bool *convOk )
 {
-  int           digit[10] = { 0x5f, 0x06, 0x3b, 0x2f, 0x66, 0x6d, 0x7c, 0x07, 0x7f, 0x67 };
+  int           digit[10] = { 0x5f, 0x06, 0x6b, 0x2f, 0x36, 0x3d, 0x7d, 0x07, 0x7f, 0x3f };
   const char *c_digit[10] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
   byte &= 0x07f;
