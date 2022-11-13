@@ -2063,24 +2063,18 @@ void DMM::readDO3122Continuous( const QByteArray & data, int id, ReadEvent::Data
     }
     else
     {
-        if (data[10u] & 0x08)
-        {
+        if (0u != (static_cast<uint8_t>(data[10u]) & 0x08u))
             val = "-";
-        }
 
         for (idx = 9; idx > 5; idx--)
         {
             // Check for blank
             if (data[idx] == 0u)
-            {
                 continue;
-            }
 
             // Check for .dp
             if (data[idx] & 0x80u)
-            {
                 val += '.';
-            }
 
             val += DO3122Digit(data[idx], &convOk);
 
@@ -2105,7 +2099,7 @@ void DMM::readDO3122Continuous( const QByteArray & data, int id, ReadEvent::Data
         default: convOk = false; break;
         }
 
-        if (data[20u] != 0u && data[21u] == 0u)
+        if ( (data[20u] != 0u) && (data[21u] == 0u) )
         {
             switch (static_cast<uint8_t>(data[20u] & 0xffu))
             {

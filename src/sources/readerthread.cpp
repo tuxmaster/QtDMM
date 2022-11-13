@@ -139,9 +139,7 @@ void ReaderThread::socketNotifierSLOT()
 	}
 
     if (-1 == retval)
-    {
         m_status = ReaderThread::Error;
-    }
 }
 
 int  ReaderThread::formatLength() const
