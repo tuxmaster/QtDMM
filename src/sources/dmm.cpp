@@ -207,6 +207,9 @@ void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat 
 		  case ReadEvent::RS22812Continuous:
 				readRS22812Continuous( data, id, df );
 			   break;
+          case ReadEvent::DO3122Continuous:
+                readDO3122Continuous( data, id, df );
+               break;
 	  }
 	}
 	else
@@ -2026,4 +2029,139 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
         // Parser error
         m_error = tr( "Parser errors on %1" ).arg(m_device);
     } // else
+}
+
+void DMM::readDO3122Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df )
+{
+    Q_UNUSED(id);
+    Q_UNUSED(df);
+
+    QString val = "";
+    QString special = "";
+    QString unit;
+    double d_val;
+    int idx;
+    bool convOk = true;
+    bool showbar = true;
+
+    if (m_consoleLogging)
+    {
+       for (int i=0; i<22; ++i)
+          fprintf( stdout, "%02X ", data[i] & 0x0ff );
+       fprintf( stdout, "\r\n" );
+    }
+
+    // Check for overload
+    if ( (static_cast<uint8_t>(data[6u]) == 0x80u)
+         && (static_cast<uint8_t>(data[7u]) == 0x58u)
+         && (static_cast<uint8_t>(data[8u]) == 0x5fu)
+         && (static_cast<uint8_t>(data[9u]) == 0x00u)
+         )
+    {
+        val = "OL";
+        d_val = 0.0;
+    }
+    else
+    {
+        if (0u != (static_cast<uint8_t>(data[10u]) & 0x08u))
+            val = "-";
+
+        for (idx = 9; idx > 5; idx--)
+        {
+            // Check for blank
+            if (data[idx] == 0u)
+                continue;
+
+            // Check for .dp
+            if (data[idx] & 0x80u)
+                val += '.';
+
+            val += DO3122Digit(data[idx], &convOk);
+
+            if (false == convOk)
+            {
+                m_error = tr( "Digit parse fail on %1" ).arg(m_device);
+                return;
+            }
+        }
+
+        d_val = val.toDouble(&convOk);
+    }
+
+    if (convOk)
+    {
+        switch (data[10u] & 0x07u)
+        {
+        case 0x00u: special = ""; break;
+        case 0x01u: special = "Diode"; break;
+        case 0x02u: special = "AC"; break;
+        case 0x04u: special = "DC"; break;
+        default: convOk = false; break;
+        }
+
+        if ( (data[20u] != 0u) && (data[21u] == 0u) )
+        {
+            switch (static_cast<uint8_t>(data[20u] & 0xffu))
+            {
+            case 0x01u: unit = "C"; break;
+            case 0x02u: unit = "F"; break;
+            case 0x90u: unit = "mF"; d_val *= 0.001; break;
+            case 0xA0u: unit = "uF"; d_val *= 0.000001; break;
+            case 0xC0u: unit = "nF"; d_val *= 0.000000001; break;
+            default: convOk = false; break;
+            }
+        }
+        else if (data[21u] != 0u)
+        {
+            switch (static_cast<uint8_t>(data[21u] & 0x33u))
+            {
+            case 0x00u: unit = ""; break;
+            case 0x01u: d_val *= 0.000001; unit = 'u'; break;
+            case 0x02u: d_val *= 0.001; unit = 'm'; break;
+            case 0x10u: d_val *= 1000000; unit = 'M'; break;
+            case 0x20u: d_val *= 1000; unit = 'K'; break;
+            default: convOk = false; break;
+            }
+
+            switch (static_cast<uint8_t>(data[21u] & 0xCCu))
+            {
+            case 0x04u: unit += "A"; break;
+            case 0x08u: unit += "V"; break;
+            case 0x40u: unit += "Ohm"; break;
+            case 0x80u: unit += "Hz"; break;
+            default: convOk = false; break;
+            }
+        }
+        else
+            convOk = false;
+
+        if (true == convOk)
+        {
+            Q_EMIT value(d_val, val, unit, special, showbar, 0);
+            m_error = tr( "Connected %1" ).arg(m_device);
+        }
+        else
+            m_error = tr( "Parser errors on %1" ).arg(m_device);
+    }
+    else
+        m_error = tr( "Parser errors on %1" ).arg(m_device);
+}
+
+const char *DMM::DO3122Digit( int byte, bool *convOk )
+{
+  int           digit[10] = { 0x5f, 0x06, 0x6b, 0x2f, 0x36, 0x3d, 0x7d, 0x07, 0x7f, 0x3f };
+  const char *c_digit[10] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
+  byte &= 0x07f;
+
+  *convOk = true;
+
+  for (int n=0; n<10; n++)
+  {
+    if (byte == digit[n])
+        return c_digit[n];
+  }
+
+  *convOk = false;
+  return 0;
 }

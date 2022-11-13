@@ -58,7 +58,6 @@ class ReaderThread : public QObject
 	  ReadStatus            m_status;
 	  bool                  m_readValue;
 	  char                  m_fifo[FIFO_LENGTH];
-	  char                  m_buffer[FIFO_LENGTH];
 	  ReadEvent::DataFormat	m_format;
 	  int                   m_length;
 	  bool                  m_sendRequest;
@@ -77,6 +76,7 @@ class ReaderThread : public QObject
 	  void					readVC870();
 	  void					readVC940();
 	  void					readRS22812Continuous();
+      void                  readDO3122Continuous();
 
 	  int					formatLength() const;
 	  bool					checkFormat();

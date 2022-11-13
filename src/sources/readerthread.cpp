@@ -39,7 +39,6 @@ ReaderThread::ReaderThread( QObject *receiver ) :
   m_id( 0 ),
   m_numValues( 1 )
 {
-  m_buffer[14] = '\0';
   m_serialPort=Q_NULLPTR;
 }
 
@@ -94,48 +93,42 @@ void ReaderThread::startRead()
 
 void ReaderThread::socketNotifierSLOT()
 {
-  //std::cerr << "socket call" << std::endl;
+      //std::cerr << "socket call" << std::endl;
 
-  int  retval;
-  char byte;
+      int  retval;
+      char byte;
+      QByteArray dataOut;
 
-  m_status = ReaderThread::Ok;
+      m_status = ReaderThread::Ok;
 
+    while((retval = m_serialPort->read( &byte, 1)) > 0)
+    {
 
-	retval = m_serialPort->read( &byte, 1);
-
-	if (-1 == retval)
-	{
-	  m_status = ReaderThread::Error;
-	  return;
-	}
-	else if (0 == retval)
-	{
-	  m_status = ReaderThread::Timeout;
-	  return;
-	}
-	else
-	{
 	  m_fifo[m_length] = byte;
 
-	  //fprintf( stderr, "READ: %02X - %02X %d\n", (unsigned)byte, (unsigned)byte & 0xf0, m_length );
+      fprintf( stderr, "%02X ", static_cast<uint8_t>(byte) );
 
 	  if (checkFormat())
 	  {
 		m_length = (m_length-formatLength()+1+FIFO_LENGTH)%FIFO_LENGTH;
 
-		//fprintf( stderr, "Format Ok!\n" );
+        fprintf( stderr, "Format Ok!\n" );
+
+        dataOut = QByteArray();
 
 		for (int i=0; i<formatLength(); ++i)
 		{
-		  m_buffer[i] = m_fifo[m_length];
+          dataOut.append(m_fifo[m_length]);
+          fprintf( stderr, "%02X ", static_cast<uint8_t>(dataOut[i]));
 		  m_length = (m_length+1)%FIFO_LENGTH;
 		}
+
+        fprintf( stderr, "\n" );
 
 		m_sendRequest = true;
 		m_length = 0;
 
-		Q_EMIT readEvent( m_buffer, m_id, m_format );
+        Q_EMIT readEvent(dataOut, m_id, m_format );
 		//QApplication::postEvent( m_receiver,
 		//    new ReadEvent( m_buffer, formatLength(), m_id, m_format ) );
 
@@ -145,6 +138,8 @@ void ReaderThread::socketNotifierSLOT()
 		m_length = (m_length+1) % FIFO_LENGTH;
 	}
 
+    if (-1 == retval)
+        m_status = ReaderThread::Error;
 }
 
 int  ReaderThread::formatLength() const
@@ -173,14 +168,14 @@ int  ReaderThread::formatLength() const
 		return 14;
 	  case ReadEvent::RS22812Continuous:
 		return 9;
+      case ReadEvent::DO3122Continuous:
+        return 22;
   }
   return 0;
 }
 
 void ReaderThread::readDMM()
 {
-  memset( m_buffer, 0, 20 );
-
   switch(m_format)
   {
 	  case ReadEvent::Metex14:
@@ -216,6 +211,9 @@ void ReaderThread::readDMM()
 	  case ReadEvent::RS22812Continuous:
 		  readRS22812Continuous();
 		  break;
+      case ReadEvent::DO3122Continuous:
+          readDO3122Continuous();
+          break;
   }
 }
 
@@ -521,6 +519,23 @@ bool ReaderThread::checkFormat()
 	  }
 	}
   }
+  else if ( m_format == ReadEvent::DO3122Continuous )
+  {
+      if ( (static_cast<uint8_t>(m_fifo[(m_length-21+FIFO_LENGTH)%FIFO_LENGTH]) != 0xAAu)
+           || (static_cast<uint8_t>(m_fifo[(m_length-20+FIFO_LENGTH)%FIFO_LENGTH]) != 0x55u)
+           || (static_cast<uint8_t>(m_fifo[(m_length-19+FIFO_LENGTH)%FIFO_LENGTH]) != 0x52u)
+           || (static_cast<uint8_t>(m_fifo[(m_length-18+FIFO_LENGTH)%FIFO_LENGTH]) != 0x24u)
+           )
+          return false;
+
+      if (static_cast<uint8_t>(m_fifo[(m_length-17+FIFO_LENGTH)%FIFO_LENGTH]) != 0x01u)
+      {
+          (void)fprintf(stderr, "bad mode %#x\n", static_cast<uint8_t>(m_fifo[(m_length-17+FIFO_LENGTH)%FIFO_LENGTH]));
+          return false;
+      }
+
+      return true;
+  }
   return false;
 }
 
@@ -574,5 +589,9 @@ void ReaderThread::readPeakTech10()
 }
 
 void ReaderThread::readRS22812Continuous()
+{
+}
+
+void ReaderThread::readDO3122Continuous()
 {
 }
