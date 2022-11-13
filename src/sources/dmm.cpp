@@ -2161,6 +2161,8 @@ const char *DMM::DO3122Digit( int byte, bool *convOk )
 
   byte &= 0x07f;
 
+  *convOk = true;
+
   for (int n=0; n<10; n++)
   {
     if (byte == digit[n])
