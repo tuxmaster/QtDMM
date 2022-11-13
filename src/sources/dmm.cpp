@@ -2133,9 +2133,7 @@ void DMM::readDO3122Continuous( const QByteArray & data, int id, ReadEvent::Data
             }
         }
         else
-        {
             convOk = false;
-        }
 
         if (true == convOk)
         {
@@ -2143,14 +2141,10 @@ void DMM::readDO3122Continuous( const QByteArray & data, int id, ReadEvent::Data
             m_error = tr( "Connected %1" ).arg(m_device);
         }
         else
-        {
             m_error = tr( "Parser errors on %1" ).arg(m_device);
-        }
     }
     else
-    {
         m_error = tr( "Parser errors on %1" ).arg(m_device);
-    }
 }
 
 const char *DMM::DO3122Digit( int byte, bool *convOk )

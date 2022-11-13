@@ -524,10 +524,9 @@ bool ReaderThread::checkFormat()
       if ( (static_cast<uint8_t>(m_fifo[(m_length-21+FIFO_LENGTH)%FIFO_LENGTH]) != 0xAAu)
            || (static_cast<uint8_t>(m_fifo[(m_length-20+FIFO_LENGTH)%FIFO_LENGTH]) != 0x55u)
            || (static_cast<uint8_t>(m_fifo[(m_length-19+FIFO_LENGTH)%FIFO_LENGTH]) != 0x52u)
-           || (static_cast<uint8_t>(m_fifo[(m_length-18+FIFO_LENGTH)%FIFO_LENGTH]) != 0x24u) )
-      {
+           || (static_cast<uint8_t>(m_fifo[(m_length-18+FIFO_LENGTH)%FIFO_LENGTH]) != 0x24u)
+           )
           return false;
-      }
 
       if (static_cast<uint8_t>(m_fifo[(m_length-17+FIFO_LENGTH)%FIFO_LENGTH]) != 0x01u)
       {
