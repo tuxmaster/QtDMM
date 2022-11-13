@@ -2039,6 +2039,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
     double d_val;
     int idx;
     bool convOk;
+    bool showbar = true;
 
     if (m_consoleLogging)
     {
@@ -2119,7 +2120,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
 
         if (true == convOk)
         {
-            Q_EMIT value(d_val, val, unit, special, false, 0);
+            Q_EMIT value(d_val, val, unit, special, showbar, 0);
             m_error = tr( "Connected %1" ).arg(m_device);
         }
         else
