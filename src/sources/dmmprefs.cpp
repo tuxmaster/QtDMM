@@ -43,6 +43,7 @@
 //              8: QM1537
 //              9: 9 binary bytes continuous (22-812)
 //             10: 23 bytes continuous (VC870)
+//             11: 22 bytes continuous (DO3122)
 //    bits
 //    stopBits
 //    number of values (For DMM's that send several lines at once)
@@ -65,6 +66,8 @@ struct DMMInfo dmm_info[] = {
 							  {"Digitech QM1462", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},  // no image
 							  {"Digitech QM1538", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},  // no image
 							  {"Digitech QM1537", 3, 8, 8, 1, 1, 0, 1, 0, 0,1,1,1},  // no image
+
+                              {"Duratool DO3122", 5, 11, 8, 1, 1, 0, 1, 0, 0,0,0,0},
 
 							  {"ELV M9803R", 5, 4, 7, 1, 1, 1, 1, 0, 0,1,1,1},       // no image
 
