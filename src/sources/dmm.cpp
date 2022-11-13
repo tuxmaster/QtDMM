@@ -2035,7 +2035,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
 {
     QString val = "";
     QString special = "";
-    QString unit = "  ";
+    QString unit;
     double d_val;
     int idx;
     bool convOk;
@@ -2084,8 +2084,8 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
         {
             switch (static_cast<uint8_t>(data[20u] & 0xffu))
             {
-            case 0x01u: unit = "°C"; break;
-            case 0x02u: unit = "°F"; break;
+            case 0x01u: unit = "C"; break;
+            case 0x02u: unit = "F"; break;
             case 0x10u: unit = "mF"; d_val *= 0.001; break;
             case 0x20u: unit = "uF"; d_val *= 0.000001; break;
             case 0x40u: unit = "nF"; d_val *= 0.000000001; break;
@@ -2096,19 +2096,19 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
         {
             switch (static_cast<uint8_t>(data[21u] & 0x33u))
             {
-            case 0x01u: d_val *= 0.000001; unit[0u] = 'u'; break;
-            case 0x02u: d_val *= 0.001; unit[0u] = 'm'; break;
-            case 0x10u: d_val *= 1000000; unit[0u] = 'M'; break;
-            case 0x20u: d_val *= 1000; unit[0u] = 'K'; break;
-            default: break;
+            case 0x01u: d_val *= 0.000001; unit = 'u'; break;
+            case 0x02u: d_val *= 0.001; unit = 'm'; break;
+            case 0x10u: d_val *= 1000000; unit = 'M'; break;
+            case 0x20u: d_val *= 1000; unit = 'K'; break;
+            default: unit = ""; break;
             }
 
             switch (static_cast<uint8_t>(data[21u] & 0xCCu))
             {
-            case 0x04u: unit[1u] = 'A'; break;
-            case 0x08u: unit[1u] = 'V'; break;
-            case 0x40u: unit[1u] = 'R'; break;
-            case 0x80u: unit[1u] = 'H'; unit += 'z'; break;
+            case 0x04u: unit += "A"; break;
+            case 0x08u: unit += "V"; break;
+            case 0x40u: unit += "Ohm"; break;
+            case 0x80u: unit += "Hz"; break;
             default: convOk = false; break;
             }
         }
