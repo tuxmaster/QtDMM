@@ -2049,7 +2049,11 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
     }
 
     // Check for overload
-    if ( (data[6u] == 0x80) && (data[7u] == 0x58u) && (data[8u] == 0x5fu) && (data[9u] == 0x00u) )
+    if ( (static_cast<uint8_t>(data[6u]) == 0x80u)
+         && (static_cast<uint8_t>(data[7u]) == 0x58u)
+         && (static_cast<uint8_t>(data[8u]) == 0x5fu)
+         && (static_cast<uint8_t>(data[9u]) == 0x00u)
+         )
     {
         val = "OL";
         d_val = 0.0;
@@ -2103,9 +2107,9 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
             {
             case 0x01u: unit = "C"; break;
             case 0x02u: unit = "F"; break;
-            case 0x10u: unit = "mF"; d_val *= 0.001; break;
-            case 0x20u: unit = "uF"; d_val *= 0.000001; break;
-            case 0x40u: unit = "nF"; d_val *= 0.000000001; break;
+            case 0x90u: unit = "mF"; d_val *= 0.001; break;
+            case 0xA0u: unit = "uF"; d_val *= 0.000001; break;
+            case 0xC0u: unit = "nF"; d_val *= 0.000000001; break;
             default: convOk = false; break;
             }
         }
