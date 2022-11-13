@@ -2038,7 +2038,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
     QString unit;
     double d_val;
     int idx;
-    bool convOk = false;
+    bool convOk = true;
     bool showbar = true;
 
     if (m_consoleLogging)
@@ -2095,6 +2095,7 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
     {
         switch (data[10u] & 0x07u)
         {
+        case 0x00u: special = ""; break;
         case 0x01u: special = "Diode"; break;
         case 0x02u: special = "AC"; break;
         case 0x04u: special = "DC"; break;
@@ -2117,11 +2118,12 @@ void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent:
         {
             switch (static_cast<uint8_t>(data[21u] & 0x33u))
             {
+            case 0x00u: unit = ""; break;
             case 0x01u: d_val *= 0.000001; unit = 'u'; break;
             case 0x02u: d_val *= 0.001; unit = 'm'; break;
             case 0x10u: d_val *= 1000000; unit = 'M'; break;
             case 0x20u: d_val *= 1000; unit = 'K'; break;
-            default: unit = ""; break;
+            default: convOk = false; break;
             }
 
             switch (static_cast<uint8_t>(data[21u] & 0xCCu))
