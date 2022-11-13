@@ -208,7 +208,7 @@ void DMM::readEventSLOT( const QByteArray & data, int id, ReadEvent::DataFormat 
 				readRS22812Continuous( data, id, df );
 			   break;
           case ReadEvent::DO3122Continuous:
-                readDO32122Continuous( data, id, df );
+                readDO3122Continuous( data, id, df );
                break;
 	  }
 	}
@@ -2031,8 +2031,11 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
     } // else
 }
 
-void DMM::readDO32122Continuous( const QByteArray & data, int /*id*/, ReadEvent::DataFormat /*df*/ )
+void DMM::readDO3122Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df )
 {
+    Q_UNUSED(id);
+    Q_UNUSED(df);
+
     QString val = "";
     QString special = "";
     QString unit;

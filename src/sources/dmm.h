@@ -86,7 +86,7 @@ class DMM : public QObject
 	  void						readVC940Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
 	  void						readQM1537Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
 	  void						readRS22812Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
-      void						readDO32122Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
+      void						readDO3122Continuous( const QByteArray & data, int id, ReadEvent::DataFormat df );
 	  const char				*vc820Digit( int );
 	  const char				*RS22812Digit( int );
       const char                *DO3122Digit( int byte, bool *convOk );
