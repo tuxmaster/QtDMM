@@ -25,11 +25,15 @@ TRANSLATIONS    =  translations/qtdmm_de.ts
 QMAKE_EXTRA_COMPILERS += lrelease
 lrelease.input         = TRANSLATIONS
 lrelease.output        = ${QMAKE_FILE_BASE}.qm
-if (linux-g++) {
-    lrelease.commands      = $$[QT_INSTALL_BINS]/lrelease-qt5 ${QMAKE_FILE_IN} -qm translations/${QMAKE_FILE_BASE}.qm
-} else {
-    lrelease.commands      = $$[QT_INSTALL_BINS]/../../../bin/qt5/lrelease ${QMAKE_FILE_IN} -qm translations/${QMAKE_FILE_BASE}.qm
+
+defineReplace(detect_lrelease) {
+    !system("which lrelease-qt5 > /dev/null 2>&1"): \
+        return("lrelease")
+    return("lrelease-qt5")
 }
+
+LRELEASE_BINARY = $$detect_lrelease()
+lrelease.commands = $$LRELEASE_BINARY ${QMAKE_FILE_IN} -qm translations/${QMAKE_FILE_BASE}.qm
 lrelease.CONFIG       += no_link target_predeps
 
 FORMS =      forms/uiconfigdlg.ui \

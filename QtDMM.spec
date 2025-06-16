@@ -22,7 +22,8 @@ Eine Anwendung für DMM's.
 %setup -q -n %{name}
 
 %build
-qmake-qt5
+QMAKE=$(which qmake-qt5 || which qmake)
+$QMAKE
 make %{?_smp_mflags}
 
 %install
