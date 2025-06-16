@@ -170,6 +170,8 @@ int  ReaderThread::formatLength() const
 		return 9;
       case ReadEvent::DO3122Continuous:
         return 22;
+      case ReadEvent::CyrustekES51922:
+        return 14;
   }
   return 0;
 }
@@ -213,6 +215,9 @@ void ReaderThread::readDMM()
 		  break;
       case ReadEvent::DO3122Continuous:
           readDO3122Continuous();
+          break;
+      case ReadEvent::CyrustekES51922:
+          readCyrustekES51922();
           break;
   }
 }
@@ -277,6 +282,11 @@ bool ReaderThread::checkFormat()
   {
 	if (m_fifo[m_length] == 0x0d)
 		return true;
+  }
+  else if (m_format == ReadEvent::CyrustekES51922)
+  {
+    if ((m_length) && (m_fifo[m_length - 1] == 0x0d) && (m_fifo[m_length] == 0x0a))
+      return true;
   }
   else if (m_format == ReadEvent::RS22812Continuous)
   {
@@ -593,5 +603,9 @@ void ReaderThread::readRS22812Continuous()
 }
 
 void ReaderThread::readDO3122Continuous()
+{
+}
+
+void ReaderThread::readCyrustekES51922()
 {
 }

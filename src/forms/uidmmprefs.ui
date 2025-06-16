@@ -575,6 +575,11 @@
           <string>22 bytes binary, continuous (DO3122)</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>14 bytes half-ASCII, UNI-T UT61E</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

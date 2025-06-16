@@ -118,6 +118,7 @@ struct DMMInfo dmm_info[] = {
 							  {"Uni-Trend UT30E", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},   // no image
 							  {"Uni-Trend UT61B", 3, 8, 8, 1, 1, 0, 1, 0, 0,1,1,1},   // no image
 							  {"Uni-Trend UT61D", 3, 8, 8, 1, 1, 0, 8, 0, 0,0,0,1},   // no image
+							  {"Uni-Trend UT61E", 6, 12, 7, 1, 1, 2, 2, 0, 0,0,0,1},   // no image
 
 							  {"Voltcraft M-3610D", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},  // no image
 							  {"Voltcraft M-3650D", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
