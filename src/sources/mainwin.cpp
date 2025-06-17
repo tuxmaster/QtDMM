@@ -36,6 +36,7 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
   m_running( false )
 {
   setupUi(this);
+  setupIcons();
 
   m_wid = new MainWid( this );
   setCentralWidget( m_wid );
@@ -202,3 +203,27 @@ void MainWin::toolbarVisibilitySLOT( bool disp, bool dmm, bool graph, bool file,
   toolBarDisplay->setVisible( disp );
 }
 
+void MainWin::setupIcons()
+{
+  QIcon iconConnectOn = QIcon::fromTheme("network-connect");
+  QIcon iconConnectOff = QIcon::fromTheme("network-disconnect");
+
+  this->action_Connect->setIcon(iconConnectOff);
+  connect(this->action_Connect, &QAction::toggled, this, [=](bool checked) {
+    this->action_Connect->setIcon(checked ? iconConnectOn : iconConnectOff);
+  });
+
+  this->action_Reset->setIcon(QIcon::fromTheme("view-refresh"));
+  this->action_Start->setIcon(QIcon::fromTheme("media-record"));
+  this->action_Stop->setIcon(QIcon::fromTheme("media-playback-stop"));
+  this->action_Print->setIcon(QIcon::fromTheme("document-print"));
+  this->action_Export->setIcon(QIcon::fromTheme("document-save"));
+  this->action_Import->setIcon(QIcon::fromTheme("document-open"));
+  this->action_Configure->setIcon(QIcon::fromTheme("preferences-system"));
+  this->action_Quit->setIcon(QIcon::fromTheme("application-exit"));
+  this->action_Clear->setIcon(QIcon::fromTheme("user-trash"));
+  QIcon helpIcon = QIcon::fromTheme("help-contextual");
+  if (helpIcon.isNull())
+    helpIcon = QIcon::fromTheme("help-contents");  // fallback
+  this->action_Direct_help->setIcon(helpIcon);
+}

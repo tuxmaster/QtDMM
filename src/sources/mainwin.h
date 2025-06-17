@@ -55,6 +55,7 @@ class MainWin : public QMainWindow, private Ui::UIMainWin
 	  QLabel		*m_error;
 	  QLabel		*m_info;
 
+	  void			setupIcons();
 	  void			createToolBars();
 	  void			createActions();
 	  void			closeEvent( QCloseEvent * )Q_DECL_OVERRIDE;
