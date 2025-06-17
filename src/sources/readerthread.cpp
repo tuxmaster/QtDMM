@@ -37,7 +37,8 @@ ReaderThread::ReaderThread( QObject *receiver ) :
   m_length( 0 ),
   m_sendRequest( true ),
   m_id( 0 ),
-  m_numValues( 1 )
+  m_numValues( 1 ),
+  m_consoleLogging( false )
 {
   m_serialPort=Q_NULLPTR;
 }
@@ -64,6 +65,12 @@ void ReaderThread::setHandle( QSerialPort *handle )
 	connect(m_serialPort,SIGNAL(aboutToClose()),this,SLOT(socketClose()));
   }
 }
+
+void ReaderThread::setConsoleLogging(bool on)
+{
+	m_consoleLogging = on;
+}
+
 void ReaderThread::socketClose()
 {
 	m_id=0;
@@ -93,53 +100,64 @@ void ReaderThread::startRead()
 
 void ReaderThread::socketNotifierSLOT()
 {
-      //std::cerr << "socket call" << std::endl;
+	//std::cerr << "socket call" << std::endl;
 
-      int  retval;
-      char byte;
-      QByteArray dataOut;
+	int  retval;
+	char byte;
+	QByteArray dataOut;
 
-      m_status = ReaderThread::Ok;
+	m_status = ReaderThread::Ok;
 
-    while((retval = m_serialPort->read( &byte, 1)) > 0)
-    {
+	while((retval = m_serialPort->read( &byte, 1)) > 0)
+	{
+		m_fifo[m_length] = byte;
 
-	  m_fifo[m_length] = byte;
-
-      fprintf( stderr, "%02X ", static_cast<uint8_t>(byte) );
-
-	  if (checkFormat())
-	  {
-		m_length = (m_length-formatLength()+1+FIFO_LENGTH)%FIFO_LENGTH;
-
-        fprintf( stderr, "Format Ok!\n" );
-
-        dataOut = QByteArray();
-
-		for (int i=0; i<formatLength(); ++i)
+		if (m_consoleLogging)
 		{
-          dataOut.append(m_fifo[m_length]);
-          fprintf( stderr, "%02X ", static_cast<uint8_t>(dataOut[i]));
-		  m_length = (m_length+1)%FIFO_LENGTH;
+			fprintf( stderr, "%02X ", static_cast<uint8_t>(byte) );
 		}
 
-        fprintf( stderr, "\n" );
+		if (checkFormat())
+		{
+			m_length = (m_length-formatLength()+1+FIFO_LENGTH)%FIFO_LENGTH;
 
-		m_sendRequest = true;
-		m_length = 0;
+			if (m_consoleLogging)
+			{
+				fprintf( stderr, "Format Ok!\n" );
+			}
+			dataOut = QByteArray();
 
-        Q_EMIT readEvent(dataOut, m_id, m_format );
-		//QApplication::postEvent( m_receiver,
-		//    new ReadEvent( m_buffer, formatLength(), m_id, m_format ) );
+			for (int i=0; i<formatLength(); ++i)
+			{
+				dataOut.append(m_fifo[m_length]);
+				if (m_consoleLogging)
+				{
+					fprintf( stderr, "%02X ", static_cast<uint8_t>(dataOut[i]));
+					m_length = (m_length+1)%FIFO_LENGTH;
+				}
+			}
 
-		m_id = (m_id+1) % m_numValues;
-	  }
-	  else
-		m_length = (m_length+1) % FIFO_LENGTH;
+			if (m_consoleLogging)
+			{
+				fprintf( stderr, "\n" );
+			}
+			m_sendRequest = true;
+			m_length = 0;
+
+			Q_EMIT readEvent(dataOut, m_id, m_format );
+			// QApplication::postEvent( m_receiver,
+			// new ReadEvent( m_buffer, formatLength(), m_id, m_format ) );
+
+			m_id = (m_id+1) % m_numValues;
+		}
+		else
+		{
+			m_length = (m_length+1) % FIFO_LENGTH;
+		}
 	}
 
-    if (-1 == retval)
-        m_status = ReaderThread::Error;
+	if (-1 == retval)
+		m_status = ReaderThread::Error;
 }
 
 int  ReaderThread::formatLength() const

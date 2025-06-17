@@ -44,17 +44,28 @@
 //              9: 9 binary bytes continuous (22-812)
 //             10: 23 bytes continuous (VC870)
 //             11: 22 bytes continuous (DO3122)
+//             12: 4 bytes half-ASCII (CyrustekES51922)
 //    bits
 //    stopBits
 //    number of values (For DMM's that send several lines at once)
 //    parity (0,1,2 - None,Even,Odd)
 //    [don't ask for any logic behind the digits, changing would break configs]
-//    display digits (0,1,2,3 - 2000, 4000, 20000, 50000, 100000, 200000, 400000,
-//                              1000000, 6000, 40000)
+//    display digits (0: 2000
+//                    1: 4000
+//                    2: 20000
+//                    3: 50000
+//                    4: 100000
+//                    5: 200000
+//                    6: 400000
+//                    7: 1000000
+//                    8: 6000
+//                    9: 40000
+//                    10: 22000
 //    External device setup 0, 1
-//- Added
-
-
+//    rts 0, 1
+//    cts 0, 1
+//    dsr 0, 1
+//    dtr 0, 1
 
 
 struct DMMInfo dmm_info[] = {
@@ -118,7 +129,7 @@ struct DMMInfo dmm_info[] = {
 							  {"Uni-Trend UT30E", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},   // no image
 							  {"Uni-Trend UT61B", 3, 8, 8, 1, 1, 0, 1, 0, 0,1,1,1},   // no image
 							  {"Uni-Trend UT61D", 3, 8, 8, 1, 1, 0, 8, 0, 0,0,0,1},   // no image
-							  {"Uni-Trend UT61E", 6, 12, 7, 1, 1, 2, 2, 0, 0,0,0,1},   // no image
+							  {"Uni-Trend UT61E", 6, 12, 7, 1, 1, 2, 10, 0, 0,0,0,1},   // no image
 
 							  {"Voltcraft M-3610D", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},  // no image
 							  {"Voltcraft M-3650D", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},

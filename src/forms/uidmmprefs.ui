@@ -431,6 +431,11 @@
               <string>40000</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>22000</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -577,7 +582,7 @@
         </item>
         <item>
          <property name="text">
-          <string>14 bytes half-ASCII, UNI-T UT61E</string>
+          <string>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</string>
          </property>
         </item>
        </widget>

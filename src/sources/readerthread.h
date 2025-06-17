@@ -46,6 +46,7 @@ class ReaderThread : public QObject
 	  void					startRead();
 	  void					setHandle( QSerialPort *handle );
 	  void					setFormat( ReadEvent::DataFormat );
+	  void					setConsoleLogging(bool on);
 
 	  ReadStatus			status() const { return m_status; }
 	  void					setNumValues( int num ) { m_numValues = num; }
@@ -63,6 +64,7 @@ class ReaderThread : public QObject
 	  bool                  m_sendRequest;
 	  int                   m_id;
 	  int                   m_numValues;
+	  bool                  m_consoleLogging;
 
 	  void					readDMM();
 	  void					readMetex14();
