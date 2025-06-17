@@ -43,7 +43,9 @@ MainWin::MainWin( QWidget *parent) : QMainWindow( parent),
 
   createActions();
 
-  m_display = new DisplayWid( toolBarDisplay );
+
+  m_display = new DisplayWid( this );
+  toolBarDisplay->addWidget(m_display);
   m_wid->setDisplay( m_display );
 
   setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(APP_VERSION) );

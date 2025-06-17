@@ -98,6 +98,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_bar[6] =  BitmapHelper(":/Symbols/sixty_bar.xpm");
 
   setAttribute(Qt::WA_OpaquePaintEvent);
+  setAutoFillBackground(false);
 
   setDisplayMode( 1, true, true, 1 );
 }
@@ -172,7 +173,6 @@ void DisplayWid::setDisplayMode( int dm, bool minMax, bool bar, int numValues )
   m_numValues   = numValues;
 
   int numDigits = calcNumDigits( m_displayMode );
-
   m_minMaxW = m_showMinMax ? (numDigits)*18+30+24 : 10;
   int digitsW = (numDigits)*49+30+30;
   m_extraH = m_numValues > 1 ? 24 : 0;
@@ -222,6 +222,10 @@ void DisplayWid::setDisplayMode( int dm, bool minMax, bool bar, int numValues )
   case 9:
 	m_range = 40000;
 	break;
+
+  case 10:
+	m_range = 22000;
+	break;
   }
 
   update();
@@ -269,7 +273,9 @@ void DisplayWid::setMode( int id, const QString & value )
 
 void DisplayWid::paintEvent( QPaintEvent * )
 {
-  QPixmap pix( width(), height() );
+  QRect drawRect = contentsRect();
+
+  QPixmap pix(drawRect.size() );
   pix.fill( palette().window().color() );
   QPainter p;
 
@@ -405,7 +411,7 @@ void DisplayWid::paintEvent( QPaintEvent * )
   }
 
   p.begin(this);
-  p.drawPixmap(0,0,pix);
+  p.drawPixmap(drawRect.topLeft(), pix);
   p.end();
 }
 
@@ -764,6 +770,7 @@ int DisplayWid::calcNumDigits( int dm )
 	case 3:
 	case 4:
 	case 9:
+	case 10:
 	  numDigits = 5;
 	  break;
 	case 5:

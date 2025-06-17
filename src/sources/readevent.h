@@ -41,7 +41,8 @@ class ReadEvent
 		QM1537Continuous,
 		RS22812Continuous,
 		VC870Continuous,
-        DO3122Continuous
+        DO3122Continuous,
+		CyrustekES51922
 	  };
 };
 #endif // READEVENT_HH
