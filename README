@@ -1,4 +1,4 @@
-QtDMM 0.9.0 (c) 2001-2014 M.Toussaint
+QtDMM 0.9.8 (c) 2001-2014 M.Toussaint
 
 QtDMM is a simple DMM readout software including a configurable transient 
 recorder. A friend of mine asked me  for a DMM readout software for Linux 
@@ -10,32 +10,81 @@ time) and  triggered automatic  start when given  thresholds are reached.
 If you call QtDMM  with the commandline option --console it  will display
 some debug output. This might (or hight not :) help resolve problems.
 
-It was written  for Metex (and compatible like VOLTCRAFT)  multimeter and
-is known to work with the following DMM's:
+It was written  for Metex (and compatible like VOLTCRAFT)  multimeter.
+following DMM's are supported by QtDMM. (some needs user confirmation)
 
+
+    Digitek      DT4000Zc
+    Digitek      DT-9062
+    Digitek      INO2513
     Digitech     QM1350
+    Digitech     QM1462
+    Digitech     QM1537
+    Digitech     QM1538
+
+    Duratool     DO3122
+
     ELV          M9803R
+
+    HoldPeak     HP-90EPC
+
+    Iso-Tech     IDM 73
+
+    MASTECH      MAS-343
+    MASTECH      MAS-345
     MASTECH      M9803R
+
+    McVoice      M-345pro
     McVoice      M-980T
     Metex        M-3660D
     Metex        M-3830D
+    Metex        M-3840D
     Metex        M-3850D
     Metex        M-3850M
+    Metex        M-3870D
+    Metex        M-4650C
     Metex        ME-11
     Metex        ME-22
     Metex        ME-32
     Metex        ME-42
     Metex        Universal system 9160
-    PeakTech     4010
-    PeakTech     4390
+
     PeakTech     451
+    PeakTech     3330
+    PeakTech     3430
+    PeakTech     4010
+    PeakTech     4015A
+    PeakTech     4360
+    PeakTech     4390
+
     Radioshack   22-805 DMM
+    Radioshack   22-812
     Radioshack   RS22-168A
+
+    TekPower     TP4000ZC
+
+    Tenma        72-7745
+    Tenma        72-1016
+
+    Sinometer    MAS-343
+
+    Uni-Trend    UT30A
+    Uni-Trend    UT30E
+    Uni-Trend    UT61B
+    Uni-Trend    UT61D
+
     Voltcraft    M-3650D
+    Voltcraft    M-3860
     Voltcraft    M-4660
+    Voltcraft    M-4660A
+    Voltcraft    M-4660M
     Voltcraft    ME-11
     Voltcraft    ME-22T
     Voltcraft    ME-32
+    Voltcraft    ME-42
+    Voltcraft    MXD-4660A
+    Voltcraft    VC 630
+    Voltcraft    VC 650
     Voltcraft    VC 670
     Voltcraft    VC 820
     Voltcraft    VC 840
@@ -43,16 +92,7 @@ is known to work with the following DMM's:
     Voltcraft    VC 920
     Voltcraft    VC 940
 
-The following models should work but need to be confirmed by a user:
 
-    Voltcraft    ME-42
-    Voltcraft    M-3860
-    Voltcraft    M-4660A
-    Voltcraft    M-4660M
-    Voltcraft    MXD-4660A
-    Voltcraft    VC 630
-    Voltcraft    VC 650
-    Voltcraft    VC 670
 
 If you manage to  get QtDMM working  with a  digital multimeter different 
 from the mentioned  above, or if you can confirm  one of the  unconfirmed
@@ -63,7 +103,7 @@ QtDMM is kind of "works for me" software. I'm using it, I like it the way
 it is  and it seems  to be quite stable. It still needs some improvements 
 but does it's job quite well.
 
-QtDMM 0.9.0 is distributed under the GNU Public License, version 3.
+QtDMM 0.9.8 is distributed under the GNU Public License, version 3.
 (QtDMM versions prior to 0.9.0 are licensed under GNU GPL 2.0)
  
 -- 27/04/2014
