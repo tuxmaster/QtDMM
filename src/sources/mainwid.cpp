@@ -168,6 +168,7 @@ void MainWid::timerEvent( QTimerEvent * )
 
 void MainWid::valueSLOT( double dval, const QString & val, const QString & u,const QString & s, const QString & r, bool hold, bool showBar,int id )
 {
+	/*
   std::cerr << "valueSLOT " << dval
 	   << " val=" << val.toLocal8Bit().data()
 	   << " u=" << u.toLocal8Bit().data()
@@ -176,47 +177,48 @@ void MainWid::valueSLOT( double dval, const QString & val, const QString & u,con
 	   << " showBar=" << showBar
 	   << " hold=" << hold
 	   << " id=" << id << std::endl;
+*/
+	m_display->setHold(hold);
+	if (r=="AUTO") m_display->setAuto(true);
+	if (r=="MANU") m_display->setManu(true);
 
-  m_display->setShowBar( showBar );
-  m_display->setValue( id, val );
+	m_display->setShowBar( showBar );
+	m_display->setMode( id, s );
 
-  m_display->setMode( id, s );
-  m_display->setHold(hold);
 
-  if (r=="AUTO") m_display->setAuto(true);
-  if (r=="MANU") m_display->setManu(true);
-
-  QString tmpUnit = u;
-
-  m_display->setUnit( id, tmpUnit );
-
-  if (id == 0)
-  {
-	if (m_lastUnit != s)
+	if (!hold)
 	{
-	  resetSLOT();
-	  ui_graph->setUnit( u );
-	}
-	m_lastUnit = s;
+	m_display->setValue( id, val );
+	m_display->setUnit( id, u );
 
-	if (dval > m_max)
+	if (id == 0)
 	{
-	  m_max = dval;
-	  m_display->setMaxUnit( u );
-	  m_display->setMaxValue( val );
+		if (m_lastUnit != s)
+		{
+			if (m_lastUnit != s)resetSLOT();
+			ui_graph->setUnit( u );
+		}
+		m_lastUnit = s;
+
+		if (dval > m_max)
+		{
+			m_max = dval;
+			m_display->setMaxUnit( u );
+			m_display->setMaxValue( val );
+		}
+
+		if (dval < m_min)
+		{
+			m_min = dval;
+			m_display->setMinUnit( u );
+			m_display->setMinValue( val );
+		}
+
+		m_dval = dval;
+	}
 	}
 
-	if (dval < m_min)
-	{
-	  m_min = dval;
-	  m_display->setMinUnit( u );
-	  m_display->setMinValue( val );
-	}
-
-	m_dval = dval;
-  }
-
-  m_display->update();
+	m_display->update();
 }
 
 void MainWid::resetSLOT()

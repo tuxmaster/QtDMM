@@ -205,7 +205,7 @@ void DisplayWid::setDisplayMode( int dm, bool minMax, bool bar, int numValues )
   m_extraW = (numDigits)*18+30+10;
   m_minW = m_extraW * (m_numValues-1);
 
-  setFixedSize( qMax( m_minW, digitsW+m_minMaxW ) + 24, 76 + (m_showBar ? 26 : 2)+m_extraH );
+  setFixedSize( qMax( m_minW, digitsW+m_minMaxW ), 76 + (m_showBar ? 26 : 2)+m_extraH );
 
   switch (m_displayMode)
   {
@@ -259,571 +259,452 @@ void DisplayWid::setDisplayMode( int dm, bool minMax, bool bar, int numValues )
 
 void DisplayWid::setShowBar( bool bar )
 {
-  m_paintBar = bar;
+	m_paintBar = bar;
 }
 
 void DisplayWid::setValue( int id, const QString & value )
 {
-  m_value[id] = value;
+	m_value[id] = value;
 }
 
 void DisplayWid::setMinValue( const QString & value )
 {
-  m_minValue = value;
+	m_minValue = value;
 }
 
 void DisplayWid::setMaxValue( const QString & value )
 {
-  m_maxValue = value;
+	m_maxValue = value;
 }
 
 void DisplayWid::setUnit( int id, const QString & value )
 {
-  m_unit[id] = value;
+	m_unit[id] = value;
 }
 
 void DisplayWid::setMinUnit( const QString & value )
 {
-  m_minUnit = value;
+	m_minUnit = value;
 }
 
 void DisplayWid::setMaxUnit( const QString & value )
 {
-  m_maxUnit = value;
+	m_maxUnit = value;
 }
 
 void DisplayWid::setMode( int id, const QString & value )
 {
-  m_mode[id] = value;
+	m_mode[id] = value;
 }
 
 void DisplayWid::paintEvent( QPaintEvent * )
 {
-  QRect drawRect = contentsRect();
+	QRect drawRect = contentsRect();
 
-  QPixmap pix(drawRect.size() );
-  pix.fill( palette().window().color() );
-  QPainter p;
+	QPixmap pix(drawRect.size() );
+	pix.fill( palette().window().color() );
+	QPainter p;
 
-  int numDigits = calcNumDigits( m_displayMode );
+	int numDigits = calcNumDigits( m_displayMode );
 
-  if (!m_value[0].isEmpty())
-  {
-	p.begin(&pix);
-
-	p.setPen( palette().windowText().style() );
-
-	if (m_showMinMax)
+	if (!m_value[0].isEmpty())
 	{
-	  p.save();
-	  p.drawPixmap( 6, 16, *m_minStr );
-	  p.translate( 28, 12 );
-	  drawSmallNumber( &p, m_minValue );
-	  p.translate( (numDigits)*18+12, 12 );
-	  drawSmallUnit( &p, m_minUnit );
-	  p.restore();
+		p.begin(&pix);
 
-	  p.save();
-	  p.drawPixmap( 6, 12+34, *m_maxStr );
-	  p.translate( 28,8+34 );
-	  drawSmallNumber( &p, m_maxValue );
-	  p.translate( (numDigits)*18+12, 12 );
-	  drawSmallUnit( &p, m_maxUnit );
-	  p.restore();
-	}
+		p.setPen( palette().windowText().style() );
 
-	p.save();
-	if (m_showMinMax)
-	{
-	  p.translate( 6+16+(numDigits*18)+30, 8 );
-	}
-	else
-	{
-	  p.translate( 6, 8 );
-	}
-
-	drawBigNumber( &p, m_value[0] );
-	p.translate( (numDigits)*49+24, 42 );
-	drawBigUnit( &p, m_unit[0] );
-
-	if (m_mode[0] == "DI")
-	{
-	  p.drawPixmap( 0, -36, *m_diode );
-	}
-	else if (m_mode[0] == "AC")
-	{
-	  p.drawPixmap( 0, -36, *m_ac );
-	}
-	else if (m_mode[0] == "DC")
-	{
-	  p.drawPixmap( 0, -36, *m_dc );
-	}
-
-
-	if (m_showHold)
-	{
-		p.drawPixmap( 30, -36, *m_hold );
-	}
-
-	if (m_showAuto)
-	{
-		p.drawPixmap( 30, -18, *m_auto );
-	} else if (m_showManu)
-	{
-		p.drawPixmap( 30, -18, *m_manu );
-	}
-
-	p.restore();
-
-	if (m_showBar)
-	{
-	  QString val;
-
-	  for (unsigned i=0; i<static_cast<unsigned>(m_value[0].length()); ++i)
-	  {
-		if (m_value[0][i].digitValue() != -1)
+		if (m_showMinMax)
 		{
-		  val += m_value[0][i];
+			p.save();
+			p.drawPixmap( 6, 16, *m_minStr );
+			p.translate( 28, 12 );
+			drawSmallNumber( &p, m_minValue );
+			p.translate( (numDigits)*18+12, 12 );
+			drawSmallUnit( &p, m_minUnit );
+			p.restore();
+
+			p.save();
+			p.drawPixmap( 6, 12+34, *m_maxStr );
+			p.translate( 28,8+34 );
+			drawSmallNumber( &p, m_maxValue );
+			p.translate( (numDigits)*18+12, 12 );
+			drawSmallUnit( &p, m_maxUnit );
+			p.restore();
 		}
-	  }
-	  double percent = val.toDouble() / static_cast<double>(m_range);
 
-	  int step = width()-18;
-	  int off = 0;
-	  if (0 == m_displayMode || 2 == m_displayMode)
-	  {
-		step /= 20;
-		off = (width()-20*step)/2-2;
-	  }
-	  else if (1 == m_displayMode || 3 == m_displayMode || 9 == m_displayMode)
-	  {
-		step /= 40;
-		off = (width()-40*step)/2-2;
-	  }
-	  else if (8 == m_displayMode)
-	  {
-		step /= 60;
-		off = (width()-60*step)/2-2;
-	  }
-	  else
-	  {
-		step /= 50;
-		off = (width()-50*step)/2-2;
-	  }
+		p.save();
+		p.translate( 6+(m_showMinMax?(numDigits*18)+46:0), 8 );
 
-	  for(int i=off, c=0, n=0; i<=width()-off; i+=step, ++c)
-	  {
-		if (!(c%5))
+		drawBigNumber( &p, m_value[0] );
+		p.translate( (numDigits)*49+24, 42 );
+		drawBigUnit( &p, m_unit[0] );
+
+		if (m_mode[0] == "DI")
 		{
-		  p.drawLine( i, height()-16, i, height()-12 );
+			p.drawPixmap( 0, -36, *m_diode );
+		}
+		else if (m_mode[0] == "AC")
+		{
+			p.drawPixmap( 0, -36, *m_ac );
+		}
+		else if (m_mode[0] == "DC")
+		{
+			p.drawPixmap( 0, -36, *m_dc );
+		}
 
-		  if (!(c%10))
+		p.restore();
+
+		if (m_showBar)
+		{
+			QString val;
+
+			for (unsigned i=0; i<static_cast<unsigned>(m_value[0].length()); ++i)
+			{
+				if (m_value[0][i].digitValue() != -1)
+				{
+					val += m_value[0][i];
+				}
+			}
+			double percent = val.toDouble() / static_cast<double>(m_range);
+			if (percent>1.0)
+					percent = 1.0;
+
+			int divisions = 50;
+			switch (m_displayMode)
+			{
+				case 0:
+				case 2:
+				case 10:
+					divisions = 20;
+					break;
+				case 1:
+				case 3:
+				case 9:
+					divisions = 40;
+					break;
+				case 8:
+					divisions = 60;
+					break;
+			}
+
+			int off = 25;
+
+			int step = (width()-off*2)/(divisions);
+
+			for(int c=0, n=0; c<=divisions; ++c)
 		  {
-			p.drawPixmap( i-4, height()-16-9, *m_bar[n++] );
-		  }
+				int x=off+c*step+5;
+				if (!(c%5))
+				{
+					p.drawLine( x, height()-16, x, height()-12 );
+
+					if (!(c%10))
+					{
+						p.drawPixmap( x-4, height()-16-9, *m_bar[n++] );
+					}
+				}
+				else
+				{
+					p.drawLine( x, height()-14, x, height()-12 );
+				}
+	  	}
+
+			if (m_paintBar)
+			{
+				int width = static_cast<int>(qRound(static_cast<double>((step*divisions))*percent));
+				p.fillRect( off+5, height()-10, width, 5, palette().windowText().color() );
+			}
+		}
+
+		if (m_showHold)
+		{
+			p.drawPixmap( 6, height()-25, *m_hold );
+		}
+
+		if (m_showAuto)
+		{
+			p.drawPixmap( width()-23, height()-25, *m_auto );
+		}
+		else if (m_showManu)
+		{
+			p.drawPixmap( width()-23, height()-25, *m_manu );
+		}
+
+		p.translate( 6, 76 );
+		for (int i=1; i<m_numValues; ++i)
+		{
+			drawSmallNumber( &p, m_value[i] );
+			p.save();
+			p.translate( (numDigits)*18+12, 12 );
+			drawSmallUnit( &p, m_unit[i] );
+			p.restore();
+			p.translate( m_extraW, 0 );
+		}
+
+		p.end();
+	}
+
+	p.begin(this);
+	p.drawPixmap(drawRect.topLeft(), pix);
+	p.end();
+}
+
+void DisplayWid::drawSmallNumber(QPainter *p, const QString &num)
+{
+	if (num.isEmpty())
+		return;
+
+	int x = 0;
+	int offset = 0;
+
+	// Skip leading spaces
+	while (offset < num.length() - 1 && num[offset] == ' ')
+		++offset;
+
+	// Draw minus sign if present
+	if (num[offset] == '-')
+	{
+		p->drawPixmap(0, 9, *m_smallMinus);
+		++offset;
+	}
+
+	x += 12;
+
+	// Mapping of lowercase letters to their position in m_smallSpecialChar (0-based index)
+	static const QMap<QChar, int> specialCharMap = {
+		{ 'a', 0 },
+		{ 'b', 1 },
+		{ 'd', 2 },
+		{ 'e', 3 },
+		{ 'h', 4 },
+		{ 'l', 5 },
+		{ 'n', 6 },
+		{ 'o', 7 },
+		{ 'p', 8 },
+		{ 'r', 9 },
+		{ 's', 10 },
+		{ 't', 11 },
+		{ 'y', 12 }
+	};
+
+	// Draw each character from the offset to the end
+	for (int i = offset; i < num.length(); ++i)
+	{
+		QChar ch = num[i];
+
+		if (ch == '.')
+		{
+			// Draw decimal point slightly offset
+			p->drawPixmap(x - 5, 0, *m_smallDecimal);
+		}
+		else if (specialCharMap.contains(ch.toLower()))
+		{
+			// Draw special letters from m_smallSpecialChar strip
+			int index = specialCharMap.value(ch.toLower());
+			p->drawPixmap(x, 0, *m_smallSpecialChar, 12 * index, 0, 12, 21);
+			x += 18;
+		}
+		else if (ch.isDigit())
+		{
+			// Draw digits from m_smallDigit strip
+			int digit = ch.digitValue();
+			p->drawPixmap(x, 0, *m_smallDigit, 12 * digit, 0, 12, 21);
+			x += 18;
 		}
 		else
 		{
-		  p.drawLine( i, height()-14, i, height()-12 );
+			// Unknown character, just advance x to keep spacing
+			x += 18;
 		}
-	  }
-
-	  if (m_paintBar)
-	  {
-		p.fillRect( off, height()-10,
-					static_cast<int>(qRound(static_cast<double>((width()-2*off))*percent)), 5,
-					palette().windowText().color() );
-	  }
 	}
-
-	p.translate( 6, 76 );
-	for (int i=1; i<m_numValues; ++i)
-	{
-	  drawSmallNumber( &p, m_value[i] );
-	  p.save();
-	  p.translate( (numDigits)*18+12, 12 );
-	  drawSmallUnit( &p, m_unit[i] );
-	  p.restore();
-	  p.translate( m_extraW, 0 );
-	}
-
-	p.end();
-  }
-
-  p.begin(this);
-  p.drawPixmap(drawRect.topLeft(), pix);
-  p.end();
 }
 
-void DisplayWid::drawSmallNumber( QPainter *p, const QString & num )
+
+void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
 {
-  int x = 0;
-  int offset = 0;
-  if(!num.isEmpty())
-  {
-	  while (num[offset] == ' ' && offset<num.length()-1)
+	if (str.isEmpty())
+		return;
+
+	int x = 0;
+	int index = 0;
+
+	// Map of SI prefixes to corresponding big-sized pixmaps
+	static const QMap<QChar, const QPixmap*> prefixMap = {
+		{ 'G', m_bigG },
+		{ 'M', m_bigM },
+		{ 'k', m_bigk },
+		{ 'm', m_bigm },
+		{ 'u', m_bigu },
+		{ 'n', m_bign }
+	};
+
+	QChar firstChar = str.at(0);
+	if (prefixMap.contains(firstChar))
+	{
+		const QPixmap* prefixPixmap = prefixMap.value(firstChar);
+		int y = (firstChar == 'u') ? 3 : 0; // offset µ prefix vertically
+		p->drawPixmap(x, y, *prefixPixmap);
+		x += prefixPixmap->width() + 2;
+		++index;
+	}
+
+	// Unit suffix after prefix
+	const QString unitSuffix = str.mid(index);
+
+	// Map of unit suffixes to corresponding big-sized pixmaps
+	static const QMap<QString, const QPixmap*> unitMap = {
+		{ "Ohm",    m_bigOhm },
+		{ "C",      m_bigDeg },
+		{ "Hz",     m_bigHz },
+		{ "F",      m_bigF },      // not Fahrenheit
+		{ "H",      m_bigH },
+		{ "W",      m_bigW },
+		{ "dBm",    m_bigDBM },
+		{ "A",      m_bigA },
+		{ "V",      m_bigV },
+		{ "VA",     m_bigVA },
+		{ "cosphi", m_bigcosphi },
+		{ "%",      m_bigPercent }
+	};
+
+	if (const QPixmap* unitPixmap = unitMap.value(unitSuffix, nullptr))
+	{
+		p->drawPixmap(x, 0, *unitPixmap);
+	}
+}
+
+void DisplayWid::drawSmallUnit(QPainter *p, const QString &str)
+{
+	if (str.isEmpty())
+		return;
+
+	int x = 0;
+	int index = 0;
+
+	static const QMap<QChar, const QPixmap*> prefixMap = {
+		{ 'G', m_smallG }, { 'M', m_smallM }, { 'k', m_smallk },
+		{ 'm', m_smallm }, { 'u', m_smallu }, { 'n', m_smalln }
+	};
+
+	QChar first = str.at(0);
+	if (prefixMap.contains(first)) {
+		const QPixmap* pix = prefixMap.value(first);
+		int y = (first == 'u') ? 3 : 0;  // Ausnahme für µ
+		p->drawPixmap(x, y, *pix);
+		x += pix->width() + 1;
+		++index;
+	}
+
+	const QString unitSuffix = str.mid(index);
+
+	static const QMap<QString, const QPixmap*> unitMap = {
+		{ "Ohm",     m_smallOhm },
+		{ "C",       m_smallDeg },
+		{ "Hz",      m_smallHz },
+		{ "F",       m_smallF },
+		{ "H",       m_smallH },
+		{ "W",       m_smallW },
+		{ "dBm",     m_smallDBM },
+		{ "A",       m_smallA },
+		{ "V",       m_smallV },
+		{ "VA",      m_smallVA },
+		{ "cosphi",  m_smallcosphi },
+		{ "%",       m_smallPercent }
+	};
+
+	if (unitMap.contains(unitSuffix))
+	{
+		p->drawPixmap(x, 0, *unitMap.value(unitSuffix));
+	}
+}
+
+void DisplayWid::drawBigNumber(QPainter *p, const QString &num)
+{
+	if (num.isEmpty())
+		return;
+
+	int x = 0;
+	int offset = 0;
+
+	// skip spaces
+	while (offset < num.length() - 1 && num.at(offset) == QLatin1Char(' '))
 		++offset;
-	  if (num[offset] == '-')
-	  {
-		p->drawPixmap( 0, 9, *m_smallMinus );
-		offset++;
-	  }
-  }
-  x += 12;
 
-  for (unsigned i=offset; i<static_cast<unsigned>(num.length()); i++)
-  {
-	if (num[i] == '.')
+	// handle minus
+	if (num.at(offset) == QLatin1Char('-'))
 	{
-	  p->drawPixmap( x-5, 0, *m_smallDecimal );
-	}
-	else if (num[i].toLower() == 'a')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*0, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'b')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*1, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'd')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*2, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'e')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*3, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'h')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*4, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'l')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*5, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'n')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*6, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'o')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*7, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'p')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*8, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'r')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*9, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 's')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*10, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 't')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*11, 0, 12, 21 );
-	  x += 18;
-	}
-	else if (num[i].toLower() == 'y')
-	{
-	  p->drawPixmap( x, 0, *m_smallSpecialChar, 12*12, 0, 12, 21 );
-	  x += 18;
+		p->drawPixmap(x, 0, *m_bigMinus);
+		++offset;
+		x += 28;
 	}
 	else
 	{
-	  int digit = num[i].toLatin1()-'0';
-	  if (digit >= 0 && digit <= 9)
-	  {
-		p->drawPixmap( x, 0, *m_smallDigit, 12*digit, 0, 12, 21 );
-	  }
-	  x += 18;
+		x += 28;
 	}
-  }
-}
 
-void DisplayWid::drawBigUnit( QPainter *p, const QString & str )
-{
-  int index = 0;
-  int x = 0;
+	// map special chars
+	static const QMap<QChar, int> specialCharMap = {
+		{ 'a', 0 }, { 'b', 1 }, { 'd', 2 }, { 'e', 3 },
+		{ 'h', 4 }, { 'l', 5 }, { 'n', 6 }, { 'o', 7 },
+		{ 'p', 8 }, { 'r', 9 }, { 's', 10 }, { 't', 11 }, { 'y', 12 }
+	};
 
-  if(!str.isEmpty())
-  {
-	  if (str[0] == 'G')
-	  {
-		p->drawPixmap( x, 0, *m_bigG );
-		x += m_bigG->width()+2;
-		index++;
-	  }
-	  else if (str[0] == 'M')
-	  {
-		p->drawPixmap( x, 0, *m_bigM );
-		x += m_bigM->width()+2;
-		index++;
-	  }
-	  else if (str[0] == 'k')
-	  {
-		p->drawPixmap( x, 0, *m_bigk );
-		x += m_bigk->width()+2;
-		index++;
-	  }
-	  else if (str[0] == 'm')
-	  {
-		p->drawPixmap( x, 0, *m_bigm );
-		x += m_bigm->width()+2;
-		index++;
-	  }
-	  else if (str[0] == 'u')
-	  {
-		p->drawPixmap( x, 3, *m_bigu );
-		x += m_bigu->width()+2;
-		index++;
-	  }
-	  else if (str[0] == 'n')
-	  {
-		p->drawPixmap( x, 0, *m_bign );
-		x += m_bign->width()+2;
-		index++;
-	  }
+	for (int i = offset; i < num.length(); ++i)
+	{
+		QChar ch = num.at(i).toLower();
 
-	  if (str.mid(index) == "Ohm")
-		p->drawPixmap( x, 0, *m_bigOhm );
-	  else if (str.mid(index) == "C")
-		p->drawPixmap( x, 0, *m_bigDeg );
-	  else if (str.mid(index) == "Hz")
-		p->drawPixmap( x, 0, *m_bigHz );
-	  else if (str.mid(index) == "F") // ignore Farenheit
-		p->drawPixmap( x, 0, *m_bigF );
-	  else if (str.mid(index) == "H")
-		p->drawPixmap( x, 0, *m_bigH );
-	  else if (str.mid(index) == "W")
-		p->drawPixmap( x, 0, *m_bigW );
-	  else if (str.mid(index) == "dBm")
-		p->drawPixmap( x, 0, *m_bigDBM );
-	  else if (str.mid(index) == "A")
-		p->drawPixmap( x, 0, *m_bigA );
-	  else if (str.mid(index) == "V")
-		p->drawPixmap( x, 0, *m_bigV );
-	  else if (str.mid(index) == "VA")
-		p->drawPixmap( x, 0, *m_bigVA );
-	  else if (str.mid(index) == "cosphi")
-		p->drawPixmap( x, 0, *m_bigcosphi );
-	  else if (str.mid(index) == "%")
-		p->drawPixmap( x, 0, *m_bigPercent );
-  }
-}
-
-void DisplayWid::drawSmallUnit( QPainter *p, const QString & str )
-{
-  int index = 0;
-  int x = 0;
-
-  if(!str.isEmpty())
-  {
-	  if (str[0] == 'G')
-	  {
-		p->drawPixmap( x, 0, *m_smallG );
-		x += m_smallG->width()+1;
-		index++;
-	  }
-	  else if (str[0] == 'M')
-	  {
-		p->drawPixmap( x, 0, *m_smallM );
-		x += m_smallM->width()+1;
-		index++;
-	  }
-	  else if (str[0] == 'k')
-	  {
-		p->drawPixmap( x, 0, *m_smallk );
-		x += m_smallk->width()+1;
-		index++;
-	  }
-	  else if (str[0] == 'm')
-	  {
-		p->drawPixmap( x, 0, *m_smallm );
-		x += m_smallm->width()+1;
-		index++;
-	  }
-	  else if (str[0] == 'u')
-	  {
-		p->drawPixmap( x, 3, *m_smallu );
-		x += m_smallu->width()+1;
-		index++;
-	  }
-	  else if (str[0] == 'n')
-	  {
-		p->drawPixmap( x, 0, *m_smalln );
-		x += m_smalln->width()+1;
-		index++;
-	  }
-	  if (str.mid(index) == "Ohm")
-		p->drawPixmap( x, 0, *m_smallOhm );
-	  else if (str.mid(index) == "C")
-		p->drawPixmap( x, 0, *m_smallDeg );
-	  else if (str.mid(index) == "Hz")
-		p->drawPixmap( x, 0, *m_smallHz );
-	  else if (str.mid(index) == "F")
-		p->drawPixmap( x, 0, *m_smallF );
-	  else if (str.mid(index) == "H")
-		p->drawPixmap( x, 0, *m_smallH );
-	  else if (str.mid(index) == "W")
-		p->drawPixmap( x, 0, *m_smallW );
-	  else if (str.mid(index) == "dBm")
-		p->drawPixmap( x, 0, *m_smallDBM );
-	  else if (str.mid(index) == "A")
-		p->drawPixmap( x, 0, *m_smallA );
-	  else if (str.mid(index) == "V")
-		p->drawPixmap( x, 0, *m_smallV );
-	  else if (str.mid(index) == "VA")
-		p->drawPixmap( x, 0, *m_smallVA );
-	  else if (str.mid(index) == "cosphi")
-		p->drawPixmap( x, 0, *m_smallcosphi );
-	  else if (str.mid(index) == "%")
-		p->drawPixmap( x, 0, *m_smallPercent );
-  }
-}
-
-void DisplayWid::drawBigNumber( QPainter *p, const QString & num )
-{
-  int x = 0;
-  int offset = 0;
-  if(!num.isEmpty())
-  {
-	  while (num[offset] == ' ' && offset<num.length()-1)
-		  ++offset;
-
-	  if (num[offset] == '-')
-	  {
-		p->drawPixmap( x, 0, *m_bigMinus );
-		offset++;
-	  }
-  }
-  x += 28;
-
-  for (unsigned i=offset; i<static_cast<unsigned>(num.length()); i++)
-  {
-	if (num[i] == '.')
-		p->drawPixmap( x-11, 0, *m_bigDecimal );
-	else if (num[i].toLower() == 'a')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*0, 0, 34, 60 );
-	  x += 49;
+		if (ch == QLatin1Char('.'))
+		{
+			p->drawPixmap(x - 11, 0, *m_bigDecimal);
+		}
+		else if (specialCharMap.contains(ch))
+		{
+			int index = specialCharMap.value(ch);
+			p->drawPixmap(x + 2, 2, *m_bigSpecialChar, 34 * index, 0, 34, 60);
+			x += 49;
+		}
+		else if (ch == QLatin1Char(' '))
+		{
+			x += 49;
+		}
+		else if (ch.isDigit())
+		{
+			int digit = ch.toLatin1() - '0';
+			p->drawPixmap(x + 2, 2, *m_bigDigit, 34 * digit, 0, 34, 60);
+			x += 49;
+		}
 	}
-	else if (num[i].toLower() == 'b')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*1, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 'd')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*2, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 'e')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*3, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 'h')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*4, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 'l')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*5, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 'n')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*6, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 'o')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*7, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 'p')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*8, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 'r')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*9, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 's')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*10, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 't')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*11, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i].toLower() == 'y')
-	{
-	  p->drawPixmap( x+2, 2, *m_bigSpecialChar, 34*12, 0, 34, 60 );
-	  x += 49;
-	}
-	else if (num[i] == ' ')
-		x += 49;
-	else
-	{
-	  int digit = num[i].toLatin1()-'0';
-
-	  if (digit >= 0 && digit <= 9)
-		p->drawPixmap( x+2, 2, *m_bigDigit, 34*digit, 0, 34, 60 );
-	  x += 49;
-	}
-  }
 }
 
 int DisplayWid::calcNumDigits( int dm )
 {
-  int numDigits = 0;
+	int numDigits = 0;
 
-  switch (dm)
-  {
-	default:
-	case 0:
-	case 1:
-	case 8:
-	  numDigits = 4;
-	  break;
-	case 2:
-	case 3:
-	case 4:
-	case 9:
-	case 10:
-	  numDigits = 5;
-	  break;
-	case 5:
-	case 6:
-	case 7:
-	  numDigits = 6;
-	  break;
-  }
+	switch (dm)
+	{
+		case 0:
+		case 1:
+		case 8:
+			numDigits = 4;
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 9:
+		case 10:
+			numDigits = 5;
+			break;
+		case 5:
+		case 6:
+		case 7:
+			numDigits = 6;
+			break;
+	}
 
-  return numDigits;
+	return numDigits;
 }
 
 QBitmap* DisplayWid::BitmapHelper(const QString &file) const
 {
-		return new QBitmap(QPixmap(file).createMaskFromColor(Qt::black,Qt::MaskOutColor));
+	return new QBitmap(QPixmap(file).createMaskFromColor(Qt::black,Qt::MaskOutColor));
 }
