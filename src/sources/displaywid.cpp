@@ -28,6 +28,8 @@
 #include <iostream>
 
 DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
+  m_showAuto( false),
+  m_showManu(false),
   m_paintBar( true ),
   m_numValues( 1 )
 {
@@ -88,6 +90,10 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_diode =  BitmapHelper(":/Symbols/diode.xpm");
   m_ac =  BitmapHelper(":/Symbols/ac.xpm");
   m_dc =  BitmapHelper(":/Symbols/dc.xpm");
+
+  m_hold =  BitmapHelper(":/Symbols/hold.xpm");
+  m_auto =  BitmapHelper(":/Symbols/auto.xpm");
+  m_manu =  BitmapHelper(":/Symbols/manu.xpm");
 
   m_bar[0] =  BitmapHelper(":/Symbols/null_bar.xpm");
   m_bar[1] =  BitmapHelper(":/Symbols/ten_bar.xpm");
@@ -163,6 +169,26 @@ DisplayWid::~DisplayWid()
 	delete m_bar[4];
 	delete m_bar[5];
 	delete m_bar[6];
+	delete m_hold;
+	delete m_auto;
+	delete m_manu;
+}
+
+void DisplayWid::setHold( bool enabled)
+{
+	m_showHold = enabled;
+}
+
+void DisplayWid::setAuto( bool enabled)
+{
+	m_showAuto = enabled;
+	m_showManu = !enabled;
+}
+
+void DisplayWid::setManu( bool enabled)
+{
+	m_showManu = enabled;
+	m_showAuto = !enabled;
 }
 
 void DisplayWid::setDisplayMode( int dm, bool minMax, bool bar, int numValues )
@@ -179,7 +205,7 @@ void DisplayWid::setDisplayMode( int dm, bool minMax, bool bar, int numValues )
   m_extraW = (numDigits)*18+30+10;
   m_minW = m_extraW * (m_numValues-1);
 
-  setFixedSize( qMax( m_minW, digitsW+m_minMaxW ), 76 + (m_showBar ? 26 : 2)+m_extraH );
+  setFixedSize( qMax( m_minW, digitsW+m_minMaxW ) + 24, 76 + (m_showBar ? 26 : 2)+m_extraH );
 
   switch (m_displayMode)
   {
@@ -331,6 +357,20 @@ void DisplayWid::paintEvent( QPaintEvent * )
 	else if (m_mode[0] == "DC")
 	{
 	  p.drawPixmap( 0, -36, *m_dc );
+	}
+
+
+	if (m_showHold)
+	{
+		p.drawPixmap( 30, -36, *m_hold );
+	}
+
+	if (m_showAuto)
+	{
+		p.drawPixmap( 30, -18, *m_auto );
+	} else if (m_showManu)
+	{
+		p.drawPixmap( 30, -18, *m_manu );
 	}
 
 	p.restore();

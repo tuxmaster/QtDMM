@@ -77,5 +77,8 @@
         <file alias="quit.xpm">xpm/quit.xpm</file>
         <file alias="recorder.xpm">xpm/recorder.xpm</file>
         <file alias="scale.xpm">xpm/scale.xpm</file>
+        <file alias="hold.xpm">xpm/hold.xpm</file>
+        <file alias="auto.xpm">xpm/auto.xpm</file>
+        <file alias="manu.xpm">xpm/manu.xpm</file>
     </qresource>
 </RCC>

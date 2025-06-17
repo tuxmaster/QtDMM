@@ -23,6 +23,7 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <QPrinter>
+#include <iostream>
 
 #include "mainwid.h"
 #include "dmmgraph.h"
@@ -49,8 +50,8 @@ MainWid::MainWid( QWidget *parent ) :  QFrame( parent ),
   m_printDlg = new qtdmm::PrintDlg( this );
   m_printDlg->hide();
 
-  connect( m_dmm, SIGNAL( value( double, const QString &, const QString &, const QString &, bool, int )),
-		   this,  SLOT( valueSLOT( double, const QString &, const QString &, const QString &, bool, int )));
+  connect( m_dmm, SIGNAL( value( double, const QString &, const QString &, const QString &, const QString &, bool, bool, int )),
+		   this,  SLOT( valueSLOT( double, const QString &, const QString &, const QString &, const QString &, bool, bool, int )));
   connect( m_dmm, SIGNAL( error( const QString & ) ),this, SIGNAL( error( const QString & )));
   connect( ui_graph, SIGNAL( info( const QString & ) ),this, SIGNAL( info( const QString & ) ));
   connect( ui_graph, SIGNAL( error( const QString & ) ),this, SIGNAL( error( const QString & ) ));
@@ -165,25 +166,31 @@ void MainWid::timerEvent( QTimerEvent * )
   ui_graph->addValue( m_dval );
 }
 
-void MainWid::valueSLOT( double dval, const QString & val, const QString & u,const QString & s,  bool showBar,int id )
+void MainWid::valueSLOT( double dval, const QString & val, const QString & u,const QString & s, const QString & r, bool hold, bool showBar,int id )
 {
-/*  cerr << "valueSLOT " << dval
-	   << " val=" << val.latin1()
-	   << " u=" << u.latin1()
-	   << " s=" << s.latin1()
+  std::cerr << "valueSLOT " << dval
+	   << " val=" << val.toLocal8Bit().data()
+	   << " u=" << u.toLocal8Bit().data()
+	   << " s=" << s.toLocal8Bit().data()
+	   << " r=" << r.toLocal8Bit().data()
 	   << " showBar=" << showBar
-	   << " id=" << id << endl;  */
+	   << " hold=" << hold
+	   << " id=" << id << std::endl;
 
   m_display->setShowBar( showBar );
   m_display->setValue( id, val );
 
   m_display->setMode( id, s );
+  m_display->setHold(hold);
+
+  if (r=="AUTO") m_display->setAuto(true);
+  if (r=="MANU") m_display->setManu(true);
 
   QString tmpUnit = u;
 
   m_display->setUnit( id, tmpUnit );
 
-  if (0 == id)
+  if (id == 0)
   {
 	if (m_lastUnit != s)
 	{
