@@ -42,7 +42,7 @@ void myMessageOutput( QtMsgType type,const QMessageLogContext &, const QString &
 			qWarning()<<"Warning: "<<msg;
 		break;
 	case QtFatalMsg:
-		 qFatal(QString("Fatal: %1").arg(msg).toUtf8());
+		 qFatal("Fatal: %s", msg.toUtf8().constData());
 	case QtCriticalMsg:
 		  qCritical()<<"Critial: "<<msg;
 		break;

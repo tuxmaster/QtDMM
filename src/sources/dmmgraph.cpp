@@ -25,7 +25,7 @@
 #include <QPen>
 
 #include "dmmgraph.h"
-#include "Settings.h"
+#include "settings.h"
 
 
 DMMGraph::DMMGraph(QWidget *parent):DMMGraph(parent,Q_NULLPTR)

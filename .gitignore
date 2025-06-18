@@ -6,3 +6,4 @@ src/qtdmm_resource.rc
 src/translations/qtdmm_de.qm
 tmp/
 .qmake.stash
+build/

@@ -1,32 +1,37 @@
-Installation QtDMM 0.9.5 (c) 2001-2014 M.Toussaint
+Installation QtDMM 0.9.8 (c) 2001-2014 M.Toussaint
 
 Requirements:
 -------------
 - Qt library 5.x developer version
+- cmake 3.5 or higher
 - A supported multimeter or a compatible model
+
 
 Compilation:
 ------------
-
 - untar the tarball you've downloaded
 - enter the qtdmm directory
-- type qmake-qt5 
-- type make 
+
+no system wide installation:
+- type ./compile.sh
+- you will find the executable in ./bin directory
+
+system wide installation:
+- type ./compile.sh install
+
+if you want to remove all build files
+- type ./compile.sh clean
 
 That's it. You should have the executable qtdmm now.
 
-If your DMM isn't  listed in the model combo  (list see README), just try to 
+If your DMM isn't listed in the model combo (list see README), just try to
 find manual settings, or a  compatible model. It is very unlikely that wrong 
 settings cause harm to your DMM. Worst case could be that it hangs. 
 Switching it off will reset it.
 
-If  you  find  working  settings mail me  the result. I  will add it  to the 
-presets and future users can benefit from you help.
+If you find working settings or encounter any problems don't hesitate to
+contact via our github page.
 
-If you encounter any problems don't hesitate to contact me 
+https://github.com/tuxmaster/QtDMM
 
-
--- 27/04/2014
-   Matthias Toussaint
-   <qtdmm@mtoussaint.de>
 
