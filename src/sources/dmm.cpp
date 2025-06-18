@@ -740,9 +740,9 @@ void DMM::readCyrustekES51922(const QByteArray & data, int id, ReadEvent::DataFo
 
   case 0x32:
     if (pStr[CyrustekES51922_Status] & 8)
-      unit = "Hz";
-    else
       unit = "%";
+    else
+      unit = "Hz";
 
     switch (pStr[CyrustekES51922_Range]) {
     case 0x30:
