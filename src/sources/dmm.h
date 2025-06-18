@@ -51,7 +51,7 @@ class DMM : public QObject
 
 	Q_SIGNALS:
 	  void						value( double dval, const QString & val, const QString & unit, const QString & special,
-									   bool showBar,int id );
+									    const QString & range, bool hold, bool showBar,int id );
 	  void						error( const QString & );
 
 	protected:

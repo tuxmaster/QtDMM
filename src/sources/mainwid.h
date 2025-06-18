@@ -62,7 +62,7 @@ class MainWid : public QFrame, private Ui::UIMainWid
 	  void				connectDMM( bool );
 
 	public Q_SLOTS:
-	  void				valueSLOT( double, const QString &, const QString &, const QString &, bool, int );
+	  void				valueSLOT( double, const QString &, const QString &, const QString &, const QString &, bool, bool, int );
 	  void				resetSLOT();
 	  void				connectSLOT( bool );
 	  void				quitSLOT();

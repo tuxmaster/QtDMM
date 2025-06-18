@@ -133,8 +133,8 @@ void ReaderThread::socketNotifierSLOT()
 				if (m_consoleLogging)
 				{
 					fprintf( stderr, "%02X ", static_cast<uint8_t>(dataOut[i]));
-					m_length = (m_length+1)%FIFO_LENGTH;
 				}
+				m_length = (m_length+1)%FIFO_LENGTH;
 			}
 
 			if (m_consoleLogging)
