@@ -6,7 +6,7 @@ set(TRANSLATIONS "translations/qtdmm_de.ts")
 set(RESOURCES "Resources.qrc")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
 
-find_package(Qt6 ${QT_MIN_VERSION} COMPONENTS ${QT_COMPONENTS} QUIET)
+find_package(Qt6 ${QT_MIN_VERSION} COMPONENTS ${QT_COMPONENTS} Core5Compat QUIET)
 if(Qt6_FOUND)
 	message(STATUS "Building with Qt6")
 	set(QT_VERSION 6)
@@ -19,14 +19,7 @@ else()
 	set(QT_NAMESPACE Qt5)
 endif()
 
-include_directories(
-	${Qt5Widgets_INCLUDE_DIRS}
-	${Qt5SerialPort_INCLUDE_DIRS}
-	${Qt5PrintSupport_INCLUDE_DIRS}
-	${Qt5LinguistTools_INCLUDE_DIRS}
-	${CMAKE_SOURCE_DIR}/src/sources/
-)
-
+include_directories(${CMAKE_SOURCE_DIR}/src/sources/)
 
 file(GLOB_RECURSE UI_FILES CONFIGURE_DEPENDS forms/*.ui)
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS sources/*.cpp sources/*.h)
@@ -36,6 +29,7 @@ if(QT_VERSION EQUAL 5)
 	qt5_add_resources(RES_SOURCES ${RESOURCES})
 	qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TRANSLATIONS})
 else()
+	include_directories(${Qt6Core5Compat_INCLUDE_DIRS})
 	qt_wrap_ui(UI_HEADERS ${UI_FILES})
 	qt_add_resources(RES_SOURCES ${RESOURCES})
 	qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TRANSLATIONS})
@@ -53,6 +47,10 @@ target_link_libraries(${PROJECT_NAME}
 	${QT_NAMESPACE}::SerialPort
 	${QT_NAMESPACE}::PrintSupport
 )
+
+if(QT_VERSION EQUAL 6)
+	target_link_libraries(${PROJECT_NAME} ${QT_NAMESPACE}::Core5Compat)
+endif()
 
 install(TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION bin

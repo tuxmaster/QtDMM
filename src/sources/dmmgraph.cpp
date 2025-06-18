@@ -23,6 +23,7 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <QPen>
+#include <QRegExp>
 
 #include "dmmgraph.h"
 #include "settings.h"
@@ -930,7 +931,7 @@ void DMMGraph::mousePressEvent( QMouseEvent *ev )
 
 	m_popup->popup( ev->globalPos() );
   }
-  else if (ev->button() == Qt::MidButton)
+  else if (ev->button() == Qt::MiddleButton)
   {
 	m_mouseDown = false;
 	m_mousePan = true;
