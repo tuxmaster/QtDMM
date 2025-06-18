@@ -1,6 +1,22 @@
-find_package(Qt5 COMPONENTS Widgets SerialPort PrintSupport LinguistTools REQUIRED)
 set (CMAKE_CXX_STANDARD 14)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(QT_MIN_VERSION "5.9")
+
+set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
+
+find_package(Qt6 ${QT_MIN_VERSION} COMPONENTS ${QT_COMPONENTS} QUIET)
+if(Qt6_FOUND)
+	message(STATUS "Building with Qt6")
+	set(QT_VERSION 6)
+	find_package(Qt6 REQUIRED COMPONENTS ${QT_COMPONENTS})
+	set(QT_NAMESPACE Qt6)
+else()
+	message(STATUS "Building with Qt5")
+	set(QT_VERSION 5)
+	find_package(Qt5 REQUIRED COMPONENTS ${QT_COMPONENTS})
+	set(QT_NAMESPACE Qt5)
+endif()
 
 include_directories(
 	${Qt5Widgets_INCLUDE_DIRS}
@@ -10,28 +26,19 @@ include_directories(
 	${CMAKE_SOURCE_DIR}/src/sources/
 )
 
-set(CMAKE_AUTOMOC ON)
 
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.11.0")
-    file(GLOB_RECURSE UI_FILES CONFIGURE_DEPENDS forms/*.ui)
+file(GLOB_RECURSE UI_FILES CONFIGURE_DEPENDS forms/*.ui)
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS sources/*.cpp sources/*.h)
+
+if(QT_VERSION EQUAL 5)
+	qt5_wrap_ui(UI_GENERATED_HEADERS ${UI_FILES})
+	qt5_add_resources(RES_SOURCES Resources.qrc)
+	qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} translations/qtdmm_de.ts)
 else()
-    file(GLOB UI_FILES forms/*.ui )
+	qt_wrap_ui(UI_HEADERS ${UI_FILES}) # optional, automoc + autouic evtl. ausreichend
+	qt_add_resources(RES_SOURCES ${RESOURCES})
+	qt_add_translation(QM_FILES ${TRANSLATIONS})
 endif()
-
-qt5_wrap_ui(UI_GENERATED_HEADERS ${UI_FILES})
-qt5_add_resources(RES_SOURCES Resources.qrc)
-
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.11.0")
-    file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS sources/*.cpp sources/*.h)
-else()
-    file(GLOB SRC_FILES sources/*.cpp sources/*.h )
-endif()
-
-qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} translations/qtdmm_de.ts)
-
-add_definitions(${Qt5Widgets_DEFINITIONS})
-
-set(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 add_executable(${PROJECT_NAME}
 	${SRC_FILES}
@@ -41,10 +48,9 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME}
-	${Qt5Widgets_LIBRARIES} 
-	${Qt5SerialPort_LIBRARIES} 
-	${Qt5PrintSupport_LIBRARIES}
-	${Qt5LinguistTools_LIBRARIES}
+	${QT_NAMESPACE}::Widgets
+	${QT_NAMESPACE}::SerialPort
+	${QT_NAMESPACE}::PrintSupport
 )
 
 install(TARGETS ${PROJECT_NAME}
