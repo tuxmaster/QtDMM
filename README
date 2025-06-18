@@ -71,7 +71,10 @@ following DMM's are supported by QtDMM. (some needs user confirmation)
     Uni-Trend    UT30A
     Uni-Trend    UT30E
     Uni-Trend    UT61B
+    Uni-Trend    UT61C
     Uni-Trend    UT61D
+
+    Vichy        VC99
 
     Voltcraft    M-3650D
     Voltcraft    M-3860
