@@ -2,7 +2,8 @@ set (CMAKE_CXX_STANDARD 14)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(QT_MIN_VERSION "5.9")
-
+set(TRANSLATIONS "translations/qtdmm_de.ts")
+set(RESOURCES "Resources.qrc")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
 
 find_package(Qt6 ${QT_MIN_VERSION} COMPONENTS ${QT_COMPONENTS} QUIET)
@@ -31,18 +32,18 @@ file(GLOB_RECURSE UI_FILES CONFIGURE_DEPENDS forms/*.ui)
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS sources/*.cpp sources/*.h)
 
 if(QT_VERSION EQUAL 5)
-	qt5_wrap_ui(UI_GENERATED_HEADERS ${UI_FILES})
-	qt5_add_resources(RES_SOURCES Resources.qrc)
-	qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} translations/qtdmm_de.ts)
+	qt5_wrap_ui(UI_HEADERS ${UI_FILES})
+	qt5_add_resources(RES_SOURCES ${RESOURCES})
+	qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TRANSLATIONS})
 else()
-	qt_wrap_ui(UI_HEADERS ${UI_FILES}) # optional, automoc + autouic evtl. ausreichend
+	qt_wrap_ui(UI_HEADERS ${UI_FILES})
 	qt_add_resources(RES_SOURCES ${RESOURCES})
-	qt_add_translation(QM_FILES ${TRANSLATIONS})
+	qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TRANSLATIONS})
 endif()
 
 add_executable(${PROJECT_NAME}
 	${SRC_FILES}
-	${UI_GENERATED_HEADERS}
+	${UI_HEADERS}
 	${RES_SOURCES}
 	${QM_FILES}
 )
