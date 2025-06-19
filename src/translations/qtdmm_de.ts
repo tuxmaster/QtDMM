@@ -4,34 +4,48 @@
 <context>
     <name>ConfigDlg</name>
     <message>
-        <location filename="../sources/configdlg.cpp" line="54"/>
-        <location filename="../sources/configdlg.cpp" line="77"/>
-        <location filename="../sources/configdlg.cpp" line="93"/>
+        <location filename="../sources/configdlg.cpp" line="55"/>
+        <location filename="../sources/configdlg.cpp" line="80"/>
+        <location filename="../sources/configdlg.cpp" line="101"/>
         <source>QtDMM: Welcome!</source>
         <translation>QtDMM: Willkommen!</translation>
     </message>
     <message>
-        <location filename="../sources/configdlg.cpp" line="55"/>
-        <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;This seems to be your first invocation of QtDMM (Or you have deleted it&apos;s configuration file).&lt;p&gt;QtDMM has created the file %1 in your home directory to save its settings.</source>
-        <translation>&lt;font size+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dies scheint der erste Aufruf von QtDMM zu sein, bzw. die Konfigurstion wurde gelöscht.&lt;p&gt;QtDMM hate eine neue Datei unter dem Pfad %1 angelegt.</translation>
+        <location filename="../sources/configdlg.cpp" line="56"/>
+        <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;This seems to be your first invocation of QtDMM (Or you have deleted its configuration file).&lt;p&gt;QtDMM has created the file %1 in your home directory to save its settings.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources/configdlg.cpp" line="65"/>
-        <location filename="../sources/configdlg.cpp" line="88"/>
+        <location filename="../sources/configdlg.cpp" line="81"/>
+        <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You seem to have upgraded &lt;b&gt;QtDMM&lt;/b&gt; from a version prior to 0.8.4. Please check your configuration. There are some new parameters to be configured.&lt;p&gt;Thank you for choosing &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources/configdlg.cpp" line="102"/>
+        <source>Your config file has been converted to the new format.
+Please check your color settings, because they couldn&apos;t be converted automatically.
+Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;This seems to be your first invocation of QtDMM (Or you have deleted it&apos;s configuration file).&lt;p&gt;QtDMM has created the file %1 in your home directory to save its settings.</source>
+        <translation type="vanished">&lt;font size+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dies scheint der erste Aufruf von QtDMM zu sein, bzw. die Konfigurstion wurde gelöscht.&lt;p&gt;QtDMM hate eine neue Datei unter dem Pfad %1 angelegt.</translation>
+    </message>
+    <message>
+        <location filename="../sources/configdlg.cpp" line="68"/>
+        <location filename="../sources/configdlg.cpp" line="93"/>
         <source>Continue</source>
         <translation>Fortsetzen</translation>
     </message>
     <message>
-        <location filename="../sources/configdlg.cpp" line="78"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You seem to have upgraded &lt;b&gt;QtDMM&lt;/b&gt; from a version prior to 0.8.4 Please check your configuration. There are some new parameter to be configured.&lt;p&gt;Thank you for choosing &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</source>
-        <translation>&lt;font size=+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;p&gt;Wie es ausschaut, wurde &lt;b&gt;QtDMM&lt;/b&gt; von einer Version vor 0.8.4 aktualisiert. Bitte überprüfen Sie die Konfiguration. Es gibt einige neue Parameter.&lt;p&gt;Danke das Sie &lt;b&gt;QtDMM&lt;/b&gt; benutzen.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
+        <translation type="vanished">&lt;font size=+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;p&gt;Wie es ausschaut, wurde &lt;b&gt;QtDMM&lt;/b&gt; von einer Version vor 0.8.4 aktualisiert. Bitte überprüfen Sie die Konfiguration. Es gibt einige neue Parameter.&lt;p&gt;Danke das Sie &lt;b&gt;QtDMM&lt;/b&gt; benutzen.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../sources/configdlg.cpp" line="94"/>
         <source>Your config file has convertet to the new format.
 Please check your color settings, because it can&apos;t be converted automatic.
 Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old.</source>
-        <translation>Ihre Konfiguration wurde in ein neues Format überführt.
+        <translation type="vanished">Ihre Konfiguration wurde in ein neues Format überführt.
 Bitte überprüfen Sie die Farbeinstellungen, da diese nicht konvertiert werden konnten.
 Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
     </message>
@@ -181,47 +195,47 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Angehalten</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="880"/>
+        <location filename="../sources/dmmgraph.cpp" line="888"/>
         <source>Disconnect</source>
         <translation>Trennen</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="887"/>
+        <location filename="../sources/dmmgraph.cpp" line="895"/>
         <source>Connect</source>
         <translation>Verbinden</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="896"/>
+        <location filename="../sources/dmmgraph.cpp" line="904"/>
         <source>Stop recorder</source>
         <translation>Rekorder anhalten</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="903"/>
+        <location filename="../sources/dmmgraph.cpp" line="911"/>
         <source>Start recorder</source>
         <translation>Rekorder starten</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="908"/>
+        <location filename="../sources/dmmgraph.cpp" line="916"/>
         <source>Clear graph</source>
         <translation>Graphen löschen</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="914"/>
+        <location filename="../sources/dmmgraph.cpp" line="922"/>
         <source>Configure...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="922"/>
+        <location filename="../sources/dmmgraph.cpp" line="930"/>
         <source>Export data...</source>
         <translation>Daten exportieren ...</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="926"/>
+        <location filename="../sources/dmmgraph.cpp" line="934"/>
         <source>Import data...</source>
         <translation>Daten importieren ...</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1146"/>
+        <location filename="../sources/dmmgraph.cpp" line="1163"/>
         <source>Export data</source>
         <translation>Daten exportieren</translation>
     </message>
@@ -230,32 +244,32 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1175"/>
+        <location filename="../sources/dmmgraph.cpp" line="1193"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1176"/>
+        <location filename="../sources/dmmgraph.cpp" line="1194"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Beim Importieren werden alle bisherigen Messwerte gelöscht.&lt;p&gt;Möchten Sie zu ersten die bisherigen Daten exportieren?</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1184"/>
+        <location filename="../sources/dmmgraph.cpp" line="1208"/>
         <source>Export data first</source>
         <translation>Daten zu erst exportieren</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1185"/>
+        <location filename="../sources/dmmgraph.cpp" line="1212"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importieren und Daten löschen</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1198"/>
+        <location filename="../sources/dmmgraph.cpp" line="1224"/>
         <source>Import data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="../sources/dmmgraph.cpp" line="1227"/>
+        <location filename="../sources/dmmgraph.cpp" line="1253"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Diese Datei scheint nicht gültig zu sein</translation>
     </message>
@@ -349,42 +363,47 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../sources/mainwid.cpp" line="110"/>
+        <location filename="../sources/mainwid.cpp" line="111"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="111"/>
+        <location filename="../sources/mainwid.cpp" line="112"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Es befinden sich ungesicherte Daten im Speicher. Wenn Sie das Programm beenden gehen diese verloren.&lt;p&gt;Sollen diese vorher exportiert werden?</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="120"/>
+        <location filename="../sources/mainwid.cpp" line="127"/>
         <source>Export data first</source>
         <translation>Daten erst exportieren</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="121"/>
+        <location filename="../sources/mainwid.cpp" line="131"/>
         <source>Quit without saving</source>
         <translation>Beenden ohne speichern</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="397"/>
+        <location filename="../sources/mainwid.cpp" line="406"/>
         <source>Automatic start at %1</source>
         <translation>Automatisch starten bei %1</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="399"/>
+        <location filename="../sources/mainwid.cpp" line="408"/>
         <source>Raising threshold %1</source>
         <translation>Grenzwert steigent %1</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="401"/>
+        <location filename="../sources/mainwid.cpp" line="410"/>
         <source>Falling threshold %1</source>
         <translation>Grenzwert fallend %1</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="457"/>
+        <location filename="../sources/mainwid.cpp" line="433"/>
+        <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources/mainwid.cpp" line="474"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Konnte %1 nicht starten</translation>
     </message>
@@ -393,38 +412,37 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="obsolete">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s is still running!&lt;p&gt;Do you want to kill it now</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="470"/>
+        <location filename="../sources/mainwid.cpp" line="491"/>
         <source>Launched %1</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="475"/>
+        <location filename="../sources/mainwid.cpp" line="496"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 mit dem Rückgabecode %2 beendet.</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="422"/>
-        <location filename="../sources/mainwid.cpp" line="456"/>
+        <location filename="../sources/mainwid.cpp" line="432"/>
+        <location filename="../sources/mainwid.cpp" line="473"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: Startfehler</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="423"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now</source>
-        <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %1 läuft noch.&lt;p&gt;Soll es getötet werden</translation>
+        <translation type="vanished">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %1 läuft noch.&lt;p&gt;Soll es getötet werden</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="431"/>
+        <location filename="../sources/mainwid.cpp" line="445"/>
         <source>Yes, kill it!</source>
         <translation>Ja, töten!</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="432"/>
+        <location filename="../sources/mainwid.cpp" line="449"/>
         <source>No, keep running</source>
         <translation>Nein, es laufen lassen</translation>
     </message>
     <message>
-        <location filename="../sources/mainwid.cpp" line="464"/>
+        <location filename="../sources/mainwid.cpp" line="485"/>
         <source>Bummer!</source>
         <translation>Reinfall!</translation>
     </message>
@@ -2120,46 +2138,55 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <name>UITipDlg</name>
     <message>
         <location filename="../forms/uitipdlg.ui" line="17"/>
+        <location filename="../../build/src/ui_uitipdlg.h" line="143"/>
         <source>QtDMM: Tip of the day</source>
         <translation>QtDMM Tipp des Tages</translation>
     </message>
     <message>
         <location filename="../forms/uitipdlg.ui" line="150"/>
+        <location filename="../../build/src/ui_uitipdlg.h" line="145"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Don&apos;t show tips again&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Check this if you don&apos;t want to see the tip of the day at startup. You can activate the tips at any time in the preferences again.</source>
         <translation>&lt;font size=+1&gt;&lt;b&gt;Keine Tipps mehr zeigen&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dies ankreuzen, wenn keine Tipps beim Starten mehr gewünscht sind. Dies kann jederzeit in den Einstellungen wieder geändert werden.</translation>
     </message>
     <message>
         <location filename="../forms/uitipdlg.ui" line="153"/>
+        <location filename="../../build/src/ui_uitipdlg.h" line="147"/>
         <source>Don&apos;t show tips again</source>
         <translation>Keine Tipps mehr zeigen</translation>
     </message>
     <message>
         <location filename="../forms/uitipdlg.ui" line="166"/>
+        <location filename="../../build/src/ui_uitipdlg.h" line="149"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Previous&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Go to previous tip.</source>
         <translation>&lt;font size=+1&gt;&lt;b&gt;Vorigen&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Den Tipp davor anzeigen.</translation>
     </message>
     <message>
         <location filename="../forms/uitipdlg.ui" line="169"/>
+        <location filename="../../build/src/ui_uitipdlg.h" line="151"/>
         <source>&amp;Previous</source>
         <translation>&amp;Vorigen</translation>
     </message>
     <message>
         <location filename="../forms/uitipdlg.ui" line="185"/>
+        <location filename="../../build/src/ui_uitipdlg.h" line="153"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Next&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Go to next tip.</source>
         <translation>&lt;font size=+1&gt;&lt;b&gt;Nächsten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Den nächsten Tipp anzeigen.</translation>
     </message>
     <message>
         <location filename="../forms/uitipdlg.ui" line="188"/>
+        <location filename="../../build/src/ui_uitipdlg.h" line="155"/>
         <source>&amp;Next</source>
         <translation>&amp;Nächsten</translation>
     </message>
     <message>
         <location filename="../forms/uitipdlg.ui" line="214"/>
+        <location filename="../../build/src/ui_uitipdlg.h" line="157"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Close&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Close this dialog.</source>
         <translation>&lt;font size=+1&gt;&lt;b&gt;Schließen&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dieses Fenster schließen.</translation>
     </message>
     <message>
         <location filename="../forms/uitipdlg.ui" line="217"/>
+        <location filename="../../build/src/ui_uitipdlg.h" line="159"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>

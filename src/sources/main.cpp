@@ -64,15 +64,24 @@ int main( int argc, char **argv )
   QTranslator QtTranslation;
   QTranslator AppTranslation;
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+  QString QtTranslationPath=QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+#else
   QString QtTranslationPath=QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+#endif
+
   QString AppTranslationPath=QtTranslationPath;
 #ifdef Q_OS_WIN
   AppTranslationPath="./";
 #endif
 
-  QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()),QtTranslationPath);
-  AppTranslation.load(QString("%1_%2").arg(app.applicationName().toLower()).arg(QLocale::system().name()),AppTranslationPath);
-
+  bool qtLoaded = QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()),QtTranslationPath);
+  bool appLoaded = AppTranslation.load(QString("%1_%2").arg(app.applicationName().toLower()).arg(QLocale::system().name()),AppTranslationPath);
+  if (!qtLoaded)
+    qWarning() << "Could not load Qt translation!";
+  if (!appLoaded)
+    qWarning() << "Could not load application translation!";
+    
   if((!AppTranslation.isEmpty()) && (!QtTranslation.isEmpty()))
   {
 	app.installTranslator(&QtTranslation);

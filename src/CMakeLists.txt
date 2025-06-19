@@ -1,7 +1,7 @@
 set (CMAKE_CXX_STANDARD 14)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
-set(QT_MIN_VERSION "5.9")
+set(QT_MIN_VERSION "5.14")
 set(TRANSLATIONS "translations/qtdmm_de.ts")
 set(RESOURCES "Resources.qrc")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)

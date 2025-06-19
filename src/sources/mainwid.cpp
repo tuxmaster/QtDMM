@@ -107,19 +107,28 @@ bool MainWid::closeWin()
 
   if (ui_graph->dirty() && m_configDlg->alertUnsavedData())
   {
-	QMessageBox question( tr("QtDMM: Unsaved data" ),
-						  tr("<font size=+2><b>Unsaved data</b></font><p>"
-							 "You still have unsaved measured data in memory."
-							 " If you quit now it will be lost."
-							 "<p>Do you want to export your unsaved data first?" ),
-							 QMessageBox::Information,
-							 QMessageBox::Yes | QMessageBox::Default,
-							 QMessageBox::No,
-							 QMessageBox::Cancel | QMessageBox::Escape );
+    QMessageBox question;
+    question.setWindowTitle(tr("QtDMM: Unsaved data"));
+    question.setText(tr("<font size=+2><b>Unsaved data</b></font><p>"
+                        "You still have unsaved measured data in memory."
+                        " If you quit now it will be lost."
+                        "<p>Do you want to export your unsaved data first?"));
+    question.setIcon(QMessageBox::Information);
+    question.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
 
-	question.setButtonText( QMessageBox::Yes, tr("Export data first") );
-	question.setButtonText( QMessageBox::No, tr("Quit without saving") );
-	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
+    // Set standard buttons
+    question.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+    question.setDefaultButton(QMessageBox::Yes);
+    question.setEscapeButton(QMessageBox::Cancel);
+
+    // Set custom button texts
+    QAbstractButton* yesButton = question.button(QMessageBox::Yes);
+    if (yesButton)
+        yesButton->setText(tr("Export data first"));
+
+    QAbstractButton* noButton = question.button(QMessageBox::No);
+    if (noButton)
+      noButton->setText(tr("Quit without saving"));
 
 	switch (question.exec())
 	{
@@ -419,18 +428,25 @@ void MainWid::startExternalSLOT()
 {
   if (m_external->state() == QProcess::Running)
   {
-	QMessageBox question( tr("QtDMM: Launch error" ),
-						  tr("<font size=+2><b>Launch error</b></font><p>"
-							 "Application %1 is still running!<p>"
-							 "Do you want to kill it now").arg(m_configDlg->externalCommand()),
-						  QMessageBox::Information,
-						  QMessageBox::Yes | QMessageBox::Default,
-						  QMessageBox::No,
-						  Qt::NoButton );
+    QMessageBox question;
+    question.setWindowTitle(tr("QtDMM: Launch error"));
+    question.setText(tr("<font size=+2><b>Launch error</b></font><p>"
+                        "Application %1 is still running!<p>"
+                        "Do you want to kill it now?")
+                     .arg(m_configDlg->externalCommand()));
+    question.setIcon(QMessageBox::Information);
+    question.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
 
-	question.setButtonText( QMessageBox::Yes, tr("Yes, kill it!") );
-	question.setButtonText( QMessageBox::Yes, tr("No, keep running") );
-	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
+    question.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    question.setDefaultButton(QMessageBox::Yes);
+
+    QAbstractButton* yesButton = question.button(QMessageBox::Yes);
+    if (yesButton)
+        yesButton->setText(tr("Yes, kill it!"));
+
+    QAbstractButton* noButton = question.button(QMessageBox::No);
+    if (noButton)
+        noButton->setText(tr("No, keep running"));
 
 	switch (question.exec())
 	{
@@ -453,18 +469,23 @@ void MainWid::startExternalSLOT()
   m_external->start();
   if (m_external->state() != QProcess::Starting)
   {
-	QMessageBox question( tr("QtDMM: Launch error" ),
-						  tr("<font size=+2><b>Launch error</b></font><p>"
-							 "Couldn't launch %1").arg(m_configDlg->externalCommand()),
-						  QMessageBox::Information,
-						  QMessageBox::Yes | QMessageBox::Default,
-						  Qt::NoButton,
-						  Qt::NoButton );
+    QMessageBox question;
+    question.setWindowTitle(tr("QtDMM: Launch error"));
+    question.setText(tr("<font size=+2><b>Launch error</b></font><p>"
+                        "Couldn't launch %1").arg(m_configDlg->externalCommand()));
+    question.setIcon(QMessageBox::Information);
+    question.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
 
-	question.setButtonText( QMessageBox::Yes, tr("Bummer!") );
-	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
+    // Nur ein "OK"-Button mit benutzerdefiniertem Text
+    question.setStandardButtons(QMessageBox::Yes);
+    question.setDefaultButton(QMessageBox::Yes);
 
-	question.exec();
+    QAbstractButton* yesButton = question.button(QMessageBox::Yes);
+    if (yesButton)
+        yesButton->setText(tr("Bummer!"));
+
+
+	  question.exec();
   }
   else
 	  Q_EMIT error( tr("Launched %1").arg(m_configDlg->externalCommand()) );
