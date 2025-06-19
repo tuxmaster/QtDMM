@@ -33,7 +33,7 @@
 #include "integrationprefs.h"
 #include "recorderprefs.h"
 #include "scaleprefs.h"
-#include "Settings.h"
+#include "settings.h"
 
 #include <iostream>
 
@@ -49,51 +49,60 @@ ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
 
   // Check if configuration file exists. If not welcome user
 
-  if(!m_settings->fileExists())
+  if (!m_settings->fileExists())
   {
-	QMessageBox welcome( tr("QtDMM: Welcome!" ),
-						 tr("<font size=+2><b>Welcome!</b></font><p>"
-							"This seems to be your first invocation of QtDMM "
-							"(Or you have deleted it's configuration file).<p>QtDMM"
-							" has created the file %1 in your home directory"
-							" to save its settings.").arg(m_settings->fileName()),
-						 QMessageBox::Information,
-						 QMessageBox::Yes | QMessageBox::Default,
-						 Qt::NoButton,
-						 Qt::NoButton );
+      QMessageBox welcome;
+      welcome.setWindowTitle(tr("QtDMM: Welcome!"));
+      welcome.setText(tr("<font size=+2><b>Welcome!</b></font><p>"
+                         "This seems to be your first invocation of QtDMM "
+                         "(Or you have deleted its configuration file).<p>QtDMM "
+                         "has created the file %1 in your home directory "
+                         "to save its settings.").arg(m_settings->fileName()));
+      welcome.setIcon(QMessageBox::Information);
+      welcome.setStandardButtons(QMessageBox::Yes);
+      welcome.setDefaultButton(QMessageBox::Yes);
+      welcome.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
 
-	welcome.setButtonText( QMessageBox::Yes, tr("Continue") );
-	welcome.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
-	welcome.exec();
+      QAbstractButton* yesButton = welcome.button(QMessageBox::Yes);
+      if (yesButton)
+          yesButton->setText(tr("Continue"));
+
+      welcome.exec();
   }
   else
   {
+      int version = m_settings->getInt("QtDMM/version");
+      int revision = m_settings->getInt("QtDMM/revision");
 
-	int version  = m_settings->getInt("QtDMM/version");
-	int revision = m_settings->getInt( "QtDMM/revision");
+      if ((version <= 0 && revision < 84) || version >= 7)
+      {
+          QMessageBox welcome;
+          welcome.setWindowTitle(tr("QtDMM: Welcome!"));
+          welcome.setText(tr("<font size=+2><b>Welcome!</b></font><p>"
+                             "You seem to have upgraded <b>QtDMM</b> from a version prior to 0.8.4. "
+                             "Please check your configuration. There are some new parameters to be "
+                             "configured."
+                             "<p>Thank you for choosing <b>QtDMM</b>.<p><i>Matthias Toussaint</i>"));
+          welcome.setIcon(QMessageBox::Information);
+          welcome.setStandardButtons(QMessageBox::Yes);
+          welcome.setDefaultButton(QMessageBox::Yes);
+          welcome.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
 
-	if ((version <= 0 && revision < 84) || version >= 7)
-	{
-	  QMessageBox welcome( tr("QtDMM: Welcome!" ),
-						   tr("<font size=+2><b>Welcome!</b></font><p>"
-							  "You seem to have upgraded <b>QtDMM</b> from a version prior to 0.8.4"
-							  " Please check your configuration. There are some new parameter to be"
-							  " configured."
-							  "<p>Thank you for choosing <b>QtDMM</b>.<p><i>Matthias Toussaint</i>"),
-							QMessageBox::Information,
-							QMessageBox::Yes | QMessageBox::Default,
-							Qt::NoButton,
-							Qt::NoButton );
+          QAbstractButton* yesButton = welcome.button(QMessageBox::Yes);
+          if (yesButton)
+              yesButton->setText(tr("Continue"));
 
-	  welcome.setButtonText( QMessageBox::Yes, tr("Continue") );
-	  welcome.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
-	  welcome.exec();
-	}
-	if(m_settings->fileConverted())
-		QMessageBox::information(0,tr("QtDMM: Welcome!"),
-								 tr("Your config file has convertet to the new format.\n"
-									"Please check your color settings, because it can't be converted automatic.\n"
-									"Your old config ~/.qtdmmrc was remaned to ~/.qtdmmrc.old."));
+          welcome.exec();
+      }
+
+      if (m_settings->fileConverted())
+      {
+          QMessageBox::information(nullptr,
+                                   tr("QtDMM: Welcome!"),
+                                   tr("Your config file has been converted to the new format.\n"
+                                      "Please check your color settings, because they couldn't be converted automatically.\n"
+                                      "Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old."));
+      }
   }
 
   // CREATE PAGES (Top page last)

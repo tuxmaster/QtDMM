@@ -20,7 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-
+#include <QRegExp>
 
 #include <math.h>
 #include "engnumbervalidator.h"

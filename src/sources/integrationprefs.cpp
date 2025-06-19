@@ -26,7 +26,7 @@
 #include "colorbutton.h"
 #include "engnumbervalidator.h"
 #include "integrationprefs.h"
-#include "Settings.h"
+#include "settings.h"
 
 IntegrationPrefs::IntegrationPrefs( QWidget *parent) : PrefWidget( parent)
 {

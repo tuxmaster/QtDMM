@@ -26,7 +26,7 @@
 
 #include "engnumbervalidator.h"
 #include "recorderprefs.h"
-#include  "Settings.h"
+#include  "settings.h"
 
 #define MINUTE_SECS   60
 #define HOUR_SECS     60*60

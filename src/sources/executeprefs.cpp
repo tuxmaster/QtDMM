@@ -25,7 +25,7 @@
 
 #include "engnumbervalidator.h"
 #include "executeprefs.h"
-#include "Settings.h"
+#include "settings.h"
 
 
 ExecutePrefs::ExecutePrefs( QWidget *parent) : PrefWidget( parent )

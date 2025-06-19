@@ -25,7 +25,7 @@
 #include <QSerialPortInfo>
 
 #include "dmmprefs.h"
-#include "Settings.h"
+#include "settings.h"
 
 
 // when all needed parameter are found this hardcoded version will
