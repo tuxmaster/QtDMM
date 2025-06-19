@@ -38,7 +38,7 @@ make -j $(nproc)
 if [ -e src/qtdmm ]
 then
 	mkdir -p ../bin
-	cp src/qtdmm ../bin
+	cp qtdmm ../bin
 	if ${INSTALL}
 	then
 		echo
