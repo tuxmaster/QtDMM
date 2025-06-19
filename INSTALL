@@ -1,37 +1,65 @@
-Installation QtDMM 0.9.8 (c) 2001-2014 M.Toussaint
+QtDMM 0.9.8 Installation Instructions
+(c) 2001–2014 M. Toussaint
+
+QtDMM is a graphical front-end for digital multimeters. It was originally
+developed for Qt5, which is now end-of-life (EOL). Work is ongoing to support
+Qt6 as well. Qt5 is still the recommended choice, but Qt6 builds are welcome
+for testing.
+
 
 Requirements:
--------------
-- Qt library 5.x developer version
-- cmake 3.5 or higher
-- A supported multimeter or a compatible model
+=============
+- developer version of Qt 5.14 or higher (recommended) or Qt 6.x
+- CMake version 3.11 or higher
+- A supported or compatible multimeter
 
 
 Compilation:
+============
+A helper script named `compile.sh` is included for convenience. You may use
+it or follow the standard CMake workflow.
+
+Basic steps:
 ------------
-- untar the tarball you've downloaded
-- enter the qtdmm directory
+- Download and extract the QtDMM source code from GitHub:
+  https://github.com/tuxmaster/QtDMM
+- Open a terminal and change to the QtDMM directory:
+    cd QtDMM
 
-no system wide installation:
-- type ./compile.sh
-- you will find the executable in ./bin directory
+- For a clean build (optional):
+    ./compile.sh clean <other options>
 
-system wide installation:
-- type ./compile.sh install
+Building with Qt5 (Recommended):
+-------------------------------
+Build and install system-wide:
+    ./compile.sh install
 
-if you want to remove all build files
-- type ./compile.sh clean
+Build only (no installation):
+    ./compile.sh
 
-That's it. You should have the executable qtdmm now.
+The compiled binary will be placed in the `./bin` directory:
+    ./bin/qtdmm
 
-If your DMM isn't listed in the model combo (list see README), just try to
-find manual settings, or a  compatible model. It is very unlikely that wrong 
-settings cause harm to your DMM. Worst case could be that it hangs. 
-Switching it off will reset it.
+Building with Qt6 (Experimental):
+--------------------------------
+like Qt5 build, but add `qt6` ardument, e.g.:
+    ./compile.sh qt6 install
 
-If you find working settings or encounter any problems don't hesitate to
-contact via our github page.
 
-https://github.com/tuxmaster/QtDMM
+Multimeter Compatibility:
+=========================
+If your DMM is not listed in the model selection (see README), try:
+- Using manual configuration
+- Selecting a similar model
 
+Incorrect settings are unlikely to damage your device. In the worst case,
+the multimeter may stop responding. Power-cycling it will usually fix this.
+
+
+Feedback & Support:
+===================
+If you find working settings for an unsupported device or encounter problems,
+please get in touch via the GitHub project page:
+
+    https://github.com/tuxmaster/QtDMM
 
