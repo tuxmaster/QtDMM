@@ -18,14 +18,14 @@ EOF
 }
 
 INSTALL=false
-FORCE_QT5=""
+FORCE_QT5="-DFORCE_QT5=ON"
 
 for arg in $*
 do
 	arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
 	[ "$arg" = "clean" ] && rm -rf build
 	[ "$arg" = "install" ] && INSTALL=true
-	[ "$arg" = "qt6" ] || FORCE_QT5="-DFORCE_QT5=ON"
+	[ "$arg" = "qt6" ] && FORCE_QT5=""
 	[ "$arg" = "help" -o "$arg" = "h" ] && usage
 done
 
