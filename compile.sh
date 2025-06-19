@@ -35,7 +35,7 @@ cd build
 cmake ${FORCE_QT5} ..
 make -j $(nproc)
 
-if [ -e src/qtdmm ]
+if [ -x qtdmm ]
 then
 	mkdir -p ../bin
 	cp qtdmm ../bin
