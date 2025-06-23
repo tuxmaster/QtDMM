@@ -26,7 +26,7 @@
 
 #include "colorbutton.h"
 #include "guiprefs.h"
-#include "Settings.h"
+#include "settings.h"
 
 GuiPrefs::GuiPrefs( QWidget *parent) : PrefWidget( parent )
 {

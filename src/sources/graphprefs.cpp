@@ -27,7 +27,7 @@
 
 #include "colorbutton.h"
 #include "graphprefs.h"
-#include "Settings.h"
+#include "settings.h"
 
 
 GraphPrefs::GraphPrefs( QWidget *parent) : PrefWidget( parent )

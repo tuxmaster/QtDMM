@@ -26,7 +26,7 @@
 
 #include "engnumbervalidator.h"
 #include "scaleprefs.h"
-#include "Settings.h"
+#include "settings.h"
 
 
 #define MINUTE_SECS   60
