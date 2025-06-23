@@ -88,7 +88,8 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_maxStr =  BitmapHelper(":/Symbols/max_str.xpm");
 
   m_diode =  BitmapHelper(":/Symbols/diode.xpm");
-  m_ac =  BitmapHelper(":/Symbols/ac.xpm");
+  m_buzzer=  BitmapHelper(":/Symbols/buzzer.xpm");
+	m_ac =  BitmapHelper(":/Symbols/ac.xpm");
   m_dc =  BitmapHelper(":/Symbols/dc.xpm");
 
   m_hold =  BitmapHelper(":/Symbols/hold.xpm");
@@ -160,6 +161,7 @@ DisplayWid::~DisplayWid()
 	delete m_minStr;
 	delete m_maxStr;
 	delete m_diode;
+	delete m_buzzer;
 	delete m_ac;
 	delete m_dc;
 	delete m_bar[0];
@@ -343,6 +345,10 @@ void DisplayWid::paintEvent( QPaintEvent * )
 		{
 			p.drawPixmap( 0, -36, *m_diode );
 		}
+		else if (m_mode[0] == "BUZ")
+		{
+			p.drawPixmap( 0, -36, *m_buzzer );
+		}
 		else if (m_mode[0] == "AC")
 		{
 			p.drawPixmap( 0, -36, *m_ac );
@@ -350,6 +356,11 @@ void DisplayWid::paintEvent( QPaintEvent * )
 		else if (m_mode[0] == "DC")
 		{
 			p.drawPixmap( 0, -36, *m_dc );
+		}
+		else if (m_mode[0] == "ACDC")
+		{
+			p.drawPixmap( 0, -36, *m_ac );
+			p.drawPixmap( 16, -36, *m_dc );
 		}
 
 		p.restore();
