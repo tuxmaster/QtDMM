@@ -49,6 +49,7 @@
         <file alias="ac.xpm">xpm/ac.xpm</file>
         <file alias="dc.xpm">xpm/dc.xpm</file>
         <file alias="diode.xpm">xpm/diode.xpm</file>
+        <file alias="buzzer.xpm">xpm/buzzer.xpm</file>
         <file alias="fifty_bar.xpm">xpm/fifty_bar.xpm</file>
         <file alias="fourty_bar.xpm">xpm/fourty_bar.xpm</file>
         <file alias="null_bar.xpm">xpm/null_bar.xpm</file>
@@ -77,5 +78,8 @@
         <file alias="quit.xpm">xpm/quit.xpm</file>
         <file alias="recorder.xpm">xpm/recorder.xpm</file>
         <file alias="scale.xpm">xpm/scale.xpm</file>
+        <file alias="hold.xpm">xpm/hold.xpm</file>
+        <file alias="auto.xpm">xpm/auto.xpm</file>
+        <file alias="manu.xpm">xpm/manu.xpm</file>
     </qresource>
 </RCC>

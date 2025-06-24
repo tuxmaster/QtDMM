@@ -23,6 +23,7 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <QPrinter>
+#include <iostream>
 
 #include "mainwid.h"
 #include "dmmgraph.h"
@@ -49,8 +50,8 @@ MainWid::MainWid( QWidget *parent ) :  QFrame( parent ),
   m_printDlg = new qtdmm::PrintDlg( this );
   m_printDlg->hide();
 
-  connect( m_dmm, SIGNAL( value( double, const QString &, const QString &, const QString &, bool, int )),
-		   this,  SLOT( valueSLOT( double, const QString &, const QString &, const QString &, bool, int )));
+  connect( m_dmm, SIGNAL( value( double, const QString &, const QString &, const QString &, const QString &, bool, bool, int )),
+		   this,  SLOT( valueSLOT( double, const QString &, const QString &, const QString &, const QString &, bool, bool, int )));
   connect( m_dmm, SIGNAL( error( const QString & ) ),this, SIGNAL( error( const QString & )));
   connect( ui_graph, SIGNAL( info( const QString & ) ),this, SIGNAL( info( const QString & ) ));
   connect( ui_graph, SIGNAL( error( const QString & ) ),this, SIGNAL( error( const QString & ) ));
@@ -174,51 +175,59 @@ void MainWid::timerEvent( QTimerEvent * )
   ui_graph->addValue( m_dval );
 }
 
-void MainWid::valueSLOT( double dval, const QString & val, const QString & u,const QString & s,  bool showBar,int id )
+void MainWid::valueSLOT( double dval, const QString & val, const QString & u,const QString & s, const QString & r, bool hold, bool showBar,int id )
 {
-/*  cerr << "valueSLOT " << dval
-	   << " val=" << val.latin1()
-	   << " u=" << u.latin1()
-	   << " s=" << s.latin1()
+	/*
+  std::cerr << "valueSLOT " << dval
+	   << " val=" << val.toLocal8Bit().data()
+	   << " u=" << u.toLocal8Bit().data()
+	   << " s=" << s.toLocal8Bit().data()
+	   << " r=" << r.toLocal8Bit().data()
 	   << " showBar=" << showBar
-	   << " id=" << id << endl;  */
+	   << " hold=" << hold
+	   << " id=" << id << std::endl;
+*/
+	m_display->setHold(hold);
+	if (r=="AUTO") m_display->setAuto(true);
+	if (r=="MANU") m_display->setManu(true);
 
-  m_display->setShowBar( showBar );
-  m_display->setValue( id, val );
+	m_display->setShowBar( showBar );
+	m_display->setMode( id, s );
 
-  m_display->setMode( id, s );
 
-  QString tmpUnit = u;
-
-  m_display->setUnit( id, tmpUnit );
-
-  if (0 == id)
-  {
-	if (m_lastUnit != s)
+	if (!hold)
 	{
-	  resetSLOT();
-	  ui_graph->setUnit( u );
-	}
-	m_lastUnit = s;
+	m_display->setValue( id, val );
+	m_display->setUnit( id, u );
 
-	if (dval > m_max)
+	if (id == 0)
 	{
-	  m_max = dval;
-	  m_display->setMaxUnit( u );
-	  m_display->setMaxValue( val );
+		if (m_lastUnit != s)
+		{
+			if (m_lastUnit != s)resetSLOT();
+			ui_graph->setUnit( u );
+		}
+		m_lastUnit = s;
+
+		if (dval > m_max)
+		{
+			m_max = dval;
+			m_display->setMaxUnit( u );
+			m_display->setMaxValue( val );
+		}
+
+		if (dval < m_min)
+		{
+			m_min = dval;
+			m_display->setMinUnit( u );
+			m_display->setMinValue( val );
+		}
+
+		m_dval = dval;
+	}
 	}
 
-	if (dval < m_min)
-	{
-	  m_min = dval;
-	  m_display->setMinUnit( u );
-	  m_display->setMinValue( val );
-	}
-
-	m_dval = dval;
-  }
-
-  m_display->update();
+	m_display->update();
 }
 
 void MainWid::resetSLOT()

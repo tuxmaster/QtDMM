@@ -29,10 +29,9 @@
 #include <iomanip>
 #include <sstream>
 
-#define LOG_OUTPUT
 
-DMM::DMM(QObject *parent) :
-  QObject( parent),
+DMM::DMM(QObject *parent)
+  : QObject( parent),
   m_handle( Q_NULLPTR ),
   m_speed( 600 ),
   m_parity( QSerialPort::NoParity ),
@@ -430,7 +429,7 @@ void DMM::readVC940Continuous( const QByteArray & data, int id, ReadEvent::DataF
 	  unit = "A";
 	  break;
 	case 10:   // buzzer
-	  special = "OH";
+	  special = "BUZ";
 	  unit = "Ohm";
 	  val = insertCommaIT( val, 3 );
 	  break;
@@ -503,7 +502,7 @@ void DMM::readVC940Continuous( const QByteArray & data, int id, ReadEvent::DataF
 
   //printf( "d_val=%f val=%s unit=%s special=%s\n", d_val, val.latin1(), unit.latin1(), special.latin1() );
 
-  Q_EMIT value( d_val, val, unit, special, true, id );
+  Q_EMIT value( d_val, val, unit, special, "", false, true, id );
   m_error = tr( "Connected %1" ).arg(m_device);
 }
 
@@ -619,7 +618,7 @@ void DMM::readRS22812Continuous( const QByteArray & data, int id, ReadEvent::Dat
 	unit.prepend( "M" );
   }
 
-  Q_EMIT value( d_val, val, unit, special, true, id );
+  Q_EMIT value( d_val, val, unit, special, "", false, true, id );
 
   m_error = tr( "Connected %1" ).arg(m_device);
 }
@@ -679,12 +678,13 @@ void DMM::readASCII( const QByteArray & data, int id, ReadEvent::DataFormat df )
 	d_val *= 1.0E6;
   else if (unit.left(1) == "G")
 	d_val *= 1.0E9;
-  Q_EMIT value( d_val, val, unit, special, true, id );
+  Q_EMIT value( d_val, val, unit, special, "", false, true, id );
 
  m_error = tr( "Connected %1" ).arg(m_device);
 }
 
-void DMM::readCyrustekES51922(const QByteArray & data, int id, ReadEvent::DataFormat /*df*/) {
+void DMM::readCyrustekES51922(const QByteArray & data, int id, ReadEvent::DataFormat /*df*/)
+{
   QString val;
   QString special;
   QString unit;
@@ -696,13 +696,13 @@ void DMM::readCyrustekES51922(const QByteArray & data, int id, ReadEvent::DataFo
 
   const char *pStr = data.data();
 
-#define CyrustekES51922_Range 0
-#define CyrustekES51922_Function 6
-#define CyrustekES51922_Status 7
-#define CyrustekES51922_Option1 8
-#define CyrustekES51922_Option2 9
-#define CyrustekES51922_Option3 10
-#define CyrustekES51922_Option4 11
+  const size_t CyrustekES51922_Range = 0;
+  const size_t CyrustekES51922_Function = 6;
+  const size_t CyrustekES51922_Status = 7;
+  const size_t CyrustekES51922_Option1 = 8;
+  const size_t CyrustekES51922_Option2 = 9;
+  const size_t CyrustekES51922_Option3 = 10;
+  const size_t CyrustekES51922_Option4 = 11;
 
   if (pStr[CyrustekES51922_Status] & 0x04) {
     val = "-";
@@ -740,9 +740,9 @@ void DMM::readCyrustekES51922(const QByteArray & data, int id, ReadEvent::DataFo
 
   case 0x32:
     if (pStr[CyrustekES51922_Status] & 8)
-      unit = "Hz";
-    else
       unit = "%";
+    else
+      unit = "Hz";
 
     switch (pStr[CyrustekES51922_Range]) {
     case 0x30:
@@ -954,11 +954,11 @@ void DMM::readCyrustekES51922(const QByteArray & data, int id, ReadEvent::DataFo
 
   if (pStr[CyrustekES51922_Option3] & 2)
   {
-    // (" AUTO")
+    range = "AUTO";
   }
   else
   {
-    // (" MANUAL")
+    range = "MANU";
   };
 
   if (pStr[CyrustekES51922_Option3] & 8)
@@ -968,7 +968,7 @@ void DMM::readCyrustekES51922(const QByteArray & data, int id, ReadEvent::DataFo
 
   hold = pStr[CyrustekES51922_Option4] & 2;
 
-  Q_EMIT value(dVal, val, unit, special, true, id);
+  Q_EMIT value(dVal, val, unit, special, range, hold, true, id);
   m_error = tr("Connected %1").arg(m_device);
 }
 
@@ -1105,7 +1105,7 @@ void DMM::readQM1537Continuous( const QByteArray & data, int id, ReadEvent::Data
 	}
   }
 
-  Q_EMIT value( d_val, val, unit, special, showBar, id );
+  Q_EMIT value( d_val, val, unit, special, "", false, showBar, id );
   m_error = tr( "Connected %1" ).arg(m_device);
 }
 
@@ -1356,7 +1356,7 @@ void DMM::readM9803RContinuous( const QByteArray & data, int id, ReadEvent::Data
 	  break;
   }
 
-  Q_EMIT value( d_val, val, unit, special, showBar, id );
+  Q_EMIT value( d_val, val, unit, special, "", false, showBar, id );
   m_error = tr( "Connected %1" ).arg(m_device);
 }
 
@@ -1571,7 +1571,7 @@ void DMM::readIsoTechContinuous(const QByteArray & data, int id, ReadEvent::Data
 
  // printf ("DVAL: %f\n", d_val);
 
-  Q_EMIT value( d_val, val, unit, special, true, id );
+  Q_EMIT value( d_val, val, unit, special, "", false, true, id );
   m_error = tr( "Connected %1" ).arg(m_device);
 }
 
@@ -1686,7 +1686,7 @@ void DMM::readVC820Continuous( const QByteArray & data, int id, ReadEvent::DataF
 	unit.prepend( "M" );
   }
 
-  Q_EMIT value( d_val, val, unit, special, true, id );
+  Q_EMIT value( d_val, val, unit, special, "", false, true, id );
 
   m_error = tr( "Connected %1" ).arg(m_device);
 }
@@ -2310,13 +2310,13 @@ void DMM::readVC870Continuous( const QByteArray & data, int /*id*/, ReadEvent::D
 
     if (!l_bParserError) {
         // Always update the primary display (ID 0)
-        Q_EMIT value(d_val1, val1, unit1, special, l_bShowBar, 0);
+        Q_EMIT value(d_val1, val1, unit1, special, "", false, l_bShowBar, 0);
         if (in[20] == 0x31) { // LCD need Dual display
             // Enable or update the secondary display (ID 1)
-            Q_EMIT value(d_val2, val2, unit2, special, l_bShowBar, 1); // Keep the l_bShowBar flag!
+            Q_EMIT value(d_val2, val2, unit2, special, "", false, l_bShowBar, 1); // Keep the l_bShowBar flag!
         } else {
             // Disable the secondary display (ID 1) as it is currently unused
-            Q_EMIT value(0, "", "", "", l_bShowBar, 1); // Keep the l_bShowBar flag!
+            Q_EMIT value(0, "", "", "", "", false, l_bShowBar, 1); // Keep the l_bShowBar flag!
         } // else
 
         m_error = tr( "Connected %1" ).arg(m_device);
@@ -2432,7 +2432,7 @@ void DMM::readDO3122Continuous( const QByteArray & data, int id, ReadEvent::Data
 
         if (true == convOk)
         {
-            Q_EMIT value(d_val, val, unit, special, showbar, 0);
+            Q_EMIT value(d_val, val, unit, special, "", false, showbar, 0);
             m_error = tr( "Connected %1" ).arg(m_device);
         }
         else
