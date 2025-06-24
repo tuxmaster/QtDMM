@@ -25,112 +25,112 @@
 #include <math.h>
 #include "engnumbervalidator.h"
 
-EngNumberValidator::EngNumberValidator(QObject *parent) : QValidator( parent)
+EngNumberValidator::EngNumberValidator(QObject *parent) : QValidator(parent)
 {
 }
 
 // TODO: RegExp is still a simple hack
 //
-QValidator::State EngNumberValidator::validate( QString & input, int & pos ) const
+QValidator::State EngNumberValidator::validate(QString &input, int &pos) const
 {
-  static QRegExp doubleRe( "-?\\d+\\.?\\d*"  );
-  static QRegExp fullRe( "-?\\d+\\.?\\d*[munpkMGT]?"  );
+  static QRegExp doubleRe("-?\\d+\\.?\\d*");
+  static QRegExp fullRe("-?\\d+\\.?\\d*[munpkMGT]?");
 
   input = input.trimmed();
-  pos = qMin( static_cast<int>(input.length()), pos );
+  pos = qMin(static_cast<int>(input.length()), pos);
 
   // mt: changed
-  if (fullRe.exactMatch( input ))
-	  return Acceptable;
-  if (doubleRe.exactMatch( input ))
-	  return Intermediate;
+  if (fullRe.exactMatch(input))
+    return Acceptable;
+  if (doubleRe.exactMatch(input))
+    return Intermediate;
 
   return Invalid;
 }
 
-double EngNumberValidator::value( const QString & string )
+double EngNumberValidator::value(const QString &string)
 {
   double factor = 1.;
 
   // mt: added toAscii
-  switch (string[string.length()-1].toLatin1())
+  switch (string[string.length() - 1].toLatin1())
   {
-	  case 'm':
-		factor = 1e-3;
-		break;
-	  case 'u':
-		factor = 1e-6;
-		break;
-	  case 'n':
-		factor = 1e-9;
-		break;
-	  case 'p':
-		factor = 1e-12;
-		break;
-	  case 'k':
-		factor = 1e3;
-		break;
-	  case 'M':
-		factor = 1e6;
-		break;
-	  case 'G':
-		factor = 1e9;
-		break;
-	  case 'T':
-		factor = 1e12;
-		break;
+    case 'm':
+      factor = 1e-3;
+      break;
+    case 'u':
+      factor = 1e-6;
+      break;
+    case 'n':
+      factor = 1e-9;
+      break;
+    case 'p':
+      factor = 1e-12;
+      break;
+    case 'k':
+      factor = 1e3;
+      break;
+    case 'M':
+      factor = 1e6;
+      break;
+    case 'G':
+      factor = 1e9;
+      break;
+    case 'T':
+      factor = 1e12;
+      break;
   }
 
   return string.toDouble() * factor;
 }
 
-QString EngNumberValidator::engValue( double value )
+QString EngNumberValidator::engValue(double value)
 {
   QString suffix = "";
 
   if (fabs(value) < 1.)
   {
-	value *= 1000;
-	suffix = "m";
+    value *= 1000;
+    suffix = "m";
   }
   if (fabs(value) < 1.)
   {
-	value *= 1000;
-	suffix = "µ";
+    value *= 1000;
+    suffix = "µ";
   }
   if (fabs(value) < 1.)
   {
-	value *= 1000;
-	suffix = "n";
+    value *= 1000;
+    suffix = "n";
   }
   if (fabs(value) < 1.)
   {
-	value *= 1000;
-	suffix = "p";
+    value *= 1000;
+    suffix = "p";
   }
   if (fabs(value) >= 1000.)
   {
-	value /= 1000;
-	suffix = "k";
+    value /= 1000;
+    suffix = "k";
   }
   if (fabs(value) >= 1000.)
   {
-	value /= 1000;
-	suffix = "M";
+    value /= 1000;
+    suffix = "M";
   }
   if (fabs(value) >= 1000.)
   {
-	value /= 1000;
-	suffix = "G";
+    value /= 1000;
+    suffix = "G";
   }
   if (fabs(value) >= 1000.)
   {
-	value /= 1000;
-	suffix = "T";
+    value /= 1000;
+    suffix = "T";
   }
 
   QString str;
-  str.setNum( (static_cast<int>(qRound( value * 10. ))) / 10. );
+  str.setNum((static_cast<int>(qRound(value * 10.))) / 10.);
   str += suffix;
 
   return str;

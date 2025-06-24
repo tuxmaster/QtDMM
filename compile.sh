@@ -50,6 +50,6 @@ then
 		${RUN} && qtdmm
 	elif ${RUN}
 	then
-		./qtdmm
+		./qtdmm --console
 	fi
 fi

@@ -24,15 +24,15 @@
 
 #include "dmmbar.h"
 
-DMMBar::DMMBar( QWidget *parent ) : QWidget( parent),
-  m_value( 0.0 )
+DMMBar::DMMBar(QWidget *parent) : QWidget(parent),
+  m_value(0.0)
 {
 }
 
-void DMMBar::setValue( double value )
+void DMMBar::setValue(double value)
 {
   while (value > 4)
-	value /= 10.;
+    value /= 10.;
   m_value = value;
   update();
 }

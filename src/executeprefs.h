@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef EXECUTEPREFS_HH
-#define EXECUTEPREFS_HH
+#pragma once
 
 #include <QtCore>
 
@@ -30,25 +29,24 @@
 class ExecutePrefs : public PrefWidget, private Ui::UIExecutePrefs
 {
   Q_OBJECT
-	public:
-	  ExecutePrefs(QWidget *parent=Q_NULLPTR);
-	  ~ExecutePrefs();
-	  bool			startExternal() const;
-	  bool			externalFalling() const;
-	  double		externalThreshold() const;
-	  bool			disconnectExternal() const;
-	  QString		externalCommand() const;
-	  void			setThreshold( double );
+public:
+  ExecutePrefs(QWidget *parent = Q_NULLPTR);
+  ~ExecutePrefs();
+  bool			startExternal() const;
+  bool			externalFalling() const;
+  double		externalThreshold() const;
+  bool			disconnectExternal() const;
+  QString		externalCommand() const;
+  void			setThreshold(double);
 
-	public Q_SLOTS:
-	  virtual void	defaultsSLOT()Q_DECL_OVERRIDE;
-	  virtual void	factoryDefaultsSLOT()Q_DECL_OVERRIDE;
-	  virtual void	applySLOT()Q_DECL_OVERRIDE;
+public Q_SLOTS:
+  virtual void	defaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void	factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void	applySLOT()Q_DECL_OVERRIDE;
 
-	protected Q_SLOTS:
-	  void			on_ui_browseExec_clicked();
+protected Q_SLOTS:
+  void			on_ui_browseExec_clicked();
 
 };
 
-#endif // EXECUTEPREFS_HH
 

@@ -20,32 +20,37 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef PRINTDLG_HH
-#define PRINTDLG_HH
+#pragma once
 
 #include <QtGui>
 #include "ui_uiprintdlg.h"
 
 
 class QPrinter;
-namespace qtdmm {
-class PrintDlg : public QDialog, private Ui::UIPrintDlg
+namespace qtdmm
 {
-  Q_OBJECT
-	public:
-	  PrintDlg(QWidget *parent=Q_NULLPTR);
-	  void		setPrinter( QPrinter * prt );
-	  QString	title() const { return printTitle->text(); }
-	  QString	comment() const { return printComment->toPlainText(); }
+  class PrintDlg : public QDialog, private Ui::UIPrintDlg
+  {
+    Q_OBJECT
+  public:
+    PrintDlg(QWidget *parent = Q_NULLPTR);
+    void		setPrinter(QPrinter *prt);
+    QString	title() const
+    {
+      return printTitle->text();
+    }
+    QString	comment() const
+    {
+      return printComment->toPlainText();
+    }
 
-	protected:
-	  QPrinter	*m_printer;
+  protected:
+    QPrinter	*m_printer;
 
-	protected Q_SLOTS:
-	  void		on_configBut_clicked();
-	  void		on_helpBut_clicked();
-	  void		createPrinterString();
+  protected Q_SLOTS:
+    void		on_configBut_clicked();
+    void		on_helpBut_clicked();
+    void		createPrinterString();
 
-};
+  };
 }
-#endif // PRINTDLG_HH

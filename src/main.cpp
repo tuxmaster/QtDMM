@@ -26,36 +26,36 @@
 #include "config.h"
 
 
-void myMessageOutput( QtMsgType type,const QMessageLogContext &, const QString &msg )
+void myMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &msg)
 {
-  switch ( type )
+  switch (type)
   {
-	case QtDebugMsg:
+    case QtDebugMsg:
 #ifdef QT_DEBUG
-		  qDebug()<<"Debug: "<<msg;
+      qDebug() << "Debug: " << msg;
 #endif
-		break;
-	case QtWarningMsg:
-		if (msg.contains( "Absolute index" ))
-			abort();
-		else
-			qWarning()<<"Warning: "<<msg;
-		break;
-	case QtFatalMsg:
-		 qFatal("Fatal: %s", msg.toUtf8().constData());
-	case QtCriticalMsg:
-		  qCritical()<<"Critial: "<<msg;
-		break;
-	case QtInfoMsg:
-		  qInfo()<<"Info: "<<msg;
-		break;
+      break;
+    case QtWarningMsg:
+      if (msg.contains("Absolute index"))
+        abort();
+      else
+        qWarning() << "Warning: " << msg;
+      break;
+    case QtFatalMsg:
+      qFatal("Fatal: %s", msg.toUtf8().constData());
+    case QtCriticalMsg:
+      qCritical() << "Critial: " << msg;
+      break;
+    case QtInfoMsg:
+      qInfo() << "Info: " << msg;
+      break;
   }
 }
 
-int main( int argc, char **argv )
+int main(int argc, char **argv)
 {
-  qInstallMessageHandler( myMessageOutput );
-  QApplication app( argc, argv );
+  qInstallMessageHandler(myMessageOutput);
+  QApplication app(argc, argv);
 
   app.setApplicationName(APP_NAME);
   app.setApplicationVersion(APP_VERSION);
@@ -65,27 +65,27 @@ int main( int argc, char **argv )
   QTranslator AppTranslation;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-  QString QtTranslationPath=QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+  QString QtTranslationPath = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
 #else
-  QString QtTranslationPath=QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+  QString QtTranslationPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 #endif
 
-  QString AppTranslationPath=QtTranslationPath;
+  QString AppTranslationPath = QtTranslationPath;
 #ifdef Q_OS_WIN
-  AppTranslationPath="./";
+  AppTranslationPath = "./";
 #endif
 
-  bool qtLoaded = QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()),QtTranslationPath);
-  bool appLoaded = AppTranslation.load(QString("%1_%2").arg(app.applicationName().toLower()).arg(QLocale::system().name()),AppTranslationPath);
+  bool qtLoaded = QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()), QtTranslationPath);
+  bool appLoaded = AppTranslation.load(QString("%1_%2").arg(app.applicationName().toLower()).arg(QLocale::system().name()), AppTranslationPath);
   if (!qtLoaded)
     qWarning() << "Could not load Qt translation!";
   if (!appLoaded)
     qWarning() << "Could not load application translation!";
-    
-  if((!AppTranslation.isEmpty()) && (!QtTranslation.isEmpty()))
+
+  if ((!AppTranslation.isEmpty()) && (!QtTranslation.isEmpty()))
   {
-	app.installTranslator(&QtTranslation);
-	app.installTranslator(&AppTranslation);
+    app.installTranslator(&QtTranslation);
+    app.installTranslator(&AppTranslation);
   }
   MainWin mainWin;
 
@@ -93,10 +93,10 @@ int main( int argc, char **argv )
   parser.addOption(QCommandLineOption("console"));
 
   parser.process(app);
-  if(parser.isSet("console"))
-	mainWin.setConsoleLogging( true );
+  if (parser.isSet("console"))
+    mainWin.setConsoleLogging(true);
   mainWin.show();
-  mainWin.move( 100, 100 );
+  mainWin.move(100, 100);
 
   return app.exec();
 }

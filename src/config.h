@@ -15,11 +15,8 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
-#ifndef CONFIG_H
-#define CONFIG_H
+#pragma once
 
-#define APP_NAME			"QtDMM"
-#define APP_VERSION			"0.9.8"
-#define APP_ORGANIZATION	APP_NAME
-
-#endif // CONFIG_H
+#define APP_NAME         "QtDMM"
+#define APP_VERSION      "0.9.8"
+#define APP_ORGANIZATION APP_NAME

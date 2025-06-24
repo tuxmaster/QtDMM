@@ -20,37 +20,35 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef SCALEPREFS_HH
-#define SCALEPREFS_HH
+#pragma once
 
 #include <QtGui>
 
 #include "ui_uiscaleprefs.h"
 
-class ScalePrefs : public PrefWidget,private Ui::UIScalePrefs
+class ScalePrefs : public PrefWidget, private Ui::UIScalePrefs
 {
   Q_OBJECT
-	public:
-	  ScalePrefs(QWidget *parent=Q_NULLPTR);
-	  ~ScalePrefs();
-	  bool			automaticScale() const;
-	  bool			includeZero() const;
-	  double		scaleMin() const;
-	  double		scaleMax() const;
-	  int			windowSeconds() const;
-	  int			totalSeconds() const;
+public:
+  ScalePrefs(QWidget *parent = Q_NULLPTR);
+  ~ScalePrefs();
+  bool			automaticScale() const;
+  bool			includeZero() const;
+  double		scaleMin() const;
+  double		scaleMax() const;
+  int			windowSeconds() const;
+  int			totalSeconds() const;
 
-	public Q_SLOTS:
-	  virtual void	defaultsSLOT()Q_DECL_OVERRIDE;
-	  virtual void	factoryDefaultsSLOT()Q_DECL_OVERRIDE;
-	  virtual void	applySLOT()Q_DECL_OVERRIDE;
+public Q_SLOTS:
+  virtual void	defaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void	factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void	applySLOT()Q_DECL_OVERRIDE;
 
-	  void			setAutoScaleSLOT( bool autoScale );
-	  void			zoomInSLOT( double fac );
-	  void			zoomOutSLOT( double fac );
-	  void			setGraphSizeSLOT( int size, int length );
+  void			setAutoScaleSLOT(bool autoScale);
+  void			zoomInSLOT(double fac);
+  void			zoomOutSLOT(double fac);
+  void			setGraphSizeSLOT(int size, int length);
 
 };
 
-#endif // SCALEPREFS_HH
 

@@ -20,23 +20,21 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef DMMBAR_HH
-#define DMMBAR_HH
+#pragma once
 
 #include <QtGui>
 #include <QtWidgets>
 
 class DMMBar : public QWidget
 {
-	Q_OBJECT
-	public:
-	  DMMBar(QWidget *parent);
+  Q_OBJECT
+public:
+  DMMBar(QWidget *parent);
 
-	public Q_SLOTS:
-	  void		setValue( double );
+public Q_SLOTS:
+  void		setValue(double);
 
-	protected:
-	  double	m_value;
+protected:
+  double	m_value;
 };
 
-#endif // DMMBAR_HH

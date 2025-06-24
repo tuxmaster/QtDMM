@@ -20,21 +20,22 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef CONFIGITEM_HH
-#define CONFIGITEM_HH
+#pragma once
 
 #include <QtGui>
 #include <QtWidgets>
 
 class ConfigItem : public QListWidgetItem
 {
-	public:
-	  ConfigItem(int id, const QPixmap &, const QString & label, QListWidget *parent );
-	  int	id() const { return m_id; }
+public:
+  ConfigItem(int id, const QPixmap &, const QString &label, QListWidget *parent);
+  int	id() const
+  {
+    return m_id;
+  }
 
-	protected:
-	  int	m_id;
+protected:
+  int	m_id;
 
 };
 
-#endif // CONFIGITEM_HH

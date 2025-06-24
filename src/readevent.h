@@ -20,29 +20,28 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef READEVENT_HH
-#define READEVENT_HH
+#pragma once
 
 #include <QtCore>
 
 class ReadEvent
 {
-	public:
-	  enum DataFormat
-	  {
-		Metex14 = 0,
-		PeakTech10,
-		Voltcraft14Continuous,
-		Voltcraft15Continuous,
-		M9803RContinuous,
-		VC820Continuous,
-		IsoTech,
-		VC940Continuous,
-		QM1537Continuous,
-		RS22812Continuous,
-		VC870Continuous,
-        DO3122Continuous,
-		CyrustekES51922
-	  };
+public:
+  enum DataFormat
+  {
+    Metex14 = 0,
+    PeakTech10,
+    Voltcraft14Continuous,
+    Voltcraft15Continuous,
+    M9803RContinuous,
+    VC820Continuous,
+    IsoTech,
+    VC940Continuous,
+    QM1537Continuous,
+    RS22812Continuous,
+    VC870Continuous,
+    DO3122Continuous,
+    CyrustekES51922,
+    CyrustekES51962
+  };
 };
-#endif // READEVENT_HH

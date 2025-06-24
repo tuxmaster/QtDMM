@@ -194,37 +194,37 @@
             </property>
             <item>
              <property name="text">
-              <string>600 baud</string>
+              <string>600</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>1200 baud</string>
+              <string>1200</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>1800 baud</string>
+              <string>1800</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>2400 baud</string>
+              <string>2400</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>4800 baud</string>
+              <string>4800</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>9600 baud</string>
+              <string>9600</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>19200 baud</string>
+              <string>19200</string>
              </property>
             </item>
            </widget>
@@ -583,6 +583,11 @@
         <item>
          <property name="text">
           <string>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>11 bytes binary, continuous (CyrustekES51962)</string>
          </property>
         </item>
        </widget>

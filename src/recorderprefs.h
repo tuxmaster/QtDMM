@@ -20,33 +20,31 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef RECORDERPREFS_HH
-#define RECORDERPREFS_HH
+#pragma once
 
 #include "ui_uirecorderprefs.h"
 #include "dmmgraph.h"
 
-class RecorderPrefs : public PrefWidget ,private Ui::UIRecorderPrefs
+class RecorderPrefs : public PrefWidget, private Ui::UIRecorderPrefs
 {
   Q_OBJECT
-	public:
-	  RecorderPrefs(QWidget *parent=Q_NULLPTR);
-	  ~RecorderPrefs();
-	  DMMGraph::SampleMode	sampleMode() const;
-	  int					sampleStep() const;
-	  int					sampleLength() const;
-	  double				fallingThreshold() const;
-	  double				raisingThreshold() const;
-	  QTime					startTime() const;
-	  void					setThreshold( double );
+public:
+  RecorderPrefs(QWidget *parent = Q_NULLPTR);
+  ~RecorderPrefs();
+  DMMGraph::SampleMode	sampleMode() const;
+  int					sampleStep() const;
+  int					sampleLength() const;
+  double				fallingThreshold() const;
+  double				raisingThreshold() const;
+  QTime					startTime() const;
+  void					setThreshold(double);
 
-	public Q_SLOTS:
-	  virtual void			defaultsSLOT()Q_DECL_OVERRIDE;
-	  virtual void			factoryDefaultsSLOT()Q_DECL_OVERRIDE;
-	  virtual void			applySLOT()Q_DECL_OVERRIDE;
-	  void					setSampleTimeSLOT( int sampleTime );
+public Q_SLOTS:
+  virtual void			defaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void			factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void			applySLOT()Q_DECL_OVERRIDE;
+  void					setSampleTimeSLOT(int sampleTime);
 
 };
 
-#endif // RECORDERPREFS_HH
 

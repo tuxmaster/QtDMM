@@ -38,143 +38,143 @@
 #include <iostream>
 
 
-ConfigDlg::ConfigDlg( QWidget *parent) :  QDialog( parent )
+ConfigDlg::ConfigDlg(QWidget *parent) :  QDialog(parent)
 {
-  m_buttonBox_OK=false;
+  m_buttonBox_OK = false;
   setupUi(this);
 
   QString path = QString("%1/.qtdmmrc").arg(QDir::homePath());
 
-  m_settings=new Settings(this,path);
+  m_settings = new Settings(this, path);
 
   // Check if configuration file exists. If not welcome user
 
   if (!m_settings->fileExists())
   {
+    QMessageBox welcome;
+    welcome.setWindowTitle(tr("QtDMM: Welcome!"));
+    welcome.setText(tr("<font size=+2><b>Welcome!</b></font><p>"
+                       "This seems to be your first invocation of QtDMM "
+                       "(Or you have deleted its configuration file).<p>QtDMM "
+                       "has created the file %1 in your home directory "
+                       "to save its settings.").arg(m_settings->fileName()));
+    welcome.setIcon(QMessageBox::Information);
+    welcome.setStandardButtons(QMessageBox::Yes);
+    welcome.setDefaultButton(QMessageBox::Yes);
+    welcome.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
+
+    QAbstractButton *yesButton = welcome.button(QMessageBox::Yes);
+    if (yesButton)
+      yesButton->setText(tr("Continue"));
+
+    welcome.exec();
+  }
+  else
+  {
+    int version = m_settings->getInt("QtDMM/version");
+    int revision = m_settings->getInt("QtDMM/revision");
+
+    if ((version <= 0 && revision < 84) || version >= 7)
+    {
       QMessageBox welcome;
       welcome.setWindowTitle(tr("QtDMM: Welcome!"));
       welcome.setText(tr("<font size=+2><b>Welcome!</b></font><p>"
-                         "This seems to be your first invocation of QtDMM "
-                         "(Or you have deleted its configuration file).<p>QtDMM "
-                         "has created the file %1 in your home directory "
-                         "to save its settings.").arg(m_settings->fileName()));
+                         "You seem to have upgraded <b>QtDMM</b> from a version prior to 0.8.4. "
+                         "Please check your configuration. There are some new parameters to be "
+                         "configured."
+                         "<p>Thank you for choosing <b>QtDMM</b>.<p><i>Matthias Toussaint</i>"));
       welcome.setIcon(QMessageBox::Information);
       welcome.setStandardButtons(QMessageBox::Yes);
       welcome.setDefaultButton(QMessageBox::Yes);
       welcome.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
 
-      QAbstractButton* yesButton = welcome.button(QMessageBox::Yes);
+      QAbstractButton *yesButton = welcome.button(QMessageBox::Yes);
       if (yesButton)
-          yesButton->setText(tr("Continue"));
+        yesButton->setText(tr("Continue"));
 
       welcome.exec();
-  }
-  else
-  {
-      int version = m_settings->getInt("QtDMM/version");
-      int revision = m_settings->getInt("QtDMM/revision");
+    }
 
-      if ((version <= 0 && revision < 84) || version >= 7)
-      {
-          QMessageBox welcome;
-          welcome.setWindowTitle(tr("QtDMM: Welcome!"));
-          welcome.setText(tr("<font size=+2><b>Welcome!</b></font><p>"
-                             "You seem to have upgraded <b>QtDMM</b> from a version prior to 0.8.4. "
-                             "Please check your configuration. There are some new parameters to be "
-                             "configured."
-                             "<p>Thank you for choosing <b>QtDMM</b>.<p><i>Matthias Toussaint</i>"));
-          welcome.setIcon(QMessageBox::Information);
-          welcome.setStandardButtons(QMessageBox::Yes);
-          welcome.setDefaultButton(QMessageBox::Yes);
-          welcome.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
-
-          QAbstractButton* yesButton = welcome.button(QMessageBox::Yes);
-          if (yesButton)
-              yesButton->setText(tr("Continue"));
-
-          welcome.exec();
-      }
-
-      if (m_settings->fileConverted())
-      {
-          QMessageBox::information(nullptr,
-                                   tr("QtDMM: Welcome!"),
-                                   tr("Your config file has been converted to the new format.\n"
-                                      "Please check your color settings, because they couldn't be converted automatically.\n"
-                                      "Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old."));
-      }
+    if (m_settings->fileConverted())
+    {
+      QMessageBox::information(nullptr,
+                               tr("QtDMM: Welcome!"),
+                               tr("Your config file has been converted to the new format.\n"
+                                  "Please check your color settings, because they couldn't be converted automatically.\n"
+                                  "Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old."));
+    }
   }
 
   // CREATE PAGES (Top page last)
 
-  m_recorder = new RecorderPrefs( ui_stack );
-  m_recorder->setId( ConfigDlg::Recorder );
-  new ConfigItem( m_recorder->id(),
-				  m_recorder->pixmap(),
-				  m_recorder->label(),
-				  ui_list );
-  m_recorder->setCfg( m_settings );
-  ui_stack->insertWidget( m_recorder->id() ,m_recorder);
+  m_recorder = new RecorderPrefs(ui_stack);
+  m_recorder->setId(ConfigDlg::Recorder);
+  new ConfigItem(m_recorder->id(),
+                 m_recorder->pixmap(),
+                 m_recorder->label(),
+                 ui_list);
+  m_recorder->setCfg(m_settings);
+  ui_stack->insertWidget(m_recorder->id(), m_recorder);
 
-  m_scale = new ScalePrefs( ui_stack );
-  m_scale->setId( ConfigDlg::Scale );
-  new ConfigItem( m_scale->id(),
-				  m_scale->pixmap(),
-				  m_scale->label(),
-				  ui_list );
-  m_scale->setCfg( m_settings );
-  ui_stack->insertWidget( m_scale->id() ,m_scale);
+  m_scale = new ScalePrefs(ui_stack);
+  m_scale->setId(ConfigDlg::Scale);
+  new ConfigItem(m_scale->id(),
+                 m_scale->pixmap(),
+                 m_scale->label(),
+                 ui_list);
+  m_scale->setCfg(m_settings);
+  ui_stack->insertWidget(m_scale->id(), m_scale);
 
-  m_dmm = new DmmPrefs( ui_stack );
-  m_dmm->setId( ConfigDlg::DMM );
-  new ConfigItem( m_dmm->id(),
-				  m_dmm->pixmap(),
-				  m_dmm->label(),
-				  ui_list );
-  m_dmm->setCfg( m_settings );
-  ui_stack->insertWidget(  m_dmm->id() ,m_dmm);
+  m_dmm = new DmmPrefs(ui_stack);
+  m_dmm->setId(ConfigDlg::DMM);
+  new ConfigItem(m_dmm->id(),
+                 m_dmm->pixmap(),
+                 m_dmm->label(),
+                 ui_list);
+  m_dmm->setCfg(m_settings);
+  ui_stack->insertWidget(m_dmm->id(), m_dmm);
 
-  m_gui = new GuiPrefs( ui_stack );
-  m_gui->setId( ConfigDlg::GUI );
-  new ConfigItem( m_gui->id(),
-				  m_gui->pixmap(),
-				  m_gui->label(),
-				  ui_list );
-  m_gui->setCfg( m_settings );
-  ui_stack->insertWidget( m_gui->id(),m_gui );
+  m_gui = new GuiPrefs(ui_stack);
+  m_gui->setId(ConfigDlg::GUI);
+  new ConfigItem(m_gui->id(),
+                 m_gui->pixmap(),
+                 m_gui->label(),
+                 ui_list);
+  m_gui->setCfg(m_settings);
+  ui_stack->insertWidget(m_gui->id(), m_gui);
 
-  m_graph = new GraphPrefs( ui_stack );
-  m_graph->setId( ConfigDlg::Graph );
-  new ConfigItem( m_graph->id(),
-				  m_graph->pixmap(),
-				  m_graph->label(),
-				  ui_list );
-  m_graph->setCfg( m_settings );
-  ui_stack->insertWidget( m_graph->id(),m_graph );
+  m_graph = new GraphPrefs(ui_stack);
+  m_graph->setId(ConfigDlg::Graph);
+  new ConfigItem(m_graph->id(),
+                 m_graph->pixmap(),
+                 m_graph->label(),
+                 ui_list);
+  m_graph->setCfg(m_settings);
+  ui_stack->insertWidget(m_graph->id(), m_graph);
 
-  m_integration = new IntegrationPrefs( ui_stack );
-  m_integration->setId( ConfigDlg::Integration );
-  new ConfigItem( m_integration->id(),
-				  m_integration->pixmap(),
-				  m_integration->label(),
-				  ui_list );
-  m_integration->setCfg( m_settings );
-  ui_stack->insertWidget( m_integration->id() ,m_integration);
+  m_integration = new IntegrationPrefs(ui_stack);
+  m_integration->setId(ConfigDlg::Integration);
+  new ConfigItem(m_integration->id(),
+                 m_integration->pixmap(),
+                 m_integration->label(),
+                 ui_list);
+  m_integration->setCfg(m_settings);
+  ui_stack->insertWidget(m_integration->id(), m_integration);
 
-  m_execute = new ExecutePrefs( ui_stack );
-  m_execute->setId( ConfigDlg::External );
-  new ConfigItem( m_execute->id(),
-				  m_execute->pixmap(),
-				  m_execute->label(),
-				  ui_list );
-  m_execute->setCfg( m_settings );
-  ui_stack->insertWidget( m_execute->id(),m_execute);
+  m_execute = new ExecutePrefs(ui_stack);
+  m_execute->setId(ConfigDlg::External);
+  new ConfigItem(m_execute->id(),
+                 m_execute->pixmap(),
+                 m_execute->label(),
+                 ui_list);
+  m_execute->setCfg(m_settings);
+  ui_stack->insertWidget(m_execute->id(), m_execute);
 
 
-   // init stuff
+  // init stuff
   //
   on_ui_buttonBox_rejected();
-  showPage( static_cast<ConfigDlg::PageType>(m_settings->getInt("Config/LastItem",DMM)));
+  showPage(static_cast<ConfigDlg::PageType>(m_settings->getInt("Config/LastItem", DMM)));
   ui_undo->hide();
   adjustSize();
 }
@@ -184,71 +184,71 @@ QString ConfigDlg::deviceListText() const
   return m_dmm->deviceListText();
 }
 
-void ConfigDlg::showPage( ConfigDlg::PageType page )
+void ConfigDlg::showPage(ConfigDlg::PageType page)
 {
-  PrefWidget *wid=Q_NULLPTR;
-  for (int entry=0;entry<= static_cast<int>(ui_list->count());entry++)
+  PrefWidget *wid = Q_NULLPTR;
+  for (int entry = 0; entry <= static_cast<int>(ui_list->count()); entry++)
   {
-	  if (dynamic_cast<ConfigItem *> (ui_list->item(entry))->id() == page)
-	  {
-		  ui_list->setCurrentRow(entry);
-		  ui_stack->setCurrentIndex(page);
-		  wid = dynamic_cast<PrefWidget *> (ui_stack->widget( page ));
-		  break;
-	  }
+    if (dynamic_cast<ConfigItem *>(ui_list->item(entry))->id() == page)
+    {
+      ui_list->setCurrentRow(entry);
+      ui_stack->setCurrentIndex(page);
+      wid = dynamic_cast<PrefWidget *>(ui_stack->widget(page));
+      break;
+    }
   }
   if (wid)
   {
-	ui_helpText->setText( wid->description() );
-	ui_helpPixmap->setPixmap( wid->pixmap() );
+    ui_helpText->setText(wid->description());
+    ui_helpPixmap->setPixmap(wid->pixmap());
   }
 }
 
 void ConfigDlg::on_ui_factoryDefaults_clicked()
 {
-  dynamic_cast<PrefWidget*>(ui_stack->currentWidget())->factoryDefaultsSLOT();
+  dynamic_cast<PrefWidget *>(ui_stack->currentWidget())->factoryDefaultsSLOT();
 }
 
-void ConfigDlg::zoomInSLOT( double fac )
+void ConfigDlg::zoomInSLOT(double fac)
 {
-  m_scale->zoomInSLOT( fac );
+  m_scale->zoomInSLOT(fac);
   Q_EMIT zoomed();
 }
 
-void ConfigDlg::zoomOutSLOT( double fac )
+void ConfigDlg::zoomOutSLOT(double fac)
 {
-  m_scale->zoomOutSLOT( fac );
+  m_scale->zoomOutSLOT(fac);
   Q_EMIT zoomed();
 }
 
-void ConfigDlg::setSampleTimeSLOT( int sampleTime )
+void ConfigDlg::setSampleTimeSLOT(int sampleTime)
 {
-  m_recorder->setSampleTimeSLOT( sampleTime );
+  m_recorder->setSampleTimeSLOT(sampleTime);
   on_ui_buttonBox_accepted();
 }
 
-void ConfigDlg::setGraphSizeSLOT( int size, int length )
+void ConfigDlg::setGraphSizeSLOT(int size, int length)
 {
-  m_scale->setGraphSizeSLOT( size, length );
+  m_scale->setGraphSizeSLOT(size, length);
   on_ui_buttonBox_accepted();
 }
 
-void ConfigDlg::connectSLOT( bool /*connected*/ )
+void ConfigDlg::connectSLOT(bool /*connected*/)
 {
 
 }
 
 QRect ConfigDlg::winRect() const
 {
-  QRect rect( m_settings->getInt( "Position/x"),
-			  m_settings->getInt( "Position/y"),
-			  m_settings->getInt( "Position/width", 500 ),
-			  m_settings->getInt( "Position/height", 350 ) );
+  QRect rect(m_settings->getInt("Position/x"),
+             m_settings->getInt("Position/y"),
+             m_settings->getInt("Position/width", 500),
+             m_settings->getInt("Position/height", 350));
 
   return rect;
 }
 
-void ConfigDlg::setWinRect( const QRect & rect )
+void ConfigDlg::setWinRect(const QRect &rect)
 {
   m_winRect = rect;
 }
@@ -257,103 +257,103 @@ void ConfigDlg::on_ui_buttonBox_rejected()
 {
   m_settings->clear();
   int count = m_settings->getInt("Custom colors/count");
-  for (int i=0; i<count; i++)
-	QColorDialog::setCustomColor( i, m_settings->getColor( QString("Custom colors/color_%1").arg(i)));
-  for (int i=0; i<NumItems; ++i)
-	dynamic_cast<PrefWidget *>(ui_stack->widget(i))->defaultsSLOT();
+  for (int i = 0; i < count; i++)
+    QColorDialog::setCustomColor(i, m_settings->getColor(QString("Custom colors/color_%1").arg(i)));
+  for (int i = 0; i < NumItems; ++i)
+    dynamic_cast<PrefWidget *>(ui_stack->widget(i))->defaultsSLOT();
   hide();
 }
 
-void ConfigDlg::setCurrentTipSLOT( int id )
+void ConfigDlg::setCurrentTipSLOT(int id)
 {
-  m_settings->setInt("QtDMM/tip-id", id );
+  m_settings->setInt("QtDMM/tip-id", id);
   m_settings->save();
 }
 
 int ConfigDlg::currentTipId() const
 {
-  return m_settings->getInt( "QtDMM/tip-id");
+  return m_settings->getInt("QtDMM/tip-id");
 }
 
 void ConfigDlg::on_ui_buttonBox_accepted()
 {
-  m_settings->setInt( "Custom colors/count", QColorDialog::customCount() );
+  m_settings->setInt("Custom colors/count", QColorDialog::customCount());
 
-  for (int i=0; i<QColorDialog::customCount(); i++)
-	m_settings->setColor( QString("Custom colors/color_%1").arg(i), QColorDialog::customColor(i));
-  m_settings->setInt( "Position/x", m_winRect.x() );
-  m_settings->setInt( "Position/y", m_winRect.y() );
-  m_settings->setInt( "Position/width", m_winRect.width() );
-  m_settings->setInt( "Position/height", m_winRect.height() );
+  for (int i = 0; i < QColorDialog::customCount(); i++)
+    m_settings->setColor(QString("Custom colors/color_%1").arg(i), QColorDialog::customColor(i));
+  m_settings->setInt("Position/x", m_winRect.x());
+  m_settings->setInt("Position/y", m_winRect.y());
+  m_settings->setInt("Position/width", m_winRect.width());
+  m_settings->setInt("Position/height", m_winRect.height());
 
-  m_settings->setInt( "Printer/page-size", static_cast<int>(m_printer->pageLayout().pageSize().id()));
-  m_settings->setInt( "Printer/page-orientation", static_cast<int>(m_printer->pageLayout().orientation()));
-  m_settings->setInt( "Printer/color", static_cast<int>(m_printer->colorMode()));
-  m_settings->setString( "Printer/name", m_printer->printerName() );
-  m_settings->setString( "Printer/filename", m_printer->outputFileName() );
-  m_settings->setBool( "Printer/print-file", (m_printer->outputFormat() == QPrinter::PdfFormat) ? true:false );
-  m_settings->setInt("Config/LastItem",dynamic_cast<ConfigItem *>(ui_list->currentItem())->id());
+  m_settings->setInt("Printer/page-size", static_cast<int>(m_printer->pageLayout().pageSize().id()));
+  m_settings->setInt("Printer/page-orientation", static_cast<int>(m_printer->pageLayout().orientation()));
+  m_settings->setInt("Printer/color", static_cast<int>(m_printer->colorMode()));
+  m_settings->setString("Printer/name", m_printer->printerName());
+  m_settings->setString("Printer/filename", m_printer->outputFileName());
+  m_settings->setBool("Printer/print-file", (m_printer->outputFormat() == QPrinter::PdfFormat) ? true : false);
+  m_settings->setInt("Config/LastItem", dynamic_cast<ConfigItem *>(ui_list->currentItem())->id());
 
-  for (int i=0; i<NumItems; ++i)
-	dynamic_cast<PrefWidget*>(ui_stack->widget(i))->applySLOT();
+  for (int i = 0; i < NumItems; ++i)
+    dynamic_cast<PrefWidget *>(ui_stack->widget(i))->applySLOT();
   m_settings->save();
   Q_EMIT accepted();
 
   if ((sender() == ui_buttonBox) && m_buttonBox_OK)
-	hide();
+    hide();
 }
 void ConfigDlg::on_ui_buttonBox_clicked(QAbstractButton *button)
 {
-	if(ui_buttonBox->buttonRole(button)==QDialogButtonBox::AcceptRole)
-		m_buttonBox_OK=true;
-	else
-		m_buttonBox_OK=false;
+  if (ui_buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole)
+    m_buttonBox_OK = true;
+  else
+    m_buttonBox_OK = false;
 }
 
-void ConfigDlg::writePrinter( QPrinter * printer )
+void ConfigDlg::writePrinter(QPrinter *printer)
 {
   m_printer = printer;
   on_ui_buttonBox_accepted();
 }
 
-void ConfigDlg::readPrinter( QPrinter * printer )
+void ConfigDlg::readPrinter(QPrinter *printer)
 {
   m_printer = printer;
 
   m_printer->setPageSize(QPageSize(static_cast<QPageSize::PageSizeId>(m_settings->getInt("Printer/page-size"))));
-  m_printer->setPageOrientation(static_cast<QPageLayout::Orientation>(m_settings->getInt( "Printer/page-orientation")));
-  m_printer->setColorMode(static_cast<QPrinter::ColorMode>(m_settings->getInt( "Printer/color", 1 )));
-  m_printer->setPrinterName( m_settings->getString( "Printer/name", "lp" ) );
-  m_printer->setOutputFileName( m_settings->getString( "Printer/filename") );
-  m_printer->setOutputFormat((m_settings->getBool( "Printer/print-file")) ? QPrinter::PdfFormat : QPrinter::NativeFormat  );
+  m_printer->setPageOrientation(static_cast<QPageLayout::Orientation>(m_settings->getInt("Printer/page-orientation")));
+  m_printer->setColorMode(static_cast<QPrinter::ColorMode>(m_settings->getInt("Printer/color", 1)));
+  m_printer->setPrinterName(m_settings->getString("Printer/name", "lp"));
+  m_printer->setOutputFileName(m_settings->getString("Printer/filename"));
+  m_printer->setOutputFormat((m_settings->getBool("Printer/print-file")) ? QPrinter::PdfFormat : QPrinter::NativeFormat);
 }
 
 void ConfigDlg::on_ui_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *)
 {
   int id = dynamic_cast<ConfigItem *>(current)->id();
   PrefWidget *wid = dynamic_cast<PrefWidget *>(ui_stack->widget(id));
-  ui_stack->setCurrentWidget( wid );
+  ui_stack->setCurrentWidget(wid);
 
-  ui_helpText->setText( wid->description() );
-  ui_helpPixmap->setPixmap( wid->pixmap() );
+  ui_helpText->setText(wid->description());
+  ui_helpPixmap->setPixmap(wid->pixmap());
 }
 
-void ConfigDlg::thresholdChangedSLOT( DMMGraph::CursorMode mode, double value )
+void ConfigDlg::thresholdChangedSLOT(DMMGraph::CursorMode mode, double value)
 {
   switch (mode)
   {
-  case DMMGraph::Trigger:
-	m_recorder->setThreshold( value );
-	break;
-  case DMMGraph::External:
-	m_execute->setThreshold( value );
-	break;
-  case DMMGraph::Integration:
-	m_integration->setThreshold( value );
-	break;
-  default:
-	std::cerr << "Unexpected CursorMode in configdlg.cpp:418" << std::endl;
-	break;
+    case DMMGraph::Trigger:
+      m_recorder->setThreshold(value);
+      break;
+    case DMMGraph::External:
+      m_execute->setThreshold(value);
+      break;
+    case DMMGraph::Integration:
+      m_integration->setThreshold(value);
+      break;
+    default:
+      std::cerr << "Unexpected CursorMode in configdlg.cpp:418" << std::endl;
+      break;
   }
 }
 
@@ -466,9 +466,9 @@ bool ConfigDlg::saveWindowSize() const
   return m_gui->saveWindowSize();
 }
 
-void ConfigDlg::setShowTipsSLOT( bool on )
+void ConfigDlg::setShowTipsSLOT(bool on)
 {
-  m_gui->on_ui_tipOfTheDay_toggled( on );
+  m_gui->on_ui_tipOfTheDay_toggled(on);
 }
 
 bool ConfigDlg::showDmmToolbar() const
@@ -496,9 +496,9 @@ bool ConfigDlg::showDisplay() const
   return m_gui->showDisplay();
 }
 
-void ConfigDlg::setToolbarVisibility( bool disp, bool dmm, bool graph, bool file, bool help )
+void ConfigDlg::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file, bool help)
 {
-  m_gui->setToolbarVisibility( disp, dmm, graph, file, help );
+  m_gui->setToolbarVisibility(disp, dmm, graph, file, help);
 }
 
 /////////////////////////////////////////////////////////////////

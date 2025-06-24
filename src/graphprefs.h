@@ -20,35 +20,33 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef GRAPHPREFS_HH
-#define GRAPHPREFS_HH
+#pragma once
 
 #include <QtGui>
 #include "ui_uigraphprefs.h"
 
-class GraphPrefs : public PrefWidget,private Ui::UIGraphPrefs
+class GraphPrefs : public PrefWidget, private Ui::UIGraphPrefs
 {
   Q_OBJECT
-	public:
-	  GraphPrefs(QWidget *parent=Q_NULLPTR);
-	  ~GraphPrefs();
-	  QColor		bgColor() const;
-	  QColor		gridColor() const;
-	  QColor		dataColor() const;
-	  QColor		startColor() const;
-	  QColor		externalColor() const;
-	  QColor		cursorColor() const;
-	  int			lineWidth() const;
-	  int			lineMode() const;
-	  int			pointMode() const;
-	  bool			crosshair() const;
+public:
+  GraphPrefs(QWidget *parent = Q_NULLPTR);
+  ~GraphPrefs();
+  QColor		bgColor() const;
+  QColor		gridColor() const;
+  QColor		dataColor() const;
+  QColor		startColor() const;
+  QColor		externalColor() const;
+  QColor		cursorColor() const;
+  int			lineWidth() const;
+  int			lineMode() const;
+  int			pointMode() const;
+  bool			crosshair() const;
 
-	public Q_SLOTS:
-	  virtual void	defaultsSLOT();
-	  virtual void	factoryDefaultsSLOT();
-	  virtual void	applySLOT();
+public Q_SLOTS:
+  virtual void	defaultsSLOT();
+  virtual void	factoryDefaultsSLOT();
+  virtual void	applySLOT();
 
 };
 
-#endif // GRAPHPREFS_HH
 

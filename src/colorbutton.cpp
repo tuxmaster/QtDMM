@@ -25,12 +25,12 @@
 
 #include "colorbutton.h"
 
-ColorButton::ColorButton(QWidget *parent) : QPushButton( parent)
+ColorButton::ColorButton(QWidget *parent) : QPushButton(parent)
 {
-  m_color = QColor( 255, 255, 255 );
-  setAutoDefault( false );
+  m_color = QColor(255, 255, 255);
+  setAutoDefault(false);
 
-  connect( this, SIGNAL( clicked() ), this, SLOT( clickedSLOT() ));
+  connect(this, SIGNAL(clicked()), this, SLOT(clickedSLOT()));
 }
 
 QColor ColorButton::color() const
@@ -38,38 +38,38 @@ QColor ColorButton::color() const
   return m_color;
 }
 
-void ColorButton::setColor( const QColor & c )
+void ColorButton::setColor(const QColor &c)
 {
   m_color = c;
 
-  QImage img( 16, 12, QImage::Format_RGB32 );
+  QImage img(16, 12, QImage::Format_RGB32);
   img.fill(m_color.rgb());
-  for (int i=0; i<16; ++i)
+  for (int i = 0; i < 16; ++i)
   {
-	reinterpret_cast<QRgb*>(img.scanLine(0))[i] = 0;
-	reinterpret_cast<QRgb*>(img.scanLine(11))[i] = 0;
+    reinterpret_cast<QRgb *>(img.scanLine(0))[i] = 0;
+    reinterpret_cast<QRgb *>(img.scanLine(11))[i] = 0;
   }
 
-  for (int i=0; i<12; ++i)
+  for (int i = 0; i < 12; ++i)
   {
-	reinterpret_cast<QRgb*>(img.scanLine(i))[0] = 0;
-	reinterpret_cast<QRgb*>(img.scanLine(i))[15] = 0;
+    reinterpret_cast<QRgb *>(img.scanLine(i))[0] = 0;
+    reinterpret_cast<QRgb *>(img.scanLine(i))[15] = 0;
   }
 
   QPixmap pix;
-  pix.convertFromImage( img );
-  setIcon( pix );
+  pix.convertFromImage(img);
+  setIcon(pix);
 }
 
 void ColorButton::clickedSLOT()
 {
-  QColor c = QColorDialog::getColor( color(), this );
+  QColor c = QColorDialog::getColor(color(), this);
 
   if (c.isValid())
   {
-	setColor( c );
+    setColor(c);
 
-	Q_EMIT valueChanged();
-	Q_EMIT valueChanged( c );
+    Q_EMIT valueChanged();
+    Q_EMIT valueChanged(c);
   }
 }

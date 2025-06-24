@@ -28,100 +28,100 @@
 #include "guiprefs.h"
 #include "settings.h"
 
-GuiPrefs::GuiPrefs( QWidget *parent) : PrefWidget( parent )
+GuiPrefs::GuiPrefs(QWidget *parent) : PrefWidget(parent)
 {
   setupUi(this);
-  m_label = tr( "GUI settings" );
-  m_description = tr( "<b>Here you can configure QtDMM's visual"
-					  " appearance and behaviour.</b>" );
-  m_pixmap = new QPixmap(":/Symbols/gui.xpm" );
+  m_label = tr("GUI settings");
+  m_description = tr("<b>Here you can configure QtDMM's visual"
+                     " appearance and behaviour.</b>");
+  m_pixmap = new QPixmap(":/Symbols/gui.xpm");
 }
 GuiPrefs::~GuiPrefs()
 {
-	delete m_pixmap;
+  delete m_pixmap;
 }
 
 void GuiPrefs::defaultsSLOT()
 {
-  ui_saveWindowPos->setChecked( m_cfg->getBool( "Save/window-pos", true ));
-  ui_saveWindowSize->setChecked( m_cfg->getBool( "Save/window-size", true ));
+  ui_saveWindowPos->setChecked(m_cfg->getBool("Save/window-pos", true));
+  ui_saveWindowSize->setChecked(m_cfg->getBool("Save/window-size", true));
 
-  ui_showDisplay->setChecked( m_cfg->getBool( "Display/show", true ));
-  if(!m_cfg->fileConverted())
+  ui_showDisplay->setChecked(m_cfg->getBool("Display/show", true));
+  if (!m_cfg->fileConverted())
   {
-	ui_bgColorDisplay->setColor( m_cfg->getColor( "Display/display-background", QColor( 212,220,207 ) ));
-	ui_textColor->setColor( m_cfg->getColor( "Display/display-text", Qt::black )); // mt: removed .rgb()
+    ui_bgColorDisplay->setColor(m_cfg->getColor("Display/display-background", QColor(212, 220, 207)));
+    ui_textColor->setColor(m_cfg->getColor("Display/display-text", Qt::black));    // mt: removed .rgb()
   }
   else
   {
-	  ui_bgColorDisplay->setColor( QColor( 212,220,207 ));
-	  ui_textColor->setColor(Qt::black);
-	  m_cfg->save();
+    ui_bgColorDisplay->setColor(QColor(212, 220, 207));
+    ui_textColor->setColor(Qt::black);
+    m_cfg->save();
   }
-  ui_showBar->setChecked( m_cfg->getBool( "Display/display-bar", true ));
-  ui_showMinMax->setChecked( m_cfg->getBool( "Display/display-min-max", true ));
+  ui_showBar->setChecked(m_cfg->getBool("Display/display-bar", true));
+  ui_showMinMax->setChecked(m_cfg->getBool("Display/display-min-max", true));
 
-  ui_alertUnsavedData->setChecked( m_cfg->getBool( "Alert/unsaved-file", true ));
-  ui_textLabel->setChecked( m_cfg->getBool( "Icons/text-label", true ));
+  ui_alertUnsavedData->setChecked(m_cfg->getBool("Alert/unsaved-file", true));
+  ui_textLabel->setChecked(m_cfg->getBool("Icons/text-label", true));
 
-  ui_dmmToolBar->setChecked( m_cfg->getBool( "Toolbar/dmm", true ));
-  ui_graphToolBar->setChecked( m_cfg->getBool( "Toolbar/graph", true ));
-  ui_fileToolBar->setChecked( m_cfg->getBool( "Toolbar/file", true ));
-  ui_helpToolBar->setChecked( m_cfg->getBool( "Toolbar/help", true ));
+  ui_dmmToolBar->setChecked(m_cfg->getBool("Toolbar/dmm", true));
+  ui_graphToolBar->setChecked(m_cfg->getBool("Toolbar/graph", true));
+  ui_fileToolBar->setChecked(m_cfg->getBool("Toolbar/file", true));
+  ui_helpToolBar->setChecked(m_cfg->getBool("Toolbar/help", true));
 
-  ui_tipOfTheDay->setChecked( m_cfg->getBool( "QtDMM/show-tip", true ));
+  ui_tipOfTheDay->setChecked(m_cfg->getBool("QtDMM/show-tip", true));
 }
 
 void GuiPrefs::factoryDefaultsSLOT()
 {
-  ui_saveWindowPos->setChecked( true );
-  ui_saveWindowSize->setChecked( true );
+  ui_saveWindowPos->setChecked(true);
+  ui_saveWindowSize->setChecked(true);
 
-  ui_showDisplay->setChecked( true );
-  ui_bgColorDisplay->setColor( QColor( 212,220,207 ) );
-  ui_textColor->setColor( Qt::black );
+  ui_showDisplay->setChecked(true);
+  ui_bgColorDisplay->setColor(QColor(212, 220, 207));
+  ui_textColor->setColor(Qt::black);
 
-  ui_showBar->setChecked( true );
-  ui_showMinMax->setChecked( true );
+  ui_showBar->setChecked(true);
+  ui_showMinMax->setChecked(true);
 
-  ui_alertUnsavedData->setChecked( true );
-  ui_textLabel->setChecked( true );
+  ui_alertUnsavedData->setChecked(true);
+  ui_textLabel->setChecked(true);
 
-  ui_dmmToolBar->setChecked( true );
-  ui_graphToolBar->setChecked( true );
-  ui_fileToolBar->setChecked( true );
-  ui_helpToolBar->setChecked( true );
+  ui_dmmToolBar->setChecked(true);
+  ui_graphToolBar->setChecked(true);
+  ui_fileToolBar->setChecked(true);
+  ui_helpToolBar->setChecked(true);
 
-  ui_tipOfTheDay->setChecked( true );
+  ui_tipOfTheDay->setChecked(true);
 }
 
-void GuiPrefs::setToolbarVisibility( bool disp, bool dmm, bool graph, bool file, bool help )
+void GuiPrefs::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file, bool help)
 {
-  ui_showDisplay->setChecked( disp );
-  ui_dmmToolBar->setChecked( dmm );
-  ui_graphToolBar->setChecked( graph );
-  ui_fileToolBar->setChecked( file );
-  ui_helpToolBar->setChecked( help );
+  ui_showDisplay->setChecked(disp);
+  ui_dmmToolBar->setChecked(dmm);
+  ui_graphToolBar->setChecked(graph);
+  ui_fileToolBar->setChecked(file);
+  ui_helpToolBar->setChecked(help);
 }
 
 void GuiPrefs::applySLOT()
 {
-  m_cfg->setInt( "QtDMM/version", 0 );
-  m_cfg->setInt( "QtDMM/revision", 84 );
-  m_cfg->setBool( "QtDMM/show-tip", showTip() );
-  m_cfg->setBool( "Save/window-pos", saveWindowPosition() );
-  m_cfg->setBool( "Save/window-size", saveWindowSize() );
-  m_cfg->setBool( "Display/show", showDisplay() );
-  m_cfg->setColor( "Display/display-background", ui_bgColorDisplay->color());
-  m_cfg->setColor( "Display/display-text", ui_textColor->color());
-  m_cfg->setBool( "Display/display-bar", showBar() );
-  m_cfg->setBool( "Display/display-min-max", showMinMax() );
-  m_cfg->setBool( "Alert/unsaved-file", alertUnsavedData() );
-  m_cfg->setBool( "Icons/text-label", useTextLabel() );
-  m_cfg->setBool( "Toolbar/dmm", showDmmToolbar() );
-  m_cfg->setBool( "Toolbar/graph", showGraphToolbar() );
-  m_cfg->setBool( "Toolbar/file", showFileToolbar() );
-  m_cfg->setBool( "Toolbar/help", showHelpToolbar() );
+  m_cfg->setInt("QtDMM/version", 0);
+  m_cfg->setInt("QtDMM/revision", 84);
+  m_cfg->setBool("QtDMM/show-tip", showTip());
+  m_cfg->setBool("Save/window-pos", saveWindowPosition());
+  m_cfg->setBool("Save/window-size", saveWindowSize());
+  m_cfg->setBool("Display/show", showDisplay());
+  m_cfg->setColor("Display/display-background", ui_bgColorDisplay->color());
+  m_cfg->setColor("Display/display-text", ui_textColor->color());
+  m_cfg->setBool("Display/display-bar", showBar());
+  m_cfg->setBool("Display/display-min-max", showMinMax());
+  m_cfg->setBool("Alert/unsaved-file", alertUnsavedData());
+  m_cfg->setBool("Icons/text-label", useTextLabel());
+  m_cfg->setBool("Toolbar/dmm", showDmmToolbar());
+  m_cfg->setBool("Toolbar/graph", showGraphToolbar());
+  m_cfg->setBool("Toolbar/file", showFileToolbar());
+  m_cfg->setBool("Toolbar/help", showHelpToolbar());
 }
 
 bool GuiPrefs::showTip() const
@@ -194,7 +194,7 @@ bool GuiPrefs::saveWindowSize() const
   return ui_saveWindowSize->isChecked();
 }
 
-void GuiPrefs::on_ui_tipOfTheDay_toggled( bool on )
+void GuiPrefs::on_ui_tipOfTheDay_toggled(bool on)
 {
-  ui_tipOfTheDay->setChecked( on );
+  ui_tipOfTheDay->setChecked(on);
 }

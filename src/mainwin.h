@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef MAINWIN_HH
-#define MAINWIN_HH
+#pragma once
 
 #include <QtGui>
 #include <QtWidgets>
@@ -35,30 +34,29 @@ class DisplayWid;
 class MainWin : public QMainWindow, private Ui::UIMainWin
 {
   Q_OBJECT
-	public:
-	  MainWin(QWidget *parent=Q_NULLPTR);
-	  void			setConsoleLogging( bool );
+public:
+  MainWin(QWidget *parent = Q_NULLPTR);
+  void			setConsoleLogging(bool);
 
-	protected Q_SLOTS:
-	  void			runningSLOT( bool );
-	  void			connectSLOT( bool );
-	  void			on_action_On_version_triggered();
-	  void			setConnectSLOT( bool );
-	  void			toolbarVisibilitySLOT( bool, bool, bool, bool, bool );
-	  void			setToolbarVisibilitySLOT();
-	  void			setUseTextLabel(bool on);
+protected Q_SLOTS:
+  void			runningSLOT(bool);
+  void			connectSLOT(bool);
+  void			on_action_On_version_triggered();
+  void			setConnectSLOT(bool);
+  void			toolbarVisibilitySLOT(bool, bool, bool, bool, bool);
+  void			setToolbarVisibilitySLOT();
+  void			setUseTextLabel(bool on);
 
-	protected:
-	  MainWid       *m_wid;
-	  DisplayWid	*m_display;
-	  bool			m_running;
-	  QLabel		*m_error;
-	  QLabel		*m_info;
+protected:
+  MainWid       *m_wid;
+  DisplayWid	*m_display;
+  bool			m_running;
+  QLabel		*m_error;
+  QLabel		*m_info;
 
-	  void			setupIcons();
-	  void			createToolBars();
-	  void			createActions();
-	  void			closeEvent( QCloseEvent * )Q_DECL_OVERRIDE;
+  void			setupIcons();
+  void			createToolBars();
+  void			createActions();
+  void			closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
 };
 
-#endif // MAINWIN_HH

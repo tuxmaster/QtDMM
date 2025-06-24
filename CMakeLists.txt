@@ -1,19 +1,19 @@
 cmake_minimum_required(VERSION 3.11)
 project(qtdmm)
 
-set (CMAKE_CXX_STANDARD 14)
+set (CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(QT_MIN_VERSION "5.14")
 
-set(TRANSLATIONS "src/translations/qtdmm_de.ts")
-set(RESOURCES "src/Resources.qrc")
+set(TRANSLATIONS "assets/translations/qtdmm_de.ts")
+set(RESOURCES "src/resources.qrc")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
 
-include_directories(src/sources/)
+include_directories(src)
 
-file(GLOB_RECURSE UI_FILES CONFIGURE_DEPENDS src/forms/*.ui)
-file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/sources/*.cpp src/sources/*.h)
+file(GLOB_RECURSE UI_FILES CONFIGURE_DEPENDS src/ui/*.ui)
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp src/*.h )
 
 find_package(Qt6 ${QT_MIN_VERSION} COMPONENTS ${QT_COMPONENTS} Core5Compat QUIET)
 if(Qt6_FOUND AND NOT FORCE_QT5)

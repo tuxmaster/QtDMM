@@ -26,55 +26,56 @@
 #include <QtPrintSupport>
 
 #include "printdlg.h"
-namespace qtdmm {
-PrintDlg::PrintDlg( QWidget *parent ) : QDialog( parent)
+namespace qtdmm
 {
-  setupUi(this);
-}
+  PrintDlg::PrintDlg(QWidget *parent) : QDialog(parent)
+  {
+    setupUi(this);
+  }
 
-void PrintDlg::setPrinter( QPrinter * prt )
-{
-  m_printer = prt;
-  createPrinterString();
-}
+  void PrintDlg::setPrinter(QPrinter *prt)
+  {
+    m_printer = prt;
+    createPrinterString();
+  }
 
-void PrintDlg::on_configBut_clicked()
-{
-  static QPrintDialog* dlgprinter=0;
-  if(!dlgprinter)
-	  dlgprinter =new QPrintDialog(m_printer,this);
-  if (dlgprinter->exec() == QDialog::Accepted)
-	createPrinterString();
-}
+  void PrintDlg::on_configBut_clicked()
+  {
+    static QPrintDialog *dlgprinter = 0;
+    if (!dlgprinter)
+      dlgprinter = new QPrintDialog(m_printer, this);
+    if (dlgprinter->exec() == QDialog::Accepted)
+      createPrinterString();
+  }
 
-void PrintDlg::createPrinterString()
-{
-  QString txt = m_printer->printerName();
+  void PrintDlg::createPrinterString()
+  {
+    QString txt = m_printer->printerName();
 
-  if (m_printer->outputFormat() == QPrinter::PdfFormat)
-	  txt = QString("File: %1").arg(m_printer->outputFileName());
+    if (m_printer->outputFormat() == QPrinter::PdfFormat)
+      txt = QString("File: %1").arg(m_printer->outputFileName());
 
-  txt.append(" ");
-  txt.append( m_printer->pageLayout().pageSize().name());
-  txt.append( " ");
+    txt.append(" ");
+    txt.append(m_printer->pageLayout().pageSize().name());
+    txt.append(" ");
 
-  if (m_printer->pageLayout().orientation() == QPageLayout::Landscape)
-	txt.append( "Landscape");
-  else
-	txt.append("Portrait");
+    if (m_printer->pageLayout().orientation() == QPageLayout::Landscape)
+      txt.append("Landscape");
+    else
+      txt.append("Portrait");
 
-  if (m_printer->colorMode() == QPrinter::Color)
-	txt.append(" Color");
-  else
-	txt.append(" Grayscale");
+    if (m_printer->colorMode() == QPrinter::Color)
+      txt.append(" Color");
+    else
+      txt.append(" Grayscale");
 
-  printerLabel->setText( txt );
+    printerLabel->setText(txt);
 
-  printBut->setEnabled( true );
-}
+    printBut->setEnabled(true);
+  }
 
-void PrintDlg::on_helpBut_clicked()
-{
-  QWhatsThis::enterWhatsThisMode();
-}
+  void PrintDlg::on_helpBut_clicked()
+  {
+    QWhatsThis::enterWhatsThisMode();
+  }
 }

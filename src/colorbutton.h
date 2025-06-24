@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef COLORBUTTON_HH
-#define COLORBUTTON_HH
+#pragma once
 
 #include <qpushbutton.h>
 #include <qcolor.h>
@@ -31,22 +30,20 @@ class QPainter;
 class ColorButton : public QPushButton
 {
   Q_OBJECT
-	public:
-	  ColorButton( QWidget *parent=Q_NULLPTR);
+public:
+  ColorButton(QWidget *parent = Q_NULLPTR);
 
 
-	  QColor	color() const;
-	  void		setColor( const QColor & );
+  QColor	color() const;
+  void		setColor(const QColor &);
 
-	Q_SIGNALS:
-	  void		valueChanged();
-	  void		valueChanged( const QColor & );
+Q_SIGNALS:
+  void		valueChanged();
+  void		valueChanged(const QColor &);
 
-	protected Q_SLOTS:
-	  void		clickedSLOT();
+protected Q_SLOTS:
+  void		clickedSLOT();
 
-	protected:
-	  QColor	m_color;
+protected:
+  QColor	m_color;
 };
-
-#endif // COLORBUTTON_HH

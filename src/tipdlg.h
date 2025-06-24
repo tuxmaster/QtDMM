@@ -20,48 +20,49 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef TIPDLG_HH
-#define TIPDLG_HH
+#pragma once
 
 #include <QtCore>
 
 #include "ui_uitipdlg.h"
 
-class TipDlg : public QDialog,private Ui::UITipDlg
+class TipDlg : public QDialog, private Ui::UITipDlg
 {
   Q_OBJECT
-	public:
-	  TipDlg( QWidget *parent=Q_NULLPTR );
+public:
+  TipDlg(QWidget *parent = Q_NULLPTR);
 
 
-	  bool						showTips() const;
+  bool						showTips() const;
 
-	  static const QStringList	s_tipText;
+  static const QStringList	s_tipText;
 
-	  void						setCurrentTip( int c );
-	  int						currentTip() const { return m_curTip; }
+  void						setCurrentTip(int c);
+  int						currentTip() const
+  {
+    return m_curTip;
+  }
 
-	Q_SIGNALS:
-	  void						showTips( bool );
-	  void						currentTip( int );
+Q_SIGNALS:
+  void						showTips(bool);
+  void						currentTip(int);
 
-	public Q_SLOTS:
-	  void						setShowTipsSLOT( bool );
+public Q_SLOTS:
+  void						setShowTipsSLOT(bool);
 
-	protected:
-	  int						m_numTips;
-	  int						m_curTip;
-	  QString					m_formatTip;
+protected:
+  int						m_numTips;
+  int						m_curTip;
+  QString					m_formatTip;
 
-	  void						showTipText();
-	  void						closeEvent( QCloseEvent * )Q_DECL_OVERRIDE;
+  void						showTipText();
+  void						closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
 
-	protected Q_SLOTS:
-	  void						on_ui_nextBut_clicked();
-	  void						on_ui_previousBut_clicked();
-	  void						on_ui_closeBut_clicked();
-	  void						on_ui_showTip_toggled( bool );
+protected Q_SLOTS:
+  void						on_ui_nextBut_clicked();
+  void						on_ui_previousBut_clicked();
+  void						on_ui_closeBut_clicked();
+  void						on_ui_showTip_toggled(bool);
 
 };
 
-#endif // TIPDLG_HH
