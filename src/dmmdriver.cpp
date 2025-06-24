@@ -1,5 +1,7 @@
 #include "dmmdriver.h"
 
+std::vector<DmmDriver::DMMInfo> DmmDriver::m_configurations;
+
 QString DmmDriver::insertComma(const QString &val, int pos)
 {
   return val.left(2 + pos) + "." + val.right(4 - pos);

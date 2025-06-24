@@ -1,14 +1,15 @@
 #pragma once
 
+#include <QtCore>
 #include <QString>
 #include <QByteArray>
 #include <optional>
 
 #include "readevent.h"
 
-class DmmDriver
+class DmmDriver : public QObject
 {
-  Q_DECLARE_TR_FUNCTIONS(DmmDriver)
+  Q_OBJECT
 
 public:
   struct DmmResponse
@@ -28,8 +29,29 @@ public:
     int id2;
   };
 
+  struct DMMInfo
+  {
+    QString vendor;
+    QString model;
+    QString name;
+    int   baud;
+    int   protocol;
+    int   bits;
+    int   stopBits;
+    int   numValues;
+    int   parity;
+    int   display;
+    bool  externalSetup;
+    bool  rts;
+    bool  cts;
+    bool  dsr;
+    bool  dtr;
+  };
+
   virtual ~DmmDriver() = default;
   virtual std::optional<DmmDriver::DmmResponse> decode(const QByteArray &data, int id, ReadEvent::DataFormat df) = 0;
+  static std::vector<DMMInfo> getDeviceConfigurations() { return m_configurations; };
+  static std::vector<DMMInfo> m_configurations;
 
 protected:
   QString insertComma(const QString &val, int pos);

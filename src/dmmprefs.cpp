@@ -23,9 +23,11 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <QSerialPortInfo>
-
+#include <iostream>
 #include "dmmprefs.h"
 #include "settings.h"
+#include "drivers/drivers.h"
+
 
 /**
   when all needed parameter are found this hardcoded version will
@@ -205,7 +207,12 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
 
   m_path = QDir::currentPath();
 
+  for (const auto& cfg : DmmDriver::getDeviceConfigurations()) {
+    std::cout << cfg.name.toStdString() << std::endl;
 }
+}
+
+
 DmmPrefs::~DmmPrefs()
 {
   delete m_pixmap;

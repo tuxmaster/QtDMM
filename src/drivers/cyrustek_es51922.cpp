@@ -1,5 +1,10 @@
 #include "cyrustek_es51922.h"
 
+static const bool registered = []() {
+    DmmDriver::m_configurations.push_back(  {"Uni-Trend","UT61E","Uni-Trend UT61E", 6, 12, 7, 1, 1, 2, 10, 0, 0,0,0,1});
+    return true;
+}();
+
 std::optional<DmmDriver::DmmResponse> DrvCyrusTekES51922::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};

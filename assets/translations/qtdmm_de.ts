@@ -274,33 +274,33 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DmmPrefs</name>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="191"/>
+        <location filename="../../src/dmmprefs.cpp" line="193"/>
         <source>Multimeter settings</source>
         <translation>Multimeter Einstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="192"/>
+        <location filename="../../src/dmmprefs.cpp" line="194"/>
         <source>&lt;b&gt;Here you can configure the serial port and protocol for your DMM. There is also a number of predefined models.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Hier können Sie den Anschluss und das Protokoll für Ihr DMM einstellen. Es gibt schon eine Reihe vorkonfigurierter Modelle.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="198"/>
+        <location filename="../../src/dmmprefs.cpp" line="200"/>
         <source>Manual settings</source>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="490"/>
+        <location filename="../../src/dmmprefs.cpp" line="497"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="490"/>
-        <location filename="../../src/dmmprefs.cpp" line="518"/>
+        <location filename="../../src/dmmprefs.cpp" line="497"/>
+        <location filename="../../src/dmmprefs.cpp" line="525"/>
         <source>DMM description (*.ini)</source>
         <translation>DMM Beschreibung (*.ini)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="518"/>
+        <location filename="../../src/dmmprefs.cpp" line="525"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
@@ -561,16 +561,19 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <name>UIConfigDlg</name>
     <message>
         <location filename="../../src/ui/uiconfigdlg.ui" line="14"/>
+        <location filename="../../build/ui_uiconfigdlg.h" line="187"/>
         <source>QtDMM: Preferences</source>
         <translation>QtDMM: Einstellungen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiconfigdlg.ui" line="129"/>
+        <location filename="../../build/ui_uiconfigdlg.h" line="188"/>
         <source>&amp;Undo</source>
         <translation>&amp;Rückgängig</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiconfigdlg.ui" line="155"/>
+        <location filename="../../build/ui_uiconfigdlg.h" line="189"/>
         <source>&amp;Factory defaults</source>
         <translation>&amp;Standard Einstellungen</translation>
     </message>
@@ -579,91 +582,109 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <name>UIDmmPrefs</name>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="26"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="461"/>
         <source>&lt;b&gt;Select yor DMM or set parameter manually&lt;/b&gt;</source>
         <translation>&lt;b&gt;Bitte das DMM bzw. die Parameter manuell wählen.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="41"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="463"/>
         <source>Here you may select your DMM model. If your DMM is not in the list, try to find working settings and mail them to me (&lt;font color=blue&gt;&lt;u&gt;qtdmm@mtoussaint.de&lt;/u&gt;&lt;/font&gt;). So I can add them to the list in the next release.</source>
         <translation>Hier kann das DMM Modell ausgewählt werden. Wenn Ihr DMM nicht in der Liste ist, können Sie versuchen die Einstellungen per Hand herauszufinden. Und freundlicher weise an &lt;font color=blue&gt;&lt;u&gt;qtdmm@mtoussaint.de&lt;/u&gt;&lt;/font&gt; schicken, so das diese in der nächsten Version eingepflegt werden.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="61"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="466"/>
         <source>Load Settings</source>
         <translation>Einstellungen laden</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="78"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="470"/>
         <source>Save Settings</source>
         <translation>Einstellungen speichern</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="94"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="473"/>
         <source>Port settings</source>
         <translation>Anschluseinstellungen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="197"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="480"/>
         <source>600</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="202"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="481"/>
         <source>1200</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="207"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="482"/>
         <source>1800</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="212"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="483"/>
         <source>2400</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="217"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="484"/>
         <source>4800</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="222"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="485"/>
         <source>9600</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="227"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="486"/>
         <source>19200</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="286"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="500"/>
         <source>Parit&amp;y</source>
         <translation>&amp;Parität</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="302"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="506"/>
         <source>Parity for serial communication. May be None, Odd or Even.</source>
         <translation>Parität für die serielle Übertragung. Diese kann Keine, Gerade oder Ungerade sein.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="306"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="501"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="311"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="502"/>
         <source>Even</source>
         <translation>Gerade</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="316"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="503"/>
         <source>Odd</source>
         <translation>Ungerade</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="377"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="529"/>
         <source>Number of display digits.
 &lt;ul&gt;&lt;li&gt;3 1/2 - 2000 Counts&lt;/li&gt;
 &lt;li&gt;3 3/4 - 4000 Counts&lt;/li&gt;
@@ -679,146 +700,175 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="386"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="516"/>
         <source>2000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="391"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="517"/>
         <source>4000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="396"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="518"/>
         <source>20000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="401"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="519"/>
         <source>50000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="406"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="520"/>
         <source>100000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="411"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="521"/>
         <source>200000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="416"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="522"/>
         <source>400000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="421"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="523"/>
         <source>1000000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="426"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="524"/>
         <source>6000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="431"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="525"/>
         <source>40000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="436"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="526"/>
         <source>22000</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="575"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="551"/>
         <source>23 bytes ASCII, continuous (VC870)</source>
         <translation>23 bytes ASCII, kontinuierlich (VC870)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="580"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="552"/>
         <source>22 bytes binary, continuous (DO3122)</source>
         <translation>22 bytes binary, kontinuierlich (DO3122)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="585"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="553"/>
         <source>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</source>
         <translation>14 bytes halb-ASCII, UNI-T UT61E (CyrustekES51922)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="590"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="554"/>
         <source>11 bytes binary, continuous (CyrustekES51962)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="673"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="563"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, das es funkioniert, dann melden Sie es bitte an: &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="698"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="564"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, welches hier nicht aufgeführt ist, aber Sie aber passende Einstellungen gefunden haben, so teilen Sie es bitte &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt; mit. So können zukümpftige Versionen von Ihrer Hilfe profitieren.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="259"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="498"/>
         <source>Number of bits for serial communication.</source>
         <translation>Anzahl der Bits für die Übertragung.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="263"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="492"/>
         <source>5 bits</source>
         <translation>5 Bits</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="268"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="493"/>
         <source>6 bits</source>
         <translation>6 Bits</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="273"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="494"/>
         <source>7 bits</source>
         <translation>7 Bits</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="278"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="495"/>
         <source>8 bits</source>
         <translation>8 Bits</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="243"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="491"/>
         <source>&amp;Bits:</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="344"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="513"/>
         <source>Number of stop bits for serial communication.</source>
         <translation>Anzahl der Stoppbits.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="348"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="509"/>
         <source>1 Stop bit</source>
         <translation>1 Stoppbit</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="353"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="510"/>
         <source>2 Stop bits</source>
         <translation>2 Stoppbits</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="128"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="475"/>
         <source>&amp;Port:</source>
         <translation>&amp;Anschluß:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="158"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="477"/>
         <source>Choose the serial device here. &lt;i&gt;(Hint for DOS people: /dev/ttyS0 corresponds to COM1. /dev/ttyS1 to COM2 ...)&lt;/i&gt;</source>
         <translation>Hier bitte den seriellen Anschluß wählen.&lt;i&gt;(Für Unixumsteiger: /dev/ttyS0 entspricht COM1 und so weiter)&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="190"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="489"/>
         <source>Select the baud rate for the DMM here. If you encounter problems connecting to your DMM try lowering the baud rate. I had some problems with my &lt;b&gt;Metex ME-32&lt;/b&gt;. The Documentation said 1200 baud but it only worked at 600.</source>
         <translation>Hier die Baudrate für das DMM auswählen. Wenn Probleme mit der Verbindung zum DMM auftreten, bitte die Baudrate verringern. Es sind Probleme mit dem &lt;b&gt;Metex ME-32&lt;/b&gt; bekannt. Laut Dokumentation soll es mit 1200 Baud laufen, aber tatsächlich geht es nur mit 600 Baud.</translation>
     </message>
@@ -852,112 +902,134 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="361"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="515"/>
         <source>&amp;Digits</source>
         <translation>S&amp;tellen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="328"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="508"/>
         <source>&amp;Stop bits:</source>
         <translation>&amp;Stoppbits:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="174"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="479"/>
         <source>Baud &amp;rate:</source>
         <translation>Baud&amp;rate:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="102"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="474"/>
         <source>External device setup</source>
         <translation>Externe Steuerung</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="463"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="536"/>
         <source>RTS</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="473"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="537"/>
         <source>CTS</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="480"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="538"/>
         <source>DSR</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="487"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="539"/>
         <source>DTR</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="515"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="540"/>
         <source>Protocol</source>
         <translation>Protokoll</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="521"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="557"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translatorcomment>Hier wird das Kommunikationsprotokoll ausgewählt. Wenn Sie kein &quot;offiziell&quot; unterstützes DMM benutzte, versuchen Sie eines der bereits vorhanden Protokolle. Mit etwas etwas Glück passt eines. Wenn Sie eins finden, teilen Sie es bitte dem Autor mit.</translatorcomment>
         <translation>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="525"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="541"/>
         <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
         <translation>14 Bytes ASCII, auf Abfrage (Metex/Voltcraft)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="530"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="542"/>
         <source>11 bytes ASCII, continuous (PeakTech 451)</source>
         <translation>11 Bytes ASCII, kontinuierlich (PeakTech 451)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="535"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="543"/>
         <source>14 bytes ASCII, continuous (Voltcraft)</source>
         <translation>14 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="540"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="544"/>
         <source>15 bytes ASCII, continuous (Voltcraft)</source>
         <translation>15 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="545"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="545"/>
         <source>11 bytes binary, continuous (M9803R)</source>
         <translation>11 Bytes binär, kontinuierlich (M9803R)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="550"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="546"/>
         <source>14 bytes binary, continuous (VC820)</source>
         <translation>14 Bytes binär, kontinuierlich (VC820)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="555"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="547"/>
         <source>22 bytes ASCII, continuous (IsoTech)</source>
         <translation>22 Bytes ASCII, kontinuierlich (IsoTech)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="560"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="548"/>
         <source>11 bytes binary, continuous (VC940)</source>
         <translation>11 Bytes binär, kontinuierlich (VC940)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="565"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="549"/>
         <source>14 bytes ASCII/binary, continuous (QM1537)</source>
         <translation>14 Bytes ASCII/Binär, kontinuierlich (QM1537)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="570"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="550"/>
         <source>9 bytes binary, continuous (RS 22-812)</source>
         <translation>9 Bytes binär, kontinuierlich (RS 22-812)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="605"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="559"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Anzahl der Werte:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="615"/>
+        <location filename="../../build/ui_uidmmprefs.h" line="561"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Einige Multimeter senden verschiedenen Zeile mit verschiedenen Messwerten. Hier kann die Anzahl der zu ignorieren Zeilen eingetragen werden.( Das bedeutet, QtDMM verarbeitet nur die erste Zeile).</translation>
     </message>
@@ -966,32 +1038,39 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <name>UIExecutePrefs</name>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="26"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="203"/>
         <source>Execute external command at given threshold</source>
         <translation>Ein externes Programm ausführen, sobald ein Grenzwert erreicht ist</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="23"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="201"/>
         <source>Check this if you want QtDMM to execute an external command when given thresholds are reached (Falling or raising edge).</source>
         <translation>Dies ankreuzen, wenn beim erreichen eines Grenzwertes ein externes Programm aufgerufen werden soll.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="36"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="204"/>
         <source>Threshold</source>
         <translation>Grenzwert</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="48"/>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="79"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="205"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="212"/>
         <source>Threshold:</source>
         <translation>Grenzwert:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="69"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="211"/>
         <source>0</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="64"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="207"/>
         <source>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -1001,11 +1080,13 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="100"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="218"/>
         <source>0.0</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="95"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="214"/>
         <source>Threshold for falling edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -1015,51 +1096,61 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="113"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="222"/>
         <source>&amp;Raising edge</source>
         <translation>&amp;Oberer Grenzwert</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="110"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="220"/>
         <source>Call command on raising edge.</source>
         <translation>Programm beim erreichen des oberen Grenzwertes aufrufen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="126"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="226"/>
         <source>&amp;Falling edge</source>
         <translation>&amp;Unterer Grenzwert</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="123"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="224"/>
         <source>Call command on falling edge.</source>
         <translation>Programm beim erreichen des unteren Grenzwertes aufrufen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="171"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="227"/>
         <source>Command</source>
         <translation>Programm</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="200"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="231"/>
         <source>Disconnect before executing command</source>
         <translation>Vor start die Verbindung trennen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="197"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="229"/>
         <source>Check this if you want QtDMM to disconnect (close the serial port) before executing the external command.</source>
         <translation>Dies ankreuzen, wenn vor Programmausführen die Verbindung zum Multimeter getrennt werden soll.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="233"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="233"/>
         <source>Enter here the external command to be executed.</source>
         <translation>Hier das auszuführende Programm eintragen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="246"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="236"/>
         <source>Browse</source>
         <translation>Durchsuchen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiexecuteprefs.ui" line="249"/>
+        <location filename="../../build/ui_uiexecuteprefs.h" line="239"/>
         <source>Here you can browse your harddisk for the external command (Altenative to directly typing it into the field to the left).</source>
         <translation>Hier kann der Computer nach dem auszuführenen Programm durchsucht werden( Alternativ kann links das Programm eingegeben werden).</translation>
     </message>
@@ -1068,36 +1159,43 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <name>UIGraphPrefs</name>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="35"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="353"/>
         <source>Colors</source>
         <translation>Farben</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="85"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="355"/>
         <source>Click this button so change the color of the data graph in the recorder.</source>
         <translation>Hier klicken um die Farbe des Graphen zu ändern.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="104"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="357"/>
         <source>&amp;Data</source>
         <translation>&amp;Daten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="148"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="359"/>
         <source>Click this button to change the background color of the recorder graph.</source>
         <translation>Hier klicken um die Hintergrundfarbe des Graphen zu ändern.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="167"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="361"/>
         <source>&amp;Background</source>
         <translation>&amp;Hintergrund</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="211"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="363"/>
         <source>Click this button to change the color of the grid and grid text in the recorder.</source>
         <translation>Hier klicken um die Farbe des Gitters und der Achenbeschriftung zu ändern.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="227"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="365"/>
         <source>&amp;Grid</source>
         <translation>&amp;Gitter</translation>
     </message>
@@ -1105,111 +1203,135 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
         <location filename="../../src/ui/uigraphprefs.ui" line="271"/>
         <location filename="../../src/ui/uigraphprefs.ui" line="331"/>
         <location filename="../../src/ui/uigraphprefs.ui" line="394"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="367"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="371"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="375"/>
         <source>Click this button to change the color of the cursor at the current sampling position in the recorder.</source>
         <translation>Hier klicken um die Farbe des Cursors zu ändern.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="287"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="369"/>
         <source>Cu&amp;rsor</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="350"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="373"/>
         <source>Start threshold</source>
         <translation>Start Grenzwert</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="413"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="377"/>
         <source>E&amp;xternal threshold</source>
         <translation>&amp;Externer Grenzwert</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="431"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="378"/>
         <source>Drawing style</source>
         <translation>Linienart</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="452"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="379"/>
         <source>Data points:</source>
         <translation>Datenpunkte:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="469"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="380"/>
         <source>No line</source>
         <translation>Keine Linie</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="474"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="381"/>
         <source>Solid line</source>
         <translation>Durchgehende Linie</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="479"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="382"/>
         <source>Dotted line</source>
         <translation>Gepunktete Linie</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="493"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="384"/>
         <source>Data:</source>
         <translation>Daten:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="528"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="386"/>
         <source>Here you can choose the line width of the data graph in the recorder.</source>
         <translation>Hier kann die Liniendarstellung des Datengraphen geändert werden.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="544"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="388"/>
         <source>Width:</source>
         <translation>Breite:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="558"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="389"/>
         <source>No points</source>
         <translation>Keine Punkte</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="563"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="390"/>
         <source>Circle</source>
         <translation>Kreise</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="568"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="391"/>
         <source>Square</source>
         <translation>Rechtecke</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="573"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="392"/>
         <source>Diamond</source>
         <translation>Diamanten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="578"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="393"/>
         <source>X</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="583"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="394"/>
         <source>Large Circle</source>
         <translation>Große Kreise</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="588"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="395"/>
         <source>Large Square</source>
         <translation>Große Rechecke</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="593"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="396"/>
         <source>Large Diamond</source>
         <translation>Große Diamanten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="598"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="397"/>
         <source>Large X</source>
         <translation>Großes X</translation>
     </message>
     <message>
         <location filename="../../src/ui/uigraphprefs.ui" line="625"/>
+        <location filename="../../build/ui_uigraphprefs.h" line="399"/>
         <source>Crosshair cursor</source>
         <translation>Fadenkreuzcursor</translation>
     </message>
@@ -1218,77 +1340,93 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <name>UIGuiPrefs</name>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="35"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="380"/>
         <source>Display</source>
         <translation>DMM Anzeige</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="73"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="381"/>
         <source>Show bargraph</source>
         <translation>Bargraph</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="118"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="382"/>
         <source>Show Min/Max</source>
         <translation>Min/Max</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="152"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="383"/>
         <source>Show</source>
         <translation>Anzeigen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="191"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="385"/>
         <source>Click this button to change the color of the numerical display for the dmm.</source>
         <translation>Hier klicken um die Farbe der Anzeige des DMM&apos;s zu ändern.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="204"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="387"/>
         <source>Back&amp;ground</source>
         <translation>&amp;Hintergrund</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="251"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="389"/>
         <source>Click this button to change the color of the text in the numerical display.</source>
         <translation>Hier klicken um die Farbe der Texte im DMM zu ändern.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="264"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="391"/>
         <source>&amp;Text</source>
         <translation>&amp;Text</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="282"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="392"/>
         <source>At program exit</source>
         <translation>Bei Programmende</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="320"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="394"/>
         <source>When this option is checked QtDMM will alert you if you are going to overwrite or loose unsaved data (import, quit).</source>
         <translation>Wenn diese Option ausgewählt ist, dann wird vor dem Überschreiben des internen Speichers gefragt ob die Daten gesichert werden sollen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="323"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="396"/>
         <source>Alert unsaved data</source>
         <translation>Warnung bei ungesicherten Daten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="368"/>
         <location filename="../../src/ui/uiguiprefs.ui" line="416"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="398"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="402"/>
         <source>When this option is checked the window position and size saved and restored in the next session.</source>
         <translation>Wenn diese Option ausgewäht ist, wird die Fenstergroße und die -position gepeichert und beim nächten Starten wiederhergestellt.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="371"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="400"/>
         <source>Save window position</source>
         <translation>Fensterposition speichern</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="419"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="404"/>
         <source>Save window size</source>
         <translation>Fenstergröße speichern</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="450"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="405"/>
         <source>Toolbar</source>
         <translation>Werkzeugleisten</translation>
     </message>
@@ -1298,36 +1436,47 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
         <location filename="../../src/ui/uiguiprefs.ui" line="584"/>
         <location filename="../../src/ui/uiguiprefs.ui" line="632"/>
         <location filename="../../src/ui/uiguiprefs.ui" line="680"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="407"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="411"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="415"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="419"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="423"/>
         <source>Check this if you want text labels in the toolbar.</source>
         <translation>Hier ankreuzen, wenn unter den Symbolen auch der Text erscheinen soll.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="491"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="409"/>
         <source>Icons with text label</source>
         <translation>Symbole mit Text</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="539"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="413"/>
         <source>DMM toolbar</source>
         <translation>DMM</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="587"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="417"/>
         <source>File toolbar</source>
         <translation>Datei</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="635"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="421"/>
         <source>Help toolbar</source>
         <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="683"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="425"/>
         <source>Graph toolbar</source>
         <translation>Graphen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="714"/>
+        <location filename="../../build/ui_uiguiprefs.h" line="426"/>
         <source>Show tip of the day</source>
         <translation>Tipp des Tages anzeigen</translation>
     </message>
@@ -1336,137 +1485,165 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <name>UIIntegrationPrefs</name>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="31"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="304"/>
         <source>Show integration</source>
         <translation>Integration anzeigen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="59"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="305"/>
         <source>Colors</source>
         <translation>Farben</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="91"/>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="139"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="307"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="311"/>
         <source>Click this button so change the color of the data graph in the recorder.</source>
         <translation>Hier klicken um die Farbe des Graphen zu ändern.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="104"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="309"/>
         <source>Integration graph</source>
         <translation>Integrationsgraphen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="152"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="313"/>
         <source>Integration threshold</source>
         <translation>Integrationsgrenzwert</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="173"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="314"/>
         <source>Drawing style</source>
         <translation>Linienart</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="185"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="315"/>
         <source>Point style:</source>
         <translation>Punkte:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="204"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="316"/>
         <source>Line style:</source>
         <translation>Linien:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="221"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="317"/>
         <source>No points</source>
         <translation>Keine Punkte</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="226"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="318"/>
         <source>Circle</source>
         <translation>Kreise</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="231"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="319"/>
         <source>Square</source>
         <translation>Rechtecke</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="236"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="320"/>
         <source>Diamond</source>
         <translation>Diamanten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="241"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="321"/>
         <source>X</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="246"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="322"/>
         <source>Large Circle</source>
         <translation>Große Kreise</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="251"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="323"/>
         <source>Large Square</source>
         <translation>Große Rechecke</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="256"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="324"/>
         <source>Large Diamond</source>
         <translation>Große Diamanten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="261"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="325"/>
         <source>Large X</source>
         <translation>Großes X</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="270"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="327"/>
         <source>No line</source>
         <translation>Keine Linie</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="275"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="328"/>
         <source>Solid line</source>
         <translation>Durchgehende Linie</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="280"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="329"/>
         <source>Dotted line</source>
         <translation>Gepunktete Linie</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="288"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="331"/>
         <source>Width:</source>
         <translation>Breite:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="307"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="333"/>
         <source>Here you can choose the line width of the data graph in the recorder.</source>
         <translation>Hier kann die Liniendarstellung des Datengraphen geändert werden.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="361"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="335"/>
         <source>Graph</source>
         <translation>Graphen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="373"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="336"/>
         <source>Scale:</source>
         <translation>Skalierung:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="386"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="337"/>
         <source>Threshold:</source>
         <translation>Grenzwert:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="404"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="343"/>
         <source>1.0</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="399"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="339"/>
         <source>Scaling factor for integration curve.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -1477,11 +1654,14 @@ Hier können die Werte mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="419"/>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="447"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="349"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="356"/>
         <source>0.0</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="414"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="345"/>
         <source>Amplitude offset for integration curve.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -1491,11 +1671,13 @@ Hier können die Werte mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="429"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="350"/>
         <source>Offset:</source>
         <translation>Kompensation:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiintegrationprefs.ui" line="442"/>
+        <location filename="../../build/ui_uiintegrationprefs.h" line="352"/>
         <source>If sampled value gets below this offset the integration curve is reset to zero.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -1508,6 +1690,7 @@ Hier können die Werte mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben
     <name>UIMainWid</name>
     <message>
         <location filename="../../src/ui/uimainwid.ui" line="71"/>
+        <location filename="../../build/ui_uimainwid.h" line="67"/>
         <source>This is the plotting area for the transient recorder. It is widely configurable by clicking the &lt;b&gt;config ...&lt;/b&gt; button to the right. Data aquisition may be started by hand, at a specific time or automatically triggered by the measured value itself &lt;i&gt;(See configuration dialog)&lt;/i&gt;&lt;p&gt;
 The maximum resolution for data aquisition is 1/10th of a second, but may also be configured to sample once a week or what ever you want.
 &lt;p&gt;
@@ -1522,98 +1705,119 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <name>UIMainWin</name>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="35"/>
+        <location filename="../../build/ui_uimainwin.h" line="340"/>
         <source>&amp;File</source>
         <translation>D&amp;atei</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="48"/>
+        <location filename="../../build/ui_uimainwin.h" line="341"/>
         <source>&amp;DMM</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="57"/>
+        <location filename="../../build/ui_uimainwin.h" line="342"/>
         <source>&amp;Recorder</source>
         <translation>&amp;Rekorder</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="68"/>
+        <location filename="../../build/ui_uimainwin.h" line="343"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="82"/>
+        <location filename="../../build/ui_uimainwin.h" line="344"/>
         <source>DMM</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="98"/>
+        <location filename="../../build/ui_uimainwin.h" line="345"/>
         <source>Recorder</source>
         <translation>Rekorder</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="116"/>
+        <location filename="../../build/ui_uimainwin.h" line="346"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="137"/>
         <location filename="../../src/ui/uimainwin.ui" line="427"/>
+        <location filename="../../build/ui_uimainwin.h" line="333"/>
+        <location filename="../../build/ui_uimainwin.h" line="347"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="164"/>
+        <location filename="../../build/ui_uimainwin.h" line="348"/>
         <source>Display</source>
         <translation>Anzeige</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="185"/>
+        <location filename="../../build/ui_uimainwin.h" line="240"/>
         <source>&amp;Export</source>
         <translation>&amp;Export</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="188"/>
+        <location filename="../../build/ui_uimainwin.h" line="242"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Export recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Here you can export the recorded data as tab separated list. Each line contains the following values (separated by a tab character): date (dd.mm.yyyy) time (hh:mm:ss) value (float) unit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder Graphen exportieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hier können die aufgezeichneten Daten als eine Liste durch Tabulatoren getrennt exportiert werden. Jede Zeile enthält die folgenden Werte (getrennt durch einen Tabulator): Datum (tt.mm.jjjj) Zeit (ss:mm:SS) Wert (Fließkomma) Einheit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="191"/>
+        <location filename="../../build/ui_uimainwin.h" line="245"/>
         <source>Ctrl+E</source>
         <translation>Strg+E</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="203"/>
+        <location filename="../../build/ui_uimainwin.h" line="247"/>
         <source>&amp;Import</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="206"/>
+        <location filename="../../build/ui_uimainwin.h" line="249"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Import data into recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Here you can import previously exported data files. QtDMM tries to do an educated guess if the file format is correct and rejects import of files which to not match.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Importiert Daten in den Rekorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hier können zuvor exportierte Daten importiert werden. QtDMM versucht das Format zu lesen und verweigert den Import von ungültigen Dateien.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="209"/>
+        <location filename="../../build/ui_uimainwin.h" line="252"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="221"/>
+        <location filename="../../build/ui_uimainwin.h" line="254"/>
         <source>&amp;Print</source>
         <translation>&amp;Drucken</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="224"/>
+        <location filename="../../build/ui_uimainwin.h" line="256"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Print recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A dialog will open where you can define a title and a comment for your printout. The printer itself can also be configured here. To be able to print you need at least one working postscript printer configured in your system. Printing into a file is also supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder Graphen drucken&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Es öffnet sich ein Fenster,indem der Titel und ein Kommentar für den Ausdruck festgelegt werden kann. Der Drucker selbst kann hier auch ausgewält werden. Der Ausdruck in eine Datei(PDF) ist ebenfalls möglich.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="227"/>
+        <location filename="../../build/ui_uimainwin.h" line="259"/>
         <source>Ctrl+P</source>
         <translation>Strg+D</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="239"/>
         <location filename="../../src/ui/uimainwin.ui" line="310"/>
+        <location filename="../../build/ui_uimainwin.h" line="261"/>
+        <location filename="../../build/ui_uimainwin.h" line="289"/>
         <source>&amp;Configure</source>
         <translation>&amp;Konfigurieren</translation>
     </message>
@@ -1621,131 +1825,159 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <location filename="../../src/ui/uimainwin.ui" line="242"/>
         <location filename="../../src/ui/uimainwin.ui" line="313"/>
         <location filename="../../src/ui/uimainwin.ui" line="387"/>
+        <location filename="../../build/ui_uimainwin.h" line="263"/>
+        <location filename="../../build/ui_uimainwin.h" line="291"/>
+        <location filename="../../build/ui_uimainwin.h" line="319"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will open QtDMM&apos;s configuration dialog. Here you can configure it&apos;s visual appearance and all options regarding the multimeter hardware and the recorder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;QtDMM konfigurieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Dies öffnen das Konfugurationsfenster für QtDMM. Hier kann die visuelle Erscheinung, alle Optionen die die Datenaufzeichnung betreffen sowie die Einstellungen für das DMM festgelegt werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="245"/>
+        <location filename="../../build/ui_uimainwin.h" line="266"/>
         <source>F2</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="257"/>
+        <location filename="../../build/ui_uimainwin.h" line="268"/>
         <source>&amp;Quit</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="260"/>
+        <location filename="../../build/ui_uimainwin.h" line="270"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Quit QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder contains unsaved data QtDMM will give you the option to savve your data first.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;QtDMM Beenden&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wenn der Datenrekorder ungespeicherte Daten enthällt, haben Sie die Möglichkeit diese vorher zu speichern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="263"/>
+        <location filename="../../build/ui_uimainwin.h" line="273"/>
         <source>Ctrl+Q</source>
         <translation>Strg+B</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="278"/>
+        <location filename="../../build/ui_uimainwin.h" line="275"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="281"/>
+        <location filename="../../build/ui_uimainwin.h" line="277"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Connect to the Multimeter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will establish the serial connection to the dmm. If not connected the serial port is free and can be used by other software.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Verbindung zum DMM herstellen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Die baut die serielle Verbindung zum DMM auf.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="284"/>
+        <location filename="../../build/ui_uimainwin.h" line="280"/>
         <source>Ctrl+C</source>
         <translation>Strg+V</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="296"/>
+        <location filename="../../build/ui_uimainwin.h" line="282"/>
         <source>&amp;Reset</source>
         <translation>&amp;Zurücksetzen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="299"/>
+        <location filename="../../build/ui_uimainwin.h" line="284"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Reset min/max values&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The min/max values in the display will be reset. You can activate this option at any time. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Min/Max Werte zurücksetzen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Die Min/Max Werte in der Anzeige werden zurückgesetzt. Diese Option kann jederzeit aktiviert werden. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="302"/>
+        <location filename="../../build/ui_uimainwin.h" line="287"/>
         <source>Ctrl+R</source>
         <translation>Strg+Z</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="316"/>
+        <location filename="../../build/ui_uimainwin.h" line="294"/>
         <source>Shift+F2</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="331"/>
+        <location filename="../../build/ui_uimainwin.h" line="296"/>
         <source>&amp;Start</source>
         <translation>&amp;Starten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="334"/>
+        <location filename="../../build/ui_uimainwin.h" line="298"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Start the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If you are in manual mode this will start the recorder. Press F2 to set the recorder options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder starten&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Startet den Rekorder wenn sich dieser im manuellen Modus befindet. F2 drücken für die Rekordereinstellungen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="337"/>
+        <location filename="../../build/ui_uimainwin.h" line="301"/>
         <source>Ctrl+S</source>
         <translation>Strg+S</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="352"/>
+        <location filename="../../build/ui_uimainwin.h" line="303"/>
         <source>S&amp;top</source>
         <translation>&amp;Anhalten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="355"/>
+        <location filename="../../build/ui_uimainwin.h" line="305"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Stop the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The recorder will be stopped. This is independent from the start mode of the recorder. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Hällt den Rekorder an&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Der Rekoder wird angehalten. Dies ist unabhängig von dem gewählten Startmodus. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="358"/>
+        <location filename="../../build/ui_uimainwin.h" line="308"/>
         <source>Ctrl+X</source>
         <translation>Strg+A</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="370"/>
+        <location filename="../../build/ui_uimainwin.h" line="310"/>
         <source>&amp;Clear</source>
         <translation>&amp;Löschen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="373"/>
+        <location filename="../../build/ui_uimainwin.h" line="312"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clear the recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder is already started it will clear the graph and continue recording.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lösche den Graphen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wenn der Rekorder läuft, wird der Graph gelöscht und es wird weiter aufgezeichnet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="376"/>
+        <location filename="../../build/ui_uimainwin.h" line="315"/>
         <source>Del</source>
         <translation>Enf</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="384"/>
+        <location filename="../../build/ui_uimainwin.h" line="317"/>
         <source>C&amp;onfigure</source>
         <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="390"/>
+        <location filename="../../build/ui_uimainwin.h" line="322"/>
         <source>Ctrl+F2</source>
         <translation>Strg+F2</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="398"/>
+        <location filename="../../build/ui_uimainwin.h" line="324"/>
         <source>&amp;On version</source>
         <translation>Ü&amp;ber die Version</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="401"/>
+        <location filename="../../build/ui_uimainwin.h" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Urheber Information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zeigt die Information zum Urheber sowie etwas Werbung zu QtDMM an. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="409"/>
+        <location filename="../../build/ui_uimainwin.h" line="328"/>
         <source>&amp;Tip of the day</source>
         <translation>&amp;Tipp des Tages</translation>
     </message>
@@ -1755,21 +1987,25 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="412"/>
+        <location filename="../../build/ui_uimainwin.h" line="330"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show tip of the day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeigt den Tipp des Tages an.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="424"/>
+        <location filename="../../build/ui_uimainwin.h" line="332"/>
         <source>&amp;Direct Help</source>
         <translation>&amp;Direkte Hilfe</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="430"/>
+        <location filename="../../build/ui_uimainwin.h" line="335"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direct Help&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enter the direct help mode. You have done this already when reading this text :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direkte Hilfe&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Schalten in den direkten Hilfemodus um. Dies haben Sie bereits duch lesen des Textes getan :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="433"/>
+        <location filename="../../build/ui_uimainwin.h" line="338"/>
         <source>Shift+F1</source>
         <translation></translation>
     </message>
@@ -1778,81 +2014,97 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <name>UIPrintDlg</name>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="14"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="183"/>
         <source>QtDMM: Print graph ...</source>
         <translation>QtDMM: Graph drucken</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="17"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="184"/>
         <source>Print ...</source>
         <translation>Drucken ...</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="71"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="185"/>
         <source>Printer:</source>
         <translation>Drucker:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="96"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="189"/>
         <source>Please select printer -&gt;</source>
         <translation>Bitte ein Drucker wählen -&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="87"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="187"/>
         <source>This label shows the currently selected printer. Click the button to the right to configure the printer. &lt;i&gt;(You have to select a printer in order to be able to print)&lt;/i&gt;</source>
         <translation>Hier wird der aktuell ausgewählte Drucker angezeigt. Um diesen zu ändern auf die rechte Schaltfläche klicken. &lt;i&gt;(Zum drucken muss ein Drucker ausgewählt werden)&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="115"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="193"/>
         <source>Configure ...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="112"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="191"/>
         <source>Click here to configure the printer.</source>
         <translation>Hier klicken um den Drucker zu konfigurieren.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="151"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="194"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="161"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="196"/>
         <source>Enter a title for the document &lt;i&gt;(Optional)&lt;/i&gt;</source>
         <translation>Hier ein Titel für das Dokument eintragen. &lt;i&gt;(optional)&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="171"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="198"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="181"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="200"/>
         <source>Here you may enter an comment which will be printed on top of the page &lt;i&gt;(Optional)&lt;/i&gt;</source>
         <translation>Hier kann ein Kommentar angegeben werden, der dann am Anfang der Seite ausgegeben wird. &lt;i&gt;(optional)&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="223"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="203"/>
         <source>Direct help (SHIFT+F1)</source>
         <translation>Direkthilfe (Umschalt+F1)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="262"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="209"/>
         <source>&amp;Print</source>
         <translation>&amp;Drucken</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="259"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="207"/>
         <source>Click here to print.</source>
         <translation>Hier klicken um zu drucken.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="275"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="213"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiprintdlg.ui" line="272"/>
+        <location filename="../../build/ui_uiprintdlg.h" line="211"/>
         <source>Click here to abort printing.</source>
         <translation>Hier klicken um den Druckvorgang abzubrechen.</translation>
     </message>
@@ -1861,16 +2113,19 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <name>UIRecorderPrefs</name>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="32"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="521"/>
         <source>Sampling</source>
         <translation>Beproben</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="53"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="522"/>
         <source>Sample &amp;every:</source>
         <translation>Messen &amp;alle:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="69"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="529"/>
         <source>Unit for sampling period.</source>
         <translation>Einheit des Messintervalls.</translation>
     </message>
@@ -1882,6 +2137,9 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <location filename="../../src/ui/uirecorderprefs.ui" line="73"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="132"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="888"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="523"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="532"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="604"/>
         <source>Seconds</source>
         <translation>Sekunden</translation>
     </message>
@@ -1889,6 +2147,9 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <location filename="../../src/ui/uirecorderprefs.ui" line="78"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="137"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="893"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="524"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="533"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="605"/>
         <source>Minutes</source>
         <translation>Minuten</translation>
     </message>
@@ -1896,6 +2157,9 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <location filename="../../src/ui/uirecorderprefs.ui" line="83"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="142"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="898"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="525"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="534"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="606"/>
         <source>Hours</source>
         <translation>Stunden</translation>
     </message>
@@ -1903,22 +2167,29 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <location filename="../../src/ui/uirecorderprefs.ui" line="88"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="147"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="903"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="526"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="535"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="607"/>
         <source>Days</source>
         <translation>Tage</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="112"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="531"/>
         <source>Sample t&amp;ime:</source>
         <translation>&amp;Messdauer:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="128"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="884"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="538"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="610"/>
         <source>Unit for maximum sampling time.</source>
         <translation>Einheit für die Messdauer.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="155"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="541"/>
         <source>Specify the sampling period. See unit to the right.</source>
         <translation>Hier wird der Intervall der Messungen angegeben.</translation>
     </message>
@@ -1929,67 +2200,82 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="171"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="865"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="544"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="602"/>
         <source>Maximum sampling time. When this time expires, the recorder is stopped automatically.</source>
         <translation>Die maximal Messdauer. Wenn der Wert erreicht ist, wird der Rekorder automatisch angehalten.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="193"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="547"/>
         <source>Start</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="255"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="552"/>
         <source>&amp;Manual</source>
         <translation>&amp;Manuell</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="252"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="550"/>
         <source>Select this entry if you want to manually start the transient recorder. Use the &lt;b&gt;Start&lt;/b&gt; and &lt;b&gt;Stop&lt;/b&gt; buttons in the main window to start/stop sampling.</source>
         <translation>Wählen Sie diesen Punkt, wenn Sie den Rekorder per Hand starten wollen. Benutzen Sie dazu die Schaltfächen &lt;b&gt;Starten&lt;/b&gt; und &lt;b&gt;Anhalten&lt;/b&gt; in der Werkzeugleiste im Hauptfenster.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="303"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="556"/>
         <source>&amp;Predefined time</source>
         <translation>&amp;Festgelegte Zeit</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="300"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="554"/>
         <source>Select this entry if you want the transient recorder to be started at a predefined time.</source>
         <translation>Wählen Sie diesen Eintrag, wenn die Messerie zu einem bestimmten Zeitpunkt starten soll.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="174"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="546"/>
         <source>∞</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="401"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="558"/>
         <source>Hour of start time.</source>
         <translation>Stunde.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="423"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="461"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="560"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="564"/>
         <source>:</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="439"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="562"/>
         <source>Minutes of start time.</source>
         <translation>Minute.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="477"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="566"/>
         <source>Seconds of start time.</source>
         <translation>Sekunde.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="537"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="576"/>
         <source>&amp;Trigger</source>
         <translation>&amp;Schwellwert</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="529"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="569"/>
         <source>Select this entry if you want to automatically trigger the sampling. &lt;p&gt;
 You have two choices:
 &lt;ul&gt;
@@ -2006,11 +2292,14 @@ Es gibt folgende Möglichkeiten:
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="633"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="673"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="583"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="589"/>
         <source>0.0</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="628"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="579"/>
         <source>Threshold for falling edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -2020,6 +2309,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="668"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="585"/>
         <source>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -2030,36 +2320,44 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="686"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="699"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="590"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="591"/>
         <source>Threshold:</source>
         <translation>Grenzwert:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="751"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="595"/>
         <source>&amp;Raising edge</source>
         <translation>&amp;Oberer Grenzwert</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="748"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="593"/>
         <source>Trigger sampling on raising edge.</source>
         <translation>Starten der Messreihe beim Überschreiten des Grenzwertes.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="805"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="599"/>
         <source>&amp;Falling edge</source>
         <translation>&amp;Unterer Grenzwert</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="802"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="597"/>
         <source>Trigger sampling on falling edge.</source>
         <translation>Starten der Messreihe beim Unterschreiten des Grenzwertes.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="839"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="600"/>
         <source>Pre trigger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="968"/>
+        <location filename="../../build/ui_uirecorderprefs.h" line="612"/>
         <source>Pre trigger time:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2068,6 +2366,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <name>UIScalePrefs</name>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="20"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="263"/>
         <source>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -2077,46 +2376,55 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="34"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="267"/>
         <source>Scale</source>
         <translation>Skalierung</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="49"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="271"/>
         <source>Au&amp;tomatic</source>
         <translation>&amp;Automatisch</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="46"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="269"/>
         <source>Select this entry if you want automatic scaling of the vertical scale in the transient recorder.</source>
         <translation>Wählen Sie diesen Punkt, wenn der Graph automatisch skaliert werden soll.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="80"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="272"/>
         <source>Include zero line</source>
         <translation>Inklusive Nulllinie</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="111"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="276"/>
         <source>&amp;Manual</source>
         <translation>&amp;Manuell</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="108"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="274"/>
         <source>Select this entry if you want to set the minimum and maximum value for the scale manually. If selected enter the minimum and maximum values below.</source>
         <translation>Diesen Punkte auswählen, wenn Sie selber die obere und untere Skalengrenze festlegen wollen. Wenn der Punkt ausgewählt wurde, können weiter unten die Werte eingesetzt werden.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="142"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="277"/>
         <source>M&amp;inimum:</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="181"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="283"/>
         <source>-3.999</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="176"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="279"/>
         <source>Enter the minimum scale value here.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -2126,16 +2434,19 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="194"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="284"/>
         <source>Ma&amp;ximum:</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="233"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="290"/>
         <source>3.999</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="228"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="286"/>
         <source>Enter the maximum scale value here.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -2145,55 +2456,69 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="264"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="291"/>
         <source>Window</source>
         <translation>Fenster</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="276"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="292"/>
         <source>&amp;Size:</source>
         <translation>&amp;Breite</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="292"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="293"/>
         <source>Max. &amp;length:</source>
         <translation>&amp;Maximale Länge:</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="324"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="300"/>
         <source>Unit for visible window width.</source>
         <translation>Einheit für den sichbaren Bereich des Graphen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="328"/>
         <location filename="../../src/ui/uiscaleprefs.ui" line="352"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="294"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="302"/>
         <source>Seconds</source>
         <translation>Sekunden</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="333"/>
         <location filename="../../src/ui/uiscaleprefs.ui" line="357"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="295"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="303"/>
         <source>Minutes</source>
         <translation>Minuten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="338"/>
         <location filename="../../src/ui/uiscaleprefs.ui" line="362"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="296"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="304"/>
         <source>Hours</source>
         <translation>Stunden</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="343"/>
         <location filename="../../src/ui/uiscaleprefs.ui" line="367"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="297"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="305"/>
         <source>Days</source>
         <translation>Tage</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="375"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="308"/>
         <source>Size (in time) of the visible part of the recorder graph. See unit to the right.</source>
         <translation>Zeitlicher Rahmen für den sichbaren Bereich des Graphen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="391"/>
+        <location filename="../../build/ui_uiscaleprefs.h" line="311"/>
         <source>Maximum length (in time) of the recorder graph. If this time is reached the first recorded values will be discarded. It will not stop recording.</source>
         <translation>Maximale Aufzeichnungsdauer für den Graphen. Wenn die Grenze erreicht ist, werden die Rekorderdaten von vorne überschrieben. Die Aufzeichnung wird nicht angehalten.</translation>
     </message>
@@ -2202,46 +2527,55 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <name>UITipDlg</name>
     <message>
         <location filename="../../src/ui/uitipdlg.ui" line="17"/>
+        <location filename="../../build/ui_uitipdlg.h" line="143"/>
         <source>QtDMM: Tip of the day</source>
         <translation>QtDMM Tipp des Tages</translation>
     </message>
     <message>
         <location filename="../../src/ui/uitipdlg.ui" line="150"/>
+        <location filename="../../build/ui_uitipdlg.h" line="145"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Don&apos;t show tips again&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Check this if you don&apos;t want to see the tip of the day at startup. You can activate the tips at any time in the preferences again.</source>
         <translation>&lt;font size=+1&gt;&lt;b&gt;Keine Tipps mehr zeigen&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dies ankreuzen, wenn keine Tipps beim Starten mehr gewünscht sind. Dies kann jederzeit in den Einstellungen wieder geändert werden.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uitipdlg.ui" line="153"/>
+        <location filename="../../build/ui_uitipdlg.h" line="147"/>
         <source>Don&apos;t show tips again</source>
         <translation>Keine Tipps mehr zeigen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uitipdlg.ui" line="166"/>
+        <location filename="../../build/ui_uitipdlg.h" line="149"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Previous&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Go to previous tip.</source>
         <translation>&lt;font size=+1&gt;&lt;b&gt;Vorigen&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Den Tipp davor anzeigen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uitipdlg.ui" line="169"/>
+        <location filename="../../build/ui_uitipdlg.h" line="151"/>
         <source>&amp;Previous</source>
         <translation>&amp;Vorigen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uitipdlg.ui" line="185"/>
+        <location filename="../../build/ui_uitipdlg.h" line="153"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Next&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Go to next tip.</source>
         <translation>&lt;font size=+1&gt;&lt;b&gt;Nächsten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Den nächsten Tipp anzeigen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uitipdlg.ui" line="188"/>
+        <location filename="../../build/ui_uitipdlg.h" line="155"/>
         <source>&amp;Next</source>
         <translation>&amp;Nächsten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uitipdlg.ui" line="214"/>
+        <location filename="../../build/ui_uitipdlg.h" line="157"/>
         <source>&lt;font size=+1&gt;&lt;b&gt;Close&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Close this dialog.</source>
         <translation>&lt;font size=+1&gt;&lt;b&gt;Schließen&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dieses Fenster schließen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uitipdlg.ui" line="217"/>
+        <location filename="../../build/ui_uitipdlg.h" line="159"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
