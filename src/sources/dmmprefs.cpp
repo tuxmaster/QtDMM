@@ -27,64 +27,70 @@
 #include "dmmprefs.h"
 #include "Settings.h"
 
-
-// when all needed parameter are found this hardcoded version will
-// be replaced by a file
-//    name
-//    baud (600=0,1200,1800,2400,4800,9600,19200)
-//    protocol (0: 14 bytes polling 'D'
-//              1: 11 bytes continuous [PeakTech]
-//              2: 14 continuous
-//              3: 15 continuous
-//              4: 11 bin continuous (M9803R)
-//              5: 14 bin continuous (VC820)
-//              6: IsoTech
-//              7: VC940
-//              8: QM1537
-//              9: 9 binary bytes continuous (22-812)
-//             10: 23 bytes continuous (VC870)
-//             11: 22 bytes continuous (DO3122)
-//             12: 4 bytes half-ASCII (CyrustekES51922)
-//    bits
-//    stopBits
-//    number of values (For DMM's that send several lines at once)
-//    parity (0,1,2 - None,Even,Odd)
-//    [don't ask for any logic behind the digits, changing would break configs]
-//    display digits (0: 2000
-//                    1: 4000
-//                    2: 20000
-//                    3: 50000
-//                    4: 100000
-//                    5: 200000
-//                    6: 400000
-//                    7: 1000000
-//                    8: 6000
-//                    9: 40000
-//                    10: 22000
-//    External device setup 0, 1
-//    rts 0, 1
-//    cts 0, 1
-//    dsr 0, 1
-//    dtr 0, 1
-
+/**
+  when all needed parameter are found this hardcoded version will
+  be replaced by a file
+     name
+     baud 0: 600
+          1: 1200
+          2: 1800
+          3: 2400
+          4: 4800
+          5: 9600
+          6: 19200
+     protocol 0: 14 bytes polling 'D'
+              1: 11 bytes continuous [PeakTech]
+              2: 14 continuous
+              3: 15 continuous
+              4: 11 bin continuous (M9803R)
+              5: 14 bin continuous (VC820)
+              6: IsoTech
+              7: VC940
+              8: QM1537
+              9: 9 binary bytes continuous (22-812)
+              0: 23 bytes continuous (VC870)
+             11: 22 bytes continuous (DO3122)
+             12: 4 bytes half-ASCII (CyrustekES51922)
+     bits
+     stopBits
+     number of values (For DMM's that send several lines at once)
+     parity (0,1,2 - None,Even,Odd)
+     [don't ask for any logic behind the digits, changing would break configs]
+     display digits 0: 2000
+                    1: 4000
+                    2: 20000
+                    3: 50000
+                    4: 100000
+                    5: 200000
+                    6: 400000
+                    7: 1000000
+                    8: 6000
+                    9: 40000
+                   10: 22000
+     External device setup 0, 1
+     rts 0, 1
+     cts 0, 1
+     dsr 0, 1
+     dtr 0, 1
+**/
 
 struct DMMInfo dmm_info[] = {
 							  {"Digitek DT4000ZC", 3, 8, 8, 1, 1, 0, 1, 0, 0,1,1,1},
 							  {"Digitek DT-9062", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},
-							  {"Digitek INO2513", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},  // no image
+							  {"Digitek INO2513", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},
 
-							  {"Digitech QM1350", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},  // no image
-							  {"Digitech QM1462", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},  // no image
-							  {"Digitech QM1538", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},  // no image
-							  {"Digitech QM1537", 3, 8, 8, 1, 1, 0, 1, 0, 0,1,1,1},  // no image
+							  {"Digitech QM1350", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
+							  {"Digitech QM1462", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},
+							  {"Digitech QM1538", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},
+							  {"Digitech QM1537", 3, 8, 8, 1, 1, 0, 1, 0, 0,1,1,1},
 
-                              {"Duratool DO3122", 5, 11, 8, 1, 1, 0, 1, 0, 0,0,0,0},
+								{"Duratool DO3122", 5, 11, 8, 1, 1, 0, 1, 0, 0,0,0,0},
 
-							  {"ELV M9803R", 5, 4, 7, 1, 1, 1, 1, 0, 0,1,1,1},       // no image
+							  {"ELV M9803R", 5, 4, 7, 1, 1, 1, 1, 0, 0,1,1,1},
 
-							  {"HoldPeak HP-90EPC", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1}, // no image
+							  {"HoldPeak HP-90EPC", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},
 
-							  {"Iso-Tech IDM 73", 6, 6, 7, 1, 1, 2, 8, 0, 0,1,1,1},   // no image
+							  {"Iso-Tech IDM 73", 6, 6, 7, 1, 1, 2, 8, 0, 0,1,1,1},
 
 							  {"MASTECH MAS-343", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
 							  {"MASTECH MAS-345", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
@@ -94,7 +100,7 @@ struct DMMInfo dmm_info[] = {
 							  {"McVoice M-980T", 5, 4, 7, 1, 1, 0, 1, 0, 0,1,1,1},
 
 							  {"Metex M-3660D", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
-							  {"Metex M-3830D", 1, 0, 7, 2, 4, 0, 1, 0, 0,1,1,1},      // no image
+							  {"Metex M-3830D", 1, 0, 7, 2, 4, 0, 1, 0, 0,1,1,1},
 							  {"Metex M-3840D", 1, 0, 7, 2, 4, 0, 1, 0, 0,1,1,1},
 							  {"Metex M-3850D", 1, 0, 7, 2, 4, 0, 1, 0, 0,1,1,1},
 							  {"Metex M-3850M", 5, 0, 7, 2, 4, 0, 1, 0, 0,1,1,1},
@@ -112,10 +118,10 @@ struct DMMInfo dmm_info[] = {
 							  {"PeakTech 4015A", 5, 0, 7, 2, 4, 0, 4, 0, 0,1,1,1},
 							  {"PeakTech 4360", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
 							  {"PeakTech 4390", 5, 0, 7, 2, 4, 0, 1, 0, 0,1,1,1},
-							  {"PeakTech 451", 0, 1, 7, 2, 1, 0, 1, 0, 0,1,1,1},       // no image
+							  {"PeakTech 451", 0, 1, 7, 2, 1, 0, 1, 0, 0,1,1,1},
 
 							  {"Radioshack 22-805 DMM", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
-							  {"Radioshack RS22-168A", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},   // no image
+							  {"Radioshack RS22-168A", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
 							  {"Radioshack 22-812", 4, 9, 8, 1, 1, 0, 1, 0, 0,1,1,1},
 
 							  {"TekPower TP4000ZC", 3, 8, 8, 1, 1, 0, 1, 0, 0,1,1,1},
@@ -126,15 +132,18 @@ struct DMMInfo dmm_info[] = {
 							  {"Sinometer MAS-343", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
 
 							  {"Uni-Trend UT30A", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},
-							  {"Uni-Trend UT30E", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},   // no image
-							  {"Uni-Trend UT61B", 3, 8, 8, 1, 1, 0, 1, 0, 0,1,1,1},   // no image
-							  {"Uni-Trend UT61D", 3, 8, 8, 1, 1, 0, 8, 0, 0,0,0,1},   // no image
-							  {"Uni-Trend UT61E", 6, 12, 7, 1, 1, 2, 10, 0, 0,0,0,1},   // no image
+							  {"Uni-Trend UT30E", 3, 5, 8, 1, 1, 0, 1, 0, 0,1,1,1},
+							  {"Uni-Trend UT61B", 3, 8, 8, 1, 1, 0, 1, 0, 0,1,1,1},
+							  {"Uni-Trend UT61C", 3, 8, 8, 1, 1, 0, 8, 0, 0,0,0,1},
+							  {"Uni-Trend UT61D", 3, 8, 8, 1, 1, 0, 8, 0, 0,0,0,1},
+							  {"Uni-Trend UT61E", 6, 12, 7, 1, 1, 2, 10, 0, 0,0,0,1},
 
-							  {"Voltcraft M-3610D", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},  // no image
+								{"Vichy VC99", 3, 8, 8, 1, 1, 0, 8, 0, 0,0,0,1},
+
+							  {"Voltcraft M-3610D", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
 							  {"Voltcraft M-3650D", 1, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
-							  {"Voltcraft M-3860", 5, 0, 7, 2, 4, 0, 2, 0, 0,1,1,1},   // no image
-							  {"Voltcraft M-4650CR", 1, 2, 7, 2, 1, 0, 2, 0 , 0,1,1,1}, // no image
+							  {"Voltcraft M-3860", 5, 0, 7, 2, 4, 0, 2, 0, 0,1,1,1},
+							  {"Voltcraft M-4650CR", 1, 2, 7, 2, 1, 0, 2, 0 , 0,1,1,1},
 							  {"Voltcraft M-4660", 1, 0, 7, 2, 4, 0, 3, 0, 0,1,1,1},
 							  {"Voltcraft ME-11", 0, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
 							  {"Voltcraft ME-22T", 3, 0, 7, 2, 1, 0, 1, 0, 0,1,1,1},
