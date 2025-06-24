@@ -99,6 +99,7 @@ class DisplayWid : public QWidget
 	  QBitmap	*m_minStr;
 	  QBitmap	*m_maxStr;
 	  QBitmap	*m_diode;
+	  QBitmap	*m_buzzer;
 	  QBitmap	*m_ac;
 	  QBitmap	*m_dc;
 	  QBitmap	*m_bar[7];

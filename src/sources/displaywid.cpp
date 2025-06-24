@@ -88,7 +88,8 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget( parent),
   m_maxStr =  BitmapHelper(":/Symbols/max_str.xpm");
 
   m_diode =  BitmapHelper(":/Symbols/diode.xpm");
-  m_ac =  BitmapHelper(":/Symbols/ac.xpm");
+  m_buzzer=  BitmapHelper(":/Symbols/buzzer.xpm");
+	m_ac =  BitmapHelper(":/Symbols/ac.xpm");
   m_dc =  BitmapHelper(":/Symbols/dc.xpm");
 
   m_hold =  BitmapHelper(":/Symbols/hold.xpm");
@@ -160,6 +161,7 @@ DisplayWid::~DisplayWid()
 	delete m_minStr;
 	delete m_maxStr;
 	delete m_diode;
+	delete m_buzzer;
 	delete m_ac;
 	delete m_dc;
 	delete m_bar[0];
@@ -342,6 +344,10 @@ void DisplayWid::paintEvent( QPaintEvent * )
 		if (m_mode[0] == "DI")
 		{
 			p.drawPixmap( 0, -36, *m_diode );
+		}
+		else if (m_mode[0] == "BUZ")
+		{
+			p.drawPixmap( 0, -36, *m_buzzer );
 		}
 		else if (m_mode[0] == "AC")
 		{
