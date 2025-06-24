@@ -430,7 +430,7 @@ void DMM::readVC940Continuous( const QByteArray & data, int id, ReadEvent::DataF
 	  unit = "A";
 	  break;
 	case 10:   // buzzer
-	  special = "OH";
+	  special = "BUZ";
 	  unit = "Ohm";
 	  val = insertCommaIT( val, 3 );
 	  break;
