@@ -1,6 +1,10 @@
 #include "rs22812.h"
 
 // https://sigrok.org/wiki/RadioShack_22-812
+static const bool registered = []() {
+  DmmDriver::m_configurations.push_back({"Radioshack", "22-812", "Radioshack 22-812", 4800, 9, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  return true;
+}();
 
 std::optional<DmmDriver::DmmResponse> DrvRS22812::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {

@@ -1,5 +1,14 @@
 #include "drivers/vc940.h"
 
+static const bool registered = []() {
+  DmmDriver::m_configurations.push_back({"Tenma", "72-7732", "Tenma 72-7732", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Uni-Trend", "UT71BCDE", "Uni-Trend UT71BCDE", 2400, 7, 7, 1, 1, 2, 200000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Voltcraft", "VC 920", "Voltcraft VC 920", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Voltcraft", "VC 940", "Voltcraft VC 940", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Voltcraft", "VC 960", "Voltcraft VC 960", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
+  return true;
+}();
+
 std::optional<DmmDriver::DmmResponse> DrvVC940::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};

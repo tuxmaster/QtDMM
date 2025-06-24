@@ -1,5 +1,10 @@
 #include "drivers/vc870.h"
 
+static const bool registered = []() {
+  DmmDriver::m_configurations.push_back({"Voltcraft", "VC 870", "Voltcraft VC 870", 9600, 10, 8, 1, 2, 0, 40000, 0, 0, 1, 1, 1});
+  return true;
+}();
+
 std::optional<DmmDriver::DmmResponse> DrvVC870::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   // Support for the Voltcraft VC870 digital multimeter was contributed by Florian Evers, florian-evers@gmx.de, under the "GPLv3 or later" licence

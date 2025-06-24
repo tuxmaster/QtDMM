@@ -27,23 +27,6 @@
 #include "ui_uidmmprefs.h"
 #include "readevent.h"
 
-struct DMMInfo
-{
-  const char *name;
-  int   baud;
-  int   protocol;
-  int   bits;
-  int   stopBits;
-  int   numValues;
-  int   parity;
-  int   display;
-  bool  externalSetup;
-  bool  rts;
-  bool  cts;
-  bool  dsr;
-  bool  dtr;
-};
-
 class DmmPrefs : public PrefWidget, private Ui::UIDmmPrefs
 {
   Q_OBJECT
@@ -53,37 +36,33 @@ public:
   QSerialPort::Parity	parity() const;
   QSerialPort::DataBits bits() const;
   QSerialPort::StopBits stopBits() const;
-  int					speed() const;
-  int					numValues() const;
-  bool					externalSetup() const;
-  bool					rts() const;
-  bool					cts() const;
-  bool					dsr() const;
-  bool					dtr() const;
+  int     speed() const;
+  int     numValues() const;
+  bool    externalSetup() const;
+  bool    rts() const;
+  bool    cts() const;
+  bool    dsr() const;
+  bool    dtr() const;
   ReadEvent::DataFormat	format() const;
-  int					display() const;
-  QString				dmmName() const;
-  QString				device() const;
-
-  QString				deviceListText() const;
+  int     display() const;
+  QString dmmName() const;
+  QString device() const;
+  QString deviceListText() const;
 
 public Q_SLOTS:
-  virtual void			defaultsSLOT() Q_DECL_OVERRIDE;
-  virtual void			factoryDefaultsSLOT() Q_DECL_OVERRIDE;
-  virtual void			applySLOT() Q_DECL_OVERRIDE;
+  virtual void defaultsSLOT() Q_DECL_OVERRIDE;
+  virtual void factoryDefaultsSLOT() Q_DECL_OVERRIDE;
+  virtual void applySLOT() Q_DECL_OVERRIDE;
 
 protected Q_SLOTS:
-  void					on_ui_model_activated(int);
-  void					on_ui_load_clicked();
-  void					on_ui_save_clicked();
-  void					on_ui_externalSetup_toggled();
+  void on_ui_model_activated(int);
+  void on_ui_load_clicked();
+  void on_ui_save_clicked();
+  void on_ui_externalSetup_toggled();
 
 protected:
-  QString				m_path;
+  QString m_path;
 
 private:
-  QStringListModel		*m_portlist;
-
+  QStringListModel *m_portlist;
 };
-
-

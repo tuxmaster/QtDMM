@@ -1,5 +1,20 @@
 #include "drivers/vc820.h"
-#include <iostream>
+
+static const bool registered = []() {
+  DmmDriver::m_configurations.push_back({"Digitek", "DT-9062", "Digitek DT-9062", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Digitek", "INO2513", "Digitek INO2513", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Digitech", "QM1462", "Digitech QM1462", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Digitech", "QM1538", "Digitech QM1538", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"HoldPeak", "HP-90EPC", "HoldPeak HP-90EPC", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"PeakTech", "3330", "PeakTech 3330", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Tenma", "72-7745", "Tenma 72-7745", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Uni-Trend", "UT30A", "Uni-Trend UT30A", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Uni-Trend", "UT30E", "Uni-Trend UT30E", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Voltcraft", "VC 820", "Voltcraft VC 820", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Voltcraft", "VC 840", "Voltcraft VC 840", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  return true;
+}();
+
 
 std::optional<DmmDriver::DmmResponse> DrvVC820::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {

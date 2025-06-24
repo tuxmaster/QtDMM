@@ -41,7 +41,7 @@ make -j $(nproc) || exit 1
 if [ -x qtdmm ]
 then
 	mkdir -p ../bin
-	cp qtdmm ../bin
+	cp qtdmm qtdmm*.qm ../bin
 	if ${INSTALL}
 	then
 		echo

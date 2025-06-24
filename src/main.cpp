@@ -80,7 +80,12 @@ int main(int argc, char **argv)
   if (!qtLoaded)
     qWarning() << "Could not load Qt translation!";
   if (!appLoaded)
-    qWarning() << "Could not load application translation!";
+  {
+    AppTranslationPath = "./";
+    appLoaded = AppTranslation.load(QString("%1_%2").arg(app.applicationName().toLower()).arg(QLocale::system().name()), AppTranslationPath);
+    if (!appLoaded)
+      qWarning() << "Could not load application translation!";
+  }
 
   if ((!AppTranslation.isEmpty()) && (!QtTranslation.isEmpty()))
   {

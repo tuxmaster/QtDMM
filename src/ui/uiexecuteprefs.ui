@@ -252,7 +252,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../Resources.qrc">
+           <iconset resource="../resources.qrc">
             <normaloff>:/Symbols/import.xpm</normaloff>:/Symbols/import.xpm</iconset>
           </property>
           <property name="autoDefault">
@@ -305,7 +305,7 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
   <include location="global">prefwidget.h</include>
  </includes>
  <resources>
-  <include location="../Resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections>
   <connection>

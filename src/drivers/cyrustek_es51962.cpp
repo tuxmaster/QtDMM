@@ -1,7 +1,9 @@
 #include "cyrustek_es51962.h"
 
+// possibly same proto as iso-tech.
+
 static const bool registered = []() {
-    DmmDriver::m_configurations.push_back(  {"Uni-Trend","U803","Uni-Trend UT803", 6, 12, 7, 1, 1, 2, 10, 0, 0,0,0,1});
+    DmmDriver::m_configurations.push_back(  {"Uni-Trend","U803","Uni-Trend UT803", 19200, 13, 7, 1, 1, 2, 6000, 0, 0,0,0,1});
     return true;
 }();
 

@@ -1,10 +1,18 @@
 #include "drivers/m9803r.h"
 
+
+static const bool registered = []() {
+  DmmDriver::m_configurations.push_back({"ELV", "M9803R", "ELV M9803R", 9600, 4, 7, 1, 1, 1, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"MASTECH", "M9803R", "MASTECH M9803R", 9600, 4, 7, 1, 1, 1, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"McVoice", "M-980T", "McVoice M-980T", 9600, 4, 7, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  return true;
+}();
+
 std::optional<DmmDriver::DmmResponse> DrvM9803R::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
   m_result.id     = id;
-	m_result.hold   = false;
+  m_result.hold   = false;
   m_result.range  = "";
 
   QString val;

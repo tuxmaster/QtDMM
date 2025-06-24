@@ -7,13 +7,46 @@
 
 #include "readevent.h"
 
+/**
+  description of dmminfo data
+     vendor
+     model
+     name (aka vendor+model)
+     baud (600, 1200, 1800, 2400, 4800, 9600, 19200)
+     protocol 0: 14 bytes polling 'D'
+              1: 11 bytes continuous [PeakTech]
+              2: 14 continuous
+              3: 15 continuous
+              4: 11 bin continuous (M9803R)
+              5: 14 bin continuous (VC820)
+              6: IsoTech
+              7: VC940
+              8: QM1537
+              9: 9 binary bytes continuous (22-812)
+             10: 23 bytes continuous (VC870)
+             11: 22 bytes continuous (DO3122)
+             12: 4 bytes half-ASCII (CyrustekES51922)
+     bits
+     stopBits
+     number of values (For DMM's that send several lines at once)
+     parity (0,1,2 - None,Even,Odd)
+     [don't ask for any logic behind the digits, changing would break configs]
+     display digits (2000, 4000, 6000, 20000, 22000, 40000, 50000, 100000, 200000, 400000, 1000000)
+     External device setup 0, 1
+     rts 0, 1
+     cts 0, 1
+     dsr 0, 1
+     dtr 0, 1
+**/
+
 class DmmDriver : public QObject
 {
   Q_OBJECT
 
 public:
-  struct DmmResponse
+  class DmmResponse
   {
+  public:
     double dval;
     QString val;
     QString unit;
@@ -29,8 +62,9 @@ public:
     int id2;
   };
 
-  struct DMMInfo
+  class DMMInfo
   {
+  public:
     QString vendor;
     QString model;
     QString name;

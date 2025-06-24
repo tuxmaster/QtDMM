@@ -1,5 +1,11 @@
 #include "drivers/do3122.h"
 
+static const bool registered = []() {
+  DmmDriver::m_configurations.push_back({"Duratool", "DO3122", "Duratool DO3122", 9600, 11, 8, 1, 1, 0, 4000, 0, 0, 0, 0, 0});
+  return true;
+}();
+
+
 std::optional<DmmDriver::DmmResponse> DrvDO3122::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
