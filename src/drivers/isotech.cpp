@@ -1,8 +1,8 @@
 #include "drivers/isotech.h"
 
 static const bool registered = []() {
-  DmmDriver::m_configurations.push_back({"Iso-Tech", "IDM 73", "Iso-Tech IDM 73", 19200, 6, 7, 1, 1, 2, 6000, 0, 0, 1, 1, 1});
-  DmmDriver::m_configurations.push_back({"Tenma", "72-1016", "Tenma 72-1016", 19200, 6, 7, 1, 2, 2, 6000, 0, 0, 1, 1, 1});
+  DmmDriver::addConfig({"Iso-Tech", "IDM 73", "Iso-Tech IDM 73", 19200, 6, 7, 1, 1, 2, 6000, 0, 0, 1, 1, 1});
+  DmmDriver::addConfig({"Tenma", "72-1016", "Tenma 72-1016", 19200, 6, 7, 1, 2, 2, 6000, 0, 0, 1, 1, 1});
   return true;
 }();
 

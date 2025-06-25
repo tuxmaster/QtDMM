@@ -70,6 +70,7 @@ void DMM::setPortSettings(QSerialPort::DataBits bits, QSerialPort::StopBits stop
 
 void DMM::setFormat(ReadEvent::DataFormat format)
 {
+  initDriver(format);
   m_readerThread->setFormat(format);
 }
 
@@ -89,6 +90,28 @@ void DMM::setDevice(const QString &device)
 {
   m_device = device;
 }
+
+void DMM::initDriver( ReadEvent::DataFormat df)
+{
+  switch (df)
+  {
+    case ReadEvent::Metex14:
+    case ReadEvent::PeakTech10:
+    case ReadEvent::Voltcraft14Continuous:
+    case ReadEvent::Voltcraft15Continuous: createDriver<DrvAscii>();   break;
+    case ReadEvent::M9803RContinuous:      createDriver<DrvM9803R>();  break;
+    case ReadEvent::VC820Continuous:       createDriver<DrvVC820>();   break;
+    case ReadEvent::VC870Continuous:       createDriver<DrvVC870>();   break;
+    case ReadEvent::IsoTech:               createDriver<DrvIsoTech>(); break;
+    case ReadEvent::VC940Continuous:       createDriver<DrvVC940>();   break;
+    case ReadEvent::QM1537Continuous:      createDriver<DrvQM1537>();  break;
+    case ReadEvent::RS22812Continuous:     createDriver<DrvRS22812>(); break;
+    case ReadEvent::DO3122Continuous:      createDriver<DrvDO3122>();  break;
+    case ReadEvent::CyrustekES51922:       createDriver<DrvCyrusTekES51922>(); break;
+    case ReadEvent::CyrustekES51962:       createDriver<DrvCyrusTekES51962>(); break;
+  }
+}
+
 
 bool DMM::open()
 {
@@ -178,23 +201,19 @@ void DMM::readEventSLOT(const QByteArray &data, int id, ReadEvent::DataFormat df
         fprintf(stdout, "%02X ", data[i] & 0x0ff);
       fprintf(stdout, "\r\n");
     }
-    switch (df)
+
+    // call decode of current driver to convert data into distinct values
+    if (auto r = m_driver->decode(data, id, df); r)
     {
-      case ReadEvent::Metex14:
-      case ReadEvent::PeakTech10:
-      case ReadEvent::Voltcraft14Continuous:
-      case ReadEvent::Voltcraft15Continuous: readDMM<DrvAscii>(data, id, df);   break;
-      case ReadEvent::M9803RContinuous:      readDMM<DrvM9803R>(data, id, df);  break;
-      case ReadEvent::VC820Continuous:       readDMM<DrvVC820>(data, id, df);   break;
-      case ReadEvent::VC870Continuous:       readDMM<DrvVC870>(data, id, df);   break;
-      case ReadEvent::IsoTech:               readDMM<DrvIsoTech>(data, id, df); break;
-      case ReadEvent::VC940Continuous:       readDMM<DrvVC940>(data, id, df);   break;
-      case ReadEvent::QM1537Continuous:      readDMM<DrvQM1537>(data, id, df);  break;
-      case ReadEvent::RS22812Continuous:     readDMM<DrvRS22812>(data, id, df); break;
-      case ReadEvent::DO3122Continuous:      readDMM<DrvDO3122>(data, id, df);  break;
-      case ReadEvent::CyrustekES51922:       readDMM<DrvCyrusTekES51922>(data, id, df); break;
-      case ReadEvent::CyrustekES51962:       readDMM<DrvCyrusTekES51962>(data, id, df); break;
+      Q_EMIT value(r->dval, r->val, r->unit, r->special, r->range, r->hold, r->showBar, r->id);
+      if (r->id2 > 0)
+      {
+        Q_EMIT value(r->dval2, r->val2, r->unit2, r->special, r->range, r->hold, r->showBar, r->id2);
+      }
+      m_error = r->error.isEmpty() ? tr("Connected %1").arg(m_device) : tr("%1 %2").arg(r->error, m_device);
     }
+    else
+      m_error = tr("Error %1").arg(m_device);
   }
   else
   {

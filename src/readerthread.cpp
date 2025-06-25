@@ -38,7 +38,8 @@ ReaderThread::ReaderThread(QObject *receiver) :
   m_sendRequest(true),
   m_id(0),
   m_numValues(1),
-  m_consoleLogging(false)
+  m_consoleLogging(false),
+  m_driver(Q_NULLPTR)
 {
   m_serialPort = Q_NULLPTR;
 }
@@ -69,6 +70,11 @@ void ReaderThread::setHandle(QSerialPort *handle)
 void ReaderThread::setConsoleLogging(bool on)
 {
   m_consoleLogging = on;
+}
+
+void ReaderThread::setDriver(DmmDriver* driver)
+{
+  m_driver = driver;
 }
 
 void ReaderThread::socketClose()
@@ -185,7 +191,12 @@ void ReaderThread::readDMM()
 
 bool ReaderThread::checkFormat()
 {
-  if (m_format == ReadEvent::Metex14)
+
+  if(m_driver != Q_NULLPTR && m_driver->checkFormat(m_fifo,m_length,m_format))
+  {
+    return true;
+  }
+  else if (m_format == ReadEvent::Metex14)
   {
     if (m_fifo[m_length] == 0x0d)
       return true;
@@ -239,16 +250,6 @@ bool ReaderThread::checkFormat()
   else if (m_format == ReadEvent::QM1537Continuous)
   {
     if (m_fifo[m_length] == 0x0d)
-      return true;
-  }
-  else if (m_format == ReadEvent::CyrustekES51922)
-  {
-    if ((m_length) && (m_fifo[m_length - 1] == 0x0d) && (m_fifo[m_length] == 0x0a))
-      return true;
-  }
-  else if (m_format == ReadEvent::CyrustekES51962 && m_length >= 12)
-  {
-    if (m_fifo[(m_length-1+FIFO_LENGTH)%FIFO_LENGTH] == 0x0d && m_fifo[m_length] == 0x0a)
       return true;
   }
   else if (m_format == ReadEvent::RS22812Continuous)

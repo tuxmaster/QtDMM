@@ -83,9 +83,11 @@ public:
   };
 
   virtual ~DmmDriver() = default;
+  virtual bool checkFormat(const char* data, size_t len, ReadEvent::DataFormat df) = 0; // TBD use qbytearray or similar instead for data
   virtual std::optional<DmmDriver::DmmResponse> decode(const QByteArray &data, int id, ReadEvent::DataFormat df) = 0;
   static std::vector<DMMInfo> getDeviceConfigurations() { return m_configurations; };
-  static std::vector<DMMInfo> m_configurations;
+  static void addConfig(DMMInfo info);
+
 
 protected:
   QString insertComma(const QString &val, int pos);
@@ -94,5 +96,6 @@ protected:
   bool bit(const QByteArray &data, int byte, int bit) const;
   QString toString() const;
 
+  static std::vector<DMMInfo> m_configurations;
   DmmResponse m_result;
 };

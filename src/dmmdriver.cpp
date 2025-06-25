@@ -2,6 +2,12 @@
 
 std::vector<DmmDriver::DMMInfo> DmmDriver::m_configurations;
 
+void DmmDriver::addConfig(DMMInfo info)
+{
+  DmmDriver::m_configurations.push_back(info);
+}
+
+
 QString DmmDriver::insertComma(const QString &val, int pos)
 {
   return val.left(2 + pos) + "." + val.right(4 - pos);

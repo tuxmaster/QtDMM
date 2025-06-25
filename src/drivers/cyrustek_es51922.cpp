@@ -1,9 +1,14 @@
 #include "cyrustek_es51922.h"
 
 static const bool registered = []() {
-    DmmDriver::m_configurations.push_back(  {"Uni-Trend","UT61E","Uni-Trend UT61E", 19200, 12, 7, 1, 1, 2, 22000, 0, 0,0,0,1});
-    return true;
+  DmmDriver::addConfig(  {"Uni-Trend","UT61E","Uni-Trend UT61E", 19200, 12, 7, 1, 1, 2, 22000, 0, 0,0,0,1});
+  return true;
 }();
+
+bool DrvCyrusTekES51922::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+{
+  return (df == ReadEvent::CyrustekES51922 && (len) && (data[len - 1] == 0x0d) && (data[len] == 0x0a));
+}
 
 std::optional<DmmDriver::DmmResponse> DrvCyrusTekES51922::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {

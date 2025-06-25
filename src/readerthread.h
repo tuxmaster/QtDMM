@@ -24,8 +24,7 @@
 
 #include <QtCore>
 #include "readevent.h"
-
-#define FIFO_LENGTH 100
+#include "dmmdriver.h"
 
 class QSerialPort;
 class ReaderThread : public QObject
@@ -46,6 +45,7 @@ public:
   void        setHandle(QSerialPort *handle);
   void        setFormat(ReadEvent::DataFormat);
   void        setConsoleLogging(bool on);
+  void        setDriver(DmmDriver* driver);
 
   ReadStatus  status() const  { return m_status;  }
   void        setNumValues(int num)  { m_numValues = num; }
@@ -54,7 +54,7 @@ Q_SIGNALS:
   void        readEvent(const QByteArray &, int id, ReadEvent::DataFormat df);
 
 protected:
-  QObject              *m_receiver;
+  QObject*              m_receiver;
   ReadStatus            m_status;
   bool                  m_readValue;
   char                  m_fifo[FIFO_LENGTH];
@@ -64,7 +64,7 @@ protected:
   int                   m_id;
   int                   m_numValues;
   bool                  m_consoleLogging;
-
+  DmmDriver*            m_driver;
   void readDMM();
   void readMetex14();
 

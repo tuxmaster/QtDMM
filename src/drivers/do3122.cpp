@@ -1,7 +1,7 @@
 #include "drivers/do3122.h"
 
 static const bool registered = []() {
-  DmmDriver::m_configurations.push_back({"Duratool", "DO3122", "Duratool DO3122", 9600, 11, 8, 1, 1, 0, 4000, 0, 0, 0, 0, 0});
+  DmmDriver::addConfig({"Duratool", "DO3122", "Duratool DO3122", 9600, 11, 8, 1, 1, 0, 4000, 0, 0, 0, 0, 0});
   return true;
 }();
 

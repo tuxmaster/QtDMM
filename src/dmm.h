@@ -55,6 +55,7 @@ Q_SIGNALS:
   void    error(const QString &);
 
 protected:
+  void                  initDriver( ReadEvent::DataFormat df);
   QSerialPort          *m_handle;
   int                   m_speed;
   QSerialPort::Parity   m_parity;
@@ -77,28 +78,16 @@ protected:
 
   void                  timerEvent(QTimerEvent *) Q_DECL_OVERRIDE;
 
-
   template<typename DriverType>
-  void readDMM(const QByteArray &data, int id, ReadEvent::DataFormat df)
+  void createDriver()
   {
     if (auto *p = dynamic_cast<DriverType *>(m_driver); !p)
     {
       delete m_driver;
       m_driver = new DriverType();
+      m_readerThread->setDriver(m_driver);
     }
-
-    if (auto r = m_driver->decode(data, id, df); r)
-    {
-      Q_EMIT value(r->dval, r->val, r->unit, r->special, r->range, r->hold, r->showBar, r->id);
-      if (r->id2 > 0)
-      {
-        Q_EMIT value(r->dval2, r->val2, r->unit2, r->special, r->range, r->hold, r->showBar, r->id2);
-      }
-      m_error = r->error.isEmpty() ? tr("Connected %1").arg(m_device) : tr("%1 %2").arg(r->error, m_device);
-    }
-    else
-      m_error = tr("Error %1").arg(m_device);
-  }
+  };
 
 protected Q_SLOTS:
   void readEventSLOT(const QByteArray &str, int id, ReadEvent::DataFormat df);
