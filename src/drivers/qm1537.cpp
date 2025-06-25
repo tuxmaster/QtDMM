@@ -27,10 +27,8 @@ std::optional<DmmDriver::DmmResponse> DrvQM1537::decode(const QByteArray &data, 
 
   if (pStr[0] != 0x0A)
     return m_result;
-  if (pStr[1] == '-')
-    val = " -";
-  else
-    val = "  ";
+
+  val = (pStr[1] == '-') ? " -" : val = "  ";
 
   if ((pStr[2] == ';') &&
       (pStr[3] == '0') &&
@@ -45,7 +43,6 @@ std::optional<DmmDriver::DmmResponse> DrvQM1537::decode(const QByteArray &data, 
     val += pStr[5];
   }
 
-  bool showBar = true;
   bool doACDC = false;
   bool doUnits = true;
 
@@ -113,10 +110,7 @@ std::optional<DmmDriver::DmmResponse> DrvQM1537::decode(const QByteArray &data, 
 
   if (doACDC)
   {
-    if (pStr[8] & 0x08)
-      special = "AC";
-    else
-      special = "DC";
+    special = (pStr[8] & 0x08) ? "AC" : "DC";
   }
 
   if (doUnits)
@@ -151,8 +145,8 @@ std::optional<DmmDriver::DmmResponse> DrvQM1537::decode(const QByteArray &data, 
   m_result.dval   = d_val;
   m_result.special= special;
   m_result.val    = val;
-  m_result.unit  = unit;
-  m_result.showBar  = showBar;
+  m_result.unit   = unit;
+  m_result.showBar= true;
 
  return m_result;
 }

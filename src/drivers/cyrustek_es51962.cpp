@@ -18,6 +18,7 @@ std::optional<DmmDriver::DmmResponse> DrvCyrusTekES51962::decode(const QByteArra
   m_result.special= bit(data,8,2) ? "AC"  :"DC";
   m_result.val    = bit(data,6,2) ? "-"   :"";
   bool ovl        = bit(data,6,0);
+  QString unit_temp= bit(data,6,3) ? "C" : "F";
   int function = data[5] & 0x0f;
   int range    = data[0] & 0x0f;
 
@@ -52,7 +53,7 @@ std::optional<DmmDriver::DmmResponse> DrvCyrusTekES51962::decode(const QByteArra
     case 0x4:
       m_result.special = "TE";
       m_result.showBar= false;
-      formatResultValue(0,"","C"); break;
+      formatResultValue(0,"",unit_temp); break;
       break;
     case 0x6:
       m_result.special = "CA";
@@ -82,15 +83,15 @@ std::optional<DmmDriver::DmmResponse> DrvCyrusTekES51962::decode(const QByteArra
       }
       break;
     case 0x9:
-      formatResultValue(2,"","A"); break;
+      formatResultValue(2,"","A");
       break;
     case 0x5:   // buzzer
       m_result.special = "BUZ";
-      formatResultValue(3,"","Ohm"); break;
+      formatResultValue(3,"","Ohm");
       break;
     case 0x1:
       m_result.special = "DI";
-      formatResultValue(1,"","V"); break;
+      formatResultValue(1,"","V");
       break;
     case 0x2:
       m_result.special = "FR";

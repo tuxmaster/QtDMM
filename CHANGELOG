@@ -3,13 +3,16 @@ xx/xx/20xx 0.9.8
 	   - Use gold linker.
 	   - Added HoldPeak HP-90EPC (tstenner).
 	   - Use pkgconfig for spec file.
-	   - Added UniTrend UT61B and UT61D and Metex-3840
+	   - Added UniTrend UT61B, UT61D and Metex-3840
 	     (ported from 0.9.2 original branch)
-	   - Added UniTrend UT61E (redpanther)
+	   - Added UT61E (redpanther), UT803, UT71B/C/D/E, UT60A/E
 	   - Fix compile for Windows using mingw
 	   - Code clean up
 	   - cleanup UI
-	   - Add support for hold and auto/manual range
+	   - Add support for hold, auto/manual range, continuity test, combined ac+dc
+	     Fahrenheit
+	   - Qt6 support
+	   - switch to cmake
 
 30/10/2016 0.9.7
 	   - Added Voltcraft VC870 (Florian Evers)

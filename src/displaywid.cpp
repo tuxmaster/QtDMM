@@ -57,6 +57,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_bigDBM =  BitmapHelper(":/Symbols/DBM.xpm");
   m_bigOhm =  BitmapHelper(":/Symbols/Ohm.xpm");
   m_bigDeg =  BitmapHelper(":/Symbols/deg.xpm");
+  m_bigDegF =  BitmapHelper(":/Symbols/degf.xpm");
   m_bigPercent =  BitmapHelper(":/Symbols/percent.xpm");
 
   m_smallDigit =  BitmapHelper(":/Symbols/numbers_small.xpm");
@@ -82,6 +83,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_smallDBM =  BitmapHelper(":/Symbols/DBM_small.xpm");
   m_smallOhm =  BitmapHelper(":/Symbols/Ohm_small.xpm");
   m_smallDeg =  BitmapHelper(":/Symbols/deg_small.xpm");
+  m_smallDegF =  BitmapHelper(":/Symbols/degf_small.xpm");
   m_smallPercent =  BitmapHelper(":/Symbols/percent_small.xpm");
 
   m_minStr =  BitmapHelper(":/Symbols/min_str.xpm");
@@ -134,6 +136,7 @@ DisplayWid::~DisplayWid()
   delete m_bigDBM;
   delete m_bigOhm;
   delete m_bigDeg;
+  delete m_bigDegF;
   delete m_bigPercent;
   delete m_smallDigit;
   delete m_smallSpecialChar;
@@ -157,6 +160,7 @@ DisplayWid::~DisplayWid()
   delete m_smallDBM;
   delete m_smallOhm;
   delete m_smallDeg;
+  delete m_smallDegF;
   delete m_smallPercent;
   delete m_minStr;
   delete m_maxStr;
@@ -487,6 +491,7 @@ void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
   {
     { "Ohm",    m_bigOhm },
     { "C",      m_bigDeg },
+    { "dF",     m_bigDegF },
     { "Hz",     m_bigHz },
     { "F",      m_bigF },      // not Fahrenheit
     { "H",      m_bigH },
@@ -533,6 +538,7 @@ void DisplayWid::drawSmallUnit(QPainter *p, const QString &str)
   {
     { "Ohm",     m_smallOhm },
     { "C",       m_smallDeg },
+    { "dF",      m_smallDegF },
     { "Hz",      m_smallHz },
     { "F",       m_smallF },
     { "H",       m_smallH },

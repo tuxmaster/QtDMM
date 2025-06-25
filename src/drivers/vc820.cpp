@@ -10,6 +10,8 @@ static const bool registered = []() {
   DmmDriver::m_configurations.push_back({"Tenma", "72-7745", "Tenma 72-7745", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
   DmmDriver::m_configurations.push_back({"Uni-Trend", "UT30A", "Uni-Trend UT30A", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
   DmmDriver::m_configurations.push_back({"Uni-Trend", "UT30E", "Uni-Trend UT30E", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Uni-Trend", "UT60A", "Uni-Trend UT30A", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 0, 0, 1});
+  DmmDriver::m_configurations.push_back({"Uni-Trend", "UT60E", "Uni-Trend UT30E", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 0, 0, 1});
   DmmDriver::m_configurations.push_back({"Voltcraft", "VC 820", "Voltcraft VC 820", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
   DmmDriver::m_configurations.push_back({"Voltcraft", "VC 840", "Voltcraft VC 840", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
   return true;

@@ -2,7 +2,8 @@
 
 static const bool registered = []() {
   DmmDriver::m_configurations.push_back({"Tenma", "72-7732", "Tenma 72-7732", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
-  DmmDriver::m_configurations.push_back({"Uni-Trend", "UT71BCDE", "Uni-Trend UT71BCDE", 2400, 7, 7, 1, 1, 2, 200000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Uni-Trend", "UT71B", "Uni-Trend UT71B", 2400, 7, 7, 1, 1, 2, 200000, 0, 0, 1, 1, 1});
+  DmmDriver::m_configurations.push_back({"Uni-Trend", "UT71CDE", "Uni-Trend UT71CDE", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
   DmmDriver::m_configurations.push_back({"Voltcraft", "VC 920", "Voltcraft VC 920", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
   DmmDriver::m_configurations.push_back({"Voltcraft", "VC 940", "Voltcraft VC 940", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
   DmmDriver::m_configurations.push_back({"Voltcraft", "VC 960", "Voltcraft VC 960", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
@@ -13,262 +14,110 @@ std::optional<DmmDriver::DmmResponse> DrvVC940::decode(const QByteArray &data, i
 {
   m_result = {};
   m_result.id     = id;
-	m_result.showBar = true;
+  m_result.showBar = true;
   m_result.hold   = false;
-  m_result.range  = "";
+  m_result.range  = bit(data,8,0) ? "AUTO":"MANU";
+  m_result.special= bit(data,7,0) ? "AC"  :"DC";
+  m_result.special+= bit(data,7,1) ? "DC" : "";
 
-  QString val = " ";
-  QString special;
-  QString unit;
-
-  QString str(data);
-
-  double scale = 1.0;
 
   int function = data[6] & 0x0f;
   int range    = data[5] & 0x0f;
-  int mode     = data[7];
   int mode2    = data[8];
+  bool neg     = bit(data,8,3);
 
-  if (function != 12 && mode2 & 0x04) val = "-";
+  if (function != 0xC && neg)
+    m_result.val = "-";
 
+  QString str(data);
   for (int i = 0; i < 4; ++i)
-    val += str[i];
+    m_result.val += str[i];
   if (data[4] != 'A')
-    val += str[4];
+    m_result.val += str[4];
+
   switch (function)
   {
-    case 0:
-      val = insertCommaIT(val, 3);
-      special = "AC";
-      unit = "mV";
-      scale = 1e-3;
-      break;
-    case 1:
-      val = insertCommaIT(val, range);
-      special = "DC";
-      unit = "V";
-      break;
-    case 2:
-      val = insertCommaIT(val, range);
-      special = "AC";
-      unit = "V";
-      break;
-    case 3:
-      val = insertCommaIT(val, 3);
-      special = "DC";
-      unit = "mV";
-      scale = 1e-3;
-      break;
-    case 4:
-      unit = "Ohm";
+    case 0x0:formatResultValue(3,"m","V"); break;
+    case 0x1:formatResultValue(range,"","V");  m_result.special = "DC"; break;
+    case 0x2:formatResultValue(range,"","V");  m_result.special = "AC"; break;
+    case 0x3:formatResultValue(range,"m","V"); m_result.special = "DC"; break;
+    case 0x4:
+      m_result.special = "OH";
       switch (range)
       {
-        case 1:
-          val = insertCommaIT(val, 3);
-          break;
-        case 2:
-          val = insertCommaIT(val, 1);
-          unit = "kOhm";
-          scale = 1e3;
-          break;
-        case 3:
-          val = insertCommaIT(val, 2);
-          unit = "kOhm";
-          scale = 1e3;
-          break;
-        case 4:
-          val = insertCommaIT(val, 3);
-          unit = "kOhm";
-          scale = 1e3;
-          break;
-        case 5:
-          val = insertCommaIT(val, 1);
-          unit = "MOhm";
-          scale = 1e6;
-          break;
-        case 6:
-          val = insertCommaIT(val, 2);
-          unit = "MOhm";
-          scale = 1e6;
-          break;
+        case 1:formatResultValue(3,"","Ohm");  break;
+        case 2:formatResultValue(1,"k","Ohm"); break;
+        case 3:formatResultValue(2,"k","Ohm"); break;
+        case 4:formatResultValue(3,"k","Ohm"); break;
+        case 5:formatResultValue(1,"M","Ohm"); break;
+        case 6:formatResultValue(2,"M","Ohm"); break;
       }
-      special = "OH";
       break;
-    case 5:
-      unit = "F";
+    case 0x5:
+      m_result.special = "CA";
       switch (range)
       {
-        case 1:
-          val = insertCommaIT(val, 2);
-          unit = "nF";
-          scale = 1e-9;
-          break;
-        case 2:
-          val = insertCommaIT(val, 3);
-          unit = "nF";
-          scale = 1e-9;
-          break;
-        case 3:
-          val = insertCommaIT(val, 1);
-          unit = "uF";
-          scale = 1e-6;
-          break;
-        case 4:
-          val = insertCommaIT(val, 2);
-          unit = "uF";
-          scale = 1e-6;
-          break;
-        case 5:
-          val = insertCommaIT(val, 3);
-          unit = "uF";
-          scale = 1e-6;
-          break;
-        case 6:
-          val = insertCommaIT(val, 4);
-          unit = "uF";
-          scale = 1e-6;
-          break;
-        case 7:
-          val = insertCommaIT(val, 2);
-          unit = "mF";
-          scale = 1e-3;
-          break;
+        case 1:formatResultValue(2,"n","F"); break;
+        case 2:formatResultValue(3,"n","F"); break;
+        case 3:formatResultValue(1,"u","F"); break;
+        case 4:formatResultValue(2,"u","F"); break;
+        case 5:formatResultValue(3,"u","F"); break;
+        case 6:formatResultValue(4,"u","F"); break;
+        case 7:formatResultValue(1,"m","F"); break;
       }
-      special = "CA";
       break;
-    case 6:
-      special = "TE";
-      unit = "C";
-      val = insertCommaIT(val, 4);
-      break;
-    case 7:
-      if (mode & 0x01)
-      {
-        // can't handle AC+DC
-        special = "AC";
-      }
-      else
-        special = "DC";
+    case 0x6:formatResultValue(4,"","C");  m_result.special = "TE"; break;
+    case 0x7:
       switch (range)
       {
-        case 0:
-          val = insertCommaIT(val, 3);
-          break;
-        case 1:
-          val = insertCommaIT(val, 4);
-          break;
+        case 0:formatResultValue(3,"u","A"); break;
+        case 1:formatResultValue(4,"u","A"); break;
       }
-      unit = "uA";
-      scale = 1e-6;
       break;
-    case 8:
-      if (mode & 0x01)
-      {
-        // can't handle AC+DC
-        special = "AC";
-      }
-      else
-        special = "DC";
+    case 0x8:
       switch (range)
       {
-        case 0:
-          val = insertCommaIT(val, 2);
-          break;
-        case 1:
-          val = insertCommaIT(val, 3);
-          break;
+        case 0:formatResultValue(2,"m","A"); break;
+        case 1:formatResultValue(3,"m","A"); break;
       }
-      unit = "mA";
-      scale = 1e-3;
       break;
-    case 9:
-      if (mode & 0x01)
+    case 0x9: formatResultValue(2,"","A"); break;
+    case 0xA:
+      m_result.special = "BUZ";
+      formatResultValue(3,"","Ohm");
+      break;
+    case 0xB:
+      m_result.special = "DI";
+      formatResultValue(1,"","V");
+      break;
+    case 0xC:
+      if (neg)
       {
-        // can't handle AC+DC
-        special = "AC";
-      }
-      else
-        special = "DC";
-      val = insertCommaIT(val, 2);
-      unit = "A";
-      break;
-    case 10:   // buzzer
-      special = "BUZ";
-      unit = "Ohm";
-      val = insertCommaIT(val, 3);
-      break;
-    case 11:
-      special = "DI";
-      unit = "V";
-      val = insertCommaIT(val, 1);
-      break;
-    case 12:
-      if (mode2 & 0x04)
-      {
-        special = "PC";
-        unit = "%";
-        val = insertCommaIT(val, 3);
+        formatResultValue(3,"","%");
+        m_result.special = "PC";
       }
       else
       {
-        special = "FR";
-        unit = "Hz";
+        m_result.special = "FR";
         switch (range)
         {
-          case 0:
-            val = insertCommaIT(val, 2);
-            break;
-          case 1:
-            val = insertCommaIT(val, 3);
-            break;
-          case 2:
-            val = insertCommaIT(val, 1);
-            unit = "kHz";
-            scale = 1e3;
-            break;
-          case 3:
-            val = insertCommaIT(val, 2);
-            unit = "kHz";
-            scale = 1e3;
-            break;
-          case 4:
-            val = insertCommaIT(val, 3);
-            unit = "kHz";
-            scale = 1e3;
-            break;
-          case 5:
-            val = insertCommaIT(val, 1);
-            unit = "MHz";
-            scale = 1e6;
-            break;
-          case 6:
-            val = insertCommaIT(val, 2);
-            unit = "MHz";
-            scale = 1e6;
-            break;
-          case 7:
-            val = insertCommaIT(val, 3);
-            unit = "MHz";
-            scale = 1e6;
-            break;
+          case 0:formatResultValue(2,"","Hz"); break;
+          case 1:formatResultValue(3,"","Hz"); break;
+          case 2:formatResultValue(1,"k","Hz"); break;
+          case 3:formatResultValue(2,"k","Hz"); break;
+          case 4:formatResultValue(3,"k","Hz"); break;
+          case 5:formatResultValue(1,"M","Hz"); break;
+          case 6:formatResultValue(2,"k","Hz"); break;
+          case 7:formatResultValue(3,"k","Hz"); break;
         }
       }
       break;
-    case 13:
-      special = "TE";
-      unit = "F";
-      val = insertCommaIT(val, 4);
+    case 0xD:
+      m_result.special = "TE";
+      formatResultValue(4,"","dF"); break;
       break;
-
   }
 
-  double d_val = val.toDouble() * scale;
-
-  m_result.dval   = d_val;
-  m_result.special= special;
-  m_result.val    = val;
-  m_result.unit  = unit;
 
   return m_result;
 }
