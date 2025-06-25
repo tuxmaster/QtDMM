@@ -5,7 +5,7 @@ Summary:	Application for dmm's
 Summary(de):	Anwendung für DMM's
 Group:		Applications/Engineering
 License:	GPLv3
-URL:		http://www.mtoussaint.de/qtdmm.html
+URL:		https://github.com/tuxmaster/QtDMM
 Source0:	%{name}-%{version}.tar.xz
 
 %global lname qtdmm

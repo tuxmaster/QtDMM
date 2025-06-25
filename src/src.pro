@@ -12,7 +12,7 @@ gcc {
 TEMPLATE        = app
 
 TARGET    = qtdmm
-VERSION   = 0.9.9
+VERSION   = 0.9.8
 DESTDIR   = ../bin
 
 UI_DIR=../tmp/ui

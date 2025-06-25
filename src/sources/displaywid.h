@@ -43,6 +43,9 @@ class DisplayWid : public QWidget
 	  void		setMode( int, const QString & );
 	  void		setDisplayMode( int, bool minMax, bool bar, int numValues );
 	  void		setShowBar( bool );
+	  void		setHold( bool );
+	  void		setAuto( bool );
+	  void		setManu( bool );
 
 	protected:
 	  QBitmap	*m_bigDigit;
@@ -100,6 +103,9 @@ class DisplayWid : public QWidget
 	  QBitmap	*m_ac;
 	  QBitmap	*m_dc;
 	  QBitmap	*m_bar[7];
+	  QBitmap	*m_hold;
+	  QBitmap	*m_auto;
+	  QBitmap	*m_manu;
 	  QString	m_value[4];
 	  QString	m_minValue;
 	  QString	m_maxValue;
@@ -111,6 +117,9 @@ class DisplayWid : public QWidget
 	  int		m_range;
 	  bool		m_showMinMax;
 	  bool		m_showBar;
+	  bool		m_showHold;
+	  bool		m_showAuto;
+	  bool		m_showManu;
 	  bool		m_paintBar;
 	  int		m_numValues;
 	  int		m_minMaxW;
