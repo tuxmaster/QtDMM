@@ -23,9 +23,10 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <QPen>
+#include <QRegExp>
 
 #include "dmmgraph.h"
-#include "Settings.h"
+#include "settings.h"
 
 
 DMMGraph::DMMGraph(QWidget *parent):DMMGraph(parent,Q_NULLPTR)
@@ -850,11 +851,19 @@ void DMMGraph::wheelEvent( QWheelEvent *ev )
 
 void DMMGraph::mousePressEvent( QMouseEvent *ev )
 {
-  if (ev->button() == Qt::LeftButton)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+  QPoint pos(qRound(ev->position().x()), qRound(ev->position().y()));
+  QPoint globalPos(qRound(ev->globalPosition().x()), qRound(ev->globalPosition().y()));
+#else
+  QPoint pos = ev->pos();
+  QPoint globalPos = ev->globalPos();
+#endif
+
+	if (ev->button() == Qt::LeftButton)
   {
 	if (m_scaleMin == m_scaleMax || m_scaleMin == 1e40)
 		return;
-	if (ev->x() < m_graphRect.x())
+	if (pos.x() < m_graphRect.x())
 		return;
 
 	m_mouseDown = true;
@@ -862,11 +871,11 @@ void DMMGraph::mousePressEvent( QMouseEvent *ev )
 
 	if (m_cursorMode == NoCursor)
 	{
-	  drawCursor( ev->pos() );
-	  m_mpos = ev->pos();
+	  drawCursor( pos );
+	  m_mpos = pos;
 
-	  m_infoBox->move( ev->globalPos().x()+4, ev->globalPos().y()+4 );
-	  fillInfoBox( ev->pos() );
+	  m_infoBox->move( globalPos.x()+4, globalPos.y()+4 );
+	  fillInfoBox( pos );
 	  m_infoBox->show();
 	}
   }
@@ -928,19 +937,28 @@ void DMMGraph::mousePressEvent( QMouseEvent *ev )
 	  //m_popup->insertItem( tr("Import data..."), IDImportData );
 	}
 
-	m_popup->popup( ev->globalPos() );
+	m_popup->popup( globalPos );
   }
-  else if (ev->button() == Qt::MidButton)
+  else if (ev->button() == Qt::MiddleButton)
   {
 	m_mouseDown = false;
 	m_mousePan = true;
 
-	m_mpos = ev->pos();
+	m_mpos = pos;
   }
 }
 
 void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+  QPoint pos(qRound(ev->position().x()), qRound(ev->position().y()));
+  QPoint globalPos(qRound(ev->globalPosition().x()), qRound(ev->globalPosition().y()));
+#else
+  QPoint pos = ev->pos();
+  QPoint globalPos = ev->globalPos();
+#endif
+
+
   if (m_scaleMin == m_scaleMax || m_scaleMin == 1e40)
 	  return;
 
@@ -962,17 +980,17 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
 	}
 	else
 	{
-	  if (abs(ev->y()-m_triggerThresholdY) < 3)
+	  if (abs(pos.y()-m_triggerThresholdY) < 3)
 	  {
 		setCursor( Qt::SplitVCursor );
 		m_cursorMode = Trigger;
 	  }
-	  else if (abs(ev->y()-m_externalThresholdY) < 3)
+	  else if (abs(pos.y()-m_externalThresholdY) < 3)
 	  {
 		setCursor( Qt::SplitVCursor );
 		m_cursorMode = External;
 	  }
-	  else if (abs(ev->y()-m_integrationThresholdY) < 3)
+	  else if (abs(pos.y()-m_integrationThresholdY) < 3)
 	  {
 		setCursor( Qt::SplitVCursor );
 		m_cursorMode = Integration;
@@ -986,7 +1004,7 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
   }
   else if (m_cursorMode == Trigger)
   {
-	m_triggerThresholdY = ev->y();
+	m_triggerThresholdY = pos.y();
 
 	if (m_mode == Raising)
 	{
@@ -1005,7 +1023,7 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
   }
   else if (m_cursorMode == External)
   {
-	m_externalThresholdY = ev->y();
+	m_externalThresholdY = pos.y();
 	m_externalThreshold = m_scaleMax - ( m_externalThresholdY - m_graphRect.y()) * m_yfactor;
 
 	Q_EMIT thresholdChanged( External, m_externalThreshold );
@@ -1013,7 +1031,7 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
   }
   else if (m_cursorMode == Integration)
   {
-	m_integrationThresholdY = ev->y();
+	m_integrationThresholdY = pos.y();
 	m_integrationThreshold = m_scaleMax - ( m_integrationThresholdY - m_graphRect.y()) * m_yfactor;
 
 	Q_EMIT thresholdChanged( Integration, m_integrationThreshold );
@@ -1022,18 +1040,18 @@ void DMMGraph::mouseMoveEvent( QMouseEvent *ev )
   else if (m_cursorMode == NoCursor)
   {
 	drawCursor( m_mpos );
-	if (ev->x() < 51)
+	if (pos.x() < 51)
 	{
-	  drawCursor( QPoint( 51, ev->y() ));
-	  m_mpos = QPoint( 51, ev->y() );
+	  drawCursor( QPoint( 51, pos.y() ));
+	  m_mpos = QPoint( 51, pos.y() );
 	}
 	else
 	{
-	  drawCursor( ev->pos() );
-	  m_mpos = ev->pos();
+	  drawCursor( pos );
+	  m_mpos = pos;
 	}
-	m_infoBox->move( ev->globalPos().x()+4, ev->globalPos().y()+4 );
-	fillInfoBox( ev->pos() );
+	m_infoBox->move( globalPos.x()+4, globalPos.y()+4 );
+	fillInfoBox( pos );
   }
 }
 
@@ -1171,18 +1189,27 @@ void DMMGraph::importDataSLOT()
 {
   if (m_dirty && m_alertUnsaved)
   {
-	QMessageBox question( tr("QtDMM: Unsaved data" ),
-						  tr("<font size=+2><b>Unsaved data</b></font><p>"
-							 "Importing data will overwrite your measured data"
-							 "<p>Do you want to export your unsaved data first?" ),
-							 QMessageBox::Information,
-							 QMessageBox::Yes | QMessageBox::Default,
-							 QMessageBox::No,
-							 QMessageBox::Cancel | QMessageBox::Escape );
+    QMessageBox question;
+    question.setWindowTitle(tr("QtDMM: Unsaved data"));
+    question.setText(tr("<font size=+2><b>Unsaved data</b></font><p>"
+                        "Importing data will overwrite your measured data"
+                        "<p>Do you want to export your unsaved data first?"));
+    question.setIcon(QMessageBox::Information);
+    question.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
 
-	question.setButtonText( QMessageBox::Yes, tr("Export data first") );
-	question.setButtonText( QMessageBox::No, tr("Import & overwrite data") );
-	question.setIconPixmap( QPixmap(":/Symbols/icon.xpm" ) );
+    // Standard-Buttons
+    question.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+    question.setDefaultButton(QMessageBox::Yes);
+    question.setEscapeButton(QMessageBox::Cancel);
+
+    // set button text (Qt5/6 compatible)
+    QAbstractButton* yesButton = question.button(QMessageBox::Yes);
+    if (yesButton)
+        yesButton->setText(tr("Export data first"));
+
+    QAbstractButton* noButton = question.button(QMessageBox::No);
+    if (noButton)
+        noButton->setText(tr("Import & overwrite data"));
 
 	switch (question.exec())
 	{
