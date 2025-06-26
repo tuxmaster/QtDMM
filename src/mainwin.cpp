@@ -215,18 +215,4 @@ void MainWin::setupIcons()
   {
     this->action_Connect->setIcon(checked ? iconConnectOn : iconConnectOff);
   });
-
-  this->action_Reset->setIcon(QIcon::fromTheme("view-refresh"));
-  this->action_Start->setIcon(QIcon::fromTheme("media-record"));
-  this->action_Stop->setIcon(QIcon::fromTheme("media-playback-stop"));
-  this->action_Print->setIcon(QIcon::fromTheme("document-print"));
-  this->action_Export->setIcon(QIcon::fromTheme("document-save"));
-  this->action_Import->setIcon(QIcon::fromTheme("document-open"));
-  this->action_Configure->setIcon(QIcon::fromTheme("preferences-system"));
-  this->action_Quit->setIcon(QIcon::fromTheme("application-exit"));
-  this->action_Clear->setIcon(QIcon::fromTheme("user-trash"));
-  QIcon helpIcon = QIcon::fromTheme("help-contextual");
-  if (helpIcon.isNull())
-    helpIcon = QIcon::fromTheme("help-contents");  // fallback
-  this->action_Direct_help->setIcon(helpIcon);
 }
