@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=QtDMM
 Exec=qtdmm
-Icon=/usr/share/pixmaps/qtdmm.png
+Icon=qtdmm
 Terminal=false
 Type=Application
 Categories=GNOME;KDE;Application;Utility;

@@ -158,24 +158,7 @@ void ReaderThread::socketNotifierSLOT()
 
 int  ReaderThread::formatLength() const
 {
-  switch (m_format)
-  {
-    case ReadEvent::Metex14:               return 14;
-    case ReadEvent::Voltcraft14Continuous: return 14;
-    case ReadEvent::Voltcraft15Continuous: return 15;
-    case ReadEvent::M9803RContinuous:      return 11;
-    case ReadEvent::PeakTech10:            return 11;
-    case ReadEvent::VC820Continuous:       return 14;
-    case ReadEvent::VC870Continuous:       return 23;
-    case ReadEvent::IsoTech:               return 22;
-    case ReadEvent::VC940Continuous:       return 11;
-    case ReadEvent::QM1537Continuous:      return 14;
-    case ReadEvent::RS22812Continuous:     return 9;
-    case ReadEvent::DO3122Continuous:      return 22;
-    case ReadEvent::CyrustekES51922:       return 14;
-    case ReadEvent::CyrustekES51962:       return 11;
-    default:                               return 0;
-  }
+  return (m_driver == Q_NULLPTR) ? 0 : m_driver->getPacketLength(m_format );
 }
 
 void ReaderThread::readDMM()

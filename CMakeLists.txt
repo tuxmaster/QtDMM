@@ -15,7 +15,7 @@ include_directories(src)
 file(GLOB_RECURSE UI_FILES CONFIGURE_DEPENDS src/ui/*.ui)
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp src/*.h )
 
-find_package(Qt6 ${QT_MIN_VERSION} COMPONENTS ${QT_COMPONENTS} Core5Compat QUIET)
+find_package(Qt6 ${QT_MIN_VERSION} COMPONENTS ${QT_COMPONENTS} QUIET)
 if(Qt6_FOUND AND NOT FORCE_QT5)
 	message(STATUS "Building with Qt6")
 	find_package(Qt6 REQUIRED COMPONENTS ${QT_COMPONENTS})
@@ -48,12 +48,10 @@ target_link_libraries(${PROJECT_NAME}
 	${QT_NAMESPACE}::PrintSupport
 )
 
-if(Qt6_FOUND)
-	target_link_libraries(${PROJECT_NAME} ${QT_NAMESPACE}::Core5Compat)
-endif()
-
 install(TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION bin
 	ARCHIVE DESTINATION lib
 )
+
+include(deploy.cmake)
 

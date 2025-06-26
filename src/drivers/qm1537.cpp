@@ -100,6 +100,18 @@ std::optional<DmmDriver::DmmResponse> DrvQM1537::decode(const QByteArray &data, 
     unit = "F";
     special = "CA";
   }
+/*  else if (pStr[11] & 0x02)
+  {
+    // Temperatur C
+    unit = "C";
+    special = "TE";
+  }
+  else if (pStr[11] & 0x01)
+  {
+    // Temperatur F
+    unit = "dF";
+    special = "TE";
+  }*/
   else if (pStr[10] & 0x02)
   {
     /* Duty cycle */

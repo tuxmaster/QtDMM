@@ -20,7 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include <math.h>
 #include "engnumbervalidator.h"
@@ -33,20 +33,20 @@ EngNumberValidator::EngNumberValidator(QObject *parent) : QValidator(parent)
 //
 QValidator::State EngNumberValidator::validate(QString &input, int &pos) const
 {
-  static QRegExp doubleRe("-?\\d+\\.?\\d*");
-  static QRegExp fullRe("-?\\d+\\.?\\d*[munpkMGT]?");
+  static const QRegularExpression doubleRe(R"(^-?\d+\.?\d*$)");
+  static const QRegularExpression fullRe(R"(^-?\d+\.?\d*[munpkMGT]?$)");
 
   input = input.trimmed();
-  pos = qMin(static_cast<int>(input.length()), pos);
+  pos = qMin(input.length(), pos);
 
-  // mt: changed
-  if (fullRe.exactMatch(input))
+  if (fullRe.match(input).hasMatch())
     return Acceptable;
-  if (doubleRe.exactMatch(input))
+  if (doubleRe.match(input).hasMatch())
     return Intermediate;
 
   return Invalid;
 }
+
 
 double EngNumberValidator::value(const QString &string)
 {

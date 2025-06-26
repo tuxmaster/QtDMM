@@ -23,7 +23,7 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <QPen>
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include "dmmgraph.h"
 #include "settings.h"
@@ -1246,9 +1246,8 @@ void DMMGraph::importDataSLOT()
 
       if (!line.isNull())
       {
-        QRegExp re("[0-9]+\\.[0-9]+\\.[0-9]+\t[0-9]+:[0-9]+:[0-9]+\t[-]?[0-9]*\\.[0-9]+\t.*");
-        // mt: changed (ups, was obsolete in Qt3 already)
-        if (!re.exactMatch(line))
+        QRegularExpression re(R"(^\d+\.\d+\.\d+\t\d+:\d+:\d+\t-?\d*\.\d+\t.*$)");
+        if (!re.match(line).hasMatch())
         {
           Q_EMIT error(tr("Oops! Seems not to be a valid file"));
 
