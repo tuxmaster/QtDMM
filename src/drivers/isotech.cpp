@@ -6,9 +6,29 @@ static const bool registered = []() {
   return true;
 }();
 
+size_t DrvIsoTech::getPacketLength(ReadEvent::DataFormat df)
+{
+  return  (df == ReadEvent::IsoTech ? 22 : 0);
+}
+
+bool DrvIsoTech::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+{
+  if (df == ReadEvent::IsoTech && len >= 22)
+  {
+    for (int i = 0; i < 11; ++i)
+    {
+      if (data[len - 22 + i] != data[len - 22 + 11 + i])
+        return false;
+    }
+    if (data[len - 22 + 9] != 0x0d ||  data[len - 22 + 10] != 0x0a)
+      return false;
+    return true;
+  }
+  return false;
+}
+
 std::optional<DmmDriver::DmmResponse> DrvIsoTech::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
-
   m_result = {};
   m_result.id     = id;
 	m_result.showBar = true;

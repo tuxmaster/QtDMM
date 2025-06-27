@@ -12,6 +12,15 @@ static const bool registered = []() {
   return true;
 }();
 
+size_t DrvQM1537::getPacketLength(ReadEvent::DataFormat df)
+{
+  return  (df == ReadEvent::QM1537Continuous ? 14 : 0);
+}
+
+bool DrvQM1537::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+{
+  return (df == ReadEvent::QM1537Continuous && data[len] == 0x0d);
+}
 
 std::optional<DmmDriver::DmmResponse> DrvQM1537::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {

@@ -83,7 +83,7 @@ public:
   };
 
   virtual ~DmmDriver() = default;
-  virtual size_t                                getPacketLength(ReadEvent::DataFormat df);
+  virtual size_t                                getPacketLength(ReadEvent::DataFormat df) = 0;
   virtual bool                                  checkFormat(const char* data, size_t len, ReadEvent::DataFormat df) = 0; // TBD use qbytearray or similar instead for data
   virtual std::optional<DmmDriver::DmmResponse> decode(const QByteArray &data, int id, ReadEvent::DataFormat df) = 0;
 

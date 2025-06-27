@@ -23,7 +23,7 @@
 #include <QtGui>
 
 #include "dmm.h"
-#include "drivers/drivers.h"
+#include "drivers.h"
 
 #include <stdio.h>
 #include <iostream>

@@ -10,10 +10,19 @@ set(TRANSLATIONS "assets/translations/qtdmm_de.ts")
 set(RESOURCES "src/resources.qrc")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
 
-include_directories(src)
+include_directories(src ${CMAKE_BINARY_DIR})
 
-file(GLOB_RECURSE UI_FILES CONFIGURE_DEPENDS src/ui/*.ui)
+file(GLOB UI_FILES CONFIGURE_DEPENDS src/ui/*.ui)
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp src/*.h )
+file(GLOB DRV_HEADER_FILES CONFIGURE_DEPENDS src/drivers/*.h )
+
+set(DRIVER_HEADER_CONTENT "#pragma once\n\n")
+
+foreach(file_path IN LISTS DRV_HEADER_FILES)
+    get_filename_component(base_name "${file_path}" NAME)
+    set(DRIVER_HEADER_CONTENT "${DRIVER_HEADER_CONTENT}#include \"drivers/${base_name}\"\n")
+endforeach()
+file(WRITE "${CMAKE_BINARY_DIR}/drivers.h" "${DRIVER_HEADER_CONTENT}")
 
 find_package(Qt6 QUIET)
 if(Qt6_FOUND AND NOT FORCE_QT5)

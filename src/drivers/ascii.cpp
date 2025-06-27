@@ -45,6 +45,28 @@ static const bool registered = []() {
   return true;
 }();
 
+bool DrvAscii::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+{
+  switch(df)
+  {
+    case ReadEvent::Metex14:
+    case ReadEvent::Voltcraft14Continuous: return (data[len] == 0x0d);
+    case ReadEvent::Voltcraft15Continuous: return (data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+    default: return false;
+  }
+}
+
+size_t DrvAscii::getPacketLength(ReadEvent::DataFormat df)
+{
+  switch (df)
+  {
+    case ReadEvent::Metex14:               return 14;
+    case ReadEvent::Voltcraft14Continuous: return 14;
+    case ReadEvent::Voltcraft15Continuous: return 15;
+    default: return 0;
+  }
+}
+
 std::optional<DmmDriver::DmmResponse> DrvAscii::decode(const QByteArray &data, int id, ReadEvent::DataFormat df)
 {
   m_result = {};

@@ -10,6 +10,16 @@ static const bool registered = []() {
   return true;
 }();
 
+size_t DrvVC940::getPacketLength(ReadEvent::DataFormat df)
+{
+  return  (df == ReadEvent::VC940Continuous ? 11 : 0);
+}
+
+bool DrvVC940::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+{
+  return (df==ReadEvent::VC940Continuous && len >= 12 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+}
+
 std::optional<DmmDriver::DmmResponse> DrvVC940::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};

@@ -5,6 +5,16 @@ static const bool registered = []() {
   return true;
 }();
 
+bool DrvVC870::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+{
+  return (df == ReadEvent::VC870Continuous && (len) && (data[len - 1] == 0x0d) && (data[len] == 0x0a));
+}
+
+size_t DrvVC870::getPacketLength(ReadEvent::DataFormat df)
+{
+  return  (df == ReadEvent::VC870Continuous ? 23 : 0);
+}
+
 std::optional<DmmDriver::DmmResponse> DrvVC870::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   // Support for the Voltcraft VC870 digital multimeter was contributed by Florian Evers, florian-evers@gmx.de, under the "GPLv3 or later" licence

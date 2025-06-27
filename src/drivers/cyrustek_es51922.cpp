@@ -10,6 +10,11 @@ bool DrvCyrusTekES51922::checkFormat(const char* data, size_t len, ReadEvent::Da
   return (df == ReadEvent::CyrustekES51922 && (len) && (data[len - 1] == 0x0d) && (data[len] == 0x0a));
 }
 
+size_t DrvCyrusTekES51922::getPacketLength(ReadEvent::DataFormat df)
+{
+  return  (df == ReadEvent::CyrustekES51922 ? 14 : 0);
+}
+
 std::optional<DmmDriver::DmmResponse> DrvCyrusTekES51922::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};

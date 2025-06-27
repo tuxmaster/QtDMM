@@ -29,7 +29,7 @@
 
 #include "dmmprefs.h"
 #include "settings.h"
-#include "drivers/drivers.h"
+#include "drivers.h"
 
 
 std::vector<DmmDriver::DMMInfo> dmm_info = {};

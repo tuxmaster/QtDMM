@@ -5,6 +5,32 @@ static const bool registered = []() {
   return true;
 }();
 
+size_t DrvDO3122::getPacketLength(ReadEvent::DataFormat df)
+{
+  return  (df == ReadEvent::DO3122Continuous ? 22 : 0);
+}
+
+bool DrvDO3122::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+{
+  if (df == ReadEvent::DO3122Continuous)
+  {
+    if ((static_cast<uint8_t>(data[(len - 21 + FIFO_LENGTH) % FIFO_LENGTH]) != 0xAAu)
+        || (static_cast<uint8_t>(data[(len - 20 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x55u)
+        || (static_cast<uint8_t>(data[(len - 19 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x52u)
+        || (static_cast<uint8_t>(data[(len - 18 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x24u)
+       )
+      return false;
+
+    if (static_cast<uint8_t>(data[(len - 17 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x01u)
+    {
+      (void)fprintf(stderr, "bad mode %#x\n", static_cast<uint8_t>(data[(len - 17 + FIFO_LENGTH) % FIFO_LENGTH]));
+      return false;
+    }
+
+    return true;
+  }
+  return false;
+}
 
 std::optional<DmmDriver::DmmResponse> DrvDO3122::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {

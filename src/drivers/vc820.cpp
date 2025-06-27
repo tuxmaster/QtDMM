@@ -17,6 +17,15 @@ static const bool registered = []() {
   return true;
 }();
 
+bool DrvVC820::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+{
+  return (df == ReadEvent::VC820Continuous && ((data[len] & 0xf0) == 0xe0));
+}
+
+size_t DrvVC820::getPacketLength(ReadEvent::DataFormat df)
+{
+  return  (df == ReadEvent::VC820Continuous ? 14 : 0);
+}
 
 std::optional<DmmDriver::DmmResponse> DrvVC820::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {

@@ -8,6 +8,18 @@ static const bool registered = []() {
   return true;
 }();
 
+size_t DrvM9803R::getPacketLength(ReadEvent::DataFormat df)
+{
+  return  (df == ReadEvent::M9803RContinuous ? 11 : 0);
+}
+
+
+bool DrvM9803R::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+{
+  return (df==ReadEvent::M9803RContinuous && len >= 10 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+}
+
+
 std::optional<DmmDriver::DmmResponse> DrvM9803R::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
