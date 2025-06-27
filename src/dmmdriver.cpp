@@ -120,7 +120,7 @@ case ReadEvent::VC940Continuous:       return 11;
       return true;
   }
   else if (m_format == ReadEvent::VC820Continuous)// && m_length >= 13)
-  {
+  {qt_wrap_ui
     if ((m_fifo[m_length] & 0xf0) == 0xe0)
       return true;
   }

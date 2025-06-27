@@ -23,13 +23,9 @@
 #include <QtGui>
 #include <QtWidgets>
 
-
 #include "mainwin.h"
 #include "mainwid.h"
 #include "displaywid.h"
-#include "config.h"
-
-
 
 
 MainWin::MainWin(QWidget *parent) : QMainWindow(parent),

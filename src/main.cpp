@@ -23,7 +23,6 @@
 #include <QtGui>
 
 #include "mainwin.h"
-#include "config.h"
 
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &msg)

@@ -10,6 +10,7 @@ set(TRANSLATIONS "assets/translations/qtdmm_de.ts")
 set(RESOURCES "src/resources.qrc")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
 
+add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGANIZATION="QtDMM" )
 include_directories(src ${CMAKE_BINARY_DIR})
 
 file(GLOB UI_FILES CONFIGURE_DEPENDS src/ui/*.ui)
@@ -17,7 +18,6 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp src/*.h )
 file(GLOB DRV_HEADER_FILES CONFIGURE_DEPENDS src/drivers/*.h )
 
 set(DRIVER_HEADER_CONTENT "#pragma once\n\n")
-
 foreach(file_path IN LISTS DRV_HEADER_FILES)
     get_filename_component(base_name "${file_path}" NAME)
     set(DRIVER_HEADER_CONTENT "${DRIVER_HEADER_CONTENT}#include \"drivers/${base_name}\"\n")
