@@ -22,6 +22,7 @@
 
 #include <QtGui>
 #include <QtWidgets>
+#include <QTimer>
 
 #include "mainwin.h"
 #include "mainwid.h"
@@ -83,6 +84,7 @@ MainWin::MainWin(QWidget *parent) : QMainWindow(parent),
     else
       resize(640, 480);
   }
+  QTimer::singleShot(1000, action_Connect, &QAction::trigger);
 }
 
 void MainWin::setConsoleLogging(bool on)
