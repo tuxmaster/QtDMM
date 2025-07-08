@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef SCALEPREFS_HH
-#define SCALEPREFS_HH
+#pragma once
 
 #include <QtGui>
 
@@ -52,5 +51,4 @@ public Q_SLOTS:
 
 };
 
-#endif // SCALEPREFS_HH
 

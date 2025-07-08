@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef GUIPREFS_HH
-#define GUIPREFS_HH
+#pragma once
 
 #include <QtGui>
 #include "ui_uiguiprefs.h"
@@ -59,5 +58,4 @@ public Q_SLOTS:
 
 };
 
-#endif // GUIPREFS_HH
 

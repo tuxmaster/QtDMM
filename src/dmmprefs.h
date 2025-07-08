@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef DMMPREFS_HH
-#define DMMPREFS_HH
+#pragma once
 
 #include <QtSerialPort>
 
@@ -87,5 +86,4 @@ private:
 
 };
 
-#endif // DMMPREFS_HH
 

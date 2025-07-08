@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef PREFWIDGET_HH
-#define PREFWIDGET_HH
+#pragma once
 
 #include <QtGui>
 #include <QtWidgets>
@@ -75,4 +74,3 @@ protected:
 
 };
 
-#endif // PREFWIDGET_HH

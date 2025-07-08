@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef GRAPHPREFS_HH
-#define GRAPHPREFS_HH
+#pragma once
 
 #include <QtGui>
 #include "ui_uigraphprefs.h"
@@ -50,5 +49,4 @@ public Q_SLOTS:
 
 };
 
-#endif // GRAPHPREFS_HH
 

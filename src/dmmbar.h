@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef DMMBAR_HH
-#define DMMBAR_HH
+#pragma once
 
 #include <QtGui>
 #include <QtWidgets>
@@ -39,4 +38,3 @@ protected:
   double	m_value;
 };
 
-#endif // DMMBAR_HH

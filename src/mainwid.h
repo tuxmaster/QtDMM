@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef MAINWID_HH
-#define MAINWID_HH
+#pragma once
 
 
 #include <QtGui>
@@ -104,4 +103,3 @@ protected Q_SLOTS:
 
 };
 
-#endif // MAINWID_HH

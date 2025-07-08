@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef MAINWIN_HH
-#define MAINWIN_HH
+#pragma once
 
 #include <QtGui>
 #include <QtWidgets>
@@ -61,4 +60,3 @@ protected:
   void			closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
 };
 
-#endif // MAINWIN_HH

@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef DMMGRAPH_HH
-#define DMMGRAPH_HH
+#pragma once
 
 #include <QtGui>
 #include <QtWidgets>
@@ -269,4 +268,3 @@ private:
 
 };
 
-#endif // DMMGRAPH_HH

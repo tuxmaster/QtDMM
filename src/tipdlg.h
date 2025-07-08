@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef TIPDLG_HH
-#define TIPDLG_HH
+#pragma once
 
 #include <QtCore>
 
@@ -67,4 +66,3 @@ protected Q_SLOTS:
 
 };
 
-#endif // TIPDLG_HH

@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef PRINTDLG_HH
-#define PRINTDLG_HH
+#pragma once
 
 #include <QtGui>
 #include "ui_uiprintdlg.h"
@@ -55,4 +54,3 @@ namespace qtdmm
 
   };
 }
-#endif // PRINTDLG_HH

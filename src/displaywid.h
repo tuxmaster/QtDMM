@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef DISPLAYWID_HH
-#define DISPLAYWID_HH
+#pragma once
 
 #include <QtGui>
 #include <QtWidgets>
@@ -138,4 +137,3 @@ private:
   QBitmap	*BitmapHelper(const QString &file)const;
 };
 
-#endif // DISPLAYWID_HH

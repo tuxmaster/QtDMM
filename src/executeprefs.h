@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef EXECUTEPREFS_HH
-#define EXECUTEPREFS_HH
+#pragma once
 
 #include <QtCore>
 
@@ -50,5 +49,4 @@ protected Q_SLOTS:
 
 };
 
-#endif // EXECUTEPREFS_HH
 

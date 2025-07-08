@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef DMM_HH
-#define DMM_HH
+#pragma once
 
 #include <QtCore>
 #include <QtSerialPort>
@@ -106,4 +105,3 @@ protected Q_SLOTS:
 
 };
 
-#endif // DMM_HH

@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef READERTHREAD_HH
-#define READERTHREAD_HH
+#pragma once
 
 #include <QtCore>
 #include "readevent.h"
@@ -40,28 +39,23 @@ public:
     Error,
     NotConnected
   };
-  ReaderThread(QObject *receiver);
-  void					run();
-  void					start();
-  void					startRead();
-  void					setHandle(QSerialPort *handle);
-  void					setFormat(ReadEvent::DataFormat);
-  void					setConsoleLogging(bool on);
 
-  ReadStatus			status() const
-  {
-    return m_status;
-  }
-  void					setNumValues(int num)
-  {
-    m_numValues = num;
-  }
+  ReaderThread(QObject *receiver);
+  void          run();
+  void          start();
+  void          startRead();
+  void          setHandle(QSerialPort *handle);
+  void          setFormat(ReadEvent::DataFormat);
+  void          setConsoleLogging(bool on);
+
+  ReadStatus    status() const { return m_status; }
+  void          setNumValues(int num)  { m_numValues = num; }
 
 Q_SIGNALS:
-  void					readEvent(const QByteArray &, int id, ReadEvent::DataFormat df);
+  void          readEvent(const QByteArray &, int id, ReadEvent::DataFormat df);
 
 protected:
-  QObject				*m_receiver;
+  QObject              *m_receiver;
   ReadStatus            m_status;
   bool                  m_readValue;
   char                  m_fifo[FIFO_LENGTH];
@@ -72,33 +66,32 @@ protected:
   int                   m_numValues;
   bool                  m_consoleLogging;
 
-  void					readDMM();
-  void					readMetex14();
-  void					readVoltcraft14Continuous();
-  void					readVoltcraft15Continuous();
-  void					readM9803RContinuous();
-  void					readPeakTech10();
-  void					readIsoTech();
-  void					readQM1537Continuous();
-  void					readVC820();
-  void					readVC870();
-  void					readVC940();
-  void					readRS22812Continuous();
+  void                  readDMM();
+  void                  readMetex14();
+  void                  readVoltcraft14Continuous();
+  void                  readVoltcraft15Continuous();
+  void                  readM9803RContinuous();
+  void                  readPeakTech10();
+  void                  readIsoTech();
+  void                  readQM1537Continuous();
+  void                  readVC820();
+  void                  readVC870();
+  void                  readVC940();
+  void                  readRS22812Continuous();
   void                  readDO3122Continuous();
   void                  readCyrustekES51922();
 
-  int					formatLength() const;
-  bool					checkFormat();
+  int                   formatLength() const;
+  bool                  checkFormat();
 
 protected Q_SLOTS:
-  void					socketNotifierSLOT();
-  void					socketClose();
+  void                   socketNotifierSLOT();
+  void                   socketClose();
 
 private:
-  QSerialPort			*m_serialPort;
+  QSerialPort	          *m_serialPort;
 
 private Q_SLOTS:
-  void					timer();
+  void          timer();
 };
 
-#endif // READERTHREAD_HH

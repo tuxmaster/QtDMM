@@ -20,8 +20,7 @@
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
 
-#ifndef READEVENT_HH
-#define READEVENT_HH
+#pragma once
 
 #include <QtCore>
 
@@ -45,4 +44,3 @@ public:
     CyrustekES51922
   };
 };
-#endif // READEVENT_HH

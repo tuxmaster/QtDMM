@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef RECORDERPREFS_HH
-#define RECORDERPREFS_HH
+#pragma once
 
 #include "ui_uirecorderprefs.h"
 #include "dmmgraph.h"
@@ -48,5 +47,4 @@ public Q_SLOTS:
 
 };
 
-#endif // RECORDERPREFS_HH
 

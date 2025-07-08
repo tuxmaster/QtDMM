@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef ENGNUMBERVALIDATOR_HH
-#define ENGNUMBERVALIDATOR_HH
+#pragma once
 
 #include <QtCore>
 #include <QtGui>
@@ -37,4 +36,3 @@ public:
 
 };
 
-#endif // ENGNUMBERVALIDATOR_HH

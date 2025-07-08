@@ -20,8 +20,7 @@
 // Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
-#ifndef INTEGRATIONPREFS_HH
-#define INTEGRATIONPREFS_HH
+#pragma once
 
 #include <QtGui>
 
@@ -51,5 +50,4 @@ public Q_SLOTS:
 
 };
 
-#endif // INTEGRATIONPREFS_HH
 
