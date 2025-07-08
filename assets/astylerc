@@ -1,0 +1,12 @@
+# AStyle Konfiguration für C++
+style=allman            # { immer in neue Zeile (Allman-Stil)
+indent=spaces=2          # Tabs statt Leerzeichen für Einrückung
+indent-switches         # case/default innerhalb von switch einrücken
+indent-namespaces       # Namespaces ebenfalls einrücken
+indent-preprocessor     # Präprozessor-Anweisungen einrücken
+keep-one-line-statements # Einzeilige if/while/etc. bleiben einzeilig
+pad-oper                # Leerzeichen um Operatoren (+, -, =, etc.)
+pad-header              # Leerzeichen nach if, for, while usw.
+unpad-paren             # Keine Leerzeichen direkt nach öffnender oder vor schließender Klammer
+align-pointer=name      # Zeigerstern an Variablennamen binden (z. B. `int* ptr`)
+remove-braces

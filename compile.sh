@@ -28,20 +28,19 @@ do
 	[ "$arg" = "clean" ] && rm -rf build
 	[ "$arg" = "install" ] && INSTALL=true
 	[ "$arg" = "run" ] && RUN=true
-	[ "$arg" = "qt6" ] && FORCE_QT5=""
 	[ "$arg" = "help" -o "$arg" = "h" ] && usage
 done
 
 mkdir -p build
 
 cd build
-cmake ${FORCE_QT5} ..
+cmake  ..
 make -j $(nproc) || exit 1
 
 if [ -x qtdmm ]
 then
 	mkdir -p ../bin
-	cp qtdmm ../bin
+	cp qtdmm qtdmm*.qm ../bin
 	if ${INSTALL}
 	then
 		echo
@@ -50,6 +49,6 @@ then
 		${RUN} && qtdmm
 	elif ${RUN}
 	then
-		./qtdmm
+		./qtdmm --console
 	fi
 fi
