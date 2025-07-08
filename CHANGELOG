@@ -1,13 +1,13 @@
 
-xx/xx/20xx 0.9.8
-	   - Use gold linker.
+xx/xx/20xx 1.0.0
+	   - switch Qt6 (redpanther)
 	   - Added HoldPeak HP-90EPC (tstenner).
 	   - Use pkgconfig for spec file.
-	   - Added UniTrend UT61B and UT61D and Metex-3840
-	     (ported from 0.9.2 original branch)
+	   - Added UniTrend UT61B and UT61D and Metex-3840 (ported from 0.9.2 original branch)
 	   - Added UniTrend UT61E (redpanther)
+	   - rename UniTrend UT60 to UT60, because UT30 has no data port
 	   - Fix compile for Windows using mingw
-	   - Code clean up
+	   - Code clean up and restrucuring
 	   - cleanup UI
 	   - Add support for hold and auto/manual range
 
