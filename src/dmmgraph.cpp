@@ -853,13 +853,8 @@ void DMMGraph::wheelEvent(QWheelEvent *ev)
 
 void DMMGraph::mousePressEvent(QMouseEvent *ev)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
   QPoint pos(qRound(ev->position().x()), qRound(ev->position().y()));
   QPoint globalPos(qRound(ev->globalPosition().x()), qRound(ev->globalPosition().y()));
-#else
-  QPoint pos = ev->pos();
-  QPoint globalPos = ev->globalPos();
-#endif
 
   if (ev->button() == Qt::LeftButton)
   {
@@ -952,14 +947,8 @@ void DMMGraph::mousePressEvent(QMouseEvent *ev)
 
 void DMMGraph::mouseMoveEvent(QMouseEvent *ev)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
   QPoint pos(qRound(ev->position().x()), qRound(ev->position().y()));
   QPoint globalPos(qRound(ev->globalPosition().x()), qRound(ev->globalPosition().y()));
-#else
-  QPoint pos = ev->pos();
-  QPoint globalPos = ev->globalPos();
-#endif
-
 
   if (m_scaleMin == m_scaleMax || m_scaleMin == 1e40)
     return;

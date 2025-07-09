@@ -195,47 +195,47 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Angehalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="890"/>
+        <location filename="../../src/dmmgraph.cpp" line="885"/>
         <source>Disconnect</source>
         <translation>Trennen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="897"/>
+        <location filename="../../src/dmmgraph.cpp" line="892"/>
         <source>Connect</source>
         <translation>Verbinden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="906"/>
+        <location filename="../../src/dmmgraph.cpp" line="901"/>
         <source>Stop recorder</source>
         <translation>Rekorder anhalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="913"/>
+        <location filename="../../src/dmmgraph.cpp" line="908"/>
         <source>Start recorder</source>
         <translation>Rekorder starten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="918"/>
+        <location filename="../../src/dmmgraph.cpp" line="913"/>
         <source>Clear graph</source>
         <translation>Graphen löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="924"/>
+        <location filename="../../src/dmmgraph.cpp" line="919"/>
         <source>Configure...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="932"/>
+        <location filename="../../src/dmmgraph.cpp" line="927"/>
         <source>Export data...</source>
         <translation>Daten exportieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="936"/>
+        <location filename="../../src/dmmgraph.cpp" line="931"/>
         <source>Import data...</source>
         <translation>Daten importieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1165"/>
+        <location filename="../../src/dmmgraph.cpp" line="1154"/>
         <source>Export data</source>
         <translation>Daten exportieren</translation>
     </message>
@@ -244,32 +244,32 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1195"/>
+        <location filename="../../src/dmmgraph.cpp" line="1184"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1196"/>
+        <location filename="../../src/dmmgraph.cpp" line="1185"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Beim Importieren werden alle bisherigen Messwerte gelöscht.&lt;p&gt;Möchten Sie zu ersten die bisherigen Daten exportieren?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1210"/>
+        <location filename="../../src/dmmgraph.cpp" line="1199"/>
         <source>Export data first</source>
         <translation>Daten zu erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1214"/>
+        <location filename="../../src/dmmgraph.cpp" line="1203"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importieren und Daten löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1226"/>
+        <location filename="../../src/dmmgraph.cpp" line="1215"/>
         <source>Import data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1254"/>
+        <location filename="../../src/dmmgraph.cpp" line="1243"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Diese Datei scheint nicht gültig zu sein</translation>
     </message>
@@ -1637,119 +1637,119 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <name>UIMainWin</name>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="35"/>
-        <location filename="../../build/ui_uimainwin.h" line="340"/>
+        <location filename="../../build/ui_uimainwin.h" line="390"/>
         <source>&amp;File</source>
         <translation>D&amp;atei</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="48"/>
-        <location filename="../../build/ui_uimainwin.h" line="341"/>
+        <location filename="../../build/ui_uimainwin.h" line="391"/>
         <source>&amp;DMM</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="57"/>
-        <location filename="../../build/ui_uimainwin.h" line="342"/>
+        <location filename="../../build/ui_uimainwin.h" line="392"/>
         <source>&amp;Recorder</source>
         <translation>&amp;Rekorder</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="68"/>
-        <location filename="../../build/ui_uimainwin.h" line="343"/>
+        <location filename="../../build/ui_uimainwin.h" line="393"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="82"/>
-        <location filename="../../build/ui_uimainwin.h" line="344"/>
+        <location filename="../../build/ui_uimainwin.h" line="394"/>
         <source>DMM</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="98"/>
-        <location filename="../../build/ui_uimainwin.h" line="345"/>
+        <location filename="../../build/ui_uimainwin.h" line="395"/>
         <source>Recorder</source>
         <translation>Rekorder</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="116"/>
-        <location filename="../../build/ui_uimainwin.h" line="346"/>
+        <location filename="../../build/ui_uimainwin.h" line="396"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="137"/>
         <location filename="../../src/ui/uimainwin.ui" line="427"/>
-        <location filename="../../build/ui_uimainwin.h" line="333"/>
-        <location filename="../../build/ui_uimainwin.h" line="347"/>
+        <location filename="../../build/ui_uimainwin.h" line="383"/>
+        <location filename="../../build/ui_uimainwin.h" line="397"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="164"/>
-        <location filename="../../build/ui_uimainwin.h" line="348"/>
+        <location filename="../../build/ui_uimainwin.h" line="398"/>
         <source>Display</source>
         <translation>Anzeige</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="185"/>
-        <location filename="../../build/ui_uimainwin.h" line="240"/>
+        <location filename="../../build/ui_uimainwin.h" line="290"/>
         <source>&amp;Export</source>
         <translation>&amp;Export</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="188"/>
-        <location filename="../../build/ui_uimainwin.h" line="242"/>
+        <location filename="../../build/ui_uimainwin.h" line="292"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Export recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Here you can export the recorded data as tab separated list. Each line contains the following values (separated by a tab character): date (dd.mm.yyyy) time (hh:mm:ss) value (float) unit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder Graphen exportieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hier können die aufgezeichneten Daten als eine Liste durch Tabulatoren getrennt exportiert werden. Jede Zeile enthält die folgenden Werte (getrennt durch einen Tabulator): Datum (tt.mm.jjjj) Zeit (ss:mm:SS) Wert (Fließkomma) Einheit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="191"/>
-        <location filename="../../build/ui_uimainwin.h" line="245"/>
+        <location filename="../../build/ui_uimainwin.h" line="295"/>
         <source>Ctrl+E</source>
         <translation>Strg+E</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="203"/>
-        <location filename="../../build/ui_uimainwin.h" line="247"/>
+        <location filename="../../build/ui_uimainwin.h" line="297"/>
         <source>&amp;Import</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="206"/>
-        <location filename="../../build/ui_uimainwin.h" line="249"/>
+        <location filename="../../build/ui_uimainwin.h" line="299"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Import data into recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Here you can import previously exported data files. QtDMM tries to do an educated guess if the file format is correct and rejects import of files which to not match.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Importiert Daten in den Rekorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hier können zuvor exportierte Daten importiert werden. QtDMM versucht das Format zu lesen und verweigert den Import von ungültigen Dateien.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="209"/>
-        <location filename="../../build/ui_uimainwin.h" line="252"/>
+        <location filename="../../build/ui_uimainwin.h" line="302"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="221"/>
-        <location filename="../../build/ui_uimainwin.h" line="254"/>
+        <location filename="../../build/ui_uimainwin.h" line="304"/>
         <source>&amp;Print</source>
         <translation>&amp;Drucken</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="224"/>
-        <location filename="../../build/ui_uimainwin.h" line="256"/>
+        <location filename="../../build/ui_uimainwin.h" line="306"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Print recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A dialog will open where you can define a title and a comment for your printout. The printer itself can also be configured here. To be able to print you need at least one working postscript printer configured in your system. Printing into a file is also supported.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder Graphen drucken&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Es öffnet sich ein Fenster,indem der Titel und ein Kommentar für den Ausdruck festgelegt werden kann. Der Drucker selbst kann hier auch ausgewält werden. Der Ausdruck in eine Datei(PDF) ist ebenfalls möglich.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="227"/>
-        <location filename="../../build/ui_uimainwin.h" line="259"/>
+        <location filename="../../build/ui_uimainwin.h" line="309"/>
         <source>Ctrl+P</source>
         <translation>Strg+D</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="239"/>
         <location filename="../../src/ui/uimainwin.ui" line="310"/>
-        <location filename="../../build/ui_uimainwin.h" line="261"/>
-        <location filename="../../build/ui_uimainwin.h" line="289"/>
+        <location filename="../../build/ui_uimainwin.h" line="311"/>
+        <location filename="../../build/ui_uimainwin.h" line="339"/>
         <source>&amp;Configure</source>
         <translation>&amp;Konfigurieren</translation>
     </message>
@@ -1757,159 +1757,163 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <location filename="../../src/ui/uimainwin.ui" line="242"/>
         <location filename="../../src/ui/uimainwin.ui" line="313"/>
         <location filename="../../src/ui/uimainwin.ui" line="387"/>
-        <location filename="../../build/ui_uimainwin.h" line="263"/>
-        <location filename="../../build/ui_uimainwin.h" line="291"/>
-        <location filename="../../build/ui_uimainwin.h" line="319"/>
+        <location filename="../../build/ui_uimainwin.h" line="313"/>
+        <location filename="../../build/ui_uimainwin.h" line="341"/>
+        <location filename="../../build/ui_uimainwin.h" line="369"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will open QtDMM&apos;s configuration dialog. Here you can configure it&apos;s visual appearance and all options regarding the multimeter hardware and the recorder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;QtDMM konfigurieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Dies öffnen das Konfugurationsfenster für QtDMM. Hier kann die visuelle Erscheinung, alle Optionen die die Datenaufzeichnung betreffen sowie die Einstellungen für das DMM festgelegt werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="245"/>
-        <location filename="../../build/ui_uimainwin.h" line="266"/>
+        <location filename="../../build/ui_uimainwin.h" line="316"/>
         <source>F2</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="257"/>
-        <location filename="../../build/ui_uimainwin.h" line="268"/>
+        <location filename="../../build/ui_uimainwin.h" line="318"/>
         <source>&amp;Quit</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="260"/>
-        <location filename="../../build/ui_uimainwin.h" line="270"/>
+        <location filename="../../build/ui_uimainwin.h" line="320"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Quit QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder contains unsaved data QtDMM will give you the option to savve your data first.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;QtDMM Beenden&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wenn der Datenrekorder ungespeicherte Daten enthällt, haben Sie die Möglichkeit diese vorher zu speichern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="263"/>
-        <location filename="../../build/ui_uimainwin.h" line="273"/>
+        <location filename="../../build/ui_uimainwin.h" line="323"/>
         <source>Ctrl+Q</source>
         <translation>Strg+B</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="278"/>
-        <location filename="../../build/ui_uimainwin.h" line="275"/>
+        <location filename="../../build/ui_uimainwin.h" line="325"/>
         <source>&amp;Connect</source>
         <translation>&amp;Verbinden</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="281"/>
-        <location filename="../../build/ui_uimainwin.h" line="277"/>
+        <location filename="../../build/ui_uimainwin.h" line="327"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Connect to the Multimeter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will establish the serial connection to the dmm. If not connected the serial port is free and can be used by other software.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Verbindung zum DMM herstellen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Die baut die serielle Verbindung zum DMM auf.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="284"/>
-        <location filename="../../build/ui_uimainwin.h" line="280"/>
+        <location filename="../../build/ui_uimainwin.h" line="330"/>
         <source>Ctrl+C</source>
         <translation>Strg+V</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="296"/>
-        <location filename="../../build/ui_uimainwin.h" line="282"/>
+        <location filename="../../build/ui_uimainwin.h" line="332"/>
         <source>&amp;Reset</source>
         <translation>&amp;Zurücksetzen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="299"/>
-        <location filename="../../build/ui_uimainwin.h" line="284"/>
+        <location filename="../../build/ui_uimainwin.h" line="334"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Reset min/max values&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The min/max values in the display will be reset. You can activate this option at any time. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Min/Max Werte zurücksetzen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Die Min/Max Werte in der Anzeige werden zurückgesetzt. Diese Option kann jederzeit aktiviert werden. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="302"/>
-        <location filename="../../build/ui_uimainwin.h" line="287"/>
+        <location filename="../../build/ui_uimainwin.h" line="337"/>
         <source>Ctrl+R</source>
         <translation>Strg+Z</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="316"/>
-        <location filename="../../build/ui_uimainwin.h" line="294"/>
+        <location filename="../../build/ui_uimainwin.h" line="344"/>
         <source>Shift+F2</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="331"/>
-        <location filename="../../build/ui_uimainwin.h" line="296"/>
+        <location filename="../../build/ui_uimainwin.h" line="346"/>
         <source>&amp;Start</source>
         <translation>&amp;Starten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="334"/>
-        <location filename="../../build/ui_uimainwin.h" line="298"/>
+        <location filename="../../build/ui_uimainwin.h" line="348"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Start the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If you are in manual mode this will start the recorder. Press F2 to set the recorder options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder starten&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Startet den Rekorder wenn sich dieser im manuellen Modus befindet. F2 drücken für die Rekordereinstellungen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="337"/>
-        <location filename="../../build/ui_uimainwin.h" line="301"/>
+        <location filename="../../build/ui_uimainwin.h" line="351"/>
         <source>Ctrl+S</source>
         <translation>Strg+S</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="352"/>
-        <location filename="../../build/ui_uimainwin.h" line="303"/>
+        <location filename="../../build/ui_uimainwin.h" line="353"/>
         <source>S&amp;top</source>
         <translation>&amp;Anhalten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="355"/>
-        <location filename="../../build/ui_uimainwin.h" line="305"/>
+        <location filename="../../build/ui_uimainwin.h" line="355"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Stop the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The recorder will be stopped. This is independent from the start mode of the recorder. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Hällt den Rekorder an&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Der Rekoder wird angehalten. Dies ist unabhängig von dem gewählten Startmodus. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="358"/>
-        <location filename="../../build/ui_uimainwin.h" line="308"/>
+        <location filename="../../build/ui_uimainwin.h" line="358"/>
         <source>Ctrl+X</source>
         <translation>Strg+A</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="370"/>
-        <location filename="../../build/ui_uimainwin.h" line="310"/>
+        <location filename="../../build/ui_uimainwin.h" line="360"/>
         <source>&amp;Clear</source>
         <translation>&amp;Löschen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="373"/>
-        <location filename="../../build/ui_uimainwin.h" line="312"/>
+        <location filename="../../build/ui_uimainwin.h" line="362"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clear the recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder is already started it will clear the graph and continue recording.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lösche den Graphen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wenn der Rekorder läuft, wird der Graph gelöscht und es wird weiter aufgezeichnet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="376"/>
-        <location filename="../../build/ui_uimainwin.h" line="315"/>
+        <location filename="../../build/ui_uimainwin.h" line="365"/>
         <source>Del</source>
         <translation>Enf</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="384"/>
-        <location filename="../../build/ui_uimainwin.h" line="317"/>
+        <location filename="../../build/ui_uimainwin.h" line="367"/>
         <source>C&amp;onfigure</source>
         <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="390"/>
-        <location filename="../../build/ui_uimainwin.h" line="322"/>
+        <location filename="../../build/ui_uimainwin.h" line="372"/>
         <source>Ctrl+F2</source>
         <translation>Strg+F2</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="398"/>
-        <location filename="../../build/ui_uimainwin.h" line="324"/>
+        <location filename="../../build/ui_uimainwin.h" line="374"/>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;On version</source>
-        <translation>Ü&amp;ber die Version</translation>
+        <translation type="vanished">Ü&amp;ber die Version</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="401"/>
-        <location filename="../../build/ui_uimainwin.h" line="326"/>
+        <location filename="../../build/ui_uimainwin.h" line="376"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Urheber Information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zeigt die Information zum Urheber sowie etwas Werbung zu QtDMM an. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="409"/>
-        <location filename="../../build/ui_uimainwin.h" line="328"/>
+        <location filename="../../build/ui_uimainwin.h" line="378"/>
         <source>&amp;Tip of the day</source>
         <translation>&amp;Tipp des Tages</translation>
     </message>
@@ -1919,25 +1923,25 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="412"/>
-        <location filename="../../build/ui_uimainwin.h" line="330"/>
+        <location filename="../../build/ui_uimainwin.h" line="380"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show tip of the day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeigt den Tipp des Tages an.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="424"/>
-        <location filename="../../build/ui_uimainwin.h" line="332"/>
+        <location filename="../../build/ui_uimainwin.h" line="382"/>
         <source>&amp;Direct Help</source>
         <translation>&amp;Direkte Hilfe</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="430"/>
-        <location filename="../../build/ui_uimainwin.h" line="335"/>
+        <location filename="../../build/ui_uimainwin.h" line="385"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direct Help&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enter the direct help mode. You have done this already when reading this text :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direkte Hilfe&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Schalten in den direkten Hilfemodus um. Dies haben Sie bereits duch lesen des Textes getan :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="433"/>
-        <location filename="../../build/ui_uimainwin.h" line="338"/>
+        <location filename="../../build/ui_uimainwin.h" line="388"/>
         <source>Shift+F1</source>
         <translation></translation>
     </message>

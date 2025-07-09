@@ -5,6 +5,16 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
+# autogenerate resource.qrc so you can't forget to add the icons there
+file(GLOB XPM_FILES CONFIGURE_DEPENDS assets/icons/*.xpm )
+list(SORT XPM_FILES)
+set(RES_CONTENT "<!-- ATTENTION this file is auto generated -->\n<RCC>\n    <qresource prefix=\"/Symbols\">\n")
+foreach(file_path IN LISTS XPM_FILES)
+	get_filename_component(base_name "${file_path}" NAME)
+	set(RES_CONTENT "${RES_CONTENT}        <file alias=\"${base_name}\">../assets/icons/${base_name}</file>\n")
+endforeach()
+file(WRITE "src/resources.qrc" "${RES_CONTENT}    </qresource>\n</RCC>\n")
+
 set(TRANSLATIONS "assets/translations/qtdmm_de.ts")
 set(RESOURCES "src/resources.qrc")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
