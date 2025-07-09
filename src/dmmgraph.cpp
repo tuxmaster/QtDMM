@@ -94,6 +94,7 @@ DMMGraph::DMMGraph(QWidget *parent, Settings *settings) :
   m_popup = new QMenu(this);
   connect(m_popup, SIGNAL(triggered(QAction *)), this, SLOT(popupSLOT(QAction *)));
 }
+
 DMMGraph::~DMMGraph()
 {
   delete m_array;
@@ -845,7 +846,7 @@ void DMMGraph::emitInfo()
 
 void DMMGraph::wheelEvent(QWheelEvent *ev)
 {
-  if (ev->angleDelta().x() > 0)
+  if (ev->angleDelta().x() < 0 || ev->angleDelta().y() < 0)
     Q_EMIT zoomOut(1.1);
   else
     Q_EMIT zoomIn(1.1);
