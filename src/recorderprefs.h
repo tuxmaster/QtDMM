@@ -31,20 +31,19 @@ class RecorderPrefs : public PrefWidget, private Ui::UIRecorderPrefs
 public:
   RecorderPrefs(QWidget *parent = Q_NULLPTR);
   ~RecorderPrefs();
-  DMMGraph::SampleMode	sampleMode() const;
-  int					sampleStep() const;
-  int					sampleLength() const;
-  double				fallingThreshold() const;
-  double				raisingThreshold() const;
-  QTime					startTime() const;
-  void					setThreshold(double);
+  DMMGraph::SampleMode sampleMode() const;
+  int         sampleStep() const;
+  int         sampleLength() const;
+  double      fallingThreshold() const;
+  double      raisingThreshold() const;
+  QTime       startTime() const;
+  void        setThreshold(double);
 
 public Q_SLOTS:
-  virtual void			defaultsSLOT()Q_DECL_OVERRIDE;
-  virtual void			factoryDefaultsSLOT()Q_DECL_OVERRIDE;
-  virtual void			applySLOT()Q_DECL_OVERRIDE;
-  void					setSampleTimeSLOT(int sampleTime);
-
+  virtual void  defaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void  factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void  applySLOT()Q_DECL_OVERRIDE;
+  void          setSampleTimeSLOT(int sampleTime);
 };
 
 

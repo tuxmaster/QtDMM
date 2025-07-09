@@ -24,44 +24,34 @@ class Settings : public QObject
 {
   Q_OBJECT
 public:
-  explicit				Settings(QObject *parent = Q_NULLPTR);
-  explicit				Settings(QObject *parent, const QString &fileName);
+  explicit       Settings(QObject *parent = Q_NULLPTR);
+  explicit       Settings(QObject *parent, const QString &fileName);
   ~Settings();
 
-  const bool				&fileExists() const
-  {
-    return m_fileExists;
-  }
-  const bool				&fileConverted() const
-  {
-    return m_fileConverted;
-  }
+  const bool    &fileExists() const { return m_fileExists; }
+  const bool    &fileConverted() const { return m_fileConverted; }
 
-  const QString			&fileName()const
-  {
-    return m_filename;
-  }
+  const QString &fileName()const { return m_filename; }
 
-  void					save();
-  void					clear();
+  void           save();
+  void           clear();
 
-  int						getInt(const QString &name, const int &def = 0) const;
-  void					setInt(const QString &name, const int &value);
+  int            getInt(const QString &name, const int &def = 0) const;
+  void           setInt(const QString &name, const int &value);
 
-  QColor					getColor(const QString &name, const QColor &def = Qt::white)const;
-  void					setColor(const QString &name, const QColor &value);
+  QColor         getColor(const QString &name, const QColor &def = Qt::white)const;
+  void           setColor(const QString &name, const QColor &value);
 
-  QString					getString(const QString &name, const QString &def = "") const;
-  void					setString(const QString &name, const QString &value);
+  QString       getString(const QString &name, const QString &def = "") const;
+  void          setString(const QString &name, const QString &value);
 
-  bool					getBool(const QString &name, const bool &def = false)const;
-  void					setBool(const QString &name, const bool &value);
+  bool          getBool(const QString &name, const bool &def = false)const;
+  void          setBool(const QString &name, const bool &value);
 
 private:
-  bool					m_fileExists;
-  bool					m_fileConverted;
-  QString					m_filename;
-  QSettings				*m_qsettings;
-  QHash<QString, QVariant>	*m_tmpConfig;
+  bool          m_fileExists;
+  bool          m_fileConverted;
+  QString       m_filename;
+  QSettings    *m_qsettings;
+  QHash<QString, QVariant> *m_tmpConfig;
 };
-

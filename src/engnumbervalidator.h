@@ -31,8 +31,8 @@ public:
   EngNumberValidator(QObject *parent = Q_NULLPTR);
   QValidator::State	validate(QString &, int &) const Q_DECL_OVERRIDE;
 
-  static double		value(const QString &);
-  static QString	engValue(double);
+  static double   value(const QString &);
+  static QString  engValue(double);
 
 };
 

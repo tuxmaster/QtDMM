@@ -32,22 +32,19 @@ class IntegrationPrefs : public PrefWidget, private Ui::UIIntegrationPrefs
 public:
   IntegrationPrefs(QWidget *parent = Q_NULLPTR);
   ~IntegrationPrefs();
-  double		intScale() const;
-  double		intThreshold() const;
-  double		intOffset() const;
-  bool			showIntegration() const;
-  QColor		intColor() const;
-  QColor		intThresholdColor() const;
-  int			intLineWidth() const;
-  int			intLineMode() const;
-  int			intPointMode() const;
-  void			setThreshold(double);
+  double        intScale() const;
+  double        intThreshold() const;
+  double        intOffset() const;
+  bool          showIntegration() const;
+  QColor        intColor() const;
+  QColor        intThresholdColor() const;
+  int           intLineWidth() const;
+  int           intLineMode() const;
+  int           intPointMode() const;
+  void          setThreshold(double);
 
 public Q_SLOTS:
-  virtual void	defaultsSLOT()Q_DECL_OVERRIDE;
-  virtual void	factoryDefaultsSLOT()Q_DECL_OVERRIDE;
-  virtual void	applySLOT()Q_DECL_OVERRIDE;
-
+  virtual void  defaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void  factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void  applySLOT()Q_DECL_OVERRIDE;
 };
-
-
