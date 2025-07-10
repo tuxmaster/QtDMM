@@ -147,9 +147,6 @@ void MainWin::connectSLOT(bool on)
 {
   action_Start->setEnabled(on);
   action_Stop->setEnabled(on && m_running);
-  action_Print->setEnabled(!(on || m_running));
-  action_Export->setEnabled(!(on || m_running));
-  action_Import->setEnabled(!(on || m_running));
 
   if (!on)
     m_running = false;
