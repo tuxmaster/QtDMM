@@ -24,18 +24,18 @@ PACK=false
 for arg in $*
 do
 	arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
-	[ "$arg" = "clean" ] && rm -rf build
+	[ "$arg" = "clean"   ] && rm -rf build
 	[ "$arg" = "install" ] && INSTALL=true
-	[ "$arg" = "run" ] && RUN=true
-	[ "$arg" = "pack" ] && PACK=true
-	[ "$arg" = "help" -o "$arg" = "h" ] && usage
+	[ "$arg" = "run"     ] && RUN=true
+	[ "$arg" = "pack"    ] && PACK=true
+	[ "$arg" = "help"    ] && usage
 done
 
-mkdir -p build
+cmake -B build 
+cmake --build build --parallel $(nproc) || exit 1
 
 cd build
-cmake  ..
-make -j $(nproc) || exit 1
+
 if ${PACK}
 then
 	rm -rf ../packages/
