@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.11)
-project(qtdmm VERSION "1.0.0" LANGUAGES CXX)
+project(qtdmm VERSION "1.0.0" HOMEPAGE_URL "https://github.com/tuxmaster/QtDMM/" LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -49,6 +49,12 @@ install(TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION bin
 	ARCHIVE DESTINATION lib
 )
+
+install(FILES ${CMAKE_BINARY_DIR}/qtdmm_de.qm DESTINATION "share/qt6/translations" )
+install(FILES assets/qtdmm.desktop DESTINATION share/applications)
+install(FILES assets/icons/qtdmm_32.png DESTINATION share/icons/hicolor/32x32/apps RENAME qtdmm.png)
+install(FILES assets/icons/qtdmm_64.png DESTINATION share/icons/hicolor/64x64/apps RENAME qtdmm.png)
+install(FILES assets/icons/qtdmm_128.png DESTINATION share/icons/hicolor/128x128/apps RENAME qtdmm.png)
 
 include(deploy.cmake)
 

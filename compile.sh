@@ -11,8 +11,7 @@ usage: compile.sh <install|clean|qt6>
    install: install system wide
    clean  : remove build files before build
    run    : run qtdmm after successfull build
-   qt6    : allow build with qt6
-            if qt6 is not available qt5 is used
+   package: create packages (DEB and source)
 
 EOF
 	exit 0
@@ -20,7 +19,7 @@ EOF
 
 RUN=false
 INSTALL=false
-FORCE_QT5="-DFORCE_QT5=ON"
+PACK=false
 
 for arg in $*
 do
@@ -28,6 +27,7 @@ do
 	[ "$arg" = "clean" ] && rm -rf build
 	[ "$arg" = "install" ] && INSTALL=true
 	[ "$arg" = "run" ] && RUN=true
+	[ "$arg" = "pack" ] && PACK=true
 	[ "$arg" = "help" -o "$arg" = "h" ] && usage
 done
 
@@ -36,6 +36,12 @@ mkdir -p build
 cd build
 cmake  ..
 make -j $(nproc) || exit 1
+if ${PACK}
+then
+	rm -rf ../packages/
+	make package package_source
+	rm -rf ../packages/_CPack_Packages
+fi
 
 if [ -x qtdmm ]
 then
