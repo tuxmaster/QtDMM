@@ -22,7 +22,7 @@
 
 #include <QtGui>
 #include <QtWidgets>
-
+#include <QTimer>
 
 #include "mainwin.h"
 #include "mainwid.h"
@@ -86,6 +86,7 @@ MainWin::MainWin(QWidget *parent) : QMainWindow(parent),
     else
       resize(640, 480);
   }
+  QTimer::singleShot(1000, action_Connect, &QAction::trigger);
 }
 
 void MainWin::setConsoleLogging(bool on)
@@ -146,9 +147,6 @@ void MainWin::connectSLOT(bool on)
 {
   action_Start->setEnabled(on);
   action_Stop->setEnabled(on && m_running);
-  action_Print->setEnabled(!(on || m_running));
-  action_Export->setEnabled(!(on || m_running));
-  action_Import->setEnabled(!(on || m_running));
 
   if (!on)
     m_running = false;
