@@ -39,7 +39,16 @@ cd build
 if ${PACK}
 then
 	rm -rf ../packages/
-	make package package_source
+	make package_source
+
+	if [ -f /etc/debian_version ]
+	then
+		make package
+	elif [ -f /etc/os-release ] && grep -qiE 'rhel|fedora|suse' /etc/os-release
+	then
+		cp ../packages/qtdmm*.tar.bz2 ~/rpmbuild/SOURCES/
+		( cd ..; rpmbuild -ba QtDMM.spec )
+	fi
 	rm -rf ../packages/_CPack_Packages
 fi
 

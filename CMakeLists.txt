@@ -5,7 +5,8 @@ project(qtdmm VERSION "1.0.0" HOMEPAGE_URL "https://github.com/tuxmaster/QtDMM/"
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
-set(TRANSLATIONS "assets/translations/qtdmm_de.ts")
+set(PROJECT_LICENSE "GPL-3.0")
+set(TRANSLATIONS "assets/translations/${PROJECT_NAME}_de.ts")
 set(RESOURCES "src/resources.qrc")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
 
