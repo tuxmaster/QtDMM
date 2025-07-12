@@ -32,9 +32,8 @@ public:
   DMMBar(QWidget *parent);
 
 public Q_SLOTS:
-  void		setValue(double);
+  void    setValue(double);
 
 protected:
-  double	m_value;
+  double  m_value;
 };
-

@@ -23,7 +23,6 @@
 #pragma once
 
 #include <QtCore>
-
 #include "ui_uitipdlg.h"
 
 class TipDlg : public QDialog, private Ui::UITipDlg
@@ -31,38 +30,30 @@ class TipDlg : public QDialog, private Ui::UITipDlg
   Q_OBJECT
 public:
   TipDlg(QWidget *parent = Q_NULLPTR);
-
-
-  bool						showTips() const;
+  bool      showTips() const;
+  void      setCurrentTip(int c);
+  int       currentTip() const { return m_curTip; }
 
   static const QStringList	s_tipText;
 
-  void						setCurrentTip(int c);
-  int						currentTip() const
-  {
-    return m_curTip;
-  }
-
 Q_SIGNALS:
-  void						showTips(bool);
-  void						currentTip(int);
+  void      showTips(bool);
+  void      currentTip(int);
 
 public Q_SLOTS:
-  void						setShowTipsSLOT(bool);
+  void      setShowTipsSLOT(bool);
 
 protected:
-  int						m_numTips;
-  int						m_curTip;
-  QString					m_formatTip;
+  void      showTipText();
+  void      closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
 
-  void						showTipText();
-  void						closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
+  int       m_numTips;
+  int       m_curTip;
+  QString   m_formatTip;
 
 protected Q_SLOTS:
-  void						on_ui_nextBut_clicked();
-  void						on_ui_previousBut_clicked();
-  void						on_ui_closeBut_clicked();
-  void						on_ui_showTip_toggled(bool);
-
+  void      on_ui_nextBut_clicked();
+  void      on_ui_previousBut_clicked();
+  void      on_ui_closeBut_clicked();
+  void      on_ui_showTip_toggled(bool);
 };
-

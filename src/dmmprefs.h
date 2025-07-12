@@ -33,35 +33,35 @@ class DmmPrefs : public PrefWidget, private Ui::UIDmmPrefs
 public:
   DmmPrefs(QWidget *parent = Q_NULLPTR);
   ~DmmPrefs();
-  QSerialPort::Parity	parity() const;
+  QSerialPort::Parity parity() const;
   QSerialPort::DataBits bits() const;
   QSerialPort::StopBits stopBits() const;
-  int     speed() const;
-  int     numValues() const;
-  bool    externalSetup() const;
-  bool    rts() const;
-  bool    cts() const;
-  bool    dsr() const;
-  bool    dtr() const;
-  ReadEvent::DataFormat	format() const;
-  int     display() const;
-  QString dmmName() const;
-  QString device() const;
-  QString deviceListText() const;
+  int            speed() const;
+  int            numValues() const;
+  bool           externalSetup() const;
+  bool           rts() const;
+  bool           cts() const;
+  bool           dsr() const;
+  bool           dtr() const;
+  ReadEvent::DataFormat format() const;
+  int            display() const;
+  QString        dmmName() const;
+  QString        device() const;
+  QString        deviceListText() const;
 
 public Q_SLOTS:
-  virtual void defaultsSLOT() Q_DECL_OVERRIDE;
-  virtual void factoryDefaultsSLOT() Q_DECL_OVERRIDE;
-  virtual void applySLOT() Q_DECL_OVERRIDE;
+  virtual void   defaultsSLOT() Q_DECL_OVERRIDE;
+  virtual void   factoryDefaultsSLOT() Q_DECL_OVERRIDE;
+  virtual void   applySLOT() Q_DECL_OVERRIDE;
 
 protected Q_SLOTS:
-  void on_ui_model_activated(int);
-  void on_ui_load_clicked();
-  void on_ui_save_clicked();
-  void on_ui_externalSetup_toggled();
+  void           on_ui_model_activated(int);
+  void           on_ui_load_clicked();
+  void           on_ui_save_clicked();
+  void           on_ui_externalSetup_toggled();
 
 protected:
-  QString m_path;
+  QString        m_path;
 
 private:
   QStringListModel *m_portlist;

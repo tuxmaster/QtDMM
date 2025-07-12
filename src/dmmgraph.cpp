@@ -109,7 +109,9 @@ void DMMGraph::paintEvent(QPaintEvent *)
 {
   QPixmap pix(width(), height() - 16);
   QPainter p;
+
   p.begin(&pix);
+  p.setRenderHint(QPainter::Antialiasing);
 
   paint(&p, width(), height() - 16, m_xfactor, m_xstep, m_yfactor, m_ystep,
         m_maxUnit, m_hUnitFact, m_hUnit, true, false);
@@ -851,13 +853,8 @@ void DMMGraph::wheelEvent(QWheelEvent *ev)
 
 void DMMGraph::mousePressEvent(QMouseEvent *ev)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
   QPoint pos(qRound(ev->position().x()), qRound(ev->position().y()));
   QPoint globalPos(qRound(ev->globalPosition().x()), qRound(ev->globalPosition().y()));
-#else
-  QPoint pos = ev->pos();
-  QPoint globalPos = ev->globalPos();
-#endif
 
   if (ev->button() == Qt::LeftButton)
   {
@@ -950,14 +947,8 @@ void DMMGraph::mousePressEvent(QMouseEvent *ev)
 
 void DMMGraph::mouseMoveEvent(QMouseEvent *ev)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
   QPoint pos(qRound(ev->position().x()), qRound(ev->position().y()));
   QPoint globalPos(qRound(ev->globalPosition().x()), qRound(ev->globalPosition().y()));
-#else
-  QPoint pos = ev->pos();
-  QPoint globalPos = ev->globalPos();
-#endif
-
 
   if (m_scaleMin == m_scaleMax || m_scaleMin == 1e40)
     return;

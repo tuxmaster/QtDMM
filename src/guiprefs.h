@@ -31,30 +31,30 @@ class GuiPrefs : public PrefWidget, private Ui::UIGuiPrefs
 public:
   GuiPrefs(QWidget *parent = Q_NULLPTR);
   ~GuiPrefs();
-  bool			showTip() const;
-  bool			showBar() const;
-  bool			showMinMax() const;
-  bool			alertUnsavedData() const;
-  bool			useTextLabel() const;
-  QColor		displayBgColor() const;
-  QColor		displayTextColor() const;
-  bool			saveWindowPosition() const;
-  bool			saveWindowSize() const;
-  void			on_ui_tipOfTheDay_toggled(bool on);
-  bool			showDmmToolbar() const;
-  bool			showGraphToolbar() const;
-  bool			showFileToolbar() const;
-  bool			showHelpToolbar() const;
-  bool			showDisplay() const;
-  void			setToolbarVisibility(bool, bool, bool, bool, bool);
+  bool      showTip() const;
+  bool      showBar() const;
+  bool      showMinMax() const;
+  bool      alertUnsavedData() const;
+  bool      useTextLabel() const;
+  QColor    displayBgColor() const;
+  QColor    displayTextColor() const;
+  bool      saveWindowPosition() const;
+  bool      saveWindowSize() const;
+  void      on_ui_tipOfTheDay_toggled(bool on);
+  bool      showDmmToolbar() const;
+  bool      showGraphToolbar() const;
+  bool      showFileToolbar() const;
+  bool      showHelpToolbar() const;
+  bool      showDisplay() const;
+  void      setToolbarVisibility(bool, bool, bool, bool, bool);
 
 Q_SIGNALS:
-  void			showTips(bool);
+  void      showTips(bool);
 
 public Q_SLOTS:
-  virtual void	defaultsSLOT();
-  virtual void	factoryDefaultsSLOT();
-  virtual void	applySLOT();
+  virtual void defaultsSLOT();
+  virtual void factoryDefaultsSLOT();
+  virtual void applySLOT();
 
 };
 

@@ -345,8 +345,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="application-exit" resource="../resources.qrc">
-     <normaloff>:/Symbols/stop.xpm</normaloff>:/Symbols/stop.xpm</iconset>
+    <iconset theme="media-playback-stop" resource="../resources.qrc">
+    <normaloff>:/Symbols/stop.xpm</normaloff>:/Symbols/stop.xpm</iconset>
    </property>
    <property name="text">
     <string>S&amp;top</string>
@@ -395,7 +395,7 @@
   </action>
   <action name="action_On_version">
    <property name="text">
-    <string>&amp;On version</string>
+    <string>&amp;About</string>
    </property>
    <property name="whatsThis">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

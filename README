@@ -68,14 +68,14 @@ following DMM's are supported by QtDMM. (some needs user confirmation)
 
     Sinometer    MAS-343
 
-    Uni-Trend    UT30A
-    Uni-Trend    UT30E
+    Uni-Trend    UT60A
+    Uni-Trend    UT60E
     Uni-Trend    UT61B
     Uni-Trend    UT61C
     Uni-Trend    UT61D
     Uni-Trend    UT61E (serial)
 
-    Vichy        VC99
+    Vichy        VC99 (hw hack needed)
 
     Voltcraft    M-3650D
     Voltcraft    M-3860

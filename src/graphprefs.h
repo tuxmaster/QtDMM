@@ -31,22 +31,19 @@ class GraphPrefs : public PrefWidget, private Ui::UIGraphPrefs
 public:
   GraphPrefs(QWidget *parent = Q_NULLPTR);
   ~GraphPrefs();
-  QColor		bgColor() const;
-  QColor		gridColor() const;
-  QColor		dataColor() const;
-  QColor		startColor() const;
-  QColor		externalColor() const;
-  QColor		cursorColor() const;
-  int			lineWidth() const;
-  int			lineMode() const;
-  int			pointMode() const;
-  bool			crosshair() const;
+  QColor        bgColor() const;
+  QColor        gridColor() const;
+  QColor        dataColor() const;
+  QColor        startColor() const;
+  QColor        externalColor() const;
+  QColor        cursorColor() const;
+  int           lineWidth() const;
+  int           lineMode() const;
+  int           pointMode() const;
+  bool          crosshair() const;
 
 public Q_SLOTS:
-  virtual void	defaultsSLOT();
-  virtual void	factoryDefaultsSLOT();
-  virtual void	applySLOT();
-
+  virtual void  defaultsSLOT();
+  virtual void  factoryDefaultsSLOT();
+  virtual void  applySLOT();
 };
-
-

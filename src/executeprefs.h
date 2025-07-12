@@ -32,21 +32,18 @@ class ExecutePrefs : public PrefWidget, private Ui::UIExecutePrefs
 public:
   ExecutePrefs(QWidget *parent = Q_NULLPTR);
   ~ExecutePrefs();
-  bool			startExternal() const;
-  bool			externalFalling() const;
-  double		externalThreshold() const;
-  bool			disconnectExternal() const;
-  QString		externalCommand() const;
-  void			setThreshold(double);
+  bool          startExternal() const;
+  bool          externalFalling() const;
+  double        externalThreshold() const;
+  bool          disconnectExternal() const;
+  QString       externalCommand() const;
+  void          setThreshold(double);
 
 public Q_SLOTS:
-  virtual void	defaultsSLOT()Q_DECL_OVERRIDE;
-  virtual void	factoryDefaultsSLOT()Q_DECL_OVERRIDE;
-  virtual void	applySLOT()Q_DECL_OVERRIDE;
+  virtual void  defaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void  factoryDefaultsSLOT()Q_DECL_OVERRIDE;
+  virtual void  applySLOT()Q_DECL_OVERRIDE;
 
 protected Q_SLOTS:
-  void			on_ui_browseExec_clicked();
-
+  void          on_ui_browseExec_clicked();
 };
-
-

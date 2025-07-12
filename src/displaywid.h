@@ -1,7 +1,7 @@
 //======================================================================
-// File:  displaywid.h
-// Author: Matthias Toussaint
-// Created: Fri Nov 23 22:28:36 CET 2001
+// File:		displaywid.h
+// Author:	Matthias Toussaint
+// Created:	Fri Nov 23 22:28:36 CET 2001
 //----------------------------------------------------------------------
 // This file is part of QtDMM.
 //
@@ -33,18 +33,18 @@ public:
   DisplayWid(QWidget *parent = Q_NULLPTR);
   virtual ~DisplayWid();
 
-  void setValue(int, const QString &);
-  void setUnit(int, const QString &);
-  void setMinValue(const QString &);
-  void setMaxValue(const QString &);
-  void setMinUnit(const QString &);
-  void setMaxUnit(const QString &);
-  void setMode(int, const QString &);
-  void setDisplayMode(int, bool minMax, bool bar, int numValues);
-  void setShowBar(bool);
-  void setHold(bool);
-  void setAuto(bool);
-  void setManu(bool);
+  void     setValue(int, const QString &);
+  void     setUnit(int, const QString &);
+  void     setMinValue(const QString &);
+  void     setMaxValue(const QString &);
+  void     setMinUnit(const QString &);
+  void     setMaxUnit(const QString &);
+  void     setMode(int, const QString &);
+  void     setDisplayMode(int, bool minMax, bool bar, int numValues);
+  void     setShowBar(bool);
+  void     setHold(bool);
+  void     setAuto(bool);
+  void     setManu(bool);
 
 protected:
   QBitmap *m_bigDigit;
@@ -107,35 +107,34 @@ protected:
   QBitmap *m_hold;
   QBitmap *m_auto;
   QBitmap *m_manu;
-  QString m_value[4];
-  QString m_minValue;
-  QString m_maxValue;
-  QString m_unit[4];
-  QString m_minUnit;
-  QString m_maxUnit;
-  QString m_mode[4];
-  int     m_displayMode;
-  int     m_range;
-  bool    m_showMinMax;
-  bool    m_showBar;
-  bool    m_showHold;
-  bool    m_showAuto;
-  bool    m_showManu;
-  bool    m_paintBar;
-  int     m_numValues;
-  int     m_minMaxW;
-  int     m_extraH;
-  int     m_minW;
-  int     m_extraW;
+  QString  m_value[4];
+  QString  m_minValue;
+  QString  m_maxValue;
+  QString  m_unit[4];
+  QString  m_minUnit;
+  QString  m_maxUnit;
+  QString  m_mode[4];
+  int      m_displayMode;
+  int      m_range;
+  bool     m_showMinMax;
+  bool     m_showBar;
+  bool     m_showHold;
+  bool     m_showAuto;
+  bool     m_showManu;
+  bool     m_paintBar;
+  int      m_numValues;
+  int      m_minMaxW;
+  int      m_extraH;
+  int      m_minW;
+  int      m_extraW;
 
-  void paintEvent(QPaintEvent *) Q_DECL_OVERRIDE;
-  void drawSmallNumber(QPainter *, const QString &str);
-  void drawSmallUnit(QPainter *, const QString &str);
-  void drawBigNumber(QPainter *, const QString &str);
-  void drawBigUnit(QPainter *, const QString &str);
+  void     paintEvent(QPaintEvent *) Q_DECL_OVERRIDE;
+  void     drawSmallNumber(QPainter *, const QString &str);
+  void     drawSmallUnit(QPainter *, const QString &str);
+  void     drawBigNumber(QPainter *, const QString &str);
+  void     drawBigUnit(QPainter *, const QString &str);
 
 private:
   unsigned int calcNumDigits(unsigned int);
   QBitmap *BitmapHelper(const QString &file)const;
 };
-

@@ -1,15 +1,12 @@
-QtDMM 0.9.8 Installation Instructions
+QtDMM Installation Instructions
 (c) 2001–2014 M. Toussaint
 
-QtDMM is a graphical front-end for digital multimeters. It was originally
-developed for Qt5, which is now end-of-life (EOL). Work is ongoing to support
-Qt6 as well. Qt5 is still the recommended choice, but Qt6 builds are welcome
-for testing.
+QtDMM is a graphical front-end for digital multimeters based on Qt6 framework.
 
 
 Requirements:
 =============
-- developer version of Qt 5.14 or higher (recommended) or Qt 6.x
+- developer version of Qt 6
 - CMake version 3.11 or higher
 - A supported or compatible multimeter
 
@@ -29,21 +26,14 @@ Basic steps:
 - For a clean build (optional):
     ./compile.sh clean <other options>
 
-Building with Qt5 (Recommended):
--------------------------------
-Build and install system-wide:
+- Build and install system-wide:
     ./compile.sh install
-
-Build only (no installation):
+or
+- Build only (no installation):
     ./compile.sh
 
-The compiled binary will be placed in the `./bin` directory:
+- The compiled binary will be placed in the `./bin` directory:
     ./bin/qtdmm
-
-Building with Qt6 (Experimental):
---------------------------------
-like Qt5 build, but add `qt6` ardument, e.g.:
-    ./compile.sh qt6 install
 
 
 Multimeter Compatibility:

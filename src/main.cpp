@@ -63,13 +63,9 @@ int main(int argc, char **argv)
   QTranslator QtTranslation;
   QTranslator AppTranslation;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
   QString QtTranslationPath = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
-#else
-  QString QtTranslationPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-#endif
-
   QString AppTranslationPath = QtTranslationPath;
+
 #ifdef Q_OS_WIN
   AppTranslationPath = "./";
 #endif
