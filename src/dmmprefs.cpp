@@ -252,26 +252,14 @@ void DmmPrefs::defaultsSLOT()
   baudRate->setCurrentIndex(m_cfg->getInt("Port settings/baud"));
   bitsCombo->setCurrentIndex(m_cfg->getInt("Port settings/bits", 7) - 5);
   stopBitsCombo->setCurrentIndex(m_cfg->getInt("Port settings/stop-bits", 2) - 1);
-  int pValue;
-  switch (m_cfg->getInt("Port settings/parity"))
-  {
-    case QSerialPort::NoParity:
-      pValue = 0;
-      break;
-    case QSerialPort::EvenParity:
-      pValue = 1;
-      break;
-    case QSerialPort::OddParity:
-      pValue = 2;
-      break;
-    default:
-      qWarning() << "Wrong parity value. Using None";
-      pValue = 0;
-      break;
-  }
-  parityCombo->setCurrentIndex(pValue);
+  parityCombo->setCurrentIndex(m_cfg->getInt("Port settings/parity"));
   displayCombo->setCurrentIndex(m_cfg->getInt("DMM/display", 1));
   ui_externalSetup->setChecked(m_cfg->getInt("DMM/exterrnal-setup") == 1);
+
+  uirts->setChecked(m_cfg->getBool("DMM/rts", true));
+  uicts->setChecked(m_cfg->getBool("DMM/cts", false));
+  uidsr->setChecked(m_cfg->getBool("DMM/dsr", false));
+  uidtr->setChecked(m_cfg->getBool("DMM/dtr", false));
 
   protocolCombo->setCurrentIndex(m_cfg->getInt("DMM/data-format"));
   ui_numValues->setValue(m_cfg->getInt("DMM/number-of-values", 1));
@@ -324,6 +312,11 @@ void DmmPrefs::applySLOT()
   m_cfg->setInt("DMM/data-format", protocolCombo->currentIndex());
   m_cfg->setInt("DMM/number-of-values", ui_numValues->value());
   m_cfg->setString("DMM/model", (ui_model->currentIndex() == 0 ? "Manual" : dmm_info[ui_model->currentIndex() - 1].name));
+
+  m_cfg->setBool("DMM/rts", uirts->isChecked());
+  m_cfg->setBool("DMM/cts", uicts->isChecked());
+  m_cfg->setBool("DMM/dsr", uidsr->isChecked());
+  m_cfg->setBool("DMM/dtr", uidtr->isChecked());
 }
 
 void DmmPrefs::on_ui_externalSetup_toggled()
@@ -445,20 +438,13 @@ int DmmPrefs::speed() const
 {
   switch (baudRate->currentIndex())
   {
-    case 0:
-      return 600;
-    case 1:
-      return 1200;
-    case 2:
-      return 1800;
-    case 3:
-      return 2400;
-    case 4:
-      return 4800;
-    case 5:
-      return 9600;
-    case 6:
-      return 19200;
+    case 0: return 600;
+    case 1: return 1200;
+    case 2: return 1800;
+    case 3: return 2400;
+    case 4: return 4800;
+    case 5: return 9600;
+    case 6: return 19200;
   }
   return 600;
 }

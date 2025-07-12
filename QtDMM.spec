@@ -1,56 +1,249 @@
-Name:		QtDMM
-Version:	0.9.8
-Release:	1%{?dist}
-Summary:	Application for dmm's
-Summary(de):	Anwendung für DMM's
-Group:		Applications/Engineering
-License:	GPLv3
-URL:		https://github.com/tuxmaster/QtDMM
-Source0:	%{name}-%{version}.tar.xz
+Name:           qtdmm
+Version:        1.0.0
+Release:        1%{?dist}
+Summary:        DMM Readout Software Including a Configurable Recorder.
 
-%global lname qtdmm
+License:        GPL-3.0
+URL:            https://github.com/tuxmaster/QtDMM/
+Source0:        %{name}-%{version}.tar.bz2
 
-BuildRequires:  pkgconfig(Qt5SerialPort) pkgconfig(Qt5Help) pkgconfig(Qt5Charts) desktop-file-utils
+BuildRequires:  cmake
+BuildRequires:  gcc-c++
+BuildRequires:  desktop-file-utils
+BuildRequires:  hicolor-icon-theme
+BuildRequires:  pkgconfig(Qt6Core)
+BuildRequires:  pkgconfig(Qt6Gui)
+BuildRequires:  pkgconfig(Qt6Widgets)
+BuildRequires:  pkgconfig(Qt6SerialPort)
+
+Requires: pkgconfig(Qt6Core)
+Requires: pkgconfig(Qt6SerialPort)
+
+%undefine source_date_epoch_from_changelog
 
 %description
-Application for dmm's.
-
-%description -l de
-Eine Anwendung für DMM's.
+QtDMM is a graphical multimeter reader and logger based on Qt. It supports various serial devices.
 
 %prep
-%setup -q -n %{name}
+%autosetup
 
 %build
-qmake-qt5
-make %{?_smp_mflags}
+%cmake .
+%cmake_build
 
 %install
-mkdir -p %{buildroot}/usr/bin
-mkdir -p %{buildroot}%_qt5_translationdir
-mkdir -p %{buildroot}%{_datadir}/pixmaps
-install bin/qtdmm %{buildroot}/usr/bin/qtdmm
-install -m 644 src/translations/*.qm %{buildroot}%_qt5_translationdir/
-install -m 644 pics/large/qtdmm.png %{buildroot}%{_datadir}/pixmaps/qtdmm.png
-desktop-file-install --dir=%{buildroot}%{_datadir}/applications QtDMM.desktop
-%find_lang %{lname} --with-qt
+%cmake_install
+desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 
-%files -f %{lname}.lang
-%{_bindir}/*
-%{_datadir}/pixmaps/qtdmm.png
-%{_datadir}/applications/QtDMM.desktop
-%doc AUTHORS COPYING LICENSE README CHANGELOG
+%files
+%license LICENSE
+%doc AUTHORS README CHANGELOG
+%{_bindir}/qtdmm
+%{_datadir}/applications/qtdmm.desktop
+%{_datadir}/icons/hicolor/*/apps/qtdmm.png
+%{_datadir}/qt6/translations/qtdmm_de.qm
 
 %changelog
-* Sun Aug 06 2017 Frank Büttner <frank@familie-büttner.de> 0.9.8-1
-- update to 0.9.8
 
-* Sun Oct 30 2016 Frank Büttner <frank@familie-büttner.de> 0.9.7-1
-- update to 0.9.7
+xx/xx/20xx 1.0.0
+	   - switch Qt6 (redpanther)
+	   - Added HoldPeak HP-90EPC (tstenner).
+	   - Use pkgconfig for spec file.
+	   - Added UniTrend UT61B and UT61D and Metex-3840 (ported from 0.9.2 original branch)
+	   - Added UniTrend UT61E (redpanther)
+	   - rename UniTrend UT30 to UT60, because UT30 has no data port
+	   - Fix compile for Windows using mingw
+	   - Code clean up and restrucuring
+	   - cleanup UI
+	   - Add support for hold and auto/manual range
 
-* Thu Jan 28 2016 Frank Büttner <frank@familie-büttner.de> 0.9.6-1
-- update to 0.9.6
-- German package description
+30/10/2016 0.9.7
+	   - Added Voltcraft VC870 (Florian Evers)
+	   - Added VA symbols to display apparent power
+	   - Added cosphi symbols to display the power factor
 
-* Sat Jun 27 2015 Frank Büttner <frank@familie-büttner.de> 0.9.5-1
-- start
+28/01/2016 0.9.6
+	   - Code clean up
+	   - fix translation loading
+	   - Fix message handler
+	   - Fix file export (leading zero of the time stamp)
+	   - Fix console logging on Windows
+	   - Remove 1/10s sample rate -> don't work with most devices
+	   - Use infinity sign to set endless recoder
+	   - Fix hang of M-4660A
+
+14/07/2015 0.9.5
+	   - Port to Qt5
+	   - Use C++14
+	   - Add translation support
+
+27/04/2014 0.9.0
+	   - QtDMM was ported to Qt4.x (still a few minor bugs, but usable)
+	   - QtDMM was relicensed from GPL 2.0 to GPL 3
+	   - Added TekPower TP4000ZC / digitek DT4000ZC
+	   - Added PeakTech 3430
+
+11/07/2009 0.8.14
+	   - terminal flags
+	   - VC 920
+
+11/07/2009 0.8.13
+	   - One hour recording crash bug
+	   - Metex M-4650C settings (Samuel Hildebrandt)
+	   - Tenma 72-1016 settings (simon morris)
+	   - Metex M-3870D settings (Zdeněk Šigut)
+
+25/12/2007 0.8.12
+	   - Added PeakTech 4015A (Jochen Puchalla)
+	   - Added Tenma 72-7745 (Laurent Perez)
+	   - Bugfix McVoice M-980T (Erik Hobel)
+	   - Added Digitech QM1462 (Peter Halasz)
+	   - Added Digitek INO2513
+	   - Added Raio Shack 22-812 (Peter Halasz)
+	   - Corrected typo in dmmgraph (Erik Hobel)
+
+20/11/2007 0.8.11
+	   - GCC 4.3 compilation issues
+	   - Make it compile on OSX
+
+30/09/2007 0.8.10
+	   - Added Sinometer MAS-343
+	   - Adedd PeakTech 3330 (Jonny Bijlsma)
+	   - Bugfix in VC820 protocoll
+	   - Added Voltrcaft VC940
+	   - Added Digitech QM1537 (Rob Brown)
+	   - Added Uni-Trend UT30A and UT30E
+	   - Added Digitek DT-9062
+	   - Confirmation Voltcraft M-3860
+	   - Added PeakTech 4360 (Klaus Kaiser)
+
+19/08/2007 0.8.9
+	   - Added Voltcraft M-3610D
+	   - Added Iso-Tech IDM 73 (Paolo Bernardelli)
+
+19/11/2006 0.8.8
+	   - Make it compile with gcc 4.1
+	   - Added Digitech QM1538
+	   - Added MASTECH MAS-345
+	   - Added McVoice M-345pro
+	   - Added Voltcraft M-4650CR
+	   - Context menu for graph
+	   - import works better (but not 100%)
+
+20/12/2005 0.8.7
+	   - Added support for VC820, VC840, MASTECH M9803R, McVoice M-980T and
+	     Radioshack RS22-168A
+	   - Save manual settings to file
+	   - GUI configuration
+	   - Up to 6 digits in display now
+
+15/08/2005 0.8.6
+	   - Cleaned up compiler warnings
+	   - Added Metex M-3850M and PeakTech-4390
+	     (Thanks to Hubert Mayer)
+	   - Added Digitech QM 1350 (James Cameron)
+	   - Import/Export issue (Hubert Mayer)
+	   - Configuration problem for large port numbers
+	     (Hubert Mayer)
+
+12/05/2005 0.8.5
+	   - Fixed window save behaviour (nobody noticed yet?)
+	   - Fixed sampling counter
+	   - Added ME-42
+	   - --console option. This might or might not help to
+	     identify problems
+
+29/04/2005 0.8.4
+	   - Added header file for debian
+	   - Added QtDMM.desktop (Radek Liboska)
+	   - Added PNG Icon (Radek Liboska)
+	   - Separated device name and number (this way you can
+	     configure ttyS0-ttyS99 without the need for a one
+	     kilometer long popupmenu)
+
+24/04/2005 0.8.3
+	   - Finally ported to Qt-3.x
+
+20/10/2002 0.8.2
+	   - Added preset for Voltcraft M-3650D
+	   - Removed performance bug in graph (manual scaling)
+	   - Improved automatic scaling (not completed)
+	   - Mouse panning in graph
+	   - Thresholds can be moved with mouse now
+	   - Reworked configuration dialog (fully non-modal now)
+
+15/10/2002 0.8.1
+	   - Added include to fix compilation problems on RedHat based
+	     systems
+	   - Zoom IN/OUT of graph with wheelmouse
+
+13/10/2002 0.8
+	   - Added Protocol for ELV M9803R (Thanks to Ralph Fischer for providing
+	     me such a multimeter for testing)
+	   - Added Protocol for Voltraft VC 635 and VC 655
+	   - Display resides in toolbar now
+	   - Bargraph for Display
+	   - More configuration options for display
+	   - Added parity setting for serial port
+	   - Added setting for display digits (3 1/2 = 2000 digits,
+	     3 3/4 = 4000 digits, 4 1/2 = 20000 disgits and
+	     4 3/4 = 50000 digits)
+	   - Improved graph scale
+	   - Display shows up to four values now (not in graph yet)
+	   - Bugfix for continuous polling protocolls. This should
+	     fix the problems reported by some users
+	   - Display update separated from graph (displays as fast as
+	     the multimeter provides data)
+	   - numerous small bugfixes
+	   - introduced "tip of the day" dialog (still missing some text)
+
+02/03/2002 0.7
+	   - Added Voltcraft ME-42, M-3860, M-4660A, M-4660M, MXD-4660A,
+	   - Added protocol for Voltcraft VC 630, VC 650, VC 670
+	   - Bugfix in 14 byte, polling protocol
+	   - Fixed small configuration dialog bug
+
+15/12/2001 0.6.2
+	   - More drawing options and integration curve
+
+25/11/2001 0.6.1
+	   - Completed online help and minor internal cleanup.
+
+24/11/2001 0.6
+	   - Chromified display
+	   - Shows lines at triggers in graph
+
+27/10/2001 0.5.1
+	   - Added Metex M-3660D
+	   - Added some online help chrome
+
+05/09/2001 0.5
+	   - Can start external commands at reached thresholds now
+
+04/09/2001 0.4.1
+	   - Improved data import
+
+01/09/2001 0.4
+	   - Added more DMM's
+	   - Added import of data
+	   - Configuration dialog is nonmodal now
+	   - Added some GUI chrome
+	   - Persistent printer settings
+	   - Added support for 22-805 Radioshack DMM (Roger M.)
+	   - Added support for Metex/Voltcraft ME-11 (Dough LaRue)
+	   - Added support for Voltcraft ME-22T (Radek Liboska PhD)
+
+09/05/2001 0.3
+	   - Added support for Voltcraft M-4660 (Michael Petruzelka)
+
+08/05/2001 0.2
+	   - Added support for PeakTech 451 (Dr. Ralf Wieland)
+
+15/04/2001 0.1
+	   - Initial release version 0.1
+
+-- 24/04/2005
+   Matthias Toussaint
+   <qtdmm@mtoussaint.de>
+
+

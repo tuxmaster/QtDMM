@@ -94,6 +94,7 @@ DMMGraph::DMMGraph(QWidget *parent, Settings *settings) :
   m_popup = new QMenu(this);
   connect(m_popup, SIGNAL(triggered(QAction *)), this, SLOT(popupSLOT(QAction *)));
 }
+
 DMMGraph::~DMMGraph()
 {
   delete m_array;
@@ -845,7 +846,7 @@ void DMMGraph::emitInfo()
 
 void DMMGraph::wheelEvent(QWheelEvent *ev)
 {
-  if (ev->angleDelta().x() > 0)
+  if (ev->angleDelta().x() < 0 || ev->angleDelta().y() < 0)
     Q_EMIT zoomOut(1.1);
   else
     Q_EMIT zoomIn(1.1);
@@ -1159,11 +1160,12 @@ bool DMMGraph::exportDataSLOT()
     file.open(QIODevice::WriteOnly);
 
     QTextStream ts(&file);
-
+	printf("p %d %d\n", m_pointer, m_sampleTime);
     for (int i = 0; i < m_pointer; i++)
     {
-      QDateTime dt = m_graphStartDateTime.addSecs(i * static_cast<int>(qRound(m_sampleTime / 10.)));
-      QString line = QString("%1\t%2\t%3\n").arg(dt.toString("dd.MM.yyyy\tHH:mm:ss")).arg((*m_array)[i], 0, 'f').arg(m_unit);
+      //QDateTime dt = m_graphStartDateTime.addMSecs(i * static_cast<int>(qRound(m_sampleTime / 10.)));
+      QDateTime dt = m_graphStartDateTime.addMSecs(i * m_sampleTime * 100);
+      QString line = QString("%1\t%2\t%3\n").arg(dt.toString("dd.MM.yyyy\tHH:mm:ss:zzz")).arg((*m_array)[i], 0, 'f').arg(m_unit);
       ts << line;
     }
     m_dirty = false;
@@ -1228,6 +1230,7 @@ void DMMGraph::importDataSLOT()
     QStringList token;
     QStringList dateToken;
     QStringList timeToken;
+    QStringList timeParts;
 
     if (file.open(QIODevice::ReadOnly))
     {
@@ -1237,7 +1240,7 @@ void DMMGraph::importDataSLOT()
 
       if (!line.isNull())
       {
-        QRegularExpression re(R"(^\d+\.\d+\.\d+\t\d+:\d+:\d+\t-?\d*\.\d+\t.*$)");
+        QRegularExpression re(R"(^\d+\.\d+\.\d+\t\d+:\d+:\d+(?:\.\d+)?\t-?\d*\.\d+\t.*$)");
         if (!re.match(line).hasMatch())
         {
           Q_EMIT error(tr("Oops! Seems not to be a valid file"));
@@ -1247,11 +1250,15 @@ void DMMGraph::importDataSLOT()
 
         token = line.split("\t");
         dateToken = token[0].split(".");
-        timeToken = token[1].split(":");
+        timeParts = token[1].split('.');
+        timeToken = timeParts[0].split(':');
+        timeToken.append(timeParts.value(1, "0"));
 
         QTime startTime = QTime(timeToken[0].toInt(),
                                 timeToken[1].toInt(),
-                                timeToken[2].toInt());
+                                timeToken[2].toInt(),
+                                timeToken[3].toInt());
+
         QDate startDate = QDate(dateToken[2].toInt(),
                                 dateToken[1].toInt(),
                                 dateToken[0].toInt());
@@ -1271,11 +1278,15 @@ void DMMGraph::importDataSLOT()
           {
             token = line.split("\t");
             dateToken = token[0].split(".");
-            timeToken = token[1].split(":");
+
+            timeParts = token[1].split('.');
+            timeToken = timeParts[0].split(':');
+            timeToken.append(timeParts.value(1, "0"));
 
             QTime nowTime = QTime(timeToken[0].toInt(),
                                   timeToken[1].toInt(),
-                                  timeToken[2].toInt());
+                                  timeToken[2].toInt(),
+                                  timeToken[3].toInt());
             QDate nowDate = QDate(dateToken[2].toInt(),
                                   dateToken[1].toInt(),
                                   dateToken[0].toInt());
