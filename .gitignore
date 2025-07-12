@@ -2,3 +2,4 @@ bin/
 assets/translations/qtdmm_de.qm
 tmp/
 build/
+packages/
