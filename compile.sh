@@ -11,8 +11,7 @@ usage: compile.sh <install|clean|qt6>
    install: install system wide
    clean  : remove build files before build
    run    : run qtdmm after successfull build
-   qt6    : allow build with qt6
-            if qt6 is not available qt5 is used
+   package: create packages (DEB and source)
 
 EOF
 	exit 0
@@ -20,22 +19,38 @@ EOF
 
 RUN=false
 INSTALL=false
-FORCE_QT5="-DFORCE_QT5=ON"
+PACK=false
 
 for arg in $*
 do
 	arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
-	[ "$arg" = "clean" ] && rm -rf build
+	[ "$arg" = "clean"   ] && rm -rf build
 	[ "$arg" = "install" ] && INSTALL=true
-	[ "$arg" = "run" ] && RUN=true
-	[ "$arg" = "help" -o "$arg" = "h" ] && usage
+	[ "$arg" = "run"     ] && RUN=true
+	[ "$arg" = "pack"    ] && PACK=true
+	[ "$arg" = "help"    ] && usage
 done
 
-mkdir -p build
+cmake -B build 
+cmake --build build --parallel $(nproc) || exit 1
 
 cd build
-cmake  ..
-make -j $(nproc) || exit 1
+
+if ${PACK}
+then
+	rm -rf ../packages/
+	make package_source
+
+	if [ -f /etc/debian_version ]
+	then
+		make package
+	elif [ -f /etc/os-release ] && grep -qiE 'rhel|fedora|suse' /etc/os-release
+	then
+		cp ../packages/qtdmm*.tar.bz2 ~/rpmbuild/SOURCES/
+		( cd ..; rpmbuild -ba QtDMM.spec )
+	fi
+	rm -rf ../packages/_CPack_Packages
+fi
 
 if [ -x qtdmm ]
 then

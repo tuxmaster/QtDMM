@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=QtDMM
+Comment=Application for dmm's
+Comment[de]=Anwendung für DMM's
+Exec=qtdmm
+Icon=qtdmm
+Terminal=false
+Categories=Science;Electronics;
