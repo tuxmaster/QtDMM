@@ -68,6 +68,9 @@
         <property name="whatsThis">
          <string>Unit for sampling period.</string>
         </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
         <item>
          <property name="text">
           <string>1/10 Seconds</string>
