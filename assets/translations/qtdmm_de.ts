@@ -1812,50 +1812,51 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>Einheit des Messintervalls.</translation>
     </message>
     <message>
-        <source>1/10 Seconds</source>
-        <translation type="vanished">1/10 Sekunde</translation>
-    </message>
-    <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="73"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="132"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="888"/>
-        <source>Seconds</source>
-        <translation>Sekunden</translation>
+        <source>1/10 Seconds</source>
+        <translation>1/10 Sekunde</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="78"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="137"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="893"/>
-        <source>Minutes</source>
-        <translation>Minuten</translation>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="891"/>
+        <source>Seconds</source>
+        <translation>Sekunden</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="83"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="142"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="898"/>
-        <source>Hours</source>
-        <translation>Stunden</translation>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="896"/>
+        <source>Minutes</source>
+        <translation>Minuten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="88"/>
         <location filename="../../src/ui/uirecorderprefs.ui" line="147"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="903"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="901"/>
+        <source>Hours</source>
+        <translation>Stunden</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="93"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="152"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="906"/>
         <source>Days</source>
         <translation>Tage</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="112"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="117"/>
         <source>Sample t&amp;ime:</source>
         <translation>&amp;Messdauer:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="128"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="884"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="133"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="887"/>
         <source>Unit for maximum sampling time.</source>
         <translation>Einheit für die Messdauer.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="155"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="160"/>
         <source>Specify the sampling period. See unit to the right.</source>
         <translation>Hier wird der Intervall der Messungen angegeben.</translation>
     </message>
@@ -1864,69 +1865,69 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation type="vanished">Unendlich</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="171"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="865"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="176"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="868"/>
         <source>Maximum sampling time. When this time expires, the recorder is stopped automatically.</source>
         <translation>Die maximal Messdauer. Wenn der Wert erreicht ist, wird der Rekorder automatisch angehalten.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="193"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="198"/>
         <source>Start</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="255"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="260"/>
         <source>&amp;Manual</source>
         <translation>&amp;Manuell</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="252"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="257"/>
         <source>Select this entry if you want to manually start the transient recorder. Use the &lt;b&gt;Start&lt;/b&gt; and &lt;b&gt;Stop&lt;/b&gt; buttons in the main window to start/stop sampling.</source>
         <translation>Wählen Sie diesen Punkt, wenn Sie den Rekorder per Hand starten wollen. Benutzen Sie dazu die Schaltfächen &lt;b&gt;Starten&lt;/b&gt; und &lt;b&gt;Anhalten&lt;/b&gt; in der Werkzeugleiste im Hauptfenster.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="303"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="308"/>
         <source>&amp;Predefined time</source>
         <translation>&amp;Festgelegte Zeit</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="300"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="305"/>
         <source>Select this entry if you want the transient recorder to be started at a predefined time.</source>
         <translation>Wählen Sie diesen Eintrag, wenn die Messerie zu einem bestimmten Zeitpunkt starten soll.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="174"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="179"/>
         <source>∞</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="401"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="406"/>
         <source>Hour of start time.</source>
         <translation>Stunde.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="423"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="461"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="427"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="464"/>
         <source>:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="439"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="443"/>
         <source>Minutes of start time.</source>
         <translation>Minute.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="477"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="480"/>
         <source>Seconds of start time.</source>
         <translation>Sekunde.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="537"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="540"/>
         <source>&amp;Trigger</source>
         <translation>&amp;Schwellwert</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="529"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="532"/>
         <source>Select this entry if you want to automatically trigger the sampling. &lt;p&gt;
 You have two choices:
 &lt;ul&gt;
@@ -1941,13 +1942,13 @@ Es gibt folgende Möglichkeiten:
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="633"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="673"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="636"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="676"/>
         <source>0.0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="628"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="631"/>
         <source>Threshold for falling edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -1956,7 +1957,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
 10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="668"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="671"/>
         <source>Threshold for raising edge.&lt;p&gt;
 You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Example:&lt;br&gt;
 10k - 10000&lt;br&gt;100m - 0.1</source>
@@ -1965,38 +1966,38 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
 10k - 10000&lt;br&gt;100m - 0.1</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="686"/>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="699"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="689"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="702"/>
         <source>Threshold:</source>
         <translation>Grenzwert:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="751"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="754"/>
         <source>&amp;Raising edge</source>
         <translation>&amp;Oberer Grenzwert</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="748"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="751"/>
         <source>Trigger sampling on raising edge.</source>
         <translation>Starten der Messreihe beim Überschreiten des Grenzwertes.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="805"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="808"/>
         <source>&amp;Falling edge</source>
         <translation>&amp;Unterer Grenzwert</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="802"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="805"/>
         <source>Trigger sampling on falling edge.</source>
         <translation>Starten der Messreihe beim Unterschreiten des Grenzwertes.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="839"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="842"/>
         <source>Pre trigger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uirecorderprefs.ui" line="968"/>
+        <location filename="../../src/ui/uirecorderprefs.ui" line="971"/>
         <source>Pre trigger time:</source>
         <translation type="unfinished"></translation>
     </message>
