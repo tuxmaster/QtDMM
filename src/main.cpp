@@ -63,8 +63,8 @@ int main(int argc, char **argv)
   QTranslator QtTranslation;
   QTranslator AppTranslation;
 
-  QString QtTranslationPath = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
-  QString AppTranslationPath = QtTranslationPath;
+  QString QtTranslationPath  = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+  QString AppTranslationPath = QStandardPaths::locate(QStandardPaths::AppDataLocation, "translations", QStandardPaths::LocateDirectory);
 
 #ifdef Q_OS_WIN
   AppTranslationPath = "./";

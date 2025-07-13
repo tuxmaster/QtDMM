@@ -51,7 +51,7 @@ install(TARGETS ${PROJECT_NAME}
 	ARCHIVE DESTINATION lib
 )
 
-install(FILES ${CMAKE_BINARY_DIR}/qtdmm_de.qm DESTINATION "share/qt6/translations" )
+install(FILES ${CMAKE_BINARY_DIR}/qtdmm_de.qm DESTINATION "share/qtdmm/translations" )
 install(FILES assets/qtdmm.desktop DESTINATION share/applications)
 install(FILES assets/icons/qtdmm_32.png DESTINATION share/icons/hicolor/32x32/apps RENAME qtdmm.png)
 install(FILES assets/icons/qtdmm_64.png DESTINATION share/icons/hicolor/64x64/apps RENAME qtdmm.png)
