@@ -131,18 +131,10 @@ int RecorderPrefs::sampleStep() const
 
   switch (ui_sampleUnit->currentIndex())
   {
-    case 0:
-      thenthOfSec *= 10;
-      break;
-    case 1:
-      thenthOfSec *= MINUTE_SECS * 10;
-      break;
-    case 2:
-      thenthOfSec *= HOUR_SECS * 10;
-      break;
-    case 3:
-      thenthOfSec *= DAY_SECS * 10;
-      break;
+    case 1: return thenthOfSec * 10;
+    case 2: return thenthOfSec * 10 * MINUTE_SECS;
+    case 3: return thenthOfSec * 10 * HOUR_SECS;
+    case 4: return thenthOfSec * 10 * DAY_SECS;
   }
   return thenthOfSec;
 }
@@ -153,18 +145,10 @@ int RecorderPrefs::sampleLength() const
 
   switch (timeUnit->currentIndex())
   {
-    case 0:
-      thenthOfSec *= 10;
-      break;
-    case 1:
-      thenthOfSec *= MINUTE_SECS * 10;
-      break;
-    case 2:
-      thenthOfSec *= HOUR_SECS * 10;
-      break;
-    case 3:
-      thenthOfSec *= DAY_SECS * 10;
-      break;
+    case 0: return thenthOfSec * 10;
+    case 1: return thenthOfSec * 10 * MINUTE_SECS;
+    case 2: return thenthOfSec * 10 * HOUR_SECS;
+    case 3: return thenthOfSec * 10 * DAY_SECS ;
   }
   return thenthOfSec;
 }

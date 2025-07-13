@@ -68,6 +68,14 @@
         <property name="whatsThis">
          <string>Unit for sampling period.</string>
         </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>1/10 Seconds</string>
+         </property>
+        </item>
         <item>
          <property name="text">
           <string>Seconds</string>
@@ -415,7 +423,6 @@
                  </property>
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -453,7 +460,6 @@
                  </property>
                  <property name="font">
                   <font>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>

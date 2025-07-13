@@ -1,0 +1,47 @@
+Name:           @CPACK_PACKAGE_NAME@
+Version:        @CPACK_PACKAGE_VERSION@
+Release:        1%{?dist}
+Summary:        @CPACK_PACKAGE_DESCRIPTION_SUMMARY@
+
+License:        @PROJECT_LICENSE@
+URL:            @PROJECT_HOMEPAGE_URL@
+Source0:        %{name}-%{version}.tar.bz2
+
+BuildRequires:  cmake
+BuildRequires:  gcc-c++
+BuildRequires:  desktop-file-utils
+BuildRequires:  hicolor-icon-theme
+BuildRequires:  pkgconfig(Qt6Core)
+BuildRequires:  pkgconfig(Qt6Gui)
+BuildRequires:  pkgconfig(Qt6Widgets)
+BuildRequires:  pkgconfig(Qt6SerialPort)
+
+Requires: pkgconfig(Qt6Core)
+Requires: pkgconfig(Qt6SerialPort)
+
+%undefine source_date_epoch_from_changelog
+
+%description
+@CPACK_DEBIAN_PACKAGE_DESCRIPTION@
+
+%prep
+%autosetup
+
+%build
+%cmake .
+%cmake_build
+
+%install
+%cmake_install
+desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
+%find_lang %{name} --with-qt
+
+%files -f %{name}.lang
+%license LICENSE
+%doc AUTHORS README CHANGELOG
+%{_bindir}/qtdmm
+%{_datadir}/applications/qtdmm.desktop
+%{_datadir}/icons/hicolor/*/apps/qtdmm.png
+
+%changelog
+@RPM_CHANGELOG@
