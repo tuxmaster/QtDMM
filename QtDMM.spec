@@ -34,14 +34,14 @@ QtDMM is a graphical multimeter reader and logger based on Qt. It supports vario
 %install
 %cmake_install
 desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
+%find_lang %{name} --with-qt
 
-%files
+%files -f %{name}.lang
 %license LICENSE
 %doc AUTHORS README CHANGELOG
 %{_bindir}/qtdmm
 %{_datadir}/applications/qtdmm.desktop
 %{_datadir}/icons/hicolor/*/apps/qtdmm.png
-%{_datadir}/qt6/translations/qtdmm_de.qm
 
 %changelog
 
