@@ -21,61 +21,6 @@
     <normaloff>:/Symbols/icon.xpm</normaloff>:/Symbols/icon.xpm</iconset>
   </property>
   <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menu_File">
-    <property name="title">
-     <string>&amp;File</string>
-    </property>
-    <addaction name="action_Export"/>
-    <addaction name="action_Import"/>
-    <addaction name="separator"/>
-    <addaction name="action_Print"/>
-    <addaction name="separator"/>
-    <addaction name="action_Configure"/>
-    <addaction name="separator"/>
-    <addaction name="action_Quit"/>
-   </widget>
-   <widget class="QMenu" name="menu_DMM">
-    <property name="title">
-     <string>&amp;DMM</string>
-    </property>
-    <addaction name="action_Connect"/>
-    <addaction name="action_Reset"/>
-    <addaction name="separator"/>
-    <addaction name="action_ConfigureDMM"/>
-   </widget>
-   <widget class="QMenu" name="menu_Recorder">
-    <property name="title">
-     <string>&amp;Recorder</string>
-    </property>
-    <addaction name="action_Start"/>
-    <addaction name="action_Stop"/>
-    <addaction name="separator"/>
-    <addaction name="action_Clear"/>
-    <addaction name="separator"/>
-    <addaction name="actionConfigureRecorder"/>
-   </widget>
-   <widget class="QMenu" name="menu_Help">
-    <property name="title">
-     <string>&amp;Help</string>
-    </property>
-    <addaction name="action_On_version"/>
-    <addaction name="action_Tip_of_the_day"/>
-    <addaction name="action_Direct_help"/>
-   </widget>
-   <addaction name="menu_File"/>
-   <addaction name="menu_DMM"/>
-   <addaction name="menu_Recorder"/>
-   <addaction name="menu_Help"/>
-  </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBarDMM">
    <property name="windowTitle">
@@ -146,6 +91,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="action_Direct_help"/>
+   <addaction name="action_About"/>
   </widget>
   <widget class="QToolBar" name="toolBarDisplay">
    <property name="sizePolicy">
@@ -346,7 +292,7 @@
    </property>
    <property name="icon">
     <iconset theme="media-playback-stop" resource="../resources.qrc">
-    <normaloff>:/Symbols/stop.xpm</normaloff>:/Symbols/stop.xpm</iconset>
+     <normaloff>:/Symbols/stop.xpm</normaloff>:/Symbols/stop.xpm</iconset>
    </property>
    <property name="text">
     <string>S&amp;top</string>
@@ -417,7 +363,7 @@
   </action>
   <action name="action_Direct_help">
    <property name="icon">
-    <iconset theme="help-contents" resource="../resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/Symbols/help.xpm</normaloff>:/Symbols/help.xpm</iconset>
    </property>
    <property name="text">
@@ -431,6 +377,24 @@
    </property>
    <property name="shortcut">
     <string>Shift+F1</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="icon">
+    <iconset theme="help-about" resource="../resources.qrc">
+     <normaloff>:/Symbols/help.xpm</normaloff>:/Symbols/help.xpm</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>

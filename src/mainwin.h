@@ -41,7 +41,7 @@ public:
 protected Q_SLOTS:
   void			runningSLOT(bool);
   void			connectSLOT(bool);
-  void			on_action_On_version_triggered();
+  void			on_action_About_triggered();
   void			setConnectSLOT(bool);
   void			toolbarVisibilitySLOT(bool, bool, bool, bool, bool);
   void			setToolbarVisibilitySLOT();

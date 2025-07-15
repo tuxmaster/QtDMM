@@ -40,7 +40,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_bigDecimal =  BitmapHelper(":/Symbols/decimal.xpm");
   m_bigMinus =  BitmapHelper(":/Symbols/minus.xpm");
   m_bigG = BitmapHelper(":/Symbols/G.xpm");
-  m_bigM =  BitmapHelper(":/Symbols/M.xpm");
+  m_bigM =  BitmapHelper(":/Symbols/cm.xpm");
   m_bigk =  BitmapHelper(":/Symbols/k.xpm");
   m_bigm =  BitmapHelper(":/Symbols/m.xpm");
   m_bigu =  BitmapHelper(":/Symbols/µ.xpm");
@@ -65,7 +65,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_smallDecimal =  BitmapHelper(":/Symbols/decimal_small.xpm");
   m_smallMinus =  BitmapHelper(":/Symbols/minus_small.xpm");
   m_smallG =  BitmapHelper(":/Symbols/G_small.xpm");
-  m_smallM =  BitmapHelper(":/Symbols/M_small.xpm");
+  m_smallM =  BitmapHelper(":/Symbols/cm_small.xpm");
   m_smallk =  BitmapHelper(":/Symbols/k_small.xpm");
   m_smallm =  BitmapHelper(":/Symbols/m_small.xpm");
   m_smallu =  BitmapHelper(":/Symbols/µ_small.xpm");

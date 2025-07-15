@@ -590,16 +590,6 @@ bool ConfigDlg::rts() const
   return m_dmm->rts();
 }
 
-bool ConfigDlg::cts() const
-{
-  return m_dmm->cts();
-}
-
-bool ConfigDlg::dsr() const
-{
-  return m_dmm->dsr();
-}
-
 bool ConfigDlg::dtr() const
 {
   return m_dmm->dtr();

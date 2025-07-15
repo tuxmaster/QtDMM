@@ -69,103 +69,101 @@
                    10: 22000
      External device setup 0, 1
      rts 0, 1
-     cts 0, 1
-     dsr 0, 1
      dtr 0, 1
 **/
 
 struct DMMInfo dmm_info[] =
 {
-  {"Digitek DT4000ZC", 3, 8, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Digitek DT-9062", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Digitek INO2513", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
+  {"Digitek DT4000ZC", 3, 8, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Digitek DT-9062", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Digitek INO2513", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
 
-  {"Digitech QM1350", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Digitech QM1462", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Digitech QM1538", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Digitech QM1537", 3, 8, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
+  {"Digitech QM1350", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Digitech QM1462", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Digitech QM1538", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Digitech QM1537", 3, 8, 8, 1, 1, 0, 1, 0, 0, 1},
 
-  {"Duratool DO3122", 5, 11, 8, 1, 1, 0, 1, 0, 0, 0, 0, 0},
+  {"Duratool DO3122", 5, 11, 8, 1, 1, 0, 1, 0, 0, 0},
 
-  {"ELV M9803R", 5, 4, 7, 1, 1, 1, 1, 0, 0, 1, 1, 1},
+  {"ELV M9803R", 5, 4, 7, 1, 1, 1, 1, 0, 0, 1},
 
-  {"HoldPeak HP-90EPC", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
+  {"HoldPeak HP-90EPC", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
 
-  {"Iso-Tech IDM 73", 6, 6, 7, 1, 1, 2, 8, 0, 0, 1, 1, 1},
+  {"Iso-Tech IDM 73", 6, 6, 7, 1, 1, 2, 8, 0, 0, 1},
 
-  {"MASTECH MAS-343", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"MASTECH MAS-345", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"MASTECH M9803R", 5, 4, 7, 1, 1, 1, 1, 0, 0, 1, 1, 1},
+  {"MASTECH MAS-343", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"MASTECH MAS-345", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"MASTECH M9803R", 5, 4, 7, 1, 1, 1, 1, 0, 0, 1},
 
-  {"McVoice M-345pro", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"McVoice M-980T", 5, 4, 7, 1, 1, 0, 1, 0, 0, 1, 1, 1},
+  {"McVoice M-345pro", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"McVoice M-980T", 5, 4, 7, 1, 1, 0, 1, 0, 0, 1},
 
-  {"Metex M-3660D", 1, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex M-3830D", 1, 0, 7, 2, 4, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex M-3840D", 1, 0, 7, 2, 4, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex M-3850D", 1, 0, 7, 2, 4, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex M-3850M", 5, 0, 7, 2, 4, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex M-3870D", 1, 0, 7, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex M-4650C", 1, 0, 7, 2, 4, 0, 2, 0, 0, 1, 1, 1},
-  {"Metex ME-11", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex ME-22", 3, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex ME-32", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex ME-42", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Metex universal system 9160", 1, 0, 7, 2, 4, 0, 1, 0, 0, 1, 1, 1},
+  {"Metex M-3660D", 1, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Metex M-3830D", 1, 0, 7, 2, 4, 0, 1, 0, 0, 1},
+  {"Metex M-3840D", 1, 0, 7, 2, 4, 0, 1, 0, 0, 1},
+  {"Metex M-3850D", 1, 0, 7, 2, 4, 0, 1, 0, 0, 1},
+  {"Metex M-3850M", 5, 0, 7, 2, 4, 0, 1, 0, 0, 1},
+  {"Metex M-3870D", 1, 0, 7, 1, 1, 0, 1, 0, 0, 1},
+  {"Metex M-4650C", 1, 0, 7, 2, 4, 0, 2, 0, 0, 1},
+  {"Metex ME-11", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Metex ME-22", 3, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Metex ME-32", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Metex ME-42", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Metex universal system 9160", 1, 0, 7, 2, 4, 0, 1, 0, 0, 1},
 
-  {"PeakTech 3330", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"PeakTech 3430", 6, 8, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"PeakTech 4010", 5, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"PeakTech 4015A", 5, 0, 7, 2, 4, 0, 4, 0, 0, 1, 1, 1},
-  {"PeakTech 4360", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"PeakTech 4390", 5, 0, 7, 2, 4, 0, 1, 0, 0, 1, 1, 1},
-  {"PeakTech 451", 0, 1, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
+  {"PeakTech 3330", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"PeakTech 3430", 6, 8, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"PeakTech 4010", 5, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"PeakTech 4015A", 5, 0, 7, 2, 4, 0, 4, 0, 0, 1},
+  {"PeakTech 4360", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"PeakTech 4390", 5, 0, 7, 2, 4, 0, 1, 0, 0, 1},
+  {"PeakTech 451", 0, 1, 7, 2, 1, 0, 1, 0, 0, 1},
 
-  {"Radioshack 22-805 DMM", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Radioshack RS22-168A", 1, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Radioshack 22-812", 4, 9, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
+  {"Radioshack 22-805 DMM", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Radioshack RS22-168A", 1, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Radioshack 22-812", 4, 9, 8, 1, 1, 0, 1, 0, 0, 1},
 
-  {"TekPower TP4000ZC", 3, 8, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
+  {"TekPower TP4000ZC", 3, 8, 8, 1, 1, 0, 1, 0, 0, 1},
 
-  {"Tenma 72-7745", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Tenma 72-1016", 6, 6, 7, 1, 2, 2, 8, 0, 0, 1, 1, 1},
+  {"Tenma 72-7745", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Tenma 72-1016", 6, 6, 7, 1, 2, 2, 8, 0, 0, 1},
 
-  {"Sinometer MAS-343", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
+  {"Sinometer MAS-343", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
 
-  {"Uni-Trend UT60A", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Uni-Trend UT60E", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Uni-Trend UT61B", 3, 8, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Uni-Trend UT61C", 3, 8, 8, 1, 1, 0, 8, 0, 0, 0, 0, 1},
-  {"Uni-Trend UT61D", 3, 8, 8, 1, 1, 0, 8, 0, 0, 0, 0, 1},
-  {"Uni-Trend UT61E", 6, 12, 7, 1, 1, 2, 10, 0, 0, 0, 0, 1},
+  {"Uni-Trend UT60A", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Uni-Trend UT60E", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Uni-Trend UT61B", 3, 8, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Uni-Trend UT61C", 3, 8, 8, 1, 1, 0, 8, 0, 0, 1},
+  {"Uni-Trend UT61D", 3, 8, 8, 1, 1, 0, 8, 0, 0, 1},
+  {"Uni-Trend UT61E", 6, 12, 7, 1, 1, 2, 10, 0, 0, 1},
 
-  {"Vichy VC99", 3, 8, 8, 1, 1, 0, 8, 0, 0, 0, 0, 1},
+  {"Vichy VC99", 3, 8, 8, 1, 1, 0, 8, 0, 0, 1},
 
-  {"Voltcraft M-3610D", 1, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Voltcraft M-3650D", 1, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Voltcraft M-3860", 5, 0, 7, 2, 4, 0, 2, 0, 0, 1, 1, 1},
-  {"Voltcraft M-4650CR", 1, 2, 7, 2, 1, 0, 2, 0, 0, 1, 1, 1},
-  {"Voltcraft M-4660", 1, 0, 7, 2, 4, 0, 3, 0, 0, 1, 1, 1},
-  {"Voltcraft ME-11", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Voltcraft ME-22T", 3, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Voltcraft ME-32", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Voltcraft VC 670", 4, 2, 7, 1, 1, 0, 3, 0, 0, 1, 1, 1},
-  {"Voltcraft VC 820", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Voltcraft VC 840", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"Voltcraft VC 870", 5, 10, 8, 1, 2, 0, 9, 0, 0, 1, 1, 1},
-  {"Voltcraft VC 920", 3, 7, 7, 1, 1, 2, 9, 0, 0, 1, 1, 1},
-  {"Voltcraft VC 940", 3, 7, 7, 1, 1, 2, 9, 0, 0, 1, 1, 1},
+  {"Voltcraft M-3610D", 1, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Voltcraft M-3650D", 1, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Voltcraft M-3860", 5, 0, 7, 2, 4, 0, 2, 0, 0, 1},
+  {"Voltcraft M-4650CR", 1, 2, 7, 2, 1, 0, 2, 0, 0, 1},
+  {"Voltcraft M-4660", 1, 0, 7, 2, 4, 0, 3, 0, 0, 1},
+  {"Voltcraft ME-11", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Voltcraft ME-22T", 3, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Voltcraft ME-32", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"Voltcraft VC 670", 4, 2, 7, 1, 1, 0, 3, 0, 0, 1},
+  {"Voltcraft VC 820", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Voltcraft VC 840", 3, 5, 8, 1, 1, 0, 1, 0, 0, 1},
+  {"Voltcraft VC 870", 5, 10, 8, 1, 2, 0, 9, 0, 0, 1},
+  {"Voltcraft VC 920", 3, 7, 7, 1, 1, 2, 9, 0, 0, 1},
+  {"Voltcraft VC 940", 3, 7, 7, 1, 1, 2, 9, 0, 0, 1},
 
-  {"*Voltcraft ME-42", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1, 1, 1},
-  {"*Voltcraft M-4660A", 5, 0, 7, 2, 4, 0, 3, 0, 0, 1, 1, 1},
-  {"*Voltcraft M-4660M", 5, 0, 7, 2, 4, 0, 3, 0, 0, 1, 1, 1},
-  {"*Voltcraft MXD-4660A", 5, 0, 7, 2, 4, 0, 3, 0, 0, 1, 1, 1},
-  {"*Voltcraft VC 630", 4, 2, 7, 1, 1, 0, 3, 0, 0, 1, 1, 1},
-  {"*Voltcraft VC 650", 4, 2, 7, 1, 1, 0, 3, 0, 0, 1, 1, 1},
-  {"*Voltcraft VC 635", 3, 3, 7, 1, 1, 0, 3, 0, 0, 1, 1, 1},
-  {"*Voltcraft VC 655", 3, 3, 7, 1, 1, 0, 3, 0, 0, 1, 1, 1},
+  {"*Voltcraft ME-42", 0, 0, 7, 2, 1, 0, 1, 0, 0, 1},
+  {"*Voltcraft M-4660A", 5, 0, 7, 2, 4, 0, 3, 0, 0, 1},
+  {"*Voltcraft M-4660M", 5, 0, 7, 2, 4, 0, 3, 0, 0, 1},
+  {"*Voltcraft MXD-4660A", 5, 0, 7, 2, 4, 0, 3, 0, 0, 1},
+  {"*Voltcraft VC 630", 4, 2, 7, 1, 1, 0, 3, 0, 0, 1},
+  {"*Voltcraft VC 650", 4, 2, 7, 1, 1, 0, 3, 0, 0, 1},
+  {"*Voltcraft VC 635", 3, 3, 7, 1, 1, 0, 3, 0, 0, 1},
+  {"*Voltcraft VC 655", 3, 3, 7, 1, 1, 0, 3, 0, 0, 1},
 
-  {"", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} // End Of List
+  {"", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} // End Of List
 };
 
 DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
@@ -257,8 +255,6 @@ void DmmPrefs::defaultsSLOT()
   ui_externalSetup->setChecked(m_cfg->getInt("DMM/exterrnal-setup") == 1);
 
   uirts->setChecked(m_cfg->getBool("DMM/rts", true));
-  uicts->setChecked(m_cfg->getBool("DMM/cts", false));
-  uidsr->setChecked(m_cfg->getBool("DMM/dsr", false));
   uidtr->setChecked(m_cfg->getBool("DMM/dtr", false));
 
   protocolCombo->setCurrentIndex(m_cfg->getInt("DMM/data-format"));
@@ -314,8 +310,6 @@ void DmmPrefs::applySLOT()
   m_cfg->setString("DMM/model", (ui_model->currentIndex() == 0 ? "Manual" : dmm_info[ui_model->currentIndex() - 1].name));
 
   m_cfg->setBool("DMM/rts", uirts->isChecked());
-  m_cfg->setBool("DMM/cts", uicts->isChecked());
-  m_cfg->setBool("DMM/dsr", uidsr->isChecked());
   m_cfg->setBool("DMM/dtr", uidtr->isChecked());
 }
 
@@ -350,8 +344,6 @@ void DmmPrefs::on_ui_model_activated(int id)
   ui_numValues->setDisabled(id != 0);
   ui_externalSetup->setDisabled(id != 0);
   uirts->setDisabled(id != 0);
-  uicts->setDisabled(id != 0);
-  uidsr->setDisabled(id != 0);
   uidtr->setDisabled(id != 0);
 
   if (id != 0)
@@ -374,8 +366,6 @@ void DmmPrefs::on_ui_model_activated(int id)
     ui_numValues->setValue(dmm_info[id - 1].numValues);
     ui_externalSetup->setChecked(dmm_info[id - 1].externalSetup);
     uirts->setChecked(dmm_info[id - 1].rts);
-    uicts->setChecked(dmm_info[id - 1].cts);
-    uidsr->setChecked(dmm_info[id - 1].dsr);
     uidtr->setChecked(dmm_info[id - 1].dtr);
 
     ui_filename->setText("");
@@ -385,16 +375,6 @@ void DmmPrefs::on_ui_model_activated(int id)
 bool DmmPrefs::rts() const
 {
   return uirts->isChecked();
-}
-
-bool DmmPrefs::cts() const
-{
-  return uicts->isChecked();
-}
-
-bool DmmPrefs::dsr() const
-{
-  return uidsr->isChecked();
 }
 
 bool DmmPrefs::dtr() const
@@ -501,8 +481,6 @@ void DmmPrefs::on_ui_load_clicked()
     protocolCombo->setCurrentIndex(cfg.value("DMM/data-format", 0).toInt());
     ui_numValues->setValue(cfg.value("DMM/number-of-values", 1).toInt());
     uirts->setChecked(cfg.value("DMM/rts", true).toBool());
-    uicts->setChecked(cfg.value("DMM/cts", false).toBool());
-    uidsr->setChecked(cfg.value("DMM/dsr", false).toBool());
     uidtr->setChecked(cfg.value("DMM/dtr", false).toBool());
   }
 }
@@ -529,8 +507,6 @@ void DmmPrefs::on_ui_save_clicked()
     cfg.setValue("DMM/number-of-values", ui_numValues->value());
 
     cfg.setValue("DMM/rts", uirts->isChecked());
-    cfg.setValue("DMM/cts", uicts->isChecked());
-    cfg.setValue("DMM/dsr", uidsr->isChecked());
     cfg.setValue("DMM/dtr", uidtr->isChecked());
   }
 }

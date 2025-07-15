@@ -152,7 +152,7 @@ void MainWin::connectSLOT(bool on)
     m_running = false;
 }
 
-void MainWin::on_action_On_version_triggered()
+void MainWin::on_action_About_triggered()
 {
   QMessageBox::about(this, tr("QtDMM: Welcome!"), tr("<h1>QtDMM %1</h1><hr>"\
                      "<div align=right><i>A simple recorder for DMM's</i></div><p>"\

@@ -44,7 +44,7 @@ public:
   bool           isOpen() const;
   void           setFormat(ReadEvent::DataFormat);
   void           setPortSettings(QSerialPort::DataBits bits, QSerialPort::StopBits stopBits, QSerialPort::Parity parity,
-                                 bool externalSetup, bool rts, bool cts, bool dsr, bool dtr);
+                                 bool externalSetup, bool rts, bool dtr);
   void           setNumValues(int);
   void           setConsoleLogging(bool on) { m_consoleLogging = on; }
 
@@ -68,8 +68,6 @@ protected:
   bool           m_externalSetup;
   bool           m_dtr;
   bool           m_rts;
-  bool           m_cts;
-  bool           m_dsr;
   int            m_flags;
   int            m_delayTimer;
 

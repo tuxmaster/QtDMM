@@ -21,6 +21,7 @@
 //======================================================================
 
 #include <QtGui>
+#include <iostream>
 
 #include "mainwin.h"
 
@@ -50,6 +51,16 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &
       break;
   }
 }
+
+void printHelp()
+{
+  std::cerr << "Usage: qtdmm [--help|--debug|--print]" << std::endl;
+  std::cerr << "  --help  : print this message" << std::endl;
+  std::cerr << "  --debug : protocoll debugging information" << std::endl;
+  std::cerr << "  --print : send DMM reading to standard output" << std::endl;
+  exit(0);
+}
+
 
 int main(int argc, char **argv)
 {
@@ -90,10 +101,12 @@ int main(int argc, char **argv)
   MainWin mainWin;
 
   QCommandLineParser parser;
-  parser.addOption(QCommandLineOption("console"));
-
+  parser.addOption(QCommandLineOption("debug"));
+  parser.addOption(QCommandLineOption("help"));
+  parser.addOption(QCommandLineOption("print"));
   parser.process(app);
-  if (parser.isSet("console"))
+
+  if (parser.isSet("debug"))
     mainWin.setConsoleLogging(true);
   mainWin.show();
   mainWin.move(100, 100);

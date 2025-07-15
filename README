@@ -1,4 +1,4 @@
-QtDMM 0.9.8 (c) 2001-2014 M.Toussaint
+QtDMM 1.0.0 (c) 2001-2016 M.Toussaint
 
 QtDMM is a simple DMM readout software including a configurable transient 
 recorder. A friend of mine asked me  for a DMM readout software for Linux 
@@ -103,11 +103,7 @@ from the mentioned  above, or if you can confirm  one of the  unconfirmed
 models please give a note. For a new multimeter the best would be sending
 me a saved configuration file.
 
-QtDMM is kind of "works for me" software. I'm using it, I like it the way 
-it is  and it seems  to be quite stable. It still needs some improvements 
-but does it's job quite well.
-
-QtDMM 0.9.8 is distributed under the GNU Public License, version 3.
+QtDMM 1.0.0 is distributed under the GNU Public License, version 3.
 (QtDMM versions prior to 0.9.0 are licensed under GNU GPL 2.0)
  
 -- 27/04/2014
