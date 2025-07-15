@@ -44,9 +44,8 @@ public:
   bool      showDmmToolbar() const;
   bool      showGraphToolbar() const;
   bool      showFileToolbar() const;
-  bool      showHelpToolbar() const;
   bool      showDisplay() const;
-  void      setToolbarVisibility(bool, bool, bool, bool, bool);
+  void      setToolbarVisibility(bool, bool, bool, bool);
 
 Q_SIGNALS:
   void      showTips(bool);

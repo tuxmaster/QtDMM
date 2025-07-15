@@ -24,6 +24,7 @@
 
 #include <QtGui>
 #include <QtWidgets>
+#include <QMenu>
 
 #include "ui_uimainwin.h"
 
@@ -41,9 +42,10 @@ public:
 protected Q_SLOTS:
   void			runningSLOT(bool);
   void			connectSLOT(bool);
-  void			on_action_On_version_triggered();
+  void			on_action_About_triggered();
+  void			on_action_Menu_triggered();
   void			setConnectSLOT(bool);
-  void			toolbarVisibilitySLOT(bool, bool, bool, bool, bool);
+  void			toolbarVisibilitySLOT(bool, bool, bool, bool);
   void			setToolbarVisibilitySLOT();
   void			setUseTextLabel(bool on);
 
@@ -53,6 +55,7 @@ protected:
   bool			m_running;
   QLabel		*m_error;
   QLabel		*m_info;
+  QMenu*  m_menu;
 
   void			setupIcons();
   void			createToolBars();

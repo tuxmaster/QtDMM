@@ -46,7 +46,7 @@ public:
   bool        saveWindowSize() const;
   void        setDisplay(DisplayWid *);
   void        setConsoleLogging(bool);
-  void        setToolbarVisibility(bool, bool, bool, bool, bool);
+  void        setToolbarVisibility(bool, bool, bool, bool);
 
   QString     deviceListText() const;
 
@@ -57,7 +57,7 @@ Q_SIGNALS:
   void        useTextLabel(bool);
   void        winGeometry(const QRect &);
   void        setConnect(bool);
-  void        toolbarVisibility(bool, bool, bool, bool, bool);
+  void        toolbarVisibility(bool, bool, bool, bool);
   void        connectDMM(bool);
 
 public Q_SLOTS:

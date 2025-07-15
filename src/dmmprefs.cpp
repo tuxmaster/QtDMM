@@ -116,8 +116,6 @@ void DmmPrefs::defaultsSLOT()
   ui_externalSetup->setChecked(m_cfg->getInt("DMM/exterrnal-setup") == 1);
 
   uirts->setChecked(m_cfg->getBool("DMM/rts", true));
-  uicts->setChecked(m_cfg->getBool("DMM/cts", false));
-  uidsr->setChecked(m_cfg->getBool("DMM/dsr", false));
   uidtr->setChecked(m_cfg->getBool("DMM/dtr", false));
 
   protocolCombo->setCurrentIndex(m_cfg->getInt("DMM/data-format"));
@@ -174,8 +172,6 @@ void DmmPrefs::applySLOT()
   m_cfg->setString("DMM/model", (ui_model->currentIndex() == 0 ? "Manual" : dmm_info[ui_model->currentIndex() - 1].name));
 
   m_cfg->setBool("DMM/rts", uirts->isChecked());
-  m_cfg->setBool("DMM/cts", uicts->isChecked());
-  m_cfg->setBool("DMM/dsr", uidsr->isChecked());
   m_cfg->setBool("DMM/dtr", uidtr->isChecked());
 }
 
@@ -210,8 +206,6 @@ void DmmPrefs::on_ui_model_activated(int id)
   ui_numValues->setDisabled(id != 0);
   ui_externalSetup->setDisabled(id != 0);
   uirts->setDisabled(id != 0);
-  uicts->setDisabled(id != 0);
-  uidsr->setDisabled(id != 0);
   uidtr->setDisabled(id != 0);
 
   if (id != 0)
@@ -234,8 +228,6 @@ void DmmPrefs::on_ui_model_activated(int id)
     ui_numValues->setValue(dmm_info[id - 1].numValues);
     ui_externalSetup->setChecked(dmm_info[id - 1].externalSetup);
     uirts->setChecked(dmm_info[id - 1].rts);
-    uicts->setChecked(dmm_info[id - 1].cts);
-    uidsr->setChecked(dmm_info[id - 1].dsr);
     uidtr->setChecked(dmm_info[id - 1].dtr);
 
     ui_filename->setText("");
@@ -245,16 +237,6 @@ void DmmPrefs::on_ui_model_activated(int id)
 bool DmmPrefs::rts() const
 {
   return uirts->isChecked();
-}
-
-bool DmmPrefs::cts() const
-{
-  return uicts->isChecked();
-}
-
-bool DmmPrefs::dsr() const
-{
-  return uidsr->isChecked();
 }
 
 bool DmmPrefs::dtr() const
@@ -357,8 +339,6 @@ void DmmPrefs::on_ui_load_clicked()
     protocolCombo->setCurrentIndex(cfg.value("DMM/data-format", 0).toInt());
     ui_numValues->setValue(cfg.value("DMM/number-of-values", 1).toInt());
     uirts->setChecked(cfg.value("DMM/rts", true).toBool());
-    uicts->setChecked(cfg.value("DMM/cts", false).toBool());
-    uidsr->setChecked(cfg.value("DMM/dsr", false).toBool());
     uidtr->setChecked(cfg.value("DMM/dtr", false).toBool());
   }
 }
@@ -385,8 +365,6 @@ void DmmPrefs::on_ui_save_clicked()
     cfg.setValue("DMM/number-of-values", ui_numValues->value());
 
     cfg.setValue("DMM/rts", uirts->isChecked());
-    cfg.setValue("DMM/cts", uicts->isChecked());
-    cfg.setValue("DMM/dsr", uidsr->isChecked());
     cfg.setValue("DMM/dtr", uidtr->isChecked());
   }
 }

@@ -204,7 +204,7 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
     {
       if (m_lastUnit != s)
       {
-        if (m_lastUnit != s)resetSLOT();
+        resetSLOT();
         ui_graph->setUnit(u);
       }
       m_lastUnit = s;
@@ -354,9 +354,7 @@ void MainWid::readConfig()
   m_dmm->setSpeed(m_configDlg->speed());
   m_dmm->setFormat(m_configDlg->format());
   m_dmm->setPortSettings(static_cast<QSerialPort::DataBits>(m_configDlg->bits()), static_cast<QSerialPort::StopBits>(m_configDlg->stopBits()),
-                         m_configDlg->parity(), m_configDlg->externalSetup(),
-                         m_configDlg->rts(), m_configDlg->cts(),
-                         m_configDlg->dsr(), m_configDlg->dtr()
+                         m_configDlg->parity(), m_configDlg->externalSetup(), m_configDlg->rts(), m_configDlg->dtr()
                         );
 
   ui_graph->setGraphSize(m_configDlg->windowSeconds(),
@@ -421,8 +419,7 @@ void MainWid::readConfig()
   Q_EMIT toolbarVisibility(m_configDlg->showDisplay(),
                            m_configDlg->showDmmToolbar(),
                            m_configDlg->showGraphToolbar(),
-                           m_configDlg->showFileToolbar(),
-                           m_configDlg->showHelpToolbar());
+                           m_configDlg->showFileToolbar());
 
   if (reopen)
     m_dmm->open();
@@ -526,7 +523,7 @@ void MainWid::showTipsSLOT()
   m_tipDlg->show();
 }
 
-void MainWid::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file, bool help)
+void MainWid::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
 {
-  m_configDlg->setToolbarVisibility(disp, dmm, graph, file, help);
+  m_configDlg->setToolbarVisibility(disp, dmm, graph, file);
 }

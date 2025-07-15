@@ -41,8 +41,6 @@ DMM::DMM(QObject *parent)
     m_externalSetup(false),
     m_dtr(false),
     m_rts(false),
-    m_cts(false),
-    m_dsr(false),
     m_driver(Q_NULLPTR)
 {
   m_readerThread = new ReaderThread(this);
@@ -55,8 +53,8 @@ DMM::DMM(QObject *parent)
 
 }
 
-void DMM::setPortSettings(QSerialPort::DataBits bits, QSerialPort::StopBits stopBits, QSerialPort::Parity parity, bool externalSetup,
-                          bool rts, bool cts, bool dsr, bool dtr)
+void DMM::setPortSettings(QSerialPort::DataBits bits, QSerialPort::StopBits stopBits,
+                          QSerialPort::Parity parity, bool externalSetup, bool rts, bool dtr)
 {
   m_externalSetup = externalSetup;
   m_parity  = parity;
@@ -64,8 +62,6 @@ void DMM::setPortSettings(QSerialPort::DataBits bits, QSerialPort::StopBits stop
   m_dataBits = bits;
   m_dtr = dtr;
   m_rts = rts;
-  m_cts = cts;
-  m_dsr = dsr;
 }
 
 void DMM::setFormat(ReadEvent::DataFormat format)

@@ -80,8 +80,6 @@ public:
   int                   stopBits() const;
   int                   numValues() const;
   bool                  rts() const;
-  bool                  cts() const;
-  bool                  dsr() const;
   bool                  dtr() const;
 
   QColor                bgColor() const;
@@ -125,9 +123,8 @@ public:
   bool                  showDmmToolbar() const;
   bool                  showGraphToolbar() const;
   bool                  showFileToolbar() const;
-  bool                  showHelpToolbar() const;
   bool                  showDisplay() const;
-  void                  setToolbarVisibility(bool, bool, bool, bool, bool);
+  void                  setToolbarVisibility(bool, bool, bool, bool);
 
   QString               deviceListText() const;
 

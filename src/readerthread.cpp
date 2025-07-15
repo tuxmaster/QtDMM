@@ -38,7 +38,6 @@ ReaderThread::ReaderThread(QObject *receiver) :
   m_sendRequest(true),
   m_id(0),
   m_numValues(1),
-  m_consoleLogging(false),
   m_driver(Q_NULLPTR)
 {
   m_port = Q_NULLPTR;
@@ -67,10 +66,6 @@ void ReaderThread::setHandle(QSerialPort *handle)
   }
 }
 
-void ReaderThread::setConsoleLogging(bool on)
-{
-  m_consoleLogging = on;
-}
 
 void ReaderThread::setDriver(DmmDriver* driver)
 {
@@ -104,57 +99,57 @@ void ReaderThread::startRead()
   m_sendRequest = true;
 }
 
+
 void ReaderThread::socketNotifierSLOT()
 {
-  //std::cerr << "socket call" << std::endl;
-
-  int  retval;
+  int retval = 0;
+  int r;
   char byte;
-  QByteArray dataOut;
 
   m_status = ReaderThread::Ok;
+  size_t bytesToRead = formatLength();
 
-  while ((retval = m_port->read(&byte, 1)) > 0)
-  {
+  while ((r = m_port->read( &byte, 1)) > 0) {
+    retval++;
+
     m_fifo[m_length] = byte;
-
-    if (m_consoleLogging)
-      fprintf(stderr, "%02X ", static_cast<uint8_t>(byte));
 
     if (checkFormat())
     {
-      m_length = (m_length - formatLength() + 1 + FIFO_LENGTH) % FIFO_LENGTH;
+      m_length = (m_length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
 
-      if (m_consoleLogging)
-        fprintf(stderr, "Format Ok!\n");
-      dataOut = QByteArray();
-
-      for (int i = 0; i < formatLength(); ++i)
+      for (int i = 0; i < bytesToRead; ++i)
       {
-        dataOut.append(m_fifo[m_length]);
-        if (m_consoleLogging)
-          fprintf(stderr, "%02X ", static_cast<uint8_t>(dataOut[i]));
+        m_buffer[i] = m_fifo[m_length];
         m_length = (m_length + 1) % FIFO_LENGTH;
       }
 
-      if (m_consoleLogging)
-        fprintf(stderr, "\n");
       m_sendRequest = true;
       m_length = 0;
 
-      Q_EMIT readEvent(dataOut, m_id, m_format);
-      // QApplication::postEvent( m_receiver,
-      // new ReadEvent( m_buffer, formatLength(), m_id, m_format ) );
+
+      Q_EMIT readEvent( QByteArray(m_buffer,bytesToRead), m_id, m_format );
 
       m_id = (m_id + 1) % m_numValues;
+
+      if (m_port->bytesAvailable() < bytesToRead) {
+        break;
+      }
     }
     else
       m_length = (m_length + 1) % FIFO_LENGTH;
   }
 
-  if (-1 == retval)
-    m_status = ReaderThread::Error;
+  if (0 == retval) {
+    if (-1 == r) {
+      m_status = ReaderThread::Error;
+    }
+    else if (0 == r) {
+      m_status = ReaderThread::Timeout;
+    }
+  }
 }
+
 
 int  ReaderThread::formatLength() const
 {

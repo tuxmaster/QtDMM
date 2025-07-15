@@ -477,20 +477,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="uicts">
-          <property name="text">
-           <string>CTS</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="uidsr">
-          <property name="text">
-           <string>DSR</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QCheckBox" name="uidtr">
           <property name="text">
            <string>DTR</string>

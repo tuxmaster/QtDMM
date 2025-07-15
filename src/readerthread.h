@@ -44,7 +44,6 @@ public:
   void        startRead();
   void        setHandle(QSerialPort *handle);
   void        setFormat(ReadEvent::DataFormat);
-  void        setConsoleLogging(bool on);
   void        setDriver(DmmDriver* driver);
 
   ReadStatus  status() const  { return m_status;  }
@@ -58,12 +57,12 @@ protected:
   ReadStatus            m_status;
   bool                  m_readValue;
   char                  m_fifo[FIFO_LENGTH];
+  char                  m_buffer[FIFO_LENGTH];
   ReadEvent::DataFormat m_format;
   int                   m_length;
   bool                  m_sendRequest;
   int                   m_id;
   int                   m_numValues;
-  bool                  m_consoleLogging;
   DmmDriver*            m_driver;
   void readDMM();
   void readMetex14();
