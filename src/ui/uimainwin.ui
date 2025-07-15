@@ -409,7 +409,8 @@
   </action>
   <action name="action_Menu">
    <property name="icon">
-    <iconset theme="format-justify-fill"/>
+    <iconset theme="format-justify-fill" resource="../resources.qrc">
+     <normaloff>:/Symbols/menu.xpm</normaloff>:/Symbols/menu.xpm</iconset>
    </property>
    <property name="text">
     <string>Menu</string>

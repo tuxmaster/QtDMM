@@ -1658,8 +1658,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="93"/>
-        <location filename="../../src/ui/uimainwin.ui" line="415"/>
-        <location filename="../../src/ui/uimainwin.ui" line="418"/>
+        <location filename="../../src/ui/uimainwin.ui" line="416"/>
+        <location filename="../../src/ui/uimainwin.ui" line="419"/>
         <source>Menu</source>
         <translation type="unfinished"></translation>
     </message>
