@@ -67,7 +67,6 @@ void GuiPrefs::defaultsSLOT()
   ui_dmmToolBar->setChecked(m_cfg->getBool("Toolbar/dmm", true));
   ui_graphToolBar->setChecked(m_cfg->getBool("Toolbar/graph", true));
   ui_fileToolBar->setChecked(m_cfg->getBool("Toolbar/file", true));
-  ui_helpToolBar->setChecked(m_cfg->getBool("Toolbar/help", true));
 
   ui_tipOfTheDay->setChecked(m_cfg->getBool("QtDMM/show-tip", true));
 }
@@ -90,18 +89,16 @@ void GuiPrefs::factoryDefaultsSLOT()
   ui_dmmToolBar->setChecked(true);
   ui_graphToolBar->setChecked(true);
   ui_fileToolBar->setChecked(true);
-  ui_helpToolBar->setChecked(true);
 
   ui_tipOfTheDay->setChecked(true);
 }
 
-void GuiPrefs::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file, bool help)
+void GuiPrefs::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
 {
   ui_showDisplay->setChecked(disp);
   ui_dmmToolBar->setChecked(dmm);
   ui_graphToolBar->setChecked(graph);
   ui_fileToolBar->setChecked(file);
-  ui_helpToolBar->setChecked(help);
 }
 
 void GuiPrefs::applySLOT()
@@ -121,7 +118,6 @@ void GuiPrefs::applySLOT()
   m_cfg->setBool("Toolbar/dmm", showDmmToolbar());
   m_cfg->setBool("Toolbar/graph", showGraphToolbar());
   m_cfg->setBool("Toolbar/file", showFileToolbar());
-  m_cfg->setBool("Toolbar/help", showHelpToolbar());
 }
 
 bool GuiPrefs::showTip() const
@@ -144,10 +140,6 @@ bool GuiPrefs::showFileToolbar() const
   return ui_fileToolBar->isChecked();
 }
 
-bool GuiPrefs::showHelpToolbar() const
-{
-  return ui_helpToolBar->isChecked();
-}
 
 bool GuiPrefs::showDisplay() const
 {

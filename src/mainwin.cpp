@@ -23,6 +23,7 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <QTimer>
+#include <QMenu>
 
 #include "mainwin.h"
 #include "mainwid.h"
@@ -31,11 +32,19 @@
 
 
 
-MainWin::MainWin(QWidget *parent) : QMainWindow(parent),
-  m_running(false)
+MainWin::MainWin(QWidget *parent)
+  : QMainWindow(parent)
+  , m_running(false)
+  , m_menu(Q_NULLPTR)
 {
   setupUi(this);
   setupIcons();
+
+
+  QWidget* spacer = new QWidget();
+  spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+  this->toolBarMenu->addWidget(spacer);
+  this->toolBarMenu->addAction(this->action_Menu);
 
   m_wid = new MainWid(this);
   setCentralWidget(m_wid);
@@ -102,7 +111,7 @@ void MainWin::setUseTextLabel(bool on)
   toolBarDMM->setToolButtonStyle(Style);
   toolBarRecorder->setToolButtonStyle(Style);
   toolBarFile->setToolButtonStyle(Style);
-  toolBarHelp->setToolButtonStyle(Style);
+  toolBarMenu->setToolButtonStyle(Style);
 }
 
 void MainWin::createActions()
@@ -125,7 +134,7 @@ void MainWin::createActions()
   connect(action_Tip_of_the_day, SIGNAL(triggered()), m_wid, SLOT(showTipsSLOT()));
 
   connect(toolBarDisplay, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
-  connect(toolBarHelp, SIGNAL(visibilityChanged(bool)),  this, SLOT(setToolbarVisibilitySLOT()));
+  connect(toolBarMenu, SIGNAL(visibilityChanged(bool)),  this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarFile, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarRecorder, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarDMM, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
@@ -169,6 +178,27 @@ void MainWin::on_action_About_triggered()
                      .arg(APP_VERSION).arg(m_wid->deviceListText()).arg(qVersion()));
 }
 
+void MainWin::on_action_Menu_triggered()
+{
+  if (!m_menu) {
+    m_menu = new QMenu(this);
+    m_menu->addAction(action_Configure);
+    m_menu->addSeparator();
+    m_menu->addAction(action_Direct_help);
+    m_menu->addAction(action_About);
+    m_menu->addSeparator();
+    m_menu->addAction(action_Quit);
+  }
+
+  QWidget* widget = this->toolBarMenu->widgetForAction(this->action_Menu);
+  if (widget) {
+    m_menu->popup(widget->mapToGlobal(
+      QPoint( widget->width() - m_menu->sizeHint().width(), widget->height())
+    ));
+  }
+}
+
+
 void MainWin::closeEvent(QCloseEvent *ev)
 {
   setToolbarVisibilitySLOT();
@@ -184,8 +214,7 @@ void MainWin::setToolbarVisibilitySLOT()
   m_wid->setToolbarVisibility(toolBarDisplay->isVisible(),
                               toolBarDMM->isVisible(),
                               toolBarRecorder->isVisible(),
-                              toolBarFile->isVisible(),
-                              toolBarHelp->isVisible());
+                              toolBarFile->isVisible());
 }
 
 void MainWin::setConnectSLOT(bool on)
@@ -193,12 +222,11 @@ void MainWin::setConnectSLOT(bool on)
   action_Connect->setChecked(on);
 }
 
-void MainWin::toolbarVisibilitySLOT(bool disp, bool dmm, bool graph, bool file, bool help)
+void MainWin::toolbarVisibilitySLOT(bool disp, bool dmm, bool graph, bool file)
 {
   toolBarDMM->setVisible(dmm);
   toolBarRecorder->setVisible(graph);
   toolBarFile->setVisible(file);
-  toolBarHelp->setVisible(help);
   toolBarDisplay->setVisible(disp);
 }
 

@@ -486,19 +486,14 @@ bool ConfigDlg::showFileToolbar() const
   return m_gui->showFileToolbar();
 }
 
-bool ConfigDlg::showHelpToolbar() const
-{
-  return m_gui->showHelpToolbar();
-}
-
 bool ConfigDlg::showDisplay() const
 {
   return m_gui->showDisplay();
 }
 
-void ConfigDlg::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file, bool help)
+void ConfigDlg::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
 {
-  m_gui->setToolbarVisibility(disp, dmm, graph, file, help);
+  m_gui->setToolbarVisibility(disp, dmm, graph, file);
 }
 
 /////////////////////////////////////////////////////////////////

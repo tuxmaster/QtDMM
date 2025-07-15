@@ -419,8 +419,7 @@ void MainWid::readConfig()
   Q_EMIT toolbarVisibility(m_configDlg->showDisplay(),
                            m_configDlg->showDmmToolbar(),
                            m_configDlg->showGraphToolbar(),
-                           m_configDlg->showFileToolbar(),
-                           m_configDlg->showHelpToolbar());
+                           m_configDlg->showFileToolbar());
 
   if (reopen)
     m_dmm->open();
@@ -524,7 +523,7 @@ void MainWid::showTipsSLOT()
   m_tipDlg->show();
 }
 
-void MainWid::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file, bool help)
+void MainWid::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
 {
-  m_configDlg->setToolbarVisibility(disp, dmm, graph, file, help);
+  m_configDlg->setToolbarVisibility(disp, dmm, graph, file);
 }
