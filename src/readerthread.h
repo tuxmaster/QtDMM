@@ -76,7 +76,7 @@ protected Q_SLOTS:
   void socketClose();
 
 private:
-  QSerialPort *m_serialPort;
+  QSerialPort *m_port;
 
 private Q_SLOTS:
   void timer();

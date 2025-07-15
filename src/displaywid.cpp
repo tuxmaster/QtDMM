@@ -40,7 +40,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_bigDecimal =  BitmapHelper(":/Symbols/decimal.xpm");
   m_bigMinus =  BitmapHelper(":/Symbols/minus.xpm");
   m_bigG = BitmapHelper(":/Symbols/G.xpm");
-  m_bigM =  BitmapHelper(":/Symbols/M.xpm");
+  m_bigM =  BitmapHelper(":/Symbols/cm.xpm");
   m_bigk =  BitmapHelper(":/Symbols/k.xpm");
   m_bigm =  BitmapHelper(":/Symbols/m.xpm");
   m_bigu =  BitmapHelper(":/Symbols/µ.xpm");
@@ -66,7 +66,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_smallDecimal =  BitmapHelper(":/Symbols/decimal_small.xpm");
   m_smallMinus =  BitmapHelper(":/Symbols/minus_small.xpm");
   m_smallG =  BitmapHelper(":/Symbols/G_small.xpm");
-  m_smallM =  BitmapHelper(":/Symbols/M_small.xpm");
+  m_smallM =  BitmapHelper(":/Symbols/cm_small.xpm");
   m_smallk =  BitmapHelper(":/Symbols/k_small.xpm");
   m_smallm =  BitmapHelper(":/Symbols/m_small.xpm");
   m_smallu =  BitmapHelper(":/Symbols/µ_small.xpm");
@@ -481,6 +481,8 @@ void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
     p->drawPixmap(x, y, *prefixPixmap);
     x += prefixPixmap->width() + 2;
     ++index;
+        qInfo() << "x: " << QString(firstChar);
+
   }
 
   // Unit suffix after prefix
@@ -489,6 +491,7 @@ void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
   // Map of unit suffixes to corresponding big-sized pixmaps
   static const QMap<QString, const QPixmap *> unitMap =
   {
+    //{ "s",    m_bigS },
     { "Ohm",    m_bigOhm },
     { "C",      m_bigDeg },
     { "dF",     m_bigDegF },
@@ -536,6 +539,7 @@ void DisplayWid::drawSmallUnit(QPainter *p, const QString &str)
 
   static const QMap<QString, const QPixmap *> unitMap =
   {
+    //{ "s",       m_smallS },
     { "Ohm",     m_smallOhm },
     { "C",       m_smallDeg },
     { "dF",      m_smallDegF },

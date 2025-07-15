@@ -75,6 +75,7 @@ std::optional<DmmDriver::DmmResponse> DrvCyrusTekES51922::decode(const QByteArra
         case 3: formatResultValue(3,"k","Ohm"); break;
         case 4: formatResultValue(1,"M","Ohm"); break;
         case 5: formatResultValue(2,"M","Ohm"); break;
+        case 6: formatResultValue(3,"M","Ohm"); break;
       }      break;
     case 0x5:
       m_result.special = "BUZ";

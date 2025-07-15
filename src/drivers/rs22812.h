@@ -1,4 +1,6 @@
 #pragma once
+#include <QString>
+#include <optional>
 
 #include "dmmdriver.h"
 
@@ -11,5 +13,5 @@ public:
   size_t getPacketLength(ReadEvent::DataFormat df);
 
 private:
-  const char *RS22812Digit( int byte );
+std::optional<QString> digit(uint8_t byte);
 };
