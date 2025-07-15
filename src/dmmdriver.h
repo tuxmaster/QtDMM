@@ -77,8 +77,6 @@ public:
     int   display;
     bool  externalSetup;
     bool  rts;
-    bool  cts;
-    bool  dsr;
     bool  dtr;
   };
 

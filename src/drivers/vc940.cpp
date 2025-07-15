@@ -1,12 +1,12 @@
 #include "drivers/vc940.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Tenma", "72-7732", "Tenma 72-7732", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT71B", "Uni-Trend UT71B", 2400, 7, 7, 1, 1, 2, 200000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT71CDE", "Uni-Trend UT71CDE", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 920", "Voltcraft VC 920", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 940", "Voltcraft VC 940", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 960", "Voltcraft VC 960", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1, 1, 1});
+  DmmDriver::addConfig({"Tenma", "72-7732", "Tenma 72-7732", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
+  DmmDriver::addConfig({"Uni-Trend", "UT71B", "Uni-Trend UT71B", 2400, 7, 7, 1, 1, 2, 200000, 0, 0, 1});
+  DmmDriver::addConfig({"Uni-Trend", "UT71CDE", "Uni-Trend UT71CDE", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
+  DmmDriver::addConfig({"Voltcraft", "VC 920", "Voltcraft VC 920", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
+  DmmDriver::addConfig({"Voltcraft", "VC 940", "Voltcraft VC 940", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
+  DmmDriver::addConfig({"Voltcraft", "VC 960", "Voltcraft VC 960", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
   return true;
 }();
 

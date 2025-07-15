@@ -76,8 +76,8 @@ MainWin::MainWin(QWidget *parent)
   connect(m_wid, SIGNAL(info(const QString &)), m_info, SLOT(setText(const QString &)));
   connect(m_wid, SIGNAL(useTextLabel(bool)), this, SLOT(setUseTextLabel(bool)));
   connect(m_wid, SIGNAL(setConnect(bool)), this, SLOT(setConnectSLOT(bool)));
-  connect(m_wid, SIGNAL(toolbarVisibility(bool, bool, bool, bool, bool)),
-          this, SLOT(toolbarVisibilitySLOT(bool, bool, bool, bool, bool)));
+  connect(m_wid, SIGNAL(toolbarVisibility(bool, bool, bool, bool)),
+          this, SLOT(toolbarVisibilitySLOT(bool, bool, bool, bool)));
 
   connect(m_wid, SIGNAL(connectDMM(bool)), action_Connect, SLOT(setChecked(bool)));
 

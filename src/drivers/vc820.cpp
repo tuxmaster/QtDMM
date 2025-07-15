@@ -1,19 +1,19 @@
 #include "drivers/vc820.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Digitek", "DT-9062", "Digitek DT-9062", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Digitek", "INO2513", "Digitek INO2513", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Digitech", "QM1462", "Digitech QM1462", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Digitech", "QM1538", "Digitech QM1538", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"HoldPeak", "HP-90EPC", "HoldPeak HP-90EPC", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"PeakTech", "3330", "PeakTech 3330", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Tenma", "72-7745", "Tenma 72-7745", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT30A", "Uni-Trend UT30A", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT30E", "Uni-Trend UT30E", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT60A", "Uni-Trend UT30A", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT60E", "Uni-Trend UT30E", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 0, 0, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 820", "Voltcraft VC 820", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 840", "Voltcraft VC 840", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::addConfig({"Digitek", "DT-9062", "Digitek DT-9062", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Digitek", "INO2513", "Digitek INO2513", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Digitech", "QM1462", "Digitech QM1462", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Digitech", "QM1538", "Digitech QM1538", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"HoldPeak", "HP-90EPC", "HoldPeak HP-90EPC", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"PeakTech", "3330", "PeakTech 3330", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Tenma", "72-7745", "Tenma 72-7745", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Uni-Trend", "UT30A", "Uni-Trend UT30A", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Uni-Trend", "UT30E", "Uni-Trend UT30E", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Uni-Trend", "UT60A", "Uni-Trend UT30A", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Uni-Trend", "UT60E", "Uni-Trend UT30E", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Voltcraft", "VC 820", "Voltcraft VC 820", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDriver::addConfig({"Voltcraft", "VC 840", "Voltcraft VC 840", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
   return true;
 }();
 

@@ -1,7 +1,7 @@
 #include "drivers/vc870.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Voltcraft", "VC 870", "Voltcraft VC 870", 9600, 10, 8, 1, 2, 0, 40000, 0, 0, 1, 1, 1});
+  DmmDriver::addConfig({"Voltcraft", "VC 870", "Voltcraft VC 870", 9600, 10, 8, 1, 2, 0, 40000, 0, 0, 1});
   return true;
 }();
 

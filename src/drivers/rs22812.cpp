@@ -59,7 +59,7 @@ https://github.com/syn-net/rs22812/blob/master/rs22812_linux.py
 */
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Radioshack", "22-812", "Radioshack 22-812", 4800, 9, 8, 1, 1, 0, 4000, 0, 0, 1, 1, 1});
+  DmmDriver::addConfig({"Radioshack", "22-812", "Radioshack 22-812", 4800, 9, 8, 1, 1, 0, 4000, 0, 0, 1});
   return true;
 }();
 
