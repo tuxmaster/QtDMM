@@ -1,26 +1,26 @@
-#include "drivers/vc940.h"
+#include "vc940.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Tenma", "72-7732", "Tenma 72-7732", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT71B", "Uni-Trend UT71B", 2400, 7, 7, 1, 1, 2, 200000, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT71CDE", "Uni-Trend UT71CDE", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 920", "Voltcraft VC 920", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 940", "Voltcraft VC 940", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 960", "Voltcraft VC 960", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
+  DmmDecoder::addConfig({"Tenma", "72-7732", "", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT71B", "", 2400, 7, 7, 1, 1, 2, 200000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT71CDE", "", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
+  DmmDecoder::addConfig({"Voltcraft", "VC 920", "", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
+  DmmDecoder::addConfig({"Voltcraft", "VC 940", "", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
+  DmmDecoder::addConfig({"Voltcraft", "VC 960", "", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
   return true;
 }();
 
-size_t DrvVC940::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderVC940::getPacketLength(ReadEvent::DataFormat df)
 {
   return  (df == ReadEvent::VC940Continuous ? 11 : 0);
 }
 
-bool DrvVC940::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderVC940::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
 {
   return (df==ReadEvent::VC940Continuous && len >= 12 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
 }
 
-std::optional<DmmDriver::DmmResponse> DrvVC940::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
   m_result.id     = id;

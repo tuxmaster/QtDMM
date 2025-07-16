@@ -1,28 +1,28 @@
 #include "qm1537.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Digitek", "DT4000ZC", "Digitek DT4000ZC", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Digitech", "QM1537", "Digitech QM1537", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"PeakTech", "3430", "PeakTech 3430", 19200, 8, 7, 2, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"TekPower", "TP4000ZC", "TekPower TP4000ZC", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT61B", "Uni-Trend UT61B", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT61C", "Uni-Trend UT61C", 2400, 8, 8, 1, 1, 0, 6000, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT61D", "Uni-Trend UT61D", 2400, 8, 8, 1, 1, 0, 6000, 0, 0, 1});
-  DmmDriver::addConfig({"Vichy", "VC99", "Vichy VC99", 2400, 8, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Digitek", "DT4000ZC", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Digitech", "QM1537", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"PeakTech", "3430", "", 19200, 8, 7, 2, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"TekPower", "TP4000ZC", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT61B", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT61C", "", 2400, 8, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT61D", "", 2400, 8, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Vichy", "VC99", "", 2400, 8, 8, 1, 1, 0, 6000, 0, 0, 1});
   return true;
 }();
 
-size_t DrvQM1537::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderQM1537::getPacketLength(ReadEvent::DataFormat df)
 {
   return  (df == ReadEvent::QM1537Continuous ? 14 : 0);
 }
 
-bool DrvQM1537::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderQM1537::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
 {
   return (df == ReadEvent::QM1537Continuous && data[len] == 0x0d);
 }
 
-std::optional<DmmDriver::DmmResponse> DrvQM1537::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
   m_result.id     = id;

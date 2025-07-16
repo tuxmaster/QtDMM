@@ -11,7 +11,7 @@
   description of dmminfo data
      vendor
      model
-     name (aka vendor+model)
+     (name) leaf empty "" will be filled automatically
      baud (600, 1200, 1800, 2400, 4800, 9600, 19200)
      protocol 0: 14 bytes polling 'D'
               1: 11 bytes continuous [PeakTech]
@@ -34,12 +34,10 @@
      display digits (2000, 4000, 6000, 20000, 22000, 40000, 50000, 100000, 200000, 400000, 1000000)
      External device setup 0, 1
      rts 0, 1
-     cts 0, 1
-     dsr 0, 1
      dtr 0, 1
 **/
 
-class DmmDriver : public QObject
+class DmmDecoder : public QObject
 {
   Q_OBJECT
 
@@ -80,10 +78,10 @@ public:
     bool  dtr;
   };
 
-  virtual ~DmmDriver() = default;
+  virtual ~DmmDecoder() = default;
   virtual size_t                                getPacketLength(ReadEvent::DataFormat df) = 0;
   virtual bool                                  checkFormat(const char* data, size_t len, ReadEvent::DataFormat df) = 0; // TBD use qbytearray or similar instead for data
-  virtual std::optional<DmmDriver::DmmResponse> decode(const QByteArray &data, int id, ReadEvent::DataFormat df) = 0;
+  virtual std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id, ReadEvent::DataFormat df) = 0;
 
   static std::vector<DMMInfo>                   getDeviceConfigurations() { return m_configurations; };
   static void                                   addConfig(DMMInfo info);

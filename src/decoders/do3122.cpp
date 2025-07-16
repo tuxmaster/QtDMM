@@ -1,16 +1,16 @@
-#include "drivers/do3122.h"
+#include "do3122.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Duratool", "DO3122", "Duratool DO3122", 9600, 11, 8, 1, 1, 0, 4000, 0, 0, 0});
+  DmmDecoder::addConfig({"Duratool", "DO3122", "", 9600, 11, 8, 1, 1, 0, 4000, 0, 0, 0});
   return true;
 }();
 
-size_t DrvDO3122::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderDO3122::getPacketLength(ReadEvent::DataFormat df)
 {
   return  (df == ReadEvent::DO3122Continuous ? 22 : 0);
 }
 
-bool DrvDO3122::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderDO3122::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
 {
   if (df == ReadEvent::DO3122Continuous)
   {
@@ -32,7 +32,7 @@ bool DrvDO3122::checkFormat(const char* data, size_t len, ReadEvent::DataFormat 
   return false;
 }
 
-std::optional<DmmDriver::DmmResponse> DrvDO3122::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderDO3122::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
   m_result.id     = id;
@@ -147,7 +147,7 @@ std::optional<DmmDriver::DmmResponse> DrvDO3122::decode(const QByteArray &data, 
   return m_result;
 }
 
-const char *DrvDO3122::DO3122Digit(int byte, bool *convOk)
+const char *DecoderDO3122::DO3122Digit(int byte, bool *convOk)
 {
   int           digit[10] = { 0x5f, 0x06, 0x6b, 0x2f, 0x36, 0x3d, 0x7d, 0x07, 0x7f, 0x3f };
   const char *c_digit[10] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };

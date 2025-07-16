@@ -1,33 +1,33 @@
-#include "drivers/vc820.h"
+#include "vc820.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Digitek", "DT-9062", "Digitek DT-9062", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Digitek", "INO2513", "Digitek INO2513", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Digitech", "QM1462", "Digitech QM1462", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Digitech", "QM1538", "Digitech QM1538", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"HoldPeak", "HP-90EPC", "HoldPeak HP-90EPC", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"PeakTech", "3330", "PeakTech 3330", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Tenma", "72-7745", "Tenma 72-7745", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT30A", "Uni-Trend UT30A", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT30E", "Uni-Trend UT30E", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT60A", "Uni-Trend UT30A", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Uni-Trend", "UT60E", "Uni-Trend UT30E", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 820", "Voltcraft VC 820", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"Voltcraft", "VC 840", "Voltcraft VC 840", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Digitek", "DT-9062", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Digitek", "INO2513", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Digitech", "QM1462", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Digitech", "QM1538", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"HoldPeak", "HP-90EPC", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"PeakTech", "3330", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Tenma", "72-7745", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT30A", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT30E", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT60A", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT60E", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Voltcraft", "VC 820", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Voltcraft", "VC 840", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
   return true;
 }();
 
-bool DrvVC820::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderVC820::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
 {
   return (df == ReadEvent::VC820Continuous && ((data[len] & 0xf0) == 0xe0));
 }
 
-size_t DrvVC820::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderVC820::getPacketLength(ReadEvent::DataFormat df)
 {
   return  (df == ReadEvent::VC820Continuous ? 14 : 0);
 }
 
-std::optional<DmmDriver::DmmResponse> DrvVC820::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
   m_result.id     = id;
@@ -144,7 +144,7 @@ std::optional<DmmDriver::DmmResponse> DrvVC820::decode(const QByteArray &data, i
   return m_result;
 }
 
-const char *DrvVC820::vc820Digit(int byte)
+const char *DecoderVC820::vc820Digit(int byte)
 {
   int           digit[10] = { 0x7d, 0x05, 0x5b, 0x1f, 0x27, 0x3e, 0x7e, 0x15, 0x7f, 0x3f };
   const char *c_digit[10] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };

@@ -1,17 +1,17 @@
-#include "drivers/isotech.h"
+#include "isotech.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Iso-Tech", "IDM 73", "Iso-Tech IDM 73", 19200, 6, 7, 1, 1, 2, 6000, 0, 0, 1});
-  DmmDriver::addConfig({"Tenma", "72-1016", "Tenma 72-1016", 19200, 6, 7, 1, 2, 2, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Iso-Tech", "IDM 73", "", 19200, 6, 7, 1, 1, 2, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Tenma", "72-1016", "", 19200, 6, 7, 1, 2, 2, 6000, 0, 0, 1});
   return true;
 }();
 
-size_t DrvIsoTech::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderIsoTech::getPacketLength(ReadEvent::DataFormat df)
 {
   return  (df == ReadEvent::IsoTech ? 22 : 0);
 }
 
-bool DrvIsoTech::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderIsoTech::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
 {
   if (df == ReadEvent::IsoTech && len >= 22)
   {
@@ -27,7 +27,7 @@ bool DrvIsoTech::checkFormat(const char* data, size_t len, ReadEvent::DataFormat
   return false;
 }
 
-std::optional<DmmDriver::DmmResponse> DrvIsoTech::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderIsoTech::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
   m_result.id     = id;

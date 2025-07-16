@@ -2,14 +2,14 @@
 #include <QIODevice>
 #include <QVariant>
 #include <QSerialPort>
-#include "dmmdriver.h"
+#include "dmmdecoder.h"
 
 
 // serialdevice.h
 class SerialDevice : public QSerialPort {
     Q_OBJECT
 public:
-    explicit SerialDevice(const DmmDriver::DMMInfo info, QString device, QObject *p = Q_NULLPTR) : QSerialPort(p), m_dmmInfo(info) {
+    explicit SerialDevice(const DmmDecoder::DMMInfo info, QString device, QObject *p = Q_NULLPTR) : QSerialPort(p), m_dmmInfo(info) {
         setPortName(device);
     };
 
@@ -31,17 +31,17 @@ public:
         && setRequestToSend(m_dmmInfo.rts);
     }
 protected:
-    DmmDriver::DMMInfo m_dmmInfo;
+    DmmDecoder::DMMInfo m_dmmInfo;
 };
 
 // hiddevice.h  (wrapp‑t hidapi oder libusb)
 class HidDevice : public QIODevice {
     Q_OBJECT
 public:
-    explicit HidDevice(const DmmDriver::DMMInfo info, QString device, QObject *p = Q_NULLPTR): QIODevice(p), m_dmmInfo(info) {};
+    explicit HidDevice(const DmmDecoder::DMMInfo info, QString device, QObject *p = Q_NULLPTR): QIODevice(p), m_dmmInfo(info) {};
 
 protected:
-    DmmDriver::DMMInfo m_dmmInfo;
+    DmmDecoder::DMMInfo m_dmmInfo;
 
     qint64 readData(char *d, qint64 max)  override  { return 0; };
     qint64 writeData(const char *d, qint64 len) override  { return 0; };
@@ -55,7 +55,7 @@ public:
     enum class PortType { None, Serial, Hid, Sigrok };
 
     explicit PortHandler(QObject *parent = Q_NULLPTR) : QObject(parent) {}
-    bool create(const DmmDriver::DMMInfo spec, PortType type, QString device);
+    bool create(const DmmDecoder::DMMInfo spec, PortType type, QString device);
     void close();
 
     QIODevice*  port()     const { return m_port;  }

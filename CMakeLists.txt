@@ -11,7 +11,7 @@ set(RESOURCES "src/resources.qrc")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
 
 ## get files
-file(GLOB DRV_HEADER_FILES CONFIGURE_DEPENDS src/drivers/*.h )
+file(GLOB DRV_HEADER_FILES CONFIGURE_DEPENDS src/decoders/*.h )
 file(GLOB UI_FILES CONFIGURE_DEPENDS src/ui/*.ui)
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp src/*.h )
 file(GLOB XPM_FILES CONFIGURE_DEPENDS assets/icons/*.xpm )
@@ -29,9 +29,9 @@ file(WRITE "src/resources.qrc" "${RES_CONTENT}    </qresource>\n</RCC>\n")
 set(DRIVER_HEADER_CONTENT "#pragma once\n\n")
 foreach(file_path IN LISTS DRV_HEADER_FILES)
 	get_filename_component(base_name "${file_path}" NAME)
-	set(DRIVER_HEADER_CONTENT "${DRIVER_HEADER_CONTENT}#include \"drivers/${base_name}\"\n")
+	set(DRIVER_HEADER_CONTENT "${DRIVER_HEADER_CONTENT}#include \"decoders/${base_name}\"\n")
 endforeach()
-file(WRITE "${CMAKE_BINARY_DIR}/drivers.h" "${DRIVER_HEADER_CONTENT}")
+file(WRITE "${CMAKE_BINARY_DIR}/decoders.h" "${DRIVER_HEADER_CONTENT}")
 
 ## compile the application
 add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGANIZATION="QtDMM" )

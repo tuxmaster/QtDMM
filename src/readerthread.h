@@ -25,7 +25,7 @@
 #include <QtCore>
 #include <QIODevice>
 #include "readevent.h"
-#include "dmmdriver.h"
+#include "dmmdecoder.h"
 
 class QSerialPort;
 class ReaderThread : public QObject
@@ -45,7 +45,7 @@ public:
   void        startRead();
   void        setHandle(QIODevice *handle);
   void        setFormat(ReadEvent::DataFormat);
-  void        setDriver(DmmDriver* driver);
+  void        setDriver(DmmDecoder* driver);
 
   ReadStatus  status() const  { return m_status;  }
   void        setNumValues(int num)  { m_numValues = num; }
@@ -64,7 +64,7 @@ protected:
   bool                  m_sendRequest;
   int                   m_id;
   int                   m_numValues;
-  DmmDriver*            m_driver;
+  DmmDecoder*            m_driver;
   void readDMM();
   void readMetex14();
 

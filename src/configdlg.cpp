@@ -581,7 +581,7 @@ int ConfigDlg::intPointMode() const
 // DMM
 //
 
-DmmDriver::DMMInfo ConfigDlg::dmmInfo() const
+DmmDecoder::DMMInfo ConfigDlg::dmmInfo() const
 {
   return m_dmm->dmmInfo();
 }

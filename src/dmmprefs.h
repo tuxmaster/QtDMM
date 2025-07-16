@@ -26,7 +26,7 @@
 
 #include "ui_uidmmprefs.h"
 #include "readevent.h"
-#include "dmmdriver.h"
+#include "dmmdecoder.h"
 
 class DmmPrefs : public PrefWidget, private Ui::UIDmmPrefs
 {
@@ -35,7 +35,7 @@ public:
   DmmPrefs(QWidget *parent = Q_NULLPTR);
   ~DmmPrefs();
 
-  DmmDriver::DMMInfo dmmInfo() { return m_dmmInfo; };
+  DmmDecoder::DMMInfo dmmInfo() { return m_dmmInfo; };
   QSerialPort::Parity parity() const;
   QSerialPort::DataBits bits() const;
   QSerialPort::StopBits stopBits() const;
@@ -63,7 +63,7 @@ protected Q_SLOTS:
 
 protected:
   QString        m_path;
-  DmmDriver::DMMInfo m_dmmInfo;
+  DmmDecoder::DMMInfo m_dmmInfo;
 
 private:
   QStringListModel *m_portlist;

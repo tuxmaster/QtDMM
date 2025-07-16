@@ -1,21 +1,21 @@
-#include "drivers/vc870.h"
+#include "vc870.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Voltcraft", "VC 870", "Voltcraft VC 870", 9600, 10, 8, 1, 2, 0, 40000, 0, 0, 1});
+  DmmDecoder::addConfig({"Voltcraft", "VC 870", "", 9600, 10, 8, 1, 2, 0, 40000, 0, 0, 1});
   return true;
 }();
 
-bool DrvVC870::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderVC870::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
 {
   return (df == ReadEvent::VC870Continuous && (len) && (data[len - 1] == 0x0d) && (data[len] == 0x0a));
 }
 
-size_t DrvVC870::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderVC870::getPacketLength(ReadEvent::DataFormat df)
 {
   return  (df == ReadEvent::VC870Continuous ? 23 : 0);
 }
 
-std::optional<DmmDriver::DmmResponse> DrvVC870::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderVC870::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   // Support for the Voltcraft VC870 digital multimeter was contributed by Florian Evers, florian-evers@gmx.de, under the "GPLv3 or later" licence
   m_result = {};

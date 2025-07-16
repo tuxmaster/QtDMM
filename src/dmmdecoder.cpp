@@ -1,22 +1,22 @@
-#include "dmmdriver.h"
+#include "dmmdecoder.h"
 
-std::vector<DmmDriver::DMMInfo> DmmDriver::m_configurations;
+std::vector<DmmDecoder::DMMInfo> DmmDecoder::m_configurations;
 
 
-void DmmDriver::addConfig(DMMInfo info)
+void DmmDecoder::addConfig(DMMInfo info)
 {
   info.name = info.vendor + " " + info.model;
-  DmmDriver::m_configurations.push_back(info);
+  DmmDecoder::m_configurations.push_back(info);
 }
 
 
-QString DmmDriver::insertComma(const QString &val, int pos)
+QString DmmDecoder::insertComma(const QString &val, int pos)
 {
   return val.left(2 + pos) + "." + val.right(4 - pos);
 }
 
 
-QString DmmDriver::insertCommaIT(const QString &val, int pos)
+QString DmmDecoder::insertCommaIT(const QString &val, int pos)
 {
   if (pos == 0)
     return val;
@@ -27,12 +27,12 @@ QString DmmDriver::insertCommaIT(const QString &val, int pos)
   return (val.left(pos) + "." + val.mid(pos));
 }
 
-bool DmmDriver::bit(const QByteArray &data, int byte, int bit) const {
+bool DmmDecoder::bit(const QByteArray &data, int byte, int bit) const {
   return data[byte] & (1 << bit);
 }
 
 
-void DmmDriver::formatResultValue(int commaPos, const QString& prefix, const QString& baseUnit)
+void DmmDecoder::formatResultValue(int commaPos, const QString& prefix, const QString& baseUnit)
 {
     static const QHash<QString, double> scaleMap = {
     { "",     1.0 },
@@ -51,7 +51,7 @@ void DmmDriver::formatResultValue(int commaPos, const QString& prefix, const QSt
 }
 
 
-QString DmmDriver::toString() const {
+QString DmmDecoder::toString() const {
   return QString("id=%1: %2 %3 (%4) [%5] range=%6 hold=%7 bar=%8")
                    .arg(m_result.id)
                    .arg(m_result.val)

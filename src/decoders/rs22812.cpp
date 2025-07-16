@@ -59,18 +59,18 @@ https://github.com/syn-net/rs22812/blob/master/rs22812_linux.py
 */
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"Radioshack", "22-812", "Radioshack 22-812", 4800, 9, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Radioshack", "22-812", "", 4800, 9, 8, 1, 1, 0, 4000, 0, 0, 1});
   return true;
 }();
 
 
-size_t DrvRS22812::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderRS22812::getPacketLength(ReadEvent::DataFormat df)
 {
   return  (df == ReadEvent::RS22812Continuous ? 9 : 0);
 }
 
 
-bool DrvRS22812::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderRS22812::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
 {
   if (df == ReadEvent::RS22812Continuous)
   {
@@ -325,7 +325,7 @@ bool DrvRS22812::checkFormat(const char* data, size_t len, ReadEvent::DataFormat
 }
 
 
-std::optional<DmmDriver::DmmResponse> DrvRS22812::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderRS22812::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
   m_result.id = id;
@@ -386,7 +386,7 @@ std::optional<DmmDriver::DmmResponse> DrvRS22812::decode(const QByteArray &data,
 }
 
 
-std::optional<QString> DrvRS22812::digit(uint8_t byte)
+std::optional<QString> DecoderRS22812::digit(uint8_t byte)
 {
   static const QHash<uint8_t, QString> digitMap = {
     {0xd7, "0"}, {0x50, "1"}, {0xb5, "2"}, {0xf1, "3"},{0x72, "4"},

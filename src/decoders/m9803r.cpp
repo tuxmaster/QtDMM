@@ -1,26 +1,26 @@
-#include "drivers/m9803r.h"
+#include "m9803r.h"
 
 
 static const bool registered = []() {
-  DmmDriver::addConfig({"ELV", "M9803R", "ELV M9803R", 9600, 4, 7, 1, 1, 1, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"MASTECH", "M9803R", "MASTECH M9803R", 9600, 4, 7, 1, 1, 1, 4000, 0, 0, 1});
-  DmmDriver::addConfig({"McVoice", "M-980T", "McVoice M-980T", 9600, 4, 7, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"ELV", "M9803R", "", 9600, 4, 7, 1, 1, 1, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"MASTECH", "M9803R", "", 9600, 4, 7, 1, 1, 1, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"McVoice", "M-980T", "", 9600, 4, 7, 1, 1, 0, 4000, 0, 0, 1});
   return true;
 }();
 
-size_t DrvM9803R::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderM9803R::getPacketLength(ReadEvent::DataFormat df)
 {
   return  (df == ReadEvent::M9803RContinuous ? 11 : 0);
 }
 
 
-bool DrvM9803R::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderM9803R::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
 {
   return (df==ReadEvent::M9803RContinuous && len >= 10 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
 }
 
 
-std::optional<DmmDriver::DmmResponse> DrvM9803R::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderM9803R::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
 {
   m_result = {};
   m_result.id     = id;

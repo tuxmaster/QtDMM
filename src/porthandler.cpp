@@ -1,6 +1,6 @@
 #include "porthandler.h"
 
-bool PortHandler::create(const DmmDriver::DMMInfo spec, PortType t, QString device)
+bool PortHandler::create(const DmmDecoder::DMMInfo spec, PortType t, QString device)
 {
   close();
 

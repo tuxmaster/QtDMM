@@ -29,10 +29,10 @@
 
 #include "dmmprefs.h"
 #include "settings.h"
-#include "drivers.h"
+#include "decoders.h"
 
 
-std::vector<DmmDriver::DMMInfo> dmm_info = {};
+std::vector<DmmDecoder::DMMInfo> dmm_info = {};
 
 DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
 {
@@ -59,7 +59,7 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
   ui_model->clear();
   ui_model->insertItem(-1, tr("Manual settings"));
 
-  std::vector<DmmDriver::DMMInfo> configs = DmmDriver::getDeviceConfigurations();
+  std::vector<DmmDecoder::DMMInfo> configs = DmmDecoder::getDeviceConfigurations();
 
   // Sortieren nach dem Namen
   std::sort(configs.begin(), configs.end(), [](const auto& a, const auto& b) {

@@ -27,7 +27,7 @@
 #include "ui_uiconfigdlg.h"
 #include "dmmgraph.h"
 #include "readevent.h"
-#include "dmmdriver.h"
+#include "dmmdecoder.h"
 
 class Settings;
 class QPrinter;
@@ -82,7 +82,7 @@ public:
   int                   numValues() const;
   bool                  rts() const;
   bool                  dtr() const;
-  DmmDriver::DMMInfo    dmmInfo() const;
+  DmmDecoder::DMMInfo    dmmInfo() const;
 
   QColor                bgColor() const;
   QColor                gridColor() const;

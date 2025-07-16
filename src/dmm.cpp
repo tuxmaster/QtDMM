@@ -23,7 +23,7 @@
 #include <QtGui>
 
 #include "dmm.h"
-#include "drivers.h"
+#include "decoders.h"
 
 #include <stdio.h>
 #include <iostream>
@@ -93,17 +93,17 @@ void DMM::initDriver( ReadEvent::DataFormat df)
     case ReadEvent::Metex14:
     case ReadEvent::PeakTech10:
     case ReadEvent::Voltcraft14Continuous:
-    case ReadEvent::Voltcraft15Continuous: createDriver<DrvAscii>();   break;
-    case ReadEvent::M9803RContinuous:      createDriver<DrvM9803R>();  break;
-    case ReadEvent::VC820Continuous:       createDriver<DrvVC820>();   break;
-    case ReadEvent::VC870Continuous:       createDriver<DrvVC870>();   break;
-    case ReadEvent::IsoTech:               createDriver<DrvIsoTech>(); break;
-    case ReadEvent::VC940Continuous:       createDriver<DrvVC940>();   break;
-    case ReadEvent::QM1537Continuous:      createDriver<DrvQM1537>();  break;
-    case ReadEvent::RS22812Continuous:     createDriver<DrvRS22812>(); break;
-    case ReadEvent::DO3122Continuous:      createDriver<DrvDO3122>();  break;
-    case ReadEvent::CyrustekES51922:       createDriver<DrvCyrusTekES51922>(); break;
-    case ReadEvent::CyrustekES51962:       createDriver<DrvCyrusTekES51962>(); break;
+    case ReadEvent::Voltcraft15Continuous: createDriver<DecoderAscii>();   break;
+    case ReadEvent::M9803RContinuous:      createDriver<DecoderM9803R>();  break;
+    case ReadEvent::VC820Continuous:       createDriver<DecoderVC820>();   break;
+    case ReadEvent::VC870Continuous:       createDriver<DecoderVC870>();   break;
+    case ReadEvent::IsoTech:               createDriver<DecoderIsoTech>(); break;
+    case ReadEvent::VC940Continuous:       createDriver<DecoderVC940>();   break;
+    case ReadEvent::QM1537Continuous:      createDriver<DecoderQM1537>();  break;
+    case ReadEvent::RS22812Continuous:     createDriver<DecoderRS22812>(); break;
+    case ReadEvent::DO3122Continuous:      createDriver<DecoderDO3122>();  break;
+    case ReadEvent::CyrustekES51922:       createDriver<DecoderCyrusTekES51922>(); break;
+    case ReadEvent::CyrustekES51962:       createDriver<DecoderCyrusTekES51962>(); break;
   }
 }
 

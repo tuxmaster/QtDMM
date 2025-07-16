@@ -70,7 +70,7 @@ void ReaderThread::setHandle(QIODevice *handle)
 }
 
 
-void ReaderThread::setDriver(DmmDriver* driver)
+void ReaderThread::setDriver(DmmDecoder* driver)
 {
   m_driver = driver;
 }
