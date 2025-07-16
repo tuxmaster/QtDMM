@@ -481,8 +481,6 @@ void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
     p->drawPixmap(x, y, *prefixPixmap);
     x += prefixPixmap->width() + 2;
     ++index;
-        qInfo() << "x: " << QString(firstChar);
-
   }
 
   // Unit suffix after prefix

@@ -1,27 +1,76 @@
 #pragma once
-/*
+#include <QIODevice>
+#include <QVariant>
+#include <QSerialPort>
+#include "dmmdriver.h"
+
+
+// serialdevice.h
+class SerialDevice : public QSerialPort {
+    Q_OBJECT
+public:
+    explicit SerialDevice(const DmmDriver::DMMInfo info, QString device, QObject *p = Q_NULLPTR) : QSerialPort(p), m_dmmInfo(info) {
+        setPortName(device);
+    };
+
+    bool init()
+    {
+      Parity parity = NoParity;
+      switch (m_dmmInfo.parity)
+      {
+        case 0: parity = NoParity;   break;
+        case 1: parity = EvenParity; break;
+        case 2: parity = OddParity;  break;
+      }
+
+      return setParity(parity)
+        && setBaudRate(m_dmmInfo.baud)
+        && setStopBits(static_cast<StopBits>(m_dmmInfo.stopBits))
+        && setDataBits(static_cast<DataBits>(m_dmmInfo.bits))
+        && setDataTerminalReady(m_dmmInfo.dtr)
+        && setRequestToSend(m_dmmInfo.rts);
+    }
+protected:
+    DmmDriver::DMMInfo m_dmmInfo;
+};
+
+// hiddevice.h  (wrapp‑t hidapi oder libusb)
+class HidDevice : public QIODevice {
+    Q_OBJECT
+public:
+    explicit HidDevice(const DmmDriver::DMMInfo info, QString device, QObject *p = Q_NULLPTR): QIODevice(p), m_dmmInfo(info) {};
+
+protected:
+    DmmDriver::DMMInfo m_dmmInfo;
+
+    qint64 readData(char *d, qint64 max)  override  { return 0; };
+    qint64 writeData(const char *d, qint64 len) override  { return 0; };
+};
+
+
 class PortHandler : public QObject
 {
-  Q_OBJECT
-
+    Q_OBJECT
 public:
-	PortHandler();
+    enum class PortType { None, Serial, Hid, Sigrok };
 
-	bool isOpen();
-	open(..);
-	QSerialPort::SerialPortError error();
-	bool setParity(QSerialPort::Parity parity)
-	bool setDataBits(QSerialPort::DataBits dataBits)
-	bool setBaudRateqint32 baudRate, QSerialPort::Directions directions = AllDirections)
-	bool setStopBits(QSerialPort::StopBits stopBits)
-	bool setDataTerminalReady(bool set)
-	bool setRequestToSend(bool set)
-	close();
-	availabePorts()
+    explicit PortHandler(QObject *parent = Q_NULLPTR) : QObject(parent) {}
+    bool create(const DmmDriver::DMMInfo spec, PortType type, QString device);
+    void close();
 
-	 SIGNAL(readyRead()
-	 SIGNAL(aboutToClose(
-		 read(&byte, 1)
-		 write("D\n", 2)
+    QIODevice*  port()     const { return m_port;  }
+    PortType    portType() const { return m_type; }
+    int         error();
+    bool        init();
+    bool        isOpen() const { return m_port != Q_NULLPTR && m_port->isOpen(); };
+
+    static PortType str2portType(const QString str);
+signals:
+    void opened(QIODevice *dev);
+    void closed();
+
+private:
+    QIODevice *m_port   = Q_NULLPTR;
+    PortType   m_type   = PortType::None;
+    QString    m_device;
 };
-*/

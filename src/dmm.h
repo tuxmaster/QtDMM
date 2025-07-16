@@ -28,6 +28,7 @@
 #include "readerthread.h"
 #include "readevent.h"
 #include "dmmdriver.h"
+#include "porthandler.h"
 
 class DMM : public QObject
 {
@@ -41,6 +42,7 @@ public:
   bool    open();
   void    close();
   void    setName(const QString &name)  {  m_name = name; }
+  void    setDmmInfo(const DmmDriver::DMMInfo info)  {  m_dmmInfo = info; }
   QString errorString() const  { return m_error; }
   bool    isOpen() const;
   void    setFormat(ReadEvent::DataFormat);
@@ -56,7 +58,7 @@ Q_SIGNALS:
 
 protected:
   void                  initDriver( ReadEvent::DataFormat df);
-  QSerialPort          *m_handle;
+  PortHandler          *m_portHandler;
   int                   m_speed;
   QSerialPort::Parity   m_parity;
   QSerialPort::StopBits m_stopBits;
@@ -73,6 +75,8 @@ protected:
   int                   m_flags;
   int                   m_delayTimer;
   DmmDriver            *m_driver;
+  DmmDriver::DMMInfo    m_dmmInfo;
+  PortHandler::PortType m_portType;
 
   void                  timerEvent(QTimerEvent *) Q_DECL_OVERRIDE;
 

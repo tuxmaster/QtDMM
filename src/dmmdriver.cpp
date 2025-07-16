@@ -5,6 +5,7 @@ std::vector<DmmDriver::DMMInfo> DmmDriver::m_configurations;
 
 void DmmDriver::addConfig(DMMInfo info)
 {
+  info.name = info.vendor + " " + info.model;
   DmmDriver::m_configurations.push_back(info);
 }
 

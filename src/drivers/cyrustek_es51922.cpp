@@ -1,7 +1,7 @@
 #include "cyrustek_es51922.h"
 
 static const bool registered = []() {
-  DmmDriver::addConfig(  {"Uni-Trend","UT61E","Uni-Trend UT61E", 19200, 12, 7, 1, 1, 2, 22000, 0, 0,1});
+  DmmDriver::addConfig(  {"Uni-Trend","UT61E","", 19200, 12, 7, 1, 1, 2, 22000, 0, 0,1});
   return true;
 }();
 

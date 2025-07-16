@@ -61,54 +61,64 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="123"/>
+        <location filename="../../src/dmm.cpp" line="120"/>
         <source>Access denied for %1.</source>
         <translation>Zugriff auf %1 verweigert.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="126"/>
+        <location filename="../../src/dmm.cpp" line="123"/>
         <source>No such device %1.</source>
         <translation>%1 existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="129"/>
+        <location filename="../../src/dmm.cpp" line="126"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Fehler beim Öffnen von %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="140"/>
+        <location filename="../../src/dmm.cpp" line="138"/>
         <source>Error configuring serial port %1.</source>
         <translation>Fehler beim Konfigurieren des Anschlusses %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="150"/>
+        <location filename="../../src/dmm.cpp" line="144"/>
         <source>Connecting ...</source>
         <translation>Verbinde ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="165"/>
-        <location filename="../../src/dmm.cpp" line="221"/>
+        <location filename="../../src/dmm.cpp" line="159"/>
+        <location filename="../../src/dmm.cpp" line="213"/>
         <source>Not connected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="217"/>
+        <location filename="../../src/dmm.cpp" line="201"/>
+        <source>%1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="204"/>
+        <source>Error %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="209"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation>Lesefehler auf %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="219"/>
+        <location filename="../../src/dmm.cpp" line="211"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Wartezeit abgelaufr für %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="209"/>
+        <location filename="../../src/dmm.cpp" line="201"/>
         <source>Connected %1</source>
         <translation>Verbunden %1</translation>
     </message>
@@ -119,16 +129,6 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <source>Digit parse fail on %1</source>
         <translation type="vanished">Ziffernanalyse fehlgeschlagen in %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/dmm.cpp" line="209"/>
-        <source>%1 %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/dmm.cpp" line="212"/>
-        <source>Error %1</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -289,13 +289,13 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="322"/>
+        <location filename="../../src/dmmprefs.cpp" line="333"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="322"/>
-        <location filename="../../src/dmmprefs.cpp" line="348"/>
+        <location filename="../../src/dmmprefs.cpp" line="333"/>
+        <location filename="../../src/dmmprefs.cpp" line="359"/>
         <source>DMM description (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -304,7 +304,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">DMM Beschreibung (*.ini)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="348"/>
+        <location filename="../../src/dmmprefs.cpp" line="359"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
@@ -488,12 +488,12 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWin</name>
     <message>
-        <location filename="../../src/mainwin.cpp" line="166"/>
+        <location filename="../../src/mainwin.cpp" line="162"/>
         <source>QtDMM: Welcome!</source>
         <translation>QtDMM: Willkommen!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="166"/>
+        <location filename="../../src/mainwin.cpp" line="162"/>
         <source>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;A simple recorder for DMM&apos;s&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;A simple display software for a variety of digital multimeter. Currently confirmed are:&lt;table&gt;%2&lt;/table&gt;Other compatible models may work also.&lt;p&gt;QtDMM features min/max memory and a configurable recorder with import/export and printing function. Sampling may be started manually, at a given time or triggered by a measured threshold. Additionally an external program may be started when given thresholds are reached.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; uses the platform independent toolkit &lt;b&gt;Qt&lt;/b&gt; version %3 and is licensed under &lt;b&gt;GPL 3&lt;/b&gt; (Versions prior to v0.9.0 where licensed under GPL 2)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;The icons (except the DMM icon) have been taken from the KDE project.&lt;p&gt;</source>
         <translation>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;Ein einfacher Datenrekorder für DMM&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;Ein einfaches Anzeigeprogramm für eine Vielzahl von DMM&apos;s. Aktuell bestätigt sind:&lt;table&gt;%2&lt;/table&gt;Andere kompatible Modelle sollten ebenfalls funktionieren.&lt;p&gt;QtDMM stellt die Funktionen Min/Max Werte halten, ein konfigurierbaren Datenrekorder mit Daten im/export Funktion sowie ein Druckfunktion zur Verfügung. Die Datenaufzeichnung kann manuell, durch einen Grenzwert oder durch eine Zeitfunktion ausgelöst werden. Desweiteren kann ein externes Programm beim erreichen eines Grenzwertes gestartet werden.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; wurde mit der Platformunabhängigen &lt;b&gt;Qt&lt;/b&gt; Bibliothek in der Version %3 welche unter der &lt;b&gt;GPLv3&lt;/b&gt; lizensiert ist erstellt.(Versionen vor 0.9.0 wurden unter der GPLv2 Lizenz veröffentlicht)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;Die Symbole (bis auf das DMM Symbol) stammen von dem KDE Projekt.&lt;p&gt;</translation>
     </message>

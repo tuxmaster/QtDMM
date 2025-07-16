@@ -23,6 +23,7 @@
 #pragma once
 
 #include <QtCore>
+#include <QIODevice>
 #include "readevent.h"
 #include "dmmdriver.h"
 
@@ -42,7 +43,7 @@ public:
   void        run();
   void        start();
   void        startRead();
-  void        setHandle(QSerialPort *handle);
+  void        setHandle(QIODevice *handle);
   void        setFormat(ReadEvent::DataFormat);
   void        setDriver(DmmDriver* driver);
 
@@ -75,7 +76,7 @@ protected Q_SLOTS:
   void socketClose();
 
 private:
-  QSerialPort *m_port;
+  QIODevice *m_port;
 
 private Q_SLOTS:
   void timer();

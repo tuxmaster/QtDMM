@@ -30,7 +30,6 @@
 
 DMM::DMM(QObject *parent)
   : QObject(parent),
-    m_handle(Q_NULLPTR),
     m_speed(600),
     m_parity(QSerialPort::NoParity),
     m_stopBits(QSerialPort::OneStop),
@@ -43,9 +42,9 @@ DMM::DMM(QObject *parent)
     m_rts(false),
     m_driver(Q_NULLPTR)
 {
+  m_portHandler  = new PortHandler(this);
   m_readerThread = new ReaderThread(this);
 
-  // mt: QThread emits a signal now. no more custom event
   connect(m_readerThread, SIGNAL(readEvent(const QByteArray &, int, ReadEvent::DataFormat)),
           this, SLOT(readEventSLOT(const QByteArray &, int, ReadEvent::DataFormat)));
 
@@ -72,9 +71,7 @@ void DMM::setFormat(ReadEvent::DataFormat format)
 
 bool DMM::isOpen() const
 {
-  if (!m_handle)
-    return false;
-  return m_handle->isOpen();
+  return m_portHandler->isOpen();
 }
 
 void DMM::setSpeed(int speed)
@@ -84,7 +81,9 @@ void DMM::setSpeed(int speed)
 
 void DMM::setDevice(const QString &device)
 {
-  m_device = device;
+  QStringList deviceList = device.split( ":" );
+  m_device = deviceList.last();
+  m_portType = PortHandler::str2portType(deviceList.first());
 }
 
 void DMM::initDriver( ReadEvent::DataFormat df)
@@ -111,13 +110,11 @@ void DMM::initDriver( ReadEvent::DataFormat df)
 
 bool DMM::open()
 {
-  m_handle = new QSerialPort(this);
-  m_handle->setPortName(m_device);
+  m_portHandler->create(m_dmmInfo, m_portType, m_device);
 
-  if (!m_handle->open(QIODevice::ReadWrite))
+  if (m_portHandler->port() && !m_portHandler->port()->open(QIODevice::ReadWrite))
   {
-    int errorCode = m_handle->error();
-    switch (errorCode)
+    switch (m_portHandler->error())
     {
       case QSerialPort::PermissionError:
         m_error = tr("Access denied for %1.").arg(m_device);
@@ -130,26 +127,23 @@ bool DMM::open()
         break;
     }
     Q_EMIT error(m_error);
-    delete m_handle;
-    m_handle = Q_NULLPTR;
+    m_portHandler->close();
     return false;
   }
 
   if (!m_externalSetup)
   {
-    m_error = tr("Error configuring serial port %1.").arg(m_device);
-    if ((!m_handle->setParity(m_parity)) || (!m_handle->setBaudRate(m_speed)) || (!m_handle->setStopBits(m_stopBits)) ||
-        (!m_handle->setDataBits(m_dataBits)) || (!m_handle->setDataTerminalReady(m_dtr)) || (!m_handle->setRequestToSend(m_rts)))
+    if (!m_portHandler->init())
     {
+      m_error = tr("Error configuring serial port %1.").arg(m_device);
       Q_EMIT error(m_error);
-      delete m_handle;
-      m_handle = Q_NULLPTR;
+      m_portHandler->close();
       return false;
     }
   }
   m_error = tr("Connecting ...");
   Q_EMIT error(m_error);
-  m_readerThread->setHandle(m_handle);
+  m_readerThread->setHandle(m_portHandler->port());
   timerEvent(0);
 
   // mt: added timer id
@@ -167,13 +161,11 @@ void DMM::close()
 
   m_readerThread->setHandle(Q_NULLPTR);
 
-  if (m_handle)
+  if (m_portHandler->port())
   {
     if (!m_externalSetup)
     {
-      m_handle->close();
-      delete m_handle;
-      m_handle = Q_NULLPTR;
+      m_portHandler->close();
     }
   }
   m_oldStatus = ReaderThread::NotConnected;
@@ -181,7 +173,7 @@ void DMM::close()
 
 void DMM::timerEvent(QTimerEvent *)
 {
-  if (!m_handle)
+  if (!m_portHandler->port())
     Q_EMIT error(m_error);
   else
     m_readerThread->startRead();

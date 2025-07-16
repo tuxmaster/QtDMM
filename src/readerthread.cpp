@@ -24,10 +24,13 @@
 #include <QtWidgets>
 #include <QtSerialPort>
 
-#include "readerthread.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <iostream>
+
+#include "readerthread.h"
+
+
 
 ReaderThread::ReaderThread(QObject *receiver) :
   QObject(receiver),
@@ -48,7 +51,7 @@ void ReaderThread::setFormat(ReadEvent::DataFormat format)
   m_format = format;
 }
 
-void ReaderThread::setHandle(QSerialPort *handle)
+void ReaderThread::setHandle(QIODevice *handle)
 {
   m_port = handle;
 

@@ -42,9 +42,9 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
   for (auto port : QSerialPortInfo::availablePorts())
   {
 #ifdef Q_OS_WIN
-    portlist << port.portName();
+    portlist << "serial:"+port.portName();
 #else
-    portlist << port.systemLocation();
+    portlist << "serial:"+port.systemLocation();
 #endif
     qDebug() << port.portName() << "--" << port.manufacturer() << "--" << port.description() << "--" << port.systemLocation();
   }
@@ -208,6 +208,7 @@ void DmmPrefs::on_ui_model_activated(int id)
   uirts->setDisabled(id != 0);
   uidtr->setDisabled(id != 0);
 
+
   if (id != 0)
     message->hide();
   else
@@ -217,8 +218,24 @@ void DmmPrefs::on_ui_model_activated(int id)
   else
     message2->hide();
 
-  if (id > 0)
+  if (id == 0)
   {
+    m_dmmInfo.name = "custom";
+    m_dmmInfo.baud = baudRate->currentText().toInt();
+    m_dmmInfo.protocol = protocolCombo->currentIndex();
+    m_dmmInfo.bits =  bitsCombo->currentText().toInt();
+    m_dmmInfo.stopBits = bitsCombo->currentText().toInt();
+    m_dmmInfo.parity = parityCombo->currentIndex();
+    m_dmmInfo.display = displayCombo->currentText().toInt();
+    m_dmmInfo.numValues = ui_numValues->value();
+    m_dmmInfo.externalSetup = ui_externalSetup->isChecked();
+    m_dmmInfo.rts = uirts->isChecked();
+    m_dmmInfo.dtr = uidtr->isChecked();
+  }
+  else
+  {
+    m_dmmInfo = dmm_info[id - 1];
+
     baudRate->setCurrentText(QString::number(dmm_info[id - 1].baud));
     protocolCombo->setCurrentIndex(dmm_info[id - 1].protocol);
     bitsCombo->setCurrentText(QString::number(dmm_info[id - 1].bits));
@@ -278,10 +295,7 @@ QSerialPort::StopBits DmmPrefs::stopBits() const
 
 int DmmPrefs::speed() const
 {
-  bool ok = false;
-  int baud = baudRate->currentText().split(" ").first().toInt(&ok);
-
-  return ok ? baud : 600;
+  return baudRate->currentText().toInt();
 }
 
 bool DmmPrefs::externalSetup() const
@@ -301,10 +315,7 @@ ReadEvent::DataFormat DmmPrefs::format() const
 
 int DmmPrefs::display() const
 {
-  bool ok = false;
-  int value_counts = displayCombo->currentText().toInt(&ok);
-
-  return (ok ? value_counts : 0);
+  return displayCombo->currentText().toInt();
 }
 
 QString DmmPrefs::dmmName() const
