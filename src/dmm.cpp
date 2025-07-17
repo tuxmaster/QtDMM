@@ -81,7 +81,7 @@ void DMM::setSpeed(int speed)
 
 void DMM::setDevice(const QString &device)
 {
-  QStringList deviceList = device.split( ":" );
+  QStringList deviceList = device.split( " " );
   m_device = deviceList.last();
   m_portType = PortHandler::str2portType(deviceList.first());
 }

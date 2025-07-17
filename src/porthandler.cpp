@@ -1,4 +1,7 @@
 #include "porthandler.h"
+#include "portdevices/serial.h"
+#include "portdevices/hidserial.h"
+#include <QSerialPortInfo>
 
 bool PortHandler::create(const DmmDecoder::DMMInfo spec, PortType t, QString device)
 {
@@ -6,8 +9,8 @@ bool PortHandler::create(const DmmDecoder::DMMInfo spec, PortType t, QString dev
 
   switch (t)
   {
-    case PortType::Serial: m_port = new SerialDevice(spec, device, this); break;
-    case PortType::Hid:    m_port = new HidDevice(spec, device, this);    break;
+    case PortType::Serial: m_port = new SerialDevice(spec, device, this);    break;
+    case PortType::Hid:    m_port = new HIDSerialDevice(spec, device, this); break;
     //case PortType::Sigrok: m_port = new SigrokDevice(this);       break;
     default: return false;
   }
@@ -36,15 +39,15 @@ int PortHandler::error()
     case PortType::Serial: return static_cast<SerialDevice *>(m_port)->error();
     case PortType::Hid: return 0;
     case PortType::Sigrok: return 0;
+    default: return 0;
   }
-  return 0;
 }
 
 PortHandler::PortType PortHandler::str2portType(const QString str)
 {
-  if (str=="serial") return PortType::Serial;
-  if (str=="usbhid") return PortType::Hid;
-  if (str=="sigrok") return PortType::Sigrok;
+  if (str.toLower() == "serial") return PortType::Serial;
+  if (str.toLower() == "usbhid") return PortType::Hid;
+  if (str.toLower() == "sigrok") return PortType::Sigrok;
   return PortType::None;
 }
 
@@ -57,4 +60,22 @@ bool PortHandler::init()
     //case PortType::Sigrok: return ;
     default: return true;
   }
+}
+
+QStringList PortHandler::availablePorts()
+{
+  QStringList portlist;
+  for (auto port : QSerialPortInfo::availablePorts())
+  {
+#ifdef Q_OS_WIN
+    portlist << "SERIAL "+port.portName();
+#else
+    portlist << "SERIAL "+port.systemLocation();
+#endif
+    qDebug() << port.portName() << "--" << port.manufacturer() << "--" << port.description() << "--" << port.systemLocation();
+  }
+
+  HIDSerialDevice::availablePorts(portlist);
+
+  return portlist;
 }

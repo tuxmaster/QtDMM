@@ -30,7 +30,7 @@
 #include "dmmprefs.h"
 #include "settings.h"
 #include "decoders.h"
-
+#include "porthandler.h"
 
 std::vector<DmmDecoder::DMMInfo> dmm_info = {};
 
@@ -38,16 +38,8 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
 {
   setupUi(this);
   m_portlist = new QStringListModel(this);
-  QStringList portlist;
-  for (auto port : QSerialPortInfo::availablePorts())
-  {
-#ifdef Q_OS_WIN
-    portlist << "serial:"+port.portName();
-#else
-    portlist << "serial:"+port.systemLocation();
-#endif
-    qDebug() << port.portName() << "--" << port.manufacturer() << "--" << port.description() << "--" << port.systemLocation();
-  }
+  QStringList portlist = PortHandler::availablePorts();
+
   m_portlist->setStringList(portlist);
   port->setModel(m_portlist);
   m_label = (tr("Multimeter settings"));

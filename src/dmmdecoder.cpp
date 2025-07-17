@@ -1,12 +1,20 @@
 #include "dmmdecoder.h"
 
-std::vector<DmmDecoder::DMMInfo> DmmDecoder::m_configurations;
-
+std::vector<DmmDecoder::DMMInfo> *DmmDecoder::m_configurations;
 
 void DmmDecoder::addConfig(DMMInfo info)
 {
+    if(!DmmDecoder::m_configurations)
+        DmmDecoder::m_configurations = new std::vector<DMMInfo>();
   info.name = info.vendor + " " + info.model;
-  DmmDecoder::m_configurations.push_back(info);
+  DmmDecoder::m_configurations->push_back(info);
+}
+
+std::vector<DmmDecoder::DMMInfo> DmmDecoder::getDeviceConfigurations()
+{
+  if(!DmmDecoder::m_configurations)
+    DmmDecoder::m_configurations = new std::vector<DMMInfo>();
+  return *m_configurations;
 }
 
 

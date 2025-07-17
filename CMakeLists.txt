@@ -38,11 +38,13 @@ add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGA
 include_directories(src ${CMAKE_BINARY_DIR})
 
 find_package(Qt6 REQUIRED COMPONENTS ${QT_COMPONENTS})
-set(QT_NAMESPACE Qt6)
+find_package(PkgConfig REQUIRED)
 
 qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
 qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR}/src ${TRANSLATIONS})
+
+pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
 
 add_executable(${PROJECT_NAME}
 	${SRC_FILES}
@@ -50,13 +52,17 @@ add_executable(${PROJECT_NAME}
 	${RES_SOURCES}
 	${QM_FILES}
 )
+#target_include_directories(my_qtdmm PRIVATE ${HIDAPI_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME}
-	${QT_NAMESPACE}::Widgets
-	${QT_NAMESPACE}::SerialPort
-	${QT_NAMESPACE}::PrintSupport
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+	Qt6::Widgets
+	Qt6::SerialPort
+	Qt6::PrintSupport
+	${HIDAPI_LIBRARIES}
 )
 
+#	$$system(pkg-config --libs hidapi-libusb libusb-1.0 libudev hidapi-hidraw)
 ## install files
 install(TARGETS ${PROJECT_NAME} 
 	RUNTIME DESTINATION bin

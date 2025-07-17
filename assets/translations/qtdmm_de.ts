@@ -296,28 +296,28 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DmmPrefs</name>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="53"/>
+        <location filename="../../src/dmmprefs.cpp" line="45"/>
         <source>Multimeter settings</source>
         <translation>Multimeter Einstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="54"/>
+        <location filename="../../src/dmmprefs.cpp" line="46"/>
         <source>&lt;b&gt;Here you can configure the serial port and protocol for your DMM. There is also a number of predefined models.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Hier können Sie den Anschluss und das Protokoll für Ihr DMM einstellen. Es gibt schon eine Reihe vorkonfigurierter Modelle.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="60"/>
+        <location filename="../../src/dmmprefs.cpp" line="52"/>
         <source>Manual settings</source>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="333"/>
+        <location filename="../../src/dmmprefs.cpp" line="325"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="333"/>
-        <location filename="../../src/dmmprefs.cpp" line="359"/>
+        <location filename="../../src/dmmprefs.cpp" line="325"/>
+        <location filename="../../src/dmmprefs.cpp" line="351"/>
         <source>DMM description (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -326,7 +326,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">DMM Beschreibung (*.ini)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="359"/>
+        <location filename="../../src/dmmprefs.cpp" line="351"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
