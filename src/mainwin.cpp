@@ -139,6 +139,10 @@ void MainWin::createActions()
   connect(toolBarRecorder, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarDMM, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
 
+  connect(new QShortcut(action_Configure->shortcut(), this), SIGNAL(activated()), action_Configure, SLOT(trigger()));
+  connect(new QShortcut(action_Direct_help->shortcut(), this), SIGNAL(activated()), action_Direct_help, SLOT(trigger()));
+  connect(new QShortcut(action_About->shortcut(), this), SIGNAL(activated()), action_About, SLOT(trigger()));
+  connect(new QShortcut(action_Quit->shortcut(), this), SIGNAL(activated()), action_Quit, SLOT(trigger()));
 }
 
 void MainWin::runningSLOT(bool on)
@@ -180,7 +184,8 @@ void MainWin::on_action_About_triggered()
 
 void MainWin::on_action_Menu_triggered()
 {
-  if (!m_menu) {
+  if (!m_menu)
+  {
     m_menu = new QMenu(this);
     m_menu->addAction(action_Configure);
     m_menu->addSeparator();
@@ -191,7 +196,8 @@ void MainWin::on_action_Menu_triggered()
   }
 
   QWidget* widget = this->toolBarMenu->widgetForAction(this->action_Menu);
-  if (widget) {
+  if (widget)
+  {
     m_menu->popup(widget->mapToGlobal(
       QPoint( widget->width() - m_menu->sizeHint().width(), widget->height())
     ));
