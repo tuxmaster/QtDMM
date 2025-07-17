@@ -1,44 +1,28 @@
 #include "hidserial.h"
 
 HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device, QObject *p)
-: QIODevice(p), m_dmmInfo(info)
+  : QIODevice(p)
+  , m_dmmInfo(info)
 {
-  if (!device.isNull()) {
-    QString prefix = "HID 0x1a86:0xe008 ";
-
-    if (device.startsWith(prefix)) {
-      QString s = device;
-      QByteArray ba = s.remove(0, prefix.size()).toUtf8();
-      fprintf(stderr, "connecting to %s\n", ba.data());
-      m_handle = hid_open_path(ba.data());
-    }
-  }
-
-  // Open the device using the VID, PID,
-  // and optionally the Serial number (NULL for the hoitek chip).
-  if (m_handle == Q_NULLPTR) {
-    m_handle = hid_open(0x1a86, 0xe008, NULL);
-  }
-
-  if (m_handle != Q_NULLPTR) {
+  if (!device.isNull() && (m_handle = hid_open_path(device.toUtf8().data())))
+  {
     m_isOpen = true;
     QThread* thread = new QThread;
     this->moveToThread(thread);
     connect(thread, SIGNAL( started() ), this, SLOT( run() ));
     connect(this, SIGNAL( finished() ), thread, SLOT( quit() ));
-    // connect(this, SIGNAL( finished() ), this, SLOT( deleteLater() ));
     connect(thread, SIGNAL( finished() ), thread, SLOT( deleteLater() ));
     thread->start();
   }
 }
 
-HIDSerialDevice::~HIDSerialDevice() {
-  if (m_isOpen) {
-    close();
-  }
+HIDSerialDevice::~HIDSerialDevice()
+{
+  close();
 }
 
-bool HIDSerialDevice::availablePorts(QStringList &portlist) {
+bool HIDSerialDevice::availablePorts(QStringList &portlist)
+{
   int dev_cnt;
   struct hid_device_info *devs, *cur_dev;
 
@@ -47,10 +31,7 @@ bool HIDSerialDevice::availablePorts(QStringList &portlist) {
     dev_cnt++;
   }
 
-  fprintf(stderr, "[!] found %i devices:\n", dev_cnt);
-
   for (cur_dev = devs; cur_dev != Q_NULLPTR; cur_dev = cur_dev->next) {
-    fprintf(stderr, "  %s\n", cur_dev->path);
     portlist << QString("HID 0x1a86:0xe008 ").append(cur_dev->path);
   }
 
@@ -59,23 +40,28 @@ bool HIDSerialDevice::availablePorts(QStringList &portlist) {
   return (dev_cnt > 0);
 }
 
-void HIDSerialDevice::close() {
-  if (m_isOpen) {
+void HIDSerialDevice::close()
+{
+  if (m_isOpen)
+  {
     Q_EMIT aboutToClose();
     m_isOpen = false;
 
-    if (m_handle != Q_NULLPTR) {
+    if (m_handle != Q_NULLPTR)
+    {
       hid_close(m_handle);
       m_handle = Q_NULLPTR;
     }
   }
 }
 
-void HIDSerialDevice::run() {
-  if (m_isOpen) {
+void HIDSerialDevice::run()
+{
+  if (m_isOpen)
+  {
     memset(m_buffer, 0, m_buflen);
 
-    unsigned int bps = 19200;
+    unsigned int bps = 19200; // possibly take baud rate from DmmInfo?
     // Send a Feature Report to the device
     m_buffer[0] = 0x0; // report ID
     m_buffer[1] = bps;
@@ -85,38 +71,40 @@ void HIDSerialDevice::run() {
     m_buffer[5] = 0x03; // 3 = enable?
     int res = hid_send_feature_report(m_handle, m_buffer, 6); // 6 bytes
 
-    if (res < 0) {
-      fprintf(stderr, "Unable to send a feature report.\n");
+    if (res < 0)
+    {
+      qCritical() << "Unable to send a feature report.";
       close();
     }
-    else {
+    else
+    {
       memset(m_buffer, 0, m_buflen);
-      QThread::usleep(1000);
+      QThread::usleep(100);
 
-      do {
+      do
+      {
         unsigned char buf[32];
 
         res = 0;
-        while (res == 0) {
-
+        while (res == 0)
+        {
           res = hid_read(m_handle, buf, sizeof(buf));
-          if (res < 0) {
+          if (res < 0)
             close();
-          }
         }
 
-        if (res > 0) {
+        if (res > 0)
+        {
           // format data
           int len = buf[0] & 0x07; // the first byte contains the length in the lower 3 bits ( 111 = 7 )
-          for (int i = 1; i <= len; i++) {
+          for (int i = 1; i <= len; i++)
+          {
             m_buffer[m_buffer_w] = buf[i] & 0x7f; // bitwise and with 0111 1111, mask the upper bit which is always 1
-            // printf("HIDPort::run() got 0x%02x @ %d\n", m_buffer[m_buffer_w], m_buffer_w);
             m_buffer_w = (m_buffer_w + 1) % m_buflen;
           }
 
-          if (len > 0) {
+          if (len > 0)
             Q_EMIT readyRead();
-          }
         }
       }
       while (m_isOpen && res >= 0);
@@ -126,23 +114,24 @@ void HIDSerialDevice::run() {
   Q_EMIT finished();
 }
 
-qint64 HIDSerialDevice::bytesAvailable() {
-  int ret = (m_buffer_w + m_buflen - m_buffer_r) % m_buflen;
-  // printf("HIDPort::bytesAvailable() -> %d\n", ret);
 
-  return ret;
+qint64 HIDSerialDevice::bytesAvailable()
+{
+  return (m_buffer_w + m_buflen - m_buffer_r) % m_buflen;;
 }
 
-qint64 HIDSerialDevice::readData(char *data, qint64 max)
+
+qint64 HIDSerialDevice::readData(char *data, qint64 maxSize)
 {
-  // printf("HIDPort::read(buf, %d)\n", maxSize);
-  if (m_isOpen) {
+  if (m_isOpen)
+  {
     unsigned int len = 0;
 
-    while (max > 0 && bytesAvailable() > 0) {
+    while (maxSize > 0 && bytesAvailable() > 0)
+    {
       data[len] = m_buffer[m_buffer_r];
       len++;
-      max--;
+      maxSize--;
       m_buffer_r = (m_buffer_r + 1) % m_buflen;
     }
 
@@ -154,7 +143,7 @@ qint64 HIDSerialDevice::readData(char *data, qint64 max)
 
 qint64 HIDSerialDevice::writeData(const char *data, qint64 len)
 {
-	return 0;
-
+ // not implemented and possible not neccessary
+ return 0;
 };
 

@@ -9,8 +9,8 @@ bool PortHandler::create(const DmmDecoder::DMMInfo spec, PortType t, QString dev
 
   switch (t)
   {
-    case PortType::Serial: m_port = new SerialDevice(spec, device, this);    break;
-    case PortType::Hid:    m_port = new HIDSerialDevice(spec, device, this); break;
+    case PortType::Serial: m_port = new SerialDevice(spec, device);    break;
+    case PortType::Hid:    m_port = new HIDSerialDevice(spec, device); break;
     //case PortType::Sigrok: m_port = new SigrokDevice(this);       break;
     default: return false;
   }
@@ -46,7 +46,7 @@ int PortHandler::error()
 PortHandler::PortType PortHandler::str2portType(const QString str)
 {
   if (str.toLower() == "serial") return PortType::Serial;
-  if (str.toLower() == "usbhid") return PortType::Hid;
+  if (str.toLower() == "hid") return PortType::Hid;
   if (str.toLower() == "sigrok") return PortType::Sigrok;
   return PortType::None;
 }

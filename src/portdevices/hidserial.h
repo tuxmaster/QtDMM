@@ -21,8 +21,6 @@ public:
   qint64 bytesAvailable();
 
   Q_SIGNALS:
-  void readyRead();
-  void aboutToClose();
   void finished();
 
 public Q_SLOTS:
@@ -37,6 +35,6 @@ protected:
   unsigned int m_buffer_w = 0;
   unsigned char m_buffer[m_buflen];
 
-  qint64 readData(char *data, qint64 max)  override;
+  qint64 readData(char *data, qint64 maxSize)  override;
   qint64 writeData(const char *data, qint64 len) override;
 };
