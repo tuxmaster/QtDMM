@@ -40,26 +40,26 @@ public:
   void			setConsoleLogging(bool);
 
 protected Q_SLOTS:
-  void			runningSLOT(bool);
-  void			connectSLOT(bool);
-  void			on_action_About_triggered();
-  void			on_action_Menu_triggered();
-  void			setConnectSLOT(bool);
-  void			toolbarVisibilitySLOT(bool, bool, bool, bool);
-  void			setToolbarVisibilitySLOT();
-  void			setUseTextLabel(bool on);
+  void      runningSLOT(bool);
+  void      connectSLOT(bool);
+  void      on_action_About_triggered();
+  void      on_action_Menu_triggered();
+  void      setConnectSLOT(bool);
+  void      toolbarVisibilitySLOT(bool, bool, bool, bool);
+  void      setToolbarVisibilitySLOT();
+  void      setUseTextLabel(bool on);
 
 protected:
-  MainWid       *m_wid;
-  DisplayWid	*m_display;
-  bool			m_running;
-  QLabel		*m_error;
-  QLabel		*m_info;
-  QMenu*  m_menu;
+  MainWid    *m_wid;
+  DisplayWid *m_display;
+  bool        m_running;
+  QLabel     *m_error;
+  QLabel     *m_info;
+  QMenu      *m_menu;
 
-  void			setupIcons();
-  void			createToolBars();
-  void			createActions();
-  void			closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
+  void        setupIcons();
+  void        createToolBars();
+  void        createActions();
+  void        closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
 };
 
