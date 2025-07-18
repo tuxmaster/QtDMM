@@ -8,8 +8,6 @@ static const bool registered = []() {
   DmmDecoder::addConfig({"HoldPeak", "HP-90EPC", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"PeakTech", "3330", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Tenma", "72-7745", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"Uni-Trend", "UT30A", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"Uni-Trend", "UT30E", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT60A", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT60E", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Voltcraft", "VC 820", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});

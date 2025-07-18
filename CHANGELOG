@@ -14,7 +14,11 @@
 - Added HoldPeak HP-90EPC (tstenner).
 - Added UniTrend UT61B and UT61D and Metex-3840 (ported from 0.9.2 original branch)
 - Added UniTrend UT61E, UT803, UT71B/C/D/E (redpanther)
+- Added Voltcraft VC960
+- Added basic support for DTM0660 based DMMs
 - Rename UniTrend UT30A/E to UT60A/E, because UT30 has no data port
+- support for USB-HID based interfaces
+- basic support for dufferent interfaces. currently: serial and hid.
 
 * 30/10/2016 0.9.7
 - Added Voltcraft VC870 (Florian Evers)
