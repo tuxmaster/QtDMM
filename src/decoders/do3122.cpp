@@ -72,7 +72,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderDO3122::decode(const QByteArray &d
       if (data[idx] & 0x80u)
         val += '.';
 
-      val += DO3122Digit(data[idx], &convOk);
+      val += digit(data[idx], &convOk);
 
       if (false == convOk)
       {
@@ -147,7 +147,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderDO3122::decode(const QByteArray &d
   return m_result;
 }
 
-const char *DecoderDO3122::DO3122Digit(int byte, bool *convOk)
+const char *DecoderDO3122::digit(int byte, bool *convOk)
 {
   int           digit[10] = { 0x5f, 0x06, 0x6b, 0x2f, 0x36, 0x3d, 0x7d, 0x07, 0x7f, 0x3f };
   const char *c_digit[10] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };

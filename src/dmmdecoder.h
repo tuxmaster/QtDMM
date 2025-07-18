@@ -26,12 +26,12 @@
              10: 23 bytes continuous (VC870)
              11: 22 bytes continuous (DO3122)
              12: 4 bytes half-ASCII (CyrustekES51922)
+             13: 15 binary bytes continuous (DTM0660)
      bits
      stopBits
      number of values (For DMM's that send several lines at once)
      parity (0,1,2 - None,Even,Odd)
-     [don't ask for any logic behind the digits, changing would break configs]
-     display digits (2000, 4000, 6000, 20000, 22000, 40000, 50000, 100000, 200000, 400000, 1000000)
+     display digits (2000, 4000, 6000, 8000, 20000, 22000, 40000, 50000, 100000, 200000, 400000, 1000000)
      External device setup 0, 1
      rts 0, 1
      dtr 0, 1

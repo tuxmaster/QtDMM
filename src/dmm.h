@@ -57,7 +57,7 @@ Q_SIGNALS:
   void    error(const QString &);
 
 protected:
-  void                  initDriver( ReadEvent::DataFormat df);
+  void                  initDecoder( ReadEvent::DataFormat df);
   PortHandler          *m_portHandler;
   int                   m_speed;
   QSerialPort::Parity   m_parity;
@@ -74,20 +74,20 @@ protected:
   bool                  m_rts;
   int                   m_flags;
   int                   m_delayTimer;
-  DmmDecoder            *m_driver;
-  DmmDecoder::DMMInfo    m_dmmInfo;
+  DmmDecoder           *m_decoder;
+  DmmDecoder::DMMInfo   m_dmmInfo;
   PortHandler::PortType m_portType;
 
   void                  timerEvent(QTimerEvent *) Q_DECL_OVERRIDE;
 
-  template<typename DriverType>
-  void createDriver()
+  template<typename DecoderType>
+  void createDecoder()
   {
-    if (auto *p = dynamic_cast<DriverType *>(m_driver); !p)
+    if (auto *p = dynamic_cast<DecoderType *>(m_decoder); !p)
     {
-      delete m_driver;
-      m_driver = new DriverType();
-      m_readerThread->setDriver(m_driver);
+      delete m_decoder;
+      m_decoder = new DecoderType();
+      m_readerThread->setDecoder(m_decoder);
     }
   };
 

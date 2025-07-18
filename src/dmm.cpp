@@ -40,7 +40,7 @@ DMM::DMM(QObject *parent)
     m_externalSetup(false),
     m_dtr(false),
     m_rts(false),
-    m_driver(Q_NULLPTR)
+    m_decoder(Q_NULLPTR)
 {
   m_portHandler  = new PortHandler(this);
   m_readerThread = new ReaderThread(this);
@@ -65,7 +65,7 @@ void DMM::setPortSettings(QSerialPort::DataBits bits, QSerialPort::StopBits stop
 
 void DMM::setFormat(ReadEvent::DataFormat format)
 {
-  initDriver(format);
+  initDecoder(format);
   m_readerThread->setFormat(format);
 }
 
@@ -86,24 +86,25 @@ void DMM::setDevice(const QString &device)
   m_portType = PortHandler::str2portType(deviceList.first());
 }
 
-void DMM::initDriver( ReadEvent::DataFormat df)
+void DMM::initDecoder( ReadEvent::DataFormat df)
 {
   switch (df)
   {
     case ReadEvent::Metex14:
     case ReadEvent::PeakTech10:
     case ReadEvent::Voltcraft14Continuous:
-    case ReadEvent::Voltcraft15Continuous: createDriver<DecoderAscii>();   break;
-    case ReadEvent::M9803RContinuous:      createDriver<DecoderM9803R>();  break;
-    case ReadEvent::VC820Continuous:       createDriver<DecoderVC820>();   break;
-    case ReadEvent::VC870Continuous:       createDriver<DecoderVC870>();   break;
-    case ReadEvent::IsoTech:               createDriver<DecoderIsoTech>(); break;
-    case ReadEvent::VC940Continuous:       createDriver<DecoderVC940>();   break;
-    case ReadEvent::QM1537Continuous:      createDriver<DecoderQM1537>();  break;
-    case ReadEvent::RS22812Continuous:     createDriver<DecoderRS22812>(); break;
-    case ReadEvent::DO3122Continuous:      createDriver<DecoderDO3122>();  break;
-    case ReadEvent::CyrustekES51922:       createDriver<DecoderCyrusTekES51922>(); break;
-    case ReadEvent::CyrustekES51962:       createDriver<DecoderCyrusTekES51962>(); break;
+    case ReadEvent::Voltcraft15Continuous: createDecoder<DecoderAscii>();   break;
+    case ReadEvent::M9803RContinuous:      createDecoder<DecoderM9803R>();  break;
+    case ReadEvent::VC820Continuous:       createDecoder<DecoderVC820>();   break;
+    case ReadEvent::VC870Continuous:       createDecoder<DecoderVC870>();   break;
+    case ReadEvent::IsoTech:               createDecoder<DecoderIsoTech>(); break;
+    case ReadEvent::VC940Continuous:       createDecoder<DecoderVC940>();   break;
+    case ReadEvent::QM1537Continuous:      createDecoder<DecoderQM1537>();  break;
+    case ReadEvent::RS22812Continuous:     createDecoder<DecoderRS22812>(); break;
+    case ReadEvent::DO3122Continuous:      createDecoder<DecoderDO3122>();  break;
+    case ReadEvent::CyrustekES51922:       createDecoder<DecoderCyrusTekES51922>(); break;
+    case ReadEvent::CyrustekES51962:       createDecoder<DecoderCyrusTekES51962>(); break;
+    case ReadEvent::DTM0660:               createDecoder<DecoderDTM0660>(); break;
   }
 }
 
@@ -190,8 +191,8 @@ void DMM::readEventSLOT(const QByteArray &data, int id, ReadEvent::DataFormat df
       fprintf(stdout, "\r\n");
     }
 
-    // call decode of current driver to convert data into distinct values
-    if (auto r = m_driver->decode(data, id, df); r)
+    // call decode of current decoder to convert data into distinct values
+    if (auto r = m_decoder->decode(data, id, df); r)
     {
       Q_EMIT value(r->dval, r->val, r->unit, r->special, r->range, r->hold, r->showBar, r->id);
       if (r->id2 > 0)

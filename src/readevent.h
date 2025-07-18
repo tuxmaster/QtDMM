@@ -45,6 +45,7 @@ public:
     VC870Continuous,
     DO3122Continuous,
     CyrustekES51922,
-    CyrustekES51962
+    CyrustekES51962,
+    DTM0660
   };
 };

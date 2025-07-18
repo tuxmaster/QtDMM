@@ -41,7 +41,7 @@ ReaderThread::ReaderThread(QObject *receiver) :
   m_sendRequest(true),
   m_id(0),
   m_numValues(1),
-  m_driver(Q_NULLPTR)
+  m_decoder(Q_NULLPTR)
 {
   m_port = Q_NULLPTR;
 }
@@ -70,9 +70,9 @@ void ReaderThread::setHandle(QIODevice *handle)
 }
 
 
-void ReaderThread::setDriver(DmmDecoder* driver)
+void ReaderThread::setDecoder(DmmDecoder* decoder)
 {
-  m_driver = driver;
+  m_decoder = decoder;
 }
 
 void ReaderThread::socketClose()
@@ -156,7 +156,7 @@ void ReaderThread::socketNotifierSLOT()
 
 int  ReaderThread::formatLength() const
 {
-  return (m_driver == Q_NULLPTR) ? 0 : m_driver->getPacketLength(m_format );
+  return (m_decoder == Q_NULLPTR) ? 0 : m_decoder->getPacketLength(m_format );
 }
 
 void ReaderThread::readDMM()
@@ -171,7 +171,7 @@ void ReaderThread::readDMM()
 
 bool ReaderThread::checkFormat()
 {
-  return (m_driver != Q_NULLPTR && m_driver->checkFormat(m_fifo,m_length,m_format));
+  return (m_decoder != Q_NULLPTR && m_decoder->checkFormat(m_fifo,m_length,m_format));
 }
 
 void ReaderThread::readMetex14()

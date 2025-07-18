@@ -26,6 +26,10 @@ following DMM's are supported by QtDMM. (some needs user confirmation)
 
     ELV          M9803R
 
+    Generic     DTM0660 4000 count (basic protocol support, probaly needs hw hacks)
+    Generic     DTM0660 6000 count (basic protocol support, probaly needs hw hacks)
+    Generic     DTM0660 8000 count (basic protocol support, probaly needs hw hacks)
+
     HoldPeak     HP-90EPC
 
     Iso-Tech     IDM 73

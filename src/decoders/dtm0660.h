@@ -2,7 +2,7 @@
 
 #include "dmmdecoder.h"
 
-class DecoderDO3122 : public DmmDecoder
+class DecoderDTM0660 : public DmmDecoder
 {
   Q_OBJECT
 public:
@@ -11,5 +11,5 @@ public:
   size_t getPacketLength(ReadEvent::DataFormat df);
 
 private:
-  const char* digit(int byte, bool *convOk);
+  const char* digit(int byte);
 };

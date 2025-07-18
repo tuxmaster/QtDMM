@@ -45,7 +45,7 @@ public:
   void        startRead();
   void        setHandle(QIODevice *handle);
   void        setFormat(ReadEvent::DataFormat);
-  void        setDriver(DmmDecoder* driver);
+  void        setDecoder(DmmDecoder* decoder);
 
   ReadStatus  status() const  { return m_status;  }
   void        setNumValues(int num)  { m_numValues = num; }
@@ -64,7 +64,7 @@ protected:
   bool                  m_sendRequest;
   int                   m_id;
   int                   m_numValues;
-  DmmDecoder*            m_driver;
+  DmmDecoder*           m_decoder;
   void readDMM();
   void readMetex14();
 
