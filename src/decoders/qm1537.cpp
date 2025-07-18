@@ -109,7 +109,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &d
     unit = "F";
     special = "CA";
   }
-/*  else if (pStr[11] & 0x02)
+  else if (pStr[11] & 0x02)
   {
     // Temperatur C
     unit = "C";
@@ -120,7 +120,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &d
     // Temperatur F
     unit = "dF";
     special = "TE";
-  }*/
+  }
   else if (pStr[10] & 0x02)
   {
     /* Duty cycle */
