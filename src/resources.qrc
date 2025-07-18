@@ -101,4 +101,7 @@
         <file alias="u.xpm">../assets/icons/u.xpm</file>
         <file alias="u_small.xpm">../assets/icons/u_small.xpm</file>
     </qresource>
+    <qresource prefix="/Translations">
+        <file alias="de">../build/qtdmm_de.qm</file>
+    </qresource>
 </RCC>

@@ -71,33 +71,19 @@ int main(int argc, char **argv)
   app.setApplicationVersion(APP_VERSION);
   app.setOrganizationName(APP_ORGANIZATION);
 
+  // translation
   QTranslator QtTranslation;
-  QTranslator AppTranslation;
-
-  QString QtTranslationPath  = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
-  QString AppTranslationPath = QStandardPaths::locate(QStandardPaths::AppDataLocation, "translations", QStandardPaths::LocateDirectory);
-
-#ifdef Q_OS_WIN
-  AppTranslationPath = "./";
-#endif
-
-  bool qtLoaded = QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()), QtTranslationPath);
-  bool appLoaded = AppTranslation.load(QString("%1_%2").arg(app.applicationName().toLower()).arg(QLocale::system().name()), AppTranslationPath);
-  if (!qtLoaded)
-    qWarning() << "Could not load Qt translation!";
-  if (!appLoaded)
-  {
-    AppTranslationPath = "./";
-    appLoaded = AppTranslation.load(QString("%1_%2").arg(app.applicationName().toLower()).arg(QLocale::system().name()), AppTranslationPath);
-    if (!appLoaded)
-      qWarning() << "Could not load application translation!";
-  }
-
-  if ((!AppTranslation.isEmpty()) && (!QtTranslation.isEmpty()))
-  {
+  if (QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()), QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
     app.installTranslator(&QtTranslation);
+  else
+    qWarning() << "Could not load Qt translation!";
+
+  QTranslator AppTranslation;
+  if (AppTranslation.load(QString("%1").arg(QLocale::system().name()), ":/Translations")) //
     app.installTranslator(&AppTranslation);
-  }
+  else
+    qWarning() << "Could not load App translation!";
+
   MainWin mainWin;
 
   QCommandLineParser parser;
