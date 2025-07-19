@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(PROJECT_LICENSE "GPL-3.0")
 set(RESOURCES "src/resources.qrc")
-set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
+set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools Network)
 
 
 ## get files
@@ -71,6 +71,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::Widgets
 	Qt6::SerialPort
 	Qt6::PrintSupport
+	Qt6::Network
 	${HIDAPI_LIBRARIES}
 )
 
