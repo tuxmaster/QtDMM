@@ -14,23 +14,9 @@ public:
         setPortName(device);
     };
 
-    bool init()
-    {
-      Parity parity = NoParity;
-      switch (m_dmmInfo.parity)
-      {
-        case 0: parity = NoParity;   break;
-        case 1: parity = EvenParity; break;
-        case 2: parity = OddParity;  break;
-      }
+    static bool availablePorts(QStringList &portlist);
+    bool init();
 
-      return setParity(parity)
-        && setBaudRate(m_dmmInfo.baud)
-        && setStopBits(static_cast<StopBits>(m_dmmInfo.stopBits))
-        && setDataBits(static_cast<DataBits>(m_dmmInfo.bits))
-        && setDataTerminalReady(m_dmmInfo.dtr)
-        && setRequestToSend(m_dmmInfo.rts);
-    }
 protected:
     DmmDecoder::DMMInfo m_dmmInfo;
 };

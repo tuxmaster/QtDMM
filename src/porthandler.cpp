@@ -65,16 +65,7 @@ bool PortHandler::init()
 QStringList PortHandler::availablePorts()
 {
   QStringList portlist;
-  for (auto port : QSerialPortInfo::availablePorts())
-  {
-#ifdef Q_OS_WIN
-    portlist << "SERIAL "+port.portName();
-#else
-    portlist << "SERIAL "+port.systemLocation();
-#endif
-    qDebug() << port.portName() << "--" << port.manufacturer() << "--" << port.description() << "--" << port.systemLocation();
-  }
-
+  SerialDevice::availablePorts(portlist);
   HIDSerialDevice::availablePorts(portlist);
 
   return portlist;

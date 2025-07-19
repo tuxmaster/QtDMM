@@ -49,6 +49,7 @@ bool DecoderAscii::checkFormat(const char* data, size_t len, ReadEvent::DataForm
 {
   switch(df)
   {
+    case ReadEvent::PeakTech10: return (data[(len-11+FIFO_LENGTH)%FIFO_LENGTH] == '#');
     case ReadEvent::Metex14:
     case ReadEvent::Voltcraft14Continuous: return (data[len] == 0x0d);
     case ReadEvent::Voltcraft15Continuous: return (data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
@@ -60,6 +61,7 @@ size_t DecoderAscii::getPacketLength(ReadEvent::DataFormat df)
 {
   switch (df)
   {
+    case ReadEvent::PeakTech10:            return 11;
     case ReadEvent::Metex14:               return 14;
     case ReadEvent::Voltcraft14Continuous: return 14;
     case ReadEvent::Voltcraft15Continuous: return 15;

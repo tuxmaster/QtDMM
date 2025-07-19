@@ -50,7 +50,8 @@ void DmmDecoder::formatResultValue(int commaPos, const QString& prefix, const QS
     { "m",    1e-3 },
     { "µ",    1e-6 },
     { "u",    1e-6 },  // optional: ASCII fallback
-    { "n",    1e-9 }
+    { "n",    1e-9 },
+    { "p",    1e-12 }
   };
 
   m_result.val = insertCommaIT(m_result.val, commaPos);
