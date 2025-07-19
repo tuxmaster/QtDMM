@@ -46,7 +46,6 @@ public:
   void          startRead();
   void          setHandle(QSerialPort *handle);
   void          setFormat(ReadEvent::DataFormat);
-  void          setConsoleLogging(bool on);
 
   ReadStatus    status() const { return m_status; }
   void          setNumValues(int num)  { m_numValues = num; }
@@ -59,12 +58,12 @@ protected:
   ReadStatus            m_status;
   bool                  m_readValue;
   char                  m_fifo[FIFO_LENGTH];
+  char                  m_buffer[FIFO_LENGTH];
   ReadEvent::DataFormat	m_format;
   int                   m_length;
   bool                  m_sendRequest;
   int                   m_id;
   int                   m_numValues;
-  bool                  m_consoleLogging;
 
   void                  readDMM();
   void                  readMetex14();
@@ -89,7 +88,7 @@ protected Q_SLOTS:
   void                   socketClose();
 
 private:
-  QSerialPort	          *m_serialPort;
+  QSerialPort	          *m_port;
 
 private Q_SLOTS:
   void          timer();

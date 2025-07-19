@@ -69,6 +69,7 @@
         <file alias="m_small.xpm">../assets/icons/m_small.xpm</file>
         <file alias="manu.xpm">../assets/icons/manu.xpm</file>
         <file alias="max_str.xpm">../assets/icons/max_str.xpm</file>
+        <file alias="menu.xpm">../assets/icons/menu.xpm</file>
         <file alias="min_str.xpm">../assets/icons/min_str.xpm</file>
         <file alias="minus.xpm">../assets/icons/minus.xpm</file>
         <file alias="minus_small.xpm">../assets/icons/minus_small.xpm</file>

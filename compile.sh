@@ -64,6 +64,6 @@ then
 		${RUN} && qtdmm
 	elif ${RUN}
 	then
-		./qtdmm --console
+		./qtdmm --debug
 	fi
 fi

@@ -627,19 +627,6 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QCheckBox" name="ui_helpToolBar">
-          <property name="whatsThis">
-           <string>Check this if you want text labels in the toolbar.</string>
-          </property>
-          <property name="text">
-           <string>Help toolbar</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="Spacer3_4_2_4">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -760,7 +747,6 @@
   <tabstop>ui_dmmToolBar</tabstop>
   <tabstop>ui_graphToolBar</tabstop>
   <tabstop>ui_fileToolBar</tabstop>
-  <tabstop>ui_helpToolBar</tabstop>
   <tabstop>ui_tipOfTheDay</tabstop>
  </tabstops>
  <includes>
