@@ -34,17 +34,16 @@ public:
   ColorButton(QWidget *parent = Q_NULLPTR);
 
 
-  QColor    color() const;
-  void      setColor(const QColor &);
+  QColor	color() const;
+  void		setColor(const QColor &);
 
 Q_SIGNALS:
-  void      valueChanged();
-  void      valueChanged(const QColor &);
+  void		valueChanged();
+  void		valueChanged(const QColor &);
 
 protected Q_SLOTS:
-  void      clickedSLOT();
+  void		clickedSLOT();
 
 protected:
-  QColor    m_color;
+  QColor	m_color;
 };
-

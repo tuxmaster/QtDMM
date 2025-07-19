@@ -350,12 +350,12 @@ void MainWid::readConfig()
     reopen = true;
   }
 
+  m_dmm->setDmmInfo(m_configDlg->dmmInfo());
   m_dmm->setDevice(m_configDlg->device());
   m_dmm->setSpeed(m_configDlg->speed());
   m_dmm->setFormat(m_configDlg->format());
   m_dmm->setPortSettings(static_cast<QSerialPort::DataBits>(m_configDlg->bits()), static_cast<QSerialPort::StopBits>(m_configDlg->stopBits()),
-                         m_configDlg->parity(), m_configDlg->externalSetup(), m_configDlg->rts(), m_configDlg->dtr()
-                        );
+                         m_configDlg->parity(), m_configDlg->externalSetup(), m_configDlg->rts(), m_configDlg->dtr() );
 
   ui_graph->setGraphSize(m_configDlg->windowSeconds(),
                          m_configDlg->totalSeconds());
@@ -511,13 +511,9 @@ void MainWid::showTipsSLOT()
     m_tipDlg->setShowTipsSLOT(m_configDlg->showTip());
     m_tipDlg->setCurrentTip(m_configDlg->currentTipId());
 
-    connect(m_tipDlg, SIGNAL(showTips(bool)),
-            m_configDlg, SLOT(setShowTipsSLOT(bool)));
-    connect(m_configDlg, SIGNAL(showTips(bool)),
-            m_tipDlg, SLOT(setShowTipsSLOT(bool)));
-    connect(m_tipDlg, SIGNAL(currentTip(int)),
-            m_configDlg, SLOT(setCurrentTipSLOT(int)));
-
+    connect(m_tipDlg, SIGNAL(showTips(bool)), m_configDlg, SLOT(setShowTipsSLOT(bool)));
+    connect(m_configDlg, SIGNAL(showTips(bool)), m_tipDlg, SLOT(setShowTipsSLOT(bool)));
+    connect(m_tipDlg, SIGNAL(currentTip(int)), m_configDlg, SLOT(setCurrentTipSLOT(int)));
   }
 
   m_tipDlg->show();

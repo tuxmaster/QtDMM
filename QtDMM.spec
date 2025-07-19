@@ -15,9 +15,11 @@ BuildRequires:  pkgconfig(Qt6Core)
 BuildRequires:  pkgconfig(Qt6Gui)
 BuildRequires:  pkgconfig(Qt6Widgets)
 BuildRequires:  pkgconfig(Qt6SerialPort)
+BuildRequires:  pkgconfig(hidapi-hidraw)
 
 Requires: pkgconfig(Qt6Core)
 Requires: pkgconfig(Qt6SerialPort)
+Requires: pkgconfig(hidapi-hidraw)
 
 %undefine source_date_epoch_from_changelog
 
@@ -34,9 +36,8 @@ QtDMM is a graphical multimeter reader and logger based on Qt. It supports vario
 %install
 %cmake_install
 desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
-%find_lang %{name} --with-qt
 
-%files -f %{name}.lang
+%files
 %license LICENSE
 %doc AUTHORS README CHANGELOG
 %{_bindir}/qtdmm
@@ -56,11 +57,11 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 - Fix mouse wheel zooming in graph
 - Fix manual serial settings load/restore
 - Export file in ms precision (to support more than 1S/s)
-- Add support for hold and auto/manual range
+- Add support for hold, auto/manual range, continuity test, combined ac+dc, Fahrenheit
 - Added HoldPeak HP-90EPC (tstenner).
 - Added UniTrend UT61B and UT61D and Metex-3840 (ported from 0.9.2 original branch)
-- Added UniTrend UT61E (redpanther)
-- Rename UniTrend UT30 to UT60, because UT30 has no data port
+- Added UniTrend UT61E, UT803, UT71B/C/D/E (redpanther)
+- Rename UniTrend UT30A/E to UT60A/E, because UT30 has no data port
 
 * 30/10/2016 0.9.7
 - Added Voltcraft VC870 (Florian Evers)

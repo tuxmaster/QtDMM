@@ -61,77 +61,74 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="101"/>
+        <location filename="../../src/dmm.cpp" line="121"/>
         <source>Access denied for %1.</source>
         <translation>Zugriff auf %1 verweigert.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="104"/>
+        <location filename="../../src/dmm.cpp" line="124"/>
         <source>No such device %1.</source>
         <translation>%1 existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="107"/>
+        <location filename="../../src/dmm.cpp" line="127"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Fehler beim Öffnen von %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="118"/>
+        <location filename="../../src/dmm.cpp" line="139"/>
         <source>Error configuring serial port %1.</source>
         <translation>Fehler beim Konfigurieren des Anschlusses %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="128"/>
+        <location filename="../../src/dmm.cpp" line="145"/>
         <source>Connecting ...</source>
         <translation>Verbinde ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="143"/>
-        <location filename="../../src/dmm.cpp" line="222"/>
+        <location filename="../../src/dmm.cpp" line="160"/>
+        <location filename="../../src/dmm.cpp" line="214"/>
         <source>Not connected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="218"/>
+        <location filename="../../src/dmm.cpp" line="202"/>
+        <source>%1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="205"/>
+        <source>Error %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="210"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation>Lesefehler auf %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="220"/>
+        <location filename="../../src/dmm.cpp" line="212"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Wartezeit abgelaufr für %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="502"/>
-        <location filename="../../src/dmm.cpp" line="617"/>
-        <location filename="../../src/dmm.cpp" line="677"/>
-        <location filename="../../src/dmm.cpp" line="977"/>
-        <location filename="../../src/dmm.cpp" line="1112"/>
-        <location filename="../../src/dmm.cpp" line="1363"/>
-        <location filename="../../src/dmm.cpp" line="1578"/>
-        <location filename="../../src/dmm.cpp" line="1692"/>
-        <location filename="../../src/dmm.cpp" line="2434"/>
-        <location filename="../../src/dmm.cpp" line="2550"/>
+        <location filename="../../src/dmm.cpp" line="202"/>
         <source>Connected %1</source>
         <translation>Verbunden %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="2439"/>
-        <location filename="../../src/dmm.cpp" line="2553"/>
-        <location filename="../../src/dmm.cpp" line="2556"/>
         <source>Parser errors on %1</source>
-        <translation>Analyse Fehler in %1</translation>
+        <translation type="vanished">Analyse Fehler in %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="2492"/>
         <source>Digit parse fail on %1</source>
-        <translation>Ziffernanalyse fehlgeschlagen in %1</translation>
+        <translation type="vanished">Ziffernanalyse fehlgeschlagen in %1</translation>
     </message>
 </context>
 <context>
@@ -275,37 +272,81 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
 </context>
 <context>
+    <name>DecoderDO3122</name>
+    <message>
+        <location filename="../../src/decoders/do3122.cpp" line="79"/>
+        <source>Digit parse fail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/decoders/do3122.cpp" line="142"/>
+        <location filename="../../src/decoders/do3122.cpp" line="145"/>
+        <source>Parser errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DecoderVC870</name>
+    <message>
+        <location filename="../../src/decoders/vc870.cpp" line="760"/>
+        <source>Parser errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DmmPrefs</name>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="185"/>
+        <location filename="../../src/dmmprefs.cpp" line="45"/>
         <source>Multimeter settings</source>
         <translation>Multimeter Einstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="186"/>
+        <location filename="../../src/dmmprefs.cpp" line="46"/>
         <source>&lt;b&gt;Here you can configure the serial port and protocol for your DMM. There is also a number of predefined models.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Hier können Sie den Anschluss und das Protokoll für Ihr DMM einstellen. Es gibt schon eine Reihe vorkonfigurierter Modelle.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="192"/>
+        <location filename="../../src/dmmprefs.cpp" line="52"/>
         <source>Manual settings</source>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="464"/>
+        <location filename="../../src/dmmprefs.cpp" line="325"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="464"/>
-        <location filename="../../src/dmmprefs.cpp" line="490"/>
-        <source>DMM description (*.ini)</source>
-        <translation>DMM Beschreibung (*.ini)</translation>
+        <location filename="../../src/dmmprefs.cpp" line="325"/>
+        <location filename="../../src/dmmprefs.cpp" line="351"/>
+        <source>DMM description (*.cfg)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="490"/>
+        <source>DMM description (*.ini)</source>
+        <translation type="vanished">DMM Beschreibung (*.ini)</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="351"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
+    </message>
+</context>
+<context>
+    <name>DrvDO3122</name>
+    <message>
+        <source>Digit parse fail on %1</source>
+        <translation type="obsolete">Ziffernanalyse fehlgeschlagen in %1</translation>
+    </message>
+    <message>
+        <source>Parser errors on %1</source>
+        <translation type="obsolete">Analyse Fehler in %1</translation>
+    </message>
+</context>
+<context>
+    <name>DrvIsoTech</name>
+    <message>
+        <source>Connected %1</source>
+        <translation type="obsolete">Verbunden %1</translation>
     </message>
 </context>
 <context>
@@ -569,32 +610,97 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Anschluseinstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="286"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="206"/>
+        <source>600</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="211"/>
+        <source>1200</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="216"/>
+        <source>1800</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="221"/>
+        <source>2400</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="226"/>
+        <source>4800</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="231"/>
+        <source>9600</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="236"/>
+        <source>19200</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="272"/>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="277"/>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="282"/>
+        <source>7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="287"/>
+        <source>8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="295"/>
         <source>Parit&amp;y</source>
         <translation>&amp;Parität</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="302"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="311"/>
         <source>Parity for serial communication. May be None, Odd or Even.</source>
         <translation>Parität für die serielle Übertragung. Diese kann Keine, Gerade oder Ungerade sein.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="306"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="315"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="311"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="320"/>
         <source>Even</source>
         <translation>Gerade</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="316"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="325"/>
         <source>Odd</source>
         <translation>Ungerade</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="377"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="357"/>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="362"/>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="386"/>
         <source>Number of display digits.
 &lt;ul&gt;&lt;li&gt;3 1/2 - 2000 Counts&lt;/li&gt;
 &lt;li&gt;3 3/4 - 4000 Counts&lt;/li&gt;
@@ -609,129 +715,128 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="386"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="395"/>
         <source>2000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="391"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="400"/>
         <source>4000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="396"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="410"/>
         <source>20000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="401"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="425"/>
         <source>50000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="406"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="430"/>
         <source>100000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="411"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="435"/>
         <source>200000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="416"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="440"/>
         <source>400000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="421"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="445"/>
         <source>1000000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="426"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="405"/>
         <source>6000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="431"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="420"/>
         <source>40000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="436"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="415"/>
         <source>22000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="561"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="570"/>
         <source>23 bytes ASCII, continuous (VC870)</source>
         <translation>23 bytes ASCII, kontinuierlich (VC870)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="566"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="575"/>
         <source>22 bytes binary, continuous (DO3122)</source>
         <translation>22 bytes binary, kontinuierlich (DO3122)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="571"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="580"/>
         <source>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</source>
         <translation>14 bytes halb-ASCII, UNI-T UT61E (CyrustekES51922)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="654"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="585"/>
+        <source>11 bytes binary, continuous (CyrustekES51962)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="668"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, das es funkioniert, dann melden Sie es bitte an: &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="679"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="693"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, welches hier nicht aufgeführt ist, aber Sie aber passende Einstellungen gefunden haben, so teilen Sie es bitte &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt; mit. So können zukümpftige Versionen von Ihrer Hilfe profitieren.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="259"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="268"/>
         <source>Number of bits for serial communication.</source>
         <translation>Anzahl der Bits für die Übertragung.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="263"/>
         <source>5 bits</source>
-        <translation>5 Bits</translation>
+        <translation type="vanished">5 Bits</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="268"/>
         <source>6 bits</source>
-        <translation>6 Bits</translation>
+        <translation type="vanished">6 Bits</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="273"/>
         <source>7 bits</source>
-        <translation>7 Bits</translation>
+        <translation type="vanished">7 Bits</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="278"/>
         <source>8 bits</source>
-        <translation>8 Bits</translation>
+        <translation type="vanished">8 Bits</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="243"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="252"/>
         <source>&amp;Bits:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="344"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="353"/>
         <source>Number of stop bits for serial communication.</source>
         <translation>Anzahl der Stoppbits.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="348"/>
         <source>1 Stop bit</source>
-        <translation>1 Stoppbit</translation>
+        <translation type="vanished">1 Stoppbit</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="353"/>
         <source>2 Stop bits</source>
-        <translation>2 Stoppbits</translation>
+        <translation type="vanished">2 Stoppbits</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="128"/>
@@ -739,62 +844,55 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>&amp;Anschluß:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="158"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="167"/>
         <source>Choose the serial device here. &lt;i&gt;(Hint for DOS people: /dev/ttyS0 corresponds to COM1. /dev/ttyS1 to COM2 ...)&lt;/i&gt;</source>
         <translation>Hier bitte den seriellen Anschluß wählen.&lt;i&gt;(Für Unixumsteiger: /dev/ttyS0 entspricht COM1 und so weiter)&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="190"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="199"/>
         <source>Select the baud rate for the DMM here. If you encounter problems connecting to your DMM try lowering the baud rate. I had some problems with my &lt;b&gt;Metex ME-32&lt;/b&gt;. The Documentation said 1200 baud but it only worked at 600.</source>
         <translation>Hier die Baudrate für das DMM auswählen. Wenn Probleme mit der Verbindung zum DMM auftreten, bitte die Baudrate verringern. Es sind Probleme mit dem &lt;b&gt;Metex ME-32&lt;/b&gt; bekannt. Laut Dokumentation soll es mit 1200 Baud laufen, aber tatsächlich geht es nur mit 600 Baud.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="197"/>
         <source>600 baud</source>
-        <translation>600 Baud</translation>
+        <translation type="vanished">600 Baud</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="202"/>
         <source>1200 baud</source>
-        <translation>1200 Baud</translation>
+        <translation type="vanished">1200 Baud</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="207"/>
         <source>1800 baud</source>
-        <translation>1800 Baud</translation>
+        <translation type="vanished">1800 Baud</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="212"/>
         <source>2400 baud</source>
-        <translation>2400 Baud</translation>
+        <translation type="vanished">2400 Baud</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="217"/>
         <source>4800 baud</source>
-        <translation>4800 Baud</translation>
+        <translation type="vanished">4800 Baud</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="222"/>
         <source>9600 baud</source>
-        <translation>9600 Baud</translation>
+        <translation type="vanished">9600 Baud</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="227"/>
         <source>19200 baud</source>
-        <translation>19200 Baud</translation>
+        <translation type="vanished">19200 Baud</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="361"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="370"/>
         <source>&amp;Digits</source>
         <translation>S&amp;tellen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="328"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="337"/>
         <source>&amp;Stop bits:</source>
         <translation>&amp;Stoppbits:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="174"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="183"/>
         <source>Baud &amp;rate:</source>
         <translation>Baud&amp;rate:</translation>
     </message>
@@ -804,83 +902,83 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Externe Steuerung</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="463"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="472"/>
         <source>RTS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="473"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="482"/>
         <source>DTR</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="501"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="510"/>
         <source>Protocol</source>
         <translation>Protokoll</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="507"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="516"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translatorcomment>Hier wird das Kommunikationsprotokoll ausgewählt. Wenn Sie kein &quot;offiziell&quot; unterstützes DMM benutzte, versuchen Sie eines der bereits vorhanden Protokolle. Mit etwas etwas Glück passt eines. Wenn Sie eins finden, teilen Sie es bitte dem Autor mit.</translatorcomment>
         <translation>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="511"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="520"/>
         <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
         <translation>14 Bytes ASCII, auf Abfrage (Metex/Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="516"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="525"/>
         <source>11 bytes ASCII, continuous (PeakTech 451)</source>
         <translation>11 Bytes ASCII, kontinuierlich (PeakTech 451)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="521"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="530"/>
         <source>14 bytes ASCII, continuous (Voltcraft)</source>
         <translation>14 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="526"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="535"/>
         <source>15 bytes ASCII, continuous (Voltcraft)</source>
         <translation>15 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="531"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="540"/>
         <source>11 bytes binary, continuous (M9803R)</source>
         <translation>11 Bytes binär, kontinuierlich (M9803R)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="536"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="545"/>
         <source>14 bytes binary, continuous (VC820)</source>
         <translation>14 Bytes binär, kontinuierlich (VC820)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="541"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="550"/>
         <source>22 bytes ASCII, continuous (IsoTech)</source>
         <translation>22 Bytes ASCII, kontinuierlich (IsoTech)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="546"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="555"/>
         <source>11 bytes binary, continuous (VC940)</source>
         <translation>11 Bytes binär, kontinuierlich (VC940)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="551"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="560"/>
         <source>14 bytes ASCII/binary, continuous (QM1537)</source>
         <translation>14 Bytes ASCII/Binär, kontinuierlich (QM1537)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="556"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="565"/>
         <source>9 bytes binary, continuous (RS 22-812)</source>
         <translation>9 Bytes binär, kontinuierlich (RS 22-812)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="586"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="600"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Anzahl der Werte:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="596"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="610"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Einige Multimeter senden verschiedenen Zeile mit verschiedenen Messwerten. Hier kann die Anzahl der zu ignorieren Zeilen eingetragen werden.( Das bedeutet, QtDMM verarbeitet nur die erste Zeile).</translation>
     </message>
@@ -1469,7 +1567,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="380"/>
+        <location filename="../../src/ui/uimainwin.ui" line="383"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
@@ -1477,6 +1575,13 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <location filename="../../src/ui/uimainwin.ui" line="125"/>
         <source>Display</source>
         <translation>Anzeige</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uimainwin.ui" line="93"/>
+        <location filename="../../src/ui/uimainwin.ui" line="419"/>
+        <location filename="../../src/ui/uimainwin.ui" line="422"/>
+        <source>Menu</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="149"/>
@@ -1489,9 +1594,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder Graphen exportieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hier können die aufgezeichneten Daten als eine Liste durch Tabulatoren getrennt exportiert werden. Jede Zeile enthält die folgenden Werte (getrennt durch einen Tabulator): Datum (tt.mm.jjjj) Zeit (ss:mm:SS) Wert (Fließkomma) Einheit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="155"/>
         <source>Ctrl+E</source>
-        <translation>Strg+E</translation>
+        <translation type="vanished">Strg+E</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="167"/>
@@ -1504,11 +1608,6 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Importiert Daten in den Rekorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hier können zuvor exportierte Daten importiert werden. QtDMM versucht das Format zu lesen und verweigert den Import von ungültigen Dateien.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="173"/>
-        <source>Ctrl+I</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../../src/ui/uimainwin.ui" line="185"/>
         <source>&amp;Print</source>
         <translation>&amp;Drucken</translation>
@@ -1519,9 +1618,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder Graphen drucken&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Es öffnet sich ein Fenster,indem der Titel und ein Kommentar für den Ausdruck festgelegt werden kann. Der Drucker selbst kann hier auch ausgewält werden. Der Ausdruck in eine Datei(PDF) ist ebenfalls möglich.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="191"/>
         <source>Ctrl+P</source>
-        <translation>Strg+D</translation>
+        <translation type="vanished">Strg+D</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="203"/>
@@ -1537,11 +1635,6 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;QtDMM konfigurieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Dies öffnen das Konfugurationsfenster für QtDMM. Hier kann die visuelle Erscheinung, alle Optionen die die Datenaufzeichnung betreffen sowie die Einstellungen für das DMM festgelegt werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="209"/>
-        <source>F2</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../../src/ui/uimainwin.ui" line="221"/>
         <source>&amp;Quit</source>
         <translation>&amp;Beenden</translation>
@@ -1552,9 +1645,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;QtDMM Beenden&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wenn der Datenrekorder ungespeicherte Daten enthällt, haben Sie die Möglichkeit diese vorher zu speichern.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="227"/>
         <source>Ctrl+Q</source>
-        <translation>Strg+B</translation>
+        <translation type="vanished">Strg+B</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="242"/>
@@ -1567,9 +1659,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Verbindung zum DMM herstellen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Die baut die serielle Verbindung zum DMM auf.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="248"/>
         <source>Ctrl+C</source>
-        <translation>Strg+V</translation>
+        <translation type="vanished">Strg+V</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="260"/>
@@ -1582,14 +1673,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Min/Max Werte zurücksetzen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Die Min/Max Werte in der Anzeige werden zurückgesetzt. Diese Option kann jederzeit aktiviert werden. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="266"/>
         <source>Ctrl+R</source>
-        <translation>Strg+Z</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uimainwin.ui" line="280"/>
-        <source>Shift+F2</source>
-        <translation></translation>
+        <translation type="vanished">Strg+Z</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="295"/>
@@ -1602,9 +1687,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder starten&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Startet den Rekorder wenn sich dieser im manuellen Modus befindet. F2 drücken für die Rekordereinstellungen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="301"/>
         <source>Ctrl+S</source>
-        <translation>Strg+S</translation>
+        <translation type="vanished">Strg+S</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="316"/>
@@ -1617,9 +1701,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Hällt den Rekorder an&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Der Rekoder wird angehalten. Dies ist unabhängig von dem gewählten Startmodus. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="322"/>
         <source>Ctrl+X</source>
-        <translation>Strg+A</translation>
+        <translation type="vanished">Strg+A</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="334"/>
@@ -1632,9 +1715,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lösche den Graphen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wenn der Rekorder läuft, wird der Graph gelöscht und es wird weiter aufgezeichnet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="340"/>
         <source>Del</source>
-        <translation>Enf</translation>
+        <translation type="vanished">Enf</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="348"/>
@@ -1642,25 +1724,12 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="354"/>
         <source>Ctrl+F2</source>
-        <translation>Strg+F2</translation>
+        <translation type="vanished">Strg+F2</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="398"/>
+        <location filename="../../src/ui/uimainwin.ui" line="401"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uimainwin.ui" line="404"/>
-        <source>F1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uimainwin.ui" line="93"/>
-        <location filename="../../src/ui/uimainwin.ui" line="416"/>
-        <location filename="../../src/ui/uimainwin.ui" line="419"/>
-        <source>Menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1668,7 +1737,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation type="vanished">Ü&amp;ber die Version</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="401"/>
+        <location filename="../../src/ui/uimainwin.ui" line="404"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Urheber Information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zeigt die Information zum Urheber sowie etwas Werbung zu QtDMM an. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1687,19 +1756,14 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeigt den Tipp des Tages an.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="377"/>
+        <location filename="../../src/ui/uimainwin.ui" line="380"/>
         <source>&amp;Direct Help</source>
         <translation>&amp;Direkte Hilfe</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="383"/>
+        <location filename="../../src/ui/uimainwin.ui" line="386"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direct Help&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enter the direct help mode. You have done this already when reading this text :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direkte Hilfe&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Schalten in den direkten Hilfemodus um. Dies haben Sie bereits duch lesen des Textes getan :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uimainwin.ui" line="386"/>
-        <source>Shift+F1</source>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -1715,72 +1779,72 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>Drucken ...</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="71"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="70"/>
         <source>Printer:</source>
         <translation>Drucker:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="96"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="95"/>
         <source>Please select printer -&gt;</source>
         <translation>Bitte ein Drucker wählen -&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="87"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="86"/>
         <source>This label shows the currently selected printer. Click the button to the right to configure the printer. &lt;i&gt;(You have to select a printer in order to be able to print)&lt;/i&gt;</source>
         <translation>Hier wird der aktuell ausgewählte Drucker angezeigt. Um diesen zu ändern auf die rechte Schaltfläche klicken. &lt;i&gt;(Zum drucken muss ein Drucker ausgewählt werden)&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="115"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="114"/>
         <source>Configure ...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="112"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="111"/>
         <source>Click here to configure the printer.</source>
         <translation>Hier klicken um den Drucker zu konfigurieren.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="151"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="150"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="161"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="160"/>
         <source>Enter a title for the document &lt;i&gt;(Optional)&lt;/i&gt;</source>
         <translation>Hier ein Titel für das Dokument eintragen. &lt;i&gt;(optional)&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="171"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="170"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="181"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="180"/>
         <source>Here you may enter an comment which will be printed on top of the page &lt;i&gt;(Optional)&lt;/i&gt;</source>
         <translation>Hier kann ein Kommentar angegeben werden, der dann am Anfang der Seite ausgegeben wird. &lt;i&gt;(optional)&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="223"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="222"/>
         <source>Direct help (SHIFT+F1)</source>
         <translation>Direkthilfe (Umschalt+F1)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="262"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="261"/>
         <source>&amp;Print</source>
         <translation>&amp;Drucken</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="259"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="258"/>
         <source>Click here to print.</source>
         <translation>Hier klicken um zu drucken.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="275"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="274"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiprintdlg.ui" line="272"/>
+        <location filename="../../src/ui/uiprintdlg.ui" line="271"/>
         <source>Click here to abort printing.</source>
         <translation>Hier klicken um den Druckvorgang abzubrechen.</translation>
     </message>

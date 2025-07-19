@@ -23,6 +23,9 @@
 #pragma once
 
 #include <QtCore>
+// moved from readerthread, so this is accessibly in dmmdriver.
+// should be solved in another way ...
+#define FIFO_LENGTH 100
 
 class ReadEvent
 {
@@ -41,6 +44,8 @@ public:
     RS22812Continuous,
     VC870Continuous,
     DO3122Continuous,
-    CyrustekES51922
+    CyrustekES51922,
+    CyrustekES51962,
+    DTM0660
   };
 };

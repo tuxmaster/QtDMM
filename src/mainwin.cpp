@@ -30,8 +30,6 @@
 #include "displaywid.h"
 
 
-
-
 MainWin::MainWin(QWidget *parent)
   : QMainWindow(parent)
   , m_running(false)
@@ -39,7 +37,6 @@ MainWin::MainWin(QWidget *parent)
 {
   setupUi(this);
   setupIcons();
-
 
   QWidget* spacer = new QWidget();
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -51,7 +48,6 @@ MainWin::MainWin(QWidget *parent)
 
   createActions();
 
-
   m_display = new DisplayWid(this);
   toolBarDisplay->addWidget(m_display);
   m_wid->setDisplay(m_display);
@@ -62,6 +58,7 @@ MainWin::MainWin(QWidget *parent)
 
   connectSLOT(false);
 
+  // status bar
   m_error = new QLabel(statusBar());
   m_error->setFrameStyle(QFrame::Panel | QFrame::Sunken);
   statusBar()->addWidget(m_error, 20);
@@ -76,10 +73,9 @@ MainWin::MainWin(QWidget *parent)
   connect(m_wid, SIGNAL(info(const QString &)), m_info, SLOT(setText(const QString &)));
   connect(m_wid, SIGNAL(useTextLabel(bool)), this, SLOT(setUseTextLabel(bool)));
   connect(m_wid, SIGNAL(setConnect(bool)), this, SLOT(setConnectSLOT(bool)));
-  connect(m_wid, SIGNAL(toolbarVisibility(bool, bool, bool, bool, bool)),
-          this, SLOT(toolbarVisibilitySLOT(bool, bool, bool, bool, bool)));
-
   connect(m_wid, SIGNAL(connectDMM(bool)), action_Connect, SLOT(setChecked(bool)));
+  connect(m_wid, SIGNAL(toolbarVisibility(bool, bool, bool, bool)),
+          this, SLOT(toolbarVisibilitySLOT(bool, bool, bool, bool)));
 
   QRect winRect = m_wid->winRect();
 

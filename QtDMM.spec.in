@@ -15,9 +15,11 @@ BuildRequires:  pkgconfig(Qt6Core)
 BuildRequires:  pkgconfig(Qt6Gui)
 BuildRequires:  pkgconfig(Qt6Widgets)
 BuildRequires:  pkgconfig(Qt6SerialPort)
+BuildRequires:  pkgconfig(hidapi-hidraw)
 
 Requires: pkgconfig(Qt6Core)
 Requires: pkgconfig(Qt6SerialPort)
+Requires: pkgconfig(hidapi-hidraw)
 
 %undefine source_date_epoch_from_changelog
 
@@ -34,9 +36,8 @@ Requires: pkgconfig(Qt6SerialPort)
 %install
 %cmake_install
 desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
-%find_lang %{name} --with-qt
 
-%files -f %{name}.lang
+%files
 %license LICENSE
 %doc AUTHORS README CHANGELOG
 %{_bindir}/qtdmm

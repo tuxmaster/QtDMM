@@ -26,21 +26,7 @@
 
 #include "ui_uidmmprefs.h"
 #include "readevent.h"
-
-struct DMMInfo
-{
-  const char *name;
-  int   baud;
-  int   protocol;
-  int   bits;
-  int   stopBits;
-  int   numValues;
-  int   parity;
-  int   display;
-  bool  externalSetup;
-  bool  rts;
-  bool  dtr;
-};
+#include "dmmdecoder.h"
 
 class DmmPrefs : public PrefWidget, private Ui::UIDmmPrefs
 {
@@ -48,6 +34,8 @@ class DmmPrefs : public PrefWidget, private Ui::UIDmmPrefs
 public:
   DmmPrefs(QWidget *parent = Q_NULLPTR);
   ~DmmPrefs();
+
+  DmmDecoder::DMMInfo dmmInfo() { return m_dmmInfo; };
   QSerialPort::Parity parity() const;
   QSerialPort::DataBits bits() const;
   QSerialPort::StopBits stopBits() const;
@@ -75,6 +63,7 @@ protected Q_SLOTS:
 
 protected:
   QString        m_path;
+  DmmDecoder::DMMInfo m_dmmInfo;
 
 private:
   QStringListModel *m_portlist;

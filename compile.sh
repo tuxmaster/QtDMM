@@ -31,7 +31,7 @@ do
 	[ "$arg" = "help"    ] && usage
 done
 
-cmake -B build 
+cmake -B build
 cmake --build build --parallel $(nproc) || exit 1
 
 cd build

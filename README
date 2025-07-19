@@ -26,6 +26,10 @@ following DMM's are supported by QtDMM. (some needs user confirmation)
 
     ELV          M9803R
 
+    Generic     DTM0660 4000 count (basic protocol support, probaly needs hw hacks)
+    Generic     DTM0660 6000 count (basic protocol support, probaly needs hw hacks)
+    Generic     DTM0660 8000 count (basic protocol support, probaly needs hw hacks)
+
     HoldPeak     HP-90EPC
 
     Iso-Tech     IDM 73
@@ -61,19 +65,25 @@ following DMM's are supported by QtDMM. (some needs user confirmation)
     Radioshack   22-812
     Radioshack   RS22-168A
 
+    Sinometer    MAS-343
+
     TekPower     TP4000ZC
 
     Tenma        72-7745
+    Tenma        72-7732
     Tenma        72-1016
-
-    Sinometer    MAS-343
 
     Uni-Trend    UT60A
     Uni-Trend    UT60E
     Uni-Trend    UT61B
     Uni-Trend    UT61C
     Uni-Trend    UT61D
-    Uni-Trend    UT61E (serial)
+    Uni-Trend    UT61E
+    Uni-Trend    UT71B
+    Uni-Trend    UT71C
+    Uni-Trend    UT71D
+    Uni-Trend    UT71E
+    Uni-Trend    UT803
 
     Vichy        VC99 (hw hack needed)
 
@@ -95,6 +105,7 @@ following DMM's are supported by QtDMM. (some needs user confirmation)
     Voltcraft    VC 870
     Voltcraft    VC 920
     Voltcraft    VC 940
+    Voltcraft    VC 960
 
 
 

@@ -42,6 +42,8 @@
         <file alias="decimal_small.xpm">../assets/icons/decimal_small.xpm</file>
         <file alias="deg.xpm">../assets/icons/deg.xpm</file>
         <file alias="deg_small.xpm">../assets/icons/deg_small.xpm</file>
+        <file alias="degf.xpm">../assets/icons/degf.xpm</file>
+        <file alias="degf_small.xpm">../assets/icons/degf_small.xpm</file>
         <file alias="diode.xpm">../assets/icons/diode.xpm</file>
         <file alias="display.xpm">../assets/icons/display.xpm</file>
         <file alias="dmm.xpm">../assets/icons/dmm.xpm</file>
@@ -98,5 +100,8 @@
         <file alias="twenty_bar.xpm">../assets/icons/twenty_bar.xpm</file>
         <file alias="u.xpm">../assets/icons/u.xpm</file>
         <file alias="u_small.xpm">../assets/icons/u_small.xpm</file>
+    </qresource>
+    <qresource prefix="/Translations">
+        <file alias="de">../build/qtdmm_de.qm</file>
     </qresource>
 </RCC>

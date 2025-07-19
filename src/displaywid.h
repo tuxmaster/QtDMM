@@ -70,6 +70,7 @@ protected:
   QBitmap *m_bigDBM;
   QBitmap *m_bigOhm;
   QBitmap *m_bigDeg;
+  QBitmap *m_bigDegF;
   QBitmap *m_bigPercent;
   QBitmap *m_smallDigit;
   QBitmap *m_smallSpecialChar;
@@ -94,6 +95,7 @@ protected:
   QPixmap *m_smallDBM;
   QPixmap *m_smallOhm;
   QPixmap *m_smallDeg;
+  QPixmap *m_smallDegF;
   QPixmap *m_smallPercent;
   QBitmap *m_minStr;
   QBitmap *m_maxStr;
@@ -133,6 +135,6 @@ protected:
   void     drawBigUnit(QPainter *, const QString &str);
 
 private:
-  int      calcNumDigits(int);
+  unsigned int calcNumDigits(unsigned int);
   QBitmap *BitmapHelper(const QString &file)const;
 };

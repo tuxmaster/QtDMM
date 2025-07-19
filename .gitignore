@@ -3,3 +3,4 @@ assets/translations/qtdmm_de.qm
 tmp/
 build/
 packages/
+CMakeLists.txt.user

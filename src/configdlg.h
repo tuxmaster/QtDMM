@@ -27,6 +27,7 @@
 #include "ui_uiconfigdlg.h"
 #include "dmmgraph.h"
 #include "readevent.h"
+#include "dmmdecoder.h"
 
 class Settings;
 class QPrinter;
@@ -55,10 +56,7 @@ public:
   };
 
   ConfigDlg(QWidget *parent = Q_NULLPTR);
-  Settings             *getSettings()
-  {
-    return m_settings;
-  }
+  Settings             *getSettings() { return m_settings;  }
   QString               device() const;
   int                   speed() const;
   int                   windowSeconds() const;
@@ -84,6 +82,7 @@ public:
   int                   numValues() const;
   bool                  rts() const;
   bool                  dtr() const;
+  DmmDecoder::DMMInfo    dmmInfo() const;
 
   QColor                bgColor() const;
   QColor                gridColor() const;

@@ -57,6 +57,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_bigDBM =  BitmapHelper(":/Symbols/DBM.xpm");
   m_bigOhm =  BitmapHelper(":/Symbols/Ohm.xpm");
   m_bigDeg =  BitmapHelper(":/Symbols/deg.xpm");
+  m_bigDegF =  BitmapHelper(":/Symbols/degf.xpm");
   m_bigPercent =  BitmapHelper(":/Symbols/percent.xpm");
 
   m_smallDigit =  BitmapHelper(":/Symbols/numbers_small.xpm");
@@ -82,6 +83,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_smallDBM =  BitmapHelper(":/Symbols/DBM_small.xpm");
   m_smallOhm =  BitmapHelper(":/Symbols/Ohm_small.xpm");
   m_smallDeg =  BitmapHelper(":/Symbols/deg_small.xpm");
+  m_smallDegF =  BitmapHelper(":/Symbols/degf_small.xpm");
   m_smallPercent =  BitmapHelper(":/Symbols/percent_small.xpm");
 
   m_minStr =  BitmapHelper(":/Symbols/min_str.xpm");
@@ -134,6 +136,7 @@ DisplayWid::~DisplayWid()
   delete m_bigDBM;
   delete m_bigOhm;
   delete m_bigDeg;
+  delete m_bigDegF;
   delete m_bigPercent;
   delete m_smallDigit;
   delete m_smallSpecialChar;
@@ -157,6 +160,7 @@ DisplayWid::~DisplayWid()
   delete m_smallDBM;
   delete m_smallOhm;
   delete m_smallDeg;
+  delete m_smallDegF;
   delete m_smallPercent;
   delete m_minStr;
   delete m_maxStr;
@@ -195,12 +199,12 @@ void DisplayWid::setManu(bool enabled)
 
 void DisplayWid::setDisplayMode(int dm, bool minMax, bool bar, int numValues)
 {
-  m_displayMode = dm;
+  m_range = dm;
   m_showMinMax  = minMax;
   m_showBar     = bar;
   m_numValues   = numValues;
 
-  int numDigits = calcNumDigits(m_displayMode);
+  int numDigits = calcNumDigits(m_range);
   m_minMaxW = m_showMinMax ? (numDigits) * 18 + 30 + 24 : 10;
   int digitsW = (numDigits) * 49 + 30 + 30;
   m_extraH = m_numValues > 1 ? 24 : 0;
@@ -208,54 +212,6 @@ void DisplayWid::setDisplayMode(int dm, bool minMax, bool bar, int numValues)
   m_minW = m_extraW * (m_numValues - 1);
 
   setFixedSize(qMax(m_minW, digitsW + m_minMaxW), 76 + (m_showBar ? 26 : 2) + m_extraH);
-
-  switch (m_displayMode)
-  {
-    case 0:
-      m_range = 2000;
-      break;
-
-    case 1:
-      m_range = 4000;
-      break;
-
-    case 2:
-      m_range = 20000;
-      break;
-
-    case 3:
-      m_range = 50000;
-      break;
-
-    case 4:
-      m_range = 100000;
-      break;
-
-    case 5:
-      m_range = 200000;
-      break;
-
-    case 6:
-      m_range = 400000;
-      break;
-
-    case 7:
-      m_range = 1000000;
-      break;
-
-    case 8:
-      m_range = 6000;
-      break;
-
-    case 9:
-      m_range = 40000;
-      break;
-
-    case 10:
-      m_range = 22000;
-      break;
-  }
-
   update();
 }
 
@@ -307,7 +263,7 @@ void DisplayWid::paintEvent(QPaintEvent *)
   pix.fill(palette().window().color());
   QPainter p;
 
-  int numDigits = calcNumDigits(m_displayMode);
+  int numDigits = calcNumDigits(m_range);
 
   if (!m_value[0].isEmpty())
   {
@@ -349,6 +305,11 @@ void DisplayWid::paintEvent(QPaintEvent *)
       p.drawPixmap(0, -36, *m_ac);
     else if (m_mode[0] == "DC")
       p.drawPixmap(0, -36, *m_dc);
+    else if (m_mode[0] == "ACDC")
+    {
+      p.drawPixmap(0, -36, *m_ac);
+      p.drawPixmap(16, -36, *m_dc);
+    }
 
     p.restore();
 
@@ -365,23 +326,9 @@ void DisplayWid::paintEvent(QPaintEvent *)
       if (percent > 1.0)
         percent = 1.0;
 
-      int divisions = 50;
-      switch (m_displayMode)
-      {
-        case 0:
-        case 2:
-        case 10:
-          divisions = 20;
-          break;
-        case 1:
-        case 3:
-        case 9:
-          divisions = 40;
-          break;
-        case 8:
-          divisions = 60;
-          break;
-      }
+      int divisions = static_cast<double>(m_range) / static_cast<double>(std::pow(10, numDigits-2));
+      if (divisions<20 || divisions>60)
+        divisions=50;
 
       int off = 25;
 
@@ -542,8 +489,10 @@ void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
   // Map of unit suffixes to corresponding big-sized pixmaps
   static const QMap<QString, const QPixmap *> unitMap =
   {
+    //{ "s",    m_bigS },
     { "Ohm",    m_bigOhm },
     { "C",      m_bigDeg },
+    { "dF",     m_bigDegF },
     { "Hz",     m_bigHz },
     { "F",      m_bigF },      // not Fahrenheit
     { "H",      m_bigH },
@@ -588,8 +537,10 @@ void DisplayWid::drawSmallUnit(QPainter *p, const QString &str)
 
   static const QMap<QString, const QPixmap *> unitMap =
   {
+    //{ "s",       m_smallS },
     { "Ohm",     m_smallOhm },
     { "C",       m_smallDeg },
+    { "dF",      m_smallDegF },
     { "Hz",      m_smallHz },
     { "F",       m_smallF },
     { "H",       m_smallH },
@@ -659,30 +610,10 @@ void DisplayWid::drawBigNumber(QPainter *p, const QString &num)
   }
 }
 
-int DisplayWid::calcNumDigits(int dm)
+unsigned int DisplayWid::calcNumDigits(unsigned int dm)
 {
-  int numDigits = 0;
-
-  switch (dm)
-  {
-    case 0:
-    case 1:
-    case 8:
-      numDigits = 4;
-      break;
-    case 2:
-    case 3:
-    case 4:
-    case 9:
-    case 10:
-      numDigits = 5;
-      break;
-    case 5:
-    case 6:
-    case 7:
-      numDigits = 6;
-      break;
-  }
+  unsigned int numDigits = 0;
+  for (unsigned int n = 1; dm >= n; ++numDigits, n *= 10) {}
 
   return numDigits;
 }

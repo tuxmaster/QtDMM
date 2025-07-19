@@ -23,9 +23,9 @@
 #pragma once
 
 #include <QtCore>
+#include <QIODevice>
 #include "readevent.h"
-
-#define FIFO_LENGTH 100
+#include "dmmdecoder.h"
 
 class QSerialPort;
 class ReaderThread : public QObject
@@ -39,58 +39,46 @@ public:
     Error,
     NotConnected
   };
-
   ReaderThread(QObject *receiver);
-  void          run();
-  void          start();
-  void          startRead();
-  void          setHandle(QSerialPort *handle);
-  void          setFormat(ReadEvent::DataFormat);
+  void        run();
+  void        start();
+  void        startRead();
+  void        setHandle(QIODevice *handle);
+  void        setFormat(ReadEvent::DataFormat);
+  void        setDecoder(DmmDecoder* decoder);
 
-  ReadStatus    status() const { return m_status; }
-  void          setNumValues(int num)  { m_numValues = num; }
+  ReadStatus  status() const  { return m_status;  }
+  void        setNumValues(int num)  { m_numValues = num; }
 
 Q_SIGNALS:
-  void          readEvent(const QByteArray &, int id, ReadEvent::DataFormat df);
+  void        readEvent(const QByteArray &, int id, ReadEvent::DataFormat df);
 
 protected:
-  QObject              *m_receiver;
+  QObject*              m_receiver;
   ReadStatus            m_status;
   bool                  m_readValue;
   char                  m_fifo[FIFO_LENGTH];
   char                  m_buffer[FIFO_LENGTH];
-  ReadEvent::DataFormat	m_format;
+  ReadEvent::DataFormat m_format;
   int                   m_length;
   bool                  m_sendRequest;
   int                   m_id;
   int                   m_numValues;
+  DmmDecoder*           m_decoder;
+  void readDMM();
+  void readMetex14();
 
-  void                  readDMM();
-  void                  readMetex14();
-  void                  readVoltcraft14Continuous();
-  void                  readVoltcraft15Continuous();
-  void                  readM9803RContinuous();
-  void                  readPeakTech10();
-  void                  readIsoTech();
-  void                  readQM1537Continuous();
-  void                  readVC820();
-  void                  readVC870();
-  void                  readVC940();
-  void                  readRS22812Continuous();
-  void                  readDO3122Continuous();
-  void                  readCyrustekES51922();
-
-  int                   formatLength() const;
-  bool                  checkFormat();
+  int  formatLength() const;
+  bool checkFormat();
 
 protected Q_SLOTS:
-  void                   socketNotifierSLOT();
-  void                   socketClose();
+  void socketNotifierSLOT();
+  void socketClose();
 
 private:
-  QSerialPort	          *m_port;
+  QIODevice *m_port;
 
 private Q_SLOTS:
-  void          timer();
+  void timer();
 };
 
