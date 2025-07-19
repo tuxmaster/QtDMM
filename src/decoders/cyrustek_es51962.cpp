@@ -2,7 +2,7 @@
 
 // possibly same proto as iso-tech.
 static const bool registered = []() {
-  DmmDecoder::addConfig(  {"Uni-Trend","UT803","", 19200, 13, 7, 1, 1, 2, 6000, 0, 0,1});
+  DmmDecoder::addConfig({"Uni-Trend","UT803","", 19200, 13, 7, 1, 1, 2, 6000, 0, 0,1});
   return true;
 }();
 

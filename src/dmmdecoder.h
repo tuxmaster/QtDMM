@@ -15,18 +15,19 @@
      baud (600, 1200, 1800, 2400, 4800, 9600, 19200)
      protocol 0: 14 bytes polling 'D'
               1: 11 bytes continuous [PeakTech]
-              2: 14 continuous
-              3: 15 continuous
-              4: 11 bin continuous (M9803R)
-              5: 14 bin continuous (VC820)
+              2: 14 bytes continuous
+              3: 15 bytes continuous
+              4: 11 bytes continuous (M9803R)
+              5: 14 bytes continuous (VC820)
               6: IsoTech
               7: VC940
               8: QM1537
-              9: 9 binary bytes continuous (22-812)
+              9: 9 bytes continuous (22-812)
              10: 23 bytes continuous (VC870)
              11: 22 bytes continuous (DO3122)
              12: 4 bytes half-ASCII (CyrustekES51922)
-             13: 15 binary bytes continuous (DTM0660)
+             13: 11 bytes continuous (CyrustekES51962)
+             14: 15 bytes continuous (DTM0660)
      bits
      stopBits
      number of values (For DMM's that send several lines at once)
