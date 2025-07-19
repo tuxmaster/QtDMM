@@ -13,7 +13,7 @@ bool SerialDevice::availablePorts(QStringList &portlist)
     portName = port.systemLocation();
 #endif
     // some quick'n'dirty hack to get rid of all those useless ports
-    // discard all all tty and all ttyS above 9 . they don't exist anyway
+    // discard all ttyS above 9. they don't exist anyway
     if (portName.startsWith("/dev/ttyS") && portName.sliced(9).toInt()>9)
       continue;
 
