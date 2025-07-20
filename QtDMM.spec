@@ -46,7 +46,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 
 %changelog
 
-* xx/xx/20xx 1.0.0
+* xx/xx/2025 1.0.0
 - Switch Qt6 (redpanther)
 - Switch to cmake build system
 - Use C++17
@@ -62,10 +62,12 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 - Added UniTrend UT61B and UT61D and Metex-3840 (ported from 0.9.2 original branch)
 - Added UniTrend UT61E, UT803, UT71B/C/D/E (redpanther)
 - Added Voltcraft VC960
+- Added PeakTech 3315
 - Added basic support for DTM0660 based DMMs
 - Rename UniTrend UT30A/E to UT60A/E, because UT30 has no data port
+- basic support for different interfaces. currently: serial, hid and rfc2217.
 - support for USB-HID based interfaces
-- basic support for dufferent interfaces. currently: serial and hid.
+- support for RFC2217 remote serial port
 
 * 30/10/2016 0.9.7
 - Added Voltcraft VC870 (Florian Evers)
