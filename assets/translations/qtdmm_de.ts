@@ -61,64 +61,64 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="121"/>
+        <location filename="../../src/dmm.cpp" line="122"/>
         <source>Access denied for %1.</source>
         <translation>Zugriff auf %1 verweigert.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="124"/>
+        <location filename="../../src/dmm.cpp" line="125"/>
         <source>No such device %1.</source>
         <translation>%1 existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="127"/>
+        <location filename="../../src/dmm.cpp" line="128"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Fehler beim Öffnen von %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="139"/>
+        <location filename="../../src/dmm.cpp" line="140"/>
         <source>Error configuring serial port %1.</source>
         <translation>Fehler beim Konfigurieren des Anschlusses %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="145"/>
+        <location filename="../../src/dmm.cpp" line="146"/>
         <source>Connecting ...</source>
         <translation>Verbinde ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="160"/>
-        <location filename="../../src/dmm.cpp" line="214"/>
+        <location filename="../../src/dmm.cpp" line="161"/>
+        <location filename="../../src/dmm.cpp" line="215"/>
         <source>Not connected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="202"/>
+        <location filename="../../src/dmm.cpp" line="203"/>
         <source>%1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="205"/>
+        <location filename="../../src/dmm.cpp" line="206"/>
         <source>Error %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="210"/>
+        <location filename="../../src/dmm.cpp" line="211"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation>Lesefehler auf %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="212"/>
+        <location filename="../../src/dmm.cpp" line="213"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Wartezeit abgelaufr für %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="202"/>
+        <location filename="../../src/dmm.cpp" line="203"/>
         <source>Connected %1</source>
         <translation>Verbunden %1</translation>
     </message>
@@ -311,13 +311,13 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="325"/>
+        <location filename="../../src/dmmprefs.cpp" line="336"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="325"/>
-        <location filename="../../src/dmmprefs.cpp" line="351"/>
+        <location filename="../../src/dmmprefs.cpp" line="336"/>
+        <location filename="../../src/dmmprefs.cpp" line="362"/>
         <source>DMM description (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -326,7 +326,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">DMM Beschreibung (*.ini)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="351"/>
+        <location filename="../../src/dmmprefs.cpp" line="362"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>

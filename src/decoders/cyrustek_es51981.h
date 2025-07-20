@@ -2,7 +2,7 @@
 
 #include "dmmdecoder.h"
 
-class DecoderPeakTech3315 : public DmmDecoder
+class DecoderCyrusTekES51981 : public DmmDecoder
 {
   Q_OBJECT
 public:

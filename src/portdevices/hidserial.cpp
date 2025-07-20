@@ -21,20 +21,33 @@ HIDSerialDevice::~HIDSerialDevice()
   close();
 }
 
+
 bool HIDSerialDevice::availablePorts(QStringList &portlist)
+{
+  qint64 portlist_len = portlist.size();
+  HIDSerialDevice::availablePorts(portlist,0x04fa, 0x2490);
+  HIDSerialDevice::availablePorts(portlist,0x1a86, 0xe008);
+
+  return portlist.size() > portlist_len;
+}
+
+bool HIDSerialDevice::availablePorts(QStringList &portlist,unsigned short vendor_id, unsigned short product_id)
 {
   int dev_cnt;
   struct hid_device_info *devs, *cur_dev;
 
-  devs = hid_enumerate(0x1a86, 0xe008); // all chips this SW belongs to...
+
+  devs = hid_enumerate(vendor_id, product_id); // all chips this SW belongs to...
   for (dev_cnt = 0, cur_dev = devs; cur_dev != Q_NULLPTR; cur_dev = cur_dev->next) {
     dev_cnt++;
   }
 
   for (cur_dev = devs; cur_dev != Q_NULLPTR; cur_dev = cur_dev->next) {
-    portlist << QString("HID 0x1a86:0xe008 ").append(cur_dev->path);
+    portlist << QString("HID 0x%1:0x%2 %3")
+    .arg(vendor_id, 4, 16, QLatin1Char('0'))
+    .arg(product_id, 4, 16, QLatin1Char('0'))
+    .arg(QString::fromLatin1(cur_dev->path));
   }
-
   hid_free_enumeration(devs);
 
   return (dev_cnt > 0);

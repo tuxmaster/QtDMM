@@ -105,6 +105,7 @@ void DMM::initDecoder( ReadEvent::DataFormat df)
     case ReadEvent::CyrustekES51922:       createDecoder<DecoderCyrusTekES51922>(); break;
     case ReadEvent::CyrustekES51962:       createDecoder<DecoderCyrusTekES51962>(); break;
     case ReadEvent::DTM0660:               createDecoder<DecoderDTM0660>(); break;
+    case ReadEvent::CyrustekES51981:       createDecoder<DecoderCyrusTekES51981>(); break;
   }
 }
 
