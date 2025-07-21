@@ -60,7 +60,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 - Add support for hold, auto/manual range, continuity test, combined ac+dc, Fahrenheit
 - Added HoldPeak HP-90EPC (tstenner).
 - Added UniTrend UT61B and UT61D and Metex-3840 (ported from 0.9.2 original branch)
-- Added UniTrend UT61E, UT803, UT71B/C/D/E (redpanther)
+- Added UniTrend UT61E, UT803, UT804, UT70B, UT71B/C/D/E (redpanther)
 - Added Voltcraft VC960
 - Added PeakTech 3315
 - Added basic support for DTM0660 based DMMs
