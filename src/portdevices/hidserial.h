@@ -27,6 +27,7 @@ public Q_SLOTS:
   void run();
 
 protected:
+  static bool availablePorts(QStringList &portlist,unsigned short vendor_id, unsigned short product_id);
   DmmDecoder::DMMInfo m_dmmInfo;
   static const unsigned int m_buflen = 1024;
   volatile bool m_isOpen = false;

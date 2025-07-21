@@ -28,6 +28,7 @@
              12: 4 bytes half-ASCII (CyrustekES51922)
              13: 11 bytes continuous (CyrustekES51962)
              14: 15 bytes continuous (DTM0660)
+             15: 11 bytes continuous (CyrustekES51981)
      bits
      stopBits
      number of values (For DMM's that send several lines at once)

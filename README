@@ -1,19 +1,24 @@
-QtDMM 1.0.0 (c) 2001-2016 M.Toussaint
+# QtDMM
 
 QtDMM is a simple DMM readout software including a configurable transient 
-recorder. A friend of mine asked me  for a DMM readout software for Linux 
-because he didn't want to use  the MS-Windows version which came with the 
-multimeter. To help  him out I wrote this little piece of software.
+recorder.
 The transient recorder features manual start, scheduled start (at a given 
 time) and  triggered automatic  start when given  thresholds are reached.
 
-If you call QtDMM  with the commandline option --console it  will display
-some debug output. This might (or hight not :) help resolve problems.
+If you call QtDMM  with the commandline option --debug it  will display
+some debug output. This might (or might not) help resolve problems.
 
 It was written  for Metex (and compatible like VOLTCRAFT)  multimeter.
-following DMM's are supported by QtDMM. (some needs user confirmation)
+
+## Supported hardware
+
+Following DMM's are supported by QtDMM. We currently don't know the state
+of all DMMs. They worked at one time, but they could have issues today.
+A list of driver state is planed, stay tuned. If you can confirm a DMM is
+working, let us know.
 
 
+    **Vendor**       **Model**
     Digitek      DT4000Zc
     Digitek      DT-9062
     Digitek      INO2513
@@ -54,6 +59,7 @@ following DMM's are supported by QtDMM. (some needs user confirmation)
     Metex        Universal system 9160
 
     PeakTech     451
+    PeakTech     3315
     PeakTech     3330
     PeakTech     3430
     PeakTech     4010
@@ -79,11 +85,13 @@ following DMM's are supported by QtDMM. (some needs user confirmation)
     Uni-Trend    UT61C
     Uni-Trend    UT61D
     Uni-Trend    UT61E
+    Uni-Trend    UT70B
     Uni-Trend    UT71B
     Uni-Trend    UT71C
     Uni-Trend    UT71D
     Uni-Trend    UT71E
     Uni-Trend    UT803
+    Uni-Trend    UT804
 
     Vichy        VC99 (hw hack needed)
 
@@ -111,17 +119,26 @@ following DMM's are supported by QtDMM. (some needs user confirmation)
 
 If you manage to  get QtDMM working  with a  digital multimeter different 
 from the mentioned  above, or if you can confirm  one of the  unconfirmed
-models please give a note. For a new multimeter the best would be sending
-me a saved configuration file.
+models please give a note.
 
-QtDMM 1.0.0 is distributed under the GNU Public License, version 3.
-(QtDMM versions prior to 0.9.0 are licensed under GNU GPL 2.0)
- 
--- 27/04/2014
-   Matthias Toussaint
-   <qtdmm@mtoussaint.de>
+## Notes
+to use RFC2217 remote serial you have to edit the config file.
+- open ~/.config/QtDMM/QtDMM.config
+- in section [Port%20settings] add new entry static_device0=RFC2217 127.0.0.1:4000 edit ip and port accordingly.
+- up to 10 devices (0-9) are supported in config. Later this will be available via config dialog
+- on remote host with DMM connected start the rfc2217_server.py. Currently only serial is supported (no HID-Serial)
+- start server with: rfc2217_server.py -p <port> <device> e.g.: rfc2217_server.py -p 4000 /dev/ttyUSB0
 
-Plans(Help/Pull requests welcome):
 
-	1.0.0 Switch to the Qt chart module for the graph. (QChart branch)
-	2.0.0 Spit to measuring/recording process to an seperate backgound daemon.
+
+## Licensing
+**0.9.5 until today tuxmaster and various contributors, see AUTHORS file**
+**0.9.3 and before (c) 2001-2016 M.Toussaint <qtdmm@mtoussaint.de>**
+
+QtDMM 0.9.0 and beyond is distributed under the GNU Public License, version 3.
+(Prior to 0.9.0 are licensed under GNU GPL 2.0)
+
+
+## Future plans:
+- Switch to the Qt chart module for the graph. (QChart branch)
+- Split to measuring/recording process to an seperate backgound daemon.
