@@ -91,6 +91,7 @@ std::unique_ptr<DmmDecoder> DmmDecoder::makeDecoder( ReadEvent::DataFormat df)
     case ReadEvent::DO3122Continuous:       return std::make_unique<DecoderDO3122>();
     case ReadEvent::CyrustekES51922:        return std::make_unique<DecoderCyrusTekES51922>();
     case ReadEvent::CyrustekES51962:        return std::make_unique<DecoderCyrusTekES51962>();
+    case ReadEvent::CyrustekES51981:        return std::make_unique<DecoderCyrusTekES51981>();
     case ReadEvent::DTM0660:                return std::make_unique<DecoderDTM0660>();
 
     default: return Q_NULLPTR;

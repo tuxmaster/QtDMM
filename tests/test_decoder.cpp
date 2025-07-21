@@ -25,7 +25,8 @@
         { "DO3122Continuous",      ReadEvent::DO3122Continuous },
         { "CyrustekES51922",       ReadEvent::CyrustekES51922 },
         { "CyrustekES51962",       ReadEvent::CyrustekES51962 },
-        { "DTM0660",               ReadEvent::DTM0660 }
+        { "DTM0660",               ReadEvent::DTM0660 },
+        { "CyrustekES51981",       ReadEvent::CyrustekES51981 }
     };
 
 QByteArray parseHexStringToByteArray(const QString& hexString)

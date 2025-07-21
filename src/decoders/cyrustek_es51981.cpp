@@ -25,7 +25,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51981::decode(const QByt
   m_result = {};
   m_result.id     = id;
   m_result.hold   = false;
-  m_result.range  = "";
+  m_result.range  = bit(data,8,1) ? "AUTO" : "MANU";
   m_result.showBar = true;
 
   QString val;
@@ -35,14 +35,13 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51981::decode(const QByt
 
   // Digit values
   if (data[6] & 4) // Sign
-    val = " -";
-  else
-    val = "  ";
+    val = "-";
 
   val += data[1];
   val += data[2];
   val += data[3];
   val += data[4];
+
   if (!memcmp(data + 1, "4000", 4) ||
       (data[6] & 1) != 0)
     val = "  0L";
@@ -211,8 +210,6 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51981::decode(const QByt
           break;
       }
       break;
-
-
   }
 
   if (data[8] & 4)
