@@ -1,0 +1,113 @@
+UT803: Tischmultimeter der chinesischen Firma UNI-Trend
+
+Counts: 6000 (4-stellig)
+DCB: 19200 Baud,7,1,Odd,DTR+,RTS-
+Paket: Länge 11, TotalTimeOut: 1000?, Markierung: "\r\n", eindeutig
+ähnlich UT71BCE, fast gleich UT70B
+
+Offenbar unidirektional (nur Messwertausgabe)
+
+Das USB-Interface ist ebenfalls mit dem USB-HID-Seriell-Umsetzer
+Hoitek HE2325U gemacht (der unter Windows kein COMx erzeugt!)
+
+Alle Telegramme werden 2x hintereinander gesendet! (Unterschied zum UT71BCE!)
+
+			 0  1  2  3  4  5  6  7  8  9 10
+### Schalterstellung V
+DC  0.000 V AUTO 6V	30 30 30 30 30 3B 38 30 3A 0D 0A
+DC -0.000 V MAN 6V	30 30 30 30 30 3B 3C 30 38 0D 0A
+DC  -0.00 V MAN 60V	31 30 30 30 30 3B 3C 30 38 0D 0A
+DC    0.0 V MAN 600V	32 30 30 30 30 3B 38 30 38 0D 0A
+DC     -0 V MAN 1000V	33 30 30 30 30 3B 3C 30 38 0D 0A
+## Unterfunktion AC
+AC  0.014 V AUTO 6V	30 30 30 31 34 3B 38 30 36 0D 0A
+A+D 0.012 V AUTO 6V	30 30 30 31 32 3B 38 30 36 0D 0A
+...
+A+D    11 V MAN 1000V	33 30 30 31 31 3B 38 30 34 0D 0A
+### Schalterstellung Ohm
+     0.L MOhm AUTO 60M	35 36 30 30 30 33 39 30 32 0D 0A
+     0.L MOhm MAN 60M	35 36 30 30 30 33 39 30 30 0D 0A
+...
+     0L. Ohm MAN 600	30 36 30 30 30 33 39 30 30 0D 0A
+## Unterfunktion Pieps
+     0L Ohm FIX 600	30 36 30 30 30 35 39 30 30 0D 0A	// Sehr schnelle Datenübertragung!
+## Unterfunktion Diode
+    .0L V FIX 6V	30 32 36 34 37 31 39 30 30 0D 0A	// Schnelle Datenübertragung!
+### Schalterstellung Kondensator
+    0.051 nF AUTO 6nF	30 30 30 35 31 36 38 30 32 0D 0A
+    0.051 nF MAN 6nF	30 30 30 35 31 36 38 30 30 0D 0A
+...
+    0.000 mF MAN 6mF	36 30 30 30 30 36 38 30 30 0D 0A	// Langsame Datenübertragung!
+### Schalterstellung Hz
+        0 Hz AUTO 6kHz	30 30 30 30 30 32 38 30 32 0D 0A
+        0 Hz MAN 6kHz	30 30 30 30 30 32 38 30 30 0D 0A
+...
+     0.00 MHz MAN 60M	34 30 30 30 30 32 38 30 30 0D 0A
+## Unterfunktion °F
+     76 °F FIX 1800	30 30 30 37 36 34 30 30 30 0D 0A
+### Schalterstellung °C
+     22 °C FIX 1000	30 30 30 32 32 34 38 30 30 0D 0A
+### Schalterstellung hFE (Beta, Stromverstärkung)
+      0			30 30 30 30 30 3E 38 30 30 0D 0A
+### Schalterstellung µA
+DC  000.0 µA AUTO 600µ	30 30 30 30 30 3D 38 30 3A 0D 0A
+DC -000.0 µA MAN 600µ	30 30 30 30 30 3D 3C 30 38 0D 0A
+DC -0000. µA MAN 6000µ	31 30 30 30 30 3D 3C 30 38 0D 0A
+## Unterfunktion ~
+...
+AC  0037 µA MAN 6000µ	31 30 30 33 37 3D 38 30 34 0D 0A
+A+D 00210 µA MAN 6000µ	31 30 30 32 31 3D 38 30 34 0D 0A	// A+D wird nicht übertragen
+### Schalterstellung mA
+DC - 0.00 mA AUTO 60mA	30 30 30 30 30 3F 3C 30 3A 0D 0A
+...
+## Unterfunktion ~
+...
+A+D   3.2 mA MAN 600m	31 30 30 33 32 3F 38 30 34 0D 0A
+### Schalterstellung A
+DC - 0.00 A FIX 10A	30 30 30 30 30 39 3C 30 38 0D 0A
+## Unterfunktion ~
+A+D  0.23 A FIX 10A	30 30 30 32 33 39 38 30 34 0D 0A	// obwohl nichts angeschlossen: störempfindlich!!
+
+
+Byte					6	5	4	3	2	1	0
+[0]	Bereich		0	1	1	0	====siehe unten===
+[1]	1. Ziffer	0	1	1	===========Ziffer=========
+[2]	2. Ziffer	0	1	1	===========Ziffer=========
+[3]	3. Ziffer	0	1	1	===========Ziffer=========
+[4]	4. Ziffer	0	1	1	===========Ziffer=========
+[5]	Schalterst.	0	1	1	========siehe unten=======
+[6]	Info		  0	1	1	°C	NEG	LoBat	OVL	// °C-Bit ist immer gesetzt außer bei °F
+[7]	Info2		  0	1	1	HOLD	MAX	MIN	0	// Rel vermutlich geplant, aber keine Taste vorhanden
+[8]	Kopplung	0	1	1	DC	AC	AUTO	0	// DC und AC zwar kombiniert am Gerät, jedoch keine Übertragung!
+[9]	'\r'		  0	0	0	1	1	0	1
+[10]	'\n'		0	0	0	1	0	1	0
+
+LONIBBLE(Byte[5]):     B       3       6     2      D      F     9    4    4    E
+Bereich (Byte[0]):     V     Ohm       F     Hz     µA     mA     A   °C   °F  hFE
+  '0'              6.000   600.0  6.000n  6000   600.0µ 60.00m 10.00 1000 1800 6000
+  '1'              60.00   6.000k 60.00n 60.00k   6000µ 600.0m     -    -    -    -
+  '2'              600.0   60.00k 600.0n 600.0k       -      -     -    -    -    -
+  '3'              1000    600.0k 6.000µ 6.000M       -      -     -    -    -    -
+  '4'              600.0m  6.000M 60.00µ 60.00M       -      -     -    -    -    -
+  '5'                  -   60.00M 600.0µ      -       -      -     -    -    -    -
+  '6'                  -        - 6.000m      -       -      -     -    -    -    -
+  '7'                  -        -      -      -       -      -     -    -    -    -
+
+Schalterstellung (Byte[5]) und etwaige Abtastrate:
+	'1'	Diode	10 Sa/s
+	'2'	Hz	2 Sa/s
+	'3'	Ohm	2 Sa/s
+	'4'	°F/°C	2 Sa/s
+	'5'	Pieps	10 Sa/s
+	'6'	F	im Bereich 6 mF sehr niedrige Rate, etwa 0,2 Sa/s {5 s/Sa}
+	'9'	A	3 Sa/s
+	';'(3B)	V	2 Sa/s
+	'='(3D)	µA	3 Sa/s
+	'>'(3E)	hFE	2 Sa/s
+	'?'(3F)	mA	3 Sa/s
+
+Fazit:
+Verwandt mit UT70B-System, nur Endwerte 6000 und einige andere Messbereiche.
+Die UT70B.exe läuft (nur) nicht wegen falscher Baudrate.
+
+Tenma 72-1016

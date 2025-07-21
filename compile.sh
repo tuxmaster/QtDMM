@@ -20,18 +20,20 @@ EOF
 RUN=false
 INSTALL=false
 PACK=false
+CTEST=false
 
 for arg in $*
 do
 	arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
 	[ "$arg" = "clean"   ] && rm -rf build
+	[ "$arg" = "ctest"    ] && CTEST=true
 	[ "$arg" = "install" ] && INSTALL=true
 	[ "$arg" = "run"     ] && RUN=true
 	[ "$arg" = "pack"    ] && PACK=true
 	[ "$arg" = "help"    ] && usage
 done
 
-cmake -B build
+cmake $(${CTEST} && echo "-DBUILD_TESTING=ON" ) -B build
 cmake --build build --parallel $(nproc) || exit 1
 
 cd build
@@ -51,6 +53,8 @@ then
 	fi
 	rm -rf ../packages/_CPack_Packages
 fi
+
+${CTEST} && ctest --test-dir . --output-on-failure
 
 if [ -x qtdmm ]
 then

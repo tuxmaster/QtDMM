@@ -1,0 +1,27 @@
+{
+  "decoder": "CyrustekES51962",
+  "tests": [
+    {
+      "hex": "30 30 30 30 30 3B 38 30 3A 0D 0A",
+      "expected": {
+        "val": "0.000",
+        "unit": "V",
+        "range": "AUTO",
+        "special": "DC",
+        "hold": false,
+        "showBar": true
+      }
+    },
+    {
+      "hex": "30 30 30 30 30 3B 3C 30 38 0D 0A",
+      "expected": {
+        "val": "-0.000",
+        "unit": "V",
+        "range": "MANU",
+        "special": "DC",
+        "hold": false,
+        "showBar": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+UT81B: Handmultimeter der chinesischen Firma UNI-Trend mit Oszilloskopanzeige
+
+* Nur USB-Adapter (mit Hoitek HE2325U) verfügbar
+* Bidirektional (Software löst Telegramm aus)
+* 9600 Baud,8,1,none,DTR+,RTS-
+* Paket: Länge 41 oder 361, TotalTimeOut: 5000, Markierung: durch Sendezeichen
+  Bei Übersteuerung ist die Länge um ein paar Bytes größer (nicht näher untersucht)
+* Fernsteuermöglichkeiten bleiben mangels Software-Funktionalität unerforscht
+
+Sendezeichen 5A 00
+
+Empfangstelegramm:      ## ## SA SB ## ?? SW RUN      AC YB OY XB    ## MX ?? RB ?? RE Linkes Readout (Spannung)  ## Rechtes Readout (Freq.) ##
+dezimaler Byte-Index:	 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40
+			 Z              Y                                                  0  2  .  8  0     V              -  -  -  -           5
+DC 2V/div 20 ms		5A 00 03 05 05 59 80 01 00 01 00 06 00 16 00 00 00 00 05 00 00 20 30 32 2E 38 30 20 56 20 00 20 20 2D 2D 2D 2D 20 20 00 35
+  320 vzb. 8-bit-Abtastwerte, 0-zentriert
+18 16 18 16 17 16 17 16 17 16 18 16 17 16 18 16
+17 16 17 16 17 16 17 16 18 16 17 16 17 16 17 16
+17 16 18 16 18 16 17 16 17 16 17 16 17 16 17 16 
+18 16 18 16 17 16 17 16 17 16 17 16 17 16 17 16 
+18 16 18 16 17 16 18 16 17 16 17 16 17 16 17 16 
+17 16 17 16 17 16 18 16 17 16 18 16 17 16 18 16 
+17 16 17 16 17 16 17 16 18 16 17 16 17 16 17 16 
+18 16 17 16 17 16 17 16 17 16 18 16 17 16 17 16 
+17 16 17 16 17 16 17 16 17 16 17 16 17 16 18 16 
+17 16 17 16 18 16 18 16 17 16 17 16 17 16 17 16 
+17 16 18 16 17 16 17 16 17 16 17 16 17 16 18 16 
+17 16 17 16 18 16 18 16 17 16 17 16 18 16 17 16 
+17 16 17 16 18 16 18 16 17 16 17 16 17 16 17 16 
+18 16 17 16 17 16 17 16 17 16 17 16 17 16 17 16 
+17 16 17 16 17 16 17 16 17 16 17 16 18 16 17 16 
+17 16 18 16 17 16 17 16 17 16 18 16 17 16 17 16 
+17 16 17 16 17 16 17 16 18 16 17 16 17 16 17 16 
+17 16 17 16 17 16 17 16 17 16 17 16 17 16 18 16 
+17 16 17 16 17 16 18 16 17 16 17 16 17 16 18 16 
+17 16 17 16 17 16 17 16 18 16 17 16 17 16 17 16 
+
+											   0  4  .  9  5     V              -  -  -  -
+			5A 00 03 05 05 59 80 01 00 01 00 06 00 16 00 00 00 00 05 00 00 20 30 34 2E 39 35 20 56 20 00 20 20 2D 2D 2D 2D 20 20 00 35 
+						 !        !  !  !                       -  0  0  0  .  5  m  V        5  0  .  0  0     H  z
+DC 20 mV/div 10 ms	5A 00 03 05 05 59 80 01 01 01 00 00 04 15 00 00 00 00 05 00 00 2D 30 30 30 2E 35 6D 56 20 00 35 30 2E 30 30 20 48 7A 00 35
+
+DC 500V/div 500ms	5A 00 03 05 05 59 80 01 00 00 00 0D 04 1A FF 00 04 00 05 00 00 20 30 30 30 30 20 56 20 00 00 20 20 2D 2D 2D 2D 20 20 00 35 
+								!
+DC 500V/div 100ns	5A 00 03 05 05 59 80 01 00 00 00 0D 04 06 FF 00 04 00 05 00 00 20 30 30 30 30 20 56 20 00 00 20 20 2D 2D 2D 2D 20 20 00 35
+						       !  !                                0  .  2  1  7     V        5  0  .  0  0     H  z
+AC 200 mV/div 20 ms	5A 00 03 05 05 59 80 01 00 01 01 03 00 15 00 00 00 00 05 00 00 20 30 2E 32 31 37 20 56 20 00 35 30 2E 30 30 20 48 7A 00 35
+0B 04 0E 09 10 0C 14 0F 16 12 18 14 19 16 19 16 
+19 16 1A 17 19 16 18 15 17 12 15 10 12 0D 0F 09
+0B 06 08 02 04 FE 00 FA FC F5 F7 F2 F5 F0 F2 ED
+F0 E9 EC E8 EA E7 EA E7 EA E7 E9 E7 EB E7 ED E9
+EF EA F1 ED F5 EF F8 F2 FB F6 FE F9 02 FC 06 00
+0C 04 0E 09 10 0C 13 0F 16 12 18 15 19 16 19 17 
+19 16 19 17 19 15 19 15 18 13 15 11 13 0D 0F 09 
+0B 06 09 04 06 00 01 FB FD F6 F8 F3 F5 F0 F2 ED 
+EF EA ED E8 EB E7 EA E7 EA E7 EA E7 EB E7 EB E8 
+EF E9 F0 ED F5 EE F8 F2 FB F7 FE F9 01 FC 06 00 
+0B 04 0E 09 10 0B 13 0E 16 12 18 14 18 14 19 15 
+19 16 19 16 19 15 18 14 16 12 13 10 11 0C 0E 08 
+0A 05 08 03 05 00 00 FB FD F6 F8 F3 F5 F0 F2 ED 
+F0 EA EC E8 EA E7 EA E7 EA E7 EA E6 EB E7 EC E9 
+EE EA F0 ED F5 EE F8 F2 FB F6 FE F8 00 FB 08 00 
+0D 06 0F 0B 10 0C 14 0F 17 12 18 15 1A 16 1A 17 
+1A 16 1A 17 19 15 18 15 16 12 13 0F 12 0C 0E 09 
+0B 05 08 03 05 00 00 FA FD F5 F8 F3 F5 F0 F2 ED 
+F0 EA ED E8 EB E7 EA E7 EA E7 EA E7 EB E7 EC E8 
+EF EA F1 ED F3 ED F8 F2 FB F5 FE F8 00 FB 05 00 
+			                                  !                                0  .  1  1  3     V        5  0  .  0  0     H  z
+AC 500 mV/div 20 ms	5A 00 03 05 05 59 80 01 00 01 01 04 00 15 00 00 00 00 05 00 00 20 30 2E 31 31 33 20 56 20 00 35 30 2E 30 30 20 48 7A 00 35 
+
+Großanzeige ohne Oszilloskopfunktion:
+DC 400mV-Bereich REL	5A 00 00 03 05 5C 00 01 01 01 00 00 00 16 00 00 00 00 05 00 01 20 30 34 30 2E 32 6D 56 20 00 35 30 2E 30 30 20 48 7A 00 35 ohne Sampledaten
+DC 400mV-Bereich	5A 00 00 03 05 5C 00 01 01 01 00 00 00 16 00 00 00 00 05 00 00 2D 30 30 31 2E 33 6D 56 20 00 35 30 2E 30 30 20 48 7A 00 35 ohne Sampledaten
+			       !  !     \  !     !     !  !  !                    !           0  .  L     M  ?              -  -  -  -
+R  40 MOhm AUTO		5A 00 00 03 05 5C 04 01 01 01 00 00 04 15 00 00 00 00 05 01 00 20 20 30 2E 4C 20 4D 3F 20 00 20 20 2D 2D 2D 2D 20 20 00 00 Keine Sampledaten!							       !  !            .  0  L     M  ?
+			5A 00 00 03 05 5C 04 01 01 01 00 00 04 15 00 00 00 00 05 01 00 20 20 30 2E 4C 20 4D 3F 20 00 20 20 2D 2D 2D 2D 20 20 00 00 LowBat: 1 Strich
+			5A 00 00 03 05 5C 04 01 01 01 00 00 04 15 00 00 00 00 05 01 00 20 20 30 2E 4C 20 4D 3F 20 00 20 20 2D 2D 2D 2D 20 20 00 00 LowBat: 3 Striche: Keine Übertragung!
+R  4 MOhm MAN		5A 00 00 03 05 5C 04 01 01 01 00 00 04 15 00 00 00 00 04 00 00 20 20 2E 30 4C 20 4D 3F 20 00 20 20 2D 2D 2D 2D 20 20 00 00 
+R  400 kOhm MAN		5A 00 00 03 05 5C 04 01 01 01 00 00 04 15 00 00 00 00 03 00 00 20 20 30 4C 2E 20 6B 3F 20 00 20 20 2D 2D 2D 2D 20 20 00 00 
+   40 k									      02
+   4 k									      01
+R  400 Ohm MAN		5A 00 00 03 05 5C 04 01 01 01 00 00 04 15 00 00 00 00 00 00 00 20 20 30 4C 2E 20 20 3F 20 00 20 20 2D 2D 2D 2D 20 20 00 00 
+Die Chinesen können nicht "Resistor" schreiben, da steht "Resister" (Wieder-Schwester) im Display!
+					   !
+Diode			5A 00 00 03 05 5C 06 01 01 01 00 00 04 15 00 00 00 00 04 00 00 20 20 2E 30 4C 20 20 56 20 00 20 20 2D 2D 2D 2D 20 20 00 00 
+					   !
+Durchgang		5A 00 00 03 05 5C 05 01 01 01 00 00 04 15 00 00 00 00 04 00 00 20 20 30 4C 2E 20 20 3F 20 00 20 20 2D 2D 2D 2D 20 20 00 00 
+					\  !                                               0  .  0  0  0     H  z     6  .  5  2  5     m  V
+Hz 20 mV 20 ms		5A 00 03 05 05 59 82 01 01 01 00 00 04 16 00 00 04 00 05 00 00 20 30 2E 30 30 30 20 48 7A 00 36 2E 35 32 35 20 6D 56 00 2E Sampledaten
+
+DC 200 µA 20 ms		5A 00 03 05 05 59 81 01 01 01 00 03 04 16 00 00 04 00 05 00 00 20 30 30 30 30 75 41 20 00 00 20 20 2D 2D 2D 2D 20 20 00 00 Sampledaten
+						       !     !
+AC 200 µA 20 ms		5A 00 03 05 05 59 81 01 01 01 01 03 00 16 00 00 01 00 05 00 00 20 30 30 30 30 75 41 20 00 00 20 20 2D 2D 2D 2D 20 20 00 00 Sampledaten
+
+AC 200 µA 20 ms	HOLD	5A 00 03 05 05 59 81 00 01 01 01 03 00 16 00 00 01 00 05 00 00 20 30 30 30 30 75 41 20 00 00 20 20 2D 2D 2D 2D 20 20 00 00
+
+DC 20 mA 20 ms		5A 00 03 05 05 59 81 01 01 01 00 09 04 16 00 00       54 01 00 20    30 30 30 6D 41 20 00    20 20 2D 2D 2D 2D 20 20 00 00 Sampledaten
+											   0  2  .  3  5  n  F              -  -  -  -
+Kap. AUTO		5A 00 00 03 05 5C 03 01 01 01 00 00 04 15 00 00 00       01 00 20 30 32 2E 33 35 6E 46 20 00 20 20 2D 2D 2D 2D 20 20 00 00 (Ü-Fehler!)
+			5A 00 00 03 05 5C 03 01 01 01 00 00 04 15 00 00 00 00 05 01 00 20 30 32 2E 33 35 6E 46 20 00 20 20 2D 2D 2D 2D 20 20 00 00 
+											      0  L  .     u  F              -  -  -  -
+Kap. AUTO		5A 00 00 03 05 5C 03 01 01 01 00 00 04 15 00 00 00 00 05 01 00 20 20 30 4C 2E 20 75 46 20 00 20 20 2D 2D 2D 2D 20 20 00 00 
+											      5  2  .  8  u  F
+Kap. AUTO		5A 00 00 03 05 5C 03 01 01 01 00 00 04 15 00 00 00 00 05 01 00 20 30 35 32 2E 38 75 46 20 00 20 20 2D 2D 2D 2D 20 20 00 00 
+
+
+
+Bereichswahl-Kodes (* bei autom. Bereichswahl gesichtet)
+	YB	XB	YB	RB	U=	U~	I=~	
+00	20mV	(theor. 1 ns)	400Ohm	*0.4V		*400µA
+01	50mV			4kOhm
+02	100mV			40kOhm	400.0mV	400.0mV	400.0µA
+03	200mV		200µA	400kOhm		*4V
+04	500mV		500µA	4MOhm
+05	1V		1mA	40MOhm	4.000V	4.000V	4000µA
+06	2V	100ns	2mA				*40mA
+07	5V	200ns	5mA
+08	10V	500ns	10mA		40.00V	40.00V	40.00mA
+09	20V	1µs	20mA
+0A	50V	2µs	50mA
+0B	100V	5µs	100mA		400.0V	400.0V	400.0mA
+0C	200V	10µs	200mA				*4A
+0D	500V	20µs	500mA		1000V	750.0V
+0E		50µs	1A				4.000A
+0F		100µs	2A
+10		200µs	5A				10.00A
+11		500µs
+12		1ms
+13		2ms
+14		5ms
+15		10ms
+16		20ms
+17		50ms
+18		100ms
+19		200ms
+1A		500ms
+1B		1s
+1C		2s
+1D		5s
+
+## = Konstanten
+MX = Manuelle Zeitbasis (04) / automatisch (00)
+
+HOLD führt nur zum Stopp der Aktualisierung auf dem Multimeter; die Messung und Übertragung neuer Werte geht weiter.
+(Sollte das Programm seine Aktualisierung deshalb stoppen? Ja!)
+
+Byte		Bedeutung
+[0]	'Z'	Echo
+[1]	00	Echo-Terminator?
+[2]	??	Sampledaten vorhanden (03) / nicht vorhanden (00)
+[3]	??	Sampledaten vorhanden (05) / nicht vorhanden (03)
+[4]	05
+[5]	??	Sampledaten vorhanden ('Y') / nicht vorhanden ('\')
+[6]	SW	Schalterstellung, V(80/00), Ohm(04), Durchgang(05), Diode(06), Hz(82/02), µA+mA+A(81/01), F(03), Bit7 = Oszi-Mode
+[7]	RUN	Oszi laufend (01) / angehalten (00) / Speicherinhalt (02)
+[8]	AY	Automatische Bereichswahl Ablenkkoeffizient (Inversdarstellung)
+[9]	AX	Automatische Bereichswahl Zeitbasis (Inversdarstellung)
+[10]	AC	Wechselspannungs- und -strommessung (01), sonst Gleichgrößen (00)
+[11]	YB	Ablekkoeffizient-Kode, 5=1V/div, 6=2V/div usw; 14=1A/div usw. (siehe Tabelle oben)
+[12]	OY	Nulllinie, -64=unten, +64=oben (Doku sagt ±60)
+[13]	XB	Zeitbasis-Kode, 27=1s/div, 26=500ms/div, 28=2s/div usw. (siehe Tabelle oben)
+[14]	TX	Triggerpunkt, 0=Mitte, -76=links (nicht ganz am Rand), +76=rechts
+[15]	TE	Triggerflanke: steigend (00), fallend (01)
+[16]	TY	Triggerpegel, 0=Mitte, -64=unten, +64=oben (Doku sagt ±60)
+[17]	TM	Trigger-Modus: Auto (00), Normal (01), Einzelauslösung (02)
+[18]	RB	Widerstands-Messbereich (siehe Tabelle oben)
+[19]	AUTO	Messbereich (Nicht-Oszi-Betrieb) automatisch (01) / manuell (00)
+[20]	RE	Relativ (01) / absolut (00)
+[21]	)
+[22]	)	(9 Bytes)
+[23]	)
+[24]	)
+[25]	)	Linkes Readout (ggf. führende Leerzeichen, nicht konstante Position der Einheit!)
+[26]	)	"u" für "µ", "?" für "Ohm", "/" für "%" (Tastverhältnis)
+[27]	)
+[28]	)
+[29]	)
+[30]	00
+[31]	)
+[32]	)	(8 Bytes)
+[33]	)
+[34]	)
+[35]	)	Rechtes Readout (ggf. führende Leerzeichen, nicht konstante Position der Einheit!)
+[36]	)	"  ----  " wenn kein Readout
+[37]	)
+[38]	)
+[39]	00
+[40]	??	mal '5', mal 00, mal '.' (ohne erkennbaren Bezug)
+[41..]		320 Bytes Sampledaten als vzb. Zahlen, -64=unten, +64=oben (zzgl. OY [12])
+[361..]		Extra-Bytes bei Übersteuerung
+
+110416
+Die Doku spricht von 160, nicht 320 Samples. Aber es kommen ja 320 Bytes als Daten-Schwanz.
+Nimmt man alle 320, sieht das Ergebnis ziemlich zappelig aus (Samples differieren).
+Die Differenz ist keine Konstante.
+Die jeweils ersten Bytes jedes Paars passen am besten bei fallender Triggerflanke,
+die jeweils zweiten Bytes bei steigender Triggerflanke. DMM.EXE ist nun so modifiziert.
+
+
+Display-Gitter:
+X-Richtung 8 Kästchen (nicht 10!), 160 Pixel
+Y-Richtung 8 Kästchen, schätzungsweise 128 Pixel (oben Zusatzanzeigen, unten Funktionstastenbelegung)
+Seitenverhältnis ca. 4:3

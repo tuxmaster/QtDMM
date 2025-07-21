@@ -31,7 +31,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &da
   m_result.id     = id;
   m_result.hold   = false;
   m_result.showBar= true;
-  m_result.range  = "";
+  m_result.range = (bit(data, 0, 1)? "AUTO" : "MANU");
 
   QString val;
   QString special;
@@ -55,6 +55,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &da
     for (int i = 0; i < 4; ++i)
       val += vc820Digit(((in[1 + 2 * i] << 4) & 0xf0) | (in[2 + 2 * i] & 0x0f));
   }
+
 
   // find comma position
   if (in[3] & 0x08)

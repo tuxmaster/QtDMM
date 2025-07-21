@@ -1,0 +1,231 @@
+﻿
+Counts: 20000 (UT71B), 40000 (UT71C, UT71D, UT71E) (5-stellig)
+DCB: 2400 Baud,7,1,ODD,DTR+,RTS-
+Paket: Länge 11, TotalTimeOut: 1000?, Markierung: "\r\n", eindeutig
+
+Die Nebenanzeigen werden nicht übertragen,
+auch nicht der Bargraf.
+
+Serielle Datenübertragung unidirektional über Optokoppler,
+bisweilen mittels USB-HID-Seriell-Umsetzer
+Hoitek HE2325U (der unter Windows kein COMx erzeugt!)
+Die Software zeigt beim Start "39999" an – unklar.
+
+			 0  1  2  3  4  5  6  7  8  9 10
+			                  DC     +
+DC  0.0000 V AUTO BG	30 30 30 30 30 31 31 30 31 0D 0A
+			                         -
+DC -0.0000 V AUTO BG	30 30 30 30 30 31 31 30 35 0D 0A
+			 0  0  0  0  1
+DC -0.0001 V AUTO BG	30 30 30 30 31 31 31 30 35 0D 0A 
+			 0  0  0  0  7
+DC -0.0007 V AUTO BG	30 30 30 30 37 31 31 30 35 0D 0A
+			 0  0  0  0  5           +
+DC  0.0005 V AUTO BG	30 30 30 30 35 31 31 30 31 0D 0A
+			 0  0  0  0  0
+DC  0.0000 V MAN BG	30 30 30 30 30 31 31 30 32 0D 0A 	
+DC  00.000 V MAN BG	30 30 30 30 30 32 31 30 32 0D 0A 	
+DC  000.00 V MAN BG	30 30 30 30 30 33 31 30 32 0D 0A 	
+DC  0000.0 V MAN BG	30 30 30 30 30 34 31 30 32 0D 0A 	
+
+DC  0.0005 V MAN BG REL	30 30 30 30 35 31 31 30 32 0D 0A	REL wird nicht übertragen!
+
+			 0  0  5  8  5    AC     +
+AC  0.0585 V AUTO BG TR	30 30 35 38 35 31 32 31 31 0D 0A
+AC  0.0585 V AUTO BG TR	30 30 35 38 34 31 32 31 31 0D 0A
+AC  0.0585 V AUTO BG TR	30 30 35 38 35 31 32 31 31 0D 0A
+AC  0.0585 V AUTO BG TR	30 30 35 38 36 31 32 31 31 0D 0A
+			 0  2  5  2  6          ?
+AC  0.2526 V MAN BG TR	30 32 35 32 36 31 32 31 32 0D 0A 	
+AC  0.6495 V MAN BG TR	30 36 34 39 35 31 32 31 32 0D 0A 	
+
+AC+DC 0.0053 V AU BG TR	30 30 30 35 33 31 32 33 31 0D 0A 	
+			 0  5  1  5  3 
+DC -051.53 mV MAN BG	30 35 31 35 33 30 33 30 34 0D 0A 	keine Bereichsumschaltung
+			 :  :  0  <  :     4
+      .0L MΩ AUTO BG	3A 3A 30 3C 3A 36 34 30 31 0D 0A 	
+      0.L  Ω MAN BG	3A 3A 30 3C 3A 31 34 30 32 0D 0A 	Endwert 400 Ω
+     . 0L kΩ MAN BG	3A 3A 30 3C 3A 32 34 30 32 0D 0A 	
+      .0L kΩ MAN BG	3A 3A 30 3C 3A 33 34 30 32 0D 0A
+      0.L kΩ MAN BG	3A 3A 30 3C 3A 34 34 30 32 0D 0A 	
+     . 0L MΩ MAN BG	3A 3A 30 3C 3A 35 34 30 32 0D 0A 	
+      .0L MΩ MAN BG	3A 3A 30 3C 3A 36 34 30 32 0D 0A 	Endwert 40 MΩ
+			                   :
+      0.L Ω Pieps BG	3A 3A 30 3C 3A 30 3A 30 30 0D 0A	Endwert 400 Ω
+					   ;
+     . 0L V Diode BG	3A 3A 30 3C 3A 30 3B 30 30 0D 0A	Endwert 4 V	
+					   5
+    00.000 nF AUTO BG	30 30 30 30 30 31 35 30 31 0D 0A 	Endwert 40 nF
+    00.000 nF MAN BG	30 30 30 30 30 31 35 30 32 0D 0A 	
+    000.00 nF MAN BG	30 30 30 30 30 32 35 30 32 0D 0A 	
+    0.0000 µF MAN BG	30 30 30 30 30 33 35 30 32 0D 0A 	
+    00.000 µF MAN BG	30 30 30 30 30 34 35 30 32 0D 0A 	
+    000.00 µF MAN BG	30 30 30 30 30 35 35 30 32 0D 0A 	
+    0.0000 mF MAN BG	30 30 30 30 30 36 35 30 32 0D 0A 	
+    00.000 mF MAN BG	30 30 30 30 30 37 35 30 32 0D 0A 	Endwert 40 mF, Langsames Arbeiten, Anzeige in Bargraf! 5 s/Wert = 0,2 Sa/s
+					   6
+    0026.4 °C		30 30 32 36 34 30 36 30 30 0D 0A 	Endwert 1000 °C
+					   =
+    0078.2 °F		30 30 37 38 32 30 3D 30 30 0D 0A 	
+					   7
+DC  000.00 µA AUTO BG	30 30 30 30 30 30 37 30 31 0D 0A 	Endwert 400 µA
+DC  000.00 µA MAN BG	30 30 30 30 30 30 37 30 32 0D 0A
+DC  0000.0 µA MAN BG	30 30 30 30 30 31 37 30 32 0D 0A
+
+AC  000.00 µA AUTO BG	30 30 30 30 30 30 37 31 31 0D 0A 	
+AC  000.00 µA MAN BG	30 30 30 30 30 30 37 31 32 0D 0A 	
+AC  0000.0 µA MAN BG	30 30 30 30 30 31 37 31 32 0D 0A 	
+					   8
+DC  00.000 mA AUTO BG	30 30 30 30 30 30 38 30 31 0D 0A 	Endwert 40 mA
+DC  00.000 mA MAN BG	30 30 30 30 30 30 38 30 32 0D 0A 	
+DC  000.00 mA MAN BG	30 30 30 30 30 31 38 30 32 0D 0A 	Endwert 400 mA
+					   9
+DC  00.000 A FIX BG	30 30 30 30 30 31 39 30 30 0D 0A 	Endwert 10 A
+AC  00.000 A FIX BG	30 30 30 30 30 31 39 31 30 0D 0A 	
+
+    0000.0 W		30 30 30 30 30 33 3E 30 30 0D 0A 	Keine Bereichsumschaltung, 10-A-Messbereich (nur UT71E)
+
+					   <
+    00.000  Hz AUTO	30 30 30 30 30 30 3C 30 31 0D 0A 	Endwert 40 Hz
+    00.000  Hz MAN	30 30 30 30 30 30 3C 30 32 0D 0A 	
+    000.00  Hz MAN	30 30 30 30 30 31 3C 30 32 0D 0A 	
+    0.0000 kHz MAN	30 30 30 30 30 32 3C 30 32 0D 0A 	
+    00.000 kHz MAN	30 30 30 30 30 33 3C 30 32 0D 0A 	
+    000.00 kHz MAN	30 30 30 30 30 34 3C 30 32 0D 0A 	
+    0.0000 MHz MAN	30 30 30 30 30 35 3C 30 32 0D 0A 	
+    00.000 MHz MAN	30 30 30 30 30 36 3C 30 32 0D 0A
+    000.00 MHz MAN	30 30 30 30 30 37 3C 30 32 0D 0A 	Endwert 400 MHz
+Tastverhältnis der Frequenz
+    000.00 %		30 30 30 30 30 30 3C 30 35 0D 0A 	
+
+PEAK-Betriebsart:
+DC -002.51 mV PEAK	30 30 32 35 31 30 33 30 36 0D 0A	Sehr schnelle, lückenlose Datenübertragung
+
+4-20-mA-Schnittstellentester:
+      LO. %		3A 3C 30 3A 3A 30 3F 30 30 0D 0A 
+      HI. %		3A 3F 31 3A 3A 30 3F 30 34 0D 0A 	
+
+Endwert-4000-Modus (statt 40000, schneller, ungenauer):
+DC  0.000 V AUTO	30 30 30 30 3A 31 31 30 31 0D 0A
+
+	
+Byte          6	5	4	3	2	1	0
+[0]	1. Ziffer	0	1	1	=========Ziffer==========	// 0x3A = ' ', 0x3B = '-', 0x3C = 'L', 0x3F = 'H'
+[1]	2. Ziffer	0	1	1	=========Ziffer==========
+[2]	3. Ziffer	0	1	1	=========Ziffer==========
+[3]	4. Ziffer	0	1	1	=========Ziffer==========
+[4]	5. Ziffer	0	1	1	=========Ziffer==========
+[5]	Bereich		0	1	1	0	===siehe unten===
+[6]	Messart		0	1	1	=======siehe unten=======
+[7]	Kopplung	0	1	1	0	0	DC	AC	// DC und AC auch kombiniert
+[8]	Info		0	1	1	0	NEG	MAN	AUTO	// MAN und AUTO nie kombiniert
+[9]	'\r'		0	0	0	1	1	0	1
+[10]	'\n'		0	0	0	1	0	1	0
+
+REL wird nicht übertragen!
+Bei HOLD wird nichts übertragen.
+"negativ" bei Frequenzmessung bedeutet Tastverhältnis
+LowBat wird nicht übertragen.
+Der Messwertspeicher (Tiefe: 100 bzw. 9999 beim UT71D) kann nicht
+programmatisch ausgelesen werden!
+
+Bereich (Byte[5]):	V	mV	Ω	F	Hz	µA	mA	A	%	°C	°F	Pieps	Diode
+	'0'		-	400m	-	-	40	400µ	40m	-	100	1000	1832	400	4
+	'1'		4	-	400	40n	400	4000µ	400m	10	-	-	-	-	-
+	'2'		40	-	4k	400n	4k	-	-	-	-	-	-	-	-
+	'3'		400	-	40k	4µ	40k	-	-	-	-	-	-	-	-
+	'4'		1000	-	400k	40µ	400k	-	-	-	-	-	-	-	-
+	'5'		-	-	4M	400µ	4M	-	-	-	-	-	-	-	-
+	'6'		-	-	40M	4m	40M	-	-	-	-	-	-	-	-
+	'7'		-	-	400M	40m	400M	-	-	-	-	-	-	-	-
+UT71B entsprechend bis 2xxx statt 4xxx
+
+Messart (Byte[6]):
+	'0'	mV~
+	'1'	V=
+	'2'	V~
+	'3'	mV=
+	'4'	Ω
+	'5'	F
+	'6'	°C
+	'7'	µA
+	'8'	mA
+	'9'	A
+	0x3A	Ω (Pieps, Durchgangsprüfung)
+	0x3B	V (Diodenmessung)
+	0x3C	Hz (oder Tastverhältnis bei gesetztem NEG-Flag)
+	0x3D	°F
+	0x3E	W (keine Übertragung von Scheinleistung, Spannung, Strom, Frequenz und cosφ) - nur UT71E
+	0x3F	% (4-20-mA-Tester)
+
+UT71B: Wie UT71C, jedoch Endwerte 20000 statt 40000
+
+UT71C entspricht „Voltcraft VC-920 TRMS-DMM“
+UT71D entspricht „Voltcraft VC-960 TRMS-DMM“
+UT71E entspricht „Voltcraft VC-940 TRMS-DMM“
+IC-Dokumentation ist vorhanden – man hätte es nicht mühselig auseinanderklamüsern müssen.
+
+Genauigkeiten (laut Messgeräte-Datenblatt):
+Bereich	Aufl.	Genauigkeit± (Absolutanteil in Digits)
+		UT71B	UT71CDE
+400mV=	10µV	0,05%+5	0,025%+5	2,5GΩ
+4V=	100µV	0,08%+5	0,05%+5		10MΩ
+40V=	1mV	-"-	-"-		-"-
+400V=	10mV	-"-	-"-		-"-
+1000V=	100mV	0,1%+8	0,1%+8		-"-
+
+4V~	100µV (	0,6%+40	0,4%+30	1kHz	10 MΩ
+40V~	1mV   (	3%+40	3%+30	10kHz	-"-
+	      (	7%+40	6%+30	100kHz
+400V	10mV	0,6%+40	0,4%+30	1kHz	-"-
+		5%+40	5%+30	10kHz
+1000V	100mV	1,2%+40	1%+30	1kHz	-"-
+		6%+40	5%+30	5kHz
+		10%+40	10%+30	10kHz
+
+400µA=	10nA	0,15%+200,1%+15
+4mA=	100nA	-"-	-"-
+40mA=	1µA	-"-	0,15%+15
+400mA=	10µA	-"-	-"-
+10A=	1mA	0,7%+30	0,5%+30
+
+400µA~	10nA  (	0,8%+15	0,7%+15	1kHz
+4mA~	100nA (	1,5%+40	1%+40	10kHz
+40mA~	1µA   (
+400mA~	10µA  (
+10A~	1mA	2%+20	1,5%+20	1kHz
+		6%+40	5%+40	10kHz
+
+400Ω	10mΩ	0,4%+20	0,3%+8
+4kΩ	100mΩ	0,4%+20	-"-
+40kΩ	1Ω	-"-	-"-
+400kΩ	10Ω	0,8%+20	0,5%+20
+4MΩ	100Ω	1%+40	1%+40
+40MΩ	1kΩ	1,5%+40	1,5%+40
+
+40nF	1pF	1,2%+20	1%+20
+400nF	10pF	-"-	-"-
+4µF	100pF	-"-	-"-
+40µF	1nF	1,2%+40	-"-
+400µF	10nF	1,5%+40	1,2%+20
+4mF	100nF	5%+40	5%+20
+40mF	1µF	-	-
+
+40Hz	1mHz	0,1%+15	0,01%+8
+400Hz	10mHz	-"-	-"-
+4kHz	100mHz	-"-	-"-
+40kHz	1Hz	-"-	-"-
+400kHz	10Hz	-"-	-"-
+4MHz	100Hz	-"-	-"-
+40MHz	1kHz	-"-	-"-
+400MHz	10kHz	-	-
+
+-40..40°C	3%+30
+40..400°C	1%+30
+400..1000°C	2,5%
+
+0..100% 	1%+50		4..20mA=
+
+2,5kW	0,1W		2%+10	) AC50..250V
+2,5kVA	1VA		2%+10	) cosφ = 0..1
+cosφ	0,001		1%+10	) imp. 10 MΩ

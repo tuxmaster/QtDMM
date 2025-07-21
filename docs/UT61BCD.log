@@ -1,0 +1,92 @@
+UT61B,C,D: Handmultimeter der chinesischen Firma UNI-Trend
+
+Counts: 4000 (4-stellig), 6000 (UT61C, UT61D)
+DCB: 2400 Baud,8,1,None,DTR+,RTS-
+Paket: Länge 14, TotalTimeOut: 1000?, Markierung: "\r\n", NICHT eindeutig
+Besonderheiten: LC-Display zeigt führende Nullen (anders als sonst bei UNI-Trend)
+
+Datenpakete kommen dicht-an-dicht beim Übertragen der gespeicherten Messwerte.
+Startzeitpunkt und Sampling-Intervall werden nicht übertragen
+und muss in der Software von Hand vorgegeben werden (für eine sinnfällige Speicherung)
+
+			 0  1  2  3  4  5  6  7  8  9 10 11 12 13
+			 +  3  4  8  2     4  1     m  V
+DC  348.2 mV AUTO BG	2B 33 34 38 32 20 34 31 00 40 80 22 0D 0A 	
+DC  348.2 mV AUTO BG	2B 33 34 38 32 20 34 31 00 40 80 22 0D 0A 	
+DC  348.1 mV AUTO BG	2B 33 34 38 31 20 34 31 00 40 80 22 0D 0A 	
+			 +  3  3  1  0     4  ?     m     ?
+DC  331.0 mV MAN BG	2B 33 33 31 30 20 34 11 00 40 80 21 0D 0A
+DC  330.9 mV MAN BG	2B 33 33 30 39 20 34 11 00 40 80 21 0D 0A
+			 +  0  0  0  0     1  ?     ?     ?
+DC  0.000 V  MAN BG	2B 30 30 30 30 20 31 11 00 00 80 00 0D 0A
+			 +  0  0  0  0     2
+DC  00.00 V  MAN BG	2B 30 30 30 30 20 32 11 00 00 80 00 0D 0A
+			                   4
+DC  000.0 V  MAN BG	2B 30 30 30 30 20 34 11 00 00 80 00 0D 0A
+			                   0
+DC  0000 V  MAN BG	2B 30 30 30 30 20 30 11 00 00 80 00 0D 0A
+			 +  0  0  0  3     4    MAX m
+DC  000.3 mV MAN MAX	2B 30 30 30 33 20 34 10 20 40 80 00 0D 0A
+			 -  0  3  4  6     4    MIN m
+DC -034.6 mV MAN MIN	2D 30 33 34 36 20 34 10 10 40 80 00 0D 0A
+			 +  ?  0  :  ?     2  A     M Ohm
+      0.L MOhm OL BG A	2B 3F 30 3A 3F 20 32 21 00 10 20 29 0D 0A
+			2B 3F 30 3A 3F 20 32 21 04 10 20 29 0D 0A	mit LowBat
+	 	
+      0.L MOhm OL BG M	2B 3F 30 3A 3F 20 32 01 00 10 20 29 0D 0A
+			 +  0  0  1  5     1        k Ohm
+   0.015 kOhm MAN BG	2B 30 30 31 35 20 31 01 00 20 20 00 0D 0A
+			 +  ?  0  :  ?     1     Diode V
+      .0L V Diode	2B 3F 30 3A 3F 20 31 00 00 04 80 00 0D 0A
+			 +  ?  0  :  ?     4        P Ohm
+   0L. Ohm OL Pieps BG	2B 3F 30 3A 3F 20 34 01 00 08 20 29 0D 0A
+			 +  0  9  5  4     2     n     F
+    09.54 nF AUTO	2B 30 39 35 34 20 32 20 02 00 04 29 0D 0A
+			 +  1  2  0  2     2        µ  F
+    12.02 µF AUTO	2B 31 32 30 32 20 32 20 00 80 04 29 0D 0A
+			 +  4  9  9  8     2          Hz
+    49.98 Hz AUTO	2B 34 39 39 38 20 32 20 00 00 08 29 0D 0A
+			 +  0  4  9  2     4        %
+    049.2 % MAN		2B 30 34 39 32 20 34 00 00 02 00 29 0D 0A
+			 +  0  0  2  5     0          °C
+    0025 °C MAN		2B 30 30 32 35 20 30 00 00 00 02 29 0D 0A	nicht bei UT61D
+			                              °F
+    0077 °F MAN		2B 30 30 37 37 20 30 00 00 00 01 29 0D 0A	nicht bei UT61D
+					    REL
+    0001 °F MAN REL	2B 30 30 30 31 20 30 04 00 00 01 29 0D 0A	nicht bei UT61D
+					   HOLD
+    0001 °F MAN HOLD	2B 30 30 30 30 20 30 02 00 00 01 29 0D 0A	nicht bei UT61D
+			 +  0  0  0  0     4        µ  A neg.BG
+DC  000.0 µA AUTO BG	2B 30 30 30 30 20 34 31 00 80 40 80 0D 0A
+			 +  0  0  0  1     4 AC     µ  A 
+AC  000.1 µA AUTO BG	2B 30 30 30 31 20 34 29 00 80 40 00 0D 0A
+
+Byte		Bit	7	6	5	4	3	2	1	0
+[0]	Vorzeichen	0	0	1	0	1	0	POS	1	ASCII '+' oder '-'
+[1]			0	0	1	1	===== Erste Ziffer  =====	'?' für Leerstelle (bei 0.L)
+[2]			0	0	1	1	===== Zweite Ziffer =====
+[3]			0	0	1	1	===== Dritte Ziffer =====	':' für "L"
+[4]			0	0	1	1	===== Vierte Ziffer =====
+[5]			0	0	1	0	0	0	0	0	stets ' ' Leerzeichen (evtl. 5. Ziffer?)
+[6]	Komma-Bitfeld, als Ziffer, '1'=0.000, '2'=00.00, '4'=000.0, '0'=0000
+[7]	Symbole		0	0	Auto	DC	AC	REL	HOLD	BG
+[8]	Symbole		0	0	MAX	MIN	0	LowBat	n	0
+[9]	Symbole		µ	m	k	M	Pieps	Diode	%	0
+[10]	Symbole		V	A	Ohm	0	Hz	F	°C	°F
+[11]	Länge der Bargraf-Anzeige, 0..41, Bit 7 = Minuszeichen (der Bargraf-Anzeige)
+[12]	0D	\r	0	0	0	0	1	1	0	1
+[13]	0A	\n	0	0	0	0	1	0	1	0
+
+BG = Bargraf ein/aus
+REL = Delta-Symbol
+% = Tastverhältnis
+
+Unklare Symbole (im Display vorhanden, aber niemals eingeschaltet):
+Pfeil-im-Kreis (Sleep-Mode) - niemals zusammen mit RS232!
+EF-im-Dreieck (Sensor-Test) - lt. Bild in Anleitung eher Kabelsucher - nur UT61A
+Beta
+hFE (nur UT61A - dieser hat kein Interface!)
+
+Der Schaltzustand der Hintergrundbeleuchtung wird nicht übertragen.
+
+Vichy VC99 = UT61C (weil 6000 Counts und mit Temperaturmessung)

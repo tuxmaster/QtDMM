@@ -1,0 +1,126 @@
+UT60A,E: Handmultimeter der chinesischen Firma UNI-Trend
+
+Counts: 3999 (4-stellig)
+DCB: 2400 Baud,8,1,None,DTR+,RTS-
+Paket: Länge 14, TotalTimeOut: 1000?, Markierung: High-Nibble, eindeutig
+Bei Frequenzmessung TotalTimeOut = 5000 ms
+
+			 0  1  2  3  4  5  6  7  8  9 10 11 12 13
+			             0    .L           M   Ohm
+     0L MOhm AUTO	13 20 30 47 5D 6E 78 80 90 A0 B2 C4 D0 E8 	
+
+DC -000.4 mV AUTO	17 2F 3D 47 5D 67 7D 8A 97 A0 B8 C0 D4 E8 	
+DC -000.5 mV AUTO	17 2F 3D 47 5D 67 7D 8B 9E A0 B8 C0 D4 E8 	
+DC  018.9 mV AUTO	17 27 3D 40 55 67 7F 8B 9F A0 B8 C0 D4 E8 	
+DC  018.8 mV AUTO	17 27 3D 40 55 67 7F 8F 9F A0 B8 C0 D4 E8 	
+DC  018.7 mV AUTO	17 27 3D 40 55 67 7F 89 95 A0 B8 C0 D4 E8 	
+
+			    -  0     0     0    .0     m     V
+DC -000.0 mV AUTO	17 2F 3D 47 5D 67 7D 8F 9D A0 B8 C0 D4 E8 	
+DC  000.2 mV AUTO	17 27 3D 47 5D 67 7D 8D 9B A0 B8 C0 D4 E8 	
+DC  000.5 mV AUTO	17 27 3D 47 5D 67 7D 8B 9E A0 B8 C0 D4 E8 	
+DC  000.9 mV AUTO	17 27 3D 47 5D 67 7D 8B 9F A0 B8 C0 D4 E8 	
+			       0     0     1    .4     m     V
+DC  001.4 mV AUTO	17 27 3D 47 5D 60 75 8A 97 A0 B8 C0 D4 E8 	
+DC  001.5 mV AUTO	17 27 3D 47 5D 60 75 8B 9E A0 B8 C0 D4 E8 	
+DC  001.7 mV AUTO	17 27 3D 47 5D 60 75 89 95 A0 B8 C0 D4 E8 	
+DC  001.8 mV AUTO	17 27 3D 47 5D 60 75 8F 9F A0 B8 C0 D4 E8 	
+DC  001.9 mV AUTO	17 27 3D 47 5D 60 75 8B 9F A0 B8 C0 D4 E8 	
+DC -004.5 mV AUTO	17 27 3D 47 5D 60 75 8B 9E A0 B8 C0 D4 E8 	
+DC -004.7 mV AUTO	17 2F 3D 47 5D 62 77 89 95 A0 B8 C0 D4 E8 	
+DC -004.8 mV AUTO	17 2F 3D 47 5D 62 77 8F 9F A0 B8 C0 D4 E8 	
+DC -004.9 mV AUTO	17 2F 3D 47 5D 62 77 8B 9F A0 B8 C0 D4 E8 	
+DC -005.0 mV AUTO	17 2F 3D 47 5D 63 7E 8F 9D A0 B8 C0 D4 E8 	
+DC -005.1 mV AUTO	17 2F 3D 47 5D 63 7E 88 95 A0 B8 C0 D4 E8 	
+DC -005.2 mV AUTO	17 2F 3D 47 5D 63 7E 8D 9B A0 B8 C0 D4 E8 	
+DC -005.4 mV AUTO	17 2F 3D 47 5D 63 7E 8A 97 A0 B8 C0 D4 E8 	
+DC -005.8 mV AUTO	17 2F 3D 47 5D 63 7E 8F 9F A0 B8 C0 D4 E8 	
+			    -  0     0     6    .1     m     V
+DC -006.1 mV AUTO	17 2F 3D 47 5D 67 7E 88 95 A0 B8 C0 D4 E8 	
+			AC     0    .0     1     3           V
+AC  0.013  V AUTO	1B 27 3D 4F 5D 60 75 81 9F A0 B0 C0 D4 E8 	
+			A      1     0    .7     2     n   H&F
+    10.72 nF AUTO H	13 20 35 47 5D 69 75 85 9B A4 B0 C9 D0 E8 	
+			A      1     0    .7     2     n     F
+    10.72 nF AUTO	13 20 35 47 5D 69 75 85 9B A4 B0 C8 D0 E8 	
+			       0    .0     0     0          Hz
+    0.000 Hz		11 27 3D 4F 5D 67 7D 87 9D A0 B0 C0 D2 E8 	
+			       0     0     0    .0     %    Hz
+    0.000 Hz %		11 27 3D 47 5D 67 7D 8F 9D A0 B4 C0 D0 E8
+			       0     0     0    .0  µ        A
+DC  000.0 µA MANU	15 27 3D 47 5D 67 7D 8F 9D A8 B0 C0 D8 E8
+			       0     0     0    .0  µ Delta  A
+DC  000.0 µA MANU Delta	15 27 3D 47 5D 67 7D 8F 9D A8 B0 C2 D8 E8
+				    .0     L       Diode     V
+     .0L V Diode	11 20 30 4F 5D 66 78 80 90 A1 B0 C0 D4 E8 	
+				     0     L     .   Ton     V
+     0L. V Ton		11 20 30 47 5D 66 78 88 90 A0 B1 C4 D0 E8 	
+			            .0     L           k   Ohm
+     .0L kOhm		11 20 30 4F 5D 66 78 80 90 A2 B0 C4 D0 E8 	
+
+Byte         Bit	7	6	5	4	3	2	1	0
+[0]	Symbole       0	0	0	1	AC	DC	AUTO	RS232C?	// DC ohne Anzeige (defekt?)
+[1]	Segmente ...	0	0	1	0	-	e	f	a	// - = Vorzeichen
+[2]	... 1. Ziffer	0	0	1	1	d	c	g	b
+[3]	Segmente ...	0	1	0	0	.	e	f	a	// . = Punkt vor Ziffer
+[4]	... 2. Ziffer	0	1	0	1	d	c	g	b
+[5]	Segmente ...	0	1	1	0	.	e	f	a
+[6]	... 3. Ziffer	0	1	1	1	d	c	g	b
+[7]	Segmente ...	1	0	0	0	.	e	f	a
+[8]	... 4. Ziffer	1	0	0	1	d	c	g	b
+[9]	Symbole		1	0	1	0	µ	n	k	Diode
+[10]	Symbole		1	0	1	1	m	%	M	Ton
+[11]	Symbole		1	1	0	0	F	Ohm	Delta	Hold
+[12]	Symbole		1	1	0	1	A	V	Hz	LowBat
+[13]	Symbole		1	1	1	0	1/0	0	0	°C	// 1/0 = 0 bei Anzeige von °C, sonst 1
+
+Unklar: Beta (befindet sich auf dem Display, aber nie angesteuert)
+Darstellung: 7 ohne f, 9 mit d, 6 mit a
+
+High-Nibbles (Bits 7:4) enthalten die Byte-Nummer 1..0Eh
+
+UT60E: zusätzliche Temperaturmessung (tatsächlich nur °C, kein °F), sowie "TrueRMS" im Display (parallel zu "AC")
+
+DC 323.2 mV AUTO	17 21 3F 45 5B 61 7F 8D 9B A0 B8 C0 D4 E8 	
+DC 323.1 mV AUTO	17 21 3F 45 5B 61 7F 88 95 A0 B8 C0 D4 E8 	
+
+   0023 °C MANU		15 27 3D 47 5D 65 7B 81 9F A0 B0 C0 D0 E1 	
+		AC,AUTO,RS232  0    .0     4     5?          V
+AC TRMS 0.045 V AUTO	1B 27 3D 4F 5D 62 77 83 9F A0 B0 C0 D4 E8
+
+UT60A entspricht „Voltcraft VC-820 DMM“
+UT60E entspricht „Voltcraft VC-840 DMM“
+
+
+Serielle Schnittstelle, Kupplung, Anschlüsse
+1	frei
+2	br
+3	ws
+4	or	Brücke nach 6
+5	ge
+6	-	Brücke nach 4
+7	gn	Brücke nach 8
+8	-	Brücke nach 7
+9	frei
+
+Spezifizierte Genauigkeiten (23 °C ± 5 K, rH < 75 %, Temperaturkoeffizient 0,1 % / K (extra??))
+		UT60A
+		ec/lsb	ev/%
+4,40,400V~	5	1
+750V~		5	1.2
+400mV=		3	0.8
+4,40,400V=	1	0.8
+1000V=		3	1
+400Ohm		2	1.2
+4k,40k,400kOhm	2	1
+4MOhm		2	1.2
+40MOhm		2	1.5
+0.04,0.4,4,40µF 5	3
+100µF		5	4
+10Hz..10MHz	3	0.1
+400,4000µA=	2	1
+40,400mA=	3	1.2
+4,10A=		5	1.5
+400,4000µA~	5	1.5
+40,400mA~	5	2
+4,10A~		5	2.5

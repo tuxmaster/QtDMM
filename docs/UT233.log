@@ -1,0 +1,66 @@
+UT233: AC-Zangenamperemeter mit 3 Spannungsmesseingängen
+       und Leistungs/Energieberechnung der chinesischen Firma UNI-Trend
+
+Counts: 9999 (4-stellig)
+DCB: 2400 Baud,8,1,None,DTR+,RTS-
+Paket: Länge 26, TotalTimeOut: 2000, Markierung: "\r\n", eindeutig
+Besonderheiten: LC-Display zeigt führende Nullen (anders als sonst bei UNI-Trend)
+
+Byte		Bit	7	6	5	4	3	2	1	0
+[0]	Funktion	0	0	1	1	0	===== MODUS =====
+[1]	Spannungsber.	0	0	1	1	0	0	=BEREICH=
+[2]	Strombereich	0	0	1	1	0	0	=BEREICH=
+[3]	Hauptanzeige	0	0	1	1	===== Erste Ziffer  =====
+[4]			0	0	1	1	===== Zweite Ziffer =====
+[5]			0	0	1	1	===== Dritte Ziffer =====
+[6]			0	0	1	1	===== Vierte Ziffer =====
+[7]			0	0	1	1	0	= Kommaposition =
+[8]	Nebenanzeige	0	0	1	1	===== Erste Ziffer  =====
+[9]	(links unten)	0	0	1	1	===== Zweite Ziffer =====
+[10]			0	0	1	1	===== Dritte Ziffer =====
+[11]			0	0	1	1	===== Vierte Ziffer =====
+[12]			0	0	1	1	0	= Kommaposition =
+[13]	Nebenanzeige	0	0	1	1	===== Erste Ziffer  =====
+[14]	(rechts unten)	0	0	1	1	===== Zweite Ziffer =====
+[15]			0	0	1	1	===== Dritte Ziffer =====
+[16]			0	0	1	1	===== Vierte Ziffer =====
+[17]			0	0	1	1	0	= Kommaposition =
+[18]	Speicherplatz	0	0	1	1	===== Erste Ziffer  =====
+[19]			0	0	1	1	===== Zweite Ziffer =====
+[20]	Status		0	0	1	1	Alarm	SIGN1	OL3	LOBAT
+[21]	Option1		0	0	1	1	MIN	MAX	OL1	OL2
+[22]	Option2		0	0	1	1	SAVE	LOAD	CLEAR	HOLD
+[23]	Leiterzuordnung	0	0	1	1	L1	L2	L3	SUM
+[24]	0D	\r	0	0	0	0	1	1	0	1
+[25]	0A	\n	0	0	0	0	1	0	1	0
+
+Kommaposition:
+	0000							0	0	0
+	000.0							0	0	1
+	00.00							0	1	0
+	0.000							0	1	1
+	00:00							1	0	0
+
+Spannungsbereich (unwesentlich zur Auswertung):
+	15 V								0	0
+	100 V								0	1
+	300 V								1	0
+	600 V								1	1
+
+Strombereich (unwesentlich zur Auswertung):
+	40 A								0	0
+	100 A								0	1
+	400 A								1	0
+	1000 A								1	1
+
+Modus:
+	Wirkleistung, Spannung, Strom				0	0	0
+	Scheinleistung, Spannung, Strom				0	0	1
+	Blindleistung, Spannung, Strom				0	1	0
+	Leistungsfaktor, Spannung, Strom			0	1	1
+	Phasenwinkel, Spannung, Strom				1	0	0
+	Frequenz, Spannung, Strom				1	0	1
+	Energieverbrauch, Wirkleistung, Zeit			keine Übertragung
+	Spannung 1, Spannung 2, Spannung 3			keine Übertragung
+
+Der Schaltzustand der Hintergrundbeleuchtung wird nicht übertragen.

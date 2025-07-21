@@ -1,0 +1,97 @@
+﻿UT60G: Handmultimeter der chinesischen Firma UNI-Trend
+
+Counts: 4000 (UT60F), 6000 (UT60G), 4-stellig
+DCB: 19200 Baud,7,1,ODD,DTR+,RTS-
+Paket: Länge 11, TotalTimeOut: 1000?, Markierung: "\r\n", eindeutig
+Datagramm jeweils 2x hintereinander!
+
+Serielle Datenübertragung unidirektional über Optokoppler.
+Protokoll ähnlich UT70B (Chip: Cyrustek E51962Q)
+
+			 0  1  2  3  4  5  6  7  8  9 10
+DC  0.000 V AUTO	30 30 30 30 30 3B 38 30 3A 0D 0A
+DC -0.000 V AUTO	30 30 30 30 30 3B 3C 30 3A 0D 0A
+DC -0.000 V MAN		30 30 30 30 30 3B 3C 30 38 0D 0A 	
+DC - 0.00 V MAN		31 30 30 30 30 3B 3C 30 38 0D 0A 	Führende Nullen werden vom Multimeter und der chinesischen UT60G-Software ausgeblendet
+DC -  0.0 V MAN		32 30 30 30 30 3B 3C 30 38 0D 0A
+AC  0.006 V AUTO	30 30 30 30 36 3B 38 30 36 0D 0A	Das Multimeter hat das Symbol "Gleich-Wechsel" am Wahlschalter, misst aber reinen Wechselanteil
+     0.L  MΩ AUTO	35 36 30 30 30 33 39 30 32 0D 0A	Zahlenanzeige liefert "60.00 MΩ"
+     0L   Ω PIEP	30 36 30 30 30 35 39 30 30 0D 0A	Sehr schnelle Datenwiederholrate (schätzungsweise 100 ms, sonst 1 s)
+     .0L  V DIODE	30 32 38 32 31 31 39 30 30 0D 0A	Zahlenanzeige liefert "2.821 V"
+     .0L  V DIODE HOLD	30 32 38 32 30 31 39 38 30 0D 0A	HOLD wird übertragen, aber nicht von der chinesischen UT60G-Software angezeigt
+    0.035 nF AUTO	30 30 30 33 35 36 38 30 32 0D 0A
+        0 Hz MAN	30 30 30 30 30 32 38 30 30 0D 0A	Im Unterschied zum UT70B ist der kleinste Bereich "6000 Hz", nicht "4 kHz"
+       17 °C		30 30 30 31 37 34 38 30 30 0D 0A
+DC - 0.00 mA AUTO LICHT	30 30 30 30 30 3F 3C 30 3A 0D 0A	Displaybeleuchtung wird nicht übertragen
+DC - 0.00 A		30 30 30 30 30 39 3C 30 38 0D 0A	"mA" und "A" sind im Gegensatz zum UT70B vertauscht
+
+HOLD wirkt nur auf die Multimeter-Anzeige, RS232-übertragene Daten "zappeln" weiter.
+Die Datenloggersoftware speichert nur bei Veränderung (= datentechnischer Unsinn)
+
+
+Byte			6	5	4	3	2	1	0
+[0]	Bereich		0	1	1	0	====siehe unten===
+[1]	1. Ziffer	0	1	1	===========Ziffer=========
+[2]	2. Ziffer	0	1	1	===========Ziffer=========
+[3]	3. Ziffer	0	1	1	===========Ziffer=========
+[4]	4. Ziffer	0	1	1	===========Ziffer=========
+[5]	Schalterst.	0	1	1	========siehe unten=======
+[6]	Info		0	1	1	1	NEG	LowBat	OVL
+[7]	Info2		0	1	1	HOLD	0	0	0
+[8]	Kopplung	0	1	1	DC	AC	AUTO	0	// DC und AC (bei UT70B) nie kombiniert
+[9]	'\r'		0	0	0	1	1	0	1
+[10]	'\n'		0	0	0	1	0	1	0
+
+Bereich (Byte[0]):	V	Ω	F	Hz	µA	mA	A	°C
+	'0'		6	600	6n	6000	400µ	60m	10	1000
+	'1'		60	6k	60n	60k	4000µ	600m	-	-
+	'2'		600	60k	600n	600k	-	-	-	-
+	'3'		1000	600k	6µ	6M	-	-	-	-
+	'4'		600m	6M	60µ	60M	-	-	-	-
+	'5'		-	60M	600µ	-	-	-	-	-
+	'6'		-	-	6m	-	-	-	-	-
+	'7'		-	-	-	-	-	-	-	-
+*** Die beiden kleinen Strommessbereiche des UT60F sind nur geraten! ***
+Wie bei vielen chinesischen Fabrikaten „fehlt“ ein einstelliger A-Messbereich.
+
+Schalterstellung (Byte[5]):
+	'1'	Diode
+	'2'	Hz
+	'3'	Ω
+	'4'	°C	(nur UT60G)
+	'5'	Pieps
+	'6'	F
+	'9'	A
+	';'(3B)	V
+	'='(3D)	µA	(nur UT60F, geraten)
+	'?'(3F)	mA
+
+Genauigkeitsangaben lt. Datenblatt:
+Größe	Bereich		rel/%	abs (Digits)
+U=	600 mV		0,5	5
+	6 .. 600 V	0,5	3
+	1000 V		0,5	5
+U~	600 mV		1,2	3	40..100 Hz
+	6 .. 600 V	1	2	40..100 Hz
+			2	2	100 Hz .. 1 kHz
+			4	3	1..10 kHz
+			4	5	10..20 kHz
+	1000 V		1	3	40..100 Hz
+			2	3	100 Hz .. 1 kHz
+I=	400 µA, 4 mA	1,5	2	Nur UT60F
+	60 mA, 600 mA	2	3
+	10 A		2,5	5
+I~	400 µA, 4 mA	1,5	5	Nur UT60F
+	60 mA, 600 mA	2	5
+	10 A		2,5	5
+R	600 Ω		1,2	2
+	6 .. 600 kΩ	1	2
+	6 MΩ		1,2	2
+	60 MΩ		1,5	2
+C	6 nF		4	10
+	60n .. 600 µF	4	3
+	6 mF		5	10
+f	alle Bereiche	0,05	1
+T	-40 .. 0 °C	3	4
+	0 .. 400 °C	1	3
+	400 .. 1000 °C	2	10

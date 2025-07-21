@@ -7,12 +7,12 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(PROJECT_LICENSE "GPL-3.0")
 set(RESOURCES "src/resources.qrc")
-set(QT_COMPONENTS Widgets SerialPort PrintSupport LinguistTools)
+set(QT_COMPONENTS Widgets SerialPort PrintSupport Test LinguistTools)
 
 
 ## get files
 file(GLOB TRANSLATIONS CONFIGURE_DEPENDS assets/translations/${PROJECT_NAME}_*.ts)
-file(GLOB DRV_HEADER_FILES CONFIGURE_DEPENDS src/decoders/*.h )
+file(GLOB DECODER_HEADER_FILES CONFIGURE_DEPENDS src/decoders/*.h )
 file(GLOB UI_FILES CONFIGURE_DEPENDS src/ui/*.ui)
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp src/*.h )
 file(GLOB XPM_FILES CONFIGURE_DEPENDS assets/icons/*.xpm )
@@ -40,7 +40,7 @@ file(WRITE "src/resources.qrc" "<!-- ATTENTION this file is auto generated -->\n
 
 ## generate header file for drivers, to make adding a driver easier
 set(DRIVER_HEADER_CONTENT "#pragma once\n\n")
-foreach(file_path IN LISTS DRV_HEADER_FILES)
+foreach(file_path IN LISTS DECODER_HEADER_FILES)
 	get_filename_component(base_name "${file_path}" NAME)
 	set(DRIVER_HEADER_CONTENT "${DRIVER_HEADER_CONTENT}#include \"decoders/${base_name}\"\n")
 endforeach()
@@ -85,5 +85,8 @@ install(FILES assets/icons/qtdmm_32.png DESTINATION share/icons/hicolor/32x32/ap
 install(FILES assets/icons/qtdmm_64.png DESTINATION share/icons/hicolor/64x64/apps RENAME qtdmm.png)
 install(FILES assets/icons/qtdmm_128.png DESTINATION share/icons/hicolor/128x128/apps RENAME qtdmm.png)
 
+## include test framework
+include(cmake/ctest.cmake)
+
 ## include deployment 
-include(deploy.cmake)
+include(cmake/deploy.cmake)
