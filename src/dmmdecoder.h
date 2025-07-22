@@ -80,14 +80,18 @@ public:
     bool  dtr;
   };
 
+  explicit DmmDecoder(ReadEvent::DataFormat df);
   virtual ~DmmDecoder() = default;
   virtual size_t                     getPacketLength(ReadEvent::DataFormat df) = 0;
   virtual bool                       checkFormat(const char* data, size_t len, ReadEvent::DataFormat df) = 0; // TBD use qbytearray or similar instead for data
   virtual std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id, ReadEvent::DataFormat df) = 0;
 
+  ReadEvent::DataFormat getType() { return m_type; };
+
   static std::vector<DMMInfo>        getDeviceConfigurations();
   static void                        addConfig(DMMInfo info);
-  static std::unique_ptr<DmmDecoder> makeDecoder( ReadEvent::DataFormat df);
+  static std::shared_ptr<DmmDecoder> getInstance(ReadEvent::DataFormat df);
+  static std::shared_ptr<DmmDecoder> getInstance(QString df);
 
 
 protected:
@@ -99,6 +103,7 @@ protected:
 
   static std::vector<DMMInfo> *m_configurations;
   DmmResponse m_result;
+  ReadEvent::DataFormat m_type;
 };
 
 

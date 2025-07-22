@@ -46,10 +46,6 @@ ReaderThread::ReaderThread(QObject *receiver) :
   m_port = Q_NULLPTR;
 }
 
-void ReaderThread::setFormat(ReadEvent::DataFormat format)
-{
-  m_format = format;
-}
 
 void ReaderThread::setHandle(QIODevice *handle)
 {
@@ -69,11 +65,6 @@ void ReaderThread::setHandle(QIODevice *handle)
   }
 }
 
-
-void ReaderThread::setDecoder(DmmDecoder* decoder)
-{
-  m_decoder = decoder;
-}
 
 void ReaderThread::socketClose()
 {

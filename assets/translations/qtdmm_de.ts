@@ -61,64 +61,64 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="122"/>
+        <location filename="../../src/dmm.cpp" line="108"/>
         <source>Access denied for %1.</source>
         <translation>Zugriff auf %1 verweigert.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="125"/>
+        <location filename="../../src/dmm.cpp" line="111"/>
         <source>No such device %1.</source>
         <translation>%1 existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="128"/>
+        <location filename="../../src/dmm.cpp" line="114"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Fehler beim Öffnen von %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="140"/>
+        <location filename="../../src/dmm.cpp" line="126"/>
         <source>Error configuring serial port %1.</source>
         <translation>Fehler beim Konfigurieren des Anschlusses %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="146"/>
+        <location filename="../../src/dmm.cpp" line="132"/>
         <source>Connecting ...</source>
         <translation>Verbinde ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="161"/>
-        <location filename="../../src/dmm.cpp" line="215"/>
+        <location filename="../../src/dmm.cpp" line="147"/>
+        <location filename="../../src/dmm.cpp" line="201"/>
         <source>Not connected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="203"/>
+        <location filename="../../src/dmm.cpp" line="189"/>
         <source>%1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="206"/>
+        <location filename="../../src/dmm.cpp" line="192"/>
         <source>Error %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="211"/>
+        <location filename="../../src/dmm.cpp" line="197"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation>Lesefehler auf %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="213"/>
+        <location filename="../../src/dmm.cpp" line="199"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Wartezeit abgelaufr für %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="203"/>
+        <location filename="../../src/dmm.cpp" line="189"/>
         <source>Connected %1</source>
         <translation>Verbunden %1</translation>
     </message>

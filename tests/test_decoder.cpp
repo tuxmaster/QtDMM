@@ -10,25 +10,6 @@
 // Decoder base class and response
 #include "dmmdecoder.h"
 
-    static const QMap<QString, ReadEvent::DataFormat> decoderMap = {
-        { "Metex14",               ReadEvent::Metex14 },
-        { "PeakTech10",            ReadEvent::PeakTech10 },
-        { "Voltcraft14Continuous", ReadEvent::Voltcraft14Continuous },
-        { "Voltcraft15Continuous", ReadEvent::Voltcraft15Continuous },
-        { "M9803RContinuous",      ReadEvent::M9803RContinuous },
-        { "VC820Continuous",       ReadEvent::VC820Continuous },
-        { "IsoTech",               ReadEvent::IsoTech },
-        { "VC940Continuous",       ReadEvent::VC940Continuous },
-        { "QM1537Continuous",      ReadEvent::QM1537Continuous },
-        { "RS22812Continuous",     ReadEvent::RS22812Continuous },
-        { "VC870Continuous",       ReadEvent::VC870Continuous },
-        { "DO3122Continuous",      ReadEvent::DO3122Continuous },
-        { "CyrustekES51922",       ReadEvent::CyrustekES51922 },
-        { "CyrustekES51962",       ReadEvent::CyrustekES51962 },
-        { "DTM0660",               ReadEvent::DTM0660 },
-        { "CyrustekES51981",       ReadEvent::CyrustekES51981 }
-    };
-
 QByteArray parseHexStringToByteArray(const QString& hexString)
 {
     QByteArray result;
@@ -42,19 +23,6 @@ QByteArray parseHexStringToByteArray(const QString& hexString)
     }
     return result;
 }
-
-// Decoder Factory
-std::unique_ptr<DmmDecoder> createDecoder(const QString& name)
-{
-    auto it = decoderMap.find(name);
-    if (it != decoderMap.end())
-        return DmmDecoder::makeDecoder(it.value());
-qInfo() << "nope" << name;
-    return nullptr;
-}
-
-
-
 
 int main(int argc, char** argv)
 {
@@ -79,19 +47,14 @@ int main(int argc, char** argv)
     QString decoderName = root["decoder"].toString();
     QJsonArray tests = root["tests"].toArray();
 
-    auto decoder = createDecoder(decoderName);
+    auto decoder = DmmDecoder::getInstance(decoderName);
     if (!decoder)
     {
         qCritical() << "Unknown decoder:" << decoderName;
         return 3;
     }
 
-    ReadEvent::DataFormat df;
-    auto it = decoderMap.find(decoderName);
-    if (it != decoderMap.end())
-        df = it.value();
-
-
+    ReadEvent::DataFormat df = decoder->getType();
     int failed = 0;
 
     for (int i = 0; i < tests.size(); ++i)

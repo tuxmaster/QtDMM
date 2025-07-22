@@ -88,24 +88,10 @@ void DMM::setDevice(const QString &device)
 
 void DMM::initDecoder( ReadEvent::DataFormat df)
 {
-  switch (df)
+  if (m_decoder == Q_NULLPTR || m_decoder->getType() != df)
   {
-    case ReadEvent::Metex14:
-    case ReadEvent::PeakTech10:
-    case ReadEvent::Voltcraft14Continuous:
-    case ReadEvent::Voltcraft15Continuous: createDecoder<DecoderAscii>();   break;
-    case ReadEvent::M9803RContinuous:      createDecoder<DecoderM9803R>();  break;
-    case ReadEvent::VC820Continuous:       createDecoder<DecoderVC820>();   break;
-    case ReadEvent::VC870Continuous:       createDecoder<DecoderVC870>();   break;
-    case ReadEvent::IsoTech:               createDecoder<DecoderIsoTech>(); break;
-    case ReadEvent::VC940Continuous:       createDecoder<DecoderVC940>();   break;
-    case ReadEvent::QM1537Continuous:      createDecoder<DecoderQM1537>();  break;
-    case ReadEvent::RS22812Continuous:     createDecoder<DecoderRS22812>(); break;
-    case ReadEvent::DO3122Continuous:      createDecoder<DecoderDO3122>();  break;
-    case ReadEvent::CyrustekES51922:       createDecoder<DecoderCyrusTekES51922>(); break;
-    case ReadEvent::CyrustekES51962:       createDecoder<DecoderCyrusTekES51962>(); break;
-    case ReadEvent::DTM0660:               createDecoder<DecoderDTM0660>(); break;
-    case ReadEvent::CyrustekES51981:       createDecoder<DecoderCyrusTekES51981>(); break;
+    m_decoder = DmmDecoder::getInstance(df);
+    m_readerThread->setDecoder(m_decoder);
   }
 }
 
@@ -183,7 +169,7 @@ void DMM::timerEvent(QTimerEvent *)
 
 void DMM::readEventSLOT(const QByteArray &data, int id, ReadEvent::DataFormat df)
 {
-  if (ReaderThread::Ok == m_readerThread->status())
+  if (ReaderThread::Ok == m_readerThread->status() )
   {
     if (m_consoleLogging)
     {
@@ -191,15 +177,15 @@ void DMM::readEventSLOT(const QByteArray &data, int id, ReadEvent::DataFormat df
         fprintf(stdout, "%02X ", data[i] & 0x0ff);
       fprintf(stdout, "\r\n");
     }
+    if (m_decoder == Q_NULLPTR)
+      return;
 
     // call decode of current decoder to convert data into distinct values
     if (auto r = m_decoder->decode(data, id, df); r)
     {
       Q_EMIT value(r->dval, r->val, r->unit, r->special, r->range, r->hold, r->showBar, r->id);
       if (r->id2 > 0)
-      {
         Q_EMIT value(r->dval2, r->val2, r->unit2, r->special, r->range, r->hold, r->showBar, r->id2);
-      }
       m_error = r->error.isEmpty() ? tr("Connected %1").arg(m_device) : tr("%1 %2").arg(r->error, m_device);
     }
     else

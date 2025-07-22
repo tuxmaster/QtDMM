@@ -74,22 +74,11 @@ protected:
   bool                  m_rts;
   int                   m_flags;
   int                   m_delayTimer;
-  DmmDecoder           *m_decoder;
+  std::shared_ptr<DmmDecoder> m_decoder;
   DmmDecoder::DMMInfo   m_dmmInfo;
   PortHandler::PortType m_portType;
 
   void                  timerEvent(QTimerEvent *) Q_DECL_OVERRIDE;
-
-  template<typename DecoderType>
-  void createDecoder()
-  {
-    if (auto *p = dynamic_cast<DecoderType *>(m_decoder); !p)
-    {
-      delete m_decoder;
-      m_decoder = new DecoderType();
-      m_readerThread->setDecoder(m_decoder);
-    }
-  };
 
 protected Q_SLOTS:
   void readEventSLOT(const QByteArray &str, int id, ReadEvent::DataFormat df);
