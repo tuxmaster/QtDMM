@@ -54,6 +54,7 @@ public:
     QString range;
     bool hold;
     bool showBar;
+    bool lowBat;
     int id;
     QString error;
     double dval2;
@@ -82,9 +83,9 @@ public:
 
   explicit DmmDecoder(ReadEvent::DataFormat df);
   virtual ~DmmDecoder() = default;
-  virtual size_t                     getPacketLength(ReadEvent::DataFormat df) = 0;
-  virtual bool                       checkFormat(const char* data, size_t len, ReadEvent::DataFormat df) = 0; // TBD use qbytearray or similar instead for data
-  virtual std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id, ReadEvent::DataFormat df) = 0;
+  virtual size_t                     getPacketLength() = 0;
+  virtual bool                       checkFormat(const char* data, size_t len) = 0; // TBD use qbytearray or similar instead for data
+  virtual std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id) = 0;
 
   ReadEvent::DataFormat getType() { return m_type; };
 
@@ -99,6 +100,7 @@ protected:
   QString insertCommaIT(const QString &val, int pos);
   void formatResultValue(int commaPos, const QString& prefix, const QString& baseUnit);
   bool bit(const QByteArray &data, int byte, int bit) const;
+  QString makeValue(const QByteArray &data, int first, int last, bool neg=false);
   QString toString() const;
 
   static std::vector<DMMInfo> *m_configurations;

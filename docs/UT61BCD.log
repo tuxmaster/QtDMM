@@ -9,8 +9,8 @@ Datenpakete kommen dicht-an-dicht beim Übertragen der gespeicherten Messwerte.
 Startzeitpunkt und Sampling-Intervall werden nicht übertragen
 und muss in der Software von Hand vorgegeben werden (für eine sinnfällige Speicherung)
 
-			 0  1  2  3  4  5  6  7  8  9 10 11 12 13
-			 +  3  4  8  2     4  1     m  V
+			                 0  1  2  3  4  5  6  7  8  9 10 11 12 13
+			                 +  3  4  8  2     4  1     m  V
 DC  348.2 mV AUTO BG	2B 33 34 38 32 20 34 31 00 40 80 22 0D 0A 	
 DC  348.2 mV AUTO BG	2B 33 34 38 32 20 34 31 00 40 80 22 0D 0A 	
 DC  348.1 mV AUTO BG	2B 33 34 38 31 20 34 31 00 40 80 22 0D 0A 	

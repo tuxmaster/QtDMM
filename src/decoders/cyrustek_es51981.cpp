@@ -10,217 +10,110 @@ static const bool registered = []()
   return true;
 }();
 
-bool DecoderCyrusTekES51981::checkFormat(const char *data, size_t len, ReadEvent::DataFormat df)
+bool DecoderCyrusTekES51981::checkFormat(const char *data, size_t len)
 {
-  return (df == ReadEvent::CyrustekES51981 && len >= 12 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+  return (m_type == ReadEvent::CyrustekES51981 && len >= 12 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
 }
 
-size_t DecoderCyrusTekES51981::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderCyrusTekES51981::getPacketLength()
 {
-  return (df == ReadEvent::CyrustekES51981 ? 11 : 0);
+  return (m_type == ReadEvent::CyrustekES51981 ? 11 : 0);
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51981::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51981::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id     = id;
   m_result.hold   = false;
   m_result.range  = bit(data,8,1) ? "AUTO" : "MANU";
+  m_result.val    = makeValue(data,1,4,bit(data,6,2));
   m_result.showBar = true;
 
-  QString val;
-  QString special;
-  QString unit;
-  double scale = 1.0;
+  if (data[8] & 4)
+    m_result.special = "AC";
+  else if (data[8] & 8)
+    m_result.special = "DC";
 
-  // Digit values
-  if (data[6] & 4) // Sign
-    val = "-";
-
-  val += data[1];
-  val += data[2];
-  val += data[3];
-  val += data[4];
-
-  if (!memcmp(data + 1, "4000", 4) ||
-      (data[6] & 1) != 0)
-    val = "  0L";
+  if (!memcmp(data + 1, "4000", 4) || (data[6] & 1) != 0)
+    m_result.val = "  0L";
 
   // Function
   switch (data[5])
   {
     case 0x31:
-      unit = "D";
+      m_result.unit = "D";
       break;
+    case 0x32:
 
-    case 0x3b:
-      unit = "V";
       switch (data[0]) // Range
       {
-        case '0':
-          unit = "mV";
-          scale = 1e-3;
-          val = insertComma(val, 3);
-          break;
-        case '1':
-          val = insertComma(val, 1);
-          break;
-        case '2':
-          val = insertComma(val, 2);
-          break;
-        case '3':
-          val = insertComma(val, 3);
-          break;
-      }
-      break;
-    case 0x3d:
-      unit = "uA";
-      scale = 1e-6;
-      switch (data[0]) // Range
-      {
-        case '0':
-          val = insertComma(val, 3);
-          break;
-      }
-      break;
-    case 0x39:
-      unit = "mA";
-      scale = 1e-3;
-      switch (data[0]) // Range
-      {
-        case '0':
-          val = insertComma(val, 3);
-          break;
-        case '1':
-          val = insertComma(val, 1);
-          break;
+        case '0': formatResultValue(1,"k",bit(data,6,3)?"RPM":"Hz"); break;
+        case '1': formatResultValue(2,"k",bit(data,6,3)?"RPM":"Hz"); break;
+        case '2': formatResultValue(3,"k",bit(data,6,3)?"RPM":"Hz"); break;
+        case '3': formatResultValue(1,"M",bit(data,6,3)?"RPM":"Hz"); break;
+        case '4': formatResultValue(2,"M",bit(data,6,3)?"RPM":"Hz"); break;
+        case '5': formatResultValue(3,"M",bit(data,6,3)?"RPM":"Hz"); break;
       }
       break;
     case 0x33:
-      unit = "kOhm";
+      m_result.unit = "kOhm";
       switch (data[0]) // Range
       {
-        case '0':
-          unit = "Ohm";
-          val = insertComma(val, 3);
-          break;
-        case '1':
-          scale = 1e3;
-          val = insertComma(val, 1);
-          break;
-        case '2':
-          scale = 1e3;
-          val = insertComma(val, 2);
-          break;
-        case '3':
-          scale = 1e3;
-          val = insertComma(val, 3);
-          break;
-        case '4':
-          unit = "MOhm";
-          scale = 1e6;
-          val = insertComma(val, 1);
-          break;
-        case '5':
-          scale = 1e6;
-          unit = "MOhm";
-          val = insertComma(val, 2);
-          break;
+        case '0': formatResultValue(3,"","Ohm"); break;
+        case '1': formatResultValue(1,"k","Ohm"); break;
+        case '2': formatResultValue(2,"k","Ohm"); break;
+        case '3': formatResultValue(3,"k","Ohm"); break;
+        case '4': formatResultValue(1,"M","Ohm"); break;
+        case '5': formatResultValue(2,"M","Ohm"); break;
       }
       break;
     case 0x34:
-      unit = (data[6] & 8) ? "C" : "F";
+      m_result.special = "TE";
+      formatResultValue(0,"",(data[6] & 8) ? "C" : "dF"); break;
       break;
-    case 0x3f:
-      unit = "A";
-      val = insertComma(val, 2);
-      break;
-    case 0x32:
-      switch (data[0]) // Range
-      {
-        case '0':
-          unit = "kHz";
-          scale = 1e3;
-          val = insertComma(val, 1);
-          break;
-        case '1':
-          unit = "kHz";
-          scale = 1e3;
-          val = insertComma(val, 2);
-          break;
-        case '2':
-          unit = "kHz";
-          scale = 1e3;
-          val = insertComma(val, 3);
-          break;
-        case '3':
-          unit = "MHz";
-          scale = 1e6;
-          val = insertComma(val, 1);
-          break;
-        case '4':
-          unit = "MHz";
-          scale = 1e6;
-          val = insertComma(val, 2);
-          break;
-        case '5':
-          unit = "MHz";
-          scale = 1e6;
-          val = insertComma(val, 3);
-          break;
-      }
+    case 0x35:
+      m_result.special = "BUZ";
+      formatResultValue(3,"","Ohm");
       break;
     case 0x36:
       switch (data[0]) // Range
       {
-        case '0':
-          unit = "nF";
-          scale = 1e-9;
-          val = insertComma(val, 1);
-          break;
-        case '1':
-          unit = "nF";
-          scale = 1e-9;
-          val = insertComma(val, 2);
-          break;
-        case '3':
-          unit = "nF";
-          scale = 1e-9;
-          val = insertComma(val, 3);
-          break;
-        case '4':
-          unit = "uF";
-          scale = 1e-6;
-          val = insertComma(val, 1);
-          break;
-        case '5':
-          unit = "uF";
-          scale = 1e-6;
-          val = insertComma(val, 2);
-          break;
-        case '6':
-          unit = "uF";
-          scale = 1e-6;
-          val = insertComma(val, 3);
-          break;
-        case '7':
-          unit = "mF";
-          scale = 1e-3;
-          val = insertComma(val, 1);
-          break;
+        case '0': formatResultValue(1,"n","F"); break;
+        case '1': formatResultValue(2,"n","F"); break;
+        case '3': formatResultValue(3,"n","F"); break;
+        case '4': formatResultValue(1,"u","F"); break;
+        case '5': formatResultValue(2,"u","F"); break;
+        case '6': formatResultValue(3,"u","F"); break;
+        case '7': formatResultValue(1,"m","F"); break;
       }
       break;
+    case 0x39:
+      switch (data[0]) // Range
+      {
+        case '0': formatResultValue(3,"m","A"); break;
+        case '1': formatResultValue(1,"m","A"); break;
+      }
+      break;
+    case 0x3b:
+      m_result.unit = "V";
+      switch (data[0]) // Range
+      {
+        case '0': formatResultValue(3,"m","V"); break;
+        case '1': formatResultValue(1,"","V"); break;
+        case '2': formatResultValue(2,"","V"); break;
+        case '3': formatResultValue(3,"","V"); break;
+      }
+      break;
+    case 0x3d:
+      switch (data[0]) // Range
+      {
+        case '0':  formatResultValue(3,"u","A"); break;
+      }
+      break;
+    case 0x3f:
+      formatResultValue(2,"A","Hz");
+      break;
   }
-
-  if (data[8] & 4)
-    special += "AC";
-  else if (data[8] & 8)
-    special += "DC";
-
-  m_result.dval   = val.toDouble() * scale;;
-  m_result.special = special;
-  m_result.val    = val;
-  m_result.unit  = unit;
 
   return m_result;
 }

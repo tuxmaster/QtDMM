@@ -4,6 +4,7 @@
     {
       "hex": "30 30 30 30 30 30 3B 30 30 30 3A 30 0D 0A",
       "expected": {
+        "dval": 0.0,
         "val": "0.0000",
         "unit": "V",
         "range": "AUTO",
@@ -15,6 +16,7 @@
     {
       "hex": "30 30 30 30 30 30 3B 30 30 30 38 30 0D 0A",
       "expected": {
+        "dval": 0.0,
         "val": "0.0000",
         "unit": "V",
         "range": "MANU",
@@ -26,6 +28,7 @@
     {
       "hex": "30 30 30 30 30 30 3B 32 30 30 3A 30 0D 0A",
       "expected": {
+        "dval": 0.0,
         "val": "0.0000",
         "unit": "V",
         "range": "AUTO",
@@ -37,6 +40,7 @@
     {
       "hex": "30 30 30 30 30 30 3D 30 30 30 3A 30 0D 0A",
       "expected": {
+        "dval": 0.0,
         "val": "000.00",
         "unit": "uA",
         "range": "AUTO",
@@ -48,6 +52,7 @@
     {
       "hex": "30 30 30 30 30 30 30 30 30 30 34 32 0D 0A",
       "expected": {
+        "dval": 0.0,
         "val": "00.000",
         "unit": "A",
         "range": "MANU",
@@ -59,6 +64,7 @@
     {
       "hex": "30 30 30 30 30 30 3B 30 30 30 3B 30 0D 0A",
       "expected": {
+        "dval": 0.0,
         "val": "0.0000",
         "unit": "Hz",
         "range": "AUTO",
@@ -70,6 +76,7 @@
     {
       "hex": "30 30 30 30 30 37 3F 30 30 30 36 30 0D 0A",
       "expected": {
+        "dval": 0.007,
         "val": "00.007",
         "unit": "mA",
         "range": "AUTO",

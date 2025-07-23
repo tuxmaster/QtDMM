@@ -68,9 +68,6 @@ protected:
   void readDMM();
   void readMetex14();
 
-  int  formatLength() const;
-  bool checkFormat();
-
 protected Q_SLOTS:
   void socketNotifierSLOT();
   void socketClose();

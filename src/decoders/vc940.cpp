@@ -1,4 +1,5 @@
 #include "vc940.h"
+// ES51966
 
 static const bool registered = []() {
   DmmDecoder::addConfig({"Tenma", "72-7732", "", 2400, 7, 7, 1, 1, 2, 40000, 0, 0, 1});
@@ -11,17 +12,17 @@ static const bool registered = []() {
   return true;
 }();
 
-size_t DecoderVC940::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderVC940::getPacketLength()
 {
-  return  (df == ReadEvent::VC940Continuous ? 11 : 0);
+  return  (m_type == ReadEvent::VC940Continuous ? 11 : 0);
 }
 
-bool DecoderVC940::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderVC940::checkFormat(const char* data, size_t len)
 {
-  return (df==ReadEvent::VC940Continuous && len >= 12 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+  return (m_type==ReadEvent::VC940Continuous && len >= 12 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id     = id;
@@ -31,20 +32,14 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &da
   m_result.special= bit(data,7,0) ? "AC"  :"DC";
   m_result.special+= bit(data,7,1) ? "DC" : "";
 
-
   int function = data[6] & 0x0f;
   int range    = data[5] & 0x0f;
   int mode2    = data[8];
   bool neg     = bit(data,8,3);
 
-  if (function != 0xC && neg)
-    m_result.val = "-";
-
-  QString str(data);
-  for (int i = 0; i < 4; ++i)
-    m_result.val += str[i];
+  m_result.val = makeValue(data,0,3, (function != 0xC && neg));
   if (data[4] != 'A')
-    m_result.val += str[4];
+    m_result.val += data[4];
 
   switch (function)
   {

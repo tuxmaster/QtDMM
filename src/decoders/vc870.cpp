@@ -5,17 +5,17 @@ static const bool registered = []() {
   return true;
 }();
 
-bool DecoderVC870::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderVC870::checkFormat(const char* data, size_t len)
 {
-  return (df == ReadEvent::VC870Continuous && (len) && (data[len - 1] == 0x0d) && (data[len] == 0x0a));
+  return (m_type == ReadEvent::VC870Continuous && (len) && (data[len - 1] == 0x0d) && (data[len] == 0x0a));
 }
 
-size_t DecoderVC870::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderVC870::getPacketLength()
 {
-  return  (df == ReadEvent::VC870Continuous ? 23 : 0);
+  return  (m_type == ReadEvent::VC870Continuous ? 23 : 0);
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderVC870::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderVC870::decode(const QByteArray &data, int id)
 {
   // Support for the Voltcraft VC870 digital multimeter was contributed by Florian Evers, florian-evers@gmx.de, under the "GPLv3 or later" licence
   m_result = {};
@@ -34,6 +34,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC870::decode(const QByteArray &da
   const uint8_t l_FunctionCode = in[0];
   const uint8_t l_FunctionSelectCode = in[1];
   const uint8_t l_FactorIndex = (in[2] & 0x0f); // Main Display Range
+
   double l_Factor  = 0.0;
   double l_Factor2 = 0.0;
   int    l_DotPos  = 0;
@@ -679,7 +680,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC870::decode(const QByteArray &da
       val1 = "  ";
     // else
 
-    val1 += QString(in[3]) + QString(in[4]) + QString(in[5]) + QString(in[6]) + QString(in[7]);
+    val1 += makeValue(data,3,7);
     d_val1 = (l_Factor * val1.toDouble());
     if (l_DotPos)
     {
@@ -712,7 +713,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC870::decode(const QByteArray &da
       val2 = "  ";
     // else
 
-    val2 += QString(in[8]) + QString(in[9]) + QString(in[10]) + QString(in[11]) + QString(in[12]);
+    val2 += makeValue(data,8,12);
     if (l_Factor2 == 0.0)
       d_val2 = (l_Factor * val2.toDouble());
     else

@@ -288,7 +288,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DecoderVC870</name>
     <message>
-        <location filename="../../src/decoders/vc870.cpp" line="760"/>
+        <location filename="../../src/decoders/vc870.cpp" line="761"/>
         <source>Parser errors</source>
         <translation type="unfinished"></translation>
     </message>

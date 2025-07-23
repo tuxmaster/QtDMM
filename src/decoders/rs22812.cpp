@@ -64,15 +64,15 @@ static const bool registered = []() {
 }();
 
 
-size_t DecoderRS22812::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderRS22812::getPacketLength()
 {
-  return  (df == ReadEvent::RS22812Continuous ? 9 : 0);
+  return  (m_type == ReadEvent::RS22812Continuous ? 9 : 0);
 }
 
 
-bool DecoderRS22812::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderRS22812::checkFormat(const char* data, size_t len)
 {
-  if (df == ReadEvent::RS22812Continuous)
+  if (m_type == ReadEvent::RS22812Continuous)
   {
     unsigned int checksum = 0x00;
     unsigned char byte;
@@ -325,7 +325,7 @@ bool DecoderRS22812::checkFormat(const char* data, size_t len, ReadEvent::DataFo
 }
 
 
-std::optional<DmmDecoder::DmmResponse> DecoderRS22812::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderRS22812::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id = id;

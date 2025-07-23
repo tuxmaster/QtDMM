@@ -6,17 +6,17 @@ static const bool registered = []() {
   return true;
 }();
 
-bool DecoderCyrusTekES51962::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderCyrusTekES51962::checkFormat(const char* data, size_t len)
 {
-  return (df == ReadEvent::CyrustekES51962 && len >= 12 && data[(len-1+FIFO_LENGTH)%FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+  return (m_type == ReadEvent::CyrustekES51962 && len >= 12 && data[(len-1+FIFO_LENGTH)%FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
 }
 
-size_t DecoderCyrusTekES51962::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderCyrusTekES51962::getPacketLength()
 {
-  return  (df == ReadEvent::CyrustekES51962 ? 11 : 0);
+  return  (m_type == ReadEvent::CyrustekES51962 ? 11 : 0);
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51962::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51962::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id     = id;
@@ -24,15 +24,12 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51962::decode(const QByt
   m_result.hold   = bit(data,7,3);
   m_result.range  = bit(data,8,1) ? "AUTO":"MANU";
   m_result.special= bit(data,8,2) ? "AC"  :"DC";
-  m_result.val    = bit(data,6,2) ? "-"   :"";
+  m_result.val    = makeValue(data,1,4, bit(data,6,2));
   bool ovl        = bit(data,6,0);
   QString unit_temp= bit(data,6,3) ? "C" : "F";
   int function = data[5] & 0x0f;
   int range    = data[0] & 0x0f;
 
-  QString str(data);
-  for (int i = 1; i < 5; ++i)
-    m_result.val += str[i];
 
   switch (function)
   {

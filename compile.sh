@@ -10,8 +10,9 @@ usage: compile.sh <install|clean|qt6>
 
    install: install system wide
    clean  : remove build files before build
+   ctest  : build and run ctest
    run    : run qtdmm after successfull build
-   package: create packages (DEB and source)
+   pack   : create packages (DEB and source)
 
 EOF
 	exit 0
@@ -33,7 +34,7 @@ do
 	[ "$arg" = "help"    ] && usage
 done
 
-cmake $(${CTEST} && echo "-DBUILD_TESTING=ON" ) -B build
+cmake -DBUILD_TESTING=$(${CTEST} && echo "ON" || echo "OFF") -B build
 cmake --build build --parallel $(nproc) || exit 1
 
 cd build
@@ -54,7 +55,12 @@ then
 	rm -rf ../packages/_CPack_Packages
 fi
 
-${CTEST} && ctest --test-dir . --output-on-failure
+if ${CTEST}
+then
+	echo
+	ctest --test-dir . --output-on-failure
+	echo
+fi
 
 if [ -x qtdmm ]
 then

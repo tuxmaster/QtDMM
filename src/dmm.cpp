@@ -181,7 +181,7 @@ void DMM::readEventSLOT(const QByteArray &data, int id, ReadEvent::DataFormat df
       return;
 
     // call decode of current decoder to convert data into distinct values
-    if (auto r = m_decoder->decode(data, id, df); r)
+    if (auto r = m_decoder->decode(data, id); r)
     {
       Q_EMIT value(r->dval, r->val, r->unit, r->special, r->range, r->hold, r->showBar, r->id);
       if (r->id2 > 0)

@@ -6,14 +6,14 @@ static const bool registered = []() {
   return true;
 }();
 
-size_t DecoderIsoTech::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderIsoTech::getPacketLength()
 {
-  return  (df == ReadEvent::IsoTech ? 22 : 0);
+  return  (m_type == ReadEvent::IsoTech ? 22 : 0);
 }
 
-bool DecoderIsoTech::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderIsoTech::checkFormat(const char* data, size_t len)
 {
-  if (df == ReadEvent::IsoTech && len >= 22)
+  if (m_type == ReadEvent::IsoTech && len >= 22)
   {
     for (int i = 0; i < 11; ++i)
     {
@@ -27,7 +27,7 @@ bool DecoderIsoTech::checkFormat(const char* data, size_t len, ReadEvent::DataFo
   return false;
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderIsoTech::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderIsoTech::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id     = id;

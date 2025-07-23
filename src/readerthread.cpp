@@ -101,14 +101,15 @@ void ReaderThread::socketNotifierSLOT()
   char byte;
 
   m_status = ReaderThread::Ok;
-  size_t bytesToRead = formatLength();
+  size_t bytesToRead = (m_decoder == Q_NULLPTR) ? 0 : m_decoder->getPacketLength();
 
-  while ((r = m_port->read( &byte, 1)) > 0) {
+  while ((r = m_port->read( &byte, 1)) > 0)
+  {
     retval++;
 
     m_fifo[m_length] = byte;
 
-    if (checkFormat())
+    if (m_decoder != Q_NULLPTR && m_decoder->checkFormat(m_fifo,m_length))
     {
       m_length = (m_length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
 
@@ -144,12 +145,6 @@ void ReaderThread::socketNotifierSLOT()
   }
 }
 
-
-int  ReaderThread::formatLength() const
-{
-  return (m_decoder == Q_NULLPTR) ? 0 : m_decoder->getPacketLength(m_format );
-}
-
 void ReaderThread::readDMM()
 {
   switch (m_format)
@@ -160,10 +155,6 @@ void ReaderThread::readDMM()
   }
 }
 
-bool ReaderThread::checkFormat()
-{
-  return (m_decoder != Q_NULLPTR && m_decoder->checkFormat(m_fifo,m_length,m_format));
-}
 
 void ReaderThread::readMetex14()
 {

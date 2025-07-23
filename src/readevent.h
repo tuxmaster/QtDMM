@@ -32,6 +32,7 @@ class ReadEvent
 public:
   enum DataFormat
   {
+    Invalid = -1,
     Metex14 = 0,
     PeakTech10,
     Voltcraft14Continuous,

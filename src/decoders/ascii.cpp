@@ -45,9 +45,9 @@ static const bool registered = []() {
   return true;
 }();
 
-bool DecoderAscii::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderAscii::checkFormat(const char* data, size_t len)
 {
-  switch(df)
+  switch(m_type)
   {
     case ReadEvent::PeakTech10: return (data[(len-11+FIFO_LENGTH)%FIFO_LENGTH] == '#');
     case ReadEvent::Metex14:
@@ -57,9 +57,9 @@ bool DecoderAscii::checkFormat(const char* data, size_t len, ReadEvent::DataForm
   }
 }
 
-size_t DecoderAscii::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderAscii::getPacketLength()
 {
-  switch (df)
+  switch (m_type)
   {
     case ReadEvent::PeakTech10:            return 11;
     case ReadEvent::Metex14:               return 14;
@@ -69,7 +69,7 @@ size_t DecoderAscii::getPacketLength(ReadEvent::DataFormat df)
   }
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderAscii::decode(const QByteArray &data, int id, ReadEvent::DataFormat df)
+std::optional<DmmDecoder::DmmResponse> DecoderAscii::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id = id;
@@ -80,15 +80,15 @@ std::optional<DmmDecoder::DmmResponse> DecoderAscii::decode(const QByteArray &da
   QString str(data);
   QString unit;
 
-  if (df == ReadEvent::Metex14 ||
-    df == ReadEvent::Voltcraft14Continuous ||
-    df == ReadEvent::Voltcraft15Continuous)
+  if (m_type == ReadEvent::Metex14 ||
+    m_type == ReadEvent::Voltcraft14Continuous ||
+    m_type == ReadEvent::Voltcraft15Continuous)
   {
     m_result.val = str.mid(2, 7).trimmed();
     unit    = str.mid(9, 4).trimmed();
     m_result.special = str.left(3).trimmed();
   }
-  else if (df == ReadEvent::PeakTech10)
+  else if (m_type == ReadEvent::PeakTech10)
   {
     m_result.val  = str.mid(1, 6).trimmed();
     unit = str.mid(7, 4).trimmed();

@@ -15,21 +15,21 @@ static const bool registered = []() {
   return true;
 }();
 
-bool DecoderVC820::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderVC820::checkFormat(const char* data, size_t len)
 {
-  return (df == ReadEvent::VC820Continuous && ((data[len] & 0xf0) == 0xe0));
+  return (m_type == ReadEvent::VC820Continuous && ((data[len] & 0xf0) == 0xe0));
 }
 
-size_t DecoderVC820::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderVC820::getPacketLength()
 {
-  return  (df == ReadEvent::VC820Continuous ? 14 : 0);
+  return  (m_type == ReadEvent::VC820Continuous ? 14 : 0);
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id     = id;
-  m_result.hold   = false;
+  m_result.hold   = (data[11] & 0x01);
   m_result.showBar= true;
   m_result.range = (bit(data, 0, 1)? "AUTO" : "MANU");
 
@@ -47,33 +47,27 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &da
     val = "  0L";
   else
   {
-    if (in[1] & 0x08)
-      val = " -";   // negative;
-    else
-      val = "  ";
+    val = (in[1] & 0x08) ? " -" : "  ";
+
     // create string;
     for (int i = 0; i < 4; ++i)
       val += vc820Digit(((in[1 + 2 * i] << 4) & 0xf0) | (in[2 + 2 * i] & 0x0f));
   }
 
 
-  // find comma position
-  if (in[3] & 0x08)
-    val = insertComma(val, 1);
-  else if (in[5] & 0x08)
-    val = insertComma(val, 2);
-  else if (in[7] & 0x08)
-    val = insertComma(val, 3);
 
-  double d_val = val.toDouble();
+  // find comma position
+  if (in[3] & 0x08) val = insertComma(val, 1);
+  else if (in[5] & 0x08) val = insertComma(val, 2);
+  else if (in[7] & 0x08) val = insertComma(val, 3);
+
+  m_result.dval  = val.toDouble();
 
   // try to find some special modes
   if (in[9] & 0x01)
     special = "DI";
-  if (in[0] & 0x08)
-    special = "AC";
-  else
-    special = "DC";
+
+  special = (in[0] & 0x08) ? "AC" : "DC";
 
   // try to find mode
   if (in[11] & 0x08)
@@ -109,33 +103,12 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &da
     qWarning() << "Unknown unit!";
 
   // try to find prefix
-  if (in[9] & 0x04)
-  {
-    d_val /= 1e9;
-    unit.prepend("n");
-  }
-  else if (in[9] & 0x08)
-  {
-    d_val /= 1e6;
-    unit.prepend("u");
-  }
-  else if (in[10] & 0x08)
-  {
-    d_val /= 1e3;
-    unit.prepend("m");
-  }
-  else if (in[9] & 0x02)
-  {
-    d_val *= 1e3;
-    unit.prepend("k");
-  }
-  else if (in[10] & 0x02)
-  {
-    d_val *= 1e6;
-    unit.prepend("M");
-  }
+  if (in[9] & 0x04)       unit.prepend("n");
+  else if (in[ 9] & 0x08) unit.prepend("u");
+  else if (in[10] & 0x08) unit.prepend("m");
+  else if (in[ 9] & 0x02) unit.prepend("k");
+  else if (in[10] & 0x02) unit.prepend("M");
 
-   m_result.dval   = d_val;
   m_result.special= special;
   m_result.val    = val;
   m_result.unit  = unit;

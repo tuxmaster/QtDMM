@@ -5,14 +5,14 @@ static const bool registered = []() {
   return true;
 }();
 
-size_t DecoderDO3122::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderDO3122::getPacketLength()
 {
-  return  (df == ReadEvent::DO3122Continuous ? 22 : 0);
+  return  (m_type == ReadEvent::DO3122Continuous ? 22 : 0);
 }
 
-bool DecoderDO3122::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderDO3122::checkFormat(const char* data, size_t len)
 {
-  if (df == ReadEvent::DO3122Continuous)
+  if (m_type == ReadEvent::DO3122Continuous)
   {
     if ((static_cast<uint8_t>(data[(len - 21 + FIFO_LENGTH) % FIFO_LENGTH]) != 0xAAu)
         || (static_cast<uint8_t>(data[(len - 20 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x55u)
@@ -32,7 +32,7 @@ bool DecoderDO3122::checkFormat(const char* data, size_t len, ReadEvent::DataFor
   return false;
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderDO3122::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderDO3122::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id     = id;

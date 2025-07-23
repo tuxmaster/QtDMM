@@ -60,10 +60,20 @@ void DmmDecoder::formatResultValue(int commaPos, const QString& prefix, const QS
   };
 
   m_result.val = insertCommaIT(m_result.val, commaPos);
-  m_result.dval = m_result.val.toDouble() * scaleMap.value(prefix, 1.0);
+  m_result.dval = m_result.val.toDouble();// * scaleMap.value(prefix, 1.0);
+
   m_result.unit = prefix + baseUnit;
 }
 
+QString DmmDecoder::makeValue(const QByteArray &data, int first, int last, bool neg)
+{
+  QString val = neg ? "-" : "";
+
+  for(int i=first; i<=last && i<data.size(); i++)
+    val += data[i];
+
+  return val;
+}
 
 QString DmmDecoder::toString() const {
   return QString("id=%1: %2 %3 (%4) [%5] range=%6 hold=%7 bar=%8")
