@@ -8,7 +8,7 @@ class PortHandler : public QObject
 {
     Q_OBJECT
 public:
-    enum class PortType { None, Serial, Hid, Sigrok };
+    enum class PortType { None, Serial, Hid, Sigrok, RFC2217 };
 
     explicit PortHandler(QObject *parent = Q_NULLPTR) : QObject(parent) {}
     bool create(const DmmDecoder::DMMInfo spec, PortType type, QString device);

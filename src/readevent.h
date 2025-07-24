@@ -32,6 +32,7 @@ class ReadEvent
 public:
   enum DataFormat
   {
+    Invalid = -1,
     Metex14 = 0,
     PeakTech10,
     Voltcraft14Continuous,
@@ -46,6 +47,7 @@ public:
     DO3122Continuous,
     CyrustekES51922,
     CyrustekES51962,
-    DTM0660
+    DTM0660,
+    CyrustekES51981
   };
 };

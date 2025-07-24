@@ -44,8 +44,8 @@ public:
   void        start();
   void        startRead();
   void        setHandle(QIODevice *handle);
-  void        setFormat(ReadEvent::DataFormat);
-  void        setDecoder(DmmDecoder* decoder);
+  void        setFormat(ReadEvent::DataFormat format) { m_format = format; };
+  void        setDecoder(std::shared_ptr<DmmDecoder> decoder) { m_decoder = decoder; };
 
   ReadStatus  status() const  { return m_status;  }
   void        setNumValues(int num)  { m_numValues = num; }
@@ -64,12 +64,9 @@ protected:
   bool                  m_sendRequest;
   int                   m_id;
   int                   m_numValues;
-  DmmDecoder*           m_decoder;
+  std::shared_ptr<DmmDecoder> m_decoder;
   void readDMM();
   void readMetex14();
-
-  int  formatLength() const;
-  bool checkFormat();
 
 protected Q_SLOTS:
   void socketNotifierSLOT();

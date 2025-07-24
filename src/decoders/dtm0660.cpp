@@ -6,23 +6,23 @@
  */
 
 static const bool registered = []() {
-  DmmDecoder::addConfig({"Generic", "DTM0660 4000 count", "", 2400, 13, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"Generic", "DTM0660 6000 count", "", 2400, 13, 8, 1, 1, 0, 6000, 0, 0, 1});
-  DmmDecoder::addConfig({"Generic", "DTM0660 8000 count", "", 2400, 13, 8, 1, 1, 0, 8000, 0, 0, 1});
+  DmmDecoder::addConfig({"Generic", "DTM0660 4000 count", "", 2400, 14, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Generic", "DTM0660 6000 count", "", 2400, 14, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Generic", "DTM0660 8000 count", "", 2400, 14, 8, 1, 1, 0, 8000, 0, 0, 1});
   return true;
 }();
 
-size_t DecoderDTM0660::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderDTM0660::getPacketLength()
 {
-  return  (df == ReadEvent::DTM0660 ? 15 : 0);
+  return  (m_type == ReadEvent::DTM0660 ? 15 : 0);
 }
 
-bool DecoderDTM0660::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderDTM0660::checkFormat(const char* data, size_t len)
 {
-  return (df == ReadEvent::DTM0660 && ((data[len] & 0xf0) == 0xf0));
+  return (m_type == ReadEvent::DTM0660 && ((data[len] & 0xf0) == 0xf0));
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderDTM0660::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderDTM0660::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id     = id;

@@ -1,0 +1,17 @@
+{
+  "decoder": "M9803RContinuous",
+  "tests": [
+    {
+      "hex": "00 04 03 02 01 00 00 00 04 00 0D 0A",
+      "expected": {
+        "dval": 1.234,
+        "val": "1.234",
+        "unit": "mV",
+        "range": "AUTO",
+        "special": "DC",
+        "hold": false,
+        "showBar": true
+      }
+    }
+  ]
+}

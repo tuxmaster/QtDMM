@@ -10,8 +10,9 @@ usage: compile.sh <install|clean|qt6>
 
    install: install system wide
    clean  : remove build files before build
+   ctest  : build and run ctest
    run    : run qtdmm after successfull build
-   package: create packages (DEB and source)
+   pack   : create packages (DEB and source)
 
 EOF
 	exit 0
@@ -20,18 +21,20 @@ EOF
 RUN=false
 INSTALL=false
 PACK=false
+CTEST=false
 
 for arg in $*
 do
 	arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
 	[ "$arg" = "clean"   ] && rm -rf build
+	[ "$arg" = "ctest"    ] && CTEST=true
 	[ "$arg" = "install" ] && INSTALL=true
 	[ "$arg" = "run"     ] && RUN=true
 	[ "$arg" = "pack"    ] && PACK=true
 	[ "$arg" = "help"    ] && usage
 done
 
-cmake -B build
+cmake -DBUILD_TESTING=$(${CTEST} && echo "ON" || echo "OFF") -B build
 cmake --build build --parallel $(nproc) || exit 1
 
 cd build
@@ -50,6 +53,13 @@ then
 		( cd ..; rpmbuild -ba QtDMM.spec )
 	fi
 	rm -rf ../packages/_CPack_Packages
+fi
+
+if ${CTEST}
+then
+	echo
+	ctest --test-dir . --output-on-failure
+	echo
 fi
 
 if [ -x qtdmm ]

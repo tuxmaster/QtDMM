@@ -1,0 +1,17 @@
+{
+  "decoder": "VC820Continuous",
+  "tests": [
+    {
+      "hex": "17 2F 3D 47 5D 67 7D 8A 97 A0 B8 C0 D4 E8",
+      "expected": {
+        "dval": -0.4,
+        "val": " -000.4",
+        "unit": "mV",
+        "range": "AUTO",
+        "special": "DC",
+        "hold": false,
+        "showBar": true
+      }
+    }
+  ]
+}

@@ -12,162 +12,123 @@ static const bool registered = []() {
   return true;
 }();
 
-size_t DecoderQM1537::getPacketLength(ReadEvent::DataFormat df)
+size_t DecoderQM1537::getPacketLength()
 {
-  return  (df == ReadEvent::QM1537Continuous ? 14 : 0);
+  return  (m_type == ReadEvent::QM1537Continuous ? 14 : 0);
 }
 
-bool DecoderQM1537::checkFormat(const char* data, size_t len, ReadEvent::DataFormat df)
+bool DecoderQM1537::checkFormat(const char* data, size_t len)
 {
-  return (df == ReadEvent::QM1537Continuous && data[len] == 0x0d);
+  return (m_type == ReadEvent::QM1537Continuous && data[len] == 0x0d);
 }
 
-std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &data, int id, ReadEvent::DataFormat /*df*/)
+std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &data, int id)
 {
   m_result = {};
   m_result.id     = id;
-  m_result.hold   = false;
-  m_result.range  = "";
+  m_result.hold   = bit(data,7,1);
+  m_result.range  = bit(data,7,5) ? "AUTO" : "MANU";
+  m_result.showBar= bit(data,7,0);
+  m_result.special = (data[7] & 0x08) ? "AC" : "DC";
 
-  QString val;
-  QString special;
-  QString unit;
-  const char *pStr = data.data();
-
-  if (pStr[0] != 0x0A)
-    return m_result;
-
-  val = (pStr[1] == '-') ? " -" : val = "  ";
-
-  if ((pStr[2] == ';') &&
-      (pStr[3] == '0') &&
-      (pStr[4] == ':') &&
-      (pStr[5] == ';'))
-    val += "  0L";
-  else
+  if (data[0] == '-')
   {
-    val += pStr[2];
-    val += pStr[3];
-    val += pStr[4];
-    val += pStr[5];
+    m_result.val = " -";
+  }
+  else if(data[0] == '+')
+  {
+    m_result.val = "";
+  }
+  else goto error;
+
+  for(int i=1;i<4;i++)
+  {
+    if(data[i]<'0')
+      goto error;
+    if(data[i]>'9')
+      goto error;
   }
 
-  bool doACDC = false;
+  if(0)
+  {
+    error:
+      printf("Data error!\n");
+      return {};
+  }
+
+  if ((data[1] == ';') &&
+      (data[2] == '0') &&
+      (data[3] == ':') &&
+      (data[4] == ';'))
+  {
+     m_result.val += "  0L";
+  }
+  else
+    m_result.val += makeValue(data,1,4);
+
   bool doUnits = true;
 
-  switch (pStr[7])
+  switch (data[6])
   {
-    case 0x31:
-      val = insertComma(val, 1);
-      break;
-    case 0x32:
-      val = insertComma(val, 2);
-      break;
-    case 0x34:
-      val = insertComma(val, 3);
-      break;
-      // default case is no comma/decimal point at all.
+    case 0x31: m_result.val = insertCommaIT (m_result.val,1); break;
+    case 0x32: m_result.val = insertCommaIT (m_result.val,2); break;
+    case 0x34: m_result.val = insertCommaIT (m_result.val,3); break;
+    // default case is no comma/decimal point at all.
   }
 
-  double d_val = val.toDouble();
+  m_result.dval = m_result.val.toDouble();
 
   /* OK, now let's figure out what we're looking at. */
-  if (pStr[11] & 0x80)
+  if (data[10] & 0x80)
   {
     /* Voltage, including diode test */
-    unit = "V";
-    if (pStr[10] & 0x04)
+    m_result.unit = "V";
+    if (data[9] & 0x04)
     {
       /* Diode test */
-      special = "DI";
-      unit = "V";
+      m_result.special = "DI";
+      m_result.unit = "V";
     }
-    else
-      doACDC = true;
   }
-  else if (pStr[11] & 0x40)
+  else if (data[10] & 0x40)
   {
     /* Current */
-    unit = "A";
-    doACDC = true;
+    m_result.unit = "A";
   }
-  else if (pStr[11] & 0x20)
+  else if (data[10] & 0x20)
   {
     /* Resistance, including continuity test */
-    unit = "Ohm";
-    special = "OH";
+    m_result.unit = "Ohm";
+    m_result.special = "OH";
   }
-  else if (pStr[11] & 0x08)
+  else if (data[10] & 0x08)
   {
     /* Frequency */
-    unit = "Hz";
-    special = "HZ";
+    m_result.unit = "Hz";
+    m_result.special = "HZ";
   }
-  else if (pStr[11] & 0x04)
+  else if (data[10 ] & 0x04)
   {
     /* Capacitance */
-    unit = "F";
-    special = "CA";
+    m_result.unit = "F";
+    m_result.special = "CA";
   }
-  else if (pStr[11] & 0x02)
-  {
-    // Temperatur C
-    unit = "C";
-    special = "TE";
-  }
-  else if (pStr[11] & 0x01)
-  {
-    // Temperatur F
-    unit = "dF";
-    special = "TE";
-  }
-  else if (pStr[10] & 0x02)
+  else if (data[9] & 0x02)
   {
     /* Duty cycle */
-    unit = "%";
-    special = "PC";
+    m_result.unit = "%";
+    m_result.special = "PC";
     doUnits = false;
-  }
-
-  if (doACDC)
-  {
-    special = (pStr[8] & 0x08) ? "AC" : "DC";
   }
 
   if (doUnits)
   {
-    if (pStr[9] & 0x02)
-    {
-      d_val /= 1e9;
-      unit.prepend('n');
-    }
-    else if (pStr[10] & 0x80)
-    {
-      d_val /= 1e6;
-      unit.prepend('u');
-    }
-    else if (pStr[10] & 0x40)
-    {
-      d_val /= 1e3;
-      unit.prepend('m');
-    }
-    else if (pStr[10] & 0x20)
-    {
-      d_val *= 1e3;
-      unit.prepend('k');
-    }
-    else if (pStr[10] & 0x10)
-    {
-      d_val *= 1e6;
-      unit.prepend('M');
-    }
+    if (data[8] & 0x02)      m_result.unit.prepend ('n');
+    else if (data[9] & 0x80) m_result.unit.prepend ('u');
+    else if (data[9] & 0x40) m_result.unit.prepend ('m');
+    else if (data[9] & 0x20) m_result.unit.prepend ('k');
+    else if (data[9] & 0x10) m_result.unit.prepend ('M');
   }
-
-  m_result.dval   = d_val;
-  m_result.special= special;
-  m_result.val    = val;
-  m_result.unit   = unit;
-  m_result.showBar= true;
 
  return m_result;
 }

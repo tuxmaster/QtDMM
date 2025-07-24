@@ -1,0 +1,239 @@
+UT70D: Handmultimeter der chinesischen Firma UNI-Trend
+
+Das UT70D hat ein bidirektionales serielles Interface.
+Das Funktionsprinzip ist dasselbe (Optokoppler),
+aber die Form des Adapters ist komplett anders als bei UT60, UT61, UT71 und UT81.
+Der UT70B-Adapter hat hingegen nur eine Datenrichtung.
+Die UT70D-Software zeigt (bei Volt) eine Stelle zu viel!
+
+Counts: 8000 (4-stellig) für Spannung, Strom, Widerstand, Kapazität; 5-stellig für Frequenz und Leitwert
+DCB: 9600 Baud,8,1,None,DTR+,RTS-
+Paket: Länge 8 oder 12, TotalTimeOut: ????, Markierung: durch Sendezeichen
+
+			 0  1  2  3  4  5  6  7  8  9 10 11
+### Stellung: V~, AC, AUTO, 800 mV, Licht aus
+
+Write	8A 	
+			8A F8 82 80 80 81 43 0A
+Write	8A 	
+			8A F8 82 80 80 81 43 0A
+Write	8A
+			8A F8 82 80 80 81 43 0A
+Write	89
+			                ?  0  2  2  4  Z
+AC 0022.4 mV AUTO	89 F8 82 80 80 3F 30 32 32 34 5A 0A
+Write	8A
+			8A F8 82 80 80 81 43 0A
+Write	8A
+			8A F8 82 80 80 81 43 0A
+Write	8A
+			8A F8 82 80 80 81 43 0A
+Write	89
+			89 F8 82 80 80 3F 30 32 32 34 5A 0A
+...
+AC 022.2 mV AUTO	89 F8 82 80 80 3F 30 32 32 32 60 0A 	
+
+AC 022.3 mV AUTO	89 F8 82 80 80 3F 30 32 32 33 61 0A 	
+			       !
+			8A F8 C2 80 80 81 53 0A 	
+AC 022.7 mV MAN 800mV	89 F8 C2 80 80 3F 30 32 32 37 4D 0A
+			       !
+			8A F8 CA 80 80 80 5A 0A 	
+AC 0.088 V MAN 8V	89 F8 CA 80 80 3F 30 30 38 38 46 0A 	
+			       !
+			8A F8 D2 80 80 80 42 0A
+AC 00.14 V MAN 80V	89 F8 D2 80 80 3F 30 30 31 34 5B 0A
+			       !
+			8A F8 DA 80 80 80 4A 0A 	
+AC 000.6 V MAN 800V	89 F8 DA 80 80 3F 30 30 30 36 54 0A 	
+			       !
+			8A F8 E2 80 80 80 32 0A 	
+AC 00004 V MAN 8000V	89 F8 E2 80 80 3F 30 30 30 34 2A 0A
+				     !
+			8A F8 E2 80 81 80 33 0A 	
+dito, 0114V, HOLD	89 F8 E2 80 81 3F 30 31 31 34 2B 0A 	
+
+Hz-Funktion aktiv:	       !     !		Die Range-Taste schaltet NICHT den Frequenzbereich!
+			8A F8 8C 80 84 80 4C 0A 	
+AC 049.98 Hz MAN 800mV	89 F8 8C 80 84 30 34 39 39 38 57 0A 	
+
+%-Funktion aktiv:	       !
+			8A F8 8D 80 80 80 51 0A 	
+AC 48.38 % MAN 800mV	89 F8 8D 80 80 3F 34 38 33 38 56 0A 	
+
+
+### Stellung: V=, DC
+			    !        !     !
+Ping(8A)		8A F0 82 80 90 80 5A 0A
+			                ?  0  0  0  0  F
+DC -0.000 V AUTO	89 F0 82 80 90 3F 30 30 30 30 46 0A
+			       !           !
+Ping(8A)		8A F0 C2 80 90 80 4A 0A 	
+DC -0.000 V MAN 8V	89 F0 C2 80 90 3F 30 30 30 30 56 0A 	
+			       !           !
+			8A F0 CA 80 90 80 42 0A 	
+DC -00.00 V MAN 80V	89 F0 CA 80 90 3F 30 30 30 30 5E 0A 	
+			       !          !! (D2h generiert die gleiche CRC wie 82h im Byte3??)
+			8A F0 D2 80 90 80 5A 0A 	
+DC -000.0 V MAN 800V	89 F0 D2 80 90 3F 30 30 30 30 46 0A 	
+
+			8A F0 DA 80 80 80 42 0A
+DC 000.0 V MAN 8000V	89 F0 DA 80 80 3F 30 30 30 30 5E 0A
+
+### Licht an? Wird nicht übertragen!
+			8A F0 C2 80 90 80 4A 0A
+DC -0.000 V MAN 8V	89 F0 C2 80 90 3F 30 30 30 30 56 0A 	
+
+### Delta? Wird nicht übertragen!
+			8A F0 C2 80 90 80 4A 0A
+DC -0.000 V MAN 8V D	89 F0 C2 80 90 3F 30 30 30 32 58 0A 	
+
+### Delta + Prozent?	             !
+			8A F0 C2 80 80 80 5A 0A 	
+			89 F0 C2 80 80 3F 31 30 30 30 47 0A 	
+
+### Stellung: mV=, DC		        ?  ?  0  >  ?
+			8A E8 8A 80 98 A8 2A 0A
+DC - 0L. mV AUTO 800mV	89 E8 8A 80 98 3F 3F 30 3E 3F 54 0A 	
+
+			8A E8 CA 80 98 A8 3A 0A 	
+DC - 0L. mV MAN 800mV	89 E8 CA 80 98 3F 3F 30 3E 3F 44 0A 	
+
+			8A E8 C2 80 98 A8 32 0A 	
+DC - 0.L mV MAN 80mV	89 E8 C2 80 98 3F 3F 30 3E 3F 4C 0A 	
+
+### Stellung: Ohm	                ?  ?  0  >  ?
+			8A E0 AA 80 88 A8 52 0A 	
+    0.L AUTO 80MOhm	89 E0 AA 80 88 3F 3F 30 3E 3F 2C 0A
+			8A E0 EA 80 88 A8 42 0A
+    0.L MAN 80MOhm	89 E0 EA 80 88 3F 3F 30 3E 3F 3C 0A 	
+			8A E0 F2 80 80 80 3A 0A 	
+   00.00 nS MAN 800 nS	89 E0 F2 80 80 3F 30 30 30 30 26 0A
+			8A E0 C2 80 88 A8 2A 0A 	
+    0L. MAN 800Ohm	89 E0 C2 80 88 3F 3F 30 3E 3F 54 0A 	
+			8A E0 CA 80 88 A8 22 0A 	
+    .0L MAN 8kOhm	89 E0 CA 80 88 3F 3F 30 3E 3F 5C 0A 	
+			8A E0 D2 80 88 A8 3A 0A 	
+    0.L MAN 80kOhm	89 E0 D2 80 88 3F 3F 30 3E 3F 44 0A 	
+			8A E0 DA 80 88 A8 32 0A 	
+    0L. MAN 800Ohm	89 E0 DA 80 88 3F 3F 30 3E 3F 4C 0A 	
+			8A E0 E2 80 88 A8 4A 0A 	
+    .0L MAN 8MOhm	89 E0 E2 80 88 3F 3F 30 3E 3F 34 0A 	
+
+## Unterfunktion F
+			8A E1 80 80 80 80 5D 0A 	
+  0.011 nF AUTO 8nF	89 E1 80 80 80 3F 30 30 31 31 49 0A 	
+			8A E1 C0 80 80 80 4D 0A 	
+  0.012 nF MAN 8nF	89 E1 C0 80 80 3F 30 30 31 32 56 0A 	
+			8A E1 C8 80 80 80 45 0A 	
+  00.00 nF MAN 80nF	89 E1 C8 80 80 3F 30 30 30 30 61 0A 	
+			8A E1 D0 80 80 80 5D 0A 	
+  000.2 nF MAN 800nF	89 E1 D0 80 80 3F 30 30 30 32 47 0A 	
+			8A E1 D8 80 80 80 55 0A 	
+  0.000 µF MAN 8µF	89 E1 D8 80 80 3F 30 30 30 30 51 0A 	
+			8A E1 E0 80 80 80 2D 0A 	
+  00.00 µF MAN 80µF	89 E1 E0 80 80 3F 30 30 30 30 39 0A 	
+			8A E1 E8 80 80 80 25 0A 	
+  000.0 µF MAN 800µF	89 E1 E8 80 80 3F 30 30 30 30 41 0A 	
+
+## Unterfunktion Pieps (nur bei Widerstandmessung) Bereichsumschaltung genauso, aber ohne nS-Bereich
+			8A E0 C2 84 88 A8 2E 0A 	
+    0L 800 Ohm Pieps	89 E0 C2 84 88 3F 3F 30 3E 3F 58 0A 	
+
+### Stellung Diode
+			8A D8 C2 80 88 80 3A 0A 	
+    .0L V FIX 8V	89 D8 C2 80 88 3F 3F 30 3E 3F 2C 0A 	
+
+### Stellung A, Subfunktionen DC und AC
+			8A A8 82 80 90 80 52 0A 	
+DC -0.000 A AUTO 8A	89 A8 82 80 90 3F 30 30 30 30 4E 0A 	
+			8A A8 C2 80 90 80 42 0A 	
+DC -0.000 A MAN 8A	89 A8 C2 80 90 3F 30 30 30 30 5E 0A 	
+			8A A8 CA 80 80 80 5A 0A 	
+DC  00.00 A MAN 80A	89 A8 CA 80 80 3F 30 30 30 30 46 0A 	
+			8A A9 82 80 80 80 43 0A 	
+AC  0.006 A AUTO 8A	89 A9 82 80 80 3F 30 30 30 36 5D 0A 	
+## Unterfunktion Hz:
+			8A A8 8C 80 84 80 4C 0A 	
+DC 000.00 Hz AUTO 8A	89 A8 8C 80 84 30 30 30 30 30 5B 0A 	wie bei Spannungsmessung, nur Byte2 (Schalterstellung) anders
+			8A A8 8C 80 84 80 4C 0A 	
+DC 000.00 Hz MAN 80A	89 A8 8C 80 84 30 30 30 30 30 5B 0A	wird nicht übertragen!
+
+### Stellung mA, Subfunktionen DC und AC
+			8A B0 82 80 90 80 4A 0A 	
+DC -00.00 mA AUTO 80mA	89 B0 82 80 90 3F 30 30 30 30 56 0A 	
+			8A B0 C2 80 90 80 5A 0A 	
+DC -00.00 mA MAN 80mA	89 B0 C2 80 90 3F 30 30 30 30 46 0A 	
+			8A B0 CA 80 80 80 42 0A 	
+DC  000.0 mA MAN 800mA	89 B0 CA 80 80 3F 30 30 30 30 5E 0A 	
+			8A B1 82 80 80 80 5B 0A 	
+AC  00.24 mA AUTO 80mA	89 B1 82 80 80 3F 30 30 32 34 45 0A 	
+
+Schreib-Byte (Kommando):
+8A	Ping (Abfrage von Schalterstellungen ohne Messwert)
+89	Messung (Abfrage von Schalterstellungen und Messwert)
+A1	Knopf: RANGE
+A3	Knopf: Hz-%
+A5	Knopf: Hold
+A7	Knopf: REL
+A9	Knopf: MAX-MIN (Wirkung: Schaltet auf "REC 100 ms" - wie weiter?)
+AB	Knopf: Pieps umschalten; bei allen Knöpfen Echo 1 Byte ebenso
+AD	Knopf: AC-DC-Cap: Diesmal verspätetes Echo!
+
+Antwort:
+Byte			7	6	5	4	3	2	1	0
+[0]	Echo (Wiederholung des Sendebytes)
+[1]	Schalterstellung
+	F8 = V~		1	1	1	1	1	0	0	0	6:3=0x0F
+	F0 = V=		1	1	1	1	0	0	0	0	6:3=0x0E
+	E8 = mV=	1	1	1	0	1	0	0	0	6:3=0x0D
+	E0 = Ohm	1	1	1	0	0	0	0	0	6:3=0x0C
+	E1 = F		1	1	1	0	0	0	0	1	(Unterfunktion von Ohm)
+	D8 = Diode	1	1	0	1	1	0	0	0	6:3=0x0B
+	A8 = A=		1	0	1	0	1	0	0	0	6:3=0x05
+	A9 = A~		1	0	1	0	1	0	0	1	(Unterfunktion von A=)
+	B0 = mA=	1	0	1	1	0	0	0	0	6:3=0x06
+	B1 = mA~	1	0	1	1	0	0	0	1	(Unterfunktion von mA=)
+[2]	Bereich:	1	MAN	B2	B1	B0	U2	U1	U0
+[3]	???		1	0	0	0	0	Pieps	0	0
+[4]	Bits:		1	0	0	NEG	?	Hz	0	HOLD
+[5]	ASCII-Ziffern, wenn <80h, erste Stelle 0x3F für 4-stellige Ergebnisse
+...
+[N-2]	Sieht nach Prüfsumme/CRC aus, Bildungsvorschrift unklar, oder Bargraf??
+[N-1]	0Ah
+
+Einheiten? (U2:0)
+	0	F
+	1
+	2	V,Ohm,A
+	3
+	4	Hz
+	5	%
+	6
+	7
+
+Bereich (B2:0)		V~	V=	mV=	Ohm	S	F	Hz	%	A	mA	Diode
+	0		800m	8	80m	800	-	8n	80?	-	8	80m	8
+	1		8	80	800m	8k	-	80n	800(5)	100(5)	10	800m	-
+	2		80	800	-	80k	-	800n	8k?	-	-	-	-
+	3		800	8000	-	800k	-	8µ	80k?	-	-	-	-
+	4		1000	-	-	8M	-	80µ	800k?	-	-	-	-
+	5		-	-	-	80M	-	800µ	8M?	-	-	-	-
+	6		-	-	-	-	800n(5)	-	80M?	-	-	-	-
+	7		-	-	-	-	-	-	800M?	-	-	-	-
+
+(5) = 5-stellige Anzeige, sonst 4-stellig
+
+* 800 nS =~ 1,25 MOhm (Messbereich)
+* 1 nS =~ 1 GOhm
+* 0.01 nS =~ 100 GOhm (Auflösung)
+
+Zeichen:
+	3E = 'L'
+	3F = ' ' (Leerstelle)
+
+Manko UT70D: Für kleine Ströme ungeeignet!
+LowBat-Bit noch nicht erforscht.
+%-Funktion unklar! (Diese lässt sich mittels 2x REL zur jeder Messart zuschalten. Nicht verwechseln mit Tastverhältnis!
+Diese (und auch die REL-Messart) werden nicht gemeldet!
+Frequenz: Messbereich immer automatisch! Range-Schalter wirkt auf unterliegenden Spannungs/Strommessbereich.

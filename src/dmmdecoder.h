@@ -15,18 +15,20 @@
      baud (600, 1200, 1800, 2400, 4800, 9600, 19200)
      protocol 0: 14 bytes polling 'D'
               1: 11 bytes continuous [PeakTech]
-              2: 14 continuous
-              3: 15 continuous
-              4: 11 bin continuous (M9803R)
-              5: 14 bin continuous (VC820)
+              2: 14 bytes continuous
+              3: 15 bytes continuous
+              4: 11 bytes continuous (M9803R)
+              5: 14 bytes continuous (VC820)
               6: IsoTech
               7: VC940
               8: QM1537
-              9: 9 binary bytes continuous (22-812)
+              9: 9 bytes continuous (22-812)
              10: 23 bytes continuous (VC870)
              11: 22 bytes continuous (DO3122)
              12: 4 bytes half-ASCII (CyrustekES51922)
-             13: 15 binary bytes continuous (DTM0660)
+             13: 11 bytes continuous (CyrustekES51962)
+             14: 15 bytes continuous (DTM0660)
+             15: 11 bytes continuous (CyrustekES51981)
      bits
      stopBits
      number of values (For DMM's that send several lines at once)
@@ -52,6 +54,7 @@ public:
     QString range;
     bool hold;
     bool showBar;
+    bool lowBat;
     int id;
     QString error;
     double dval2;
@@ -78,13 +81,18 @@ public:
     bool  dtr;
   };
 
+  explicit DmmDecoder(ReadEvent::DataFormat df);
   virtual ~DmmDecoder() = default;
-  virtual size_t                                getPacketLength(ReadEvent::DataFormat df) = 0;
-  virtual bool                                  checkFormat(const char* data, size_t len, ReadEvent::DataFormat df) = 0; // TBD use qbytearray or similar instead for data
-  virtual std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id, ReadEvent::DataFormat df) = 0;
+  virtual size_t                     getPacketLength() = 0;
+  virtual bool                       checkFormat(const char* data, size_t len) = 0; // TBD use qbytearray or similar instead for data
+  virtual std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id) = 0;
 
-  static std::vector<DMMInfo>                   getDeviceConfigurations();
-  static void                                   addConfig(DMMInfo info);
+  ReadEvent::DataFormat getType() { return m_type; };
+
+  static std::vector<DMMInfo>        getDeviceConfigurations();
+  static void                        addConfig(DMMInfo info);
+  static std::shared_ptr<DmmDecoder> getInstance(ReadEvent::DataFormat df);
+  static std::shared_ptr<DmmDecoder> getInstance(QString df);
 
 
 protected:
@@ -92,10 +100,12 @@ protected:
   QString insertCommaIT(const QString &val, int pos);
   void formatResultValue(int commaPos, const QString& prefix, const QString& baseUnit);
   bool bit(const QByteArray &data, int byte, int bit) const;
+  QString makeValue(const QByteArray &data, int first, int last, bool neg=false);
   QString toString() const;
 
   static std::vector<DMMInfo> *m_configurations;
   DmmResponse m_result;
+  ReadEvent::DataFormat m_type;
 };
 
 

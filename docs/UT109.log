@@ -1,0 +1,102 @@
+UT108, UT109: Handmultimeter der chinesischen Firma UNI-Trend
+
+Endwert: 3999 (4-stellig)
+DCB: 9600 Baud,8,1,None,DTR+,RTS-
+Paket: Länge 13, 1-5 Pakete pro Sekunde, Markierung: "\r\n", eindeutig
+Besonderheiten: LC-Display zeigt führende Nullen (anders als sonst bei UNI-Trend)
+Bei HOLD werden konstante Pakete gesendet und auf MAN umgeschaltet.
+Bei vielen Betriebsarten mit nur einem Messbereich wird trotzdem AUTO angezeigt und übertragen.
+
+			 0  1  2  3  4  5  6  7  8  9 10 11 12
+			          z  z  z  z
+400mV=	"- 0L. "	31 30 30 34 30 32 30 36 35 31 34 0D 0A
+400mV=M	"-301.2"	31 30 30 33 30 31 32 36 34 38 3C 0D 0A
+	"-175.9"	31 30 30 31 37 35 39 36 34 31 34 0D 0A
+40mV=	"-" MAN		31 30 31 30 33 37 33 36 34 30 3C 0D 0A
+	" 00.00"	31 30 31 30 30 30 30 36 30 31 34 0D 0A
+	" 00.00" MAN	31 30 31 30 30 30 30 36 30 30 3C 0D 0A
+	" 00.00" MAN MAX31 30 31 30 30 30 30 36 30 34 3C 0D 0A
+	" 00.00" MAN MIN31 30 31 30 30 30 30 36 30 32 3C 0D 0A
+	MAXMIN blinkend	31 30 31 30 30 30 30 36 30 36 3C 0D 0A
+	Licht aus	31 30 31 30 30 30 30 36 30 30 3C 0D 0A	Kein Bit fürs Licht
+	HOLD		31 30 31 30 38 33 33 36 34 38 3C 0D 0A
+40mV= "000.0 Hz"	38 30 31 30 30 30 30 31 30 30 3C 0D 0A
+RPMx10 4Cyl "0000"	37 30 30 30 30 30 30 36 30 31 34 0D 0A
+       6Cyl "0000"	37 30 31 30 30 30 30 36 30 31 34 0D 0A
+       8Cyl "0000"	37 30 32 30 30 30 30 36 30 31 34 0D 0A
+DWL    4Cyl "089.8"	37 31 30 30 38 39 38 36 30 31 34 0D 0A
+       6Cyl "059.8"	37 31 31 30 35 39 38 36 30 31 34 0D 0A
+       8Cyl "044.9"	37 31 32 30 34 34 39 36 30 31 34 0D 0A
+40V=	" 09.17"	30 30 31 30 39 31 37 36 30 31 34 0D 0A
+	"-09.16"	30 30 31 30 39 31 36 36 34 31 34 0D 0A
+4V=M	" 0.000"	30 30 30 30 30 30 37 36 34 30 3C 0D 0A
+40V=M	" 00.00"	30 30 31 30 30 30 30 36 30 30 3C 0D 0A
+400V=M	" 000.0"	30 30 32 30 30 30 30 36 30 30 3C 0D 0A
+1000V=M	" 0000"		30 30 33 30 30 30 30 36 30 30 3C 0D 0A
+4V~	" 0.0xx"	30 31 30 30 30 32 34 36 30 31 34 0D 0A	Messwertausgabe langsamer! (3Hz wegen TrueRMS?)
+4V~M	" 0.0xx"	30 31 30 30 30 31 39 36 30 30 3C 0D 0A
+40V~M			30 31 31 30 30 30 30 36 30 30 3C 0D 0A
+400V~M			30 31 32 30 30 30 30 36 30 30 3C 0D 0A
+1000V~M			30 31 33 30 30 30 30 36 30 30 3C 0D 0A
+4V~M	" 000.0 Hz"	38 31 31 30 30 30 30 31 30 30 3C 0D 0A
+40MOhm	"  0.L "	32 30 35 34 30 32 30 36 31 31 34 0D 0A
+400Ohm	" 000.1"	32 30 30 30 30 30 31 36 30 31 34 0D 0A
+400OhmM	" 000.1"	32 30 30 30 30 30 31 36 30 30 3C 0D 0A
+4kOhmM	" 0.000"	32 30 31 30 30 30 30 36 30 30 3C 0D 0A
+40kOhmM	" 00.00"	32 30 32 30 30 30 30 36 30 30 3C 0D 0A
+400kOhmM" 000.0"	32 30 33 30 30 30 30 36 30 30 3C 0D 0A
+4MOhmM	" 0.000"	32 30 34 30 30 30 30 36 30 30 3C 0D 0A
+Piep 400"  0L. "	32 31 34 34 30 32 30 36 31 30 3C 0D 0A	Kein Bargraf!
+Piep 400" 000.1"piepend	32 31 34 30 30 30 31 36 30 30 3C 0D 0A	Kein Bargraf!
+10nF	" 00.00"	32 32 30 30 30 30 30 36 30 31 34 0D 0A
+100µF	"  0L. "	32 32 34 34 30 32 30 36 31 31 34 0D 0A	Messwertausgabe sehr langsam, ca. 1 Hz
+100nFM	" 000.0"	32 32 31 30 30 30 30 36 30 30 3C 0D 0A
+1000nFM	" 0000"		32 32 32 30 30 30 30 36 30 30 3C 0D 0A
+10µFM	" 00.00"	32 32 33 30 30 30 30 36 30 30 3C 0D 0A
+Diode4V	"  .0L "	33 30 30 34 30 32 30 36 31 30 3C 0D 0A	Kein Bargraf! Schnelle Messwertausgabe
+	" 0.000"	33 30 30 30 30 30 30 36 30 30 3C 0D 0A	Kein Bargraf!
+400µA=	" 000.0"	35 30 30 30 30 30 30 36 30 31 34 0D 0A
+4000µA=M" 0000"		35 30 31 30 30 30 30 36 30 30 3C 0D 0A
+4000µA=M" 000.0 Hz"	38 30 31 30 30 30 30 31 30 30 3C 0D 0A
+400µA~	" 000.0"	35 31 30 30 30 30 30 36 30 31 34 0D 0A
+40mA=	" 00.00"	34 30 30 30 30 30 30 36 30 31 34 0D 0A
+400mA=M	" 000.0"	34 30 31 30 30 30 30 36 30 30 3C 0D 0A
+4A=	" 0.000"	36 30 30 30 30 30 30 36 30 31 34 0D 0A
+10A=	" 00.00"	36 30 31 30 30 30 30 36 30 30 3C 0D 0A
+
+Byte		Bit	7	6	5	4	3	2	1	0
+[0]	Messgröße	0	0	1	1	======== Messgröße ======
+[1]			0	0	1	1	0	0	===BSK===
+[2]	Messbereich	0	0	1	1	0	==== Bereich ====
+[3]			0	0	1	1	===== Erste Ziffer  =====
+[4]			0	0	1	1	===== Zweite Ziffer =====
+[5]			0	0	1	1	===== Dritte Ziffer =====
+[6]			0	0	1	1	===== Vierte Ziffer =====
+[7]			0	0	1	1	0	¬Hz	¬Hz	Hz	immer '6' oder '1'
+[8]			0	0	1	1	0	NEG	LoBat	OVL
+[9]			0	0	1	1	HOLD	MAX	MIN	¬MAN	MAX und MIN auch gemeinsam, dann blinkend
+[10]			0	0	1	1	MAN	1	0	0
+[11]	0D	\r	0	0	0	0	1	1	0	1
+[12]	0A	\n	0	0	0	0	1	0	1	0
+
+BSK = blaue Shift-Funktion (DWL oder Effektivwert)
+Kein Bit für den Bargraf.
+Bei Überlauf werden die Zeichen "4020" übertragen,
+was nominell nicht auftreten sollte (weil Endwert 4000)
+
+Der Schaltzustand der Hintergrundbeleuchtung wird nicht übertragen.
+
+Messgröße (Byte[0])	0	1BSK0	1BSK1#	1BSK2#	2BSK0	2BSK1	2BSK2	3	4	5	6	7BSK0	7BSK1	8
+Bereich (Byte[2])	V=~	mV=	°C	°F	Ohm	Piep	F	Diode	mA	µA	A	RPMx10	DWL	Hz
+	0		4.000	400.0	0537	0998	400.0	-	10.00n	4.000V	40.00	400.0	4.000	4Cyl	4Cyl	-
+	1		40.00	40.00	-	-	4.000k	-	100.0n	-	400.0	4000	10.00	6Cyl	6Cyl	400.0
+	2		400.0	-	-	-	40.00k	-	1000n	-	-	-	-	8Cyl	8Cyl	4.000k*
+	3		1000	-	-	-	400.0k	-	10.00µ	-	-	-	-	-	-	40.00k*
+	4		-	-	-	-	4.000k	400.0	100.0µ	-	-	-	-	-	-	400.0k*
+	5		-	-	-	-	40.00k	-	-	-	-	-	-	-	-	1.000M*
+	6		-	-	-	-	-	-	-	-	-	-	-	-	-	-
+	7		-	-	-	-	-	-	-	-	-	-	-	-	-	-
+* vermutlich mit automatischer Bereichsanpassung
+# Nicht bei UT108 (hat keine Temperaturmessung)
+
+henni, 110107

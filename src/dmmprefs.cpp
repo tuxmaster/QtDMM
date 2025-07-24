@@ -39,9 +39,9 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
   setupUi(this);
   m_portlist = new QStringListModel(this);
   QStringList portlist = PortHandler::availablePorts();
-
   m_portlist->setStringList(portlist);
   port->setModel(m_portlist);
+
   m_label = (tr("Multimeter settings"));
   m_description = tr("<b>Here you can configure the serial port"
                      " and protocol for your DMM. There is"
@@ -99,6 +99,17 @@ QString DmmPrefs::deviceListText() const
 
 void DmmPrefs::defaultsSLOT()
 {
+  // >>> temporary solution to make rfc2217 useable
+  QStringList list = m_portlist->stringList();
+  for(int i=0; i<10; i++)
+  {
+    QString dev = m_cfg->getString(QString("Port settings/static_device%1").arg(i), "");
+    if (dev.size()>0)
+      list.append(dev);
+  }
+  m_portlist->setStringList(list);
+  // <<<
+
   port->setCurrentText        (m_cfg->getString("Port settings/device"));
   baudRate->setCurrentText    (m_cfg->getString("Port settings/baud"));
   bitsCombo->setCurrentText   (m_cfg->getString("Port settings/bits", "7"));
