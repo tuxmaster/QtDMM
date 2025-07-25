@@ -9,9 +9,9 @@ static const bool registered = []()
   return true;
 }();
 
-bool DecoderCyrusTekES51962::checkFormat(const char *data, size_t len)
+bool DecoderCyrusTekES51962::checkFormat(const char *data, size_t idx)
 {
-  return (m_type == ReadEvent::CyrustekES51962 && len >= 12 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+  return (m_type == ReadEvent::CyrustekES51962 && idx >= 12 && data[(idx - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[idx] == 0x0a);
 }
 
 size_t DecoderCyrusTekES51962::getPacketLength()

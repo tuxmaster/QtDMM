@@ -45,8 +45,8 @@ DMM::DMM(QObject *parent)
   m_portHandler  = new PortHandler(this);
   m_readerThread = new ReaderThread(this);
 
-  connect(m_readerThread, SIGNAL(readEvent(const QByteArray &, int, ReadEvent::DataFormat)),
-          this, SLOT(readEventSLOT(const QByteArray &, int, ReadEvent::DataFormat)));
+  connect(m_readerThread, SIGNAL(readEvent(const QByteArray &, int)),
+          this, SLOT(readEventSLOT(const QByteArray &, int)));
 
   m_readerThread->start();
 
