@@ -2,12 +2,13 @@
 
 static const bool registered = []() {
   DmmDecoder::addConfig(  {"Uni-Trend","UT61E","", 19200, 12, 7, 1, 1, 2, 22000, 0, 0, 1});
+  DmmDecoder::addConfig(  {" Wintex","TD2200","", 19200, 12, 7, 1, 1, 0, 22000, 0, 0, 1});
   return true;
 }();
 
-bool DecoderCyrusTekES51922::checkFormat(const char* data, size_t len)
+bool DecoderCyrusTekES51922::checkFormat(const char* data, size_t idx)
 {
-  return (m_type == ReadEvent::CyrustekES51922 && (len) && (data[len - 1] == 0x0d) && (data[len] == 0x0a));
+  return (m_type == ReadEvent::CyrustekES51922 && (idx) && (data[idx - 1] == 0x0d) && (data[idx] == 0x0a));
 }
 
 size_t DecoderCyrusTekES51922::getPacketLength()

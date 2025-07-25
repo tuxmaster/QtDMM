@@ -167,7 +167,7 @@ void DMM::timerEvent(QTimerEvent *)
     m_readerThread->startRead();
 }
 
-void DMM::readEventSLOT(const QByteArray &data, int id, ReadEvent::DataFormat df)
+void DMM::readEventSLOT(const QByteArray &data, int id)
 {
   if (ReaderThread::Ok == m_readerThread->status() )
   {

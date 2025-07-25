@@ -1,5 +1,38 @@
 #include "vc820.h"
 
+/* FortuneFS9721
+ *
+ * Packet structure:
+ * Byte  bits 7-4 	Bit 3 	Bit 2 	Bit 1 	Bit 0
+ * 0 	0x1  AC 	DC 	Auto 	RS232
+ * 1 	0x2  Negative 	1A 	1B 	1C
+ * 2 	0x3  1D 	1E 	1F 	1G
+ * 3 	0x4  DP1 	2A 	2B 	2C
+ * 4 	0x5  2D 	2E 	2F 	2G
+ * 5 	0x6  DP2 	3A 	3B 	3C
+ * 6 	0x7  3D 	3E 	3F 	3G
+ * 7 	0x8  DP3 	4A 	4B 	4C
+ * 8 	0x9  4D 	4E 	4F 	4G
+ * 9 	0xa  u 	n 	k 	Diode
+ * 10 0xb  m 	% 	M 	Beep
+ * 11 0xc  Farads 	Ohms 	Rel 	Hold
+ * 12 0xd  A 	V 	Hz 	Low battery
+ * 13 0xe User3 User2 User1 User0
+ *
+ * Segment lettering:
+ *   	C
+ *
+ * B 		G
+ *
+ *   	F
+ *
+ * A 		E
+ *
+ *   	D
+ *  *
+ *
+ */
+
 static const bool registered = []() {
   DmmDecoder::addConfig({"Digitek", "DT-9062", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Digitek", "INO2513", "", 2400, 5, 8, 1, 1, 0, 4000, 0, 0, 1});
@@ -15,9 +48,9 @@ static const bool registered = []() {
   return true;
 }();
 
-bool DecoderVC820::checkFormat(const char* data, size_t len)
+bool DecoderVC820::checkFormat(const char* data, size_t idx)
 {
-  return (m_type == ReadEvent::VC820Continuous && ((data[len] & 0xf0) == 0xe0));
+  return (m_type == ReadEvent::VC820Continuous && ((data[idx] & 0xf0) == 0xe0));
 }
 
 size_t DecoderVC820::getPacketLength()

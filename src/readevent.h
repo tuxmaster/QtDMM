@@ -39,15 +39,14 @@ public:
     Voltcraft15Continuous,
     M9803RContinuous,
     VC820Continuous,
-    IsoTech,
+    CyrustekES51986,
     VC940Continuous,
     QM1537Continuous,
     RS22812Continuous,
     VC870Continuous,
     DO3122Continuous,
     CyrustekES51922,
-    CyrustekES51962,
     DTM0660,
-    CyrustekES51981
+    CyrustekES51962
   };
 };

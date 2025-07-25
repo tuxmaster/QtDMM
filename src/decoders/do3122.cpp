@@ -10,20 +10,20 @@ size_t DecoderDO3122::getPacketLength()
   return  (m_type == ReadEvent::DO3122Continuous ? 22 : 0);
 }
 
-bool DecoderDO3122::checkFormat(const char* data, size_t len)
+bool DecoderDO3122::checkFormat(const char* data, size_t idx)
 {
   if (m_type == ReadEvent::DO3122Continuous)
   {
-    if ((static_cast<uint8_t>(data[(len - 21 + FIFO_LENGTH) % FIFO_LENGTH]) != 0xAAu)
-        || (static_cast<uint8_t>(data[(len - 20 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x55u)
-        || (static_cast<uint8_t>(data[(len - 19 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x52u)
-        || (static_cast<uint8_t>(data[(len - 18 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x24u)
+    if ((static_cast<uint8_t>(data[(idx - 21 + FIFO_LENGTH) % FIFO_LENGTH]) != 0xAAu)
+        || (static_cast<uint8_t>(data[(idx - 20 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x55u)
+        || (static_cast<uint8_t>(data[(idx - 19 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x52u)
+        || (static_cast<uint8_t>(data[(idx - 18 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x24u)
        )
       return false;
 
-    if (static_cast<uint8_t>(data[(len - 17 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x01u)
+    if (static_cast<uint8_t>(data[(idx - 17 + FIFO_LENGTH) % FIFO_LENGTH]) != 0x01u)
     {
-      (void)fprintf(stderr, "bad mode %#x\n", static_cast<uint8_t>(data[(len - 17 + FIFO_LENGTH) % FIFO_LENGTH]));
+      (void)fprintf(stderr, "bad mode %#x\n", static_cast<uint8_t>(data[(idx - 17 + FIFO_LENGTH) % FIFO_LENGTH]));
       return false;
     }
 

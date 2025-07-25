@@ -89,9 +89,9 @@ size_t DecoderM9803R::getPacketLength()
 }
 
 
-bool DecoderM9803R::checkFormat(const char* data, size_t len)
+bool DecoderM9803R::checkFormat(const char* data, size_t idx)
 {
-  return (m_type==ReadEvent::M9803RContinuous && len >= 10 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+  return (m_type==ReadEvent::M9803RContinuous && idx >= 10 && data[(idx - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[idx] == 0x0a);
 }
 
 
@@ -111,15 +111,12 @@ std::optional<DmmDecoder::DmmResponse> DecoderM9803R::decode(const QByteArray &d
     val = "  0L";
   else
   {
-    val = data[0] == 0x08 ? " -" : "  ";
+    val = data[0] == 0x08 ? "-" : "";
     val += QChar('0' + data[4]);
     val += QChar('0' + data[3]);
     val += QChar('0' + data[2]);
     val += QChar('0' + data[1]);
   }
-
-  double d_val = val.toDouble();
-
 
   switch (data[5])
   {
@@ -127,229 +124,196 @@ std::optional<DmmDecoder::DmmResponse> DecoderM9803R::decode(const QByteArray &d
       switch (data[6])
       {
         case 0x00:
-          unit = "mV";
-          val = insertComma(val, 3);
-          d_val /= 10000.;
+          m_result.unit = "mV";
+          val = insertCommaIT(val, 3);
+          qInfo() << val;
           break;
         case 0x01:
-          unit = "V";
-          val = insertComma(val, 1);
-          d_val /= 1000.;
+          m_result.unit = "V";
+          val = insertCommaIT(val, 1);
           break;
         case 0x02:
-          unit = "V";
-          val = insertComma(val, 2);
-          d_val /= 100.;
+          m_result.unit = "V";
+          val = insertCommaIT(val, 2);
           break;
         case 0x03:
-          unit = "V";
-          val = insertComma(val, 3);
-          d_val /= 10.;
+          m_result.unit = "V";
+          val = insertCommaIT(val, 3);
           break;
         case 0x04:
-          unit = "V";
+          m_result.unit = "V";
           break;
       }
-      special = "DC";
+      m_result.special = "DC";
       break;
     case 0x01:
       switch (data[6])
       {
         case 0x00:
-          unit = "mV";
-          val = insertComma(val, 3);
-          d_val /= 10000.;
+          m_result.unit = "mV";
+          val = insertCommaIT(val, 3);
           break;
         case 0x01:
-          unit = "V";
-          val = insertComma(val, 1);
-          d_val /= 1000.;
+          m_result.unit = "V";
+          val = insertCommaIT(val, 1);
           break;
         case 0x02:
-          unit = "V";
-          val = insertComma(val, 2);
-          d_val /= 100.;
+          m_result.unit = "V";
+          val = insertCommaIT(val, 2);
           break;
         case 0x03:
-          unit = "V";
-          val = insertComma(val, 3);
-          d_val /= 10.;
+          m_result.unit = "V";
+          val = insertCommaIT(val, 3);
           break;
         case 0x04:
-          unit = "V";
+          m_result.unit = "V";
           break;
       }
-      special = "AC";
+      m_result.special = "AC";
       break;
     case 0x02:
       switch (data[6])
       {
         case 0x00:
-          unit = "mA";
-          val = insertComma(val, 1);
-          d_val /= 1000.;
+          m_result.unit = "mA";
+          val = insertCommaIT(val, 1);
           break;
         case 0x01:
-          unit = "mA";
-          val = insertComma(val, 2);
-          d_val /= 100.;
+          m_result.unit = "mA";
+          val = insertCommaIT(val, 2);
           break;
         case 0x02:
-          unit = "mA";
-          val = insertComma(val, 3);
-          d_val /= 10.;
+          m_result.unit = "mA";
+          val = insertCommaIT(val, 3);
           break;
       }
-      special = "DC";
+      m_result.special = "DC";
       break;
     case 0x03:
       switch (data[6])
       {
         case 0x00:
-          unit = "mA";
-          val = insertComma(val, 1);
-          d_val /= 1000.;
+          m_result.unit = "mA";
+          val = insertCommaIT(val, 1);
           break;
         case 0x01:
-          unit = "mA";
-          val = insertComma(val, 2);
-          d_val /= 100.;
+          m_result.unit = "mA";
+          val = insertCommaIT(val, 2);
           break;
         case 0x02:
-          unit = "mA";
-          val = insertComma(val, 3);
-          d_val /= 10.;
+          m_result.unit = "mA";
+          val = insertCommaIT(val, 3);
           break;
       }
-      special = "AC";
+      m_result.special = "AC";
       break;
     case 0x04:
       switch (data[6])
       {
         case 0x00:
-          unit = "Ohm";
-          val = insertComma(val, 1);
-          d_val /= 10.;
+          m_result.unit = "Ohm";
+          val = insertCommaIT(val, 1);
           break;
         case 0x01:
-          unit = "kOhm";
-          val = insertComma(val, 1);
-          d_val /= 1000.;
+          m_result.unit = "kOhm";
+          val = insertCommaIT(val, 1);
           break;
         case 0x02:
-          unit = "kOhm";
-          val = insertComma(val, 2);
-          d_val /= 100.;
+          m_result.unit = "kOhm";
+          val = insertCommaIT(val, 2);
           break;
         case 0x03:
-          unit = "kOhm";
-          val = insertComma(val, 3);
-          d_val /= 10.;
+          m_result.unit = "kOhm";
+          val = insertCommaIT(val, 3);
           break;
         case 0x04:
-          unit = "kOhm";
+          m_result.unit = "kOhm";
           break;
         case 0x05:
-          unit = "MOhm";
-          val = insertComma(val, 2);
-          d_val /= 100.;
+          m_result.unit = "MOhm";
+          val = insertCommaIT(val, 2);
           break;
       }
-      special = "OH";
+      m_result.special = "OH";
       break;
     case 0x05:
       switch (data[6])
       {
         case 0x00:
-          unit = "Ohm";
-          val = insertComma(val, 3);
-          d_val /= 10.;
+          m_result.unit = "Ohm";
+          val = insertCommaIT(val, 3);
           break;
       }
-      special = "OH";
+      m_result.special = "OH";
       break;
     case 0x06:
-      unit = "V";
-      val = insertComma(val, 1);
-      d_val /= 1000.;
-      special = "DI";
+      m_result.unit = "V";
+      val = insertCommaIT(val, 1);
+      m_result.special = "DI";
       break;
     case 0x08:
-      unit = "A";
-      val = insertComma(val, 2);
-      d_val /= 100.;
-      special = "DC";
+      m_result.unit = "A";
+      val = insertCommaIT(val, 2);
+      m_result.special = "DC";
       break;
     case 0x09:
-      unit = "A";
-      val = insertComma(val, 2);
-      d_val /= 100.;
-      special = "AC";
+      m_result.unit = "A";
+      val = insertCommaIT(val, 2);
+      m_result.special = "AC";
       break;
     case 0x0A:
-      showBar = false;
+      m_result.showBar = false;
       switch (data[6])
       {
         case 0x00:
-          unit = "kHz";
-          val = insertComma(val, 1);
-          //d_val /= 1000.;
+          m_result.unit = "kHz";
+          val = insertCommaIT(val, 1);
           break;
         case 0x01:
-          unit = "kHz";
-          val = insertComma(val, 2);
-          d_val *= 10.;
+          m_result.unit = "kHz";
+          val = insertCommaIT(val, 2);
           break;
         case 0x05:
-          unit = "Hz";
-          val = insertComma(val, 2);
-          d_val /= 100.;
+          m_result.unit = "Hz";
+          val = insertCommaIT(val, 2);
           break;
         case 0x06:
-          unit = "Hz";
-          val = insertComma(val, 3);
-          d_val /= 10.;
+          m_result.unit = "Hz";
+          val = insertCommaIT(val, 3);
           break;
       }
-      special = "HZ";
+      m_result.special = "HZ";
       break;
     case 0x0C:
       switch (data[6])
       {
         case 0x00:
-          unit = "nF";
-          val = insertComma(val, 1);
-          d_val /= 1e12;
+          m_result.unit = "nF";
+          val = insertCommaIT(val, 1);
           break;
         case 0x01:
-          unit = "nF";
-          val = insertComma(val, 2);
-          d_val /= 1e11;
+          m_result.unit = "nF";
+          val = insertCommaIT(val, 2);
           break;
         case 0x02:
-          unit = "nF";
-          val = insertComma(val, 3);
-          d_val /= 1e10;
+          m_result.unit = "nF";
+          val = insertCommaIT(val, 3);
           break;
         case 0x03:
-          unit = "uF";
-          val = insertComma(val, 1);
-          d_val /= 1e9;
+          m_result.unit = "uF";
+          val = insertCommaIT(val, 1);
           break;
         case 0x04:
-          unit = "uF";
-          val = insertComma(val, 2);
-          d_val /= 1e8;
+          m_result.unit = "uF";
+          val = insertCommaIT(val, 2);
           break;
       }
-      special = "CA";
+      m_result.special = "CA";
       break;
   }
 
-  m_result.dval   = d_val;
-  m_result.special= special;
   m_result.val    = val.trimmed();
-  m_result.unit  = unit;
+  m_result.dval   = m_result.val.toDouble();
 
   return m_result;
 }

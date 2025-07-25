@@ -5,9 +5,9 @@ static const bool registered = []() {
   return true;
 }();
 
-bool DecoderVC870::checkFormat(const char* data, size_t len)
+bool DecoderVC870::checkFormat(const char* data, size_t idx)
 {
-  return (m_type == ReadEvent::VC870Continuous && (len) && (data[len - 1] == 0x0d) && (data[len] == 0x0a));
+  return (m_type == ReadEvent::VC870Continuous && (idx) && (data[idx - 1] == 0x0d) && (data[idx] == 0x0a));
 }
 
 size_t DecoderVC870::getPacketLength()
