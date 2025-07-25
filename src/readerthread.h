@@ -51,7 +51,7 @@ public:
   void        setNumValues(int num)  { m_numValues = num; }
 
 Q_SIGNALS:
-  void        readEvent(const QByteArray &, int id, ReadEvent::DataFormat df);
+  void        readEvent(const QByteArray &, int id);
 
 protected:
   QObject*              m_receiver;

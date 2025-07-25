@@ -81,7 +81,7 @@ protected:
   void                  timerEvent(QTimerEvent *) Q_DECL_OVERRIDE;
 
 protected Q_SLOTS:
-  void readEventSLOT(const QByteArray &str, int id, ReadEvent::DataFormat df);
+  void readEventSLOT(const QByteArray &str, int id);
 
 };
 

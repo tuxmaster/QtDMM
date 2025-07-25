@@ -12,6 +12,18 @@
         "hold": false,
         "showBar": true
       }
+    },
+    {
+      "hex": "15 25 3B 40 55 67 7D 8F 9E A0 B0 C0 D1 E1",
+      "expected": {
+        "dval": 210.6,
+        "val": "  210.6",
+        "unit": "C",
+        "range": "MANU",
+        "special": "TE",
+        "hold": false,
+        "showBar": true
+      }
     }
   ]
 }

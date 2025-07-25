@@ -45,14 +45,14 @@ static const bool registered = []() {
   return true;
 }();
 
-bool DecoderAscii::checkFormat(const char* data, size_t len)
+bool DecoderAscii::checkFormat(const char* data, size_t idx)
 {
   switch(m_type)
   {
-    case ReadEvent::PeakTech10: return (data[(len-11+FIFO_LENGTH)%FIFO_LENGTH] == '#');
+    case ReadEvent::PeakTech10: return (data[(idx-11+FIFO_LENGTH)%FIFO_LENGTH] == '#');
     case ReadEvent::Metex14:
-    case ReadEvent::Voltcraft14Continuous: return (data[len] == 0x0d);
-    case ReadEvent::Voltcraft15Continuous: return (data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+    case ReadEvent::Voltcraft14Continuous: return (data[idx] == 0x0d);
+    case ReadEvent::Voltcraft15Continuous: return (data[(idx - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[idx] == 0x0a);
     default: return false;
   }
 }

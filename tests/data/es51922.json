@@ -84,6 +84,18 @@
         "hold": false,
         "showBar": true
       }
+    },
+    {
+      "hex": "34 30 31 33 34 34 3B 34 30 30 38 30 0D 0A",
+      "expected": {
+        "dval": -13.44,
+        "val": "-013.44",
+        "unit": "mV",
+        "range": "MANU",
+        "special": "DC",
+        "hold": false,
+        "showBar": true
+      }
     }
   ]
 }

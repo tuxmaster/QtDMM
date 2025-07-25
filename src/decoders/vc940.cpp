@@ -17,9 +17,9 @@ size_t DecoderVC940::getPacketLength()
   return  (m_type == ReadEvent::VC940Continuous ? 11 : 0);
 }
 
-bool DecoderVC940::checkFormat(const char* data, size_t len)
+bool DecoderVC940::checkFormat(const char* data, size_t idx)
 {
-  return (m_type==ReadEvent::VC940Continuous && len >= 12 && data[(len - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[len] == 0x0a);
+  return (m_type==ReadEvent::VC940Continuous && idx >= 12 && data[(idx - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[idx] == 0x0a);
 }
 
 std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &data, int id)

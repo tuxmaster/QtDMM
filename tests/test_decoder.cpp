@@ -9,21 +9,21 @@
 
 #include "dmmdecoder.h"
 
-QByteArray parseHexStringToByteArray(const QString& hexString)
+QByteArray parseHexStringToByteArray(const QString &hexString)
 {
   QByteArray result;
   QStringList tokens = hexString.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
-  for (const QString& token : tokens)
+  for (const QString &token : tokens)
   {
     bool ok = false;
     char byte = static_cast<char>(token.toUInt(&ok, 16));
     if (ok)
-        result.append(byte);
+      result.append(byte);
   }
   return result;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
   QCoreApplication app(argc, argv);
 
@@ -62,41 +62,83 @@ int main(int argc, char** argv)
     QJsonObject expected = test["expected"].toObject();
     QByteArray frame = parseHexStringToByteArray(hexString);
 
-    auto result = decoder->decode(frame,0);
-
-    auto fail = [&](const QString& what) {
-        qWarning() << "Test case" << i << "failed:" << what;
-        failed++;
+    auto fail = [&](const QString & what)
+    {
+      qWarning() << "Test case" << i << "failed:" << what;
+      failed++;
     };
 
-    auto check = [&](const QString& key, const auto& actual, const QJsonValue& expectedVal)
+    // simulate reading from port
+    char fifo[FIFO_LENGTH];
+    char buffer[FIFO_LENGTH];
+    size_t bytesToRead = decoder->getPacketLength();
+    size_t length = 0;
+    bool frameValid = false;
+
+    for (size_t n = 0; n < 5 && !frameValid; n++)
+    {
+      for (size_t idx = 0; idx < frame.size(); idx++)
+      {
+        fifo[length] = QChar(frame[idx]).toLatin1();
+        if (decoder->checkFormat(fifo, length))
+        {
+          length = (length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
+
+          for (int i = 0; i < bytesToRead; ++i)
+          {
+            buffer[i] = fifo[length];
+            length = (length + 1) % FIFO_LENGTH;
+          }
+
+          length = 0;
+
+          frameValid = true;
+
+          break;
+          //Q_EMIT readEvent( QByteArray(m_buffer,bytesToRead), m_id, m_format );
+          //m_id = (m_id + 1) % m_numValues;
+        }
+        else
+          length = (length + 1) % FIFO_LENGTH;
+      }
+    }
+
+    if (!frameValid)
+    {
+      fail(QString("[checkFormat] '%1' is not a valid input").arg(hexString));
+      continue;
+    }
+
+    frame.resize(decoder->getPacketLength());
+    auto result = decoder->decode(frame, 0);
+
+
+    auto check = [&](const QString & key, const auto & actual, const QJsonValue & expectedVal)
     {
       using T = std::decay_t<decltype(actual)>;
 
-      if constexpr (std::is_same_v<T, double>)
+      if constexpr(std::is_same_v<T, double>)
       {
         if (!qFuzzyCompare(actual + 1, expectedVal.toDouble() + 1))
           fail(QString("%1 mismatch: got %2, expected %3").arg(key).arg(actual).arg(expectedVal.toDouble()));
       }
-      else if constexpr (std::is_same_v<T, QString>)
+      else if constexpr(std::is_same_v<T, QString>)
       {
         if (actual != expectedVal.toString())
           fail(QString("%1 mismatch: got '%2', expected '%3'").arg(key).arg(actual).arg(expectedVal.toString()));
       }
-      else if constexpr (std::is_same_v<T, bool>)
+      else if constexpr(std::is_same_v<T, bool>)
       {
         if (actual != expectedVal.toBool())
           fail(QString("%1 mismatch: got %2, expected %3").arg(key).arg(actual).arg(expectedVal.toBool()));
       }
-      else if constexpr (std::is_same_v<T, int>)
+      else if constexpr(std::is_same_v<T, int>)
       {
         if (actual != expectedVal.toInt())
           fail(QString("%1 mismatch: got %2, expected %3").arg(key).arg(actual).arg(expectedVal.toInt()));
       }
       else
-      {
-          qWarning() << "unknown type";
-      }
+        qWarning() << "unknown type";
     };
 
     qInfo() << hexString << ": " << result->dval << result->val << result->unit << result->range << result->special << result->hold

@@ -1,5 +1,7 @@
 #include "qm1537.h"
 
+// FS9922-DMM4
+
 static const bool registered = []() {
   DmmDecoder::addConfig({"Digitek", "DT4000ZC", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Digitech", "QM1537", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
@@ -17,9 +19,9 @@ size_t DecoderQM1537::getPacketLength()
   return  (m_type == ReadEvent::QM1537Continuous ? 14 : 0);
 }
 
-bool DecoderQM1537::checkFormat(const char* data, size_t len)
+bool DecoderQM1537::checkFormat(const char* data, size_t idx)
 {
-  return (m_type == ReadEvent::QM1537Continuous && data[len] == 0x0d);
+  return (m_type == ReadEvent::QM1537Continuous && data[idx] == 0x0d);
 }
 
 std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &data, int id)
@@ -53,7 +55,8 @@ std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &d
   {
     error:
       printf("Data error!\n");
-      return {};
+      m_result.error = "Data error!";
+      return m_result;
   }
 
   if ((data[1] == ';') &&

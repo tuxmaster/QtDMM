@@ -36,7 +36,7 @@ ReaderThread::ReaderThread(QObject *receiver) :
   QObject(receiver),
   m_receiver(receiver),
   m_readValue(false),
-  m_format(ReadEvent::Metex14),
+  m_format(ReadEvent::Invalid),
   m_length(0),
   m_sendRequest(true),
   m_id(0),
@@ -123,7 +123,7 @@ void ReaderThread::socketNotifierSLOT()
       m_length = 0;
 
 
-      Q_EMIT readEvent( QByteArray(m_buffer,bytesToRead), m_id, m_format );
+      Q_EMIT readEvent( QByteArray(m_buffer,bytesToRead), m_id);
 
       m_id = (m_id + 1) % m_numValues;
 
