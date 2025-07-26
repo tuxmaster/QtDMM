@@ -225,7 +225,7 @@ void DmmPrefs::on_ui_model_activated(int id)
   {
     m_dmmInfo.name = "custom";
     m_dmmInfo.baud = baudRate->currentText().toInt();
-    m_dmmInfo.protocol = protocolCombo->currentIndex();
+    m_dmmInfo.protocol = static_cast<ReadEvent::DataFormat>(protocolCombo->currentIndex()); //!
     m_dmmInfo.bits =  bitsCombo->currentText().toInt();
     m_dmmInfo.stopBits = bitsCombo->currentText().toInt();
     m_dmmInfo.parity = parityCombo->currentIndex();

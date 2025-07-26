@@ -3,9 +3,9 @@
 // same as es51981, but less features. no collisons between features
 
 static const bool registered = []() {
-  DmmDecoder::addConfig({"Iso-Tech", "IDM 73", "", 19200, 6, 7, 1, 1, 2, 6000, 0, 0, 1});
-  DmmDecoder::addConfig({"Tenma", "72-1016"  , "", 19200, 6, 7, 1, 2, 2, 6000, 0, 0, 1});
-  DmmDecoder::addConfig({"Uni-Trend","UT803" , "", 19200, 6, 7, 1, 1, 2, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Iso-Tech", "IDM 73", "", 19200, ReadEvent::CyrustekES51986, 7, 1, 1, 2, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Tenma", "72-1016"  , "", 19200, ReadEvent::CyrustekES51986, 7, 1, 2, 2, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend","UT803" , "", 19200, ReadEvent::CyrustekES51986, 7, 1, 1, 2, 6000, 0, 0, 1});
   return true;
 }();
 

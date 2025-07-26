@@ -1,7 +1,7 @@
 #include "vc870.h"
 
 static const bool registered = []() {
-  DmmDecoder::addConfig({"Voltcraft", "VC 870", "", 9600, 10, 8, 1, 2, 0, 40000, 0, 0, 1});
+  DmmDecoder::addConfig({"Voltcraft", "VC 870", "", 9600, ReadEvent::VC870Continuous, 8, 1, 2, 0, 40000, 0, 0, 1});
   return true;
 }();
 

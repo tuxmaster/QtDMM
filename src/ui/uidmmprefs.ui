@@ -40,6 +40,9 @@
        <property name="whatsThis">
         <string>Here you may select your DMM model. If your DMM is not in the list, try to find working settings and mail them to me (&lt;font color=blue&gt;&lt;u&gt;qtdmm@mtoussaint.de&lt;/u&gt;&lt;/font&gt;). So I can add them to the list in the next release.</string>
        </property>
+       <property name="currentText">
+        <string notr="true"/>
+       </property>
       </widget>
      </item>
      <item>
@@ -166,6 +169,9 @@
               <property name="whatsThis">
                <string>Choose the serial device here. &lt;i&gt;(Hint for DOS people: /dev/ttyS0 corresponds to COM1. /dev/ttyS1 to COM2 ...)&lt;/i&gt;</string>
               </property>
+              <property name="currentText">
+               <string notr="true"/>
+              </property>
               <property name="currentIndex">
                <number>-1</number>
               </property>
@@ -197,6 +203,9 @@
            <widget class="QComboBox" name="baudRate">
             <property name="whatsThis">
              <string>Select the baud rate for the DMM here. If you encounter problems connecting to your DMM try lowering the baud rate. I had some problems with my &lt;b&gt;Metex ME-32&lt;/b&gt;. The Documentation said 1200 baud but it only worked at 600.</string>
+            </property>
+            <property name="currentText">
+             <string notr="true">600</string>
             </property>
             <property name="currentIndex">
              <number>0</number>
@@ -266,6 +275,9 @@
            <widget class="QComboBox" name="bitsCombo">
             <property name="whatsThis">
              <string>Number of bits for serial communication.</string>
+            </property>
+            <property name="currentText">
+             <string notr="true">5</string>
             </property>
             <item>
              <property name="text">
@@ -352,6 +364,9 @@
             <property name="whatsThis">
              <string>Number of stop bits for serial communication.</string>
             </property>
+            <property name="currentText">
+             <string notr="true">1</string>
+            </property>
             <item>
              <property name="text">
               <string>1</string>
@@ -389,6 +404,9 @@
 &lt;li&gt;4 1/2 - 20000 Counts&lt;/li&gt;
 &lt;li&gt;4 3/4 - 40000 Counts&lt;/li&gt;
 &lt;/ul&gt;</string>
+            </property>
+            <property name="currentText">
+             <string notr="true">2000</string>
             </property>
             <item>
              <property name="text">
@@ -469,7 +487,7 @@
         <item>
          <widget class="QCheckBox" name="uirts">
           <property name="text">
-           <string>RTS</string>
+           <string notr="true">RTS</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -479,7 +497,7 @@
         <item>
          <widget class="QCheckBox" name="uidtr">
           <property name="text">
-           <string>DTR</string>
+           <string notr="true">DTR</string>
           </property>
          </widget>
         </item>
@@ -547,7 +565,7 @@
         </item>
         <item>
          <property name="text">
-          <string>22 bytes ASCII, continuous (IsoTech)</string>
+          <string>11 bytes binary, continuous (CyrustekES51986)</string>
          </property>
         </item>
         <item>
@@ -578,6 +596,11 @@
         <item>
          <property name="text">
           <string>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>DTM0660</string>
          </property>
         </item>
         <item>

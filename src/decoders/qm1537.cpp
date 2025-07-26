@@ -3,14 +3,14 @@
 // FS9922-DMM4
 
 static const bool registered = []() {
-  DmmDecoder::addConfig({"Digitek", "DT4000ZC", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"Digitech", "QM1537", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"PeakTech", "3430", "", 19200, 8, 7, 2, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"TekPower", "TP4000ZC", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"Uni-Trend", "UT61B", "", 2400, 8, 8, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"Uni-Trend", "UT61C", "", 2400, 8, 8, 1, 1, 0, 6000, 0, 0, 1});
-  DmmDecoder::addConfig({"Uni-Trend", "UT61D", "", 2400, 8, 8, 1, 1, 0, 6000, 0, 0, 1});
-  DmmDecoder::addConfig({"Vichy", "VC99", "", 2400, 8, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Digitek", "DT4000ZC", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Digitech", "QM1537", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"PeakTech", "3430", "", 19200, ReadEvent::QM1537Continuous, 7, 2, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"TekPower", "TP4000ZC", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT61B", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT61C", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT61D", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Vichy", "VC99", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
   return true;
 }();
 

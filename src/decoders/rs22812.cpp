@@ -59,7 +59,7 @@ https://github.com/syn-net/rs22812/blob/master/rs22812_linux.py
 */
 
 static const bool registered = []() {
-  DmmDecoder::addConfig({"Radioshack", "22-812", "", 4800, 9, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Radioshack", "22-812", "", 4800, ReadEvent::RS22812Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   return true;
 }();
 

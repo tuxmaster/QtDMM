@@ -19,12 +19,47 @@
 //----------------------------------------------------------------------
 // Copyright (c) 2001 Matthias Toussaint
 //======================================================================
-
+#include <QMessageBox>
 #include <QtGui>
 #include <iostream>
+#include <unistd.h>
+#include <pwd.h>
+#include <grp.h>
 
 #include "mainwin.h"
 
+#ifdef Q_OS_UNIX
+bool userInGroup(const char* groupname) {
+  struct passwd* pw = getpwuid(geteuid());
+  if (!pw) return false;
+
+  gid_t* groups;
+  int ngroups = 0;
+
+  // Erste Abfrage, um die Anzahl der Gruppen zu bekommen
+  getgrouplist(pw->pw_name, pw->pw_gid, nullptr, &ngroups);
+
+  groups = new gid_t[ngroups];
+  if (getgrouplist(pw->pw_name, pw->pw_gid, groups, &ngroups) == -1)
+  {
+    delete[] groups;
+    return false;
+  }
+
+  for (int i = 0; i < ngroups; ++i)
+  {
+    struct group* gr = getgrgid(groups[i]);
+    if (gr && strcmp(gr->gr_name, groupname) == 0)
+    {
+      delete[] groups;
+      return true;
+    }
+  }
+
+  delete[] groups;
+  return false;
+}
+#endif
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &msg)
 {
@@ -94,8 +129,20 @@ int main(int argc, char **argv)
 
   if (parser.isSet("debug"))
     mainWin.setConsoleLogging(true);
+
+
   mainWin.show();
   mainWin.move(100, 100);
+
+#ifdef Q_OS_UNIX
+  if (!userInGroup("dialout")) {
+      QMessageBox::critical(nullptr, QObject::tr("Missing Permission"),
+                          QObject::tr("The current user is not a member of the 'dialout' group.\n"
+                          "Please add the user with the following command:\n\n"
+                          "sudo usermod -aG dialout $USER\n\n"
+                          "You need to log out and back in for the changes to take effect."));
+  }
+#endif
 
   return app.exec();
 }

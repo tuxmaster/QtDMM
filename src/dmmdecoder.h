@@ -70,7 +70,7 @@ public:
     QString model;
     QString name;
     int   baud;
-    int   protocol;
+    ReadEvent::DataFormat protocol;
     int   bits;
     int   stopBits;
     int   numValues;
@@ -88,6 +88,7 @@ public:
   virtual std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id) = 0;
 
   ReadEvent::DataFormat getType() { return m_type; };
+  QString name() const { return m_name; };
 
   static std::vector<DMMInfo>        getDeviceConfigurations();
   static void                        addConfig(DMMInfo info);
@@ -106,6 +107,7 @@ protected:
   static std::vector<DMMInfo> *m_configurations;
   DmmResponse m_result;
   ReadEvent::DataFormat m_type;
+  QString m_name;
 };
 
 
