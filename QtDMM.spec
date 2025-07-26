@@ -54,6 +54,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 - Use pkgconfig for spec file.
 - Code clean up and change project structure
 - Cleanup UI
+- Add test framwork to test decoders
 - Fix mouse wheel zooming in graph
 - Fix manual serial settings load/restore
 - Export file in ms precision (to support more than 1S/s)
