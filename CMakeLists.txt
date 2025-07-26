@@ -55,10 +55,11 @@ qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
 
 pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
+pkg_check_modules(SIGROKCXX REQUIRED libsigrokcxx)
 
 ## compile the application
-add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGANIZATION="QtDMM" )
-include_directories(src ${CMAKE_BINARY_DIR} ${HIDAPI_INCLUDE_DIRS})
+add_definitions(-DQT_NO_FOREACH -DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGANIZATION="QtDMM" )
+include_directories(src ${CMAKE_BINARY_DIR} ${HIDAPI_INCLUDE_DIRS} ${SIGROKCXX_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME}
 	${SRC_FILES}
@@ -73,6 +74,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::PrintSupport
 	Qt6::Network
 	${HIDAPI_LIBRARIES}
+	${SIGROKCXX_LIBRARIES}
 )
 
 ## install files
