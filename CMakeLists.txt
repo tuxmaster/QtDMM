@@ -54,7 +54,12 @@ qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR}/src ${TRANSLATIONS})
 qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
 
-pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
+
+if(APPLE)
+  pkg_check_modules(HIDAPI REQUIRED hidapi)
+elseif(UNIX)
+  pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
+endif()
 
 ## compile the application
 add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGANIZATION="QtDMM" )
