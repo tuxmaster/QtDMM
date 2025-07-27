@@ -1,9 +1,15 @@
 #pragma once
 
-#include <hidapi/hidapi.h>
 #include <QtCore>
 #include <QIODevice>
 #include <QThread>
+
+#ifdef Q_OS_MAC
+  #include <hidapi.h>
+#else
+  #include <hidapi/hidapi.h>
+#endif
+
 
 #include "dmmdecoder.h"
 
