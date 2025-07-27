@@ -4,6 +4,7 @@ HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device,
   : QIODevice(p)
   , m_dmmInfo(info)
 {
+#ifndef Q_OS_WIN
   if (!device.isNull() && (m_handle = hid_open_path(device.toUtf8().data())))
   {
     m_isOpen = true;
@@ -14,6 +15,7 @@ HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device,
     connect(thread, SIGNAL( finished() ), thread, SLOT( deleteLater() ));
     thread->start();
   }
+#endif
 }
 
 HIDSerialDevice::~HIDSerialDevice()
@@ -33,6 +35,7 @@ bool HIDSerialDevice::availablePorts(QStringList &portlist)
 
 bool HIDSerialDevice::availablePorts(QStringList &portlist,unsigned short vendor_id, unsigned short product_id)
 {
+#ifndef Q_OS_WIN
   int dev_cnt;
   struct hid_device_info *devs, *cur_dev;
 
@@ -51,10 +54,14 @@ bool HIDSerialDevice::availablePorts(QStringList &portlist,unsigned short vendor
   hid_free_enumeration(devs);
 
   return (dev_cnt > 0);
+#else
+  return false;
+#endif
 }
 
 void HIDSerialDevice::close()
 {
+#ifndef Q_OS_WIN
   if (m_isOpen)
   {
     Q_EMIT aboutToClose();
@@ -66,10 +73,12 @@ void HIDSerialDevice::close()
       m_handle = Q_NULLPTR;
     }
   }
+#endif
 }
 
 void HIDSerialDevice::run()
 {
+#ifndef Q_OS_WIN
   if (m_isOpen)
   {
     memset(m_buffer, 0, m_buflen);
@@ -125,6 +134,7 @@ void HIDSerialDevice::run()
   }
 
   Q_EMIT finished();
+#endif
 }
 
 

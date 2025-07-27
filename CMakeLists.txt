@@ -54,7 +54,6 @@ qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR}/src ${TRANSLATIONS})
 qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
 
-
 if(APPLE)
   pkg_check_modules(HIDAPI REQUIRED hidapi)
 elseif(UNIX)
@@ -64,6 +63,10 @@ endif()
 ## compile the application
 add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGANIZATION="QtDMM" )
 include_directories(src ${CMAKE_BINARY_DIR} ${HIDAPI_INCLUDE_DIRS})
+
+if (HIDAPI_FOUND)
+	link_directories(${HIDAPI_LIBRARY_DIRS})
+endif()
 
 add_executable(${PROJECT_NAME}
 	${SRC_FILES}
