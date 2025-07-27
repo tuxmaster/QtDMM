@@ -39,10 +39,8 @@ const QStringList TipDlg::s_tipText =
 
   tr("<font size=+2>QtDMM can't connect?</font><p>"
      "Make sure you have read/write permission for the device"
-     " the multimeter is connected to. In doubt call a:<br>"
-     " <tt>chmod a+rw /dev/&lt;device&gt;</tt> (as root) under unix like systems.<br>"
-     "<tt>&lt;device&gt;</tt> will be something like <tt>ttyS0</tt>"
-     " or <tt>usb/ttyUSB0</tt>. This depend on your configuration. For Windows check the group policies."),
+     " the multimeter is connected to. On Linux make sure you are in<br>"
+     " dailout<br> group. For Windows check the group policies."),
 
   tr("<font size=+2>Quick help</font><p>"
      "Click on the context help button in the titlebar of the window."
@@ -65,10 +63,7 @@ const QStringList TipDlg::s_tipText =
      "QtDMM writes a small configuration file (/QtDMM/QtDMM.conf). The path of it is platfom depend. It contains"
      " informations about window settings and other preferences."
      " If you want to get rid of QtDMM don't"
-     " forget to remove this file too.<br>If you want to stay with it, you may want "
-     "to write an email to me explaining what could be improved.<br>"
-     "Matthias Toussaint <font color=blue><u><a href='mailto:qtdmm@mtoussaint.de'>qtdmm@mtoussaint.de</a>"
-     "</u></font>")
+     " forget to remove this file too.</font>")
 };
 
 TipDlg::TipDlg(QWidget *parent) :  QDialog(parent),
