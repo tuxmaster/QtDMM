@@ -54,13 +54,19 @@ qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR}/src ${TRANSLATIONS})
 qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
 
-if (UNIX)
-	pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
+if(APPLE)
+  pkg_check_modules(HIDAPI REQUIRED hidapi)
+elseif(UNIX)
+  pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
 endif()
 
 ## compile the application
-add_definitions(-DQT_NO_FOREACH -DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGANIZATION="QtDMM" )
+add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGANIZATION="QtDMM" )
 include_directories(src ${CMAKE_BINARY_DIR} ${HIDAPI_INCLUDE_DIRS})
+
+if (HIDAPI_FOUND)
+	link_directories(${HIDAPI_LIBRARY_DIRS})
+endif()
 
 add_executable(${PROJECT_NAME}
 	${SRC_FILES}
@@ -76,7 +82,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::Network
 	${HIDAPI_LIBRARIES}
 )
-
 
 ## install files
 install(TARGETS ${PROJECT_NAME} 
