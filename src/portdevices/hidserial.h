@@ -1,9 +1,14 @@
 #pragma once
 
-#include <hidapi/hidapi.h>
 #include <QtCore>
 #include <QIODevice>
 #include <QThread>
+
+#ifdef Q_OS_MAC
+  #include <hidapi.h>
+#elif defined(Q_OS_UNIX)
+  #include <hidapi/hidapi.h>
+#endif
 
 #include "dmmdecoder.h"
 
@@ -31,7 +36,9 @@ protected:
   DmmDecoder::DMMInfo m_dmmInfo;
   static const unsigned int m_buflen = 1024;
   volatile bool m_isOpen = false;
+#ifndef Q_OS_WIN
   hid_device *m_handle = Q_NULLPTR;
+#endif
   unsigned int m_buffer_r = 0;
   unsigned int m_buffer_w = 0;
   unsigned char m_buffer[m_buflen];
