@@ -608,6 +608,11 @@
           <string>11 bytes binary, continuous (CyrustekES51962)</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>Sigrok</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

@@ -4,7 +4,7 @@
     {
       "hex": "30 30 30 35 38 3B 30 30 3A 0D 0A",
       "expected": {
-        "dval": 5.8,
+        "dval": 0.0058,
         "val": "005.8",
         "unit": "mV",
         "range": "AUTO",
@@ -16,7 +16,7 @@
     {
       "hex": "30 30 30 32 31 3B 34 30 38 0D 0A",
       "expected": {
-        "dval": -2.1,
+        "dval": -0.0021,
         "val": "-002.1",
         "unit": "mV",
         "range": "MANU",

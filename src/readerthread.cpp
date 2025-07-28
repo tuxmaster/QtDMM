@@ -91,6 +91,7 @@ void ReaderThread::startRead()
   //std::cerr << "start read" << std::endl;
   m_readValue = true;
   m_sendRequest = true;
+  m_last_check_ok_idx = -1;
 }
 
 
@@ -101,34 +102,54 @@ void ReaderThread::socketNotifierSLOT()
   char byte;
 
   m_status = ReaderThread::Ok;
-  size_t bytesToRead = (m_decoder == Q_NULLPTR) ? 0 : m_decoder->getPacketLength();
+  int64_t bytesToRead = (m_decoder == Q_NULLPTR) ? 0 : m_decoder->getPacketLength();
 
   while ((r = m_port->read( &byte, 1)) > 0)
   {
     retval++;
-
     m_fifo[m_length] = byte;
 
     if (m_decoder != Q_NULLPTR && m_decoder->checkFormat(m_fifo,m_length))
     {
-      m_length = (m_length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
-
-      for (int i = 0; i < bytesToRead; ++i)
+      if (bytesToRead < 0)
       {
-        m_buffer[i] = m_fifo[m_length];
-        m_length = (m_length + 1) % FIFO_LENGTH;
+        // variable length
+        if (m_last_check_ok_idx<0)
+        {
+          m_last_check_ok_idx = m_length;
+          continue; // skip first packt, so we can relaiably determine packet length
+        }
+        if (m_last_check_ok_idx<m_length)
+        {
+          bytesToRead = m_length-m_last_check_ok_idx;
+        }
+        else if (m_last_check_ok_idx<m_length)
+        {
+          bytesToRead = m_last_check_ok_idx + FIFO_LENGTH - m_length;
+        }
+        else
+          continue;
       }
 
-      m_sendRequest = true;
-      m_length = 0;
+      // fixed packet length
+        m_length = (m_length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
+
+        for (int i = 0; i < bytesToRead; ++i)
+        {
+          m_buffer[i] = m_fifo[m_length];
+          m_length = (m_length + 1) % FIFO_LENGTH;
+        }
+
+        m_sendRequest = true;
+        m_length = 0;
 
 
-      Q_EMIT readEvent( QByteArray(m_buffer,bytesToRead), m_id);
+        Q_EMIT readEvent( QByteArray(m_buffer,bytesToRead), m_id);
 
-      m_id = (m_id + 1) % m_numValues;
+        m_id = (m_id + 1) % m_numValues;
 
-      if (m_port->bytesAvailable() < bytesToRead) {
-        break;
+        if (m_port->bytesAvailable() < bytesToRead) {
+          break;
       }
     }
     else

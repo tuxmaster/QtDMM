@@ -60,7 +60,7 @@ void DmmDecoder::formatResultValue(int commaPos, const QString& prefix, const QS
   };
 
   m_result.val = insertCommaIT(m_result.val, commaPos);
-  m_result.dval = m_result.val.toDouble();// * scaleMap.value(prefix, 1.0);
+  m_result.dval = m_result.val.toDouble() * scaleMap.value(prefix, 1.0);
 
   m_result.unit = prefix + baseUnit;
 }
@@ -92,6 +92,7 @@ std::shared_ptr<DmmDecoder> DmmDecoder::getInstance(ReadEvent::DataFormat df)
   switch (df)
   {
     case ReadEvent::Invalid:                return Q_NULLPTR;
+    case ReadEvent::Sigrok:
     case ReadEvent::Metex14:
     case ReadEvent::PeakTech10:
     case ReadEvent::Voltcraft14Continuous:

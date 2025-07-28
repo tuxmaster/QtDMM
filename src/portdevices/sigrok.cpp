@@ -2,6 +2,7 @@
 
 #include <QThread>
 
+#define SIGROK_DEBUG
 
 SigrokDevice::SigrokDevice(const DmmDecoder::DMMInfo &info, QString device, QObject *parent)
   : QIODevice(parent)
@@ -9,13 +10,7 @@ SigrokDevice::SigrokDevice(const DmmDecoder::DMMInfo &info, QString device, QObj
   , m_process(new QProcess(this))
 {
   m_device = device;
-  /*auto hp = device.split(':');
-  if (hp.size() == 2)
-  {
-    m_type   = hp[0];
-    m_device = hp[1];
-  }
-  */
+
   connect(m_process, &QProcess::readyReadStandardOutput, this, &SigrokDevice::onProcessReadyRead);
 }
 
@@ -52,8 +47,10 @@ qint64 SigrokDevice::readData(char *data, qint64 maxSize)
   if (len > 0) {
     memcpy(data, m_buffer.constData(), len);
     m_buffer.remove(0, len);
+#ifdef SIGROK_DEBUG
     QString str = QString::fromUtf8(data, len);
     qInfo() << str;
+#endif
   }
   return len;
 }
@@ -89,7 +86,7 @@ bool SigrokDevice::isOpen() const
 
 bool SigrokDevice::availablePorts(QStringList &list)
 {
-  // Optional: sigrok scan oder bekannte Geräte
+  // use sigrok scan
   list << "SIGROK uni-t-ut61e-ser:conn=/dev/ttyUSB0";
   return true;
 }

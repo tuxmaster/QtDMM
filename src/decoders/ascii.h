@@ -11,4 +11,7 @@ public:
   std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id);
   bool checkFormat(const char* data, size_t len);
   size_t getPacketLength();
+
+private:
+  bool decodeSigrok(QString str);
 };

@@ -61,6 +61,7 @@ protected:
   char                  m_buffer[FIFO_LENGTH];
   ReadEvent::DataFormat m_format;
   int                   m_length;
+  int                   m_last_check_ok_idx;
   bool                  m_sendRequest;
   int                   m_id;
   int                   m_numValues;

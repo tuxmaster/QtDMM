@@ -43,7 +43,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_bigM =  BitmapHelper(":/Symbols/cm.xpm");
   m_bigk =  BitmapHelper(":/Symbols/k.xpm");
   m_bigm =  BitmapHelper(":/Symbols/m.xpm");
-  m_bigu =  BitmapHelper(":/Symbols/µ.xpm");
+  m_bigu =  BitmapHelper(":/Symbols/u.xpm");
   m_bign =  BitmapHelper(":/Symbols/n.xpm");
   m_bigp =  BitmapHelper(":/Symbols/p.xpm");
   m_bigHz =  BitmapHelper(":/Symbols/Hz.xpm");
@@ -69,7 +69,7 @@ DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
   m_smallM =  BitmapHelper(":/Symbols/cm_small.xpm");
   m_smallk =  BitmapHelper(":/Symbols/k_small.xpm");
   m_smallm =  BitmapHelper(":/Symbols/m_small.xpm");
-  m_smallu =  BitmapHelper(":/Symbols/µ_small.xpm");
+  m_smallu =  BitmapHelper(":/Symbols/u_small.xpm");
   m_smalln =  BitmapHelper(":/Symbols/n_small.xpm");
   m_smallp =  BitmapHelper(":/Symbols/p_small.xpm");
   m_smallHz =  BitmapHelper(":/Symbols/Hz_small.xpm");
@@ -456,6 +456,7 @@ void DisplayWid::drawSmallNumber(QPainter *p, const QString &num)
 
 void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
 {
+  qInfo() << "unit" << str;
   if (str.isEmpty())
     return;
 
@@ -463,21 +464,23 @@ void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
   int index = 0;
 
   // Map of SI prefixes to corresponding big-sized pixmaps
-  static const QMap<QChar, const QPixmap *> prefixMap =
+  static const QMap<QString, const QPixmap *> prefixMap =
   {
-    { 'G', m_bigG },
-    { 'M', m_bigM },
-    { 'k', m_bigk },
-    { 'm', m_bigm },
-    { 'u', m_bigu },
-    { 'n', m_bign }
+    { "G", m_bigG },
+    { "M", m_bigM },
+    { "k", m_bigk },
+    { "m", m_bigm },
+    { "u", m_bigu },
+    { "µ", m_bigu },
+    { "n", m_bign },
+    { "p", m_bigp }
   };
 
-  QChar firstChar = str.at(0);
+  QString firstChar = str.first(1);
   if (prefixMap.contains(firstChar))
   {
     const QPixmap *prefixPixmap = prefixMap.value(firstChar);
-    int y = (firstChar == 'u') ? 3 : 0; // offset µ prefix vertically
+    int y = (firstChar == "u" || firstChar == "µ" || firstChar == "p" ) ? 3 : 0; // offset µ prefix vertically
     p->drawPixmap(x, y, *prefixPixmap);
     x += prefixPixmap->width() + 2;
     ++index;
@@ -491,6 +494,7 @@ void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
   {
     //{ "s",    m_bigS },
     { "Ohm",    m_bigOhm },
+    { "Ω",      m_bigOhm },
     { "C",      m_bigDeg },
     { "dF",     m_bigDegF },
     { "Hz",     m_bigHz },
@@ -517,17 +521,23 @@ void DisplayWid::drawSmallUnit(QPainter *p, const QString &str)
   int x = 0;
   int index = 0;
 
-  static const QMap<QChar, const QPixmap *> prefixMap =
+  static const QMap<QString, const QPixmap *> prefixMap =
   {
-    { 'G', m_smallG }, { 'M', m_smallM }, { 'k', m_smallk },
-    { 'm', m_smallm }, { 'u', m_smallu }, { 'n', m_smalln }
+    { "G", m_smallG },
+    { "M", m_smallM },
+    { "k", m_smallk },
+    { "m", m_smallm },
+    { "u", m_smallu },
+    { "µ", m_smallu },
+    { "n", m_smalln },
+    { "p", m_smallp }
   };
 
-  QChar first = str.at(0);
-  if (prefixMap.contains(first))
+  QString firstChar = str.first(1);
+  if (prefixMap.contains(firstChar))
   {
-    const QPixmap *pix = prefixMap.value(first);
-    int y = (first == 'u') ? 3 : 0;  // Ausnahme für µ
+    const QPixmap *pix = prefixMap.value(firstChar);
+    int y = (firstChar == "u" || firstChar == "µ" || firstChar == "p" ) ? 3 : 0;  // µ must move some pixel down
     p->drawPixmap(x, y, *pix);
     x += pix->width() + 1;
     ++index;
@@ -539,6 +549,7 @@ void DisplayWid::drawSmallUnit(QPainter *p, const QString &str)
   {
     //{ "s",       m_smallS },
     { "Ohm",     m_smallOhm },
+    { "Ω",       m_smallOhm },
     { "C",       m_smallDeg },
     { "dF",      m_smallDegF },
     { "Hz",      m_smallHz },

@@ -177,7 +177,7 @@ void MainWid::timerEvent(QTimerEvent *)
 
 void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const QString &s, const QString &r, bool hold, bool showBar, int id)
 {
-  /*
+
   std::cerr << "valueSLOT " << dval
      << " val=" << val.toLocal8Bit().data()
      << " u=" << u.toLocal8Bit().data()
@@ -186,7 +186,7 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
      << " showBar=" << showBar
      << " hold=" << hold
      << " id=" << id << std::endl;
-  */
+
   m_display->setHold(hold);
   if (r == "AUTO") m_display->setAuto(true);
   if (r == "MANU") m_display->setManu(true);

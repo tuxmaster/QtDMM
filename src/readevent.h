@@ -48,6 +48,7 @@ public:
     CyrustekES51922,
     DTM0660,
     CyrustekES51962,
+    Sigrok,
     EndOfList              // new stuff always before!
   };
 
