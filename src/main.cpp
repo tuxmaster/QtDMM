@@ -29,7 +29,8 @@
 #include "mainwin.h"
 
 #ifdef Q_OS_LINUX
-bool userInGroup(const char* groupname) {
+bool userInGroup(const char* groupname)
+{
   struct passwd* pw = getpwuid(geteuid());
   if (!pw) return false;
 
@@ -134,7 +135,7 @@ int main(int argc, char **argv)
   mainWin.show();
   mainWin.move(100, 100);
 
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUX
   if (!userInGroup("dialout")) {
       QMessageBox::critical(nullptr, QObject::tr("Missing Permission"),
                           QObject::tr("The current user is not a member of the 'dialout' group.\n"
