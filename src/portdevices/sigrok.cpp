@@ -87,8 +87,8 @@ bool SigrokDevice::isOpen() const
 bool SigrokDevice::availablePorts(QStringList &list)
 {
   // use sigrok scan
-  list << "SIGROK uni-t-ut61e-ser:conn=/dev/ttyUSB0";
-  return true;
+  //list << "SIGROK uni-t-ut61e-ser:conn=/dev/ttyUSB0";
+  return false;
 }
 
 

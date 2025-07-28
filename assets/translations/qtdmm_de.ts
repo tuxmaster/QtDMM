@@ -512,12 +512,12 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/main.cpp" line="139"/>
+        <location filename="../../src/main.cpp" line="140"/>
         <source>Missing Permission</source>
         <translation>Berechtigung fehlt</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="140"/>
+        <location filename="../../src/main.cpp" line="141"/>
         <source>The current user is not a member of the &apos;dialout&apos; group.
 Please add the user with the following command:
 
