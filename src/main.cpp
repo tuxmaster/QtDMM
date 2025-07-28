@@ -28,7 +28,7 @@
 
 #include "mainwin.h"
 
-#ifdef Q_OS_UNIX
+#ifdef Q_OS_LINUX
 bool userInGroup(const char* groupname) {
   struct passwd* pw = getpwuid(geteuid());
   if (!pw) return false;
