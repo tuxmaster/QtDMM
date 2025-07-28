@@ -286,6 +286,14 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
 </context>
 <context>
+    <name>DecoderVC820</name>
+    <message>
+        <location filename="../../src/decoders/vc820.h" line="9"/>
+        <source>VC820</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DecoderVC870</name>
     <message>
         <location filename="../../src/decoders/vc870.cpp" line="761"/>
@@ -502,6 +510,29 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../../src/main.cpp" line="140"/>
+        <source>Missing Permission</source>
+        <translation>Berechtigung fehlt</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="141"/>
+        <source>The current user is not a member of the &apos;dialout&apos; group.
+Please add the user with the following command:
+
+sudo usermod -aG dialout $USER
+
+You need to log out and back in for the changes to take effect.</source>
+        <translation>Der aktuelle Benutzer ist nicht Mitglied der Gruppe &apos;dialout&apos;.
+Bitte fügen Sie ihn mit folgendem Befehl hinzu:
+
+sudo usermod -aG dialout $USER
+
+Danach müssen Sie sich ab- und wieder anmelden.</translation>
+    </message>
+</context>
+<context>
     <name>RecorderPrefs</name>
     <message>
         <location filename="../../src/recorderprefs.cpp" line="38"/>
@@ -535,33 +566,29 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>&lt;font size=+2&gt;Willkommen&lt;/font&gt;&lt;p&gt;QtDMM ist ein kleins Programm um DMM&apos;s (Digitalmultimeter) unter Linux/UNIX und seit Version 0.8.11 auch unter Mac OSX auszulesen. Windows wird seit Verision 0.9.5 ebenfalls unterstützt. Wenn Sie die Tipps des Tages nicht mehr sehen wollen, so können Sie diese durch ankreuzen des Feldes weiter unten abschalten. Die Tipps könnnen Sie wieder in de Einstellungen erscheinen lassen.</translation>
     </message>
     <message>
-        <source>&lt;font size=+2&gt;QtDMM can&apos;t connect?&lt;/font&gt;&lt;p&gt;Make shure you have read/write permission for the device the multimeter is connected to. In doubt call a:&lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;device&amp;gt;&lt;/tt&gt; (as root) under unix like systems.&lt;br&gt;&lt;tt&gt;&amp;lt;device&amp;gt;&lt;/tt&gt; will be something like &lt;tt&gt;ttyS0&lt;/tt&gt; or &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt;. This depend on your configuration. For Windows check the group policies.</source>
-        <translation type="vanished">&lt;font size=+2&gt;QtDMM kann keine Verbindung aufbauen?&lt;/font&gt;&lt;p&gt;Überprüfen Sie, ob Sie berechtigt sind, auf die Schnittstelle zugreifen(Lesen und Schreiben) zu drüfen an der das DMM angeschlossen ist. Im Zweifelsfall bei unixartigen Systemen den Befehl &lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;Gerät&amp;gt;&lt;/tt&gt; (als root) aufrufen.&lt;br&gt;&lt;tt&gt;&amp;lt;Gerät&amp;gt;&lt;/tt&gt; könnte sowas wie &lt;tt&gt;ttyS0&lt;/tt&gt; oder &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt; sein. Dies hängt von der Konfiguration ab. Unter Windows überpürfen Sie bitte die Gruppenrichtlinien.</translation>
-    </message>
-    <message>
         <location filename="../../src/tipdlg.cpp" line="40"/>
-        <source>&lt;font size=+2&gt;QtDMM can&apos;t connect?&lt;/font&gt;&lt;p&gt;Make sure you have read/write permission for the device the multimeter is connected to. In doubt call a:&lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;device&amp;gt;&lt;/tt&gt; (as root) under unix like systems.&lt;br&gt;&lt;tt&gt;&amp;lt;device&amp;gt;&lt;/tt&gt; will be something like &lt;tt&gt;ttyS0&lt;/tt&gt; or &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt;. This depend on your configuration. For Windows check the group policies.</source>
-        <translation>&lt;font size=+2&gt;QtDMM kann keine Verbindung aufbauen?&lt;/font&gt;&lt;p&gt;Überprüfen Sie, ob Sie berechtigt sind, auf die Schnittstelle zugreifen(Lesen und Schreiben) zu drüfen an der das DMM angeschlossen ist. Im Zweifelsfall bei unixartigen Systemen den Befehl &lt;br&gt; &lt;tt&gt;chmod a+rw /dev/&amp;lt;Gerät&amp;gt;&lt;/tt&gt; (als root) aufrufen.&lt;br&gt;&lt;tt&gt;&amp;lt;Gerät&amp;gt;&lt;/tt&gt; könnte sowas wie &lt;tt&gt;ttyS0&lt;/tt&gt; oder &lt;tt&gt;usb/ttyUSB0&lt;/tt&gt; sein. Dies hängt von der Konfiguration ab. Unter Windows überpürfen Sie bitte die Gruppenrichtlinien.</translation>
+        <source>&lt;font size=+2&gt;QtDMM can&apos;t connect?&lt;/font&gt;&lt;p&gt;Make sure you have read/write permission for the device the multimeter is connected to. On Linux make sure you are in&lt;br&gt; dailout&lt;br&gt; group. For Windows check the group policies.</source>
+        <translation>&lt;font size=+2&gt;QtDMM kann keine Verbindung aufbauen?&lt;/font&gt;&lt;p&gt;Überprüfen Sie, ob Sie berechtigt sind, auf die Schnittstelle zugreifen(Lesen und Schreiben) zu drüfen an der das DMM angeschlossen ist. Bei unixartigen Systemen müssen Sie in der Gruppe &lt;br&gt;dailout&lt;br&gt; sein. Unter Windows überpürfen Sie bitte die Gruppenrichtlinien.</translation>
     </message>
     <message>
-        <location filename="../../src/tipdlg.cpp" line="47"/>
+        <location filename="../../src/tipdlg.cpp" line="45"/>
         <source>&lt;font size=+2&gt;Quick help&lt;/font&gt;&lt;p&gt;Click on the context help button in the titlebar of the window. You can click any of the controls or windows of QtDMM to get context sensitive help. This works in all windows of QtDMM. Most newer windowmangers support this feature. </source>
         <translation>&lt;font size=+2&gt;Schnellhilfe&lt;/font&gt;&lt;p&gt;Klicken auf die Schaltfläche für die kontextabhängige Hilfe in der Symbolleiste. Nun können Sie auf jedes Steuerelement innerhalb der QtDMM Anwendung klicken um die jeweilige Hilfe aufzurufen. Dies funktioniert in allen Fenstern von QtDMM. Die meisten neuren Systeme unterstützen dies(Trifft nur für unixartige Systeme zu). </translation>
     </message>
     <message>
-        <location filename="../../src/tipdlg.cpp" line="53"/>
+        <location filename="../../src/tipdlg.cpp" line="51"/>
         <source>&lt;font size=+2&gt;Preferences&lt;/font&gt;&lt;p&gt;To configure QtDMM go to the preferences dialog. The preferences dialog can be reached by &lt;b&gt;File-&gt;Configure&lt;/b&gt;</source>
         <translation>&lt;font size=+2&gt;Einstellungen&lt;/font&gt;&lt;p&gt;Um QtDMM zu konfigurieren gehen Sie bitte rufen Sie bitte den Einstellungsdialog auf. Dieser befindet sich unter den Punkt &lt;b&gt;Datei-&gt;Konfigurieren&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/tipdlg.cpp" line="57"/>
+        <location filename="../../src/tipdlg.cpp" line="55"/>
         <source>&lt;font size=+2&gt;Measuring averaged values&lt;/font&gt;&lt;p&gt;If you want averaged values just increase the&quot;Sample every&quot; value in the Recorder settings. If you set it to 10sec and your DMM gives a value approx. every second, you&apos;ll get the average of the ten last measurements in the graph</source>
         <translation>&lt;font size=+2&gt;Messung von Durchschnittswerten&lt;/font&gt;&lt;p&gt;Wenn Durchschnittswerte gewünscht sind, bitte den Wert für &quot;Messen alle&quot; in den Rekordereinstellungen erhöhen. Wenn der Wert auf 10 Sekunden gesetz ist und das DMM einen Wert jede Sekunde liefert, dann erscheint im Graphen der Durchschnittswert für die letzten 10 Messungen</translation>
     </message>
     <message>
-        <location filename="../../src/tipdlg.cpp" line="64"/>
-        <source>&lt;font size=+2&gt;Configuration file&lt;/font&gt;&lt;p&gt;QtDMM writes a small configuration file (/QtDMM/QtDMM.conf). The path of it is platfom depend. It contains informations about window settings and other preferences. If you want to get rid of QtDMM don&apos;t forget to remove this file too.&lt;br&gt;If you want to stay with it, you may want to write an email to me explaining what could be improved.&lt;br&gt;Matthias Toussaint &lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;</source>
-        <translation>&lt;font size=+2&gt;Konfugurationsdatei&lt;/font&gt;&lt;p&gt;QtDMM erstellt eine kleine Datei (/QtDMM/QtDMM.conf). Der Pfad zu ihr hängt vom Betriessystem ab. Sie enthält die Einstellungen für das Progogramm . Wenn Sie QtDMM nicht mehr mögen so löschen Sie bitte auch diese Datei.&lt;br&gt;Wenn es Ihenen gefällt, können Sie mir eine E-Mail mit Verbesserungsvorschlägen schicken.&lt;br&gt;Matthias Toussaint &lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;</translation>
+        <location filename="../../src/tipdlg.cpp" line="62"/>
+        <source>&lt;font size=+2&gt;Configuration file&lt;/font&gt;&lt;p&gt;QtDMM writes a small configuration file (/QtDMM/QtDMM.conf). The path of it is platfom depend. It contains informations about window settings and other preferences. If you want to get rid of QtDMM don&apos;t forget to remove this file too.&lt;/font&gt;</source>
+        <translation>&lt;font size=+2&gt;Konfugurationsdatei&lt;/font&gt;&lt;p&gt;QtDMM erstellt eine kleine Datei (/QtDMM/QtDMM.conf). Der Pfad zu ihr hängt vom Betriessystem ab. Sie enthält die Einstellungen für das Progogramm . Wenn Sie QtDMM nicht mehr mögen so löschen Sie bitte auch diese Datei.&lt;/font&gt;</translation>
     </message>
 </context>
 <context>
@@ -595,112 +622,112 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Hier kann das DMM Modell ausgewählt werden. Wenn Ihr DMM nicht in der Liste ist, können Sie versuchen die Einstellungen per Hand herauszufinden. Und freundlicher weise an &lt;font color=blue&gt;&lt;u&gt;qtdmm@mtoussaint.de&lt;/u&gt;&lt;/font&gt; schicken, so das diese in der nächsten Version eingepflegt werden.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="61"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="64"/>
         <source>Load Settings</source>
         <translation>Einstellungen laden</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="78"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="81"/>
         <source>Save Settings</source>
         <translation>Einstellungen speichern</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="94"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="97"/>
         <source>Port settings</source>
         <translation>Anschluseinstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="206"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="215"/>
         <source>600</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="211"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="220"/>
         <source>1200</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="216"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="225"/>
         <source>1800</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="221"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="230"/>
         <source>2400</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="226"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="235"/>
         <source>4800</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="231"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="240"/>
         <source>9600</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="236"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="245"/>
         <source>19200</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="272"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="284"/>
         <source>5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="277"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="289"/>
         <source>6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="282"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="294"/>
         <source>7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="287"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="299"/>
         <source>8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="295"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="307"/>
         <source>Parit&amp;y</source>
         <translation>&amp;Parität</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="311"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="323"/>
         <source>Parity for serial communication. May be None, Odd or Even.</source>
         <translation>Parität für die serielle Übertragung. Diese kann Keine, Gerade oder Ungerade sein.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="315"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="327"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="320"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="332"/>
         <source>Even</source>
         <translation>Gerade</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="325"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="337"/>
         <source>Odd</source>
         <translation>Ungerade</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="357"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="372"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="362"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="377"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="386"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="401"/>
         <source>Number of display digits.
 &lt;ul&gt;&lt;li&gt;3 1/2 - 2000 Counts&lt;/li&gt;
 &lt;li&gt;3 3/4 - 4000 Counts&lt;/li&gt;
@@ -715,92 +742,107 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="395"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="413"/>
         <source>2000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="400"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="418"/>
         <source>4000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="410"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="428"/>
         <source>20000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="425"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="443"/>
         <source>50000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="430"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="448"/>
         <source>100000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="435"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="453"/>
         <source>200000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="440"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="458"/>
         <source>400000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="445"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="463"/>
         <source>1000000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="405"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="423"/>
         <source>6000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="420"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="438"/>
         <source>40000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="415"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="433"/>
         <source>22000</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="570"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="568"/>
+        <source>11 bytes binary, continuous (CyrustekES51986)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="588"/>
         <source>23 bytes ASCII, continuous (VC870)</source>
         <translation>23 bytes ASCII, kontinuierlich (VC870)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="575"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="593"/>
         <source>22 bytes binary, continuous (DO3122)</source>
         <translation>22 bytes binary, kontinuierlich (DO3122)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="580"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="598"/>
         <source>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</source>
         <translation>14 bytes halb-ASCII, UNI-T UT61E (CyrustekES51922)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="585"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="603"/>
+        <source>DTM0660</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="608"/>
         <source>11 bytes binary, continuous (CyrustekES51962)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="668"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="613"/>
+        <source>Sigrok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="696"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, das es funkioniert, dann melden Sie es bitte an: &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="693"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="721"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, welches hier nicht aufgeführt ist, aber Sie aber passende Einstellungen gefunden haben, so teilen Sie es bitte &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt; mit. So können zukümpftige Versionen von Ihrer Hilfe profitieren.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="268"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="277"/>
         <source>Number of bits for serial communication.</source>
         <translation>Anzahl der Bits für die Übertragung.</translation>
     </message>
@@ -821,12 +863,12 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">8 Bits</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="252"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="261"/>
         <source>&amp;Bits:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="353"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="365"/>
         <source>Number of stop bits for serial communication.</source>
         <translation>Anzahl der Stoppbits.</translation>
     </message>
@@ -839,17 +881,17 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">2 Stoppbits</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="128"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="131"/>
         <source>&amp;Port:</source>
         <translation>&amp;Anschluß:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="167"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="170"/>
         <source>Choose the serial device here. &lt;i&gt;(Hint for DOS people: /dev/ttyS0 corresponds to COM1. /dev/ttyS1 to COM2 ...)&lt;/i&gt;</source>
         <translation>Hier bitte den seriellen Anschluß wählen.&lt;i&gt;(Für Unixumsteiger: /dev/ttyS0 entspricht COM1 und so weiter)&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="199"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="205"/>
         <source>Select the baud rate for the DMM here. If you encounter problems connecting to your DMM try lowering the baud rate. I had some problems with my &lt;b&gt;Metex ME-32&lt;/b&gt;. The Documentation said 1200 baud but it only worked at 600.</source>
         <translation>Hier die Baudrate für das DMM auswählen. Wenn Probleme mit der Verbindung zum DMM auftreten, bitte die Baudrate verringern. Es sind Probleme mit dem &lt;b&gt;Metex ME-32&lt;/b&gt; bekannt. Laut Dokumentation soll es mit 1200 Baud laufen, aber tatsächlich geht es nur mit 600 Baud.</translation>
     </message>
@@ -882,103 +924,92 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">19200 Baud</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="370"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="385"/>
         <source>&amp;Digits</source>
         <translation>S&amp;tellen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="337"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="349"/>
         <source>&amp;Stop bits:</source>
         <translation>&amp;Stoppbits:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="183"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="189"/>
         <source>Baud &amp;rate:</source>
         <translation>Baud&amp;rate:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="102"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="105"/>
         <source>External device setup</source>
         <translation>Externe Steuerung</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="472"/>
-        <source>RTS</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="482"/>
-        <source>DTR</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="510"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="528"/>
         <source>Protocol</source>
         <translation>Protokoll</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="516"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="534"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translatorcomment>Hier wird das Kommunikationsprotokoll ausgewählt. Wenn Sie kein &quot;offiziell&quot; unterstützes DMM benutzte, versuchen Sie eines der bereits vorhanden Protokolle. Mit etwas etwas Glück passt eines. Wenn Sie eins finden, teilen Sie es bitte dem Autor mit.</translatorcomment>
         <translation>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="520"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="538"/>
         <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
         <translation>14 Bytes ASCII, auf Abfrage (Metex/Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="525"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="543"/>
         <source>11 bytes ASCII, continuous (PeakTech 451)</source>
         <translation>11 Bytes ASCII, kontinuierlich (PeakTech 451)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="530"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="548"/>
         <source>14 bytes ASCII, continuous (Voltcraft)</source>
         <translation>14 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="535"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="553"/>
         <source>15 bytes ASCII, continuous (Voltcraft)</source>
         <translation>15 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="540"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="558"/>
         <source>11 bytes binary, continuous (M9803R)</source>
         <translation>11 Bytes binär, kontinuierlich (M9803R)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="545"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="563"/>
         <source>14 bytes binary, continuous (VC820)</source>
         <translation>14 Bytes binär, kontinuierlich (VC820)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="550"/>
         <source>22 bytes ASCII, continuous (IsoTech)</source>
-        <translation>22 Bytes ASCII, kontinuierlich (IsoTech)</translation>
+        <translation type="vanished">22 Bytes ASCII, kontinuierlich (IsoTech)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="555"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="573"/>
         <source>11 bytes binary, continuous (VC940)</source>
         <translation>11 Bytes binär, kontinuierlich (VC940)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="560"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="578"/>
         <source>14 bytes ASCII/binary, continuous (QM1537)</source>
         <translation>14 Bytes ASCII/Binär, kontinuierlich (QM1537)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="565"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="583"/>
         <source>9 bytes binary, continuous (RS 22-812)</source>
         <translation>9 Bytes binär, kontinuierlich (RS 22-812)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="600"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="628"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Anzahl der Werte:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="610"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="638"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Einige Multimeter senden verschiedenen Zeile mit verschiedenen Messwerten. Hier kann die Anzahl der zu ignorieren Zeilen eingetragen werden.( Das bedeutet, QtDMM verarbeitet nur die erste Zeile).</translation>
     </message>

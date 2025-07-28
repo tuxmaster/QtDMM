@@ -1,7 +1,7 @@
 #include "do3122.h"
 
 static const bool registered = []() {
-  DmmDecoder::addConfig({"Duratool", "DO3122", "", 9600, 11, 8, 1, 1, 0, 4000, 0, 0, 0});
+  DmmDecoder::addConfig({"Duratool", "DO3122", "", 9600, ReadEvent::DO3122Continuous, 8, 1, 1, 0, 4000, 0, 0, 0});
   return true;
 }();
 

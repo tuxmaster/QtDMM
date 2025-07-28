@@ -47,6 +47,49 @@ public:
     DO3122Continuous,
     CyrustekES51922,
     DTM0660,
-    CyrustekES51962
+    CyrustekES51962,
+    Sigrok,
+    EndOfList              // new stuff always before!
   };
+
+  static QString toString(DataFormat format)
+  {
+    const auto it = formatToStringMap().find(format);
+    if (it != formatToStringMap().end())
+      return it.value();
+    return "Invalid";
+  }
+
+  static DataFormat fromString(const QString& str)
+  {
+    for (auto it = formatToStringMap().cbegin(); it != formatToStringMap().cend(); ++it)
+    {
+      if (it.value() == str)
+        return it.key();
+    }
+    return Invalid;
+  }
+
+private:
+  static const QMap<DataFormat, QString>& formatToStringMap()
+  {
+    static const QMap<DataFormat, QString> map = {
+      { Metex14,               "Metex14" },
+      { PeakTech10,            "PeakTech10" },
+      { Voltcraft14Continuous, "Voltcraft14Continuous" },
+      { Voltcraft15Continuous, "Voltcraft15Continuous" },
+      { M9803RContinuous,      "M9803RContinuous" },
+      { VC820Continuous,       "VC820Continuous" },
+      { CyrustekES51986,       "CyrustekES51986" },
+      { VC940Continuous,       "VC940Continuous" },
+      { QM1537Continuous,      "QM1537Continuous" },
+      { RS22812Continuous,     "RS22812Continuous" },
+      { VC870Continuous,       "VC870Continuous" },
+      { DO3122Continuous,      "DO3122Continuous" },
+      { CyrustekES51922,       "CyrustekES51922" },
+      { DTM0660,               "DTM0660" },
+      { CyrustekES51962,       "CyrustekES51962" }
+    };
+    return map;
+  }
 };

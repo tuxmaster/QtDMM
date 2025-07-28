@@ -4,8 +4,8 @@
 
 static const bool registered = []()
 {
-  DmmDecoder::addConfig({"PeakTech", "3315", "",  2400, 14, 7, 1, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"Uni-Trend", "UT70B", "",  2400, 14, 7, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"PeakTech", "3315", "",  2400,  ReadEvent::CyrustekES51962, 7, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT70B", "",  2400,  ReadEvent::CyrustekES51962, 7, 1, 1, 0, 4000, 0, 0, 1});
   return true;
 }();
 

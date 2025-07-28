@@ -77,9 +77,9 @@ Byte 8: Auto/Manu
 */
 
 static const bool registered = []() {
-  DmmDecoder::addConfig({"ELV", "M9803R", "", 9600, 4, 7, 1, 1, 1, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"MASTECH", "M9803R", "", 9600, 4, 7, 1, 1, 1, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"McVoice", "M-980T", "", 9600, 4, 7, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"ELV", "M9803R", "", 9600, ReadEvent::M9803RContinuous, 7, 1, 1, 1, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"MASTECH", "M9803R", "", 9600, ReadEvent::M9803RContinuous, 7, 1, 1, 1, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"McVoice", "M-980T", "", 9600, ReadEvent::M9803RContinuous, 7, 1, 1, 0, 4000, 0, 0, 1});
   return true;
 }();
 

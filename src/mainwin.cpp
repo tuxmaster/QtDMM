@@ -185,6 +185,7 @@ void MainWin::on_action_Menu_triggered()
     m_menu = new QMenu(this);
     m_menu->addAction(action_Configure);
     m_menu->addSeparator();
+    m_menu->addAction(action_Tip_of_the_day);
     m_menu->addAction(action_Direct_help);
     m_menu->addAction(action_About);
     m_menu->addSeparator();
