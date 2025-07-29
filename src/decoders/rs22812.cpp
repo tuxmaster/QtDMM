@@ -78,7 +78,7 @@ bool DecoderRS22812::checkFormat(const char* data, size_t idx)
   unsigned int checksum = 0x00;
   unsigned char byte;
   char mode, unit, multiplier, dp, minmax, rs232;
-  int offset = 0;
+  size_t offset = 0;
 
   if (idx > 9)
     offset = idx - 9;

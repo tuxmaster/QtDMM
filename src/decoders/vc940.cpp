@@ -37,6 +37,8 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &da
   int mode2    = data[8];
   bool neg     = bit(data,8,3);
 
+  Q_UNUSED(mode2)
+
   m_result.val = makeValue(data,0,3, (function != 0xC && neg));
   if (data[4] != 'A')
     m_result.val += data[4];

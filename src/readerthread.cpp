@@ -75,13 +75,13 @@ void ReaderThread::start()
 {
   QTimer *timer = new QTimer(this);
   connect(timer, SIGNAL(timeout()), this, SLOT(timer()));
-  timer->start(10);
+  timer->start(1000);
 }
 void ReaderThread::timer()
 {
   if (m_readValue)
   {
-    readDMM();
+    sendReadRequest();
     m_readValue = false;
   }
 }
@@ -111,45 +111,23 @@ void ReaderThread::socketNotifierSLOT()
 
     if (m_decoder != Q_NULLPTR && m_decoder->checkFormat(m_fifo,m_length))
     {
-      if (bytesToRead < 0)
+      m_length = (m_length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
+
+      for (int i = 0; i < bytesToRead; ++i)
       {
-        // variable length
-        if (m_last_check_ok_idx<0)
-        {
-          m_last_check_ok_idx = m_length;
-          continue; // skip first packt, so we can relaiably determine packet length
-        }
-        if (m_last_check_ok_idx<m_length)
-        {
-          bytesToRead = m_length-m_last_check_ok_idx;
-        }
-        else if (m_last_check_ok_idx<m_length)
-        {
-          bytesToRead = m_last_check_ok_idx + FIFO_LENGTH - m_length;
-        }
-        else
-          continue;
+        m_buffer[i] = m_fifo[m_length];
+        m_length = (m_length + 1) % FIFO_LENGTH;
       }
 
-      // fixed packet length
-        m_length = (m_length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
+      m_sendRequest = true;
+      m_length = 0;
 
-        for (int i = 0; i < bytesToRead; ++i)
-        {
-          m_buffer[i] = m_fifo[m_length];
-          m_length = (m_length + 1) % FIFO_LENGTH;
-        }
+      Q_EMIT readEvent( QByteArray(m_buffer,bytesToRead), m_id);
 
-        m_sendRequest = true;
-        m_length = 0;
+      m_id = (m_id + 1) % m_numValues;
 
-
-        Q_EMIT readEvent( QByteArray(m_buffer,bytesToRead), m_id);
-
-        m_id = (m_id + 1) % m_numValues;
-
-        if (m_port->bytesAvailable() < bytesToRead) {
-          break;
+      if (m_port->bytesAvailable() < bytesToRead) {
+        break;
       }
     }
     else
@@ -166,25 +144,21 @@ void ReaderThread::socketNotifierSLOT()
   }
 }
 
-void ReaderThread::readDMM()
+void ReaderThread::sendReadRequest()
 {
   switch (m_format)
   {
     case ReadEvent::Metex14:
-      readMetex14();
+      if (m_sendRequest)
+      {
+        /* TODO: Errorhandling */
+        if (m_port->write("D\n", 2) != 2)
+          m_status = Error;
+         //std::cerr << "WROTE: " << ret << std::endl;
+        m_sendRequest = false;
+      }
       break;
-  }
-}
-
-
-void ReaderThread::readMetex14()
-{
-  if (m_sendRequest)
-  {
-    /* TODO: Errorhandling */
-    if (m_port->write("D\n", 2) != 2)
-      m_status = Error;
-    //std::cerr << "WROTE: " << ret << std::endl;
-    m_sendRequest = false;
+    default:
+      break;
   }
 }

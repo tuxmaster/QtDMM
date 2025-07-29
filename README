@@ -1,14 +1,37 @@
 # QtDMM
 
-QtDMM is a simple DMM readout software including a configurable transient 
-recorder.
-The transient recorder features manual start, scheduled start (at a given 
-time) and  triggered automatic  start when given  thresholds are reached.
+**QtDMM** is a simple, cross-platform digital multimeter (DMM) readout application
+with a built-in, configurable transient recorder. It's especially useful for users
+of older multimeters whose original software no longer runs on modern operating
+systems.
 
-If you call QtDMM  with the commandline option --debug it  will display
-some debug output. This might (or might not) help resolve problems.
+QtDMM provides a reliable, open-source alternative to outdated or proprietary DMM
+software and continues to work on current **Linux** and **macOS** systems
+(*Windows support is currently limited/untested*).
 
-It was written  for Metex (and compatible like VOLTCRAFT)  multimeter.
+
+## Features
+
+- Transient Recorder
+  - Manual start
+  - Scheduled start at a specific time
+  - Automatic start triggered when defined thresholds are reached
+- various connection backends
+  - RS232 Serial (USB-Serial and native UART)
+  - USB HID-serial support (HOITEK HE2325U & compatible)
+  - RFC2217 Remote Serial
+  - Sigrok support via sigrok-cli application
+- supports lots of DMMs, see list below
+  - custom serial settings dialog for yet unknown DMMs
+
+## Key Advantages
+
+- Supports many RS232-based/USB-based multimeters
+- Recording via network remote with RFC2217 remote serial support
+- No proprietary software required
+- Fully **open source** and GPL-V3 licensed
+- Easy to use and extend
+
 
 ## Supported hardware
 
@@ -18,7 +41,7 @@ A list of driver state is planed, stay tuned. If you can confirm a DMM is
 working, let us know.
 
 
-    **Vendor**       **Model**
+    Vendor       Model
     Digitek      DT4000Zc
     Digitek      DT-9062
     Digitek      INO2513
@@ -115,11 +138,19 @@ working, let us know.
     Voltcraft    VC 940
     Voltcraft    VC 960
 
+Devices supported through sigrok can also be used via the sigrok-cli tool.
+Native support is recommended when available; otherwise, the sigrok backend
+provides a flexible fallback.
 
 
 If you manage to  get QtDMM working  with a  digital multimeter different 
 from the mentioned  above, or if you can confirm  one of the  unconfirmed
 models please give a note.
+
+## Commandline options
+If you call QtDMM  with the commandline option --debug it  will display
+some debug output. This might (or might not) help resolve problems.
+
 
 ## Notes
 to use RFC2217 remote serial you have to edit the config file.
@@ -128,7 +159,6 @@ to use RFC2217 remote serial you have to edit the config file.
 - up to 10 devices (0-9) are supported in config. Later this will be available via config dialog
 - on remote host with DMM connected start the rfc2217_server.py. Currently only serial is supported (no HID-Serial)
 - start server with: rfc2217_server.py -p <port> <device> e.g.: rfc2217_server.py -p 4000 /dev/ttyUSB0
-
 
 
 ## Licensing

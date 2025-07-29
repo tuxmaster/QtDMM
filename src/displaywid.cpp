@@ -456,7 +456,6 @@ void DisplayWid::drawSmallNumber(QPainter *p, const QString &num)
 
 void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
 {
-  qInfo() << "unit" << str;
   if (str.isEmpty())
     return;
 

@@ -57,6 +57,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 - Use pkgconfig for spec file.
 - Code clean up and change project structure
 - Cleanup UI
+- MacOSX support
 - Add test framwork to test decoders
 - Fix mouse wheel zooming in graph
 - Fix manual serial settings load/restore
@@ -72,6 +73,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 - basic support for different interfaces. currently: serial, hid and rfc2217.
 - support for USB-HID based interfaces
 - support for RFC2217 remote serial port
+- support sigrok as backend for read and decode DMM data
+
 
 * 30/10/2016 0.9.7
 - Added Voltcraft VC870 (Florian Evers)

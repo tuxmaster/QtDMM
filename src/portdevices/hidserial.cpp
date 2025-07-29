@@ -148,7 +148,7 @@ qint64 HIDSerialDevice::readData(char *data, qint64 maxSize)
 {
   if (m_isOpen)
   {
-    unsigned int len = 0;
+    qint64 len = 0;
 
     while (maxSize > 0 && bytesAvailable() > 0)
     {
@@ -167,6 +167,8 @@ qint64 HIDSerialDevice::readData(char *data, qint64 maxSize)
 qint64 HIDSerialDevice::writeData(const char *data, qint64 len)
 {
  // not implemented and possible not neccessary
+ Q_UNUSED(data);
+ Q_UNUSED(len);
  return 0;
 };
 
