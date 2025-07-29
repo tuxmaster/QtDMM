@@ -7,6 +7,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(PROJECT_LICENSE "GPL-3.0")
 set(RESOURCES "src/resources.qrc")
+set(APP_NAME "QtDMM")
+set(APP_ORGANIZATION "QtDMM")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport Test LinguistTools Network)
 
 
@@ -55,13 +57,18 @@ qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
 
 if(APPLE)
-  pkg_check_modules(HIDAPI REQUIRED hidapi)
+	pkg_check_modules(HIDAPI REQUIRED hidapi)
+	set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.qtdmm.qtdmm")
+	set(MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}")
+	set(MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}")
+	set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}")
+	set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
 elseif(UNIX)
-  pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
+	pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
 endif()
 
 ## compile the application
-add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="QtDMM" -DAPP_ORGANIZATION="QtDMM" )
+add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="${APP_NAME}" -DAPP_ORGANIZATION="${APP_ORGANIZATION}" )
 include_directories(src ${CMAKE_BINARY_DIR} ${HIDAPI_INCLUDE_DIRS})
 
 if (HIDAPI_FOUND)
@@ -69,6 +76,7 @@ if (HIDAPI_FOUND)
 endif()
 
 add_executable(${PROJECT_NAME}
+	MACOSX_BUNDLE
 	${SRC_FILES}
 	${UI_HEADERS}
 	${RES_SOURCES}
