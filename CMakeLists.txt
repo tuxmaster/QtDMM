@@ -93,6 +93,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 ## install files
 install(TARGETS ${PROJECT_NAME} 
+	BUNDLE DESTINATION .
 	RUNTIME DESTINATION bin
 	ARCHIVE DESTINATION lib
 )
