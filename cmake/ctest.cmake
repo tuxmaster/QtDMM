@@ -3,7 +3,7 @@ if (BUILD_TESTING)
 	enable_testing()
 
 	file(GLOB DECODER_FILES CONFIGURE_DEPENDS src/decoders/*.h  src/decoders/*.cpp )
-	add_executable(${TEST_DECODER} tests/test_decoder.cpp src/dmmdecoder.cpp ${DECODER_FILES})
+	add_executable(${TEST_DECODER} MACOSX_BUNDLE tests/test_decoder.cpp src/dmmdecoder.cpp ${DECODER_FILES})
 	target_link_libraries(${TEST_DECODER} PRIVATE Qt::Core Qt::Test)
 
 	file(GLOB TEST_FILES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/tests/data/*.json")
