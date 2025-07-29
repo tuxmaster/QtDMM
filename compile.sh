@@ -43,8 +43,8 @@ else
 	CMAKE_PARAMS="-DCMAKE_PREFIX_PATH=$(brew --prefix qt@6)"
 fi
 
-cmake ${JOBS} ${CMAKE_PARAMS} -DBUILD_TESTING=$(${CTEST} && echo "ON" || echo "OFF") -B build
-cmake --build build --parallel  || exit 1
+cmake ${CMAKE_PARAMS} -DBUILD_TESTING=$(${CTEST} && echo "ON" || echo "OFF") -B build
+cmake --build build --parallel ${JOBS} || exit 1
 
 cd build
 
