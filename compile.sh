@@ -34,8 +34,17 @@ do
 	[ "$arg" = "help"    ] && usage
 done
 
-cmake -DBUILD_TESTING=$(${CTEST} && echo "ON" || echo "OFF") -B build
-cmake --build build --parallel $(nproc) || exit 1
+if [ "$(uname)" = "Linux" ] >/dev/null
+then
+	JOBS=$(nproc)
+	CMAKE_PARAMS=""
+else
+	JOBS=$(sysctl -n hw.ncpu)
+	CMAKE_PARAMS="-DCMAKE_PREFIX_PATH=$(brew --prefix qt@6)"
+fi
+
+cmake ${CMAKE_PARAMS} -DBUILD_TESTING=$(${CTEST} && echo "ON" || echo "OFF") -B build
+cmake --build build --parallel ${JOBS} || exit 1
 
 cd build
 
@@ -51,6 +60,11 @@ then
 	then
 		cp ../packages/qtdmm*.tar.bz2 ~/rpmbuild/SOURCES/
 		( cd ..; rpmbuild -ba QtDMM.spec )
+	elif [ "$(uname)" = "Darwin" ]
+	then
+		echo "mac osx packages not supported yet"
+	else
+		echo "unsupported OS. no package creation"
 	fi
 	rm -rf ../packages/_CPack_Packages
 fi

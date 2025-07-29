@@ -20,7 +20,7 @@ public:
  ~HIDSerialDevice();
 
   static bool availablePorts(QStringList &portlist);
-  void close();
+  void close() override;
   bool isOpen() { return m_isOpen; };
 
   qint64 bytesAvailable();

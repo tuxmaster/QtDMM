@@ -83,6 +83,13 @@ add_executable(${PROJECT_NAME}
 	${QM_FILES}
 )
 
+# paranoia options, force you to correct all compiler warnings
+#if(MSVC)
+#	target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX)
+#else()
+#	target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
+#endif()
+
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::Widgets
 	Qt6::SerialPort

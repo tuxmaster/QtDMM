@@ -29,9 +29,10 @@ RFC2217SerialDevice::~RFC2217SerialDevice()
 
 bool RFC2217SerialDevice::availablePorts(QStringList &list)
 {
+  Q_UNUSED(list)
   //list << "RFC2217 192.168.178.138:4000";
   //list << "RFC2217 127.0.0.1:4000";
-  return true;
+  return false;
 }
 
 
@@ -145,7 +146,7 @@ void RFC2217SerialDevice::sendPortOption(quint8 option, const QByteArray &data)
   for (int i = 4; i < pkt.size(); ++i)
   {
     if ((quint8)pkt[i] == 0xFF)
-      pkt.insert(i++, 0xFF);
+      pkt.insert(i++, static_cast<char>(0xFF));
   }
 
   pkt.append(char(0xFF)); // IAC

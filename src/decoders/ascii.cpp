@@ -62,7 +62,7 @@ size_t DecoderAscii::getPacketLength()
 {
   switch (m_type)
   {
-    case ReadEvent::Sigrok:                return -1; // variable packet length
+    case ReadEvent::Sigrok:                return 30;
     case ReadEvent::PeakTech10:            return 11;
     case ReadEvent::Metex14:               return 14;
     case ReadEvent::Voltcraft14Continuous: return 14;
@@ -84,7 +84,6 @@ bool DecoderAscii::decodeSigrok(QString str)
 
   m_result.unit = list[2];
 
-qInfo()<< m_result.unit;
   for(auto const& item : list)
   {
     if (item == "HOLD") m_result.hold = true;

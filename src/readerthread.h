@@ -66,8 +66,7 @@ protected:
   int                   m_id;
   int                   m_numValues;
   std::shared_ptr<DmmDecoder> m_decoder;
-  void readDMM();
-  void readMetex14();
+  void sendReadRequest();
 
 protected Q_SLOTS:
   void socketNotifierSLOT();
