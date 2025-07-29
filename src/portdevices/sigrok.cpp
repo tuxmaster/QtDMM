@@ -2,7 +2,7 @@
 
 #include <QThread>
 
-#define SIGROK_DEBUG
+//#define SIGROK_DEBUG
 
 SigrokDevice::SigrokDevice(const DmmDecoder::DMMInfo &info, QString device, QObject *parent)
   : QIODevice(parent)
@@ -41,19 +41,39 @@ qint64 SigrokDevice::bytesAvailable() const
   return 0;
 }
 
+
 qint64 SigrokDevice::readData(char *data, qint64 maxSize)
 {
-  qint64 len = qMin(maxSize, qint64(m_buffer.size()));
-  if (len > 0) {
-    memcpy(data, m_buffer.constData(), len);
-    m_buffer.remove(0, len);
+  // padds sigrok line to fixed length with spaces.
+  // this way it is much easier and faster to decode afterwards
+  constexpr int fixedLength = 30;
+  if (m_buffer.isEmpty())
+    return 0;
+
+  int newlineIndex = m_buffer.indexOf('\n');
+  if (newlineIndex < 0)
+    return 0; // Not a complete line yet
+
+  QByteArray line = m_buffer.left(newlineIndex);
+  m_buffer.remove(0, newlineIndex + 1);
+
+  line = line.trimmed();
+  if (line.length() >= fixedLength - 1)
+    line = line.left(fixedLength - 1);
+  else
+    line.prepend(QByteArray(fixedLength - 1 - line.length(), ' '));
+  line.append('\n');
+
+  qint64 len = qMin(maxSize, qint64(line.size()));
+  memcpy(data, line.constData(), len);
+
 #ifdef SIGROK_DEBUG
-    QString str = QString::fromUtf8(data, len);
-    qInfo() << str;
+  qInfo() << QString::fromUtf8(data, len);
 #endif
-  }
+
   return len;
 }
+
 
 qint64 SigrokDevice::writeData(const char *, qint64)
 {
@@ -86,6 +106,7 @@ bool SigrokDevice::isOpen() const
 
 bool SigrokDevice::availablePorts(QStringList &list)
 {
+  Q_UNUSED(list);
   // use sigrok scan
   //list << "SIGROK uni-t-ut61e-ser:conn=/dev/ttyUSB0";
   return false;
