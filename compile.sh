@@ -27,7 +27,7 @@ for arg in $*
 do
 	arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
 	[ "$arg" = "clean"   ] && rm -rf build
-	[ "$arg" = "ctest"    ] && CTEST=true
+	[ "$arg" = "ctest"   ] && CTEST=true
 	[ "$arg" = "install" ] && INSTALL=true
 	[ "$arg" = "run"     ] && RUN=true
 	[ "$arg" = "pack"    ] && PACK=true
@@ -37,7 +37,10 @@ done
 if [ "$(uname)" = "Linux" ] >/dev/null
 then
 	JOBS=$(nproc)
-	CMAKE_PARAMS=""
+	CMAKE_PARAMS="-DCMAKE_INSTALL_PREFIX=/usr"
+elif [ "$(uname)" = "FreeBSD" ] >/dev/null
+then
+	JOBS=$(sysctl -n hw.ncpu)
 else
 	JOBS=$(sysctl -n hw.ncpu)
 	CMAKE_PARAMS="-DCMAKE_PREFIX_PATH=$(brew --prefix qt@6)"
