@@ -56,15 +56,18 @@ qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR}/src ${TRANSLATIONS})
 qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
 
-if(APPLE)
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
+elseif(UNIX)
 	pkg_check_modules(HIDAPI REQUIRED hidapi)
+endif()
+
+if(APPLE)
 	set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.qtdmm.qtdmm")
 	set(MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}")
 	set(MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}")
 	set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}")
 	set(CMAKE_OSX_ARCHITECTURES "arm64") #x86_64;
-elseif(UNIX)
-	pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
 endif()
 
 ## compile the application
@@ -99,7 +102,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 ## install files
-install(TARGETS ${PROJECT_NAME} 
+install(TARGETS ${PROJECT_NAME}
 	BUNDLE DESTINATION .
 	RUNTIME DESTINATION bin
 	ARCHIVE DESTINATION lib
@@ -113,5 +116,5 @@ install(FILES assets/icons/qtdmm_128.png DESTINATION share/icons/hicolor/128x128
 ## include test framework
 include(cmake/ctest.cmake)
 
-## include deployment 
+## include deployment
 include(cmake/deploy.cmake)
