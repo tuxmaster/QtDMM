@@ -103,12 +103,11 @@ void DmmPrefs::defaultsSLOT()
   QStringList list = m_portlist->stringList();
   for(int i=0; i<10; i++)
   {
-    QString dev = m_cfg->getString(QString("Port settings/static_device%1").arg(i), "");
+    QString dev = m_cfg->getString(QString("Port settings/custom_device%1").arg(i), "");
     if (dev.size()>0)
       list.append(dev);
   }
   m_portlist->setStringList(list);
-  // <<<
 
   port->setCurrentText        (m_cfg->getString("Port settings/device"));
   baudRate->setCurrentText    (m_cfg->getString("Port settings/baud"));

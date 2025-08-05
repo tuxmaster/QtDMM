@@ -38,6 +38,7 @@ class GuiPrefs;
 class GraphPrefs;
 class IntegrationPrefs;
 class ExecutePrefs;
+class PortsPrefs;
 
 class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 {
@@ -48,11 +49,12 @@ public:
     Recorder = 0,
     Scale,
     DMM,
+    Ports,
     GUI,
     Graph,
     Integration,
     External,
-    NumItems
+    NumItems,
   };
 
   ConfigDlg(QWidget *parent = Q_NULLPTR);
@@ -152,6 +154,7 @@ protected:
   QRect                 m_winRect;
   RecorderPrefs        *m_recorder;
   ScalePrefs           *m_scale;
+  PortsPrefs           *m_ports;
   DmmPrefs             *m_dmm;
   GuiPrefs             *m_gui;
   GraphPrefs           *m_graph;

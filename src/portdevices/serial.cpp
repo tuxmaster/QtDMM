@@ -1,25 +1,49 @@
 #include "serial.h"
 #include <QSerialPortInfo>
 
+static QStringList getExistingUartTtyS()
+{
+  QStringList result;
+  QRegularExpression re("ttyS\\d+");
+
+  QDirIterator it("/sys/devices/pnp0", QDirIterator::Subdirectories);
+  while (it.hasNext()) {
+    const QString path = it.next();
+    const QFileInfo fi(path);
+    const QString name = fi.fileName();
+
+    if (re.match(name).hasMatch() && (fi.isDir() || fi.isSymLink())) {
+      result << "/dev/" + name;
+    }
+  }
+
+  return result;
+}
+
 bool SerialDevice::availablePorts(QStringList &portlist)
 {
-  QString portName;
-  for (auto port : QSerialPortInfo::availablePorts())
-  {
-    //qDebug() << port.portName() << "--" << port.manufacturer() << "--" << port.description() << "--" << port.systemLocation();
-#ifdef Q_OS_WIN
-    portName = port.portName();
-#else
-    portName = port.systemLocation();
-#endif
-    // some quick'n'dirty hack to get rid of all those useless ports
-    // discard all ttyS above 9. they don't exist anyway
-    if (portName.startsWith("/dev/ttyS") && portName.sliced(9).toInt()>9)
-      continue;
+  QStringList validTtyS = getExistingUartTtyS();
+  portlist.clear();
 
-    portlist << "SERIAL "+portName;
+  for (const QSerialPortInfo &port : QSerialPortInfo::availablePorts()) {
+    QString portName =
+#ifdef Q_OS_WIN
+      port.portName();
+#else
+      port.systemLocation();
+#endif
+
+#ifdef Q_OS_LINUX
+    if (portName.startsWith("/dev/ttyS")) {
+      if (!validTtyS.contains(portName))
+        continue;
+    }
+#endif
+
+    portlist << "SERIAL " + portName;
   }
-  return !QSerialPortInfo::availablePorts().empty();
+
+  return !portlist.isEmpty();
 }
 
 bool SerialDevice::init()

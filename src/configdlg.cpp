@@ -33,6 +33,7 @@
 #include "integrationprefs.h"
 #include "recorderprefs.h"
 #include "scaleprefs.h"
+#include "portsprefs.h"
 #include "settings.h"
 
 #include <iostream>
@@ -124,6 +125,15 @@ ConfigDlg::ConfigDlg(QWidget *parent) :  QDialog(parent)
                  ui_list);
   m_scale->setCfg(m_settings);
   ui_stack->insertWidget(m_scale->id(), m_scale);
+
+  m_ports = new PortsPrefs(ui_stack);
+  m_ports->setId(ConfigDlg::Ports);
+  new ConfigItem(m_ports->id(),
+                 m_ports->pixmap(),
+                 m_ports->label(),
+                 ui_list);
+  m_ports->setCfg(m_settings);
+  ui_stack->insertWidget(m_ports->id(), m_ports);
 
   m_dmm = new DmmPrefs(ui_stack);
   m_dmm->setId(ConfigDlg::DMM);
