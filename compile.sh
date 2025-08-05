@@ -37,7 +37,7 @@ done
 if [ "$(uname)" = "Linux" ] >/dev/null
 then
 	JOBS=$(nproc)
-	CMAKE_PARAMS=""
+	CMAKE_PARAMS="-DCMAKE_INSTALL_PREFIX=/usr"
 else
 	JOBS=$(sysctl -n hw.ncpu)
 	CMAKE_PARAMS="-DCMAKE_PREFIX_PATH=$(brew --prefix qt@6)"
