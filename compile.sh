@@ -82,7 +82,11 @@ then
 	echo
 fi
 
-[ ! -x qtdmm ] && exit 1
+if [ ! -x qtdmm ]
+then
+	echo "build/qtdmm not found"
+	exit 1
+fi
 
 if ${APPIMG}
 then
@@ -114,13 +118,15 @@ fi
 mkdir -p ../bin
 cp qtdmm qtdmm*.qm ../bin
 
-	if ${INSTALL}
-	then
-		echo
-		echo "-- install QtDMM system wide --"
-		sudo make install || exit 1
-		${RUN} && qtdmm
-	elif ${RUN}
-	then
-		./qtdmm --debug
-	fi
+if ${INSTALL}
+then
+	echo
+	echo "-- install QtDMM system wide --"
+	sudo make install || exit 1
+	${RUN} && qtdmm
+elif ${RUN}
+then
+	./qtdmm --debug
+fi
+
+exit 0
