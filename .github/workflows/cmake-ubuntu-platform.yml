@@ -25,7 +25,8 @@ jobs:
           libhidapi-hidraw0 \
           cmake \
           build-essential \
-          zsync
+          zsync \
+          libxkbcommon-x11-dev
 
     - name: Configure and Build
       working-directory: ${{github.workspace}}/
