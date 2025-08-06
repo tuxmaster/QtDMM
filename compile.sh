@@ -8,11 +8,12 @@ usage: compile.sh <install|clean|qt6>
 
  builds QtDMM. Additional options:
 
-   install: install system wide
+   appimg : creates appImage
    clean  : remove build files before build
    ctest  : build and run ctest
-   run    : run qtdmm after successfull build
+   install: install system wide
    pack   : create packages (DEB and source)
+   run    : run qtdmm after successfull build
 
 EOF
 	exit 0
@@ -22,6 +23,7 @@ RUN=false
 INSTALL=false
 PACK=false
 CTEST=false
+APPIMG=false
 
 for arg in $*
 do
@@ -31,6 +33,7 @@ do
 	[ "$arg" = "install" ] && INSTALL=true
 	[ "$arg" = "run"     ] && RUN=true
 	[ "$arg" = "pack"    ] && PACK=true
+	[ "$arg" = "appimg"  ] && APPIMG=true
 	[ "$arg" = "help"    ] && usage
 done
 
@@ -79,10 +82,38 @@ then
 	echo
 fi
 
-if [ -x qtdmm ]
+[ ! -x qtdmm ] && exit 1
+
+if ${APPIMG}
 then
-	mkdir -p ../bin
-	cp qtdmm qtdmm*.qm ../bin
+	rm -rf AppDir appimagetool-x86_64.AppImage ../packages/QtDMM.AppImage
+	mkdir -p AppDir/usr/share/metainfo
+	wget -q https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+	chmod +x appimagetool-x86_64.AppImage
+	DESTDIR=AppDir make install
+	cp -v ../assets/qtdmm.desktop ../qtdmm.png AppDir
+	cp -v ../assets/appimage/qtdmm.appdata.xml AppDir/usr/share/metainfo
+	echo '#!/bin/sh' > AppDir/AppRun
+	echo '$APPDIR/usr/bin/qtdmm' >> AppDir/AppRun
+	chmod +x AppDir/AppRun
+
+	for lib in $(ldd -r AppDir/usr/bin/qtdmm | awk '{ print $3 }' | grep -v '^$')
+	do
+		d="$(dirname "${lib}")"
+		mkdir -p "AppDir/$d"
+		cp -v "${lib}" "AppDir/$d"
+	done
+
+	ARCH=x86_64 ./appimagetool-x86_64.AppImage -n AppDir QtDMM.AppImage
+	rm -rf AppDir appimagetool-x86_64.AppImage
+	mkdir -p ../packages
+	mv QtDMM.AppImage ../packages
+fi
+
+
+mkdir -p ../bin
+cp qtdmm qtdmm*.qm ../bin
+
 	if ${INSTALL}
 	then
 		echo
@@ -93,4 +124,3 @@ then
 	then
 		./qtdmm --debug
 	fi
-fi
