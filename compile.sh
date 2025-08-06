@@ -8,12 +8,12 @@ usage: compile.sh <install|clean|qt6>
 
  builds QtDMM. Additional options:
 
-   appimg : creates appImage
-   clean  : remove build files before build
-   ctest  : build and run ctest
-   install: install system wide
-   pack   : create packages (DEB and source)
-   run    : run qtdmm after successfull build
+   appimage: creates appImage
+   clean   : remove build files before build
+   ctest   : build and run ctest
+   install : install system wide
+   pack    : create packages (DEB and source)
+   run     : run qtdmm after successfull build
 
 EOF
 	exit 0
@@ -28,13 +28,13 @@ APPIMG=false
 for arg in $*
 do
 	arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
-	[ "$arg" = "clean"   ] && rm -rf build
-	[ "$arg" = "ctest"   ] && CTEST=true
-	[ "$arg" = "install" ] && INSTALL=true
-	[ "$arg" = "run"     ] && RUN=true
-	[ "$arg" = "pack"    ] && PACK=true
-	[ "$arg" = "appimg"  ] && APPIMG=true
-	[ "$arg" = "help"    ] && usage
+	[ "$arg" = "clean"    ] && rm -rf build
+	[ "$arg" = "ctest"    ] && CTEST=true
+	[ "$arg" = "install"  ] && INSTALL=true
+	[ "$arg" = "run"      ] && RUN=true
+	[ "$arg" = "pack"     ] && PACK=true
+	[ "$arg" = "appimage" ] && APPIMG=true
+	[ "$arg" = "help"     ] && usage
 done
 
 if [ "$(uname)" = "Linux" ] >/dev/null
