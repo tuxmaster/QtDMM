@@ -82,13 +82,16 @@ then
 	echo
 fi
 
-if [ ! -x qtdmm ]
+QTDMM_EXE="qtdmm"
+[ "$(uname)" = "Darwin" ] && QTDMM_EXE="qtdmm.app/Contents/MacOS/qtdmm"
+
+if [ ! -x ${QTDMM_EXE} ]
 then
 	echo "build/qtdmm not found"
 	exit 1
 fi
 
-if ${APPIMG}
+if [ "$(uname)" = "Linux" ] && ${APPIMG}
 then
 	rm -rf AppDir appimagetool-x86_64.AppImage ../packages/QtDMM.AppImage
 	mkdir -p AppDir/usr/share/metainfo
@@ -116,17 +119,17 @@ fi
 
 
 mkdir -p ../bin
-cp qtdmm qtdmm*.qm ../bin
+cp ${QTDMM_EXE} qtdmm*.qm ../bin
 
-if ${INSTALL}
+if [ "$(uname)" != "Darwin" ] && ${INSTALL}
 then
 	echo
 	echo "-- install QtDMM system wide --"
 	sudo make install || exit 1
-	${RUN} && qtdmm
+	${RUN} && ${QTDMM_EXE}
 elif ${RUN}
 then
-	./qtdmm --debug
+	./${QTDMM_EXE} --debug
 fi
 
 exit 0
