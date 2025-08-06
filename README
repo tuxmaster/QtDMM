@@ -139,8 +139,11 @@ working, let us know.
     Voltcraft    VC 960
 
 Devices supported through sigrok can also be used via the sigrok-cli tool.
+See https://sigrok.org/wiki/Supported_hardware#Multimeters for supported devices.
 Native support is recommended when available; otherwise, the sigrok backend
 provides a flexible fallback.
+To make sigrok work, you have to install it. If neccessary path to sigrok-cli can be set up
+in config dialog.
 
 
 If you manage to  get QtDMM working  with a  digital multimeter different 
