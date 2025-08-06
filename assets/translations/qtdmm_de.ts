@@ -432,27 +432,27 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Beenden ohne speichern</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="430"/>
+        <location filename="../../src/mainwid.cpp" line="429"/>
         <source>Automatic start at %1</source>
         <translation>Automatisch starten bei %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="432"/>
+        <location filename="../../src/mainwid.cpp" line="431"/>
         <source>Raising threshold %1</source>
         <translation>Grenzwert steigent %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="434"/>
+        <location filename="../../src/mainwid.cpp" line="433"/>
         <source>Falling threshold %1</source>
         <translation>Grenzwert fallend %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="456"/>
+        <location filename="../../src/mainwid.cpp" line="455"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="497"/>
+        <location filename="../../src/mainwid.cpp" line="496"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Konnte %1 nicht starten</translation>
     </message>
@@ -461,18 +461,18 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="obsolete">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s is still running!&lt;p&gt;Do you want to kill it now</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="514"/>
+        <location filename="../../src/mainwid.cpp" line="513"/>
         <source>Launched %1</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="519"/>
+        <location filename="../../src/mainwid.cpp" line="518"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 mit dem Rückgabecode %2 beendet.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="455"/>
-        <location filename="../../src/mainwid.cpp" line="496"/>
+        <location filename="../../src/mainwid.cpp" line="454"/>
+        <location filename="../../src/mainwid.cpp" line="495"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: Startfehler</translation>
     </message>
@@ -481,17 +481,17 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %1 läuft noch.&lt;p&gt;Soll es getötet werden</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="468"/>
+        <location filename="../../src/mainwid.cpp" line="467"/>
         <source>Yes, kill it!</source>
         <translation>Ja, töten!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="472"/>
+        <location filename="../../src/mainwid.cpp" line="471"/>
         <source>No, keep running</source>
         <translation>Nein, es laufen lassen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="508"/>
+        <location filename="../../src/mainwid.cpp" line="507"/>
         <source>Bummer!</source>
         <translation>Reinfall!</translation>
     </message>
@@ -499,12 +499,12 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWin</name>
     <message>
-        <location filename="../../src/mainwin.cpp" line="173"/>
+        <location filename="../../src/mainwin.cpp" line="166"/>
         <source>QtDMM: Welcome!</source>
         <translation>QtDMM: Willkommen!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="173"/>
+        <location filename="../../src/mainwin.cpp" line="166"/>
         <source>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;A simple recorder for DMM&apos;s&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;A simple display software for a variety of digital multimeter. Currently confirmed are:&lt;table&gt;%2&lt;/table&gt;Other compatible models may work also.&lt;p&gt;QtDMM features min/max memory and a configurable recorder with import/export and printing function. Sampling may be started manually, at a given time or triggered by a measured threshold. Additionally an external program may be started when given thresholds are reached.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; uses the platform independent toolkit &lt;b&gt;Qt&lt;/b&gt; version %3 and is licensed under &lt;b&gt;GPL 3&lt;/b&gt; (Versions prior to v0.9.0 where licensed under GPL 2)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;The icons (except the DMM icon) have been taken from the KDE project.&lt;p&gt;</source>
         <translation>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;Ein einfacher Datenrekorder für DMM&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;Ein einfaches Anzeigeprogramm für eine Vielzahl von DMM&apos;s. Aktuell bestätigt sind:&lt;table&gt;%2&lt;/table&gt;Andere kompatible Modelle sollten ebenfalls funktionieren.&lt;p&gt;QtDMM stellt die Funktionen Min/Max Werte halten, ein konfigurierbaren Datenrekorder mit Daten im/export Funktion sowie ein Druckfunktion zur Verfügung. Die Datenaufzeichnung kann manuell, durch einen Grenzwert oder durch eine Zeitfunktion ausgelöst werden. Desweiteren kann ein externes Programm beim erreichen eines Grenzwertes gestartet werden.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; wurde mit der Platformunabhängigen &lt;b&gt;Qt&lt;/b&gt; Bibliothek in der Version %3 welche unter der &lt;b&gt;GPLv3&lt;/b&gt; lizensiert ist erstellt.(Versionen vor 0.9.0 wurden unter der GPLv2 Lizenz veröffentlicht)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;Die Symbole (bis auf das DMM Symbol) stammen von dem KDE Projekt.&lt;p&gt;</translation>
     </message>

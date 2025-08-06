@@ -623,7 +623,7 @@
         </item>
         <item>
          <property name="text">
-          <string>Sigrok</string>
+          <string>variable bytes ASCII, Sigrok</string>
          </property>
         </item>
        </widget>

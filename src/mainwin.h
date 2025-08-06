@@ -42,7 +42,6 @@ public:
 protected Q_SLOTS:
   void      runningSLOT(bool);
   void      connectSLOT(bool);
-  void      configSLOT();
   void      on_action_About_triggered();
   void      on_action_Menu_triggered();
   void      setConnectSLOT(bool);

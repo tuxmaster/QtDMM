@@ -161,12 +161,6 @@ void MainWin::connectSLOT(bool on)
     m_running = false;
 }
 
-void MainWin::configSLOT()
-{
-//  action_Connect->setChecked(false);
-//  action_Connect->triggered();
-}
-
 void MainWin::on_action_About_triggered()
 {
   QMessageBox::about(this, tr("QtDMM: Welcome!"), tr("<h1>QtDMM %1</h1><hr>"\
