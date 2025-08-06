@@ -139,8 +139,11 @@ working, let us know.
     Voltcraft    VC 960
 
 Devices supported through sigrok can also be used via the sigrok-cli tool.
+See https://sigrok.org/wiki/Supported_hardware#Multimeters for supported devices.
 Native support is recommended when available; otherwise, the sigrok backend
 provides a flexible fallback.
+To make sigrok work, you have to install it. If neccessary path to sigrok-cli can be set up
+in config dialog.
 
 
 If you manage to  get QtDMM working  with a  digital multimeter different 
@@ -153,12 +156,14 @@ some debug output. This might (or might not) help resolve problems.
 
 
 ## Notes
-to use RFC2217 remote serial you have to edit the config file.
-- open ~/.config/QtDMM/QtDMM.config
-- in section [Port%20settings] add new entry static_device0=RFC2217 127.0.0.1:4000 edit ip and port accordingly.
-- up to 10 devices (0-9) are supported in config. Later this will be available via config dialog
-- on remote host with DMM connected start the rfc2217_server.py. Currently only serial is supported (no HID-Serial)
-- start server with: rfc2217_server.py -p <port> <device> e.g.: rfc2217_server.py -p 4000 /dev/ttyUSB0
+to use RFC2217 remote serial or sigrok backend you have to set up a custom port in settings dialog.
+- settings dialog -> custom ports
+- RFC2217: set RFC2217 n combo box and in the text field add <host>:<port> e.g. localhost:4000 or 192.168.178.55:4000
+- SIGROK: set SIGROK n combo box and in the text field add sigrok-cli device string. e.g. scpi-dmm:conn=/dev/ttyUSB0
+  see https://sigrok.org/wiki/Supported_hardware#Multimeters and sigrok-cli --help for more infos
+
+RFC2217 server: You can use any programm that fully supports RFC2217 protocol (including remote port setup).
+For convinience you can use assets/rfc2217_server.py. Start server with: rfc2217_server.py -p <port> <device> e.g.: rfc2217_server.py -p 4000 /dev/ttyUSB0
 
 
 ## Licensing

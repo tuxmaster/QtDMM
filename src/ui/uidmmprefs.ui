@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>633</width>
+    <width>542</width>
     <height>690</height>
    </rect>
   </property>
@@ -181,6 +181,10 @@
           </item>
          </layout>
         </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <layout class="QHBoxLayout" name="_4">
         <item>
          <layout class="QFormLayout" name="formLayout_5">
           <item row="0" column="0">
@@ -212,46 +216,92 @@
             </property>
             <item>
              <property name="text">
-              <string>600</string>
+              <string notr="true">600</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>1200</string>
+              <string notr="true">1200</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>1800</string>
+              <string notr="true">1800</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>2400</string>
+              <string notr="true">2400</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>4800</string>
+              <string notr="true">4800</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>9600</string>
+              <string notr="true">9600</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>19200</string>
+              <string notr="true">19200</string>
              </property>
             </item>
            </widget>
           </item>
          </layout>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="uirts">
+          <property name="text">
+           <string notr="true">RTS</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="uidtr">
+          <property name="text">
+           <string notr="true">DTR</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="spacer3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>21</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <layout class="QFormLayout" name="formLayout_2">
@@ -281,22 +331,22 @@
             </property>
             <item>
              <property name="text">
-              <string>5</string>
+              <string notr="true">5</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>6</string>
+              <string notr="true">6</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>7</string>
+              <string notr="true">7</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>8</string>
+              <string notr="true">8</string>
              </property>
             </item>
            </widget>
@@ -369,12 +419,12 @@
             </property>
             <item>
              <property name="text">
-              <string>1</string>
+              <string notr="true">1</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>2</string>
+              <string notr="true">2</string>
              </property>
             </item>
            </widget>
@@ -410,57 +460,57 @@
             </property>
             <item>
              <property name="text">
-              <string>2000</string>
+              <string notr="true">2000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>4000</string>
+              <string notr="true">4000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>6000</string>
+              <string notr="true">6000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>20000</string>
+              <string notr="true">20000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>22000</string>
+              <string notr="true">22000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>40000</string>
+              <string notr="true">40000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>50000</string>
+              <string notr="true">50000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>100000</string>
+              <string notr="true">100000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>200000</string>
+              <string notr="true">200000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>400000</string>
+              <string notr="true">400000</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>1000000</string>
+              <string notr="true">1000000</string>
              </property>
             </item>
            </widget>
@@ -476,43 +526,6 @@
            <size>
             <width>40</width>
             <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item row="3" column="0">
-       <layout class="QHBoxLayout" name="_4">
-        <item>
-         <widget class="QCheckBox" name="uirts">
-          <property name="text">
-           <string notr="true">RTS</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="uidtr">
-          <property name="text">
-           <string notr="true">DTR</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="spacer3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>201</width>
-            <height>21</height>
            </size>
           </property>
          </spacer>
@@ -610,7 +623,7 @@
         </item>
         <item>
          <property name="text">
-          <string>Sigrok</string>
+          <string>variable bytes ASCII, Sigrok</string>
          </property>
         </item>
        </widget>
@@ -693,7 +706,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;https://github.com/tuxmaster/QtDMM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/tuxmaster/QtDMM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>
@@ -718,7 +731,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;https://github.com/tuxmaster/QtDMM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/tuxmaster/QtDMM&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>

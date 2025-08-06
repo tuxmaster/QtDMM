@@ -38,6 +38,7 @@ class GuiPrefs;
 class GraphPrefs;
 class IntegrationPrefs;
 class ExecutePrefs;
+class PortsPrefs;
 
 class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 {
@@ -48,11 +49,12 @@ public:
     Recorder = 0,
     Scale,
     DMM,
+    Ports,
     GUI,
     Graph,
     Integration,
     External,
-    NumItems
+    NumItems,
   };
 
   ConfigDlg(QWidget *parent = Q_NULLPTR);
@@ -133,17 +135,18 @@ public:
 public Q_SLOTS:
   void                  connectSLOT(bool);
   void                  on_ui_buttonBox_accepted();
+  void                  on_ui_buttonBox_rejected();
   void                  setSampleTimeSLOT(int);
   void                  setGraphSizeSLOT(int, int);
   void                  setShowTipsSLOT(bool);
   void                  setCurrentTipSLOT(int);
   void                  zoomInSLOT(double);
   void                  zoomOutSLOT(double);
-  void                  on_ui_buttonBox_rejected();
   void                  thresholdChangedSLOT(DMMGraph::CursorMode, double);
 
 Q_SIGNALS:
   void                  accepted();
+  void                  rejected();
   void                  showTips(bool);
   void                  zoomed();
 
@@ -152,12 +155,15 @@ protected:
   QRect                 m_winRect;
   RecorderPrefs        *m_recorder;
   ScalePrefs           *m_scale;
+  PortsPrefs           *m_ports;
   DmmPrefs             *m_dmm;
   GuiPrefs             *m_gui;
   GraphPrefs           *m_graph;
   IntegrationPrefs     *m_integration;
   ExecutePrefs         *m_execute;
   bool                  m_buttonBox_OK;
+
+  void                  reloadSettings();
 
 protected Q_SLOTS:
   void                  on_ui_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *);

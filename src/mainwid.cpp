@@ -58,6 +58,7 @@ MainWid::MainWid(QWidget *parent) :  QFrame(parent),
   connect(ui_graph, SIGNAL(running(bool)), this, SLOT(runningSLOT(bool)));
   connect(m_configDlg, SIGNAL(accepted()), this, SLOT(applySLOT()));
   connect(m_configDlg, SIGNAL(zoomed()), this, SLOT(zoomedSLOT()));
+  connect(m_configDlg, SIGNAL(rejected()), this, SLOT(rejectSLOT()));
   connect(ui_graph, SIGNAL(sampleTime(int)), m_configDlg, SLOT(setSampleTimeSLOT(int)));
   connect(ui_graph, SIGNAL(graphSize(int, int)), m_configDlg, SLOT(setGraphSizeSLOT(int, int)));
   connect(ui_graph, SIGNAL(externalTriggered()), this, SLOT(startExternalSLOT()));
@@ -271,24 +272,34 @@ void MainWid::helpSLOT()
 
 void MainWid::configSLOT()
 {
+  Q_EMIT setConnect(false);
+  Q_EMIT connectDMM(false);
+  connectSLOT(false);
+
   m_configDlg->show();
   m_configDlg->raise();
 }
 
 void MainWid::configDmmSLOT()
 {
-  m_configDlg->show();
-  m_configDlg->raise();
-
+  configSLOT();
   m_configDlg->showPage(ConfigDlg::DMM);
 }
 
 void MainWid::configRecorderSLOT()
 {
-  m_configDlg->show();
-  m_configDlg->raise();
-
+  configSLOT();
   m_configDlg->showPage(ConfigDlg::Recorder);
+}
+
+void MainWid::rejectSLOT()
+{
+  if ((sender() == m_configDlg))
+  {
+    Q_EMIT setConnect(true);
+    Q_EMIT connectDMM(true);
+    connectSLOT(true);
+  }
 }
 
 void MainWid::applySLOT()
@@ -296,12 +307,18 @@ void MainWid::applySLOT()
   readConfig();
   ui_graph->setAlertUnsaved(m_configDlg->alertUnsavedData());
   m_dmm->setName(m_configDlg->dmmName());
+
+  if ((sender() == m_configDlg))
+  {
+    Q_EMIT setConnect(true);
+    Q_EMIT connectDMM(true);
+    connectSLOT(true);
+  }
 }
 
 void MainWid::zoomedSLOT()
 {
-  ui_graph->setGraphSize(m_configDlg->windowSeconds(),
-                         m_configDlg->totalSeconds());
+  ui_graph->setGraphSize(m_configDlg->windowSeconds(), m_configDlg->totalSeconds());
 }
 
 void MainWid::exportSLOT()
@@ -357,8 +374,7 @@ void MainWid::readConfig()
   m_dmm->setPortSettings(static_cast<QSerialPort::DataBits>(m_configDlg->bits()), static_cast<QSerialPort::StopBits>(m_configDlg->stopBits()),
                          m_configDlg->parity(), m_configDlg->externalSetup(), m_configDlg->rts(), m_configDlg->dtr() );
 
-  ui_graph->setGraphSize(m_configDlg->windowSeconds(),
-                         m_configDlg->totalSeconds());
+  ui_graph->setGraphSize(m_configDlg->windowSeconds(), m_configDlg->totalSeconds());
   ui_graph->setStartTime(m_configDlg->startTime());
   ui_graph->setMode(m_configDlg->sampleMode());
 

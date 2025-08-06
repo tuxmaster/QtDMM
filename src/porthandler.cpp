@@ -12,10 +12,10 @@ bool PortHandler::create(const DmmDecoder::DMMInfo spec, PortType t, QString dev
 
   switch (t)
   {
-    case PortType::Serial: m_port = new SerialDevice(spec, device);       break;
-    case PortType::Hid:    m_port = new HIDSerialDevice(spec, device);    break;
-    case PortType::Sigrok: m_port = new SigrokDevice(spec,device);        break;
-    case PortType::RFC2217: m_port = new RFC2217SerialDevice(spec,device);break;
+    case PortType::Serial: m_port = new SerialDevice(spec, device);      break;
+    case PortType::Hid:    m_port = new HIDSerialDevice(spec, device);   break;
+    case PortType::Sigrok: m_port = new SigrokDevice(spec,device);       break;
+    case PortType::RFC2217:m_port = new RFC2217SerialDevice(spec,device);break;
     default: return false;
   }
 

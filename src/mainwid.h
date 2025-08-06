@@ -77,6 +77,7 @@ public Q_SLOTS:
   void        importSLOT();
   void        runningSLOT(bool);
   void        applySLOT();
+  void        rejectSLOT();
   void        showTipsSLOT();
 
 protected:

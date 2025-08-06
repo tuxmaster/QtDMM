@@ -79,6 +79,7 @@ public:
     bool  externalSetup;
     bool  rts;
     bool  dtr;
+    QString sigrokExe;
   };
 
   explicit DmmDecoder(ReadEvent::DataFormat df);
