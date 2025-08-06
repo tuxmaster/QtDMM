@@ -156,19 +156,23 @@ some debug output. This might (or might not) help resolve problems.
 
 
 ## Notes
-to use RFC2217 remote serial or sigrok backend you have to set up a custom port in settings dialog.
-- settings dialog -> custom ports
-- RFC2217: set RFC2217 n combo box and in the text field add <host>:<port> e.g. localhost:4000 or 192.168.178.55:4000
-- SIGROK: set SIGROK n combo box and in the text field add sigrok-cli device string. e.g. scpi-dmm:conn=/dev/ttyUSB0
-  see https://sigrok.org/wiki/Supported_hardware#Multimeters and sigrok-cli --help for more infos
+To use the RFC2217 remote serial or the Sigrok backend, you need to configure a custom port in the settings dialog:
+
+- Go to **Settings Dialog** → **Custom Ports**
+- **RFC2217**: Select the **RFC2217** option from the combo box, and enter `<host>:<port>` in the input field.
+  Example: `localhost:4000` or `192.168.178.55:4000`
+- **Sigrok**: Select the **Sigrok** option from the combo box, and enter the appropriate `sigrok-cli` device string in the input field.
+  Example: `scpi-dmm:conn=/dev/ttyUSB0`
+  For more information, see [Supported Hardware](https://sigrok.org/wiki/Supported_hardware#Multimeters) and run `sigrok-cli --help`.
+
 
 RFC2217 server: You can use any programm that fully supports RFC2217 protocol (including remote port setup).
 For convinience you can use assets/rfc2217_server.py. Start server with: rfc2217_server.py -p <port> <device> e.g.: rfc2217_server.py -p 4000 /dev/ttyUSB0
 
 
 ## Licensing
-**0.9.5 until today tuxmaster and various contributors, see AUTHORS file**
-**0.9.3 and before (c) 2001-2016 M.Toussaint <qtdmm@mtoussaint.de>**
+- **0.9.5 until today tuxmaster and various contributors, see AUTHORS file**
+- **0.9.3 and before (c) 2001-2016 M.Toussaint <qtdmm@mtoussaint.de>**
 
 QtDMM 0.9.0 and beyond is distributed under the GNU Public License, version 3.
 (Prior to 0.9.0 are licensed under GNU GPL 2.0)

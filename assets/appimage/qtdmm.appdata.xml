@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.tuxmaster.qtdmm</id>
+  <name>QtDMM</name>
+  <summary>Digital multimeter readout application</summary>
+  <metadata_license>CC-BY-SA-4.0</metadata_license>
+  <project_license>AGPL-3.0-only</project_license>
+  
+  <description>
+    <p>
+      QtDMM is a simple, cross-platform digital multimeter (DMM) readout application with a built-in, configurable transient recorder. It&apos;s especially useful for users of older multimeters whose original software no longer runs on modern operating systems.
+    </p>
+    <p>
+      QtDMM provides a reliable, open-source alternative to outdated or proprietary DMM software and continues to work on current Linux and macOS systems (Windows support is currently limited/untested).
+    </p>
+  </description>
+
+  <developer id="io.github.tuxmaster.qtdmm">
+    <name>qtdmm team</name>
+  </developer>
+
+  <launchable type="desktop-id">qtdmm.desktop</launchable>
+  <url type="homepage">https://github.com/tuxmaster/QtDMM</url>
+  <content_rating type="oars-1.0" />
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/tuxmaster/QtDMM/blob/master/assets/appimage/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+</component>

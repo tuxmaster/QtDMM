@@ -1,16 +1,20 @@
-name: 🧹 Cleanup old artifacts
-
-# Run cleanup workflow at the end of every day
+name: Cleanup old workflow runs
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 3 * * *'  # daily at 03:00 UTC
+  workflow_dispatch:
 
 jobs:
-  clean:
+  cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: 🧹 Cleanup old workflow artifacts
-        uses: kolpav/purge-artifacts-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          expire-in: 7days # all artifacts at least 14 days old
+      - name: Install GitHub CLI
+        run: sudo apt install gh
+
+      - name: Delete old workflow runs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh auth login --with-token <<< "$GH_TOKEN"
+          WORKFLOW_ID=$(gh workflow list --limit 100 | grep "Ubuntu test build" | awk '{print $NF}')
+          gh run list --workflow="$WORKFLOW_ID" --limit 100 | tail -n +31 | awk '{print $1}' | xargs -n1 gh run delete -y

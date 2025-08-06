@@ -108,10 +108,16 @@ install(TARGETS ${PROJECT_NAME}
 	ARCHIVE DESTINATION lib
 )
 
-install(FILES assets/qtdmm.desktop DESTINATION share/applications)
-install(FILES assets/icons/qtdmm_32.png DESTINATION share/icons/hicolor/32x32/apps RENAME qtdmm.png)
-install(FILES assets/icons/qtdmm_64.png DESTINATION share/icons/hicolor/64x64/apps RENAME qtdmm.png)
-install(FILES assets/icons/qtdmm_128.png DESTINATION share/icons/hicolor/128x128/apps RENAME qtdmm.png)
+if (NOT WIN32)
+	file( COPY ${CMAKE_SOURCE_DIR}/docs/qtdmm.1 DESTINATION ${CMAKE_BINARY_DIR} )
+	execute_process( COMMAND gzip -f ${CMAKE_BINARY_DIR}/qtdmm.1 )
+
+	install(FILES assets/qtdmm.desktop DESTINATION share/applications)
+	install(FILES assets/icons/qtdmm_32.png DESTINATION share/icons/hicolor/32x32/apps RENAME qtdmm.png)
+	install(FILES assets/icons/qtdmm_64.png DESTINATION share/icons/hicolor/64x64/apps RENAME qtdmm.png)
+	install(FILES assets/icons/qtdmm_128.png DESTINATION share/icons/hicolor/128x128/apps RENAME qtdmm.png)
+	install(FILES ${CMAKE_BINARY_DIR}/qtdmm.1.gz DESTINATION share/man/man1)
+endif()
 
 ## include test framework
 include(cmake/ctest.cmake)

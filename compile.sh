@@ -8,11 +8,12 @@ usage: compile.sh <install|clean|qt6>
 
  builds QtDMM. Additional options:
 
-   install: install system wide
-   clean  : remove build files before build
-   ctest  : build and run ctest
-   run    : run qtdmm after successfull build
-   pack   : create packages (DEB and source)
+   appimage: creates appImage
+   clean   : remove build files before build
+   ctest   : build and run ctest
+   install : install system wide
+   pack    : create packages (DEB and source)
+   run     : run qtdmm after successfull build
 
 EOF
 	exit 0
@@ -22,16 +23,18 @@ RUN=false
 INSTALL=false
 PACK=false
 CTEST=false
+APPIMG=false
 
 for arg in $*
 do
 	arg=$(echo "$arg" | tr '[:upper:]' '[:lower:]')
-	[ "$arg" = "clean"   ] && rm -rf build
-	[ "$arg" = "ctest"   ] && CTEST=true
-	[ "$arg" = "install" ] && INSTALL=true
-	[ "$arg" = "run"     ] && RUN=true
-	[ "$arg" = "pack"    ] && PACK=true
-	[ "$arg" = "help"    ] && usage
+	[ "$arg" = "clean"    ] && rm -rf build
+	[ "$arg" = "ctest"    ] && CTEST=true
+	[ "$arg" = "install"  ] && INSTALL=true
+	[ "$arg" = "run"      ] && RUN=true
+	[ "$arg" = "pack"     ] && PACK=true
+	[ "$arg" = "appimage" ] && APPIMG=true
+	[ "$arg" = "help"     ] && usage
 done
 
 if [ "$(uname)" = "Linux" ] >/dev/null
@@ -79,18 +82,54 @@ then
 	echo
 fi
 
-if [ -x qtdmm ]
+QTDMM_EXE="qtdmm"
+[ "$(uname)" = "Darwin" ] && QTDMM_EXE="qtdmm.app/Contents/MacOS/qtdmm"
+
+if [ ! -x ${QTDMM_EXE} ]
 then
-	mkdir -p ../bin
-	cp qtdmm qtdmm*.qm ../bin
-	if ${INSTALL}
-	then
-		echo
-		echo "-- install QtDMM system wide --"
-		sudo make install || exit 1
-		${RUN} && qtdmm
-	elif ${RUN}
-	then
-		./qtdmm --debug
-	fi
+	echo "build/qtdmm not found"
+	exit 1
 fi
+
+if [ "$(uname)" = "Linux" ] && ${APPIMG}
+then
+	rm -rf AppDir appimagetool-x86_64.AppImage ../packages/QtDMM.AppImage
+	mkdir -p AppDir/usr/share/metainfo
+	wget -q https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+	chmod +x appimagetool-x86_64.AppImage
+	DESTDIR=AppDir make install
+	cp -v ../assets/qtdmm.desktop ../qtdmm.png AppDir
+	cp -v ../assets/appimage/qtdmm.appdata.xml AppDir/usr/share/metainfo
+	echo '#!/bin/sh' > AppDir/AppRun
+	echo '$APPDIR/usr/bin/qtdmm' >> AppDir/AppRun
+	chmod +x AppDir/AppRun
+
+	for lib in $(ldd -r AppDir/usr/bin/qtdmm | awk '{ print $3 }' | grep -v '^$')
+	do
+		d="$(dirname "${lib}")"
+		mkdir -p "AppDir/$d"
+		cp -v "${lib}" "AppDir/$d"
+	done
+
+	ARCH=x86_64 ./appimagetool-x86_64.AppImage -n AppDir QtDMM.AppImage
+	rm -rf AppDir appimagetool-x86_64.AppImage
+	mkdir -p ../packages
+	mv QtDMM.AppImage ../packages
+fi
+
+
+mkdir -p ../bin
+cp ${QTDMM_EXE} qtdmm*.qm ../bin
+
+if [ "$(uname)" != "Darwin" ] && ${INSTALL}
+then
+	echo
+	echo "-- install QtDMM system wide --"
+	sudo make install || exit 1
+	${RUN} && ${QTDMM_EXE}
+elif ${RUN}
+then
+	./${QTDMM_EXE} --debug
+fi
+
+exit 0
