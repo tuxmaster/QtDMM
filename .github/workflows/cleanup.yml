@@ -9,12 +9,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install GitHub CLI
-        run: sudo apt install gh
+        run: sudo apt install gh jq
 
-      - name: Delete old workflow runs
+      - name: Delete old workflow runs except master branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh auth login --with-token <<< "$GH_TOKEN"
+
+          # Get workflow ID by name
           WORKFLOW_ID=$(gh workflow list --limit 100 | grep "Ubuntu test build" | awk '{print $NF}')
-          gh run list --workflow="$WORKFLOW_ID" --limit 100 | tail -n +31 | awk '{print $1}' | xargs -n1 gh run delete -y
+
+          # Get last 100 runs for this workflow
+          gh run list --workflow="$WORKFLOW_ID" --limit 100 --json databaseId,headBranch | jq -c '.[]' |
+          tail -n +11 | while read -r run; do
+            ID=$(echo "$run" | jq -r '.databaseId')
+            BRANCH=$(echo "$run" | jq -r '.headBranch')
+            
+            # Only delete if NOT from master branch
+            if [ "$BRANCH" != "master" ]; then
+              echo "Deleting run $ID on branch $BRANCH"
+              gh run delete "$ID" -y
+            else
+              echo "Skipping run $ID on master"
+            fi
+          done
