@@ -36,3 +36,9 @@ jobs:
       working-directory: ${{github.workspace}}/
       run: ./compile.sh ctest
 
+    - name: Upload AppImage artifact
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      uses: actions/upload-artifact@v4
+      with:
+        name: qtdmm-dev-build
+        path: ${{ github.workspace }}/packages/QtDMM.AppImage
