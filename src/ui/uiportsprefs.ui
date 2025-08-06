@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>664</height>
+    <height>663</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -51,12 +51,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -81,12 +81,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -111,12 +111,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -141,12 +141,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -171,12 +171,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -201,12 +201,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -231,12 +231,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -261,12 +261,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -291,12 +291,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -321,12 +321,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
        <item>
         <property name="text">
-         <string>RFC2217</string>
+         <string notr="true">RFC2217</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>SIGROK</string>
+         <string notr="true">SIGROK</string>
         </property>
        </item>
       </widget>
@@ -374,7 +374,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </font>
        </property>
        <property name="text">
-        <string>Sigrok</string>
+        <string>Sigrok executable</string>
        </property>
       </widget>
      </item>
@@ -388,7 +388,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <item>
       <widget class="QToolButton" name="ui_sigrokExeButton">
        <property name="text">
-        <string>...</string>
+        <string notr="true">...</string>
        </property>
       </widget>
      </item>

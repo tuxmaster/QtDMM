@@ -13,19 +13,21 @@
     <message>
         <location filename="../../src/configdlg.cpp" line="57"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;This seems to be your first invocation of QtDMM (Or you have deleted its configuration file).&lt;p&gt;QtDMM has created the file %1 in your home directory to save its settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dies scheint der erste Aufruf von QtDMM zu sein, bzw. die Konfigurstion wurde gelöscht.&lt;p&gt;QtDMM hate eine neue Datei unter dem Pfad %1 angelegt.</translation>
     </message>
     <message>
         <location filename="../../src/configdlg.cpp" line="82"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You seem to have upgraded &lt;b&gt;QtDMM&lt;/b&gt; from a version prior to 0.8.4. Please check your configuration. There are some new parameters to be configured.&lt;p&gt;Thank you for choosing &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;p&gt;Wie es ausschaut, wurde &lt;b&gt;QtDMM&lt;/b&gt; von einer Version vor 0.8.4 aktualisiert. Bitte überprüfen Sie die Konfiguration. Es gibt einige neue Parameter.&lt;p&gt;Danke das Sie &lt;b&gt;QtDMM&lt;/b&gt; benutzen.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../src/configdlg.cpp" line="103"/>
         <source>Your config file has been converted to the new format.
 Please check your color settings, because they couldn&apos;t be converted automatically.
 Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Konfiguration wurde in ein neues Format überführt.
+Bitte überprüfen Sie die Farbeinstellungen, da diese nicht konvertiert werden konnten.
+Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
     </message>
     <message>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;This seems to be your first invocation of QtDMM (Or you have deleted it&apos;s configuration file).&lt;p&gt;QtDMM has created the file %1 in your home directory to save its settings.</source>
@@ -94,14 +96,9 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="190"/>
-        <source>%1 %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/dmm.cpp" line="193"/>
         <source>Error %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler %1</translation>
     </message>
     <message>
         <location filename="../../src/dmm.cpp" line="198"/>
@@ -276,21 +273,13 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/decoders/do3122.cpp" line="79"/>
         <source>Digit parse fail</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziffernanalyse fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../../src/decoders/do3122.cpp" line="142"/>
         <location filename="../../src/decoders/do3122.cpp" line="145"/>
         <source>Parser errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DecoderVC820</name>
-    <message>
-        <location filename="../../src/decoders/vc820.h" line="9"/>
-        <source>VC820</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyse Fehler</translation>
     </message>
 </context>
 <context>
@@ -298,7 +287,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/decoders/vc870.cpp" line="761"/>
         <source>Parser errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyse Fehler</translation>
     </message>
 </context>
 <context>
@@ -327,7 +316,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <location filename="../../src/dmmprefs.cpp" line="337"/>
         <location filename="../../src/dmmprefs.cpp" line="363"/>
         <source>DMM description (*.cfg)</source>
-        <translation type="unfinished"></translation>
+        <translation>DMM Beschreibung (*.cfg)</translation>
     </message>
     <message>
         <source>DMM description (*.ini)</source>
@@ -449,7 +438,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/mainwid.cpp" line="455"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s läuft noch!&lt;p&gt;Wollen sie es jetzt beenden?</translation>
     </message>
     <message>
         <location filename="../../src/mainwid.cpp" line="496"/>
@@ -532,12 +521,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/portsprefs.cpp" line="108"/>
         <source>Sigrok-cli executable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/portsprefs.cpp" line="108"/>
-        <source>sigrok (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sigrok-cli Applikation</translation>
     </message>
 </context>
 <context>
@@ -668,61 +652,6 @@ Danach müssen Sie sich ab- und wieder anmelden.</translation>
         <translation>Anschlusseinstellungen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="219"/>
-        <source>600</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="224"/>
-        <source>1200</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="229"/>
-        <source>1800</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="234"/>
-        <source>2400</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="239"/>
-        <source>4800</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="244"/>
-        <source>9600</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="249"/>
-        <source>19200</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="334"/>
-        <source>5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="339"/>
-        <source>6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="344"/>
-        <source>7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="349"/>
-        <source>8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="357"/>
         <source>Parit&amp;y</source>
         <translation>&amp;Parität</translation>
@@ -748,16 +677,6 @@ Danach müssen Sie sich ab- und wieder anmelden.</translation>
         <translation>Ungerade</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="422"/>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="427"/>
-        <source>2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="451"/>
         <source>Number of display digits.
 &lt;ul&gt;&lt;li&gt;3 1/2 - 2000 Counts&lt;/li&gt;
@@ -773,74 +692,24 @@ Danach müssen Sie sich ab- und wieder anmelden.</translation>
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="463"/>
-        <source>2000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="468"/>
-        <source>4000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="478"/>
-        <source>20000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="493"/>
-        <source>50000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="498"/>
-        <source>100000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="503"/>
-        <source>200000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="508"/>
-        <source>400000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="513"/>
-        <source>1000000</source>
-        <translation></translation>
+        <location filename="../../src/ui/uidmmprefs.ui" line="626"/>
+        <source>variable bytes ASCII, Sigrok</source>
+        <translation>variable bytes ASCII, Sigrok</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="709"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;https://github.com/tuxmaster/QtDMM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/tuxmaster/QtDMM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, das es funkioniert, dann melden Sie es bitte an: &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="734"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;https://github.com/tuxmaster/QtDMM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/tuxmaster/QtDMM&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="473"/>
-        <source>6000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="488"/>
-        <source>40000</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="483"/>
-        <source>22000</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, welches hier nicht aufgeführt ist, aber Sie aber passende Einstellungen gefunden haben, so teilen Sie es bitte &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt; mit. So können zukümpftige Versionen von Ihrer Hilfe profitieren.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="581"/>
         <source>11 bytes binary, continuous (CyrustekES51986)</source>
-        <translation type="unfinished"></translation>
+        <translation>11 bytes binär, kontinuierlich (CyrustekES51986)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="601"/>
@@ -860,17 +729,12 @@ Danach müssen Sie sich ab- und wieder anmelden.</translation>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="616"/>
         <source>DTM0660</source>
-        <translation type="unfinished"></translation>
+        <translation>DTM0660</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="621"/>
         <source>11 bytes binary, continuous (CyrustekES51962)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="626"/>
-        <source>Sigrok</source>
-        <translation type="unfinished"></translation>
+        <translation>11 bytes binär, kontinuierlich(CyrustekES51962)</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;mailto:qtdmm@mtoussaint.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;qtdmm@mtoussaint.de&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1651,7 +1515,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <location filename="../../src/ui/uimainwin.ui" line="419"/>
         <location filename="../../src/ui/uimainwin.ui" line="422"/>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="149"/>
@@ -1800,7 +1664,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="401"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>Ü&amp;ber</translation>
     </message>
     <message>
         <source>&amp;On version</source>
@@ -1850,55 +1714,32 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This is a list of custom ports. Select &lt;span style=&quot; font-weight:700;&quot;&gt;RFC2217&lt;/span&gt; for remote serial port and &lt;span style=&quot; font-weight:700;&quot;&gt;SIGROK&lt;/span&gt; for using external sigrok-cli tool. Usage below:&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;RFC2217&lt;/span&gt; port: &amp;lt;hostname|ip&amp;gt;:&amp;lt;port&amp;gt; e.g. localhost:4000&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;SIGROK&lt;/span&gt; port: sigrok string, see &lt;a href=&quot;https://sigrok.org/wiki/Supported_hardware#Multimeters&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;Sigrok Multimeters&lt;/span&gt;&lt;/a&gt;e.g. &lt;span style=&quot; font-family:&apos;monospace&apos;;&quot;&gt;uni-t-ut61e-ser:conn=/dev/ttyUSB0&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uiportsprefs.ui" line="54"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="84"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="114"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="144"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="174"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="204"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="234"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="264"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="294"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="324"/>
-        <source>RFC2217</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uiportsprefs.ui" line="59"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="89"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="119"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="149"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="179"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="209"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="239"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="269"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="299"/>
-        <location filename="../../src/ui/uiportsprefs.ui" line="329"/>
-        <source>SIGROK</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dies ist eine Liste benutzerdefinierter Ports. Wähle &lt;span style=&quot; font-weight:700;&quot;&gt;RFC2217&lt;/span&gt; für entfernte serielle Ports und &lt;span style=&quot; font-weight:700;&quot;&gt;SIGROK&lt;/span&gt; zur Nutzung des externen sigrok-cli-Werkzeugs. Verwendung siehe unten:&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;RFC2217&lt;/span&gt;-Port: &amp;lt;hostname|ip&amp;gt;:&amp;lt;port&amp;gt; z.&#x202f;B. localhost:4000&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;SIGROK&lt;/span&gt;-Port: sigrok-String, siehe &lt;a href=&quot;https://sigrok.org/wiki/Supported_hardware#Multimeters&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;Sigrok Multimeter&lt;/span&gt;&lt;/a&gt;z.&#x202f;B. &lt;span style=&quot; font-family:&apos;monospace&apos;;&quot;&gt;uni-t-ut61e-ser:conn=/dev/ttyUSB0&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiportsprefs.ui" line="349"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiportsprefs.ui" line="361"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Anschluss</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiportsprefs.ui" line="377"/>
-        <source>Sigrok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uiportsprefs.ui" line="391"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
+        <source>Sigrok executable</source>
+        <translation>Sigrok Applikation</translation>
     </message>
 </context>
 <context>
@@ -2184,12 +2025,12 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="845"/>
         <source>Pre trigger</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uirecorderprefs.ui" line="974"/>
         <source>Pre trigger time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pre trigger Zeit:</translation>
     </message>
 </context>
 <context>

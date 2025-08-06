@@ -187,7 +187,7 @@ void DMM::readEventSLOT(const QByteArray &data, int id)
       Q_EMIT value(r->dval, r->val, r->unit, r->special, r->range, r->hold, r->showBar, r->id);
       if (r->id2 > 0)
         Q_EMIT value(r->dval2, r->val2, r->unit2, r->special, r->range, r->hold, r->showBar, r->id2);
-      m_error = r->error.isEmpty() ? tr("Connected %1").arg(m_device) : tr("%1 %2").arg(r->error, m_device);
+      m_error = r->error.isEmpty() ? tr("Connected %1").arg(m_device) : QString("%1 %2").arg(r->error, m_device);
     }
     else
       m_error = tr("Error %1").arg(m_device);

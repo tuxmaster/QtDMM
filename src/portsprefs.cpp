@@ -105,7 +105,7 @@ void PortsPrefs::on_ui_sigrokExeButton_clicked()
   filter += ".exe";
 #endif
 
-  QString filename = QFileDialog::getOpenFileName(this, tr("Sigrok-cli executable"), "./",	tr("sigrok (%1)").arg(filter) );
+  QString filename = QFileDialog::getOpenFileName(this, tr("Sigrok-cli executable"), "./",	QString("sigrok (%1)").arg(filter) );
 
   if (!filename.isNull())
     ui_sigrokExe->setText(filename);
