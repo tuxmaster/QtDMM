@@ -37,11 +37,12 @@ class MainWin : public QMainWindow, private Ui::UIMainWin
   Q_OBJECT
 public:
   MainWin(QWidget *parent = Q_NULLPTR);
-  void			setConsoleLogging(bool);
+  void      setConsoleLogging(bool);
 
 protected Q_SLOTS:
   void      runningSLOT(bool);
   void      connectSLOT(bool);
+  void      configSLOT();
   void      on_action_About_triggered();
   void      on_action_Menu_triggered();
   void      setConnectSLOT(bool);

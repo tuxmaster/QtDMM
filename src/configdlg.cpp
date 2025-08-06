@@ -263,7 +263,7 @@ void ConfigDlg::setWinRect(const QRect &rect)
   m_winRect = rect;
 }
 
-void ConfigDlg::on_ui_buttonBox_rejected()
+void ConfigDlg::reloadSettings()
 {
   m_settings->clear();
   int count = m_settings->getInt("Custom colors/count");
@@ -271,6 +271,11 @@ void ConfigDlg::on_ui_buttonBox_rejected()
     QColorDialog::setCustomColor(i, m_settings->getColor(QString("Custom colors/color_%1").arg(i)));
   for (int i = 0; i < NumItems; ++i)
     dynamic_cast<PrefWidget *>(ui_stack->widget(i))->defaultsSLOT();
+}
+
+void ConfigDlg::on_ui_buttonBox_rejected()
+{
+  reloadSettings();
   hide();
 }
 
@@ -306,18 +311,26 @@ void ConfigDlg::on_ui_buttonBox_accepted()
 
   for (int i = 0; i < NumItems; ++i)
     dynamic_cast<PrefWidget *>(ui_stack->widget(i))->applySLOT();
+
   m_settings->save();
-  Q_EMIT accepted();
+  reloadSettings();
 
   if ((sender() == ui_buttonBox) && m_buttonBox_OK)
+  {
+    Q_EMIT accepted();
     hide();
+  }
 }
+
 void ConfigDlg::on_ui_buttonBox_clicked(QAbstractButton *button)
 {
-  if (ui_buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole)
-    m_buttonBox_OK = true;
-  else
-    m_buttonBox_OK = false;
+  m_buttonBox_OK = (ui_buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole);
+
+  if (ui_buttonBox->buttonRole(button) == QDialogButtonBox::ApplyRole)
+    on_ui_buttonBox_accepted();
+
+  if (ui_buttonBox->buttonRole(button) == QDialogButtonBox::RejectRole)
+    Q_EMIT rejected();
 }
 
 void ConfigDlg::writePrinter(QPrinter *printer)
@@ -593,7 +606,9 @@ int ConfigDlg::intPointMode() const
 
 DmmDecoder::DMMInfo ConfigDlg::dmmInfo() const
 {
-  return m_dmm->dmmInfo();
+  DmmDecoder::DMMInfo info = m_dmm->dmmInfo();
+  info.sigrokExe = m_ports->sigrokExecutable();
+  return info;
 }
 
 bool ConfigDlg::rts() const

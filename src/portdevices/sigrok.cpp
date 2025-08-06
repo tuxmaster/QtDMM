@@ -8,8 +8,9 @@ SigrokDevice::SigrokDevice(const DmmDecoder::DMMInfo &info, QString device, QObj
   : QIODevice(parent)
   , m_dmmInfo(info)
   , m_process(new QProcess(this))
+  , m_device(device)
 {
-  m_device = device;
+  m_sigrok = info.sigrokExe.isEmpty() ? "sigrok-cli" : info.sigrokExe;
 
   connect(m_process, &QProcess::readyReadStandardOutput, this, &SigrokDevice::onProcessReadyRead);
 }
@@ -27,7 +28,7 @@ bool SigrokDevice::init() {
   QStringList args;
   args << "--driver" << m_device << "--continuous";
 
-  m_process->start("sigrok-cli", args);
+  m_process->start(m_sigrok, args);
   if (!m_process->waitForStarted())
     return false;
 

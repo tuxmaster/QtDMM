@@ -36,5 +36,6 @@ private:
   QString m_type, m_device;
   QProcess *m_process;
   QByteArray m_buffer;
+  QString m_sigrok;
 };
 

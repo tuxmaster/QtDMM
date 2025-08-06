@@ -79,6 +79,7 @@ void DMM::setSpeed(int speed)
   m_speed = speed;
 }
 
+
 void DMM::setDevice(const QString &device)
 {
   QStringList deviceList = device.split( " " );

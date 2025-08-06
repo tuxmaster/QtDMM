@@ -71,6 +71,8 @@ void PortsPrefs::defaultsSLOT()
 
     m_portEdits[i]->setText(port);
   }
+
+  ui_sigrokExe->setText(m_cfg->getString("Port settings/sigrok_exe","sigrok-cli"));
 }
 
 void PortsPrefs::factoryDefaultsSLOT()
@@ -80,6 +82,7 @@ void PortsPrefs::factoryDefaultsSLOT()
     m_portEdits[i]->setText("");
     m_portTypes[i]->setCurrentIndex(0);
   }
+  ui_sigrokExe->setText("sigrok-cli");
 }
 
 
@@ -87,9 +90,23 @@ void PortsPrefs::applySLOT()
 {
   QStringList ports = customPortList();
 
-  for (int i = 0; i < ports.size(); ++i)
+  for (int i = 0; i < m_portEdits.size(); ++i)
   {
-    m_cfg->setString(QString("Port settings/custom_device%1").arg(i), ports[i]);
+    m_cfg->setString(QString("Port settings/custom_device%1").arg(i), (i < ports.size()) ? ports[i] : "");
   }
+
+  m_cfg->setString("Port settings/sigrok_exe",ui_sigrokExe->text());
 }
 
+void PortsPrefs::on_ui_sigrokExeButton_clicked()
+{
+  QString filter = "sigrok-cli";
+#ifdef Q_OS_WINDOWS
+  filter += ".exe";
+#endif
+
+  QString filename = QFileDialog::getOpenFileName(this, tr("Sigrok-cli executable"), "./",	tr("sigrok (%1)").arg(filter) );
+
+  if (!filename.isNull())
+    ui_sigrokExe->setText(filename);
+}

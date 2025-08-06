@@ -386,7 +386,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="sigrokExeButton">
+      <widget class="QToolButton" name="ui_sigrokExeButton">
        <property name="text">
         <string>...</string>
        </property>
@@ -427,4 +427,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <include location="../resources.qrc"/>
  </resources>
  <connections/>
+ <slots>
+  <slot>on_ui_sigrok_btn_clicked()</slot>
+ </slots>
 </ui>

@@ -135,17 +135,18 @@ public:
 public Q_SLOTS:
   void                  connectSLOT(bool);
   void                  on_ui_buttonBox_accepted();
+  void                  on_ui_buttonBox_rejected();
   void                  setSampleTimeSLOT(int);
   void                  setGraphSizeSLOT(int, int);
   void                  setShowTipsSLOT(bool);
   void                  setCurrentTipSLOT(int);
   void                  zoomInSLOT(double);
   void                  zoomOutSLOT(double);
-  void                  on_ui_buttonBox_rejected();
   void                  thresholdChangedSLOT(DMMGraph::CursorMode, double);
 
 Q_SIGNALS:
   void                  accepted();
+  void                  rejected();
   void                  showTips(bool);
   void                  zoomed();
 
@@ -161,6 +162,8 @@ protected:
   IntegrationPrefs     *m_integration;
   ExecutePrefs         *m_execute;
   bool                  m_buttonBox_OK;
+
+  void                  reloadSettings();
 
 protected Q_SLOTS:
   void                  on_ui_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *);

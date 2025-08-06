@@ -6,9 +6,9 @@ QtDMM is a graphical front-end for digital multimeters based on Qt6 framework.
 
 Requirements:
 =============
-- developer version of Qt 6 + qserialport
+- developer version of Qt 6, qserialport
 - CMake version 3.11 or higher
-- hidapi (ubuntu: libhidapi-devel, libhidapi-hidraw0 | fedora: hidapi-devel, hidapi)
+- hidapi (ubuntu: libhidapi-devel, libhidapi-hidraw0 | fedora: hidapi-devel, hidapi | MacOSX/FreeBSD: hidapi )
 - A supported or compatible multimeter
 
 
@@ -35,6 +35,16 @@ or
 
 - The compiled binary will be placed in the `./bin` directory:
     ./bin/qtdmm
+
+special installations:
+----------------------
+
+Arch Linux:
+curl -O https://raw.githubusercontent.com/tuxmaster/QtDMM/refs/heads/master/PKGBUILD && makepkg --clean --syncdeps -fi
+
+deb/rpm based Linux:
+./compile.sh pack
+will create a deb/rpm package. You can install this cleanly in your system.
 
 
 Multimeter Compatibility:
