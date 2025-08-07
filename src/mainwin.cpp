@@ -30,7 +30,7 @@
 #include "displaywid.h"
 
 
-MainWin::MainWin(QWidget *parent)
+MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   : QMainWindow(parent)
   , m_running(false)
   , m_menu(Q_NULLPTR)
@@ -42,9 +42,16 @@ MainWin::MainWin(QWidget *parent)
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
   this->toolBarMenu->addWidget(spacer);
   this->toolBarMenu->addAction(this->action_Menu);
+  QString config_id = parser.value("config-id");
+  QString version = APP_VERSION;
+  int plusIndex = version.indexOf('+');
+  if (plusIndex != -1)
+    version = version.left(plusIndex);
 
-  m_wid = new MainWid(this);
+
+  m_wid = new MainWid(config_id, parser.value("config-dir"), this);
   setCentralWidget(m_wid);
+  setConsoleLogging(parser.isSet("debug"));
 
   createActions();
 
@@ -52,7 +59,7 @@ MainWin::MainWin(QWidget *parent)
   toolBarDisplay->addWidget(m_display);
   m_wid->setDisplay(m_display);
 
-  setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(APP_VERSION));
+  setWindowTitle(QString("%1 %2 %3").arg(APP_NAME).arg(version).arg(config_id));
 
   connect(m_wid, SIGNAL(running(bool)), this, SLOT(runningSLOT(bool)));
 
