@@ -12,10 +12,9 @@ jobs:
         run: sudo apt install gh jq
 
       - name: Delete old workflow runs except master branch
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         run: |
-          gh auth login --with-token <<< "$GH_TOKEN"
+          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
 
           # Get workflow ID by name
           WORKFLOW_ID=$(gh workflow list --limit 100 | grep "Ubuntu test build" | awk '{print $NF}')
