@@ -4,24 +4,24 @@
 <context>
     <name>ConfigDlg</name>
     <message>
-        <location filename="../../src/configdlg.cpp" line="56"/>
-        <location filename="../../src/configdlg.cpp" line="81"/>
-        <location filename="../../src/configdlg.cpp" line="102"/>
+        <location filename="../../src/configdlg.cpp" line="54"/>
+        <location filename="../../src/configdlg.cpp" line="79"/>
+        <location filename="../../src/configdlg.cpp" line="100"/>
         <source>QtDMM: Welcome!</source>
         <translation>QtDMM: Willkommen!</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="57"/>
+        <location filename="../../src/configdlg.cpp" line="55"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;This seems to be your first invocation of QtDMM (Or you have deleted its configuration file).&lt;p&gt;QtDMM has created the file %1 in your home directory to save its settings.</source>
         <translation>&lt;font size+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dies scheint der erste Aufruf von QtDMM zu sein, bzw. die Konfigurstion wurde gelöscht.&lt;p&gt;QtDMM hate eine neue Datei unter dem Pfad %1 angelegt.</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="82"/>
+        <location filename="../../src/configdlg.cpp" line="80"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You seem to have upgraded &lt;b&gt;QtDMM&lt;/b&gt; from a version prior to 0.8.4. Please check your configuration. There are some new parameters to be configured.&lt;p&gt;Thank you for choosing &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;p&gt;Wie es ausschaut, wurde &lt;b&gt;QtDMM&lt;/b&gt; von einer Version vor 0.8.4 aktualisiert. Bitte überprüfen Sie die Konfiguration. Es gibt einige neue Parameter.&lt;p&gt;Danke das Sie &lt;b&gt;QtDMM&lt;/b&gt; benutzen.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="103"/>
+        <location filename="../../src/configdlg.cpp" line="101"/>
         <source>Your config file has been converted to the new format.
 Please check your color settings, because they couldn&apos;t be converted automatically.
 Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old.</source>
@@ -34,8 +34,8 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
         <translation type="vanished">&lt;font size+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dies scheint der erste Aufruf von QtDMM zu sein, bzw. die Konfigurstion wurde gelöscht.&lt;p&gt;QtDMM hate eine neue Datei unter dem Pfad %1 angelegt.</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="69"/>
-        <location filename="../../src/configdlg.cpp" line="94"/>
+        <location filename="../../src/configdlg.cpp" line="67"/>
+        <location filename="../../src/configdlg.cpp" line="92"/>
         <source>Continue</source>
         <translation>Fortsetzen</translation>
     </message>
@@ -488,12 +488,12 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWin</name>
     <message>
-        <location filename="../../src/mainwin.cpp" line="166"/>
+        <location filename="../../src/mainwin.cpp" line="173"/>
         <source>QtDMM: Welcome!</source>
         <translation>QtDMM: Willkommen!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="166"/>
+        <location filename="../../src/mainwin.cpp" line="173"/>
         <source>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;A simple recorder for DMM&apos;s&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;A simple display software for a variety of digital multimeter. Currently confirmed are:&lt;table&gt;%2&lt;/table&gt;Other compatible models may work also.&lt;p&gt;QtDMM features min/max memory and a configurable recorder with import/export and printing function. Sampling may be started manually, at a given time or triggered by a measured threshold. Additionally an external program may be started when given thresholds are reached.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; uses the platform independent toolkit &lt;b&gt;Qt&lt;/b&gt; version %3 and is licensed under &lt;b&gt;GPL 3&lt;/b&gt; (Versions prior to v0.9.0 where licensed under GPL 2)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;The icons (except the DMM icon) have been taken from the KDE project.&lt;p&gt;</source>
         <translation>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;Ein einfacher Datenrekorder für DMM&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;Ein einfaches Anzeigeprogramm für eine Vielzahl von DMM&apos;s. Aktuell bestätigt sind:&lt;table&gt;%2&lt;/table&gt;Andere kompatible Modelle sollten ebenfalls funktionieren.&lt;p&gt;QtDMM stellt die Funktionen Min/Max Werte halten, ein konfigurierbaren Datenrekorder mit Daten im/export Funktion sowie ein Druckfunktion zur Verfügung. Die Datenaufzeichnung kann manuell, durch einen Grenzwert oder durch eine Zeitfunktion ausgelöst werden. Desweiteren kann ein externes Programm beim erreichen eines Grenzwertes gestartet werden.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; wurde mit der Platformunabhängigen &lt;b&gt;Qt&lt;/b&gt; Bibliothek in der Version %3 welche unter der &lt;b&gt;GPLv3&lt;/b&gt; lizensiert ist erstellt.(Versionen vor 0.9.0 wurden unter der GPLv2 Lizenz veröffentlicht)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;Die Symbole (bis auf das DMM Symbol) stammen von dem KDE Projekt.&lt;p&gt;</translation>
     </message>
@@ -527,12 +527,27 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/main.cpp" line="140"/>
+        <location filename="../../src/main.cpp" line="125"/>
+        <source>protocol debugging information</source>
+        <translation>Protokol debugging Informationen</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="126"/>
+        <source>sets directory where config files are located</source>
+        <translation>setzt das Verzeichnis wo die Konfiguration sich befindet</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="127"/>
+        <source>sets &lt;config-id&gt;</source>
+        <translation type="unfinished">setzt die &lt;config-id&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="61"/>
         <source>Missing Permission</source>
         <translation>Berechtigung fehlt</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="141"/>
+        <location filename="../../src/main.cpp" line="62"/>
         <source>The current user is not a member of the &apos;dialout&apos; group.
 Please add the user with the following command:
 

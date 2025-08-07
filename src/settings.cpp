@@ -17,6 +17,8 @@
 
 #include "settings.h"
 
+#include <QFileInfo>
+
 Settings::Settings(QObject *parent) : QObject(parent)
 {
   m_fileConverted = false;
@@ -26,32 +28,36 @@ Settings::Settings(QObject *parent) : QObject(parent)
   m_tmpConfig = new QHash<QString, QVariant>;
   m_filename = m_qsettings->fileName();
 }
+
 Settings::~Settings()
 {
   delete m_tmpConfig;
 }
-Settings::Settings(QObject *parent, const QString &fileName) : Settings(parent)
+
+Settings::Settings(QObject *parent, const QString &session_id, const QString &config_path) : Settings(parent)
 {
-  QFile file(fileName);
-  if (file.exists())
+  if (!session_id.isEmpty())
   {
-    QSettings *old = new QSettings(fileName, QSettings::IniFormat, this);
-    //migrate
-    for (auto name : old->allKeys())
-      m_qsettings->setValue(name, old->value(name));
-    old->deleteLater();
-    m_fileExists = true;
-    //rename old config file
-    if (QFile::exists(QString("%1.old").arg(fileName)))
-      QFile::remove(QString("%1.old").arg(fileName));
-    file.rename(QString("%1.old").arg(fileName));
-    m_fileConverted = true;
+    QSettings qsettings(this);
+    QFileInfo fileInfo(qsettings.fileName());
+    QString fileDir = config_path.isEmpty() ? fileInfo.absolutePath() : config_path;
+
+    QString session_fileName = fileDir+"/"+fileInfo.baseName()+"_"+session_id+"."+fileInfo.suffix();
+    delete m_qsettings;
+    m_qsettings = new QSettings(session_fileName, QSettings::IniFormat, this);
+    QFile file(m_qsettings->fileName());
+    m_fileExists = file.exists();
+    m_filename = m_qsettings->fileName();
+    m_fileConverted = false;
+    qInfo() << "config file: " << m_qsettings->fileName();
   }
 }
+
 int Settings::getInt(const QString &name, const int &def) const
 {
   return m_qsettings->value(name, def).toInt();
 }
+
 void Settings::setInt(const QString &name, const int &value)
 {
   m_tmpConfig->insert(name, value);
@@ -64,32 +70,39 @@ QColor Settings::getColor(const QString &name, const QColor &def) const
     return m_qsettings->value(name).value<QColor>();
   return def;
 }
+
 void Settings::setColor(const QString &name, const QColor &value)
 {
   m_tmpConfig->insert(name, value);
 }
+
 QString Settings::getString(const QString &name, const QString &def) const
 {
   return m_qsettings->value(name, def).toString();
 }
+
 void Settings::setString(const QString &name, const QString &value)
 {
   m_tmpConfig->insert(name, value);
 }
+
 bool Settings::getBool(const QString &name, const bool &def) const
 {
   return m_qsettings->value(name, def).toBool();
 }
+
 void Settings::setBool(const QString &name, const bool &value)
 {
   m_tmpConfig->insert(name, value);
 }
+
 void Settings::save()
 {
   for (auto parameter : m_tmpConfig->keys())
     m_qsettings->setValue(parameter, m_tmpConfig->value(parameter));
   m_tmpConfig->clear();
 }
+
 void Settings::clear()
 {
   m_tmpConfig->clear();

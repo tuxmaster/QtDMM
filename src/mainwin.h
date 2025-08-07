@@ -25,6 +25,7 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <QMenu>
+#include <QCommandLineParser>
 
 #include "ui_uimainwin.h"
 
@@ -36,7 +37,7 @@ class MainWin : public QMainWindow, private Ui::UIMainWin
 {
   Q_OBJECT
 public:
-  MainWin(QWidget *parent = Q_NULLPTR);
+  MainWin(QCommandLineParser &parser, QWidget *parent = Q_NULLPTR);
   void      setConsoleLogging(bool);
 
 protected Q_SLOTS:

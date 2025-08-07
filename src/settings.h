@@ -25,7 +25,7 @@ class Settings : public QObject
   Q_OBJECT
 public:
   explicit       Settings(QObject *parent = Q_NULLPTR);
-  explicit       Settings(QObject *parent, const QString &fileName);
+  explicit       Settings(QObject *parent, const QString &session_id, const QString &config_path);
   ~Settings();
 
   const bool    &fileExists() const { return m_fileExists; }

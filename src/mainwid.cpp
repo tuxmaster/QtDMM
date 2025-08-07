@@ -32,7 +32,7 @@
 #include "displaywid.h"
 #include "tipdlg.h"
 
-MainWid::MainWid(QWidget *parent) :  QFrame(parent),
+MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QFrame(parent),
   m_display(0),
   m_tipDlg(0)
 {
@@ -42,7 +42,7 @@ MainWid::MainWid(QWidget *parent) :  QFrame(parent),
   m_dmm = new DMM(this);
   m_external = new QProcess(this);
 
-  m_configDlg = new ConfigDlg(this);
+  m_configDlg = new ConfigDlg(session_id, config_path, this);
   m_configDlg->hide();
 
   m_configDlg->readPrinter(&m_printer);

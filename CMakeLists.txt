@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.11)
-project(qtdmm VERSION "1.0.0" HOMEPAGE_URL "https://github.com/tuxmaster/QtDMM/" LANGUAGES CXX)
+project(qtdmm VERSION "0.0.0" HOMEPAGE_URL "https://github.com/tuxmaster/QtDMM/" LANGUAGES CXX)
 
 ## main settings
 set(CMAKE_CXX_STANDARD 17)
@@ -11,6 +11,7 @@ set(APP_NAME "QtDMM")
 set(APP_ORGANIZATION "QtDMM")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport Test LinguistTools Network)
 
+include( cmake/git_version.cmake )
 
 ## get files
 file(GLOB TRANSLATIONS CONFIGURE_DEPENDS assets/translations/${PROJECT_NAME}_*.ts)

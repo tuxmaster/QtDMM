@@ -28,23 +28,23 @@
 
 #include "mainwin.h"
 
-#ifdef Q_OS_LINUX
-bool userInGroup(const char* groupname)
+void checkUserInDailOutGroup()
 {
+#ifdef Q_OS_LINUX
+  const char* groupname = "dialout";
   struct passwd* pw = getpwuid(geteuid());
-  if (!pw) return false;
+  if (!pw) return; // check not applicable
 
   gid_t* groups;
   int ngroups = 0;
 
-  // Erste Abfrage, um die Anzahl der Gruppen zu bekommen
   getgrouplist(pw->pw_name, pw->pw_gid, nullptr, &ngroups);
 
   groups = new gid_t[ngroups];
   if (getgrouplist(pw->pw_name, pw->pw_gid, groups, &ngroups) == -1)
   {
     delete[] groups;
-    return false;
+    return; // cannot get groups
   }
 
   for (int i = 0; i < ngroups; ++i)
@@ -53,16 +53,22 @@ bool userInGroup(const char* groupname)
     if (gr && strcmp(gr->gr_name, groupname) == 0)
     {
       delete[] groups;
-      return true;
+      return; // ok
     }
   }
 
   delete[] groups;
-  return false;
-}
-#endif
+  QMessageBox::critical(nullptr, QObject::tr("Missing Permission"),
+                        QObject::tr("The current user is not a member of the 'dialout' group.\n"
+                        "Please add the user with the following command:\n\n"
+                        "sudo usermod -aG dialout $USER\n\n"
+                        "You need to log out and back in for the changes to take effect."));
 
-void myMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &msg)
+#endif
+}
+
+
+void qtdmmMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &msg)
 {
   switch (type)
   {
@@ -88,62 +94,47 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &
   }
 }
 
-void printHelp()
-{
-  std::cerr << "Usage: qtdmm [--help|--debug|--print]" << std::endl;
-  std::cerr << "  --help  : print this message" << std::endl;
-  std::cerr << "  --debug : protocoll debugging information" << std::endl;
-  std::cerr << "  --print : send DMM reading to standard output" << std::endl;
-  exit(0);
-}
 
+void initTranslation(QApplication *app,QTranslator *QtTranslation, QTranslator *AppTranslation)
+{
+  if (QtTranslation->load(QString("qt_%1").arg(QLocale::system().name()), QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+    app->installTranslator(QtTranslation);
+  else
+    qWarning() << "Could not load Qt translation!";
+
+  if (AppTranslation->load(QString("%1").arg(QLocale::system().name()), ":/Translations")) //
+    app->installTranslator(AppTranslation);
+  else
+    qWarning() << "Could not load App translation!";
+}
 
 int main(int argc, char **argv)
 {
-  qInstallMessageHandler(myMessageOutput);
+  qInstallMessageHandler(qtdmmMessageOutput);
   QApplication app(argc, argv);
+  QTranslator QtTranslation;
+  QTranslator AppTranslation;
+  QCommandLineParser parser;
 
   app.setApplicationName(APP_NAME);
   app.setApplicationVersion(APP_VERSION);
   app.setOrganizationName(APP_ORGANIZATION);
 
-  // translation
-  QTranslator QtTranslation;
-  if (QtTranslation.load(QString("qt_%1").arg(QLocale::system().name()), QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
-    app.installTranslator(&QtTranslation);
-  else
-    qWarning() << "Could not load Qt translation!";
+  initTranslation(&app,&QtTranslation,&AppTranslation);
 
-  QTranslator AppTranslation;
-  if (AppTranslation.load(QString("%1").arg(QLocale::system().name()), ":/Translations")) //
-    app.installTranslator(&AppTranslation);
-  else
-    qWarning() << "Could not load App translation!";
-
-  MainWin mainWin;
-
-  QCommandLineParser parser;
-  parser.addOption(QCommandLineOption("debug"));
-  parser.addOption(QCommandLineOption("help"));
-  parser.addOption(QCommandLineOption("print"));
+  parser.addOption({"debug", QObject::tr("protocol debugging information")});
+  parser.addOption({"config-dir",QObject::tr("sets directory where config files are located"), "config-dir"});
+  parser.addOption({"config-id",QObject::tr("sets <config-id>"), "config-id"});
+  parser.addHelpOption();
+  parser.addVersionOption();
   parser.process(app);
 
-  if (parser.isSet("debug"))
-    mainWin.setConsoleLogging(true);
-
+  MainWin mainWin(parser);
 
   mainWin.show();
   mainWin.move(100, 100);
 
-#ifdef Q_OS_LINUX
-  if (!userInGroup("dialout")) {
-      QMessageBox::critical(nullptr, QObject::tr("Missing Permission"),
-                          QObject::tr("The current user is not a member of the 'dialout' group.\n"
-                          "Please add the user with the following command:\n\n"
-                          "sudo usermod -aG dialout $USER\n\n"
-                          "You need to log out and back in for the changes to take effect."));
-  }
-#endif
+  checkUserInDailOutGroup();
 
   return app.exec();
 }
