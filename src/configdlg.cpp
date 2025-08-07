@@ -39,14 +39,12 @@
 #include <iostream>
 
 
-ConfigDlg::ConfigDlg(QWidget *parent) :  QDialog(parent)
+ConfigDlg::ConfigDlg(QString session_id, QString config_path, QWidget *parent) :  QDialog(parent)
 {
   m_buttonBox_OK = false;
   setupUi(this);
 
-  QString path = QString("%1/.qtdmmrc").arg(QDir::homePath());
-
-  m_settings = new Settings(this, path);
+  m_settings = new Settings(this, session_id, config_path);
 
   // Check if configuration file exists. If not welcome user
 

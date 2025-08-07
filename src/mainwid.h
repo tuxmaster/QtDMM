@@ -39,7 +39,7 @@ class MainWid : public QFrame, private Ui::UIMainWid
 {
   Q_OBJECT
 public:
-  MainWid(QWidget *parent = Q_NULLPTR);
+  MainWid(QString session_id, QString config_path, QWidget *parent = Q_NULLPTR);
   bool        closeWin();
   QRect       winRect() const;
   bool        saveWindowPosition() const;
