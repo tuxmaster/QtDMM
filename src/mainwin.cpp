@@ -37,12 +37,14 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
 {
   setupUi(this);
   setupIcons();
+  QString config_id = parser.value("config-id");
+
+  m_stateMgr = new SharedStateManager(config_id.isEmpty()?"default":config_id,this);
 
   QWidget* spacer = new QWidget();
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
   this->toolBarMenu->addWidget(spacer);
   this->toolBarMenu->addAction(this->action_Menu);
-  QString config_id = parser.value("config-id");
   QString version = APP_VERSION;
   int plusIndex = version.indexOf('+');
   if (plusIndex != -1)
@@ -98,7 +100,28 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
     else
       resize(640, 480);
   }
-  QTimer::singleShot(1000, action_Connect, &QAction::trigger);
+
+  connect(m_stateMgr, &SharedStateManager::stateChanged, this, [=](const QString& state){
+    if (state == "RECORD")
+    {
+        qInfo() << "rec";
+        action_Start->trigger();
+    }
+    else if (state == "STOP")
+    {
+        qInfo() << "stop";
+        action_Stop->trigger();
+    }
+  });
+
+  connect(m_stateMgr, &SharedStateManager::instanceIdAlreadyInUse, this, [=](){
+    QMessageBox::critical(this, APP_NAME,tr("Another instance is running."));
+    qInfo() << "quit";
+    qApp->quit();
+  });
+
+ if ( m_stateMgr->registerInstance() )
+   QTimer::singleShot(1000, action_Connect, &QAction::trigger);
 }
 
 void MainWin::setConsoleLogging(bool on)
@@ -123,7 +146,9 @@ void MainWin::createActions()
   connect(action_Connect, SIGNAL(triggered(bool)), this, SLOT(connectSLOT(bool)));
   connect(action_Reset, SIGNAL(triggered()), m_wid, SLOT(resetSLOT()));
   connect(action_Start, SIGNAL(triggered()), m_wid, SLOT(startSLOT()));
+  connect(action_Start, SIGNAL(triggered()), this, SLOT(startSLOT()));
   connect(action_Stop, SIGNAL(triggered()), m_wid, SLOT(stopSLOT()));
+  connect(action_Stop, SIGNAL(triggered()), this, SLOT(stopSLOT()));
   connect(action_Clear, SIGNAL(triggered()), m_wid, SLOT(clearSLOT()));
   connect(action_Print, SIGNAL(triggered()), m_wid, SLOT(printSLOT()));
   connect(action_Import, SIGNAL(triggered()), m_wid, SLOT(importSLOT()));
@@ -146,6 +171,16 @@ void MainWin::createActions()
   connect(new QShortcut(action_Direct_help->shortcut(), this), SIGNAL(activated()), action_Direct_help, SLOT(trigger()));
   connect(new QShortcut(action_About->shortcut(), this), SIGNAL(activated()), action_About, SLOT(trigger()));
   connect(new QShortcut(action_Quit->shortcut(), this), SIGNAL(activated()), action_Quit, SLOT(trigger()));
+}
+
+void MainWin::startSLOT()
+{
+  m_stateMgr->writeState("RECORD");
+}
+
+void MainWin::stopSLOT()
+{
+  m_stateMgr->writeState("STOP");
 }
 
 void MainWin::runningSLOT(bool on)

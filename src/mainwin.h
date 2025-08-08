@@ -28,6 +28,7 @@
 #include <QCommandLineParser>
 
 #include "ui_uimainwin.h"
+#include "sharedstatemanager.h"
 
 class MainWid;
 class DisplayWid;
@@ -43,6 +44,8 @@ public:
 protected Q_SLOTS:
   void      runningSLOT(bool);
   void      connectSLOT(bool);
+  void      startSLOT();
+  void      stopSLOT();
   void      on_action_About_triggered();
   void      on_action_Menu_triggered();
   void      setConnectSLOT(bool);
@@ -57,6 +60,7 @@ protected:
   QLabel     *m_error;
   QLabel     *m_info;
   QMenu      *m_menu;
+  SharedStateManager* m_stateMgr;
 
   void        setupIcons();
   void        createToolBars();
