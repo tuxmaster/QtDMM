@@ -1,5 +1,5 @@
 Name:           qtdmm
-Version:        1.0.0-alpha.1-5-g8cbda17+8cbda17
+Version:        1.0.0-alpha.1-6-g77c63e0+77c63e0
 Release:        1%{?dist}
 Summary:        DMM Readout Software Including a Configurable Recorder.
 

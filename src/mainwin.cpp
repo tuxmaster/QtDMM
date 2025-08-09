@@ -29,7 +29,6 @@
 #include "mainwid.h"
 #include "displaywid.h"
 
-
 MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   : QMainWindow(parent)
   , m_running(false)
@@ -37,9 +36,9 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
 {
   setupUi(this);
   setupIcons();
-  QString config_id = parser.value("config-id");
+  m_config_id = parser.value("config-id");
 
-  m_stateMgr = new SharedStateManager(config_id.isEmpty()?"default":config_id,this);
+  m_stateMgr = new SharedStateManager(m_config_id.isEmpty()?"default":m_config_id,this);
 
   QWidget* spacer = new QWidget();
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -51,7 +50,7 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
     version = version.left(plusIndex);
 
 
-  m_wid = new MainWid(config_id, parser.value("config-dir"), this);
+  m_wid = new MainWid(m_config_id, parser.value("config-dir"), this);
   setCentralWidget(m_wid);
   setConsoleLogging(parser.isSet("debug"));
 
@@ -61,7 +60,10 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   toolBarDisplay->addWidget(m_display);
   m_wid->setDisplay(m_display);
 
-  setWindowTitle(QString("%1 %2 %3").arg(APP_NAME).arg(version).arg(config_id));
+  if (m_config_id.isEmpty())
+    setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(version));
+  else
+    setWindowTitle(QString("%1 %2 [%3]").arg(APP_NAME).arg(version).arg(m_config_id));
 
   connect(m_wid, SIGNAL(running(bool)), this, SLOT(runningSLOT(bool)));
 
@@ -90,7 +92,6 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
 
   m_wid->applySLOT();
 
-
   if (!winRect.isEmpty())
   {
     if (m_wid->saveWindowPosition())
@@ -104,13 +105,16 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   connect(m_stateMgr, &SharedStateManager::stateChanged, this, [=](const QString& state){
     if (state == "RECORD")
     {
-        qInfo() << "rec";
-        action_Start->trigger();
+      action_Start->trigger();
     }
     else if (state == "STOP")
     {
-        qInfo() << "stop";
-        action_Stop->trigger();
+      action_Stop->trigger();
+    }
+    else if (state == "RAISE_"+(m_config_id.isEmpty()?"default":m_config_id))
+    {
+      bringMainWindowToFront();
+      m_stateMgr->writeState("IDLE");
     }
   });
 
@@ -123,6 +127,12 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
  if ( m_stateMgr->registerInstance() )
    QTimer::singleShot(1000, action_Connect, &QAction::trigger);
 }
+
+void MainWin::sendRaiseApplicationWindow(const QString & session_id)
+{
+  m_stateMgr->writeState("RAISE_"+session_id);
+}
+
 
 void MainWin::setConsoleLogging(bool on)
 {
@@ -160,12 +170,15 @@ void MainWin::createActions()
   connect(action_Quit, SIGNAL(triggered()), m_wid, SLOT(quitSLOT()));
   connect(action_Direct_help, SIGNAL(triggered()), m_wid, SLOT(helpSLOT()));
   connect(action_Tip_of_the_day, SIGNAL(triggered()), m_wid, SLOT(showTipsSLOT()));
+  connect(action_Instances, SIGNAL(triggered()), m_wid, SLOT(instancesSLOT()));
 
   connect(toolBarDisplay, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarMenu, SIGNAL(visibilityChanged(bool)),  this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarFile, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarRecorder, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarDMM, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
+
+  connect(m_stateMgr, SIGNAL(instancesChanged(QStringList&)), m_wid, SLOT(instancesChangedSlot(QStringList&)));
 
   connect(new QShortcut(action_Configure->shortcut(), this), SIGNAL(activated()), action_Configure, SLOT(trigger()));
   connect(new QShortcut(action_Direct_help->shortcut(), this), SIGNAL(activated()), action_Direct_help, SLOT(trigger()));
@@ -285,4 +298,26 @@ void MainWin::setupIcons()
   {
     this->action_Connect->setIcon(checked ? iconConnectOn : iconConnectOff);
   });
+}
+
+void MainWin::bringMainWindowToFront()
+{
+  QWidget *mainWin = nullptr;
+  const auto topWidgets = QApplication::topLevelWidgets();
+
+  for (QWidget *w : topWidgets)
+  {
+    if (w->inherits("MainWin"))
+    {
+      mainWin = w;
+      break;
+    }
+  }
+
+  if (!mainWin)
+    return;
+
+  mainWin->showNormal();
+  mainWin->raise();
+  mainWin->activateWindow();
 }

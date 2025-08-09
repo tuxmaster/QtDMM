@@ -31,10 +31,13 @@
 #include "dmm.h"
 #include "displaywid.h"
 #include "tipdlg.h"
+#include "settings.h"
+
 
 MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QFrame(parent),
   m_display(0),
-  m_tipDlg(0)
+  m_tipDlg(0),
+  m_instancesDlg(session_id, config_path,this)
 {
   setupUi(this);
   setWindowIcon(QPixmap(":/Symbols/icon.xpm"));
@@ -42,7 +45,8 @@ MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QF
   m_dmm = new DMM(this);
   m_external = new QProcess(this);
 
-  m_configDlg = new ConfigDlg(session_id, config_path, this);
+  m_settings  = new Settings(session_id, config_path, this);
+  m_configDlg = new ConfigDlg(m_settings, this);
   m_configDlg->hide();
 
   m_configDlg->readPrinter(&m_printer);
@@ -50,6 +54,8 @@ MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QF
   m_printDlg = new qtdmm::PrintDlg(this);
   m_printDlg->hide();
 
+  m_instancesDlg.setInstancesConfigured(m_settings->getConfigInstances());
+  connect(&m_instancesDlg, SIGNAL(raiseApplicationWindow(const QString &)), parent, SLOT(sendRaiseApplicationWindow(const QString &)));
   connect(m_dmm, SIGNAL(value(double, const QString &, const QString &, const QString &, const QString &, bool, bool, int)),
           this,  SLOT(valueSLOT(double, const QString &, const QString &, const QString &, const QString &, bool, bool, int)));
   connect(m_dmm, SIGNAL(error(const QString &)), this, SIGNAL(error(const QString &)));
@@ -74,7 +80,7 @@ MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QF
   connect(ui_graph, SIGNAL(thresholdChanged(DMMGraph::CursorMode, double)),
           m_configDlg, SLOT(thresholdChangedSLOT(DMMGraph::CursorMode, double)));
 
-  ui_graph->setSettings(m_configDlg->getSettings());
+  ui_graph->setSettings(m_settings);
 
   //resetSLOT();
 
@@ -538,4 +544,14 @@ void MainWid::showTipsSLOT()
 void MainWid::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
 {
   m_configDlg->setToolbarVisibility(disp, dmm, graph, file);
+}
+
+void MainWid::instancesSLOT()
+{
+  m_instancesDlg.show();
+}
+
+void MainWid::instancesChangedSlot(QStringList& instances)
+{
+  m_instancesDlg.setInstancesOnline(instances);
 }

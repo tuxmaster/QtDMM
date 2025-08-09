@@ -46,6 +46,7 @@ protected Q_SLOTS:
   void      connectSLOT(bool);
   void      startSLOT();
   void      stopSLOT();
+  void      sendRaiseApplicationWindow(const QString &);
   void      on_action_About_triggered();
   void      on_action_Menu_triggered();
   void      setConnectSLOT(bool);
@@ -61,10 +62,12 @@ protected:
   QLabel     *m_info;
   QMenu      *m_menu;
   SharedStateManager* m_stateMgr;
+  QString     m_config_id;
 
   void        setupIcons();
   void        createToolBars();
   void        createActions();
   void        closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
+  void        bringMainWindowToFront();
 };
 

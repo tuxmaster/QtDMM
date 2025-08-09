@@ -123,16 +123,19 @@ void SharedStateManager::checkForChanges()
     QJsonObject data = readJsonData();
 
     QString currentState = data["state"].toString();
-    QVariantList instances = data["instances"].toArray().toVariantList();
+    QStringList instances;
+    for (const QVariant &v : data["instances"].toArray().toVariantList())
+      instances << v.toString();
+
     if (instances.count() != m_instances.count())
     {
       m_instances = instances;
-      emit instanceCountChanged(m_instances);
+      Q_EMIT instancesChanged(m_instances);
     }
 
     if (currentState != m_lastState)
     {
-      qInfo() << currentState << QJsonDocument(data).toJson(QJsonDocument::Compact);
+      //qInfo() << currentState << QJsonDocument(data).toJson(QJsonDocument::Compact);
       m_lastState = currentState;
       Q_EMIT stateChanged(currentState);
     }

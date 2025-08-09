@@ -18,12 +18,12 @@ public:
 
   bool writeState(const QString &newState);
   void checkForChanges();
-  QVariantList instanceCount() { return m_instances; };
+  QStringList instances() { return m_instances; };
 
 signals:
   void stateChanged(const QString &newState);
   void instanceIdAlreadyInUse();
-  void instanceCountChanged(QVariantList &instances);
+  void instancesChanged(QStringList &instances);
 
 private:
   QJsonObject readJsonData();
@@ -36,5 +36,5 @@ private:
   QString m_instanceId;
   bool m_registered;
   bool m_emit_inUse;
-  QVariantList m_instances;
+  QStringList m_instances;
 };

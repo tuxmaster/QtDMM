@@ -41,6 +41,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_Instances"/>
+   <addaction name="separator"/>
    <addaction name="action_Connect"/>
    <addaction name="action_Reset"/>
   </widget>
@@ -423,6 +425,21 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+M</string>
+   </property>
+  </action>
+  <action name="action_Instances">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/Symbols/dmm_big.xpm</normaloff>:/Symbols/dmm_big.xpm</iconset>
+   </property>
+   <property name="text">
+    <string>instances</string>
+   </property>
+   <property name="toolTip">
+    <string>open or create an instance</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
  </widget>

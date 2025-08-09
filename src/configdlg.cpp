@@ -39,15 +39,14 @@
 #include <iostream>
 
 
-ConfigDlg::ConfigDlg(QString session_id, QString config_path, QWidget *parent) :  QDialog(parent)
+ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
+  : QDialog(parent)
+  , m_settings(settings)
 {
   m_buttonBox_OK = false;
   setupUi(this);
 
-  m_settings = new Settings(this, session_id, config_path);
-
   // Check if configuration file exists. If not welcome user
-
   if (!m_settings->fileExists())
   {
     QMessageBox welcome;

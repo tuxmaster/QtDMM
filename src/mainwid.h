@@ -27,6 +27,7 @@
 #include <QtPrintSupport>
 
 #include "ui_uimainwid.h"
+#include "instancesdlg.h"
 #include "printdlg.h"
 
 class DMM;
@@ -34,6 +35,7 @@ class QProcess;
 class ConfigDlg;
 class DisplayWid;
 class TipDlg;
+class Settings;
 
 class MainWid : public QFrame, private Ui::UIMainWid
 {
@@ -79,6 +81,8 @@ public Q_SLOTS:
   void        applySLOT();
   void        rejectSLOT();
   void        showTipsSLOT();
+  void        instancesSLOT();
+  void        instancesChangedSlot(QStringList&);
 
 protected:
   DMM        *m_dmm;
@@ -92,6 +96,8 @@ protected:
   DisplayWid *m_display;
   double      m_dval;
   TipDlg     *m_tipDlg;
+  InstancesDlg m_instancesDlg;
+  Settings    *m_settings;
 
   void        readConfig();
   QRect       parentRect() const;
