@@ -67,7 +67,7 @@ QStringList Settings::getConfigInstances()
   QDir dir(m_configPath);
   if (!dir.exists())
     return {};
-  qInfo() << m_configPath << m_configBaseFileName << m_configFileNameSuffix;
+  //qInfo() << m_configPath << m_configBaseFileName << m_configFileNameSuffix;
   QString pattern = QString("%1*%2")
                       .arg(m_configBaseFileName)
                       .arg(m_configFileNameSuffix.isEmpty() ? "" : "." + m_configFileNameSuffix);
@@ -95,8 +95,8 @@ QStringList Settings::getConfigInstances()
     result.prepend("default");
   }
 
-  for (auto item : result)
-    qInfo() << item;
+  //for (auto item : result)
+  //  qInfo() << item;
 
   return result;
 }
@@ -155,3 +155,14 @@ void Settings::clear()
 {
   m_tmpConfig->clear();
 }
+
+
+void Settings::deleteConfig(QString session_id)
+{
+  if(session_id.isEmpty())
+    return;
+
+  QFile configFile(m_configPath+"/"+m_configBaseFileName+"_"+session_id+"."+m_configFileNameSuffix);
+  configFile.remove();
+}
+

@@ -46,7 +46,7 @@ protected Q_SLOTS:
   void      connectSLOT(bool);
   void      startSLOT();
   void      stopSLOT();
-  void      sendRaiseApplicationWindow(const QString &);
+  void      sendStateSLOT(const QString &);
   void      on_action_About_triggered();
   void      on_action_Menu_triggered();
   void      setConnectSLOT(bool);

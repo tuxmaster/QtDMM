@@ -16,7 +16,6 @@ public:
   bool registerInstance();
   void unregisterInstance();
 
-  bool writeState(const QString &newState);
   void checkForChanges();
   QStringList instances() { return m_instances; };
 
@@ -24,6 +23,9 @@ signals:
   void stateChanged(const QString &newState);
   void instanceIdAlreadyInUse();
   void instancesChanged(QStringList &instances);
+
+public Q_SLOTS:
+  bool writeState(const QString &newState);
 
 private:
   QJsonObject readJsonData();

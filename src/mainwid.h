@@ -27,7 +27,7 @@
 #include <QtPrintSupport>
 
 #include "ui_uimainwid.h"
-#include "instancesdlg.h"
+
 #include "printdlg.h"
 
 class DMM;
@@ -36,6 +36,7 @@ class ConfigDlg;
 class DisplayWid;
 class TipDlg;
 class Settings;
+class InstancesDlg;
 
 class MainWid : public QFrame, private Ui::UIMainWid
 {
@@ -96,7 +97,7 @@ protected:
   DisplayWid *m_display;
   double      m_dval;
   TipDlg     *m_tipDlg;
-  InstancesDlg m_instancesDlg;
+  InstancesDlg *m_instancesDlg;
   Settings    *m_settings;
 
   void        readConfig();

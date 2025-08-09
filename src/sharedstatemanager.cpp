@@ -137,6 +137,8 @@ void SharedStateManager::checkForChanges()
     {
       //qInfo() << currentState << QJsonDocument(data).toJson(QJsonDocument::Compact);
       m_lastState = currentState;
+      if (currentState.startsWith("UPDATE_INSTANCES"))
+        Q_EMIT instancesChanged(m_instances);
       Q_EMIT stateChanged(currentState);
     }
   }
@@ -170,3 +172,4 @@ void SharedStateManager::unregisterInstance()
     writeJsonData(data);
   }
 }
+

@@ -386,6 +386,24 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
 </context>
 <context>
+    <name>InstancesDlg</name>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="97"/>
+        <source>QtDMM - new instance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="97"/>
+        <source>Instance name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="103"/>
+        <source>Instance already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IntegrationPrefs</name>
     <message>
         <location filename="../../src/integrationprefs.cpp" line="34"/>
@@ -401,47 +419,47 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="119"/>
+        <location filename="../../src/mainwid.cpp" line="118"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="120"/>
+        <location filename="../../src/mainwid.cpp" line="119"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Es befinden sich ungesicherte Daten im Speicher. Wenn Sie das Programm beenden gehen diese verloren.&lt;p&gt;Sollen diese vorher exportiert werden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="135"/>
+        <location filename="../../src/mainwid.cpp" line="134"/>
         <source>Export data first</source>
         <translation>Daten erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="139"/>
+        <location filename="../../src/mainwid.cpp" line="138"/>
         <source>Quit without saving</source>
         <translation>Beenden ohne speichern</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="435"/>
+        <location filename="../../src/mainwid.cpp" line="434"/>
         <source>Automatic start at %1</source>
         <translation>Automatisch starten bei %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="437"/>
+        <location filename="../../src/mainwid.cpp" line="436"/>
         <source>Raising threshold %1</source>
         <translation>Grenzwert steigent %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="439"/>
+        <location filename="../../src/mainwid.cpp" line="438"/>
         <source>Falling threshold %1</source>
         <translation>Grenzwert fallend %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="461"/>
+        <location filename="../../src/mainwid.cpp" line="460"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s läuft noch!&lt;p&gt;Wollen sie es jetzt beenden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="502"/>
+        <location filename="../../src/mainwid.cpp" line="501"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Konnte %1 nicht starten</translation>
     </message>
@@ -450,18 +468,18 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="obsolete">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s is still running!&lt;p&gt;Do you want to kill it now</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="519"/>
+        <location filename="../../src/mainwid.cpp" line="518"/>
         <source>Launched %1</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="524"/>
+        <location filename="../../src/mainwid.cpp" line="523"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 mit dem Rückgabecode %2 beendet.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="460"/>
-        <location filename="../../src/mainwid.cpp" line="501"/>
+        <location filename="../../src/mainwid.cpp" line="459"/>
+        <location filename="../../src/mainwid.cpp" line="500"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: Startfehler</translation>
     </message>
@@ -470,17 +488,17 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %1 läuft noch.&lt;p&gt;Soll es getötet werden</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="473"/>
+        <location filename="../../src/mainwid.cpp" line="472"/>
         <source>Yes, kill it!</source>
         <translation>Ja, töten!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="477"/>
+        <location filename="../../src/mainwid.cpp" line="476"/>
         <source>No, keep running</source>
         <translation>Nein, es laufen lassen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="513"/>
+        <location filename="../../src/mainwid.cpp" line="512"/>
         <source>Bummer!</source>
         <translation>Reinfall!</translation>
     </message>
@@ -1314,16 +1332,26 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     </message>
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="28"/>
-        <source>Choose instance</source>
+        <source>Choose instance to open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="55"/>
+        <source>add new instance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uiinstancesdlg.ui" line="58"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uiinstancesdlg.ui" line="66"/>
+        <location filename="../../src/ui/uiinstancesdlg.ui" line="69"/>
+        <source>remove instances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uiinstancesdlg.ui" line="72"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>

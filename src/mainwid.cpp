@@ -32,12 +32,11 @@
 #include "displaywid.h"
 #include "tipdlg.h"
 #include "settings.h"
-
+#include "instancesdlg.h"
 
 MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QFrame(parent),
   m_display(0),
-  m_tipDlg(0),
-  m_instancesDlg(session_id, config_path,this)
+  m_tipDlg(0)
 {
   setupUi(this);
   setWindowIcon(QPixmap(":/Symbols/icon.xpm"));
@@ -48,14 +47,14 @@ MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QF
   m_settings  = new Settings(session_id, config_path, this);
   m_configDlg = new ConfigDlg(m_settings, this);
   m_configDlg->hide();
-
   m_configDlg->readPrinter(&m_printer);
 
   m_printDlg = new qtdmm::PrintDlg(this);
   m_printDlg->hide();
 
-  m_instancesDlg.setInstancesConfigured(m_settings->getConfigInstances());
-  connect(&m_instancesDlg, SIGNAL(raiseApplicationWindow(const QString &)), parent, SLOT(sendRaiseApplicationWindow(const QString &)));
+  m_instancesDlg = new InstancesDlg(m_settings, session_id, config_path,this);
+
+  connect(m_instancesDlg, SIGNAL(writeState(const QString &)), parent, SLOT(sendStateSLOT(const QString &)));
   connect(m_dmm, SIGNAL(value(double, const QString &, const QString &, const QString &, const QString &, bool, bool, int)),
           this,  SLOT(valueSLOT(double, const QString &, const QString &, const QString &, const QString &, bool, bool, int)));
   connect(m_dmm, SIGNAL(error(const QString &)), this, SIGNAL(error(const QString &)));
@@ -548,10 +547,10 @@ void MainWid::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
 
 void MainWid::instancesSLOT()
 {
-  m_instancesDlg.show();
+  m_instancesDlg->show();
 }
 
 void MainWid::instancesChangedSlot(QStringList& instances)
 {
-  m_instancesDlg.setInstancesOnline(instances);
+  m_instancesDlg->setInstancesOnline(instances);
 }

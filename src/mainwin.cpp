@@ -120,7 +120,6 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
 
   connect(m_stateMgr, &SharedStateManager::instanceIdAlreadyInUse, this, [=](){
     QMessageBox::critical(this, APP_NAME,tr("Another instance is running."));
-    qInfo() << "quit";
     qApp->quit();
   });
 
@@ -128,9 +127,9 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
    QTimer::singleShot(1000, action_Connect, &QAction::trigger);
 }
 
-void MainWin::sendRaiseApplicationWindow(const QString & session_id)
+void MainWin::sendStateSLOT(const QString & state)
 {
-  m_stateMgr->writeState("RAISE_"+session_id);
+  m_stateMgr->writeState(state);
 }
 
 

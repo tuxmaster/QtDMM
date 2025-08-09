@@ -25,7 +25,7 @@
      <item>
       <widget class="QLabel" name="ui_labelInstances">
        <property name="text">
-        <string>Choose instance</string>
+        <string>Choose instance to open</string>
        </property>
       </widget>
      </item>
@@ -51,6 +51,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QToolButton" name="ui_instance_add">
+       <property name="toolTip">
+        <string>add new instance</string>
+       </property>
        <property name="text">
         <string>+</string>
        </property>
@@ -62,12 +65,18 @@
      </item>
      <item>
       <widget class="QToolButton" name="ui_instance_del">
+       <property name="toolTip">
+        <string>remove instances</string>
+       </property>
        <property name="text">
         <string>-</string>
        </property>
        <property name="icon">
         <iconset theme="list-remove">
          <normaloff>.</normaloff>.</iconset>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

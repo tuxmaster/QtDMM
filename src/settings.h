@@ -32,6 +32,8 @@ public:
   const bool    &fileConverted() const { return m_fileConverted; }
   const QString &fileName() const { return m_filename; }
 
+  void           deleteConfig(QString session_id);
+
   QStringList    getConfigInstances();
   void           save();
   void           clear();
