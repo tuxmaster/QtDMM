@@ -25,14 +25,14 @@ class Settings : public QObject
   Q_OBJECT
 public:
   explicit       Settings(QObject *parent = Q_NULLPTR);
-  explicit       Settings(const QString &session_id, const QString &config_path, QObject *parent = Q_NULLPTR);
+  explicit       Settings(const QString &instance_id, const QString &config_path, QObject *parent = Q_NULLPTR);
   ~Settings();
 
   const bool    &fileExists() const { return m_fileExists; }
   const bool    &fileConverted() const { return m_fileConverted; }
   const QString &fileName() const { return m_filename; }
 
-  void           deleteConfig(QString session_id);
+  void           deleteConfig(QString instance_id);
 
   QStringList    getConfigInstances();
   void           save();
@@ -58,6 +58,6 @@ private:
   QString       m_configPath;
   QString       m_configBaseFileName;
   QString       m_configFileNameSuffix;
-  QString       m_sessionId;
+  QString       m_instanceId;
   QHash<QString, QVariant> *m_tmpConfig;
 };

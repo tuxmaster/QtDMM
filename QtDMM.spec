@@ -1,5 +1,5 @@
 Name:           qtdmm
-Version:        1.0.0-alpha.1-7-ge07025e+e07025e
+Version:        1.0.0-alpha.1-8-g602d80f+602d80f
 Release:        1%{?dist}
 Summary:        DMM Readout Software Including a Configurable Recorder.
 

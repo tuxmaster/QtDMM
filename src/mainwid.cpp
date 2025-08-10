@@ -34,7 +34,7 @@
 #include "settings.h"
 #include "instancesdlg.h"
 
-MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QFrame(parent),
+MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  QFrame(parent),
   m_display(0),
   m_tipDlg(0)
 {
@@ -44,7 +44,7 @@ MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QF
   m_dmm = new DMM(this);
   m_external = new QProcess(this);
 
-  m_settings  = new Settings(session_id, config_path, this);
+  m_settings  = new Settings(instance_id, config_path, this);
   m_configDlg = new ConfigDlg(m_settings, this);
   m_configDlg->hide();
   m_configDlg->readPrinter(&m_printer);
@@ -52,7 +52,7 @@ MainWid::MainWid(QString session_id, QString config_path, QWidget *parent) :  QF
   m_printDlg = new qtdmm::PrintDlg(this);
   m_printDlg->hide();
 
-  m_instancesDlg = new InstancesDlg(m_settings, session_id, config_path,this);
+  m_instancesDlg = new InstancesDlg(m_settings, instance_id, config_path,this);
 
   connect(m_instancesDlg, SIGNAL(writeState(const QString &)), parent, SLOT(sendStateSLOT(const QString &)));
   connect(m_dmm, SIGNAL(value(double, const QString &, const QString &, const QString &, const QString &, bool, bool, int)),

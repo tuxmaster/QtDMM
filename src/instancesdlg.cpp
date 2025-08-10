@@ -4,9 +4,9 @@
 #include "instancesdlg.h"
 
 
-InstancesDlg::InstancesDlg(Settings *settings, QString session_id, QString config_path, QWidget *parent)
+InstancesDlg::InstancesDlg(Settings *settings, QString instance_id, QString config_path, QWidget *parent)
   :  QDialog(parent)
-  , m_sessionId(session_id.isEmpty() ? "default" : session_id)
+  , m_instanceId(instance_id.isEmpty() ? "default" : instance_id)
   , m_configPath(config_path)
   , m_settings(settings)
 {
@@ -38,12 +38,12 @@ void InstancesDlg::updateInstancesListBox()
     QPushButton *btn = new QPushButton(instanceId, ui_instancesList);
     btn->setProperty("instanceId", instanceId);
     QFont font = btn->font();
-    if (instanceId != m_sessionId)
+    if (instanceId != m_instanceId)
       font.setBold(true);
     font.setPointSize(font.pointSize() + 2);
     btn->setFont(font);
 
-    if (instanceId == m_sessionId || (m_onDelete && m_instancesOnline.contains(instanceId)))
+    if (instanceId == m_instanceId || (m_onDelete && m_instancesOnline.contains(instanceId)))
       btn->setEnabled(false);
     else if (m_onDelete)
     {
@@ -74,7 +74,7 @@ void InstancesDlg::onInstanceButtonClicked()
   QString configId = btn->property("instanceId").toString();
   QString exePath = QCoreApplication::applicationFilePath();
 
-  if (configId == m_sessionId)
+  if (configId == m_instanceId)
     return;
 
   if (m_instancesOnline.contains(configId))

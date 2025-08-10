@@ -34,26 +34,26 @@ Settings::~Settings()
   delete m_tmpConfig;
 }
 
-Settings::Settings(const QString &session_id, const QString &config_path, QObject *parent)
+Settings::Settings(const QString &instance_id, const QString &config_path, QObject *parent)
   : Settings(parent)
 {
   QFileInfo fileInfo(m_qsettings->fileName());
   m_configPath = fileInfo.absolutePath();
   m_configBaseFileName = fileInfo.baseName();
   m_configFileNameSuffix = fileInfo.suffix();
-  m_sessionId = session_id.isEmpty() ? "default" : session_id;
+  m_instanceId = instance_id.isEmpty() ? "default" : instance_id;
 
-  if (!session_id.isEmpty() || !config_path.isEmpty())
+  if (!instance_id.isEmpty() || !config_path.isEmpty())
   {
     m_configPath = config_path.isEmpty() ? fileInfo.absolutePath() : config_path;
     m_configBaseFileName = fileInfo.baseName();
     m_configFileNameSuffix = fileInfo.suffix();
 
-    QString session_fileName = m_configBaseFileName+(session_id.isEmpty() ? "" : "_"+session_id)+"."+m_configFileNameSuffix;
-    session_fileName.prepend(m_configPath+"/");
+    QString instance_fileName = m_configBaseFileName+(instance_id.isEmpty() ? "" : "_"+instance_id)+"."+m_configFileNameSuffix;
+    instance_fileName.prepend(m_configPath+"/");
 
     delete m_qsettings;
-    m_qsettings = new QSettings(session_fileName, QSettings::IniFormat, this);
+    m_qsettings = new QSettings(instance_fileName, QSettings::IniFormat, this);
     QFile file(m_qsettings->fileName());
     m_fileExists = file.exists();
     m_filename = m_qsettings->fileName();
@@ -73,7 +73,7 @@ QStringList Settings::getConfigInstances()
                       .arg(m_configFileNameSuffix.isEmpty() ? "" : "." + m_configFileNameSuffix);
 
   QStringList result;
-  result << m_sessionId;
+  result << m_instanceId;
   for (const QString &file : dir.entryList({ pattern }, QDir::Files, QDir::Name))
   {
     QString base = QFileInfo(file).completeBaseName();
@@ -157,12 +157,12 @@ void Settings::clear()
 }
 
 
-void Settings::deleteConfig(QString session_id)
+void Settings::deleteConfig(QString instance_id)
 {
-  if(session_id.isEmpty())
+  if(instance_id.isEmpty())
     return;
 
-  QFile configFile(m_configPath+"/"+m_configBaseFileName+"_"+session_id+"."+m_configFileNameSuffix);
+  QFile configFile(m_configPath+"/"+m_configBaseFileName+"_"+instance_id+"."+m_configFileNameSuffix);
   configFile.remove();
 }
 
