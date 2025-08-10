@@ -129,7 +129,7 @@ then
 	${RUN} && ${QTDMM_EXE}
 elif ${RUN}
 then
-	./${QTDMM_EXE} --debug
+	./${QTDMM_EXE} #--debug
 fi
 
 exit 0

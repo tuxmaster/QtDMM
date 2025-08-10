@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>269</height>
+    <width>390</width>
+    <height>397</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Instances</string>
+   <string>Instance Manager</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -25,7 +25,7 @@
      <item>
       <widget class="QLabel" name="ui_labelInstances">
        <property name="text">
-        <string>Choose instance to open</string>
+        <string>Choose instance to open, or add/remove instances</string>
        </property>
       </widget>
      </item>
@@ -58,8 +58,8 @@
         <string>+</string>
        </property>
        <property name="icon">
-        <iconset theme="list-add">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/Symbols/add.xpm</normaloff>:/Symbols/add.xpm</iconset>
        </property>
       </widget>
      </item>
@@ -72,8 +72,8 @@
         <string>-</string>
        </property>
        <property name="icon">
-        <iconset theme="list-remove">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset resource="../resources.qrc">
+         <normaloff>:/Symbols/remove.xpm</normaloff>:/Symbols/remove.xpm</iconset>
        </property>
        <property name="checkable">
         <bool>true</bool>

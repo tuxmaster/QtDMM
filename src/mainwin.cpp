@@ -95,7 +95,9 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   if (!winRect.isEmpty())
   {
     if (m_wid->saveWindowPosition())
+    {
       move(winRect.x(), winRect.y());
+    }
     if (m_wid->saveWindowSize())
       resize(winRect.width(), winRect.height());
     else

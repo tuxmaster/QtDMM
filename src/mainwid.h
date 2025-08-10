@@ -62,6 +62,7 @@ Q_SIGNALS:
   void        setConnect(bool);
   void        toolbarVisibility(bool, bool, bool, bool);
   void        connectDMM(bool);
+  void        sendState(const QString&);
 
 public Q_SLOTS:
   void        valueSLOT(double, const QString &, const QString &, const QString &, const QString &, bool, bool, int);

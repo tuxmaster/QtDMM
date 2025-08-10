@@ -34,6 +34,8 @@
 #include "settings.h"
 #include "instancesdlg.h"
 
+
+
 MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  QFrame(parent),
   m_display(0),
   m_tipDlg(0)
@@ -55,6 +57,7 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
   m_instancesDlg = new InstancesDlg(m_settings, instance_id, config_path,this);
 
   connect(m_instancesDlg, SIGNAL(writeState(const QString &)), parent, SLOT(sendStateSLOT(const QString &)));
+  connect(this, SIGNAL(sendState(const QString &)), parent, SLOT(sendStateSLOT(const QString &)));
   connect(m_dmm, SIGNAL(value(double, const QString &, const QString &, const QString &, const QString &, bool, bool, int)),
           this,  SLOT(valueSLOT(double, const QString &, const QString &, const QString &, const QString &, bool, bool, int)));
   connect(m_dmm, SIGNAL(error(const QString &)), this, SIGNAL(error(const QString &)));
@@ -82,7 +85,8 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
   ui_graph->setSettings(m_settings);
 
   //resetSLOT();
-
+  m_settings->save();
+  Q_EMIT sendState("UPDATE_INSTANCES_"+QString::number(QDateTime::currentMSecsSinceEpoch()));
   startTimer(100);
 
   if (m_configDlg->showTip())

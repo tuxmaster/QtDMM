@@ -15,7 +15,7 @@ SharedStateManager::SharedStateManager(const QString &instanceId, QObject *paren
     m_registered(false),
     m_emit_inUse(false)
 {
-  m_timer.setInterval(500);
+  m_timer.setInterval(250);
   connect(&m_timer, &QTimer::timeout, this, &SharedStateManager::checkForChanges);
   m_timer.start();
 }
@@ -111,6 +111,9 @@ bool SharedStateManager::registerInstance()
     m_registered = writeJsonData(data);
     if (!m_registered)
       qInfo() << "reg failed";
+    else
+      qInfo() << "reg" << m_instanceId;
+
   }
 
   return m_registered;
@@ -135,7 +138,7 @@ void SharedStateManager::checkForChanges()
 
     if (currentState != m_lastState)
     {
-      //qInfo() << currentState << QJsonDocument(data).toJson(QJsonDocument::Compact);
+      qInfo() << currentState << QJsonDocument(data).toJson(QJsonDocument::Compact);
       m_lastState = currentState;
       if (currentState.startsWith("UPDATE_INSTANCES"))
         Q_EMIT instancesChanged(m_instances);

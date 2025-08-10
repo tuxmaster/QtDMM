@@ -103,8 +103,8 @@ void GuiPrefs::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
 
 void GuiPrefs::applySLOT()
 {
-  m_cfg->setInt("QtDMM/version", 0);
-  m_cfg->setInt("QtDMM/revision", 84);
+  m_cfg->setInt("QtDMM/version", 0);   // TODO set version by cmake
+  m_cfg->setInt("QtDMM/revision", 84); // TODO set revision by cmake
   m_cfg->setBool("QtDMM/show-tip", showTip());
   m_cfg->setBool("Save/window-pos", saveWindowPosition());
   m_cfg->setBool("Save/window-size", saveWindowSize());
