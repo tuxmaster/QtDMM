@@ -63,6 +63,7 @@ protected:
   QMenu      *m_menu;
   SharedStateManager* m_stateMgr;
   QString     m_config_id;
+  bool        m_localRecord;
 
   void        setupIcons();
   void        createToolBars();

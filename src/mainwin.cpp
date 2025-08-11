@@ -33,6 +33,7 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   : QMainWindow(parent)
   , m_running(false)
   , m_menu(Q_NULLPTR)
+  , m_localRecord(true)
 {
   setupUi(this);
   setupIcons();
@@ -107,11 +108,13 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   connect(m_stateMgr, &SharedStateManager::stateChanged, this, [=](const QString& state){
     if (state == "RECORD")
     {
-      action_Start->trigger();
+      QMetaObject::invokeMethod(m_wid, "startSLOT", Qt::DirectConnection);
+      m_localRecord = false;
     }
     else if (state == "STOP")
     {
-      action_Stop->trigger();
+      if (!m_localRecord)
+        action_Stop->trigger();
     }
     else if (state == "RAISE_"+(m_config_id.isEmpty()?"default":m_config_id))
     {
@@ -156,7 +159,6 @@ void MainWin::createActions()
   connect(action_Connect, SIGNAL(triggered(bool)), m_wid, SLOT(connectSLOT(bool)));
   connect(action_Connect, SIGNAL(triggered(bool)), this, SLOT(connectSLOT(bool)));
   connect(action_Reset, SIGNAL(triggered()), m_wid, SLOT(resetSLOT()));
-  connect(action_Start, SIGNAL(triggered()), m_wid, SLOT(startSLOT()));
   connect(action_Start, SIGNAL(triggered()), this, SLOT(startSLOT()));
   connect(action_Stop, SIGNAL(triggered()), m_wid, SLOT(stopSLOT()));
   connect(action_Stop, SIGNAL(triggered()), this, SLOT(stopSLOT()));
@@ -189,12 +191,44 @@ void MainWin::createActions()
 
 void MainWin::startSLOT()
 {
-  m_stateMgr->writeState("RECORD");
+  if (m_stateMgr->instances().count()<=1)
+  {
+    QMetaObject::invokeMethod(m_wid, "startSLOT", Qt::DirectConnection);
+    m_localRecord = true;
+  }
+  else
+  {
+    QMessageBox question(
+      QMessageBox::Question,
+      tr("Record DMM data"),
+      tr("Multiple instances of QtDMM have been detected.\n"
+         "Please choose which instance should record."),
+      QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+    question.button(QMessageBox::Yes)->setText(tr("This instance"));
+    question.button(QMessageBox::No)->setText(tr("All instances"));
+    question.setEscapeButton(QMessageBox::Cancel);
+
+    switch (question.exec())
+    {
+      case QMessageBox::Yes:
+        QMetaObject::invokeMethod(m_wid, "startSLOT", Qt::DirectConnection);
+        m_localRecord = true;
+        return;
+      case QMessageBox::No:
+        m_stateMgr->writeState("RECORD");
+        m_localRecord = false;
+        return;
+    }
+  }
 }
 
 void MainWin::stopSLOT()
 {
-  m_stateMgr->writeState("STOP");
+  qInfo() << "stop" << m_localRecord;
+  if (! m_localRecord)
+    m_stateMgr->writeState("STOP");
+  m_localRecord = false;
+
 }
 
 void MainWin::runningSLOT(bool on)
