@@ -1152,20 +1152,28 @@ void DMMGraph::fillInfoBox(const QPoint &pos)
 bool DMMGraph::exportDataSLOT()
 {
   QDir path;
-  QString fn = QFileDialog::getSaveFileName(this, tr("Export data"), m_cfg->getString("QtDMM/LastUsesPath", ""));
-  if (!fn.isNull())
+  QFileInfo fileInfo(m_cfg->getString("QtDMM/LastUsesPath"));
+  QStringList validSuffixes = { "csv" };
+  QString fnSuffix = validSuffixes.contains(fileInfo.suffix()) ? fileInfo.suffix() : "csv";
+  QString fn = fileInfo.baseName().isEmpty() ? "untitled.csv" : fileInfo.absolutePath() + "/untitled." + fnSuffix;
+  fn = QFileDialog::getSaveFileName(this, tr("Export data"), fn, "CSV (*.csv)");
+
+  if (!fn.isNull() && m_pointer>0)
   {
     QFile file(fn);
     m_cfg->setString("QtDMM/LastUsesPath", path.absoluteFilePath(fn));
     file.open(QIODevice::WriteOnly);
 
     QTextStream ts(&file);
-	printf("p %d %d\n", m_pointer, m_sampleTime);
+    QString line = QString("timestamp;time (s);value;unit\n");
+    ts << line;
+
     for (int i = 0; i < m_pointer; i++)
     {
-      //QDateTime dt = m_graphStartDateTime.addMSecs(i * static_cast<int>(qRound(m_sampleTime / 10.)));
       QDateTime dt = m_graphStartDateTime.addMSecs(i * m_sampleTime * 100);
-      QString line = QString("%1\t%2\t%3\n").arg(dt.toString("dd.MM.yyyy\tHH:mm:ss:zzz")).arg((*m_array)[i], 0, 'f').arg(m_unit);
+      //timestamp: ISO8601
+      double deltaTime = (dt.toMSecsSinceEpoch()-m_graphStartDateTime.toMSecsSinceEpoch())/1000.0f;
+      line = QString("%1;%2;%3;%4\n").arg(dt.toString("yyyy-MM-ddTHH:mm:ss,zzz")).arg(deltaTime).arg((*m_array)[i], 0, 'f').arg(m_unit);
       ts << line;
     }
     m_dirty = false;
@@ -1177,6 +1185,188 @@ bool DMMGraph::exportDataSLOT()
 
   return false;
 }
+
+
+void DMMGraph::importDataSLOT()
+{
+  if (m_dirty && m_alertUnsaved)
+  {
+    QMessageBox question;
+    question.setWindowTitle(tr("QtDMM: Unsaved data"));
+    question.setText(tr("<font size=+2><b>Unsaved data</b></font><p>"
+                        "Importing data will overwrite your measured data"
+                        "<p>Do you want to export your unsaved data first?"));
+    question.setIcon(QMessageBox::Question);
+
+    // Standard-Buttons
+    question.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+    question.setDefaultButton(QMessageBox::Yes);
+    question.setEscapeButton(QMessageBox::Cancel);
+
+    QAbstractButton *yesButton = question.button(QMessageBox::Yes);
+    if (yesButton)
+      yesButton->setText(tr("Export data first"));
+
+    QAbstractButton *noButton = question.button(QMessageBox::No);
+    if (noButton)
+      noButton->setText(tr("Import & overwrite data"));
+
+    switch (question.exec())
+    {
+      case QMessageBox::Yes:
+        exportDataSLOT();
+        return;
+      case QMessageBox::Cancel:
+        return;
+    }
+  }
+  QDir path;
+  QString fn = QFileDialog::getOpenFileName(this, tr("Import data"), m_cfg->getString("QtDMM/LastUsesPath", tr("CSV (*.csv);;All files (*)")));
+
+  int cnt = 0;
+  int sample = 0;
+
+  QDateTime graphEnd;
+
+  if (!fn.isNull())
+  {
+    m_cfg->setString("QtDMM/LastUsesPath", path.absoluteFilePath(fn));
+    // First pass -> figure out size and sample time
+    QFile file(fn);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+      Q_EMIT error(tr("Cannot open file."));
+      return;
+    }
+
+    QStringList token;
+    QStringList dateToken;
+    QStringList timeToken;
+    QStringList timeParts;
+
+    QTextStream ts(&file);
+
+    QString line = ts.readLine();
+    if (line.isNull())
+    {
+      Q_EMIT error(tr("Oops! Seems not to be a valid file"));
+      file.close();
+      return;
+    }
+
+    // skip CSV-Header
+    if (line.startsWith("timestamp"))
+    {
+      line = ts.readLine();
+      if (line.isNull())
+      {
+        Q_EMIT error(tr("File contains only header"));
+        file.close();
+        return;
+      }
+    }
+
+  QRegularExpression reLegacy(
+    R"(^(?<day>\d{2})\.(?<month>\d{2})\.(?<year>\d{4})\t(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2}):(?<ms>\d{1,3})\t(?<value>-?\d+(?:\.\d+)?|nan)\t(?<unit>.*)$)",
+    QRegularExpression::CaseInsensitiveOption
+  );
+
+  QRegularExpression reCSV(
+    R"(^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})T(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})[,\.](?<ms>\d{1,3});(?<delta>-?\d+(?:\.\d+)?|nan);(?<value>-?\d+(?:\.\d+)?|nan);(?<unit>.*)$)",
+    QRegularExpression::CaseInsensitiveOption
+  );
+
+    // detect format
+    bool isLegacy = reLegacy.match(line).hasMatch();
+
+    //(*m_array).clear();
+    QVector<double> values;
+    QRegularExpressionMatch match;
+    do
+    {
+      if (!line.trimmed().isEmpty())
+      {
+        match = isLegacy ? reLegacy.match(line) : reCSV.match(line);
+
+        if (!match.hasMatch())
+        {
+          qInfo() << line;
+          Q_EMIT error(tr("Oops! Seems not to be a valid file"));
+          file.close();
+          return;
+        }
+
+        QDate valueDate(
+          match.captured("year").toInt(),
+          match.captured("month").toInt(),
+          match.captured("day").toInt()
+        );
+
+        QTime valueTime(
+          match.captured("hour").toInt(),
+          match.captured("minute").toInt(),
+          match.captured("second").toInt(),
+          match.captured("ms").toInt()
+        );
+
+        if (values.isEmpty())
+        {
+          setUnit(match.captured("unit"));
+          m_graphStartDateTime = QDateTime(valueDate, valueTime);
+        }
+
+        graphEnd = QDateTime(valueDate, valueTime);
+        sample += m_graphStartDateTime.secsTo(graphEnd);
+        values << (match.captured("value") == "nan" ? 0.0f : match.captured("value").toDouble());
+      }
+
+      line = ts.readLine();
+    }
+    while (!line.isNull());
+    file.close();
+
+    int cnt = values.size();
+    m_sampleTime = (sample / (cnt > 1 ? cnt - 1 : 1))/10;
+    if (m_sampleTime<1) m_sampleTime=1;
+    qInfo() << m_graphStartDateTime.secsTo( graphEnd ) << m_sampleTime;
+    //m_sampleTime = m_graphStartDateTime.secsTo( graphEnd ) / (cnt > 1 ? cnt - 1 : 1);
+
+    int size = m_size * m_sampleTime;
+
+    if (cnt > 1)
+    {
+      Q_EMIT sampleTime(m_sampleTime);
+      m_sampleTime = (sample / (cnt - 1))/10;
+    }
+    if (m_sampleTime<1) m_sampleTime=1;
+    qInfo() << sample << cnt << m_sampleTime << m_graphStartDateTime.secsTo( graphEnd );
+
+    m_scaleMin =  1e40;
+    m_scaleMax = -1e40;
+
+    // TEST
+    setGraphSize(size, cnt * m_sampleTime);
+
+    for(int i=0; i<values.size(); i++)
+      (*m_array)[i] = values[i];
+
+    m_sampleCounter = m_pointer = cnt;
+    setScale(true, true, 0, 0);
+
+    m_dirty = false;
+
+    Q_EMIT error(fn);
+
+    update();
+
+    computeUnitFactor();
+
+    // TEST
+    Q_EMIT graphSize(size, cnt * m_sampleTime);
+  }
+}
+
+/*
 
 void DMMGraph::importDataSLOT()
 {
@@ -1195,7 +1385,6 @@ void DMMGraph::importDataSLOT()
     question.setDefaultButton(QMessageBox::Yes);
     question.setEscapeButton(QMessageBox::Cancel);
 
-    // set button text (Qt5/6 compatible)
     QAbstractButton *yesButton = question.button(QMessageBox::Yes);
     if (yesButton)
       yesButton->setText(tr("Export data first"));
@@ -1240,8 +1429,13 @@ void DMMGraph::importDataSLOT()
 
       if (!line.isNull())
       {
-        QRegularExpression re(R"(^\d+\.\d+\.\d+\t\d+:\d+:\d+(?:\.\d+)?\t-?\d*\.\d+\t.*$)");
-        if (!re.match(line).hasMatch())
+        QRegularExpression reLegacy(
+          R"(^(?<day>\d{2})\.(?<month>\d{2})\.(?<year>\d{4})\t(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2}):(?<ms>\d{1,3})\t(?<value>-?\d+(?:\.\d+)?)\t.*$)"
+        );
+        QRegularExpression reCSV(
+          R"(^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})T(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2}),(?<ms>\d{1,3});(?<delta>-?\d+(?:\.\d+)?);(?<value>-?\d+(?:\.\d+)?);(?<unit>.+)$)"
+        );
+        if (!reCSV.match(line).hasMatch())
         {
           Q_EMIT error(tr("Oops! Seems not to be a valid file"));
 
@@ -1321,12 +1515,12 @@ void DMMGraph::importDataSLOT()
       m_sampleTime = sample / (cnt - 1);
     }
 
-    /*  if (cnt*m_sampleTime > length)
-    {
-      if (size > cnt*m_sampleTime) size = cnt*m_sampleTime;
-      emit graphSize( size, cnt*m_sampleTime );
-      setGraphSize( size, cnt*m_sampleTime );
-    }*/
+    //   if (cnt*m_sampleTime > length)
+    // {
+    //   if (size > cnt*m_sampleTime) size = cnt*m_sampleTime;
+    //   emit graphSize( size, cnt*m_sampleTime );
+    //   setGraphSize( size, cnt*m_sampleTime );
+    // }
 
     m_scaleMin =  1e40;
     m_scaleMax = -1e40;
@@ -1372,6 +1566,10 @@ void DMMGraph::importDataSLOT()
     Q_EMIT graphSize(size, cnt * m_sampleTime);
   }
 }
+
+*/
+
+
 
 void DMMGraph::setThresholds(double falling, double raising)
 {

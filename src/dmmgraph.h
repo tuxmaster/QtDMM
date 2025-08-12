@@ -150,7 +150,7 @@ protected:
   double           m_xstep;
   double           m_hUnitFact;
   double           m_maxUnit;
-  int              m_sampleTime;
+  double           m_sampleTime;
   int              m_sampleLength;
   bool             m_running;
   bool             m_connected;

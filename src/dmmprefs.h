@@ -64,7 +64,7 @@ protected Q_SLOTS:
 protected:
   QString        m_path;
   DmmDecoder::DMMInfo m_dmmInfo;
-
-private:
   QStringListModel *m_portlist;
+
+  void setupComboBoxModel();
 };

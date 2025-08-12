@@ -57,8 +57,7 @@ public:
     NumItems,
   };
 
-  ConfigDlg(QString session_id, QString config_path, QWidget *parent = Q_NULLPTR);
-  Settings             *getSettings() { return m_settings;  }
+  ConfigDlg(Settings* settings, QWidget *parent = Q_NULLPTR);
   QString               device() const;
   int                   speed() const;
   int                   windowSeconds() const;

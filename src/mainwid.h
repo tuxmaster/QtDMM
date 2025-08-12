@@ -27,6 +27,7 @@
 #include <QtPrintSupport>
 
 #include "ui_uimainwid.h"
+
 #include "printdlg.h"
 
 class DMM;
@@ -34,12 +35,14 @@ class QProcess;
 class ConfigDlg;
 class DisplayWid;
 class TipDlg;
+class Settings;
+class InstancesDlg;
 
 class MainWid : public QFrame, private Ui::UIMainWid
 {
   Q_OBJECT
 public:
-  MainWid(QString session_id, QString config_path, QWidget *parent = Q_NULLPTR);
+  MainWid(QString instance_id, QString config_path, QWidget *parent = Q_NULLPTR);
   bool        closeWin();
   QRect       winRect() const;
   bool        saveWindowPosition() const;
@@ -59,6 +62,7 @@ Q_SIGNALS:
   void        setConnect(bool);
   void        toolbarVisibility(bool, bool, bool, bool);
   void        connectDMM(bool);
+  void        sendState(const QString&);
 
 public Q_SLOTS:
   void        valueSLOT(double, const QString &, const QString &, const QString &, const QString &, bool, bool, int);
@@ -79,6 +83,8 @@ public Q_SLOTS:
   void        applySLOT();
   void        rejectSLOT();
   void        showTipsSLOT();
+  void        instancesSLOT();
+  void        instancesChangedSlot(QStringList&);
 
 protected:
   DMM        *m_dmm;
@@ -92,6 +98,8 @@ protected:
   DisplayWid *m_display;
   double      m_dval;
   TipDlg     *m_tipDlg;
+  InstancesDlg *m_instancesDlg;
+  Settings    *m_settings;
 
   void        readConfig();
   QRect       parentRect() const;

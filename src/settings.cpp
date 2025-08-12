@@ -34,23 +34,71 @@ Settings::~Settings()
   delete m_tmpConfig;
 }
 
-Settings::Settings(QObject *parent, const QString &session_id, const QString &config_path) : Settings(parent)
+Settings::Settings(const QString &instance_id, const QString &config_path, QObject *parent)
+  : Settings(parent)
 {
-  if (!session_id.isEmpty())
-  {
-    QSettings qsettings(this);
-    QFileInfo fileInfo(qsettings.fileName());
-    QString fileDir = config_path.isEmpty() ? fileInfo.absolutePath() : config_path;
+  QFileInfo fileInfo(m_qsettings->fileName());
+  m_configPath = fileInfo.absolutePath();
+  m_configBaseFileName = fileInfo.baseName();
+  m_configFileNameSuffix = fileInfo.suffix();
+  m_instanceId = instance_id.isEmpty() ? "default" : instance_id;
 
-    QString session_fileName = fileDir+"/"+fileInfo.baseName()+"_"+session_id+"."+fileInfo.suffix();
+  if (!instance_id.isEmpty() || !config_path.isEmpty())
+  {
+    m_configPath = config_path.isEmpty() ? fileInfo.absolutePath() : config_path;
+    m_configBaseFileName = fileInfo.baseName();
+    m_configFileNameSuffix = fileInfo.suffix();
+
+    QString instance_fileName = m_configBaseFileName+(instance_id.isEmpty() ? "" : "_"+instance_id)+"."+m_configFileNameSuffix;
+    instance_fileName.prepend(m_configPath+"/");
+
     delete m_qsettings;
-    m_qsettings = new QSettings(session_fileName, QSettings::IniFormat, this);
+    m_qsettings = new QSettings(instance_fileName, QSettings::IniFormat, this);
     QFile file(m_qsettings->fileName());
     m_fileExists = file.exists();
     m_filename = m_qsettings->fileName();
     m_fileConverted = false;
-    qInfo() << "config file: " << m_qsettings->fileName();
+    //qInfo() << "config file: " << m_qsettings->fileName();
   }
+}
+
+QStringList Settings::getConfigInstances()
+{
+  QDir dir(m_configPath);
+  if (!dir.exists())
+    return {};
+  //qInfo() << m_configPath << m_configBaseFileName << m_configFileNameSuffix;
+  QString pattern = QString("%1*%2")
+                      .arg(m_configBaseFileName)
+                      .arg(m_configFileNameSuffix.isEmpty() ? "" : "." + m_configFileNameSuffix);
+
+  QStringList result;
+  result << m_instanceId;
+  for (const QString &file : dir.entryList({ pattern }, QDir::Files, QDir::Name))
+  {
+    QString base = QFileInfo(file).completeBaseName();
+
+    if (base.startsWith(m_configBaseFileName))
+      base = base.mid(m_configBaseFileName.length());
+
+    if (base.startsWith("_"))
+      base.remove(0, 1);
+
+    result << (base.isEmpty() ? "default" : base);
+  }
+
+  result.removeDuplicates();
+  result.sort(Qt::CaseInsensitive);
+  if (result.contains("default"))
+  {
+    result.removeAll("default");
+    result.prepend("default");
+  }
+
+  //for (auto item : result)
+  //  qInfo() << item;
+
+  return result;
 }
 
 int Settings::getInt(const QString &name, const int &def) const
@@ -107,3 +155,14 @@ void Settings::clear()
 {
   m_tmpConfig->clear();
 }
+
+
+void Settings::deleteConfig(QString instance_id)
+{
+  if(instance_id.isEmpty())
+    return;
+
+  QFile configFile(m_configPath+"/"+m_configBaseFileName+"_"+instance_id+"."+m_configFileNameSuffix);
+  configFile.remove();
+}
+

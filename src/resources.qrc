@@ -22,6 +22,7 @@
         <file alias="W.xpm">../assets/icons/W.xpm</file>
         <file alias="W_small.xpm">../assets/icons/W_small.xpm</file>
         <file alias="ac.xpm">../assets/icons/ac.xpm</file>
+        <file alias="add.xpm">../assets/icons/add.xpm</file>
         <file alias="all_digits.xpm">../assets/icons/all_digits.xpm</file>
         <file alias="auto.xpm">../assets/icons/auto.xpm</file>
         <file alias="bar.xpm">../assets/icons/bar.xpm</file>
@@ -61,6 +62,7 @@
         <file alias="icon.xpm">../assets/icons/icon.xpm</file>
         <file alias="icon_gray.xpm">../assets/icons/icon_gray.xpm</file>
         <file alias="import.xpm">../assets/icons/import.xpm</file>
+        <file alias="instances.xpm">../assets/icons/instances.xpm</file>
         <file alias="integration.xpm">../assets/icons/integration.xpm</file>
         <file alias="integration_old.xpm">../assets/icons/integration_old.xpm</file>
         <file alias="k.xpm">../assets/icons/k.xpm</file>
@@ -88,6 +90,7 @@
         <file alias="print.xpm">../assets/icons/print.xpm</file>
         <file alias="quit.xpm">../assets/icons/quit.xpm</file>
         <file alias="recorder.xpm">../assets/icons/recorder.xpm</file>
+        <file alias="remove.xpm">../assets/icons/remove.xpm</file>
         <file alias="reset.xpm">../assets/icons/reset.xpm</file>
         <file alias="scale.xpm">../assets/icons/scale.xpm</file>
         <file alias="sixty_bar.xpm">../assets/icons/sixty_bar.xpm</file>

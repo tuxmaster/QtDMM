@@ -29,27 +29,29 @@
 #include "mainwid.h"
 #include "displaywid.h"
 
-
 MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   : QMainWindow(parent)
   , m_running(false)
   , m_menu(Q_NULLPTR)
+  , m_localRecord(true)
 {
   setupUi(this);
   setupIcons();
+  m_config_id = parser.value("config-id");
+
+  m_stateMgr = new SharedStateManager(m_config_id.isEmpty()?"default":m_config_id,this);
 
   QWidget* spacer = new QWidget();
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
   this->toolBarMenu->addWidget(spacer);
   this->toolBarMenu->addAction(this->action_Menu);
-  QString config_id = parser.value("config-id");
   QString version = APP_VERSION;
   int plusIndex = version.indexOf('+');
   if (plusIndex != -1)
     version = version.left(plusIndex);
 
 
-  m_wid = new MainWid(config_id, parser.value("config-dir"), this);
+  m_wid = new MainWid(m_config_id, parser.value("config-dir"), this);
   setCentralWidget(m_wid);
   setConsoleLogging(parser.isSet("debug"));
 
@@ -59,7 +61,10 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   toolBarDisplay->addWidget(m_display);
   m_wid->setDisplay(m_display);
 
-  setWindowTitle(QString("%1 %2 %3").arg(APP_NAME).arg(version).arg(config_id));
+  if (m_config_id.isEmpty())
+    setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(version));
+  else
+    setWindowTitle(QString("%1 %2 [%3]").arg(APP_NAME).arg(version).arg(m_config_id));
 
   connect(m_wid, SIGNAL(running(bool)), this, SLOT(runningSLOT(bool)));
 
@@ -88,18 +93,50 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
 
   m_wid->applySLOT();
 
-
   if (!winRect.isEmpty())
   {
     if (m_wid->saveWindowPosition())
+    {
       move(winRect.x(), winRect.y());
+    }
     if (m_wid->saveWindowSize())
       resize(winRect.width(), winRect.height());
     else
       resize(640, 480);
   }
-  QTimer::singleShot(1000, action_Connect, &QAction::trigger);
+
+  connect(m_stateMgr, &SharedStateManager::stateChanged, this, [=](const QString& state){
+    if (state == "RECORD")
+    {
+      QMetaObject::invokeMethod(m_wid, "startSLOT", Qt::DirectConnection);
+      m_localRecord = false;
+    }
+    else if (state == "STOP")
+    {
+      if (!m_localRecord)
+        action_Stop->trigger();
+    }
+    else if (state == "RAISE_"+(m_config_id.isEmpty()?"default":m_config_id))
+    {
+      bringMainWindowToFront();
+      m_stateMgr->writeState("IDLE");
+    }
+  });
+
+  connect(m_stateMgr, &SharedStateManager::instanceIdAlreadyInUse, this, [=](){
+    QMessageBox::critical(this, APP_NAME,tr("Another instance is running."));
+    qApp->quit();
+  });
+
+ if ( m_stateMgr->registerInstance() )
+   QTimer::singleShot(1000, action_Connect, &QAction::trigger);
 }
+
+void MainWin::sendStateSLOT(const QString & state)
+{
+  m_stateMgr->writeState(state);
+}
+
 
 void MainWin::setConsoleLogging(bool on)
 {
@@ -122,8 +159,9 @@ void MainWin::createActions()
   connect(action_Connect, SIGNAL(triggered(bool)), m_wid, SLOT(connectSLOT(bool)));
   connect(action_Connect, SIGNAL(triggered(bool)), this, SLOT(connectSLOT(bool)));
   connect(action_Reset, SIGNAL(triggered()), m_wid, SLOT(resetSLOT()));
-  connect(action_Start, SIGNAL(triggered()), m_wid, SLOT(startSLOT()));
+  connect(action_Start, SIGNAL(triggered()), this, SLOT(startSLOT()));
   connect(action_Stop, SIGNAL(triggered()), m_wid, SLOT(stopSLOT()));
+  connect(action_Stop, SIGNAL(triggered()), this, SLOT(stopSLOT()));
   connect(action_Clear, SIGNAL(triggered()), m_wid, SLOT(clearSLOT()));
   connect(action_Print, SIGNAL(triggered()), m_wid, SLOT(printSLOT()));
   connect(action_Import, SIGNAL(triggered()), m_wid, SLOT(importSLOT()));
@@ -135,6 +173,7 @@ void MainWin::createActions()
   connect(action_Quit, SIGNAL(triggered()), m_wid, SLOT(quitSLOT()));
   connect(action_Direct_help, SIGNAL(triggered()), m_wid, SLOT(helpSLOT()));
   connect(action_Tip_of_the_day, SIGNAL(triggered()), m_wid, SLOT(showTipsSLOT()));
+  connect(action_Instances, SIGNAL(triggered()), m_wid, SLOT(instancesSLOT()));
 
   connect(toolBarDisplay, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarMenu, SIGNAL(visibilityChanged(bool)),  this, SLOT(setToolbarVisibilitySLOT()));
@@ -142,10 +181,54 @@ void MainWin::createActions()
   connect(toolBarRecorder, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
   connect(toolBarDMM, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
 
+  connect(m_stateMgr, SIGNAL(instancesChanged(QStringList&)), m_wid, SLOT(instancesChangedSlot(QStringList&)));
+
   connect(new QShortcut(action_Configure->shortcut(), this), SIGNAL(activated()), action_Configure, SLOT(trigger()));
   connect(new QShortcut(action_Direct_help->shortcut(), this), SIGNAL(activated()), action_Direct_help, SLOT(trigger()));
   connect(new QShortcut(action_About->shortcut(), this), SIGNAL(activated()), action_About, SLOT(trigger()));
   connect(new QShortcut(action_Quit->shortcut(), this), SIGNAL(activated()), action_Quit, SLOT(trigger()));
+}
+
+void MainWin::startSLOT()
+{
+  if (m_stateMgr->instances().count()<=1)
+  {
+    QMetaObject::invokeMethod(m_wid, "startSLOT", Qt::DirectConnection);
+    m_localRecord = true;
+  }
+  else
+  {
+    QMessageBox question(
+      QMessageBox::Question,
+      tr("Record DMM data"),
+      tr("Multiple instances of QtDMM have been detected.\n"
+         "Please choose which instance should record."),
+      QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+    question.button(QMessageBox::Yes)->setText(tr("This instance"));
+    question.button(QMessageBox::No)->setText(tr("All instances"));
+    question.setEscapeButton(QMessageBox::Cancel);
+
+    switch (question.exec())
+    {
+      case QMessageBox::Yes:
+        QMetaObject::invokeMethod(m_wid, "startSLOT", Qt::DirectConnection);
+        m_localRecord = true;
+        return;
+      case QMessageBox::No:
+        m_stateMgr->writeState("RECORD");
+        m_localRecord = false;
+        return;
+    }
+  }
+}
+
+void MainWin::stopSLOT()
+{
+  qInfo() << "stop" << m_localRecord;
+  if (! m_localRecord)
+    m_stateMgr->writeState("STOP");
+  m_localRecord = false;
+
 }
 
 void MainWin::runningSLOT(bool on)
@@ -250,4 +333,26 @@ void MainWin::setupIcons()
   {
     this->action_Connect->setIcon(checked ? iconConnectOn : iconConnectOff);
   });
+}
+
+void MainWin::bringMainWindowToFront()
+{
+  QWidget *mainWin = nullptr;
+  const auto topWidgets = QApplication::topLevelWidgets();
+
+  for (QWidget *w : topWidgets)
+  {
+    if (w->inherits("MainWin"))
+    {
+      mainWin = w;
+      break;
+    }
+  }
+
+  if (!mainWin)
+    return;
+
+  mainWin->showNormal();
+  mainWin->raise();
+  mainWin->activateWindow();
 }

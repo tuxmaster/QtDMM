@@ -45,6 +45,21 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
                      " also a number of predefined models.</b>");
   m_pixmap = new QPixmap(":/Symbols/dmm.xpm");
 
+  setupComboBoxModel();
+
+  message2->hide();
+
+  m_path = QDir::currentPath();
+}
+
+
+DmmPrefs::~DmmPrefs()
+{
+  delete m_pixmap;
+}
+
+void DmmPrefs::setupComboBoxModel()
+{
   ui_model->clear();
   ui_model->insertItem(-1, tr("Manual settings"));
 
@@ -61,15 +76,27 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
     ui_model->addItem(cfg.name);
   }
 
-  message2->hide();
+  QCompleter *completer = new QCompleter(ui_model->model(), this);
+  completer->setCaseSensitivity(Qt::CaseInsensitive);
+  completer->setFilterMode(Qt::MatchContains);
+  completer->setCompletionMode(QCompleter::PopupCompletion);
 
-  m_path = QDir::currentPath();
-}
+  ui_model->setCompleter(completer);
 
-
-DmmPrefs::~DmmPrefs()
-{
-  delete m_pixmap;
+  connect(ui_model->lineEdit(), &QLineEdit::editingFinished, this, [this]()
+  {
+    bool found = false;
+    for (int i = 0; i < ui_model->count(); ++i)
+    {
+      if (ui_model->itemText(i).compare(ui_model->currentText(), Qt::CaseInsensitive) == 0)
+      {
+        found = true;
+        break;
+      }
+    }
+    if (!found)
+      ui_model->setCurrentIndex(-1);
+  });
 }
 
 QString DmmPrefs::deviceListText() const
