@@ -30,6 +30,7 @@
 #include <QLineSeries>
 #include <QScatterSeries>
 #include <QValueAxis>
+#include <QGraphicsLineItem>
 
 class Settings;
 
@@ -94,7 +95,7 @@ public:
   void             setSampleTime(int v) { m_sampleTime = v; }
   void             setSampleLength(int v) { m_sampleLength = v; }
   void             setStartTime(const QTime &time) { m_startTime = time; }
-  void             setMode(DMMGraph::SampleMode mode) { m_mode = mode;  }
+  void             setMode(DMMGraph::SampleMode mode);
   void             print(QPrinter *prt, const QString &, const QString &);
   void             setThresholds(double falling, double raising);
   void             setScale(bool autoScale, bool includeZero, double min, double max);
@@ -164,6 +165,10 @@ protected:
   QDateTime        m_graphStartDateTime;
   double           m_sum;
   bool             m_first;
+  QPoint           m_mpos;
+  bool             m_mouseDown;
+  bool             m_mousePan;
+  CursorMode       m_cursorMode;
   double           m_raisingThreshold;
   double           m_fallingThreshold;
   double           m_lastVal;
@@ -198,19 +203,30 @@ protected:
   bool             m_includeZero;
   QMenu           *m_popup;
 
-  // Qt Charts based rendering (core curve + axes). Cursor/threshold/integration
-  // overlays, zoom/pan and crosshair are not re-rendered yet (state above is
-  // still tracked so addValue()'s trigger logic keeps working, and so a later
-  // step can reintroduce their visuals without rebuilding the state machinery).
+  // Qt Charts based rendering (core curve + axes, plus the integration curve
+  // and the cursor/threshold overlays reintroduced as QGraphicsLineItems on
+  // top of the chart scene).
   QChartView      *m_chartView;
   QChart          *m_chart;
   QLineSeries     *m_dataSeries;
   QScatterSeries  *m_dataPoints;
+  QLineSeries     *m_intSeries;
+  QScatterSeries  *m_intPoints;
   QValueAxis      *m_xAxis;
   QValueAxis      *m_yAxis;
+  QGraphicsLineItem *m_crosshairVLine;
+  QGraphicsLineItem *m_crosshairHLine;
+  QGraphicsLineItem *m_triggerLine;
+  QGraphicsLineItem *m_externalLine;
+  QGraphicsLineItem *m_integrationLine;
 
   void             resizeEvent(QResizeEvent *)Q_DECL_OVERRIDE;
-  void             mousePressEvent(QMouseEvent *)Q_DECL_OVERRIDE;
+  bool             eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
+
+  void             handleChartMousePress(QMouseEvent *);
+  void             handleChartMouseMove(QMouseEvent *);
+  void             handleChartMouseRelease(QMouseEvent *);
+  void             handleChartWheel(QWheelEvent *);
 
   void             emitInfo();
   void             computeUnitFactor();
@@ -218,6 +234,9 @@ protected:
   void             rebuildSeries();
   void             updateXAxisRange();
   void             updateSeriesAppearance();
+  void             updateThresholdLinesVisibility();
+  void             updateThresholdLinePositions();
+  QString          formatEngineeringValue(double) const;
 
 private:
   Qt::PenStyle     penStyle(LineMode);

@@ -24,6 +24,7 @@
 #include <QtWidgets>
 #include <QPen>
 #include <QRegularExpression>
+#include <QToolTip>
 
 #include "dmmgraph.h"
 #include "settings.h"
@@ -45,6 +46,9 @@ DMMGraph::DMMGraph(QWidget *parent, Settings *settings) :
   m_running(false),
   m_connected(false),
   m_mode(DMMGraph::Manual),
+  m_mouseDown(false),
+  m_mousePan(false),
+  m_cursorMode(NoCursor),
   m_lastValValid(false),
   m_dirty(false),
   m_alertUnsaved(true),
@@ -84,21 +88,47 @@ DMMGraph::DMMGraph(QWidget *parent, Settings *settings) :
   m_dataPoints = new QScatterSeries();
   m_chart->addSeries(m_dataPoints);
 
+  m_intSeries = new QLineSeries();
+  m_chart->addSeries(m_intSeries);
+
+  m_intPoints = new QScatterSeries();
+  m_chart->addSeries(m_intPoints);
+
   m_xAxis = new QValueAxis();
   m_xAxis->setTitleText(tr("[sec]"));
   m_chart->addAxis(m_xAxis, Qt::AlignBottom);
   m_dataSeries->attachAxis(m_xAxis);
   m_dataPoints->attachAxis(m_xAxis);
+  m_intSeries->attachAxis(m_xAxis);
+  m_intPoints->attachAxis(m_xAxis);
 
   m_yAxis = new QValueAxis();
   m_chart->addAxis(m_yAxis, Qt::AlignLeft);
   m_dataSeries->attachAxis(m_yAxis);
   m_dataPoints->attachAxis(m_yAxis);
+  m_intSeries->attachAxis(m_yAxis);
+  m_intPoints->attachAxis(m_yAxis);
 
   updateSeriesAppearance();
 
+  // Cursor crosshair + draggable threshold lines, overlaid directly on the
+  // chart's graphics scene, above the series (see setZValue below).
+  m_crosshairVLine   = new QGraphicsLineItem(m_chart);
+  m_crosshairHLine   = new QGraphicsLineItem(m_chart);
+  m_triggerLine      = new QGraphicsLineItem(m_chart);
+  m_externalLine     = new QGraphicsLineItem(m_chart);
+  m_integrationLine  = new QGraphicsLineItem(m_chart);
+
+  for (QGraphicsLineItem *item : {m_crosshairVLine, m_crosshairHLine, m_triggerLine, m_externalLine, m_integrationLine})
+  {
+    item->setZValue(1000);
+    item->setVisible(false);
+  }
+
   m_chartView = new QChartView(m_chart, this);
   m_chartView->setRenderHint(QPainter::Antialiasing);
+  m_chartView->viewport()->setMouseTracking(true);
+  m_chartView->viewport()->installEventFilter(this);
 
   m_popup = new QMenu(this);
   connect(m_popup, SIGNAL(triggered(QAction *)), this, SLOT(popupSLOT(QAction *)));
@@ -169,19 +199,33 @@ void DMMGraph::resizeEvent(QResizeEvent *)
 {
   m_chartView->setGeometry(0, 0, width(), height() - 16);
   scrollbar->setGeometry(0, height() - 16, width(), 16);
+
+  // Simpler than tracking/restoring hover state across a resize: just hide it,
+  // the next mouse move will reposition it correctly.
+  m_crosshairVLine->setVisible(false);
+  m_crosshairHLine->setVisible(false);
+
+  updateThresholdLinePositions();
 }
 
 void DMMGraph::rebuildSeries()
 {
   QList<QPointF> points;
+  QList<QPointF> intPoints;
   points.reserve(m_pointer);
+  intPoints.reserve(m_pointer);
 
   double step = m_sampleTime / 10.0;
   for (int i = 0; i < m_pointer; i++)
+  {
     points.append(QPointF(i * step, (*m_array)[i]));
+    intPoints.append(QPointF(i * step, m_integrationOffset + (*m_arrayInt)[i] * m_integrationScale));
+  }
 
   m_dataSeries->replace(points);
   m_dataPoints->replace(points);
+  m_intSeries->replace(intPoints);
+  m_intPoints->replace(intPoints);
 }
 
 void DMMGraph::updateXAxisRange()
@@ -218,6 +262,55 @@ void DMMGraph::updateSeriesAppearance()
   m_dataPoints->setMarkerSize(size);
   m_dataPoints->setColor(m_dataColor);
   m_dataPoints->setVisible(m_pointMode != NoPoint);
+
+  m_intSeries->setPen(QPen(m_intColor, m_intLineWidth, penStyle(m_intLineMode), Qt::RoundCap, Qt::RoundJoin));
+  m_intSeries->setVisible(m_showIntegration && m_intLineMode != NoLine);
+
+  QScatterSeries::MarkerShape intShape = QScatterSeries::MarkerShapeCircle;
+  int intSize = 7;
+
+  switch (m_intPointMode)
+  {
+    case NoPoint:                                                                        break;
+    case Circle:      case LargeCircle:  intShape = QScatterSeries::MarkerShapeCircle;    break;
+    case Square:      case LargeSquare:  intShape = QScatterSeries::MarkerShapeRectangle; break;
+    case Diamond:     case LargeDiamond:
+    case X:           case LargeX:       intShape = QScatterSeries::MarkerShapeRotatedRectangle; break;
+  }
+  if (m_intPointMode == LargeCircle || m_intPointMode == LargeSquare ||
+      m_intPointMode == LargeDiamond || m_intPointMode == LargeX)
+    intSize = 11;
+
+  m_intPoints->setMarkerShape(intShape);
+  m_intPoints->setMarkerSize(intSize);
+  m_intPoints->setColor(m_intColor);
+  m_intPoints->setVisible(m_showIntegration && m_intPointMode != NoPoint);
+}
+
+void DMMGraph::updateThresholdLinesVisibility()
+{
+  m_triggerLine->setVisible(m_mode == Raising || m_mode == Falling);
+  m_externalLine->setVisible(m_startExternal);
+  m_integrationLine->setVisible(m_showIntegration);
+
+  updateThresholdLinePositions();
+}
+
+void DMMGraph::updateThresholdLinePositions()
+{
+  QRectF plot = m_chart->plotArea();
+
+  auto positionLine = [&](QGraphicsLineItem *item, double value)
+  {
+    if (!item->isVisible())
+      return;
+    double y = m_chart->mapToPosition(QPointF(m_xAxis->min(), value), m_dataSeries).y();
+    item->setLine(plot.left(), y, plot.right(), y);
+  };
+
+  positionLine(m_triggerLine, m_mode == Raising ? m_raisingThreshold : m_fallingThreshold);
+  positionLine(m_externalLine, m_externalThreshold);
+  positionLine(m_integrationLine, m_integrationThreshold);
 }
 
 void DMMGraph::setGraphSize(int size, int length)
@@ -239,6 +332,7 @@ void DMMGraph::setGraphSize(int size, int length)
 
   rebuildSeries();
   updateXAxisRange();
+  updateThresholdLinePositions();
 }
 
 void DMMGraph::startSLOT()
@@ -380,10 +474,17 @@ void DMMGraph::addValue(double val)
       double x = (m_pointer - 1) * m_sampleTime / 10.0;
       m_dataSeries->append(x, val);
       m_dataPoints->append(x, val);
+
+      double intVal = m_integrationOffset + (*m_arrayInt)[m_pointer - 1] * m_integrationScale;
+      m_intSeries->append(x, intVal);
+      m_intPoints->append(x, intVal);
     }
 
     if (resFlag)
+    {
       m_yAxis->setRange(m_scaleMin, m_scaleMax);
+      updateThresholdLinePositions();
+    }
   }
 
   m_sampleCounter++;
@@ -441,6 +542,8 @@ void DMMGraph::clearSLOT()
 
   m_dataSeries->clear();
   m_dataPoints->clear();
+  m_intSeries->clear();
+  m_intPoints->clear();
 }
 
 void DMMGraph::emitInfo()
@@ -467,20 +570,59 @@ void DMMGraph::emitInfo()
   Q_EMIT info(txt);
 }
 
-void DMMGraph::mousePressEvent(QMouseEvent *ev)
+// m_chartView is a child widget covering the whole graph area, so mouse/wheel
+// events over it are delivered to its viewport, not to DMMGraph's own
+// mousePressEvent/etc. overrides. An event filter on the viewport is the
+// standard way to intercept them while keeping all interaction state/logic on
+// DMMGraph itself (it already owns everything these handlers need).
+bool DMMGraph::eventFilter(QObject *watched, QEvent *event)
 {
-  // Cursor-drag (left button) and pan (middle button) are deferred to a later
-  // step along with the threshold/cursor overlays they position; only the
-  // right-click popup menu (self-contained, no painting-state dependency) is
-  // kept working here.
-  if (ev->button() != Qt::RightButton)
+  if (watched == m_chartView->viewport())
   {
-    QWidget::mousePressEvent(ev);
-    return;
+    switch (event->type())
+    {
+      case QEvent::MouseButtonPress:
+        handleChartMousePress(static_cast<QMouseEvent *>(event));
+        return true;
+      case QEvent::MouseMove:
+        handleChartMouseMove(static_cast<QMouseEvent *>(event));
+        return true;
+      case QEvent::MouseButtonRelease:
+        handleChartMouseRelease(static_cast<QMouseEvent *>(event));
+        return true;
+      case QEvent::Wheel:
+        handleChartWheel(static_cast<QWheelEvent *>(event));
+        return true;
+      case QEvent::Leave:
+        m_crosshairVLine->setVisible(false);
+        m_crosshairHLine->setVisible(false);
+        QToolTip::hideText();
+        break;
+      default:
+        break;
+    }
   }
 
+  return QWidget::eventFilter(watched, event);
+}
+
+void DMMGraph::handleChartMousePress(QMouseEvent *ev)
+{
+  QPoint pos(qRound(ev->position().x()), qRound(ev->position().y()));
   QPoint globalPos(qRound(ev->globalPosition().x()), qRound(ev->globalPosition().y()));
 
+  if (ev->button() == Qt::LeftButton)
+  {
+    m_mouseDown = true;
+    m_mousePan = false;
+  }
+  else if (ev->button() == Qt::MiddleButton)
+  {
+    m_mouseDown = false;
+    m_mousePan = true;
+    m_mpos = pos;
+  }
+  else if (ev->button() == Qt::RightButton)
   {
     m_popup->clear();
 
@@ -540,6 +682,172 @@ void DMMGraph::mousePressEvent(QMouseEvent *ev)
 
     m_popup->popup(globalPos);
   }
+}
+
+void DMMGraph::handleChartMouseMove(QMouseEvent *ev)
+{
+  QPoint pos(qRound(ev->position().x()), qRound(ev->position().y()));
+
+  if (m_mousePan)
+  {
+    QRectF plot = m_chart->plotArea();
+    double range = m_xAxis->max() - m_xAxis->min();
+    if (plot.width() <= 0 || range <= 0)
+      return;
+
+    double pixelsPerSecond = plot.width() / range;
+    double dxSeconds = (m_mpos.x() - pos.x()) / pixelsPerSecond;
+    double dxSamples = dxSeconds / (m_sampleTime / 10.0);
+
+    if (fabs(dxSamples) >= 1)
+    {
+      int sv = qMax(0, scrollbar->value());
+      scrollbar->setValue(qBound(0, sv + qRound(dxSamples), scrollbar->maximum()));
+      m_mpos = pos;
+    }
+    return;
+  }
+
+  if (m_mouseDown && m_cursorMode != NoCursor)
+  {
+    QPointF scenePos = m_chartView->mapToScene(pos);
+    double value = m_chart->mapToValue(scenePos, m_dataSeries).y();
+
+    switch (m_cursorMode)
+    {
+      case Trigger:
+        if (m_mode == Raising) m_raisingThreshold = value;
+        else                   m_fallingThreshold = value;
+        break;
+      case External:
+        m_externalThreshold = value;
+        break;
+      case Integration:
+        m_integrationThreshold = value;
+        break;
+      case NoCursor:
+        break;
+    }
+
+    updateThresholdLinePositions();
+    Q_EMIT thresholdChanged(m_cursorMode, value);
+    return;
+  }
+
+  // Pure hover: hit-test the draggable threshold lines (trigger, then
+  // external, then integration - first match wins when lines overlap) and,
+  // failing that, drive the crosshair.
+  if (!m_mouseDown && !m_mousePan)
+  {
+    QPointF scenePos = m_chartView->mapToScene(pos);
+    const int tolerance = 3;
+
+    auto near = [&](QGraphicsLineItem *item)
+    {
+      return item->isVisible() && fabs(scenePos.y() - item->line().y1()) < tolerance;
+    };
+
+    if (near(m_triggerLine))
+      m_cursorMode = Trigger;
+    else if (near(m_externalLine))
+      m_cursorMode = External;
+    else if (near(m_integrationLine))
+      m_cursorMode = Integration;
+    else
+      m_cursorMode = NoCursor;
+
+    m_chartView->viewport()->setCursor(m_cursorMode == NoCursor ? Qt::ArrowCursor : Qt::SplitVCursor);
+
+    if (m_cursorMode != NoCursor || !m_crosshair)
+    {
+      m_crosshairVLine->setVisible(false);
+      m_crosshairHLine->setVisible(false);
+      QToolTip::hideText();
+      return;
+    }
+
+    QRectF plot = m_chart->plotArea();
+    double x = qBound(plot.left(), scenePos.x(), plot.right());
+
+    m_crosshairVLine->setLine(x, plot.top(), x, plot.bottom());
+    m_crosshairVLine->setVisible(true);
+
+    double xValue = m_chart->mapToValue(QPointF(x, scenePos.y()), m_dataSeries).x();
+    int idx = qRound(xValue / (m_sampleTime / 10.0));
+
+    QString text = m_graphStartDateTime.time().addSecs(idx * m_sampleTime / 10).toString();
+
+    if (idx >= 0 && idx < m_pointer)
+    {
+      double val = (*m_array)[idx];
+      QPointF scenePoint = m_chart->mapToPosition(QPointF(xValue, val), m_dataSeries);
+      m_crosshairHLine->setLine(plot.left(), scenePoint.y(), plot.right(), scenePoint.y());
+      m_crosshairHLine->setVisible(true);
+      text += "\n" + formatEngineeringValue(val);
+    }
+    else
+      m_crosshairHLine->setVisible(false);
+
+    QPoint globalPos = m_chartView->viewport()->mapToGlobal(pos) + QPoint(4, 4);
+    QToolTip::showText(globalPos, text, m_chartView);
+  }
+}
+
+void DMMGraph::handleChartMouseRelease(QMouseEvent *)
+{
+  m_mouseDown = false;
+  m_mousePan = false;
+}
+
+void DMMGraph::handleChartWheel(QWheelEvent *ev)
+{
+  if (ev->angleDelta().x() < 0 || ev->angleDelta().y() < 0)
+    Q_EMIT zoomOut(1.1);
+  else
+    Q_EMIT zoomIn(1.1);
+}
+
+QString DMMGraph::formatEngineeringValue(double val) const
+{
+  QString prefix;
+
+  if (fabs(val) < 1 && val != 0)
+  {
+    val *= 1000;
+    prefix = "m";
+  }
+  if (fabs(val) < 1 && val != 0)
+  {
+    val *= 1000;
+    prefix = "u";
+  }
+  if (fabs(val) < 1 && val != 0)
+  {
+    val *= 1000;
+    prefix = "n";
+  }
+  if (fabs(val) < 1 && val != 0)
+  {
+    val *= 1000;
+    prefix = "p";
+  }
+  if (fabs(val) >= 1000)
+  {
+    val /= 1000;
+    prefix = "k";
+  }
+  if (fabs(val) >= 1000)
+  {
+    val /= 1000;
+    prefix = "M";
+  }
+  if (fabs(val) >= 1000)
+  {
+    val /= 1000;
+    prefix = "G";
+  }
+
+  return QString("%1 %2%3").arg(val).arg(prefix).arg(m_unit);
 }
 
 bool DMMGraph::exportDataSLOT()
@@ -974,6 +1282,15 @@ void DMMGraph::setThresholds(double falling, double raising)
 {
   m_fallingThreshold = falling;
   m_raisingThreshold = raising;
+
+  updateThresholdLinesVisibility();
+}
+
+void DMMGraph::setMode(DMMGraph::SampleMode mode)
+{
+  m_mode = mode;
+
+  updateThresholdLinesVisibility();
 }
 
 void DMMGraph::setScale(bool autoScale, bool includeZero, double min, double max)
@@ -1009,6 +1326,7 @@ void DMMGraph::setScale(bool autoScale, bool includeZero, double min, double max
   }
 
   m_yAxis->setRange(m_scaleMin, m_scaleMax);
+  updateThresholdLinePositions();
 }
 
 bool DMMGraph::computeMinMax(double val)
@@ -1055,6 +1373,12 @@ void DMMGraph::setColors(const QColor &bg, const QColor &grid,
   m_xAxis->setGridLineColor(m_gridColor);
   m_yAxis->setGridLineColor(m_gridColor);
   updateSeriesAppearance();
+
+  m_crosshairVLine->setPen(QPen(m_cursorColor));
+  m_crosshairHLine->setPen(QPen(m_cursorColor));
+  m_triggerLine->setPen(QPen(m_startColor));
+  m_externalLine->setPen(QPen(m_externalColor));
+  m_integrationLine->setPen(QPen(m_intThresholdColor));
 }
 
 void DMMGraph::setLineStyle(int lineMode, int pointMode, int intLineMode, int intPointMode)
@@ -1080,6 +1404,8 @@ void DMMGraph::setExternal(bool on, bool falling, double threshold)
   m_startExternal = on;
   m_externalFalling = falling;
   m_externalThreshold = threshold;
+
+  updateThresholdLinesVisibility();
 }
 
 Qt::PenStyle DMMGraph::penStyle(LineMode mode)
@@ -1102,6 +1428,10 @@ void DMMGraph::setIntegration(bool showInt, double sc, double th, double off)
   m_integrationScale = sc;
   m_integrationThreshold = th;
   m_integrationOffset = off;
+
+  rebuildSeries();
+  updateSeriesAppearance();
+  updateThresholdLinesVisibility();
 }
 
 void DMMGraph::computeUnitFactor()
