@@ -236,7 +236,8 @@ protected:
   void             updateSeriesAppearance();
   void             updateThresholdLinesVisibility();
   void             updateThresholdLinePositions();
-  QString          formatEngineeringValue(double) const;
+  QString          formatEngineeringValue(double value, QString *unit = Q_NULLPTR) const;
+  double           unitScaleFactor(const QString &unit) const;
 
 private:
   Qt::PenStyle     penStyle(LineMode);
