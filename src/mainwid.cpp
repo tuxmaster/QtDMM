@@ -255,8 +255,8 @@ void MainWid::connectSLOT(bool on)
 {
   if (on)
   {
-    m_dmm->open();
-    ui_graph->clearSLOT();
+    if (m_dmm->open())
+      ui_graph->clearSLOT();
   }
   else
   {

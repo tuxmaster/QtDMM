@@ -145,6 +145,66 @@ int main(int argc, char **argv)
     graph.addValue(1.23);
   }
 
+  // --- 6. engineering-prefix export/import: setUnit() must strip a leading
+  //         G or p prefix too (previously only n/u/m/k/M were recognized), and
+  //         a value re-imported from a prefix-scaled export (e.g. "2.5;pF")
+  //         must round-trip back to the same raw value, not get double-scaled
+  //         into something like "ppF" on the next export. ---
+  {
+    QTemporaryDir outDir;
+
+    auto exportedUnitFor = [&](const QString &unit, double rawValue) -> QString
+    {
+      DMMGraph graph(nullptr, &settings);
+      graph.setUnit(unit);
+      graph.setSampleTime(10);
+      graph.setGraphSize(5, 5);
+      graph.setMode(DMMGraph::Manual);
+      graph.startSLOT();
+      graph.addValue(rawValue);
+
+      QString path = outDir.path() + "/prefix_probe.csv";
+      if (!graph.exportCsvFile(path))
+        return QString();
+
+      QStringList lines = readFile(path).split('\n', Qt::SkipEmptyParts);
+      if (lines.size() < 2)
+        return QString();
+      return lines[1].split(';').value(3); // timestamp;time;value;unit
+    };
+
+    check(exportedUnitFor("GHz", 2.5e9) == "GHz",
+          "setUnit() should strip a leading 'G' prefix so re-exporting a GHz-range value stays 'GHz', not 'GGHz' or 'Hz'");
+    check(exportedUnitFor("pF", 2.5e-12) == "pF",
+          "setUnit() should strip a leading 'p' prefix so re-exporting a pF-range value stays 'pF', not doubled to 'ppF'");
+
+    // Full round trip at an extreme prefix: import a pF-range export, export
+    // again, and the two exports must be byte-for-byte identical.
+    {
+      DMMGraph graph(nullptr, &settings);
+      graph.setUnit("F");
+      graph.setSampleTime(10);
+      graph.setGraphSize(5, 5);
+      graph.setMode(DMMGraph::Manual);
+      graph.startSLOT();
+      graph.addValue(2.5e-12);
+
+      QString exported1 = outDir.path() + "/pf_export1.csv";
+      check(graph.exportCsvFile(exported1), "pF round-trip: first export failed");
+
+      DMMGraph graph2(nullptr, &settings);
+      check(graph2.importCsvFile(exported1), "pF round-trip: re-import failed");
+
+      QString exported2 = outDir.path() + "/pf_export2.csv";
+      check(graph2.exportCsvFile(exported2), "pF round-trip: second export failed");
+
+      QString c1 = readFile(exported1);
+      QString c2 = readFile(exported2);
+      check(!c1.isEmpty() && c1 == c2,
+            "pF round-trip: re-exporting a re-imported pF-range file produced different CSV content");
+    }
+  }
+
   if (failed == 0)
     qInfo() << "All DMMGraph baseline tests passed.";
   else

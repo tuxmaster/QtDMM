@@ -22,51 +22,8 @@
 #include <QMessageBox>
 #include <QtGui>
 #include <iostream>
-#include <unistd.h>
-#include <pwd.h>
-#include <grp.h>
 
 #include "mainwin.h"
-
-void checkUserInDailOutGroup()
-{
-#ifdef Q_OS_LINUX
-  const char* groupname = "dialout";
-  struct passwd* pw = getpwuid(geteuid());
-  if (!pw) return; // check not applicable
-
-  gid_t* groups;
-  int ngroups = 0;
-
-  getgrouplist(pw->pw_name, pw->pw_gid, nullptr, &ngroups);
-
-  groups = new gid_t[ngroups];
-  if (getgrouplist(pw->pw_name, pw->pw_gid, groups, &ngroups) == -1)
-  {
-    delete[] groups;
-    return; // cannot get groups
-  }
-
-  for (int i = 0; i < ngroups; ++i)
-  {
-    struct group* gr = getgrgid(groups[i]);
-    if (gr && strcmp(gr->gr_name, groupname) == 0)
-    {
-      delete[] groups;
-      return; // ok
-    }
-  }
-
-  delete[] groups;
-  QMessageBox::critical(nullptr, QObject::tr("Missing Permission"),
-                        QObject::tr("The current user is not a member of the 'dialout' group.\n"
-                        "Please add the user with the following command:\n\n"
-                        "sudo usermod -aG dialout $USER\n\n"
-                        "You need to log out and back in for the changes to take effect."));
-
-#endif
-}
-
 
 void qtdmmMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &msg)
 {
@@ -134,8 +91,6 @@ int main(int argc, char **argv)
 
   mainWin.show();
   mainWin.move(100, 100);
-
-  checkUserInDailOutGroup();
 
   return app.exec();
 }

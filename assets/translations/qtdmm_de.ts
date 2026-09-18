@@ -63,64 +63,69 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="104"/>
+        <location filename="../../src/dmm.cpp" line="160"/>
         <source>Error creating port %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="114"/>
+        <location filename="../../src/dmm.cpp" line="212"/>
         <source>Access denied for %1.</source>
         <translation>Zugriff auf %1 verweigert.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="117"/>
+        <location filename="../../src/dmm.cpp" line="174"/>
         <source>No such device %1.</source>
         <translation>%1 existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="120"/>
+        <location filename="../../src/dmm.cpp" line="171"/>
+        <source>Missing Permission</source>
+        <translation type="unfinished">Berechtigung fehlt</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="177"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Fehler beim Öffnen von %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="132"/>
+        <location filename="../../src/dmm.cpp" line="189"/>
         <source>Error configuring serial port %1.</source>
         <translation>Fehler beim Konfigurieren des Anschlusses %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="138"/>
+        <location filename="../../src/dmm.cpp" line="195"/>
         <source>Connecting ...</source>
         <translation>Verbinde ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="153"/>
-        <location filename="../../src/dmm.cpp" line="207"/>
+        <location filename="../../src/dmm.cpp" line="220"/>
+        <location filename="../../src/dmm.cpp" line="274"/>
         <source>Not connected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="198"/>
+        <location filename="../../src/dmm.cpp" line="265"/>
         <source>Error %1</source>
         <translation>Fehler %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="203"/>
+        <location filename="../../src/dmm.cpp" line="270"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation>Lesefehler auf %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="205"/>
+        <location filename="../../src/dmm.cpp" line="272"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Wartezeit abgelaufr für %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="195"/>
+        <location filename="../../src/dmm.cpp" line="262"/>
         <source>Connected %1</source>
         <translation>Verbunden %1</translation>
     </message>
@@ -163,68 +168,68 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="563"/>
-        <location filename="../../src/dmmgraph.cpp" line="565"/>
-        <location filename="../../src/dmmgraph.cpp" line="567"/>
-        <location filename="../../src/dmmgraph.cpp" line="569"/>
+        <location filename="../../src/dmmgraph.cpp" line="558"/>
+        <location filename="../../src/dmmgraph.cpp" line="560"/>
+        <location filename="../../src/dmmgraph.cpp" line="562"/>
+        <location filename="../../src/dmmgraph.cpp" line="564"/>
         <source>Sampling</source>
         <translation>Beproben</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="563"/>
-        <location filename="../../src/dmmgraph.cpp" line="565"/>
-        <location filename="../../src/dmmgraph.cpp" line="567"/>
-        <location filename="../../src/dmmgraph.cpp" line="569"/>
+        <location filename="../../src/dmmgraph.cpp" line="558"/>
+        <location filename="../../src/dmmgraph.cpp" line="560"/>
+        <location filename="../../src/dmmgraph.cpp" line="562"/>
+        <location filename="../../src/dmmgraph.cpp" line="564"/>
         <source>Stopped</source>
         <translation>Angehalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="631"/>
+        <location filename="../../src/dmmgraph.cpp" line="626"/>
         <source>Disconnect</source>
         <translation>Trennen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="638"/>
+        <location filename="../../src/dmmgraph.cpp" line="633"/>
         <source>Connect</source>
         <translation>Verbinden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="647"/>
+        <location filename="../../src/dmmgraph.cpp" line="642"/>
         <source>Stop recorder</source>
         <translation>Rekorder anhalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="654"/>
+        <location filename="../../src/dmmgraph.cpp" line="649"/>
         <source>Start recorder</source>
         <translation>Rekorder starten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="659"/>
+        <location filename="../../src/dmmgraph.cpp" line="654"/>
         <source>Clear graph</source>
         <translation>Graphen löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="665"/>
+        <location filename="../../src/dmmgraph.cpp" line="660"/>
         <source>Configure...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="673"/>
+        <location filename="../../src/dmmgraph.cpp" line="668"/>
         <source>Export data...</source>
         <translation>Daten exportieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="677"/>
+        <location filename="../../src/dmmgraph.cpp" line="672"/>
         <source>Import data...</source>
         <translation>Daten importieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="860"/>
+        <location filename="../../src/dmmgraph.cpp" line="879"/>
         <source>Export data</source>
         <translation>Daten exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="969"/>
+        <location filename="../../src/dmmgraph.cpp" line="998"/>
         <source>File contains only header</source>
         <translation type="unfinished"></translation>
     </message>
@@ -233,43 +238,44 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="903"/>
+        <location filename="../../src/dmmgraph.cpp" line="932"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="904"/>
+        <location filename="../../src/dmmgraph.cpp" line="933"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Beim Importieren werden alle bisherigen Messwerte gelöscht.&lt;p&gt;Möchten Sie zu ersten die bisherigen Daten exportieren?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="916"/>
+        <location filename="../../src/dmmgraph.cpp" line="945"/>
         <source>Export data first</source>
         <translation>Daten zu erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="920"/>
+        <location filename="../../src/dmmgraph.cpp" line="949"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importieren und Daten löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="931"/>
+        <location filename="../../src/dmmgraph.cpp" line="960"/>
         <source>Import data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="931"/>
+        <location filename="../../src/dmmgraph.cpp" line="960"/>
         <source>CSV (*.csv);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="949"/>
+        <location filename="../../src/dmmgraph.cpp" line="897"/>
+        <location filename="../../src/dmmgraph.cpp" line="978"/>
         <source>Cannot open file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="958"/>
-        <location filename="../../src/dmmgraph.cpp" line="1000"/>
+        <location filename="../../src/dmmgraph.cpp" line="987"/>
+        <location filename="../../src/dmmgraph.cpp" line="1029"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Diese Datei scheint nicht gültig zu sein</translation>
     </message>
@@ -577,39 +583,64 @@ Please choose which instance should record.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/main.cpp" line="126"/>
+        <location filename="../../src/main.cpp" line="83"/>
         <source>protocol debugging information</source>
         <translation>Protokol debugging Informationen</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="127"/>
+        <location filename="../../src/main.cpp" line="84"/>
         <source>sets directory where config files are located</source>
         <translation>setzt das Verzeichnis wo die Konfiguration sich befindet</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="128"/>
+        <location filename="../../src/main.cpp" line="85"/>
         <source>sets &lt;config-id&gt;</source>
         <translation type="unfinished">setzt die &lt;config-id&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="61"/>
         <source>Missing Permission</source>
-        <translation>Berechtigung fehlt</translation>
+        <translation type="vanished">Berechtigung fehlt</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="62"/>
         <source>The current user is not a member of the &apos;dialout&apos; group.
 Please add the user with the following command:
 
 sudo usermod -aG dialout $USER
 
 You need to log out and back in for the changes to take effect.</source>
-        <translation>Der aktuelle Benutzer ist nicht Mitglied der Gruppe &apos;dialout&apos;.
+        <translation type="vanished">Der aktuelle Benutzer ist nicht Mitglied der Gruppe &apos;dialout&apos;.
 Bitte fügen Sie ihn mit folgendem Befehl hinzu:
 
 sudo usermod -aG dialout $USER
 
 Danach müssen Sie sich ab- und wieder anmelden.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="71"/>
+        <source>No permission to access %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="75"/>
+        <source>
+
+On this system the device is typically accessible via group &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="77"/>
+        <source>
+Add your user with:
+
+sudo usermod -aG %1 $USER</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="79"/>
+        <source>
+
+Then log out and back in so the new group membership becomes active.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
