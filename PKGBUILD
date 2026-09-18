@@ -1,6 +1,6 @@
 # Maintainer: Dein Name <deine@email.tld>
 pkgname=qtdmm
-pkgver=1.0.0.alpha.1
+pkgver=0.0.0 # placeholder, overwritten by pkgver() below on every build
 pkgrel=1
 pkgdesc="A DMM readout software including a configurable recorder "
 arch=('x86_64')
@@ -16,7 +16,10 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd $pkgname
-  echo "$(git tag --list --sort=-authordate --merged | head -n1)_$(git rev-parse --short HEAD)" | sed 's/\([^-]*-g\)/r\1/;s/-/_/g'
+  # CalVer from HEAD's commit date, same scheme as cmake/git_version.cmake,
+  # plus Arch's usual .rN.gHASH VCS-package suffix so same-day rebuilds still
+  # sort correctly. No tags needed, no manual bumping.
+  echo "$(git log -1 --format=%cd --date=format:%Y.%m.%d).r$(git rev-list --count HEAD).g$(git rev-parse --short HEAD)"
 }
 
 build() {

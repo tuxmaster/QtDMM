@@ -72,7 +72,7 @@ if(APPLE)
 endif()
 
 ## compile the application
-add_definitions(-DAPP_VERSION="${PROJECT_VERSION}" -DAPP_NAME="${APP_NAME}" -DAPP_ORGANIZATION="${APP_ORGANIZATION}" )
+add_definitions(-DAPP_VERSION="${PROJECT_VERSION_FULL}" -DAPP_NAME="${APP_NAME}" -DAPP_ORGANIZATION="${APP_ORGANIZATION}" )
 include_directories(src ${CMAKE_BINARY_DIR} ${HIDAPI_INCLUDE_DIRS})
 
 if (HIDAPI_FOUND)
