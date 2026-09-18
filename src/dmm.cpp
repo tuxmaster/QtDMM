@@ -96,6 +96,7 @@ DMM::DMM(QObject *parent)
     m_externalSetup(false),
     m_dtr(false),
     m_rts(false),
+    m_delayTimer(0),
     m_decoder(Q_NULLPTR)
 {
   m_portHandler  = new PortHandler(this);
@@ -215,7 +216,11 @@ QString DMM::permissionHint() const
 void DMM::close()
 {
   // mt: added timer id
-  killTimer(m_delayTimer);
+  if (m_delayTimer > 0)
+  {
+    killTimer(m_delayTimer);
+    m_delayTimer = 0;
+  }
 
   m_error = tr("Not connected");
   Q_EMIT error(m_error);
