@@ -60,8 +60,8 @@ DmmPrefs::~DmmPrefs()
 
 void DmmPrefs::setupComboBoxModel()
 {
-  ui_model->clear();
-  ui_model->insertItem(-1, tr("Manual settings"));
+  ui_vendor->clear();
+  ui_vendor->insertItem(-1, tr("Manual settings"));
 
   std::vector<DmmDecoder::DMMInfo> configs = DmmDecoder::getDeviceConfigurations();
 
@@ -71,12 +71,24 @@ void DmmPrefs::setupComboBoxModel()
   });
 
   dmm_info.clear();
+  QStringList vendors;
   for (const auto& cfg : configs) {
     dmm_info.push_back(cfg);
-    ui_model->addItem(cfg.name);
+    if (!vendors.contains(cfg.vendor))
+      vendors.append(cfg.vendor);
   }
 
-  QCompleter *completer = new QCompleter(ui_model->model(), this);
+  vendors.sort(Qt::CaseInsensitive);
+  ui_vendor->addItems(vendors);
+
+  // The completer searches the full, unfiltered device list (all vendors),
+  // so typing a known model name still finds it directly - on selection the
+  // editingFinished handler below switches the vendor combo to match.
+  QStringList allNames;
+  for (const auto& cfg : dmm_info)
+    allNames.append(cfg.name);
+
+  QCompleter *completer = new QCompleter(allNames, this);
   completer->setCaseSensitivity(Qt::CaseInsensitive);
   completer->setFilterMode(Qt::MatchContains);
   completer->setCompletionMode(QCompleter::PopupCompletion);
@@ -85,18 +97,75 @@ void DmmPrefs::setupComboBoxModel()
 
   connect(ui_model->lineEdit(), &QLineEdit::editingFinished, this, [this]()
   {
-    bool found = false;
+    QString text = ui_model->currentText();
+
+    // already the current selection within the current vendor's list?
     for (int i = 0; i < ui_model->count(); ++i)
     {
-      if (ui_model->itemText(i).compare(ui_model->currentText(), Qt::CaseInsensitive) == 0)
+      if (ui_model->itemText(i).compare(text, Qt::CaseInsensitive) == 0)
       {
-        found = true;
-        break;
+        ui_model->setCurrentIndex(i);
+        on_ui_model_activated(i);
+        return;
       }
     }
-    if (!found)
-      ui_model->setCurrentIndex(-1);
+
+    // otherwise search the full device list and switch vendor if needed
+    for (size_t i = 0; i < dmm_info.size(); ++i)
+    {
+      if (dmm_info[i].name.compare(text, Qt::CaseInsensitive) == 0)
+      {
+        int vendorIdx = ui_vendor->findText(dmm_info[i].vendor);
+        if (vendorIdx >= 0)
+        {
+          ui_vendor->setCurrentIndex(vendorIdx);
+          populateModelsForVendor(dmm_info[i].vendor);
+          int modelIdx = ui_model->findText(dmm_info[i].name);
+          ui_model->setCurrentIndex(modelIdx);
+          on_ui_model_activated(modelIdx);
+        }
+        return;
+      }
+    }
+
+    ui_model->setCurrentIndex(-1);
   });
+}
+
+void DmmPrefs::populateModelsForVendor(const QString &vendor)
+{
+  ui_model->clear();
+
+  m_currentVendorModels.clear();
+  for (const auto& cfg : dmm_info)
+    if (cfg.vendor == vendor)
+      m_currentVendorModels.push_back(cfg);
+
+  std::sort(m_currentVendorModels.begin(), m_currentVendorModels.end(), [](const auto& a, const auto& b) {
+    return a.model < b.model;
+  });
+
+  for (const auto& cfg : m_currentVendorModels)
+    ui_model->addItem(cfg.name);
+}
+
+void DmmPrefs::on_ui_vendor_activated(int id)
+{
+  if (id == 0)
+  {
+    ui_model->clear();
+    m_currentVendorModels.clear();
+    enterManualMode();
+  }
+  else
+  {
+    populateModelsForVendor(ui_vendor->itemText(id));
+    if (!m_currentVendorModels.empty())
+    {
+      ui_model->setCurrentIndex(0);
+      on_ui_model_activated(0);
+    }
+  }
 }
 
 QString DmmPrefs::deviceListText() const
@@ -154,20 +223,30 @@ void DmmPrefs::defaultsSLOT()
 
   QString model = m_cfg->getString("DMM/model");
 
-  ui_model->setCurrentIndex(0);
+  ui_vendor->setCurrentIndex(0);
+  ui_model->clear();
+  m_currentVendorModels.clear();
 
-  int id = 0;
   for (const auto& cfg : dmm_info)
   {
     if (model == cfg.name)
     {
-      ui_model->setCurrentIndex(id + 1);
+      int vendorIdx = ui_vendor->findText(cfg.vendor);
+      if (vendorIdx >= 0)
+      {
+        ui_vendor->setCurrentIndex(vendorIdx);
+        populateModelsForVendor(cfg.vendor);
+        int modelIdx = ui_model->findText(cfg.name);
+        ui_model->setCurrentIndex(modelIdx);
+      }
       break;
     }
-    id++;
   }
 
-  on_ui_model_activated(ui_model->currentIndex());
+  if (ui_vendor->currentIndex() == 0)
+    enterManualMode();
+  else
+    on_ui_model_activated(ui_model->currentIndex());
 }
 
 void DmmPrefs::factoryDefaultsSLOT()
@@ -182,9 +261,11 @@ void DmmPrefs::factoryDefaultsSLOT()
 
   protocolCombo->setCurrentIndex(0);
   ui_numValues->setValue(1);
-  ui_model->setCurrentIndex(0);
+  ui_vendor->setCurrentIndex(0);
+  ui_model->clear();
+  m_currentVendorModels.clear();
 
-  on_ui_model_activated(ui_model->currentIndex());
+  enterManualMode();
 }
 
 void DmmPrefs::applySLOT()
@@ -200,7 +281,7 @@ void DmmPrefs::applySLOT()
 
   m_cfg->setInt("DMM/data-format", protocolCombo->currentIndex());
   m_cfg->setInt("DMM/number-of-values", ui_numValues->value());
-  m_cfg->setString("DMM/model", (ui_model->currentIndex() == 0 ? "Manual" : dmm_info[ui_model->currentIndex() - 1].name));
+  m_cfg->setString("DMM/model", (ui_vendor->currentIndex() == 0 ? "Manual" : m_currentVendorModels[ui_model->currentIndex()].name));
 
   m_cfg->setBool("DMM/rts", uirts->isChecked());
   m_cfg->setBool("DMM/dtr", uidtr->isChecked());
@@ -208,7 +289,7 @@ void DmmPrefs::applySLOT()
 
 void DmmPrefs::on_ui_externalSetup_toggled()
 {
-  if (ui_model->currentIndex() == 0)
+  if (ui_vendor->currentIndex() == 0)
   {
     baudRate->setDisabled(ui_externalSetup->isChecked());
     bitsCombo->setDisabled(ui_externalSetup->isChecked());
@@ -217,69 +298,89 @@ void DmmPrefs::on_ui_externalSetup_toggled()
   }
 }
 
+void DmmPrefs::enterManualMode()
+{
+  ui_filename->setDisabled(false);
+  ui_save->setDisabled(false);
+  ui_load->setDisabled(false);
+
+  baudRate->setDisabled(false);
+  ui_protocol->setDisabled(false);
+  ui_baudLabel->setDisabled(false);
+  ui_bitsLabel->setDisabled(false);
+  ui_stopLabel->setDisabled(false);
+  ui_displayLabel->setDisabled(false);
+  ui_parityLabel->setDisabled(false);
+  bitsCombo->setDisabled(false);
+  displayCombo->setDisabled(false);
+  stopBitsCombo->setDisabled(false);
+  parityCombo->setDisabled(false);
+  ui_numValues->setDisabled(false);
+  ui_externalSetup->setDisabled(false);
+  uirts->setDisabled(false);
+  uidtr->setDisabled(false);
+
+  message->show();
+  message2->hide();
+
+  m_dmmInfo.name = "custom";
+  m_dmmInfo.baud = baudRate->currentText().toInt();
+  m_dmmInfo.protocol = static_cast<ReadEvent::DataFormat>(protocolCombo->currentIndex()); //!
+  m_dmmInfo.bits =  bitsCombo->currentText().toInt();
+  m_dmmInfo.stopBits = bitsCombo->currentText().toInt();
+  m_dmmInfo.parity = parityCombo->currentIndex();
+  m_dmmInfo.display = displayCombo->currentText().toInt();
+  m_dmmInfo.numValues = ui_numValues->value();
+  m_dmmInfo.externalSetup = ui_externalSetup->isChecked();
+  m_dmmInfo.rts = uirts->isChecked();
+  m_dmmInfo.dtr = uidtr->isChecked();
+}
+
 void DmmPrefs::on_ui_model_activated(int id)
 {
-  ui_filename->setDisabled(id != 0);
-  ui_save->setDisabled(id != 0);
-  ui_load->setDisabled(id != 0);
+  if (id < 0 || id >= static_cast<int>(m_currentVendorModels.size()))
+    return;
 
-  baudRate->setDisabled(id != 0);
-  ui_protocol->setDisabled(id != 0);
-  ui_baudLabel->setDisabled(id != 0);
-  ui_bitsLabel->setDisabled(id != 0);
-  ui_stopLabel->setDisabled(id != 0);
-  ui_displayLabel->setDisabled(id != 0);
-  ui_parityLabel->setDisabled(id != 0);
-  bitsCombo->setDisabled(id != 0);
-  displayCombo->setDisabled(id != 0);
-  stopBitsCombo->setDisabled(id != 0);
-  parityCombo->setDisabled(id != 0);
-  ui_numValues->setDisabled(id != 0);
-  ui_externalSetup->setDisabled(id != 0);
-  uirts->setDisabled(id != 0);
-  uidtr->setDisabled(id != 0);
+  ui_filename->setDisabled(true);
+  ui_save->setDisabled(true);
+  ui_load->setDisabled(true);
 
+  baudRate->setDisabled(true);
+  ui_protocol->setDisabled(true);
+  ui_baudLabel->setDisabled(true);
+  ui_bitsLabel->setDisabled(true);
+  ui_stopLabel->setDisabled(true);
+  ui_displayLabel->setDisabled(true);
+  ui_parityLabel->setDisabled(true);
+  bitsCombo->setDisabled(true);
+  displayCombo->setDisabled(true);
+  stopBitsCombo->setDisabled(true);
+  parityCombo->setDisabled(true);
+  ui_numValues->setDisabled(true);
+  ui_externalSetup->setDisabled(true);
+  uirts->setDisabled(true);
+  uidtr->setDisabled(true);
 
-  if (id != 0)
-    message->hide();
-  else
-    message->show();
+  message->hide();
   if (ui_model->itemText(id)[0] == '*')
     message2->show();
   else
     message2->hide();
 
-  if (id == 0)
-  {
-    m_dmmInfo.name = "custom";
-    m_dmmInfo.baud = baudRate->currentText().toInt();
-    m_dmmInfo.protocol = static_cast<ReadEvent::DataFormat>(protocolCombo->currentIndex()); //!
-    m_dmmInfo.bits =  bitsCombo->currentText().toInt();
-    m_dmmInfo.stopBits = bitsCombo->currentText().toInt();
-    m_dmmInfo.parity = parityCombo->currentIndex();
-    m_dmmInfo.display = displayCombo->currentText().toInt();
-    m_dmmInfo.numValues = ui_numValues->value();
-    m_dmmInfo.externalSetup = ui_externalSetup->isChecked();
-    m_dmmInfo.rts = uirts->isChecked();
-    m_dmmInfo.dtr = uidtr->isChecked();
-  }
-  else
-  {
-    m_dmmInfo = dmm_info[id - 1];
+  m_dmmInfo = m_currentVendorModels[id];
 
-    baudRate->setCurrentText(QString::number(dmm_info[id - 1].baud));
-    protocolCombo->setCurrentIndex(dmm_info[id - 1].protocol);
-    bitsCombo->setCurrentText(QString::number(dmm_info[id - 1].bits));
-    stopBitsCombo->setCurrentText(QString::number(dmm_info[id - 1].stopBits));
-    parityCombo->setCurrentIndex(dmm_info[id - 1].parity);
-    displayCombo->setCurrentText(QString::number(dmm_info[id - 1].display));
-    ui_numValues->setValue(dmm_info[id - 1].numValues);
-    ui_externalSetup->setChecked(dmm_info[id - 1].externalSetup);
-    uirts->setChecked(dmm_info[id - 1].rts);
-    uidtr->setChecked(dmm_info[id - 1].dtr);
+  baudRate->setCurrentText(QString::number(m_currentVendorModels[id].baud));
+  protocolCombo->setCurrentIndex(m_currentVendorModels[id].protocol);
+  bitsCombo->setCurrentText(QString::number(m_currentVendorModels[id].bits));
+  stopBitsCombo->setCurrentText(QString::number(m_currentVendorModels[id].stopBits));
+  parityCombo->setCurrentIndex(m_currentVendorModels[id].parity);
+  displayCombo->setCurrentText(QString::number(m_currentVendorModels[id].display));
+  ui_numValues->setValue(m_currentVendorModels[id].numValues);
+  ui_externalSetup->setChecked(m_currentVendorModels[id].externalSetup);
+  uirts->setChecked(m_currentVendorModels[id].rts);
+  uidtr->setChecked(m_currentVendorModels[id].dtr);
 
-    ui_filename->setText("");
-  }
+  ui_filename->setText("");
 }
 
 bool DmmPrefs::rts() const

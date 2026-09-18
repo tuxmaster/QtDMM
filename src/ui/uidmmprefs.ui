@@ -36,6 +36,16 @@
       <number>5</number>
      </property>
      <item>
+      <widget class="QComboBox" name="ui_vendor">
+       <property name="whatsThis">
+        <string>Select your DMM's vendor to narrow the model list below.</string>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QComboBox::AdjustToContents</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QComboBox" name="ui_model">
        <property name="whatsThis">
         <string>Here you may select your DMM model. If your DMM is not in the list, try to find working settings and mail them to me (&lt;font color=blue&gt;&lt;u&gt;qtdmm@mtoussaint.de&lt;/u&gt;&lt;/font&gt;). So I can add them to the list in the next release.</string>
