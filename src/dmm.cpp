@@ -21,12 +21,68 @@
 //======================================================================
 
 #include <QtGui>
+#include <QFile>
+#include <QFileInfo>
+#include <QMessageBox>
 
 #include "dmm.h"
 #include "decoders.h"
 
 #include <stdio.h>
 #include <iostream>
+
+#ifdef Q_OS_LINUX
+namespace
+{
+// Distro-appropriate serial-group fallback, used only when the device file's
+// own group can't be determined. Arch/CachyOS use "uucp" instead of Debian's
+// "dialout" for serial port access.
+QString distroSuggestedSerialGroup()
+{
+  QFile file("/etc/os-release");
+  if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    return QStringLiteral("dialout");
+
+  QString id;
+  QString idLike;
+  while (!file.atEnd())
+  {
+    const QString line = QString::fromUtf8(file.readLine()).trimmed();
+    if (line.startsWith("ID="))
+      id = line.mid(3).remove('"');
+    else if (line.startsWith("ID_LIKE="))
+      idLike = line.mid(8).remove('"');
+  }
+
+  if ((id + ' ' + idLike).toLower().contains("arch"))
+    return QStringLiteral("uucp");
+
+  return QStringLiteral("dialout");
+}
+
+QString serialPermissionHintForDevice(const QString &device)
+{
+  QFileInfo deviceInfo(device);
+  const QString deviceGroup = deviceInfo.group();
+  const QString suggestedGroup = !deviceGroup.isEmpty() && deviceGroup != QLatin1String("root")
+    ? deviceGroup
+    : distroSuggestedSerialGroup();
+
+  QString message = QObject::tr("No permission to access %1.").arg(device);
+
+  if (!suggestedGroup.isEmpty())
+  {
+    message += QObject::tr("\n\nOn this system the device is typically accessible via group '%1'.")
+      .arg(suggestedGroup);
+    message += QObject::tr("\nAdd your user with:\n\nsudo usermod -aG %1 $USER")
+      .arg(suggestedGroup);
+    message += QObject::tr("\n\nThen log out and back in so the new group membership becomes active.");
+  }
+
+  return message;
+}
+}
+#endif
 
 DMM::DMM(QObject *parent)
   : QObject(parent),
@@ -111,7 +167,8 @@ bool DMM::open()
     switch (m_portHandler->error())
     {
       case QSerialPort::PermissionError:
-        m_error = tr("Access denied for %1.").arg(m_device);
+        m_error = permissionHint();
+        QMessageBox::critical(nullptr, tr("Missing Permission"), m_error);
         break;
       case QSerialPort::DeviceNotFoundError:
         m_error = tr("No such device %1.").arg(m_device);
@@ -143,6 +200,16 @@ bool DMM::open()
   // mt: added timer id
   m_delayTimer = startTimer(1000);
   return true;
+}
+
+QString DMM::permissionHint() const
+{
+#ifdef Q_OS_LINUX
+  if (m_portType == PortHandler::PortType::Serial && !m_device.isEmpty())
+    return serialPermissionHintForDevice(m_device);
+#endif
+
+  return tr("Access denied for %1.").arg(m_device);
 }
 
 void DMM::close()

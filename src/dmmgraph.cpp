@@ -506,15 +506,10 @@ void DMMGraph::addValue(double val)
 
 void DMMGraph::setUnit(const QString &unit)
 {
-  if (unit.left(1) == "n")
-    m_unit = unit.mid(1);
-  else if (unit.left(1) == "u")
-    m_unit = unit.mid(1);
-  else if (unit.left(1) == "m")
-    m_unit = unit.mid(1);
-  else if (unit.left(1) == "k")
-    m_unit = unit.mid(1);
-  else if (unit.left(1) == "M")
+  const QString prefix = unit.left(1);
+
+  if (prefix == "G" || prefix == "M" || prefix == "k" || prefix == "m"
+      || prefix == "u" || prefix == "n" || prefix == "p")
     m_unit = unit.mid(1);
   else
     m_unit = unit;
@@ -783,7 +778,8 @@ void DMMGraph::handleChartMouseMove(QMouseEvent *ev)
       QPointF scenePoint = m_chart->mapToPosition(QPointF(xValue, val), m_dataSeries);
       m_crosshairHLine->setLine(plot.left(), scenePoint.y(), plot.right(), scenePoint.y());
       m_crosshairHLine->setVisible(true);
-      text += "\n" + formatEngineeringValue(val);
+      QString unit;
+      text += "\n" + QString("%1 %2").arg(formatEngineeringValue(val, &unit)).arg(unit);
     }
     else
       m_crosshairHLine->setVisible(false);
@@ -807,47 +803,70 @@ void DMMGraph::handleChartWheel(QWheelEvent *ev)
     Q_EMIT zoomIn(1.1);
 }
 
-QString DMMGraph::formatEngineeringValue(double val) const
+namespace
 {
-  QString prefix;
+struct EngineeringUnit
+{
+  double factor;
+  const char *prefix;
+};
 
-  if (fabs(val) < 1 && val != 0)
+const EngineeringUnit engineeringUnits[] = {
+  {1e9,   "G"},
+  {1e6,   "M"},
+  {1e3,   "k"},
+  {1.0,   ""},
+  {1e-3,  "m"},
+  {1e-6,  "u"},
+  {1e-9,  "n"},
+  {1e-12, "p"}
+};
+}
+
+QString DMMGraph::formatEngineeringValue(double value, QString *unit) const
+{
+  const double absValue = fabs(value);
+  const EngineeringUnit *selected = &engineeringUnits[3]; // "" - no prefix
+
+  if (absValue > 0.0)
   {
-    val *= 1000;
-    prefix = "m";
-  }
-  if (fabs(val) < 1 && val != 0)
-  {
-    val *= 1000;
-    prefix = "u";
-  }
-  if (fabs(val) < 1 && val != 0)
-  {
-    val *= 1000;
-    prefix = "n";
-  }
-  if (fabs(val) < 1 && val != 0)
-  {
-    val *= 1000;
-    prefix = "p";
-  }
-  if (fabs(val) >= 1000)
-  {
-    val /= 1000;
-    prefix = "k";
-  }
-  if (fabs(val) >= 1000)
-  {
-    val /= 1000;
-    prefix = "M";
-  }
-  if (fabs(val) >= 1000)
-  {
-    val /= 1000;
-    prefix = "G";
+    for (const EngineeringUnit &candidate : engineeringUnits)
+    {
+      if (absValue >= candidate.factor)
+      {
+        selected = &candidate;
+        break;
+      }
+    }
   }
 
-  return QString("%1 %2%3").arg(val).arg(prefix).arg(m_unit);
+  const double scaled = value / selected->factor;
+
+  if (unit)
+    *unit = QString("%1%2").arg(selected->prefix).arg(m_unit);
+
+  return QString::number(scaled, 'g', 12);
+}
+
+double DMMGraph::unitScaleFactor(const QString &unit) const
+{
+  if (unit == m_unit)
+    return 1.0;
+
+  if (unit.endsWith(m_unit))
+  {
+    const QString prefix = unit.left(unit.size() - m_unit.size());
+
+    if (prefix == "G") return 1e9;
+    if (prefix == "M") return 1e6;
+    if (prefix == "k") return 1e3;
+    if (prefix == "m") return 1e-3;
+    if (prefix == "u") return 1e-6;
+    if (prefix == "n") return 1e-9;
+    if (prefix == "p") return 1e-12;
+  }
+
+  return 1.0;
 }
 
 bool DMMGraph::exportDataSLOT()
@@ -873,7 +892,11 @@ bool DMMGraph::exportCsvFile(const QString &fileName)
   m_cfg->setString("QtDMM/LastUsesPath", QDir().absoluteFilePath(fileName));
 
   QFile file(fileName);
-  file.open(QIODevice::WriteOnly);
+  if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+  {
+    Q_EMIT error(tr("Cannot open file."));
+    return false;
+  }
 
   QTextStream ts(&file);
   QString line = QString("timestamp;time (s);value;unit\n");
@@ -884,7 +907,13 @@ bool DMMGraph::exportCsvFile(const QString &fileName)
     QDateTime dt = m_graphStartDateTime.addMSecs(i * m_sampleTime * 100);
     //timestamp: ISO8601
     double deltaTime = (dt.toMSecsSinceEpoch()-m_graphStartDateTime.toMSecsSinceEpoch())/1000.0f;
-    line = QString("%1;%2;%3;%4\n").arg(dt.toString("yyyy-MM-ddTHH:mm:ss,zzz")).arg(deltaTime).arg((*m_array)[i], 0, 'f').arg(m_unit);
+    QString unit;
+    QString value = formatEngineeringValue((*m_array)[i], &unit);
+    line = QString("%1;%2;%3;%4\n")
+      .arg(dt.toString("yyyy-MM-ddTHH:mm:ss,zzz"))
+      .arg(deltaTime, 0, 'g', 12)
+      .arg(value)
+      .arg(unit);
     ts << line;
   }
   m_dirty = false;
@@ -1022,7 +1051,9 @@ bool DMMGraph::importCsvFile(const QString &fileName)
       }
 
       graphEnd = QDateTime(valueDate, valueTime);
-      values << (match.captured("value") == "nan" ? 0.0f : match.captured("value").toDouble());
+      values << (match.captured("value") == "nan"
+        ? 0.0f
+        : match.captured("value").toDouble() * unitScaleFactor(match.captured("unit")));
     }
 
     line = ts.readLine();

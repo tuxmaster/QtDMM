@@ -58,6 +58,7 @@ Q_SIGNALS:
 
 protected:
   void                  initDecoder( ReadEvent::DataFormat df);
+  QString               permissionHint() const;
   PortHandler          *m_portHandler;
   int                   m_speed;
   QSerialPort::Parity   m_parity;
