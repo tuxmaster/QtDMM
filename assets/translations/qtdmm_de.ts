@@ -65,7 +65,7 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
     <message>
         <location filename="../../src/dmm.cpp" line="161"/>
         <source>Error creating port %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim erzeugen von port %1.</translation>
     </message>
     <message>
         <location filename="../../src/dmm.cpp" line="213"/>
@@ -80,7 +80,7 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
     <message>
         <location filename="../../src/dmm.cpp" line="172"/>
         <source>Missing Permission</source>
-        <translation type="unfinished">Berechtigung fehlt</translation>
+        <translation>Berechtigung fehlt</translation>
     </message>
     <message>
         <location filename="../../src/dmm.cpp" line="178"/>
@@ -231,7 +231,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/dmmgraph.cpp" line="998"/>
         <source>File contains only header</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei enthält nur den Header</translation>
     </message>
     <message>
         <source>All files (*.*)</source>
@@ -265,13 +265,13 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/dmmgraph.cpp" line="960"/>
         <source>CSV (*.csv);;All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>CSV (*.csv);;Alle Dateien (*)</translation>
     </message>
     <message>
         <location filename="../../src/dmmgraph.cpp" line="897"/>
         <location filename="../../src/dmmgraph.cpp" line="978"/>
         <source>Cannot open file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei kann nicht geöffnet werden.</translation>
     </message>
     <message>
         <location filename="../../src/dmmgraph.cpp" line="987"/>
@@ -407,17 +407,17 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/instancesdlg.cpp" line="98"/>
         <source>QtDMM - new instance</source>
-        <translation type="unfinished"></translation>
+        <translation>QtDMM - neue Instanz</translation>
     </message>
     <message>
         <location filename="../../src/instancesdlg.cpp" line="98"/>
         <source>Instance name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Instanz Name:</translation>
     </message>
     <message>
         <location filename="../../src/instancesdlg.cpp" line="104"/>
         <source>Instance already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instanz existiert bereits.</translation>
     </message>
 </context>
 <context>
@@ -525,23 +525,25 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/mainwin.cpp" line="203"/>
         <source>Record DMM data</source>
-        <translation type="unfinished"></translation>
+        <translation>DMM Daten aufnehmen</translation>
     </message>
     <message>
         <location filename="../../src/mainwin.cpp" line="204"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Wählen Sie aus, welche Instanz aufnehmen soll.</translatorcomment>
+        <translation>Mehrere Instanzen von QtDMM wurden gefunden.
+Please choose which instance should record.</translation>
     </message>
     <message>
         <location filename="../../src/mainwin.cpp" line="207"/>
         <source>This instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Instanz</translation>
     </message>
     <message>
         <location filename="../../src/mainwin.cpp" line="208"/>
         <source>All instances</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Instanzen</translation>
     </message>
     <message>
         <location filename="../../src/mainwin.cpp" line="256"/>
@@ -556,7 +558,7 @@ Please choose which instance should record.</source>
     <message>
         <location filename="../../src/mainwin.cpp" line="127"/>
         <source>Another instance is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Andere Instanz läuft noch</translation>
     </message>
 </context>
 <context>
@@ -600,7 +602,7 @@ Please choose which instance should record.</source>
     <message>
         <location filename="../../src/main.cpp" line="85"/>
         <source>sets &lt;config-id&gt;</source>
-        <translation type="unfinished">setzt die &lt;config-id&gt;</translation>
+        <translation>setzt die &lt;config-id&gt;</translation>
     </message>
     <message>
         <source>Missing Permission</source>
@@ -623,14 +625,16 @@ Danach müssen Sie sich ab- und wieder anmelden.</translation>
     <message>
         <location filename="../../src/dmm.cpp" line="71"/>
         <source>No permission to access %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Berechtigung um auf %1 zuzugreifen.</translation>
     </message>
     <message>
         <location filename="../../src/dmm.cpp" line="75"/>
         <source>
 
 On this system the device is typically accessible via group &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Auf diesem System ist das Gerät in der Regel über die Gruppe &apos;%1&apos; zugreifbar.</translation>
     </message>
     <message>
         <location filename="../../src/dmm.cpp" line="77"/>
@@ -638,14 +642,19 @@ On this system the device is typically accessible via group &apos;%1&apos;.</sou
 Add your user with:
 
 sudo usermod -aG %1 $USER</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Gruppe dem Benutzer hinzufügen:
+
+sudo usermod -aG %1 $USER</translation>
     </message>
     <message>
         <location filename="../../src/dmm.cpp" line="79"/>
         <source>
 
 Then log out and back in so the new group membership becomes active.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörigkeit wirksam wird.</translation>
     </message>
 </context>
 <context>
@@ -735,7 +744,7 @@ Then log out and back in so the new group membership becomes active.</source>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="41"/>
         <source>Select your DMM&apos;s vendor to narrow the model list below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie den Hersteller Ihres DMM, um die Modellliste einzugrenzen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="51"/>
@@ -1396,32 +1405,32 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="14"/>
         <source>Instance Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Instanz Verwaltung</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="28"/>
         <source>Choose instance to open, or add/remove instances</source>
-        <translation type="unfinished"></translation>
+        <translation>Instanz Öffnen oder Instanzen hinzufügen/entfernen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="55"/>
         <source>add new instance</source>
-        <translation type="unfinished"></translation>
+        <translation>Instanz hinzufügen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="58"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="69"/>
         <source>remove instances</source>
-        <translation type="unfinished"></translation>
+        <translation>Instanz löschen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="72"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1642,42 +1651,42 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="160"/>
         <source>Export graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Graph exportieren</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="181"/>
         <source>Import graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Graph importieren</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="202"/>
         <source>Print graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Graph drucken</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="262"/>
         <source>Connect/Disconnect DMM</source>
-        <translation type="unfinished"></translation>
+        <translation>DMM verbinden/trennen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="283"/>
         <source>reset min/max</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset min/max</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="321"/>
         <source>Start recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufnahme starten</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="345"/>
         <source>Stop recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufnahme stoppen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="366"/>
         <source>Clear graph</source>
-        <translation type="unfinished">Graphen löschen</translation>
+        <translation>Graphen löschen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="415"/>
@@ -1687,22 +1696,22 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="457"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="466"/>
         <source>Instances</source>
-        <translation type="unfinished"></translation>
+        <translation>Instanzen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="469"/>
         <source>Instance Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Instanzen Verwaltung</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="472"/>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+N</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="133"/>
