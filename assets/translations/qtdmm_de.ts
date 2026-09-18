@@ -320,13 +320,18 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="465"/>
+        <location filename="../../src/dmmprefs.cpp" line="65"/>
+        <source>All vendors</source>
+        <translation>Alle Hersteller</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="486"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="465"/>
-        <location filename="../../src/dmmprefs.cpp" line="491"/>
+        <location filename="../../src/dmmprefs.cpp" line="486"/>
+        <location filename="../../src/dmmprefs.cpp" line="512"/>
         <source>DMM description (*.cfg)</source>
         <translation>DMM Beschreibung (*.cfg)</translation>
     </message>
@@ -335,7 +340,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">DMM Beschreibung (*.ini)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="491"/>
+        <location filename="../../src/dmmprefs.cpp" line="512"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
