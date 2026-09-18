@@ -106,5 +106,8 @@
     </qresource>
     <qresource prefix="/Translations">
         <file alias="de">../build/qtdmm_de.qm</file>
+        <file alias="es">../build/qtdmm_es.qm</file>
+        <file alias="fr">../build/qtdmm_fr.qm</file>
+        <file alias="pl">../build/qtdmm_pl.qm</file>
     </qresource>
 </RCC>
