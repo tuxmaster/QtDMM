@@ -63,59 +63,64 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="109"/>
+        <location filename="../../src/dmm.cpp" line="104"/>
+        <source>Error creating port %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="114"/>
         <source>Access denied for %1.</source>
         <translation>Zugriff auf %1 verweigert.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="112"/>
+        <location filename="../../src/dmm.cpp" line="117"/>
         <source>No such device %1.</source>
         <translation>%1 existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="115"/>
+        <location filename="../../src/dmm.cpp" line="120"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Fehler beim Öffnen von %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="127"/>
+        <location filename="../../src/dmm.cpp" line="132"/>
         <source>Error configuring serial port %1.</source>
         <translation>Fehler beim Konfigurieren des Anschlusses %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="133"/>
+        <location filename="../../src/dmm.cpp" line="138"/>
         <source>Connecting ...</source>
         <translation>Verbinde ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="148"/>
-        <location filename="../../src/dmm.cpp" line="202"/>
+        <location filename="../../src/dmm.cpp" line="153"/>
+        <location filename="../../src/dmm.cpp" line="207"/>
         <source>Not connected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="193"/>
+        <location filename="../../src/dmm.cpp" line="198"/>
         <source>Error %1</source>
         <translation>Fehler %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="198"/>
+        <location filename="../../src/dmm.cpp" line="203"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation>Lesefehler auf %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="200"/>
+        <location filename="../../src/dmm.cpp" line="205"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Wartezeit abgelaufr für %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="190"/>
+        <location filename="../../src/dmm.cpp" line="195"/>
         <source>Connected %1</source>
         <translation>Verbunden %1</translation>
     </message>
@@ -234,7 +239,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Daten exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1263"/>
+        <location filename="../../src/dmmgraph.cpp" line="1268"/>
         <source>File contains only header</source>
         <translation type="unfinished"></translation>
     </message>
@@ -243,43 +248,43 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1195"/>
+        <location filename="../../src/dmmgraph.cpp" line="1202"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1196"/>
+        <location filename="../../src/dmmgraph.cpp" line="1203"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Beim Importieren werden alle bisherigen Messwerte gelöscht.&lt;p&gt;Möchten Sie zu ersten die bisherigen Daten exportieren?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1208"/>
+        <location filename="../../src/dmmgraph.cpp" line="1215"/>
         <source>Export data first</source>
         <translation>Daten zu erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1212"/>
+        <location filename="../../src/dmmgraph.cpp" line="1219"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importieren und Daten löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1224"/>
+        <location filename="../../src/dmmgraph.cpp" line="1230"/>
         <source>Import data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1224"/>
+        <location filename="../../src/dmmgraph.cpp" line="1230"/>
         <source>CSV (*.csv);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1238"/>
+        <location filename="../../src/dmmgraph.cpp" line="1248"/>
         <source>Cannot open file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1252"/>
-        <location filename="../../src/dmmgraph.cpp" line="1294"/>
+        <location filename="../../src/dmmgraph.cpp" line="1257"/>
+        <location filename="../../src/dmmgraph.cpp" line="1299"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Diese Datei scheint nicht gültig zu sein</translation>
     </message>
@@ -404,17 +409,17 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>InstancesDlg</name>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="97"/>
+        <location filename="../../src/instancesdlg.cpp" line="98"/>
         <source>QtDMM - new instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="97"/>
+        <location filename="../../src/instancesdlg.cpp" line="98"/>
         <source>Instance name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="103"/>
+        <location filename="../../src/instancesdlg.cpp" line="104"/>
         <source>Instance already exists.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -587,17 +592,17 @@ Please choose which instance should record.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/main.cpp" line="125"/>
+        <location filename="../../src/main.cpp" line="126"/>
         <source>protocol debugging information</source>
         <translation>Protokol debugging Informationen</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="126"/>
+        <location filename="../../src/main.cpp" line="127"/>
         <source>sets directory where config files are located</source>
         <translation>setzt das Verzeichnis wo die Konfiguration sich befindet</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="127"/>
+        <location filename="../../src/main.cpp" line="128"/>
         <source>sets &lt;config-id&gt;</source>
         <translation type="unfinished">setzt die &lt;config-id&gt;</translation>
     </message>

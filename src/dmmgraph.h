@@ -129,6 +129,11 @@ public Q_SLOTS:
   void             importDataSLOT();
   void             connectSLOT(bool on) { m_connected = on; }
 
+  // File-path-driven, non-interactive halves of export/importDataSLOT (no QFileDialog),
+  // split out so the CSV parsing/writing logic can be exercised from tests.
+  bool             exportCsvFile(const QString &fileName);
+  bool             importCsvFile(const QString &fileName);
+
 protected Q_SLOTS:
   void             popupSLOT(QAction *action);
 

@@ -99,8 +99,8 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &da
   // try to find some special modes
   if (in[9] & 0x01)
     special = "DI";
-
-  special = (in[0] & 0x08) ? "AC" : "DC";
+  else
+    special = (in[0] & 0x08) ? "AC" : "DC";
 
   // try to find mode
   if (in[11] & 0x08)

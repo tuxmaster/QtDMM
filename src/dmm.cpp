@@ -99,7 +99,12 @@ void DMM::initDecoder( ReadEvent::DataFormat df)
 
 bool DMM::open()
 {
-  m_portHandler->create(m_dmmInfo, m_portType, m_device);
+  if (!m_portHandler->create(m_dmmInfo, m_portType, m_device))
+  {
+    m_error = tr("Error creating port %1.").arg(m_device);
+    Q_EMIT error(m_error);
+    return false;
+  }
 
   if (m_portHandler->port() && !m_portHandler->port()->open(QIODevice::ReadWrite))
   {

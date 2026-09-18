@@ -107,11 +107,6 @@ std::optional<DmmDecoder::DmmResponse> DecoderDTM0660::decode(const QByteArray &
     m_result.unit    = "F";
     m_result.special = "TE";
   }
-  else if (data[13] & 0x01)
-  {
-    m_result.unit    = "C";
-    m_result.special = "TE";
-  }
   else
   {
     qWarning() << "Unknown DTM0660 unit!";

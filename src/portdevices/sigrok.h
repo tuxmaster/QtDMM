@@ -31,11 +31,14 @@ private:
   qint64 readData(char *data, qint64 maxSize) override;
   qint64 writeData(const char *data, qint64 len) override;
 
+  static constexpr int m_fixedLineLength = 30;
+
   DmmDecoder::DMMInfo m_dmmInfo;
   bool m_isOpen = false;
   QString m_type, m_device;
   QProcess *m_process;
   QByteArray m_buffer;
+  QByteArray m_outLine;
   QString m_sigrok;
 };
 

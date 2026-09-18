@@ -9,6 +9,7 @@ InstancesDlg::InstancesDlg(Settings *settings, QString instance_id, QString conf
   , m_instanceId(instance_id.isEmpty() ? "default" : instance_id)
   , m_configPath(config_path)
   , m_settings(settings)
+  , m_onDelete(false)
 {
   setupUi(this);
   ui_instancesList->setStyleSheet("background-color: palette(window);");

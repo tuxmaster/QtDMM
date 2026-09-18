@@ -34,22 +34,30 @@ QJsonObject SharedStateManager::initialJson()
 }
 
 
-QJsonObject SharedStateManager::readJsonData()
+// Allocated generously up front: QSharedMemory cannot be grown while another
+// process is still attached (create() fails with AlreadyExists), so growing
+// on demand is unsafe with multiple running instances. A few hundred instance
+// ids plus the state string comfortably fit well within this size.
+static constexpr int kSharedMemorySize = 65536;
+
+bool SharedStateManager::ensureAttached()
 {
-  if (!m_memory.isAttached() && !m_memory.attach())
-    return initialJson();
+  if (m_memory.isAttached())
+    return true;
+  if (m_memory.attach())
+    return true;
+  return m_memory.create(kSharedMemorySize);
+}
 
-  m_memory.lock();
-
+QJsonObject SharedStateManager::readJsonDataLocked()
+{
   QByteArray rawData(static_cast<const char*>(m_memory.constData()), m_memory.size());
   int end = rawData.indexOf('\0');
   if (end != -1)
     rawData.truncate(end);
 
-  m_memory.unlock();
   QJsonParseError parseError;
   QJsonDocument doc = QJsonDocument::fromJson(rawData, &parseError);
-  //qInfo() << QJsonDocument(doc).toJson(QJsonDocument::Compact);
 
   if (parseError.error != QJsonParseError::NoError || !doc.isObject())
   {
@@ -60,39 +68,58 @@ QJsonObject SharedStateManager::readJsonData()
   return doc.object();
 }
 
-bool SharedStateManager::writeJsonData(const QJsonObject &obj)
+QJsonObject SharedStateManager::readJsonData()
 {
-  if (!m_memory.isAttached() && !m_memory.attach())
-  {
-    if (!m_memory.create(8192))
-      return false;
-  }
+  if (!ensureAttached())
+    return initialJson();
+
+  m_memory.lock();
+  QJsonObject obj = readJsonDataLocked();
+  m_memory.unlock();
+
+  return obj;
+}
+
+bool SharedStateManager::writeJsonDataLocked(const QJsonObject &obj)
+{
   QJsonDocument doc(obj);
   QByteArray jsonData = doc.toJson(QJsonDocument::Compact);
 
   if (jsonData.size() > m_memory.size())
   {
-    m_memory.detach();
-    if (!m_memory.create(jsonData.size() + 1024))
-      return false;
+    qWarning() << "shared state too large (" << jsonData.size() << "bytes) for the"
+               << m_memory.size() << "byte shared memory segment, dropping update";
+    return false;
   }
 
-  m_memory.lock();
   char *to = static_cast<char*>(m_memory.data());
-  const char* from = jsonData.constData();
   memset(to, 0, m_memory.size());
-  memcpy(to, from, jsonData.size());
-
-  m_memory.unlock();
+  memcpy(to, jsonData.constData(), jsonData.size());
 
   return true;
 }
 
+bool SharedStateManager::modifyJsonData(const std::function<bool(QJsonObject &)> &mutator)
+{
+  if (!ensureAttached())
+    return false;
+
+  m_memory.lock();
+  QJsonObject data = readJsonDataLocked();
+  bool shouldWrite = mutator(data);
+  bool ok = shouldWrite && writeJsonDataLocked(data);
+  m_memory.unlock();
+
+  return ok;
+}
+
 bool SharedStateManager::registerInstance()
 {
-  if (!m_registered)
+  if (m_registered)
+    return true;
+
+  m_registered = modifyJsonData([this](QJsonObject &data)
   {
-    QJsonObject data = readJsonData();
     QJsonArray instances = data["instances"].toArray();
 
     for (const QJsonValue &val : instances)
@@ -107,11 +134,11 @@ bool SharedStateManager::registerInstance()
 
     instances.append(m_instanceId);
     data["instances"] = instances;
+    return true;
+  });
 
-    m_registered = writeJsonData(data);
-    if (!m_registered)
-      qInfo() << "reg failed";
-  }
+  if (!m_registered)
+    qInfo() << "reg failed";
 
   return m_registered;
 }
@@ -143,22 +170,28 @@ void SharedStateManager::checkForChanges()
     }
   }
   if (m_emit_inUse)
+  {
+    m_emit_inUse = false;
     Q_EMIT instanceIdAlreadyInUse();
-
+  }
 }
 
 bool SharedStateManager::writeState(const QString &newState)
 {
-  QJsonObject data = readJsonData();
-  data["state"] = newState;
-  return writeJsonData(data);
+  return modifyJsonData([&newState](QJsonObject &data)
+  {
+    data["state"] = newState;
+    return true;
+  });
 }
 
 void SharedStateManager::unregisterInstance()
 {
-  if (m_registered)
+  if (!m_registered)
+    return;
+
+  modifyJsonData([this](QJsonObject &data)
   {
-    QJsonObject data = readJsonData();
     QJsonArray instances = data["instances"].toArray();
 
     QJsonArray updated;
@@ -169,7 +202,7 @@ void SharedStateManager::unregisterInstance()
     }
 
     data["instances"] = updated;
-    writeJsonData(data);
-  }
+    return true;
+  });
 }
 

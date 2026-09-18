@@ -78,10 +78,11 @@ void qtdmmMessageOutput(QtMsgType type, const QMessageLogContext &, const QStrin
 #endif
       break;
     case QtWarningMsg:
+#ifdef QT_DEBUG
       if (msg.contains("Absolute index"))
         abort();
-      else
-        qWarning() << "Warning: " << msg;
+#endif
+      qWarning() << "Warning: " << msg;
       break;
     case QtFatalMsg:
       qFatal("Fatal: %s", msg.toUtf8().constData());
