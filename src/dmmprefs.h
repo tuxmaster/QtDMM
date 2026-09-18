@@ -71,5 +71,6 @@ protected:
 
   void setupComboBoxModel();
   void populateModelsForVendor(const QString &vendor);
+  void populateAllModels();
   void enterManualMode();
 };

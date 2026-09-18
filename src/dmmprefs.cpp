@@ -62,6 +62,7 @@ void DmmPrefs::setupComboBoxModel()
 {
   ui_vendor->clear();
   ui_vendor->insertItem(-1, tr("Manual settings"));
+  ui_vendor->addItem(tr("All vendors"));
 
   std::vector<DmmDecoder::DMMInfo> configs = DmmDecoder::getDeviceConfigurations();
 
@@ -149,6 +150,17 @@ void DmmPrefs::populateModelsForVendor(const QString &vendor)
     ui_model->addItem(cfg.name);
 }
 
+void DmmPrefs::populateAllModels()
+{
+  ui_model->clear();
+
+  // dmm_info is already sorted by name (vendor+model) in setupComboBoxModel().
+  m_currentVendorModels = dmm_info;
+
+  for (const auto& cfg : m_currentVendorModels)
+    ui_model->addItem(cfg.name);
+}
+
 void DmmPrefs::on_ui_vendor_activated(int id)
 {
   if (id == 0)
@@ -156,6 +168,15 @@ void DmmPrefs::on_ui_vendor_activated(int id)
     ui_model->clear();
     m_currentVendorModels.clear();
     enterManualMode();
+  }
+  else if (id == 1)
+  {
+    populateAllModels();
+    if (!m_currentVendorModels.empty())
+    {
+      ui_model->setCurrentIndex(0);
+      on_ui_model_activated(0);
+    }
   }
   else
   {
