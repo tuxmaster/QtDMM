@@ -125,6 +125,26 @@ int main(int argc, char **argv)
     }
   }
 
+  // --- 5. smoke test for addValue()'s live-recording ring buffer against the
+  //         Qt Charts series sync (rebuildSeries()/append()): must survive a
+  //         buffer wrap without crashing, and setGraphSize() must be callable
+  //         again afterwards while data already exists. ---
+  {
+    DMMGraph graph(nullptr, &settings);
+    graph.setSampleTime(1);
+    graph.setGraphSize(5, 5); // small window -> wraps quickly
+    graph.setMode(DMMGraph::Manual);
+    graph.startSLOT();
+
+    for (int i = 0; i < 20; i++)
+      graph.addValue(i * 0.1);
+
+    check(graph.dirty(), "ring-buffer smoke test: expected graph to be marked dirty after recording");
+
+    graph.setGraphSize(10, 10);
+    graph.addValue(1.23);
+  }
+
   if (failed == 0)
     qInfo() << "All DMMGraph baseline tests passed.";
   else

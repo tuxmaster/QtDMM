@@ -9,7 +9,7 @@ set(PROJECT_LICENSE "GPL-3.0")
 set(RESOURCES "src/resources.qrc")
 set(APP_NAME "QtDMM")
 set(APP_ORGANIZATION "QtDMM")
-set(QT_COMPONENTS Widgets SerialPort PrintSupport Test LinguistTools Network)
+set(QT_COMPONENTS Widgets SerialPort PrintSupport Test LinguistTools Network Charts)
 
 include( cmake/git_version.cmake )
 
@@ -99,6 +99,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::SerialPort
 	Qt6::PrintSupport
 	Qt6::Network
+	Qt6::Charts
 	${HIDAPI_LIBRARIES}
 )
 

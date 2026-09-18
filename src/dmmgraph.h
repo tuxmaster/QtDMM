@@ -25,6 +25,12 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <QPrinter>
+#include <QChartView>
+#include <QChart>
+#include <QLineSeries>
+#include <QScatterSeries>
+#include <QValueAxis>
+#include <QGraphicsLineItem>
 
 class Settings;
 
@@ -89,7 +95,7 @@ public:
   void             setSampleTime(int v) { m_sampleTime = v; }
   void             setSampleLength(int v) { m_sampleLength = v; }
   void             setStartTime(const QTime &time) { m_startTime = time; }
-  void             setMode(DMMGraph::SampleMode mode) { m_mode = mode;  }
+  void             setMode(DMMGraph::SampleMode mode);
   void             print(QPrinter *prt, const QString &, const QString &);
   void             setThresholds(double falling, double raising);
   void             setScale(bool autoScale, bool includeZero, double min, double max);
@@ -147,14 +153,7 @@ protected:
   QVector<double> *m_array;	// mt: changed from QArray to QVector
   QVector<double> *m_arrayInt;	// mt: changed from QArray to QVector
   int              m_pointer;
-  double           m_yfactor;
-  double           m_xfactor;
-  double           m_ystep;
   QString          m_unit;
-  QString          m_hUnit;
-  double           m_xstep;
-  double           m_hUnitFact;
-  double           m_maxUnit;
   double           m_sampleTime;
   int              m_sampleLength;
   bool             m_running;
@@ -167,8 +166,9 @@ protected:
   double           m_sum;
   bool             m_first;
   QPoint           m_mpos;
-  QLabel          *m_infoBox;
   bool             m_mouseDown;
+  bool             m_mousePan;
+  CursorMode       m_cursorMode;
   double           m_raisingThreshold;
   double           m_fallingThreshold;
   double           m_lastVal;
@@ -194,46 +194,49 @@ protected:
   PointMode        m_intPointMode;
   LineMode         m_lineMode;
   LineMode         m_intLineMode;
-  QPolygon	       m_drawArray;
   double           m_integrationScale;
   double           m_integrationThreshold;
   double           m_integrationOffset;
   bool             m_showIntegration;
   double           m_factor;
   QString          m_prefix;
-  QRect            m_graphRect;
-  int              m_fontHeight;
-  int              m_triggerThresholdY;
-  int              m_integrationThresholdY;
-  int              m_externalThresholdY;
-  CursorMode       m_cursorMode;
   bool             m_includeZero;
   QMenu           *m_popup;
-  bool             m_mousePan;
 
-  void             paintEvent(QPaintEvent *)Q_DECL_OVERRIDE;
+  // Qt Charts based rendering (core curve + axes, plus the integration curve
+  // and the cursor/threshold overlays reintroduced as QGraphicsLineItems on
+  // top of the chart scene).
+  QChartView      *m_chartView;
+  QChart          *m_chart;
+  QLineSeries     *m_dataSeries;
+  QScatterSeries  *m_dataPoints;
+  QLineSeries     *m_intSeries;
+  QScatterSeries  *m_intPoints;
+  QValueAxis      *m_xAxis;
+  QValueAxis      *m_yAxis;
+  QGraphicsLineItem *m_crosshairVLine;
+  QGraphicsLineItem *m_crosshairHLine;
+  QGraphicsLineItem *m_triggerLine;
+  QGraphicsLineItem *m_externalLine;
+  QGraphicsLineItem *m_integrationLine;
+
   void             resizeEvent(QResizeEvent *)Q_DECL_OVERRIDE;
-  void             mousePressEvent(QMouseEvent *)Q_DECL_OVERRIDE;
-  void             mouseMoveEvent(QMouseEvent *)Q_DECL_OVERRIDE;
-  void             mouseReleaseEvent(QMouseEvent *)Q_DECL_OVERRIDE;
-  void             wheelEvent(QWheelEvent *)Q_DECL_OVERRIDE;
-  void             timerEvent(QTimerEvent *)Q_DECL_OVERRIDE;
+  bool             eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;
 
-  double           createYScale(int h, double &ystep);
-  double           createTimeScale(int w, double &xstep, double &hUnitFact, double &maxUnit, QString &hUnit);
+  void             handleChartMousePress(QMouseEvent *);
+  void             handleChartMouseMove(QMouseEvent *);
+  void             handleChartMouseRelease(QMouseEvent *);
+  void             handleChartWheel(QWheelEvent *);
+
   void             emitInfo();
-  void             paint(QPainter *p, int w, int h, double xfactor, double xstep, double yfactor, double ystep,
-                         double maxUnit, double hUnitFact, const QString &hUnit, bool color, bool printer);
-  void             paintHorizontalGrid(QPainter *p, double yfactor, double ystep, bool color);
-  void             paintVerticalGrid(QPainter *p, double xfactor, double xstep, double maxUnit,
-                                     double hUnitFact, const QString &hUnit, bool color);
-  void             paintData(QPainter *p, double xfactor, double yfactor, bool color, bool printer);
-  void             paintThresholds(QPainter *p, double xfactor, double yfactor, bool color, bool printer);
-  void             drawCursor(const QPoint &);
-  void             fillInfoBox(const QPoint &);
-  void             drawPoint(PointMode, QPainter *, int, int);
   void             computeUnitFactor();
   bool             computeMinMax(double);
+  void             rebuildSeries();
+  void             updateXAxisRange();
+  void             updateSeriesAppearance();
+  void             updateThresholdLinesVisibility();
+  void             updateThresholdLinePositions();
+  QString          formatEngineeringValue(double) const;
 
 private:
   Qt::PenStyle     penStyle(LineMode);
