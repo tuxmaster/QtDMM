@@ -6,6 +6,43 @@
 #include <QJsonArray>
 #include <QDebug>
 #include <QStringDecoder>
+#include <QCoreApplication>
+
+#ifdef Q_OS_UNIX
+#include <csignal>
+#include <sys/types.h>
+#endif
+
+namespace
+{
+// True if a process with this pid still exists. Used to tell a genuinely
+// still-running instance apart from a stale registration left behind by one
+// that crashed/was killed without reaching its destructor (unregisterInstance()
+// never ran, so its "instances" entry survives in shared memory indefinitely -
+// System V shared memory on Linux is not cleaned up just because every
+// attached process has died).
+bool isProcessAlive(qint64 pid)
+{
+#ifdef Q_OS_UNIX
+  if (pid <= 0)
+    return false;
+  // Signal 0: no signal is sent, only existence/permission is checked.
+  return ::kill(static_cast<pid_t>(pid), 0) == 0 || errno != ESRCH;
+#else
+  Q_UNUSED(pid);
+  return true; // no cheap liveness check available; assume alive (old behavior)
+#endif
+}
+
+// Instance entries are {"id": ..., "pid": ...} objects; also accepts the old
+// plain-string format (no pid available then) for backward compatibility.
+QString instanceId(const QJsonValue &val)
+{
+  if (val.isObject())
+    return val.toObject()["id"].toString();
+  return val.toString();
+}
+}
 
 SharedStateManager::SharedStateManager(const QString &instanceId, QObject *parent)
   : QObject(parent),
@@ -121,19 +158,42 @@ bool SharedStateManager::registerInstance()
   m_registered = modifyJsonData([this](QJsonObject &data)
   {
     QJsonArray instances = data["instances"].toArray();
+    QJsonArray kept;
+    bool conflict = false;
 
     for (const QJsonValue &val : instances)
     {
-      if (val.toString() == m_instanceId)
+      QJsonObject entry = val.toObject();
+      // Backward compatible with the old plain-string format (no pid to check
+      // liveness of) - keep it as-is, err on the side of treating it as a
+      // real, live conflict rather than silently dropping unknown data.
+      QString id = entry.isEmpty() ? val.toString() : entry["id"].toString();
+      qint64 pid = entry.isEmpty() ? -1 : static_cast<qint64>(entry["pid"].toDouble());
+
+      if (id == m_instanceId)
       {
+        if (pid > 0 && !isProcessAlive(pid))
+        {
+          qInfo() << m_instanceId << "had a stale registration (pid" << pid << "no longer running), replacing it";
+          continue; // drop the stale entry instead of keeping it
+        }
+
         qWarning() << m_instanceId << "id exists";
         m_emit_inUse = true;
-        return false;
+        conflict = true;
       }
+
+      kept.append(val);
     }
 
-    instances.append(m_instanceId);
-    data["instances"] = instances;
+    if (conflict)
+      return false;
+
+    QJsonObject self;
+    self["id"] = m_instanceId;
+    self["pid"] = QCoreApplication::applicationPid();
+    kept.append(self);
+    data["instances"] = kept;
     return true;
   });
 
@@ -151,8 +211,8 @@ void SharedStateManager::checkForChanges()
 
     QString currentState = data["state"].toString();
     QStringList instances;
-    for (const QVariant &v : data["instances"].toArray().toVariantList())
-      instances << v.toString();
+    for (const QJsonValue &v : data["instances"].toArray())
+      instances << instanceId(v);
 
     if (instances.count() != m_instances.count())
     {
@@ -197,7 +257,7 @@ void SharedStateManager::unregisterInstance()
     QJsonArray updated;
     for (const QJsonValue &val : instances)
     {
-      if (val.toString() != m_instanceId)
+      if (instanceId(val) != m_instanceId)
         updated.append(val);
     }
 
