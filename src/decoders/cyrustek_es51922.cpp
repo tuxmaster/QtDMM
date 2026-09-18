@@ -2,7 +2,7 @@
 
 static const bool registered = []() {
   DmmDecoder::addConfig(  {"Uni-Trend","UT61E","", 19200, ReadEvent::CyrustekES51922, 7, 1, 1, 2, 22000, 0, 0, 1});
-  DmmDecoder::addConfig(  {" Wintex","TD2200","", 19200, ReadEvent::CyrustekES51922, 7, 1, 1, 0, 22000, 0, 0, 1});
+  DmmDecoder::addConfig(  {"Wintex","TD2200","", 19200, ReadEvent::CyrustekES51922, 7, 1, 1, 0, 22000, 0, 0, 1});
   return true;
 }();
 

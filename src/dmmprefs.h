@@ -23,6 +23,7 @@
 #pragma once
 
 #include <QtSerialPort>
+#include <vector>
 
 #include "ui_uidmmprefs.h"
 #include "readevent.h"
@@ -56,6 +57,7 @@ public Q_SLOTS:
   virtual void   applySLOT() Q_DECL_OVERRIDE;
 
 protected Q_SLOTS:
+  void           on_ui_vendor_activated(int);
   void           on_ui_model_activated(int);
   void           on_ui_load_clicked();
   void           on_ui_save_clicked();
@@ -65,6 +67,10 @@ protected:
   QString        m_path;
   DmmDecoder::DMMInfo m_dmmInfo;
   QStringListModel *m_portlist;
+  std::vector<DmmDecoder::DMMInfo> m_currentVendorModels;
 
   void setupComboBoxModel();
+  void populateModelsForVendor(const QString &vendor);
+  void populateAllModels();
+  void enterManualMode();
 };
