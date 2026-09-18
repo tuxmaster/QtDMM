@@ -235,7 +235,7 @@ void MainWin::runningSLOT(bool on)
 {
   m_running = on;
 
-  action_Stop->setEnabled(!on);
+  action_Start->setEnabled(!on);
   action_Stop->setEnabled(on);
   action_Print->setEnabled(!on);
   action_Export->setEnabled(!on);

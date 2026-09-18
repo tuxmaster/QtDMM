@@ -39,34 +39,41 @@ bool SigrokDevice::init() {
 
 qint64 SigrokDevice::bytesAvailable() const
 {
-  return 0;
+  qint64 avail = m_outLine.size();
+  if (m_buffer.indexOf('\n') >= 0)
+    avail += m_fixedLineLength;
+  return avail;
 }
 
 
 qint64 SigrokDevice::readData(char *data, qint64 maxSize)
 {
-  // padds sigrok line to fixed length with spaces.
-  // this way it is much easier and faster to decode afterwards
-  constexpr int fixedLength = 30;
-  if (m_buffer.isEmpty())
-    return 0;
+  // pads sigrok line to fixed length with spaces.
+  // this way it is much easier and faster to decode afterwards.
+  // m_outLine holds the not-yet-delivered remainder of the current padded
+  // line, since callers (ReaderThread) may read as little as one byte at a time.
+  if (m_outLine.isEmpty())
+  {
+    int newlineIndex = m_buffer.indexOf('\n');
+    if (newlineIndex < 0)
+      return 0; // Not a complete line yet
 
-  int newlineIndex = m_buffer.indexOf('\n');
-  if (newlineIndex < 0)
-    return 0; // Not a complete line yet
+    QByteArray line = m_buffer.left(newlineIndex);
+    m_buffer.remove(0, newlineIndex + 1);
 
-  QByteArray line = m_buffer.left(newlineIndex);
-  m_buffer.remove(0, newlineIndex + 1);
+    line = line.trimmed();
+    if (line.length() >= m_fixedLineLength - 1)
+      line = line.left(m_fixedLineLength - 1);
+    else
+      line.prepend(QByteArray(m_fixedLineLength - 1 - line.length(), ' '));
+    line.append('\n');
 
-  line = line.trimmed();
-  if (line.length() >= fixedLength - 1)
-    line = line.left(fixedLength - 1);
-  else
-    line.prepend(QByteArray(fixedLength - 1 - line.length(), ' '));
-  line.append('\n');
+    m_outLine = line;
+  }
 
-  qint64 len = qMin(maxSize, qint64(line.size()));
-  memcpy(data, line.constData(), len);
+  qint64 len = qMin(maxSize, qint64(m_outLine.size()));
+  memcpy(data, m_outLine.constData(), len);
+  m_outLine.remove(0, len);
 
 #ifdef SIGROK_DEBUG
   qInfo() << QString::fromUtf8(data, len);
@@ -96,6 +103,7 @@ void SigrokDevice::close()
     }
 
     m_buffer.clear();
+    m_outLine.clear();
     QIODevice::close();
   }
 }

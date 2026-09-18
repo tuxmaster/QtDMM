@@ -4,6 +4,7 @@
 #include <QSharedMemory>
 #include <QTimer>
 #include <QJsonObject>
+#include <functional>
 
 class SharedStateManager : public QObject
 {
@@ -29,8 +30,14 @@ public Q_SLOTS:
 
 private:
   QJsonObject readJsonData();
-  bool writeJsonData(const QJsonObject &obj);
   QJsonObject initialJson();
+  bool ensureAttached();
+  QJsonObject readJsonDataLocked();
+  bool writeJsonDataLocked(const QJsonObject &obj);
+  // Reads, lets mutator modify the data, and writes it back, all under a single
+  // held lock so the read-check-write sequence is atomic across instances.
+  // mutator returns false to veto the write (e.g. duplicate instance id found).
+  bool modifyJsonData(const std::function<bool(QJsonObject &)> &mutator);
 
   QSharedMemory m_memory;
   QTimer m_timer;

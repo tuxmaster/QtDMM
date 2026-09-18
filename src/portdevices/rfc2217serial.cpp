@@ -122,12 +122,9 @@ void RFC2217SerialDevice::sendRFC2217Negotiation()
   // 4 = SET-STOPSIZE
   sendPortOption(4, QByteArray(1, char(m_dmmInfo.stopBits)));
 
-  // 5 = SET-CONTROL + DTR/RTS
-  quint8 mask = 0;
-  mask |= m_dmmInfo.dtr ? 0x08 : 0x09;  // DTR ON/OFF
-  mask |= m_dmmInfo.rts ? 0x0b : 0x0c;  // RTS ON/OFF
-
-  sendPortOption(5, QByteArray(1, char(mask))); // none
+  // 5 = SET-CONTROL: DTR and RTS are separate SET-CONTROL suboptions, not a bitmask
+  sendPortOption(5, QByteArray(1, char(m_dmmInfo.dtr ? 0x08 : 0x09))); // DTR ON/OFF
+  sendPortOption(5, QByteArray(1, char(m_dmmInfo.rts ? 0x0b : 0x0c))); // RTS ON/OFF
 }
 
 // Sende IAC SB 0x2C <option> <data...> IAC SE

@@ -1,0 +1,38 @@
+{
+  "decoder": "CyrustekES51922",
+  "tests": [
+    {
+      "comment": "real capture from a Uni-Trend UT61E (ES51922 protocol, 19200 7E1), DC voltage mode, probes open/floating",
+      "hex": "30 30 30 30 30 31 3b 30 30 30 3a 30 0d 0a",
+      "expected": {
+        "dval": 0.0001,
+        "val": "0.0001",
+        "unit": "V",
+        "range": "AUTO",
+        "special": "DC"
+      }
+    },
+    {
+      "comment": "same UT61E capture, positive noise reading",
+      "hex": "30 30 30 31 31 37 3b 30 30 30 3a 30 0d 0a",
+      "expected": {
+        "dval": 0.0117,
+        "val": "0.0117",
+        "unit": "V",
+        "range": "AUTO",
+        "special": "DC"
+      }
+    },
+    {
+      "comment": "same UT61E capture, negative-sign bit set (byte 7 bit 2)",
+      "hex": "30 30 30 30 39 37 3b 34 30 30 3a 30 0d 0a",
+      "expected": {
+        "dval": -0.0097,
+        "val": "-0.0097",
+        "unit": "V",
+        "range": "AUTO",
+        "special": "DC"
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "decoder": "VC820Continuous",
+  "tests": [
+    {
+      "comment": "diode-test mode must be reported as DI, not overwritten by the AC/DC check (regression test for the special-flag overwrite bug)",
+      "hex": "10 20 30 47 5D 66 78 80 90 A1 B0 C0 D4 E0",
+      "expected": {
+        "special": "DI",
+        "unit": "V",
+        "val": "  0L"
+      }
+    },
+    {
+      "comment": "plain DC voltage, no diode bit set",
+      "hex": "10 20 30 47 5D 66 78 80 90 A0 B0 C0 D4 E0",
+      "expected": {
+        "special": "DC",
+        "unit": "V",
+        "val": "  0L"
+      }
+    },
+    {
+      "comment": "plain AC voltage, no diode bit set",
+      "hex": "18 20 30 47 5D 66 78 80 90 A0 B0 C0 D4 E0",
+      "expected": {
+        "special": "AC",
+        "unit": "V",
+        "val": "  0L"
+      }
+    }
+  ]
+}
