@@ -112,6 +112,12 @@ int main(int argc, char **argv)
     frame.resize(decoder->getPacketLength());
     auto result = decoder->decode(frame, 0);
 
+    if (!result)
+    {
+      fail(QString("[decode] '%1' produced no result").arg(hexString));
+      continue;
+    }
+
 
     auto check = [&](const QString & key, const auto & actual, const QJsonValue & expectedVal)
     {
