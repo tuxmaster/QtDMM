@@ -1,0 +1,4 @@
+# Test fixtures are compared byte for byte against generated output; keep
+# their line endings as committed even where git would convert to CRLF.
+tests/data/** -text
+docs/protocols/sources/** -text

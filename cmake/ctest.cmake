@@ -34,4 +34,10 @@ if (BUILD_TESTING)
 	if (Python3_Interpreter_FOUND)
 		add_test(NAME docs_generated COMMAND ${Python3_EXECUTABLE} "${CMAKE_SOURCE_DIR}/tests/generate_docs.py" --check)
 	endif()
+
+	## the tests report through qWarning()/qInfo(); on Windows Qt sends those
+	## to the debugger instead of stderr unless told otherwise, and ctest's
+	## --output-on-failure would show nothing
+	get_property(ALL_TESTS DIRECTORY PROPERTY TESTS)
+	set_tests_properties(${ALL_TESTS} PROPERTIES ENVIRONMENT "QT_FORCE_STDERR_LOGGING=1;QT_LOGGING_TO_CONSOLE=1")
 endif()
