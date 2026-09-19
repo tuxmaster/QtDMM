@@ -114,7 +114,10 @@ QJsonObject SharedStateManager::readJsonDataLocked()
 
   if (parseError.error != QJsonParseError::NoError || !doc.isObject())
   {
-    qInfo("parse error");
+    // a freshly created segment is all zeros - that is the normal first
+    // start, not worth a message
+    if (!rawData.trimmed().isEmpty())
+      qWarning() << "shared state: cannot parse" << parseError.errorString();
     return initialJson();
   }
 

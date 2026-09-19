@@ -13,6 +13,9 @@
 #endif
 
 #include "dmmdecoder.h"
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(lcHid)
 
 // hiddevice.h  (wrapp‑t hidapi oder libusb)
 class HIDSerialDevice : public QIODevice {
@@ -22,6 +25,14 @@ public:
  ~HIDSerialDevice();
 
   static bool availablePorts(QStringList &portlist);
+  // Fails when the hidapi handle could not be opened, so DMM reports an
+  // error instead of waiting for frames that never come.
+  bool open(OpenMode mode) override;
+  // The cable answers with (possibly empty) input reports once it is
+  // configured; with data it has seen UART bytes from the meter. A cable
+  // that answers but never carries data means the meter is not sending.
+  bool cableAnswers() const { return m_reportsSeen > 0; }
+  bool dataSeen() const { return m_dataSeen; }
   void close() override;
 
   // Must stay const: QIODevice::bytesAvailable() is const and virtual, so a
@@ -40,6 +51,8 @@ protected:
   DmmDecoder::DMMInfo m_dmmInfo;
   static const unsigned int m_buflen = 1024;
   volatile bool m_isOpen = false;
+  volatile int m_reportsSeen = 0;
+  volatile bool m_dataSeen = false;
   hid_device *m_handle = Q_NULLPTR;
   unsigned int m_buffer_r = 0;
   unsigned int m_buffer_w = 0;

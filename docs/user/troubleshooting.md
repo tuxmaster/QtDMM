@@ -19,7 +19,10 @@ On FreeBSD the ports are `/dev/cuaU0`, `/dev/cuau0` … and belong to group
 ## "Timeout on device" although the meter is on
 
 - Many meters only send data after their RS-232 or USB function is switched on
-  — look for a button labelled RS232, PC, USB or a serial symbol.
+  — look for a button labelled RS232, PC, USB or a serial symbol. With a
+  USB-HID cable QtDMM can tell the two apart and says *"The USB cable answers,
+  but the meter sends nothing"* when the cable is fine and only the meter's
+  output is off.
 - Some cables draw their power from the DTR or RTS line. Compare the DTR/RTS
   boxes on the DMM settings page with the device table in
   [Supported devices](supported-devices.md); with manual settings, try DTR on

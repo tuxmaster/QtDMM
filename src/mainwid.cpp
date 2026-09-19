@@ -72,6 +72,10 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
   connect(ui_graph, SIGNAL(error(const QString &)), this, SIGNAL(error(const QString &)));
   connect(ui_graph, SIGNAL(running(bool)), this, SLOT(runningSLOT(bool)));
   connect(m_configDlg, SIGNAL(accepted()), this, SLOT(applySLOT()));
+  // Apply: take the settings over while the dialog stays open. Through a
+  // lambda so sender() is not the dialog and applySLOT() does not reconnect
+  // the meter, which only happens when the dialog closes.
+  connect(m_configDlg, &ConfigDlg::applied, this, [this]() { applySLOT(); });
   connect(m_configDlg, SIGNAL(zoomed()), this, SLOT(zoomedSLOT()));
   connect(m_configDlg, SIGNAL(rejected()), this, SLOT(rejectSLOT()));
   connect(ui_graph, SIGNAL(sampleTime(int)), m_configDlg, SLOT(setSampleTimeSLOT(int)));

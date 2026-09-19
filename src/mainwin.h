@@ -64,6 +64,8 @@ protected:
   MeterWid   *m_meter;
   QDockWidget *m_meterDock;
   QDockWidget *m_displayDock;
+  QAction    *m_lockPanels;
+  void        setPanelsLocked(bool locked);
   bool        m_running;
   QLabel     *m_error;
   QLabel     *m_info;

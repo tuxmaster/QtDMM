@@ -18,6 +18,20 @@ Documentation for people working on QtDMM itself. Planned pages:
 
 None of these pages exist yet.
 
+## Translations
+
+The build compiles `assets/translations/qtdmm_*.ts` with lrelease only. After
+adding or changing `tr()` strings, refresh the sources explicitly:
+
+```
+cmake --build build --target update_translations
+```
+
+then fill in the new entries (Qt Linguist or a text editor) and commit the
+`.ts` files. lupdate is kept out of the normal build on purpose: it rewrites
+files in the source tree, and two targets running it in parallel corrupted
+them.
+
 ## Platforms
 
 Linux, macOS and FreeBSD are built and tested by the GitHub workflows with

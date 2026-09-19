@@ -1,11 +1,20 @@
 #include "hidserial.h"
 
+// Low-level trace of the HID cable, enabled by --debug
+Q_LOGGING_CATEGORY(lcHid, "qtdmm.hid", QtWarningMsg)
+
 HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device, QObject *p)
   : QIODevice(p)
   , m_dmmInfo(info)
 {
-  if (!device.isNull() && (m_handle = hid_open_path(device.toUtf8().data())))
+  if (device.isNull())
+    return;
+  m_handle = hid_open_path(device.toUtf8().data());
+  if (!m_handle)
+    qWarning() << "HID: cannot open" << device << QString::fromWCharArray(hid_error(nullptr));
+  else
   {
+    qCDebug(lcHid) << "opened" << device;
     m_isOpen = true;
     QThread* thread = new QThread;
     this->moveToThread(thread);
@@ -53,6 +62,13 @@ bool HIDSerialDevice::availablePorts(QStringList &portlist,unsigned short vendor
   return (dev_cnt > 0);
 }
 
+bool HIDSerialDevice::open(OpenMode mode)
+{
+  if (!m_isOpen)
+    return false;
+  return QIODevice::open(mode);
+}
+
 void HIDSerialDevice::close()
 {
   if (m_isOpen)
@@ -85,12 +101,17 @@ void HIDSerialDevice::run()
     m_buffer[2] = bps >> 8;
     m_buffer[3] = bps >> 16;
     m_buffer[4] = bps >> 24;
-    m_buffer[5] = 0x03; // 3 = enable?
+    // data bits as (bits - 5), per sigrok's CH9325 driver; the two bytes
+    // before it are unknown (parity/stop bits?) and left at zero there too
+    const int bits = (m_dmmInfo.bits >= 5 && m_dmmInfo.bits <= 8) ? m_dmmInfo.bits : 8;
+    m_buffer[5] = static_cast<unsigned char>(bits - 5);
     int res = hid_send_feature_report(m_handle, m_buffer, 6); // 6 bytes
+    qCDebug(lcHid) << "feature report" << QByteArray(reinterpret_cast<const char *>(m_buffer), 6).toHex(' ')
+                   << "baud" << bps << "->" << res;
 
     if (res < 0)
     {
-      qCritical() << "Unable to send a feature report.";
+      qCritical() << "HID: unable to send the feature report:" << QString::fromWCharArray(hid_error(m_handle));
       close();
     }
     else
@@ -107,13 +128,20 @@ void HIDSerialDevice::run()
         {
           res = hid_read(m_handle, buf, sizeof(buf));
           if (res < 0)
+          {
+            qWarning() << "HID: read failed:" << QString::fromWCharArray(hid_error(m_handle));
             close();
+          }
         }
 
         if (res > 0)
         {
+          qCDebug(lcHid) << "report" << QByteArray(reinterpret_cast<const char *>(buf), res).toHex(' ');
+          m_reportsSeen++;
           // format data
           int len = buf[0] & 0x07; // the first byte contains the length in the lower 3 bits ( 111 = 7 )
+          if (len > 0)
+            m_dataSeen = true;
           for (int i = 1; i <= len; i++)
           {
             m_buffer[m_buffer_w] = buf[i] & 0x7f; // bitwise and with 0111 1111, mask the upper bit which is always 1
