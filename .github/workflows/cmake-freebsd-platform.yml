@@ -1,0 +1,29 @@
+name: FreeBSD test build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    # GitHub has no FreeBSD runner; this boots a FreeBSD VM on the Ubuntu runner
+    # and runs the steps inside it. Compile and test only, no packaging.
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build and test in FreeBSD VM
+      uses: vmactions/freebsd-vm@v1
+      with:
+        release: "14.2"
+        usesh: true
+        prepare: |
+          pkg install -y cmake ninja pkgconf git python3 \
+            qt6-base qt6-serialport qt6-charts qt6-tools hidapi
+        run: |
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+          ctest --test-dir build --output-on-failure

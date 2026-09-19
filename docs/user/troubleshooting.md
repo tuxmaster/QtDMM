@@ -13,6 +13,9 @@ sudo usermod -aG dialout $USER
 (or `uucp`), then **log out and back in** — group membership is only read at
 login.
 
+On FreeBSD the ports are `/dev/cuaU0`, `/dev/cuau0` … and belong to group
+`dialer`: `sudo pw groupmod dialer -m $USER`, then log in again.
+
 ## "Timeout on device" although the meter is on
 
 - Many meters only send data after their RS-232 or USB function is switched on
@@ -32,6 +35,11 @@ the `/dev/hidraw*` device is usually only readable by root. A udev rule grants
 access to your user; check the cable's vendor:product id with `lsusb` and match
 it in the rule. QtDMM sets the cable's speed from the device table when it
 opens the port.
+
+On FreeBSD hidapi talks to the cable through libusb, so the entry shows a USB
+address instead of a device file, and your user needs access to the `ugen`
+node — a `devfs.rules` entry (`add path 'ugen*' mode 0660 group dialer`, same
+for `usb/*`) does that; `usbconfig` lists the attached devices.
 
 ## Windows
 

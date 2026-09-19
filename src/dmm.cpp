@@ -31,14 +31,17 @@
 #include <stdio.h>
 #include <iostream>
 
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
 namespace
 {
 // Distro-appropriate serial-group fallback, used only when the device file's
 // own group can't be determined. Arch/CachyOS use "uucp" instead of Debian's
-// "dialout" for serial port access.
+// "dialout" for serial port access; FreeBSD uses "dialer".
 QString distroSuggestedSerialGroup()
 {
+#ifdef Q_OS_FREEBSD
+  return QStringLiteral("dialer");
+#endif
   QFile file("/etc/os-release");
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     return QStringLiteral("dialout");
@@ -74,8 +77,13 @@ QString serialPermissionHintForDevice(const QString &device)
   {
     message += QObject::tr("\n\nOn this system the device is typically accessible via group '%1'.")
       .arg(suggestedGroup);
+#ifdef Q_OS_FREEBSD
+    message += QObject::tr("\nAdd your user with:\n\nsudo pw groupmod %1 -m $USER")
+      .arg(suggestedGroup);
+#else
     message += QObject::tr("\nAdd your user with:\n\nsudo usermod -aG %1 $USER")
       .arg(suggestedGroup);
+#endif
     message += QObject::tr("\n\nThen log out and back in so the new group membership becomes active.");
   }
 
@@ -205,7 +213,7 @@ bool DMM::open()
 
 QString DMM::permissionHint() const
 {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
   if (m_portType == PortHandler::PortType::Serial && !m_device.isEmpty())
     return serialPermissionHintForDevice(m_device);
 #endif

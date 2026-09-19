@@ -36,6 +36,26 @@ or
 - The compiled binary will be placed in the `./bin` directory:
     ./bin/qtdmm
 
+FreeBSD:
+--------
+- pkg install cmake ninja pkgconf qt6-base qt6-serialport qt6-charts qt6-tools hidapi
+  (python3 for the documentation check in ctest). CMake-generated Makefiles
+  need GNU make (gmake), so either install gmake or use -G Ninja as below.
+- Build, test and install:
+    cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+    cmake --build build
+    ctest --test-dir build
+    sudo cmake --install build             (prefix /usr/local)
+  compile.sh works as well when gmake is installed.
+- Serial ports are /dev/cuaU0, /dev/cuau0 ... and belong to group dialer:
+    sudo pw groupmod dialer -m $USER
+- USB-HID cables are opened through libusb; give your user access to the
+  ugen device node with a devfs.rules entry, e.g. in /etc/devfs.rules:
+    [localrules=10]
+    add path 'usb/*' mode 0660 group dialer
+    add path 'ugen*' mode 0660 group dialer
+  and devfs_system_ruleset="localrules" in /etc/rc.conf.
+
 Windows:
 --------
 - Visual Studio 2019 or newer (Qt 6 does not support MSVC 2017) and a Qt 6.5+

@@ -1,6 +1,9 @@
 #include "serial.h"
 #include <QSerialPortInfo>
 
+#ifdef Q_OS_LINUX
+// The kernel registers ttyS0..ttyS31 whether or not a UART exists; only the
+// ones with a sysfs node are real.
 static QStringList getExistingUartTtyS()
 {
   QStringList result;
@@ -19,10 +22,13 @@ static QStringList getExistingUartTtyS()
 
   return result;
 }
+#endif
 
 bool SerialDevice::availablePorts(QStringList &portlist)
 {
+#ifdef Q_OS_LINUX
   QStringList validTtyS = getExistingUartTtyS();
+#endif
   portlist.clear();
 
   for (const QSerialPortInfo &port : QSerialPortInfo::availablePorts()) {
