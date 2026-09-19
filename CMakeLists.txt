@@ -81,7 +81,11 @@ if(WIN32)
 	set(HIDAPI_WITH_TESTS OFF CACHE BOOL "" FORCE)
 	set(HIDAPI_BUILD_HIDTEST OFF CACHE BOOL "" FORCE)
 	set(BUILD_SHARED_LIBS OFF)
+	# hidapi 0.14 still declares cmake_minimum_required 3.1.3, which CMake >= 4
+	# refuses outright; this lets it configure under the 3.5 policy set.
+	set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 	FetchContent_MakeAvailable(hidapi)
+	unset(CMAKE_POLICY_VERSION_MINIMUM)
 	set(HIDAPI_TARGET hidapi::hidapi)
 else()
 	find_package(PkgConfig REQUIRED)
