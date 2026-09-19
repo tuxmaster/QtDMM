@@ -115,7 +115,7 @@ int main(int argc, char **argv)
     render(w, QSize(1000, 400)).save(QDir(dump).filePath("display_large_plain.png"));
     w.setFaceColor(QColor(0x20, 0x30, 0x40));
     render(w, size).save(QDir(dump).filePath("display_dark_face.png"));
-    w.setFaceColor(QColor(0xb6, 0xcf, 0xa4));
+    w.setFaceColor(QColor(0xda, 0xdc, 0x77));
     w.setDisplayMode(4000, true, true, 1);
     render(w, QSize(1400, 200)).save(QDir(dump).filePath("display_very_wide.png"));
     render(w, QSize(300, 400)).save(QDir(dump).filePath("display_very_tall.png"));

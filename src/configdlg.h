@@ -44,15 +44,17 @@ class ConfigDlg : public QDialog, private Ui::UIConfigDlg
 {
   Q_OBJECT
 public:
+  // The ids double as the page index in ui_stack, so this is also the
+  // order of the category list.
   enum PageType
   {
-    Recorder = 0,
-    Scale,
-    DMM,
-    Ports,
+    DMM = 0,
     GUI,
     Graph,
+    Scale,
     Integration,
+    Recorder,
+    Ports,
     External,
     NumItems,
   };

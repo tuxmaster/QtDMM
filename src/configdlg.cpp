@@ -103,34 +103,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
     }
   }
 
-  // CREATE PAGES (Top page last)
-
-  m_recorder = new RecorderPrefs(ui_stack);
-  m_recorder->setId(ConfigDlg::Recorder);
-  new ConfigItem(m_recorder->id(),
-                 m_recorder->pixmap(),
-                 m_recorder->label(),
-                 ui_list);
-  m_recorder->setCfg(m_settings);
-  ui_stack->insertWidget(m_recorder->id(), m_recorder);
-
-  m_scale = new ScalePrefs(ui_stack);
-  m_scale->setId(ConfigDlg::Scale);
-  new ConfigItem(m_scale->id(),
-                 m_scale->pixmap(),
-                 m_scale->label(),
-                 ui_list);
-  m_scale->setCfg(m_settings);
-  ui_stack->insertWidget(m_scale->id(), m_scale);
-
-  m_ports = new PortsPrefs(ui_stack);
-  m_ports->setId(ConfigDlg::Ports);
-  new ConfigItem(m_ports->id(),
-                 m_ports->pixmap(),
-                 m_ports->label(),
-                 ui_list);
-  m_ports->setCfg(m_settings);
-  ui_stack->insertWidget(m_ports->id(), m_ports);
+  // CREATE PAGES, in the order the list shows them
 
   m_dmm = new DmmPrefs(ui_stack);
   m_dmm->setId(ConfigDlg::DMM);
@@ -159,6 +132,15 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
   m_graph->setCfg(m_settings);
   ui_stack->insertWidget(m_graph->id(), m_graph);
 
+  m_scale = new ScalePrefs(ui_stack);
+  m_scale->setId(ConfigDlg::Scale);
+  new ConfigItem(m_scale->id(),
+                 m_scale->pixmap(),
+                 m_scale->label(),
+                 ui_list);
+  m_scale->setCfg(m_settings);
+  ui_stack->insertWidget(m_scale->id(), m_scale);
+
   m_integration = new IntegrationPrefs(ui_stack);
   m_integration->setId(ConfigDlg::Integration);
   new ConfigItem(m_integration->id(),
@@ -167,6 +149,24 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  ui_list);
   m_integration->setCfg(m_settings);
   ui_stack->insertWidget(m_integration->id(), m_integration);
+
+  m_recorder = new RecorderPrefs(ui_stack);
+  m_recorder->setId(ConfigDlg::Recorder);
+  new ConfigItem(m_recorder->id(),
+                 m_recorder->pixmap(),
+                 m_recorder->label(),
+                 ui_list);
+  m_recorder->setCfg(m_settings);
+  ui_stack->insertWidget(m_recorder->id(), m_recorder);
+
+  m_ports = new PortsPrefs(ui_stack);
+  m_ports->setId(ConfigDlg::Ports);
+  new ConfigItem(m_ports->id(),
+                 m_ports->pixmap(),
+                 m_ports->label(),
+                 ui_list);
+  m_ports->setCfg(m_settings);
+  ui_stack->insertWidget(m_ports->id(), m_ports);
 
   m_execute = new ExecutePrefs(ui_stack);
   m_execute->setId(ConfigDlg::External);
@@ -177,11 +177,10 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
   m_execute->setCfg(m_settings);
   ui_stack->insertWidget(m_execute->id(), m_execute);
 
-
   // init stuff
   //
   on_ui_buttonBox_rejected();
-  showPage(static_cast<ConfigDlg::PageType>(m_settings->getInt("Config/LastItem", DMM)));
+  showPage(DMM);
   ui_undo->hide();
   adjustSize();
 }
@@ -300,7 +299,6 @@ void ConfigDlg::on_ui_buttonBox_accepted()
   m_settings->setString("Printer/name", m_printer->printerName());
   m_settings->setString("Printer/filename", m_printer->outputFileName());
   m_settings->setBool("Printer/print-file", (m_printer->outputFormat() == QPrinter::PdfFormat) ? true : false);
-  m_settings->setInt("Config/LastItem", dynamic_cast<ConfigItem *>(ui_list->currentItem())->id());
 
   for (int i = 0; i < NumItems; ++i)
     dynamic_cast<PrefWidget *>(ui_stack->widget(i))->applySLOT();

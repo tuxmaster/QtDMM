@@ -56,7 +56,7 @@ QFont sansFont(double px, bool bold = true)
 
 DisplayWid::DisplayWid(QWidget *parent)
   : QWidget(parent)
-  , m_face(0xb6, 0xcf, 0xa4)
+  , m_face(0xda, 0xdc, 0x77)
   , m_segment(0x16, 0x1e, 0x14)
 {
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

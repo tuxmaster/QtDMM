@@ -39,7 +39,7 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
   setupUi(this);
   m_portlist = new QStringListModel(this);
 
-  m_label = tr("Multimeter settings");
+  m_label = tr("Multimeter");
   m_description = tr("<b>Here you can configure the serial port"
                      " and protocol for your DMM. There is"
                      " also a number of predefined models.</b>");

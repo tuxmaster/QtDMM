@@ -18,11 +18,22 @@
 #include "settings.h"
 
 #include <QFileInfo>
+#include <QCoreApplication>
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
   m_fileConverted = false;
+  // Linux/macOS keep QSettings' native format (~/.config/QtDMM/QtDMM.conf).
+  // On Windows the native format is the registry, which has no file name -
+  // the first-start check, the per-instance config files and the instance
+  // list all rely on one - so it gets an ini file (%APPDATA%\QtDMM\QtDMM.ini).
+#ifdef Q_OS_WIN
+  m_qsettings = new QSettings(QSettings::IniFormat, QSettings::UserScope,
+                              QCoreApplication::organizationName(),
+                              QCoreApplication::applicationName(), this);
+#else
   m_qsettings = new QSettings(this);
+#endif
   QFile file(m_qsettings->fileName());
   m_fileExists = file.exists();
   m_tmpConfig = new QHash<QString, QVariant>;

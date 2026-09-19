@@ -120,7 +120,14 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   statusBar()->addWidget(m_info, 10);
   m_info->setLineWidth(1);
 
-  connect(m_wid, SIGNAL(error(const QString &)), m_error, SLOT(setText(const QString &)));
+  // messages such as the permission hint span several lines; the status bar
+  // shows the first one and keeps the rest in the tooltip
+  connect(m_wid, &MainWid::error, this, [this](const QString &text)
+  {
+    const QString firstLine = text.section('\n', 0, 0);
+    m_error->setText(firstLine);
+    m_error->setToolTip(text.contains('\n') ? text : QString());
+  });
   connect(m_wid, SIGNAL(info(const QString &)), m_info, SLOT(setText(const QString &)));
   connect(m_wid, SIGNAL(useTextLabel(bool)), this, SLOT(setUseTextLabel(bool)));
   connect(m_wid, SIGNAL(setConnect(bool)), this, SLOT(setConnectSLOT(bool)));
@@ -395,8 +402,10 @@ void MainWin::toolbarVisibilitySLOT(bool disp, bool dmm, bool graph, bool file)
 
 void MainWin::setupIcons()
 {
-  QIcon iconConnectOn = QIcon::fromTheme("network-connect");
-  QIcon iconConnectOff = QIcon::fromTheme("network-disconnect");
+  // theme icons exist on Linux desktops only; Windows and macOS get the
+  // bundled ones
+  QIcon iconConnectOn = QIcon::fromTheme("network-connect", QIcon(":/Symbols/connect_on.xpm"));
+  QIcon iconConnectOff = QIcon::fromTheme("network-disconnect", QIcon(":/Symbols/connect_icon.xpm"));
 
   this->action_Connect->setIcon(iconConnectOff);
   connect(this->action_Connect, &QAction::toggled, this, [ = ](bool checked)

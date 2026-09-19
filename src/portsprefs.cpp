@@ -7,7 +7,7 @@
 PortsPrefs::PortsPrefs(QWidget *parent) : PrefWidget(parent)
 {
   setupUi(this);
-  m_label = tr("Custom ports");
+  m_label = tr("Special ports");
   m_description = tr("<b>Here you can configure custom ports"
                      " for RFC2217 and SIGROK.</b>");
   m_pixmap = new QPixmap(":/Symbols/connect_icon.xpm");

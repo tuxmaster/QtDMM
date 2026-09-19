@@ -31,7 +31,7 @@
 IntegrationPrefs::IntegrationPrefs(QWidget *parent) : PrefWidget(parent)
 {
   setupUi(this);
-  m_label = tr("Integration");
+  m_label = tr("Integration curve");
   m_description = tr("<b>Here you can configure the parameter"
                      " for the integration curve.</b>");
   m_pixmap = new QPixmap(":/Symbols/integration.xpm");
