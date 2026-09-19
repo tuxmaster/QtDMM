@@ -5,7 +5,7 @@ The logs pair a label with the raw frame the meter sent for it, one per line:
 
     DC  0.0000 V AUTO BG<TAB>30 30 30 30 30 30 3B 30 30 30 3A 30 0D 0A<TAB>remark
 
-This script reads such a log (they are latin-1 encoded), parses the label into
+This script reads such a log (latin-1 or UTF-8), parses the label into
 a structured reading and prints a spec YAML skeleton to stdout. The output is a
 starting point for the human-curated file in docs/protocols/spec/ - review every
 vector, fill in 'expect' where the decoder's special string is known, and move
@@ -28,13 +28,13 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 
-COUPLING = {"DC": "DC", "AC": "AC", "A+D": "AC+DC"}
-RANGE_MODE = {"AUTO": "auto", "A.": "auto", "MAN": "manual", "MANU": "manual",
+COUPLING = {"DC": "DC", "AC": "AC", "A+D": "AC+DC", "AC+DC": "AC+DC"}
+RANGE_MODE = {"AUTO": "auto", "A.": "auto", "AU": "auto", "MAN": "manual", "MANU": "manual",
               "M.": "manual", "FIX": "manual"}
 FLAGS = {"BG", "Rel", "MAX", "MIN", "HOLD", "LowBat", "Diode", "Pieps", "TRMS"}
 # Spellings that differ between logs but mean the same display flag.
-FLAG_ALIASES = {"H": "HOLD", "Delta": "Rel", "Ton": "Pieps"}
-UNIT = re.compile(r"^[pnµumkMGT]?(?:V|A|Ohm|F|Hz|%|°C|°F|RPM)$")
+FLAG_ALIASES = {"H": "HOLD", "Delta": "Rel", "REL": "Rel", "Ton": "Pieps", "TR": "TRMS"}
+UNIT = re.compile(r"^[pnµumkMGT]?(?:V|A|Ohm|\u03a9|\u2126|F|Hz|%|°C|°F|RPM)$")
 RANGE_LABEL = re.compile(r"^\d+[A-Za-zµ%°]*$")
 CAPTURE = re.compile(r"^(?P<label>[^\t]*?)\t+(?P<bytes>(?:[0-9A-Fa-f]{2}\s+)*[0-9A-Fa-f]{2})\s*(?:\t\s*(?P<remark>.*?))?\s*$")
 
@@ -58,7 +58,7 @@ def parse_label(label):
         raise ValueError("no value before the unit")
 
     reading["value"] = " ".join(tokens[:unit_idx])
-    reading["unit"] = tokens[unit_idx]
+    reading["unit"] = tokens[unit_idx].replace("\u03a9", "Ohm").replace("\u2126", "Ohm")
     rest = tokens[unit_idx + 1:]
 
     if not rest or rest[0] not in RANGE_MODE:
@@ -104,7 +104,13 @@ def main():
                     help="expected frame length; lines with other lengths are skipped")
     args = ap.parse_args()
 
-    text = args.log.read_text(encoding="latin-1")
+    # Most logs are latin-1, two are UTF-8; a UTF-8 decode of latin-1 text fails
+    # on the first umlaut, so try UTF-8 first and fall back.
+    raw = args.log.read_bytes()
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError:
+        text = raw.decode("latin-1")
     source = args.log.resolve().relative_to(REPO).as_posix()
 
     vectors, skipped = [], []
