@@ -25,6 +25,27 @@
 
 #include "mainwin.h"
 
+#ifdef Q_OS_WIN
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#include <stdio.h>
+
+// QtDMM is a GUI-subsystem executable on Windows, so it has no console of its
+// own. When started from cmd/PowerShell, reattach to the parent's console so
+// --help, --version and the --debug frame dump remain visible there.
+static void attachParentConsole()
+{
+  if (::AttachConsole(ATTACH_PARENT_PROCESS))
+  {
+    FILE *f = nullptr;
+    freopen_s(&f, "CONOUT$", "w", stdout);
+    freopen_s(&f, "CONOUT$", "w", stderr);
+  }
+}
+#endif
+
 void qtdmmMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &msg)
 {
   switch (type)
@@ -68,6 +89,9 @@ void initTranslation(QApplication *app,QTranslator *QtTranslation, QTranslator *
 
 int main(int argc, char **argv)
 {
+#ifdef Q_OS_WIN
+  attachParentConsole();
+#endif
   qInstallMessageHandler(qtdmmMessageOutput);
   QApplication app(argc, argv);
   QTranslator QtTranslation;

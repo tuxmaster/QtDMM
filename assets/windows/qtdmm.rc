@@ -1,0 +1,3 @@
+// Executable icon shown by Explorer and the taskbar. Referenced from
+// CMakeLists.txt (WIN32 only); the in-app window icon comes from :/Symbols.
+IDI_ICON1 ICON "qtdmm.ico"

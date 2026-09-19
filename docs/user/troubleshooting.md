@@ -33,6 +33,14 @@ access to your user; check the cable's vendor:product id with `lsusb` and match
 it in the rule. QtDMM sets the cable's speed from the device table when it
 opens the port.
 
+## Windows
+
+Serial ports appear as `COM3`, `COM4` … and need no permissions. USB-serial
+cables need the chip vendor's driver once (CH340/CH341, FTDI, Prolific); until
+it is installed the port is missing from the list. HID cables use the Windows
+HID class driver and work without any driver installation. Debug output
+(`qtdmm --debug`) is shown when QtDMM is started from a command prompt.
+
 ## "Another instance is running"
 
 QtDMM instances coordinate through shared memory so that several meters can be

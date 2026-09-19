@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.16)
 project(qtdmm VERSION "0.0.0" HOMEPAGE_URL "https://github.com/tuxmaster/QtDMM/" LANGUAGES CXX)
 
 ## main settings
@@ -63,16 +63,34 @@ file(WRITE "${CMAKE_BINARY_DIR}/decoders.h" "${DRIVER_HEADER_CONTENT}")
 
 ## find external libs
 find_package(Qt6 REQUIRED COMPONENTS ${QT_COMPONENTS})
-find_package(PkgConfig REQUIRED)
 
 qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR}/src ${TRANSLATIONS})
 qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-	pkg_check_modules(HIDAPI REQUIRED hidapi-hidraw)
-elseif(UNIX)
-	pkg_check_modules(HIDAPI REQUIRED hidapi)
+## hidapi: distro package on Unix (keeps DEB/RPM/AUR dependencies honest),
+## built from source on Windows where there is no pkg-config and no package
+## manager to rely on. Either way the result is one imported target.
+if(WIN32)
+	include(FetchContent)
+	FetchContent_Declare(hidapi
+		GIT_REPOSITORY https://github.com/libusb/hidapi.git
+		GIT_TAG hidapi-0.14.0
+		GIT_SHALLOW TRUE
+	)
+	set(HIDAPI_WITH_TESTS OFF CACHE BOOL "" FORCE)
+	set(HIDAPI_BUILD_HIDTEST OFF CACHE BOOL "" FORCE)
+	set(BUILD_SHARED_LIBS OFF)
+	FetchContent_MakeAvailable(hidapi)
+	set(HIDAPI_TARGET hidapi::hidapi)
+else()
+	find_package(PkgConfig REQUIRED)
+	if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+		pkg_check_modules(HIDAPI REQUIRED IMPORTED_TARGET hidapi-hidraw)
+	else()
+		pkg_check_modules(HIDAPI REQUIRED IMPORTED_TARGET hidapi)
+	endif()
+	set(HIDAPI_TARGET PkgConfig::HIDAPI)
 endif()
 
 if(APPLE)
@@ -85,18 +103,21 @@ endif()
 
 ## compile the application
 add_definitions(-DAPP_VERSION="${PROJECT_VERSION_FULL}" -DAPP_NAME="${APP_NAME}" -DAPP_ORGANIZATION="${APP_ORGANIZATION}" )
-include_directories(src ${CMAKE_BINARY_DIR} ${HIDAPI_INCLUDE_DIRS})
+include_directories(src ${CMAKE_BINARY_DIR})
 
-if (HIDAPI_FOUND)
-	link_directories(${HIDAPI_LIBRARY_DIRS})
+if(WIN32)
+	enable_language(RC)
+	set(WIN_RESOURCES assets/windows/qtdmm.rc) # executable icon
 endif()
 
 add_executable(${PROJECT_NAME}
 	MACOSX_BUNDLE
+	WIN32
 	${SRC_FILES}
 	${UI_HEADERS}
 	${RES_SOURCES}
 	${QM_FILES}
+	${WIN_RESOURCES}
 )
 
 # paranoia options, force you to correct all compiler warnings
@@ -112,7 +133,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::PrintSupport
 	Qt6::Network
 	Qt6::Charts
-	${HIDAPI_LIBRARIES}
+	${HIDAPI_TARGET}
 )
 
 ## install files

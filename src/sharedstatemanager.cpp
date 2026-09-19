@@ -9,8 +9,14 @@
 #include <QCoreApplication>
 
 #ifdef Q_OS_UNIX
+#include <cerrno>
 #include <csignal>
 #include <sys/types.h>
+#elif defined(Q_OS_WIN)
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
 #endif
 
 namespace
@@ -28,6 +34,16 @@ bool isProcessAlive(qint64 pid)
     return false;
   // Signal 0: no signal is sent, only existence/permission is checked.
   return ::kill(static_cast<pid_t>(pid), 0) == 0 || errno != ESRCH;
+#elif defined(Q_OS_WIN)
+  if (pid <= 0)
+    return false;
+  HANDLE h = ::OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, static_cast<DWORD>(pid));
+  if (h == nullptr)
+    return ::GetLastError() == ERROR_ACCESS_DENIED; // exists, but owned by someone else
+  DWORD code = 0;
+  bool alive = ::GetExitCodeProcess(h, &code) && code == STILL_ACTIVE;
+  ::CloseHandle(h);
+  return alive;
 #else
   Q_UNUSED(pid);
   return true; // no cheap liveness check available; assume alive (old behavior)

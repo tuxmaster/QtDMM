@@ -24,7 +24,6 @@
 #include <QtWidgets>
 #include <QtSerialPort>
 
-#include <unistd.h>
 #include <stdio.h>
 #include <iostream>
 

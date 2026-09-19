@@ -4,10 +4,12 @@
 #include <QIODevice>
 #include <QThread>
 
-#ifdef Q_OS_MAC
-  #include <hidapi.h>
-#elif defined(Q_OS_UNIX)
+// Distro packages (Debian, FreeBSD ports) install hidapi.h below hidapi/; the
+// hidapi CMake target (Windows via FetchContent) and Homebrew put it top-level.
+#if __has_include(<hidapi/hidapi.h>)
   #include <hidapi/hidapi.h>
+#else
+  #include <hidapi.h>
 #endif
 
 #include "dmmdecoder.h"
@@ -38,9 +40,7 @@ protected:
   DmmDecoder::DMMInfo m_dmmInfo;
   static const unsigned int m_buflen = 1024;
   volatile bool m_isOpen = false;
-#ifndef Q_OS_WIN
   hid_device *m_handle = Q_NULLPTR;
-#endif
   unsigned int m_buffer_r = 0;
   unsigned int m_buffer_w = 0;
   unsigned char m_buffer[m_buflen];

@@ -101,7 +101,7 @@ void PortsPrefs::applySLOT()
 void PortsPrefs::on_ui_sigrokExeButton_clicked()
 {
   QString filter = "sigrok-cli";
-#ifdef Q_OS_WINDOWS
+#ifdef Q_OS_WIN
   filter += ".exe";
 #endif
 
