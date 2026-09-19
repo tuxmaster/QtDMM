@@ -37,7 +37,6 @@ public:
   bool      alertUnsavedData() const;
   bool      useTextLabel() const;
   QColor    displayBgColor() const;
-  QColor    displayTextColor() const;
   bool      saveWindowPosition() const;
   bool      saveWindowSize() const;
   void      on_ui_tipOfTheDay_toggled(bool on);

@@ -1,7 +1,7 @@
 //======================================================================
 // File:		displaywid.h
 // Author:	Matthias Toussaint
-// Created:	Fri Nov 23 22:28:36 CET 2001
+// Created:	Thu Dec 26 12:04:35 CET 2002
 //----------------------------------------------------------------------
 // This file is part of QtDMM.
 //
@@ -17,124 +17,92 @@
 // You should have received a copy of the GNU General Public License
 // along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 //----------------------------------------------------------------------
-// Copyright (c) 2001 Matthias Toussaint
+// Copyright (c) 2002 Matthias Toussaint
 //======================================================================
 
 #pragma once
 
-#include <QtGui>
-#include <QtWidgets>
+#include <QWidget>
+#include <QColor>
+#include <QPixmap>
 
-
+// The digital display: an LCD panel in the same housing as the analog
+// meter. Seven-segment digits, unit, annunciators (HOLD, AUTO, MANU, AC,
+// DC, diode, continuity), the min/max memory, a bar graph and up to three
+// secondary values are all drawn with QPainter and scale with the widget.
+// Unlit segments and annunciators stay faintly visible, like on a real LCD.
 class DisplayWid : public QWidget
 {
   Q_OBJECT
 public:
-  DisplayWid(QWidget *parent = Q_NULLPTR);
-  virtual ~DisplayWid();
+  DisplayWid(QWidget *parent = nullptr);
 
-  void     setValue(int, const QString &);
-  void     setUnit(int, const QString &);
-  void     setMinValue(const QString &);
-  void     setMaxValue(const QString &);
-  void     setMinUnit(const QString &);
-  void     setMaxUnit(const QString &);
-  void     setMode(int, const QString &);
-  void     setDisplayMode(int, bool minMax, bool bar, int numValues);
-  void     setShowBar(bool);
-  void     setHold(bool);
-  void     setAuto(bool);
-  void     setManu(bool);
+  void setValue(int id, const QString &);
+  void setUnit(int id, const QString &);
+  void setMode(int id, const QString &);     // "AC", "DC", "ACDC", "DI", "BUZ", ...
+  void setMinValue(const QString &);
+  void setMaxValue(const QString &);
+  void setMinUnit(const QString &);
+  void setMaxUnit(const QString &);
+  void setDisplayMode(int counts, bool minMax, bool bar, int numValues);
+  void setShowBar(bool);                     // per-reading flag from the decoder
+  void setHold(bool);
+  void setAuto(bool);
+  void setManu(bool);
+  void setFaceColor(const QColor &);         // LCD tint
+
+  QSize sizeHint() const override;
+  QSize minimumSizeHint() const override;
+
+  // Seven-segment bit mask for a character, 0 for unknown (blank).
+  // Bits: 0 a (top), 1 b, 2 c, 3 d (bottom), 4 e, 5 f, 6 g (middle).
+  static int segmentsFor(QChar ch);
 
 protected:
-  QBitmap *m_bigDigit;
-  QBitmap *m_bigSpecialChar;
-  QBitmap *m_bigDecimal;
-  QBitmap *m_bigMinus;
-  QBitmap *m_bigL;
-  QBitmap *m_bigG;
-  QBitmap *m_bigM;
-  QBitmap *m_bigk;
-  QBitmap *m_bigm;
-  QBitmap *m_bigu;
-  QBitmap *m_bign;
-  QBitmap *m_bigp;
-  QBitmap *m_bigHz;
-  QBitmap *m_bigF;
-  QBitmap *m_bigV;
-  QBitmap *m_bigVA;
-  QBitmap *m_bigcosphi;
-  QBitmap *m_bigA;
-  QBitmap *m_bigH;
-  QBitmap *m_bigW;
-  QBitmap *m_bigDBM;
-  QBitmap *m_bigOhm;
-  QBitmap *m_bigDeg;
-  QBitmap *m_bigDegF;
-  QBitmap *m_bigPercent;
-  QBitmap *m_smallDigit;
-  QBitmap *m_smallSpecialChar;
-  QPixmap *m_smallDecimal;
-  QPixmap *m_smallMinus;
-  QPixmap *m_smallL;
-  QPixmap *m_smallG;
-  QPixmap *m_smallM;
-  QPixmap *m_smallk;
-  QPixmap *m_smallm;
-  QPixmap *m_smallu;
-  QPixmap *m_smalln;
-  QPixmap *m_smallp;
-  QPixmap *m_smallHz;
-  QPixmap *m_smallF;
-  QPixmap *m_smallV;
-  QPixmap *m_smallVA;
-  QPixmap *m_smallcosphi;
-  QPixmap *m_smallA;
-  QPixmap *m_smallH;
-  QPixmap *m_smallW;
-  QPixmap *m_smallDBM;
-  QPixmap *m_smallOhm;
-  QPixmap *m_smallDeg;
-  QPixmap *m_smallDegF;
-  QPixmap *m_smallPercent;
-  QBitmap *m_minStr;
-  QBitmap *m_maxStr;
-  QBitmap *m_diode;
-  QBitmap *m_buzzer;
-  QBitmap *m_ac;
-  QBitmap *m_dc;
-  QBitmap *m_bar[7];
-  QBitmap *m_hold;
-  QBitmap *m_auto;
-  QBitmap *m_manu;
-  QString  m_value[4];
-  QString  m_minValue;
-  QString  m_maxValue;
-  QString  m_unit[4];
-  QString  m_minUnit;
-  QString  m_maxUnit;
-  QString  m_mode[4];
-  int      m_displayMode;
-  int      m_range;
-  bool     m_showMinMax;
-  bool     m_showBar;
-  bool     m_showHold;
-  bool     m_showAuto;
-  bool     m_showManu;
-  bool     m_paintBar;
-  int      m_numValues;
-  int      m_minMaxW;
-  int      m_extraH;
-  int      m_minW;
-  int      m_extraW;
-
-  void     paintEvent(QPaintEvent *) Q_DECL_OVERRIDE;
-  void     drawSmallNumber(QPainter *, const QString &str);
-  void     drawSmallUnit(QPainter *, const QString &str);
-  void     drawBigNumber(QPainter *, const QString &str);
-  void     drawBigUnit(QPainter *, const QString &str);
+  void paintEvent(QPaintEvent *) override;
+  void resizeEvent(QResizeEvent *) override;
 
 private:
-  unsigned int calcNumDigits(unsigned int);
-  QBitmap *BitmapHelper(const QString &file)const;
+  struct Layout
+  {
+    QRectF bezel, face;
+    QRectF flags, main, minMax, bar, extra;
+    double digitH = 0;            // main digit height
+    double smallH = 0;            // secondary digit height
+  };
+  Layout layout() const;
+  int numDigits() const;
+  void renderStatic();
+  void drawFlags(QPainter &p, const Layout &l) const;
+  void drawMain(QPainter &p, const Layout &l) const;
+  void drawMinMax(QPainter &p, const Layout &l) const;
+  void drawBar(QPainter &p, const Layout &l, bool staticPart) const;
+  void drawExtra(QPainter &p, const Layout &l) const;
+
+  // Seven-segment rendering. Returns the width used.
+  double drawNumber(QPainter &p, const QPointF &origin, double h, const QString &text, int minDigits, bool lit) const;
+  void drawDigit(QPainter &p, const QPointF &origin, double h, int mask) const;
+  double drawUnit(QPainter &p, const QPointF &origin, double h, const QString &unit) const;
+  double numberWidth(double h, int digits) const;
+  void drawAnnunciator(QPainter &p, const QRectF &r, const QString &text, bool on, double fontPx) const;
+
+  QColor m_face;
+  QColor m_segment;
+  QColor ghost() const;
+
+  QString m_value[4];
+  QString m_unit[4];
+  QString m_mode[4];
+  QString m_minValue, m_maxValue, m_minUnit, m_maxUnit;
+  int m_counts = 4000;
+  bool m_showMinMax = true;
+  bool m_showBar = true;
+  bool m_paintBar = false;
+  int m_numValues = 1;
+  bool m_hold = false;
+  bool m_auto = false;
+  bool m_manu = false;
+
+  QPixmap m_static;
+  bool m_staticDirty = true;
 };

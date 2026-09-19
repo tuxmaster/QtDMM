@@ -467,11 +467,6 @@ QColor ConfigDlg::displayBgColor() const
   return m_gui->displayBgColor();
 }
 
-QColor ConfigDlg::displayTextColor() const
-{
-  return m_gui->displayTextColor();
-}
-
 bool ConfigDlg::saveWindowPosition() const
 {
   return m_gui->saveWindowPosition();

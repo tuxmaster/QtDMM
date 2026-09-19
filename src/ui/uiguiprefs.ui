@@ -188,7 +188,7 @@
            </size>
           </property>
           <property name="whatsThis">
-           <string>Click this button to change the color of the numerical display for the dmm.</string>
+           <string>Tint of the LCD face of the digital display. The default is a classic greenish LCD.</string>
           </property>
          </widget>
         </item>
@@ -201,7 +201,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Back&amp;ground</string>
+           <string>LCD &amp;colour</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -211,63 +211,6 @@
           </property>
           <property name="buddy">
            <cstring>ui_bgColorDisplay</cstring>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="0" column="3">
-       <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="ColorButton" name="ui_textColor" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button to change the color of the text in the numerical display.</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="TextLabel2_2_3">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>&amp;Text</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_textColor</cstring>
           </property>
          </widget>
         </item>

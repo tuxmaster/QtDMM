@@ -90,7 +90,6 @@ public:
   QColor                dataColor() const;
   QColor                cursorColor() const;
   QColor                displayBgColor() const;
-  QColor                displayTextColor() const;
   QColor                startColor() const;
   QColor                externalColor() const;
   QColor                intColor() const;

@@ -48,14 +48,10 @@ void GuiPrefs::defaultsSLOT()
 
   ui_showDisplay->setChecked(m_cfg->getBool("Display/show", true));
   if (!m_cfg->fileConverted())
-  {
-    ui_bgColorDisplay->setColor(m_cfg->getColor("Display/display-background", QColor(212, 220, 207)));
-    ui_textColor->setColor(m_cfg->getColor("Display/display-text", Qt::black));    // mt: removed .rgb()
-  }
+    ui_bgColorDisplay->setColor(m_cfg->getColor("Display/display-background", QColor(0xb6, 0xcf, 0xa4)));
   else
   {
-    ui_bgColorDisplay->setColor(QColor(212, 220, 207));
-    ui_textColor->setColor(Qt::black);
+    ui_bgColorDisplay->setColor(QColor(0xb6, 0xcf, 0xa4));
     m_cfg->save();
   }
   ui_showBar->setChecked(m_cfg->getBool("Display/display-bar", true));
@@ -82,8 +78,7 @@ void GuiPrefs::factoryDefaultsSLOT()
   ui_saveWindowSize->setChecked(true);
 
   ui_showDisplay->setChecked(true);
-  ui_bgColorDisplay->setColor(QColor(212, 220, 207));
-  ui_textColor->setColor(Qt::black);
+  ui_bgColorDisplay->setColor(QColor(0xb6, 0xcf, 0xa4));
 
   ui_showBar->setChecked(true);
   ui_showMinMax->setChecked(true);
@@ -120,7 +115,6 @@ void GuiPrefs::applySLOT()
   m_cfg->setBool("Save/window-size", saveWindowSize());
   m_cfg->setBool("Display/show", showDisplay());
   m_cfg->setColor("Display/display-background", ui_bgColorDisplay->color());
-  m_cfg->setColor("Display/display-text", ui_textColor->color());
   m_cfg->setBool("Display/display-bar", showBar());
   m_cfg->setBool("Display/display-min-max", showMinMax());
   m_cfg->setBool("Alert/unsaved-file", alertUnsavedData());
@@ -203,11 +197,6 @@ bool GuiPrefs::useTextLabel() const
 QColor GuiPrefs::displayBgColor() const
 {
   return ui_bgColorDisplay->color();
-}
-
-QColor GuiPrefs::displayTextColor() const
-{
-  return ui_textColor->color();
 }
 
 bool GuiPrefs::saveWindowPosition() const

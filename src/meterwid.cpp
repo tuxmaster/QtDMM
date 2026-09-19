@@ -17,6 +17,7 @@
 //======================================================================
 
 #include "meterwid.h"
+#include "panelframe.h"
 
 #include <QPainter>
 #include <QPainterPath>
@@ -257,11 +258,12 @@ MeterWid::Geometry MeterWid::geometry() const
   Geometry g;
   const QRectF r = rect().adjusted(1, 1, -1, -1);
   g.bezel = r;
-  const double bezelW = qMax(4.0, r.height() * 0.06);
-  g.face = r.adjusted(bezelW, bezelW, -bezelW, -bezelW);
+  g.face = PanelFrame::faceRect(r);
   const double fh = g.face.height();
   const double fw = g.face.width();
-  g.radius = qMin(fh * 0.85, fw * 0.66);
+  // the arc ends at +-45 deg, the labels sit one font size outside it and
+  // must stay clear of the bezel when the panel is narrower than 16:9
+  g.radius = qMin(fh * 0.85, fw * 0.58);
   g.pivot = QPointF(g.face.center().x(), g.face.bottom() + fh * 0.02);
   g.fontPx = qBound(6.0, fh * 0.085, 48.0);
   return g;
@@ -276,41 +278,12 @@ void MeterWid::resizeEvent(QResizeEvent *)
 
 void MeterWid::drawBezel(QPainter &p, const Geometry &g) const
 {
-  const double radius = g.bezel.height() * 0.07;
-
-  QLinearGradient metal(g.bezel.topLeft(), g.bezel.bottomLeft());
-  metal.setColorAt(0.0, m_style.bezelLight);
-  metal.setColorAt(0.5, m_style.bezelDark.lighter(130));
-  metal.setColorAt(1.0, m_style.bezelDark);
-  p.setPen(QPen(m_style.bezelDark.darker(160), 1));
-  p.setBrush(metal);
-  p.drawRoundedRect(g.bezel, radius, radius);
-
-  // thin highlight along the top edge
-  p.setPen(QPen(QColor(255, 255, 255, 60), 1));
-  p.setBrush(Qt::NoBrush);
-  p.drawRoundedRect(g.bezel.adjusted(1, 1, -1, -1), radius, radius);
-
-  // dial: base colour, lit from around the pivot, recessed with an inner shadow
-  const double faceRadius = g.face.height() * 0.05;
-  QPainterPath faceClip;
-  faceClip.addRoundedRect(g.face, faceRadius, faceRadius);
-  p.save();
-  p.setClipPath(faceClip);
-  p.fillRect(g.face, m_style.face);
-
-  QRadialGradient glow(g.pivot, g.radius * 1.2);
-  glow.setColorAt(0.0, m_style.faceGlow);
-  glow.setColorAt(1.0, Qt::transparent);
-  p.fillRect(g.face, glow);
-
-  for (int i = 0; i < 4; ++i)
-  {
-    p.setPen(QPen(QColor(0, 0, 0, 70 - i * 15), 1));
-    p.setBrush(Qt::NoBrush);
-    p.drawRoundedRect(g.face.adjusted(i, i, -i, -i), faceRadius, faceRadius);
-  }
-  p.restore();
+  PanelFrame::Colors c;
+  c.bezelLight = m_style.bezelLight;
+  c.bezelDark = m_style.bezelDark;
+  c.face = m_style.face;
+  c.faceGlow = m_style.faceGlow;
+  PanelFrame::paint(p, g.bezel, c, g.pivot, g.radius * 1.2);
 }
 
 double MeterWid::niceStep(double range, int targetMajors)
@@ -492,7 +465,7 @@ void MeterWid::drawBoxes(QPainter &p, const Geometry &g) const
   p.drawText(QRectF(max.left(), max.top() - g.fontPx * 1.05, max.width(), g.fontPx), Qt::AlignRight | Qt::AlignVCenter, tr("MAX"));
 
   // "OL" caption next to the lamp
-  const QPointF lamp(g.face.right() - fw * 0.09, g.face.top() + fh * 0.66);
+  const QPointF lamp(g.face.right() - fw * 0.11, g.face.top() + fh * 0.66);
   p.setFont(scaledFont(g.fontPx * 0.7, true));
   p.drawText(QRectF(lamp.x() + fh * 0.05, lamp.y() - g.fontPx * 0.5, fw * 0.05, g.fontPx), Qt::AlignLeft | Qt::AlignVCenter, tr("OL"));
 }
@@ -532,7 +505,7 @@ void MeterWid::drawLamp(QPainter &p, const Geometry &g) const
 {
   const double fw = g.face.width();
   const double fh = g.face.height();
-  const QPointF c(g.face.right() - fw * 0.09, g.face.top() + fh * 0.66);
+  const QPointF c(g.face.right() - fw * 0.11, g.face.top() + fh * 0.66);
   const double r = fh * 0.035;
 
   if (m_overload)
@@ -565,9 +538,7 @@ void MeterWid::drawNeedle(QPainter &p, const Geometry &g) const
   poly << QPointF(-baseHalf, 0) << QPointF(-tipHalf, -len) << QPointF(tipHalf, -len) << QPointF(baseHalf, 0);
 
   p.save();
-  QPainterPath clip;
-  clip.addRoundedRect(g.face, g.face.height() * 0.05, g.face.height() * 0.05);
-  p.setClipPath(clip);
+  PanelFrame::clipToFace(p, g.face);
 
   // shadow
   p.save();

@@ -63,6 +63,7 @@ protected:
   DisplayWid *m_display;
   MeterWid   *m_meter;
   QDockWidget *m_meterDock;
+  QDockWidget *m_displayDock;
   bool        m_running;
   QLabel     *m_error;
   QLabel     *m_info;

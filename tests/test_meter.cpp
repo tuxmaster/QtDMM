@@ -175,7 +175,7 @@ int main(int argc, char **argv)
     const double fh = size.height() - 2 - 2 * bezelW;
     const double fw = size.width() - 2 - 2 * bezelW;
     const QPointF pivot(size.width() / 2.0, 1 + bezelW + fh + fh * 0.02);
-    const double radius = qMin(fh * 0.85, fw * 0.66);
+    const double radius = qMin(fh * 0.85, fw * 0.58);
 
     // the needle at 0 deg lights up the point straight above the pivot;
     // at -45 deg (value 0) it doesn't

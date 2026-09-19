@@ -464,11 +464,7 @@ void MainWid::readConfig()
                          m_configDlg->intLineMode(),
                          m_configDlg->intPointMode());
 
-  QPalette cg = palette();
-  cg.setColor(QPalette::Window, m_configDlg->displayBgColor());
-  cg.setColor(QPalette::WindowText, m_configDlg->displayTextColor());
-
-  m_display->setPalette(cg);
+  m_display->setFaceColor(m_configDlg->displayBgColor());
   m_display->setDisplayMode(m_configDlg->display(), m_configDlg->showMinMax(),
                             m_configDlg->showBar(), m_configDlg->numValues());
   m_dmm->setNumValues(m_configDlg->numValues());
