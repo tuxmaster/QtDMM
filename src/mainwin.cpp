@@ -100,6 +100,18 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   toolBarDMM->addAction(meterAction);
   connect(m_displayDock, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
 
+  // Locked panels have no title bar (no drag handle, no float/close
+  // buttons) - the instruments then sit flush in the window. Unlock to
+  // rearrange them.
+  m_lockPanels = new QAction(tr("&Lock panels"), this);
+  m_lockPanels->setCheckable(true);
+  m_lockPanels->setWhatsThis(tr("<html><head/><body><p><span style=\" font-weight:600;\">Lock panels</span></p>"
+                                "<p>Hide the title bars of the display and meter panels. Unlock them to move the panels "
+                                "to another side of the window or to drag them out as separate windows.</p></body></html>"));
+  connect(m_lockPanels, &QAction::toggled, this, &MainWin::setPanelsLocked);
+  m_lockPanels->setChecked(m_wid->settings()->getBool("MainWindow/lock-panels", true));
+  setPanelsLocked(m_lockPanels->isChecked());
+
   if (m_config_id.isEmpty())
     setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(version));
   else
@@ -348,6 +360,7 @@ void MainWin::on_action_Menu_triggered()
     m_menu->addAction(action_Configure);
     m_menu->addAction(m_displayDock->toggleViewAction());
     m_menu->addAction(m_meterDock->toggleViewAction());
+    m_menu->addAction(m_lockPanels);
     m_menu->addSeparator();
     m_menu->addAction(action_Help);
     m_menu->addAction(action_Tip_of_the_day);
@@ -372,11 +385,23 @@ void MainWin::closeEvent(QCloseEvent *ev)
   setToolbarVisibilitySLOT();
   // dock layout (meter position, floating state, size) and toolbar layout
   m_wid->settings()->setString("MainWindow/state", QString::fromLatin1(saveState().toBase64()));
+  m_wid->settings()->setBool("MainWindow/lock-panels", m_lockPanels->isChecked());
 
   if (m_wid->closeWin())
     ev->accept();
   else
     ev->ignore();
+}
+
+void MainWin::setPanelsLocked(bool locked)
+{
+  for (QDockWidget *dock : { m_displayDock, m_meterDock })
+  {
+    QWidget *old = dock->titleBarWidget();
+    // an empty widget as title bar hides it; nullptr restores the default one
+    dock->setTitleBarWidget(locked ? new QWidget(dock) : nullptr);
+    delete old;
+  }
 }
 
 void MainWin::setToolbarVisibilitySLOT()

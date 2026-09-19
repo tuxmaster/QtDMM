@@ -4,7 +4,12 @@ HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device,
   : QIODevice(p)
   , m_dmmInfo(info)
 {
-  if (!device.isNull() && (m_handle = hid_open_path(device.toUtf8().data())))
+  if (device.isNull())
+    return;
+  m_handle = hid_open_path(device.toUtf8().data());
+  if (!m_handle)
+    qWarning() << "HID: cannot open" << device << QString::fromWCharArray(hid_error(nullptr));
+  else
   {
     m_isOpen = true;
     QThread* thread = new QThread;
@@ -53,6 +58,13 @@ bool HIDSerialDevice::availablePorts(QStringList &portlist,unsigned short vendor
   return (dev_cnt > 0);
 }
 
+bool HIDSerialDevice::open(OpenMode mode)
+{
+  if (!m_isOpen)
+    return false;
+  return QIODevice::open(mode);
+}
+
 void HIDSerialDevice::close()
 {
   if (m_isOpen)
@@ -90,7 +102,7 @@ void HIDSerialDevice::run()
 
     if (res < 0)
     {
-      qCritical() << "Unable to send a feature report.";
+      qCritical() << "HID: unable to send the feature report:" << QString::fromWCharArray(hid_error(m_handle));
       close();
     }
     else
@@ -107,7 +119,10 @@ void HIDSerialDevice::run()
         {
           res = hid_read(m_handle, buf, sizeof(buf));
           if (res < 0)
+          {
+            qWarning() << "HID: read failed:" << QString::fromWCharArray(hid_error(m_handle));
             close();
+          }
         }
 
         if (res > 0)

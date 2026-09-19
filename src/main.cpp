@@ -42,6 +42,8 @@ static void attachParentConsole()
     FILE *f = nullptr;
     freopen_s(&f, "CONOUT$", "w", stdout);
     freopen_s(&f, "CONOUT$", "w", stderr);
+    // Qt would otherwise route qWarning() & co. to the debugger
+    qputenv("QT_FORCE_STDERR_LOGGING", "1");
   }
 }
 #endif

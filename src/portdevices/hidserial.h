@@ -22,6 +22,9 @@ public:
  ~HIDSerialDevice();
 
   static bool availablePorts(QStringList &portlist);
+  // Fails when the hidapi handle could not be opened, so DMM reports an
+  // error instead of waiting for frames that never come.
+  bool open(OpenMode mode) override;
   void close() override;
 
   // Must stay const: QIODevice::bytesAvailable() is const and virtual, so a
