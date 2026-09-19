@@ -63,8 +63,10 @@ several external sources. The Uni-Trend protocol logs (`UT*.log`) are the work
 of heha, author of the Windows read-out tool DMM.EXE, published at
 <https://heha.fwh.is/hs/UNI-T/>; the source of that tool is an independent
 implementation of the same protocols and was used to cross-check several of
-the specs here. Further protocol knowledge was taken from the sigrok DMM
-protocol database (<https://sigrok.org/>). The datasheets are the respective
-manufacturers' documents. When a decoder looks wrong, consult these sources
+the specs here. `metex-22t.log` was contributed by Simon Hartmann, as noted in
+the file itself. Further protocol knowledge was taken from the sigrok DMM
+protocol parsers (<https://sigrok.org/>, `libsigrok/src/dmm/`), which served as
+a third reference wherever the logs and heha's tool left room for doubt. The
+datasheets are the respective manufacturers' documents. When a decoder looks wrong, consult these sources
 first — several apparent bugs (such as the frame deduplication above) turned
 out to be deliberate once the notes were read.
