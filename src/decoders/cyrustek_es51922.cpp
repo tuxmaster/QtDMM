@@ -32,7 +32,37 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51922::decode(const QByt
   int function    = data[6] & 0x0f;
   int range       = data[0] & 0x0f;
 
-  switch (function)
+  // Frequency ranges per the range table in docs/protocols/sources/UT61E.log
+  // ('0'=220.00, '1'=2200.0, no '2', '3'=22.000k ... '7'=220.00M). The same
+  // table applies when the Hz button is pressed in the V or A functions: the
+  // log notes the Hz reading is independent of the V/mV range, and heha's
+  // DMM.EXE (ut.cpp) switches to its frequency mode outright in that case.
+  auto formatFrequency = [this](int r)
+  {
+    switch (r)
+    {
+      case 0: formatResultValue(3,"","Hz");  break;
+      case 1: formatResultValue(4,"","Hz");  break;
+      case 3: formatResultValue(2,"k","Hz"); break;
+      case 4: formatResultValue(3,"k","Hz"); break;
+      case 5: formatResultValue(1,"M","Hz"); break;
+      case 6: formatResultValue(2,"M","Hz"); break;
+      case 7: formatResultValue(3,"M","Hz"); break;
+    }
+  };
+
+  if (duty)
+  {
+    // Duty cycle is always shown as 100.0-style, whatever the range code
+    // (the table's '%' column reads '100.0*' for every range).
+    if (function == 0x2) m_result.special = "FR";
+    formatResultValue(4,"","%");
+  }
+  else if (hz && function != 0x2)
+  {
+    formatFrequency(range);
+  }
+  else switch (function)
   {
     case 0xB:
       switch (range)
@@ -43,25 +73,17 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51922::decode(const QByt
         case 3: formatResultValue(4,"","V"); break;
         case 4: formatResultValue(3,"m","V");break;
       }
-      if(hz) m_result.unit = "Hz";
-      if(duty) m_result.unit = "%";
       break;
     case 0x1:
+      // Diode test reads in volts with a 2.2000-style format: the log shows
+      // the display as '.0L V', and heha's ut.cpp uses the V unit code here.
       m_result.special = "DI";
-      formatResultValue(3,"m","V"); break;
+      formatResultValue(1,"","V");
       break;
     case 0x2:
-       m_result.special = "FR";
-      switch (range)
-      {
-        case 0: formatResultValue(0,"","Hz"); break;
-        case 1: formatResultValue(2,"k","Hz"); break;
-        case 2: formatResultValue(3,"k","Hz"); break;
-        case 3: formatResultValue(1,"M","Hz"); break;
-        case 4: formatResultValue(2,"M","Hz"); break;
-      }
-     m_result.unit = duty ? "%" :  "Hz";
-     break;
+      m_result.special = "FR";
+      formatFrequency(range);
+      break;
     case 0x3:
       m_result.special = "OH";
       switch (range)
@@ -98,8 +120,6 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51922::decode(const QByt
         case 0: formatResultValue(3,"u","A"); break;
         case 1: formatResultValue(4,"u","A"); break;
       }
-      if(hz) m_result.unit = "Hz";
-      if(duty) m_result.unit = "%";
       break;
     case 0xF:
       switch (range)
@@ -107,14 +127,10 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51922::decode(const QByt
         case 0: formatResultValue(2,"m","A"); break;
         case 1: formatResultValue(3,"m","A"); break;
       }
-      if(hz) m_result.unit = "Hz";
-      if(duty) m_result.unit = "%";
       break;
     case 0x9:
     case 0x0:
       formatResultValue(2,"","A");
-      if(hz) m_result.unit = "Hz";
-      if(duty) m_result.unit = "%";
       break;
   }
 

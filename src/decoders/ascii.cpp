@@ -139,11 +139,20 @@ std::optional<DmmDecoder::DmmResponse> DecoderAscii::decode(const QByteArray &da
       formatResultValue(0, "", m_result.unit);
       break;
     default:
-      if (unit_prefixes.contains(m_result.unit.left(1)))
-        formatResultValue(0, m_result.unit.left(1), m_result.unit.mid(1));
+    {
+      // Metex meters send kilo as a capital K ("KOhm", "KHz"; see
+      // docs/protocols/sources/metex-22t.log, and heha's Metex.cpp lists
+      // "pnum KMG" as the prefix alphabet). Normalise it so the value is scaled
+      // and the unit matches what DisplayWid knows.
+      QString prefix = m_result.unit.left(1);
+      if (prefix == "K")
+        prefix = "k";
+      if (unit_prefixes.contains(prefix))
+        formatResultValue(0, prefix, m_result.unit.mid(1));
       else
         formatResultValue(0, "", m_result.unit);
       break;
+    }
   }
   return m_result;
 }

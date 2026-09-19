@@ -35,7 +35,10 @@ std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &d
 
   if (data[0] == '-')
   {
-    m_result.val = " -";
+    // A single character: insertCommaIT() below allows for exactly one leading
+    // sign/space. The former " -" pushed the decimal point one place left and
+    // made every negative reading ten times too small.
+    m_result.val = "-";
   }
   else if(data[0] == '+')
   {
@@ -119,6 +122,21 @@ std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &d
     /* Duty cycle */
     m_result.unit = "%";
     m_result.special = "PC";
+    doUnits = false;
+  }
+  else if (data[10] & 0x02)
+  {
+    /* Temperature, byte 10 bit 1 per docs/protocols/sources/UT61BCD.log
+       (UT61B/C only, not the UT61D). "C" and "dF" are the strings DisplayWid
+       maps to the degree glyphs. */
+    m_result.unit = "C";
+    m_result.special = "TE";
+    doUnits = false;
+  }
+  else if (data[10] & 0x01)
+  {
+    m_result.unit = "dF";
+    m_result.special = "TE";
     doUnits = false;
   }
 

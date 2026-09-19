@@ -1,0 +1,103 @@
+protocol: QM1537Continuous
+decoder: src/decoders/qm1537.cpp
+devices: [Digitek DT4000ZC, Digitech QM1537, PeakTech 3430, TekPower TP4000ZC, Uni-Trend UT61B, Uni-Trend UT61C, Uni-Trend UT61D, Vichy VC99]
+frames_per_reading: 1
+unit_map:                      # log spelling -> what the decoder emits
+  "µ": "u"
+  "°C": "C"
+  "°F": "dF"
+sources:
+  - docs/protocols/sources/UT61BCD.log
+
+# 'reading' is what the log says the meter displayed; dval, unit, range and
+# hold are derived from it. Put decoder-specific assertions (special, val)
+# under 'expect' by hand. 'range_label' and 'remark' are informational.
+vectors:
+  - source_line: "DC  348.2 mV AUTO BG"
+    bytes: 2B 33 34 38 32 20 34 31 00 40 80 22 0D 0A
+    reading: {value: "348.2", unit: "mV", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "DC  348.2 mV AUTO BG"
+    bytes: 2B 33 34 38 32 20 34 31 00 40 80 22 0D 0A
+    reading: {value: "348.2", unit: "mV", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "DC  348.1 mV AUTO BG"
+    bytes: 2B 33 34 38 31 20 34 31 00 40 80 22 0D 0A
+    reading: {value: "348.1", unit: "mV", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "DC  331.0 mV MAN BG"
+    bytes: 2B 33 33 31 30 20 34 11 00 40 80 21 0D 0A
+    reading: {value: "331.0", unit: "mV", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  330.9 mV MAN BG"
+    bytes: 2B 33 33 30 39 20 34 11 00 40 80 21 0D 0A
+    reading: {value: "330.9", unit: "mV", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  0.000 V  MAN BG"
+    bytes: 2B 30 30 30 30 20 31 11 00 00 80 00 0D 0A
+    reading: {value: "0.000", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  00.00 V  MAN BG"
+    bytes: 2B 30 30 30 30 20 32 11 00 00 80 00 0D 0A
+    reading: {value: "00.00", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  000.0 V  MAN BG"
+    bytes: 2B 30 30 30 30 20 34 11 00 00 80 00 0D 0A
+    reading: {value: "000.0", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  0000 V  MAN BG"
+    bytes: 2B 30 30 30 30 20 30 11 00 00 80 00 0D 0A
+    reading: {value: "0000", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  000.3 mV MAN MAX"
+    bytes: 2B 30 30 30 33 20 34 10 20 40 80 00 0D 0A
+    reading: {value: "000.3", unit: "mV", coupling: DC, range_mode: manual, flags: [MAX]}
+  - source_line: "DC -034.6 mV MAN MIN"
+    bytes: 2D 30 33 34 36 20 34 10 10 40 80 00 0D 0A
+    reading: {value: "-034.6", unit: "mV", coupling: DC, range_mode: manual, flags: [MIN]}
+  - source_line: "0.015 kOhm MAN BG"
+    bytes: 2B 30 30 31 35 20 31 01 00 20 20 00 0D 0A
+    reading: {value: "0.015", unit: "kOhm", range_mode: manual, flags: [BG]}
+  - source_line: "09.54 nF AUTO"
+    bytes: 2B 30 39 35 34 20 32 20 02 00 04 29 0D 0A
+    reading: {value: "09.54", unit: "nF", range_mode: auto}
+  - source_line: "12.02 µF AUTO"
+    bytes: 2B 31 32 30 32 20 32 20 00 80 04 29 0D 0A
+    reading: {value: "12.02", unit: "µF", range_mode: auto}
+  - source_line: "49.98 Hz AUTO"
+    bytes: 2B 34 39 39 38 20 32 20 00 00 08 29 0D 0A
+    reading: {value: "49.98", unit: "Hz", range_mode: auto}
+  - source_line: "049.2 % MAN"
+    bytes: 2B 30 34 39 32 20 34 00 00 02 00 29 0D 0A
+    reading: {value: "049.2", unit: "%", range_mode: manual}
+  - source_line: "0025 °C MAN"
+    bytes: 2B 30 30 32 35 20 30 00 00 00 02 29 0D 0A
+    reading: {value: "0025", unit: "°C", range_mode: manual}
+    remark: "nicht bei UT61D"
+  - source_line: "0077 °F MAN"
+    bytes: 2B 30 30 37 37 20 30 00 00 00 01 29 0D 0A
+    reading: {value: "0077", unit: "°F", range_mode: manual}
+    remark: "nicht bei UT61D"
+  - source_line: "0001 °F MAN REL"
+    bytes: 2B 30 30 30 31 20 30 04 00 00 01 29 0D 0A
+    reading: {value: "0001", unit: "°F", range_mode: manual}
+    remark: "nicht bei UT61D"
+    note: "unrecognised tokens: REL"
+  - source_line: "DC  000.0 µA AUTO BG"
+    bytes: 2B 30 30 30 30 20 34 31 00 80 40 80 0D 0A
+    reading: {value: "000.0", unit: "µA", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "AC  000.1 µA AUTO BG"
+    bytes: 2B 30 30 30 31 20 34 29 00 80 40 00 0D 0A
+    reading: {value: "000.1", unit: "µA", coupling: AC, range_mode: auto, flags: [BG]}
+
+skipped:
+  - source_line: "0001 °F MAN HOLD"
+    bytes: 2B 30 30 30 30 20 30 02 00 00 01 29 0D 0A
+    reason: >-
+      the frame's digits are 0000 while the label reads 0001; the preceding
+      '0001 °F MAN REL' line has digits 0001. Label slip in the log.
+  - source_line: "0.L MOhm OL BG A"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: ""
+    reason: "no unit token found"
+  - source_line: "0.L MOhm OL BG M"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: ".0L V Diode"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "0L. Ohm OL Pieps BG"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "[12]"
+    reason: "1 bytes, expected 14"
+  - source_line: "[13]"
+    reason: "1 bytes, expected 14"

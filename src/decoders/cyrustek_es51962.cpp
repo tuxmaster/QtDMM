@@ -12,7 +12,7 @@ static const bool registered = []()
 bool DecoderCyrusTekES51962::checkFormat(const char *data, size_t idx)
 {
   // The 12 is deliberate and must stay above the 11-byte packet length: the
-  // UT70B sends every datagram twice in a row (see docs/protocols/UT70B.log),
+  // UT70B sends every datagram twice in a row (see docs/protocols/sources/UT70B.log),
   // so skipping the first copy's terminator at idx == 10 and matching only the
   // second at idx == 21 gives one reading per measurement. Do not "simplify"
   // this to getPacketLength() - unlike vc940, this protocol duplicates frames.
@@ -82,15 +82,20 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51962::decode(const QByt
       formatResultValue(3,"","Ohm");
       break;
     case 0x36:
+      // Capacitance ranges per the table in docs/protocols/sources/UT70B.log:
+      // 4n 40n 400n 4µ 40µ 400µ 4m 40m, one decade per range code with no gap.
+      // heha's ut.cpp encodes the same as a linear scalebase + range offset.
+      // The previous table had no range '2' and was shifted by one from there.
       switch (data[0]) // Range
       {
         case '0': formatResultValue(1,"n","F"); break;
         case '1': formatResultValue(2,"n","F"); break;
-        case '3': formatResultValue(3,"n","F"); break;
-        case '4': formatResultValue(1,"u","F"); break;
-        case '5': formatResultValue(2,"u","F"); break;
-        case '6': formatResultValue(3,"u","F"); break;
-        case '7': formatResultValue(1,"m","F"); break;
+        case '2': formatResultValue(3,"n","F"); break;
+        case '3': formatResultValue(1,"u","F"); break;
+        case '4': formatResultValue(2,"u","F"); break;
+        case '5': formatResultValue(3,"u","F"); break;
+        case '6': formatResultValue(1,"m","F"); break;
+        case '7': formatResultValue(2,"m","F"); break;
       }
       break;
     case 0x39:
@@ -114,10 +119,13 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51962::decode(const QByt
       switch (data[0]) // Range
       {
         case '0':  formatResultValue(3,"u","A"); break;
+        // 4000 µA range per the log's table (and heha's ut.cpp, which derives
+        // it from the range code); was missing, leaving the unit empty.
+        case '1':  formatResultValue(4,"u","A"); break;
       }
       break;
     case 0x3f:
-      // docs/protocols/UT70B.log lists byte[5] == '?' (0x3f) as the A range,
+      // docs/protocols/sources/UT70B.log lists byte[5] == '?' (0x3f) as the A range,
       // completing the set next to 0x39 (mA) and 0x3d (uA). This used to read
       // formatResultValue(2,"A","Hz"), i.e. "A" sat in the SI prefix argument
       // where it was meant as the unit, and the "Hz" was left over from the

@@ -1,0 +1,355 @@
+protocol: VC940Continuous
+decoder: src/decoders/vc940.cpp
+devices: [Tenma 72-7732, Uni-Trend UT71B, Uni-Trend UT71CDE, Uni-Trend UT804, Voltcraft VC 920, Voltcraft VC 940, Voltcraft VC 960]
+frames_per_reading: 2
+unit_map:                      # log spelling -> what the decoder emits
+  "µ": "u"
+  "°C": "C"
+  "°F": "dF"
+sources:
+  - docs/protocols/sources/UT71BCDE.log
+  - docs/protocols/sources/UT804.log
+
+# 'reading' is what the log says the meter displayed; dval, unit, range and
+# hold are derived from it. Put decoder-specific assertions (special, val)
+# under 'expect' by hand. 'range_label' and 'remark' are informational.
+vectors:
+  - source_line: "DC  0.0000 V AUTO BG"
+    bytes: 30 30 30 30 30 31 31 30 31 0D 0A
+    reading: {value: "0.0000", unit: "V", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "DC -0.0000 V AUTO BG"
+    bytes: 30 30 30 30 30 31 31 30 35 0D 0A
+    reading: {value: "-0.0000", unit: "V", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "DC -0.0001 V AUTO BG"
+    bytes: 30 30 30 30 31 31 31 30 35 0D 0A
+    reading: {value: "-0.0001", unit: "V", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "DC -0.0007 V AUTO BG"
+    bytes: 30 30 30 30 37 31 31 30 35 0D 0A
+    reading: {value: "-0.0007", unit: "V", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "DC  0.0005 V AUTO BG"
+    bytes: 30 30 30 30 35 31 31 30 31 0D 0A
+    reading: {value: "0.0005", unit: "V", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "DC  0.0000 V MAN BG"
+    bytes: 30 30 30 30 30 31 31 30 32 0D 0A
+    reading: {value: "0.0000", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  00.000 V MAN BG"
+    bytes: 30 30 30 30 30 32 31 30 32 0D 0A
+    reading: {value: "00.000", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  000.00 V MAN BG"
+    bytes: 30 30 30 30 30 33 31 30 32 0D 0A
+    reading: {value: "000.00", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  0000.0 V MAN BG"
+    bytes: 30 30 30 30 30 34 31 30 32 0D 0A
+    reading: {value: "0000.0", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  0.0005 V MAN BG REL"
+    bytes: 30 30 30 30 35 31 31 30 32 0D 0A
+    reading: {value: "0.0005", unit: "V", coupling: DC, range_mode: manual, flags: [BG, Rel]}
+    remark: "REL wird nicht übertragen!"
+  - source_line: "AC  0.0585 V AUTO BG TR"
+    bytes: 30 30 35 38 35 31 32 31 31 0D 0A
+    reading: {value: "0.0585", unit: "V", coupling: AC, range_mode: auto, flags: [BG, TRMS]}
+  - source_line: "AC  0.0585 V AUTO BG TR"
+    bytes: 30 30 35 38 35 31 32 31 31 0D 0A
+    reading: {value: "0.0585", unit: "V", coupling: AC, range_mode: auto, flags: [BG, TRMS]}
+  - source_line: "AC  0.2526 V MAN BG TR"
+    bytes: 30 32 35 32 36 31 32 31 32 0D 0A
+    reading: {value: "0.2526", unit: "V", coupling: AC, range_mode: manual, flags: [BG, TRMS]}
+  - source_line: "AC  0.6495 V MAN BG TR"
+    bytes: 30 36 34 39 35 31 32 31 32 0D 0A
+    reading: {value: "0.6495", unit: "V", coupling: AC, range_mode: manual, flags: [BG, TRMS]}
+  - source_line: "AC+DC 0.0053 V AU BG TR"
+    bytes: 30 30 30 35 33 31 32 33 31 0D 0A
+    reading: {value: "0.0053", unit: "V", coupling: AC+DC, range_mode: auto, flags: [BG, TRMS]}
+  - source_line: "DC -051.53 mV MAN BG"
+    bytes: 30 35 31 35 33 30 33 30 34 0D 0A
+    reading: {value: "-051.53", unit: "mV", coupling: DC, range_mode: manual, flags: [BG]}
+    remark: "keine Bereichsumschaltung"
+  - source_line: ".0L MΩ AUTO BG"
+    bytes: 3A 3A 30 3C 3A 36 34 30 31 0D 0A
+    reading: {value: ".0L", unit: "MOhm", range_mode: auto, flags: [BG]}
+  - source_line: "0.L  Ω MAN BG"
+    bytes: 3A 3A 30 3C 3A 31 34 30 32 0D 0A
+    reading: {value: "0.L", unit: "Ohm", range_mode: manual, flags: [BG]}
+    remark: "Endwert 400 Ω"
+  - source_line: ". 0L kΩ MAN BG"
+    bytes: 3A 3A 30 3C 3A 32 34 30 32 0D 0A
+    reading: {value: ". 0L", unit: "kOhm", range_mode: manual, flags: [BG]}
+  - source_line: ".0L kΩ MAN BG"
+    bytes: 3A 3A 30 3C 3A 33 34 30 32 0D 0A
+    reading: {value: ".0L", unit: "kOhm", range_mode: manual, flags: [BG]}
+  - source_line: "0.L kΩ MAN BG"
+    bytes: 3A 3A 30 3C 3A 34 34 30 32 0D 0A
+    reading: {value: "0.L", unit: "kOhm", range_mode: manual, flags: [BG]}
+  - source_line: ". 0L MΩ MAN BG"
+    bytes: 3A 3A 30 3C 3A 35 34 30 32 0D 0A
+    reading: {value: ". 0L", unit: "MOhm", range_mode: manual, flags: [BG]}
+  - source_line: ".0L MΩ MAN BG"
+    bytes: 3A 3A 30 3C 3A 36 34 30 32 0D 0A
+    reading: {value: ".0L", unit: "MOhm", range_mode: manual, flags: [BG]}
+    remark: "Endwert 40 MΩ"
+  - source_line: "00.000 nF AUTO BG"
+    bytes: 30 30 30 30 30 31 35 30 31 0D 0A
+    reading: {value: "00.000", unit: "nF", range_mode: auto, flags: [BG]}
+    remark: "Endwert 40 nF"
+  - source_line: "00.000 nF MAN BG"
+    bytes: 30 30 30 30 30 31 35 30 32 0D 0A
+    reading: {value: "00.000", unit: "nF", range_mode: manual, flags: [BG]}
+  - source_line: "000.00 nF MAN BG"
+    bytes: 30 30 30 30 30 32 35 30 32 0D 0A
+    reading: {value: "000.00", unit: "nF", range_mode: manual, flags: [BG]}
+  - source_line: "0.0000 µF MAN BG"
+    bytes: 30 30 30 30 30 33 35 30 32 0D 0A
+    reading: {value: "0.0000", unit: "µF", range_mode: manual, flags: [BG]}
+  - source_line: "00.000 µF MAN BG"
+    bytes: 30 30 30 30 30 34 35 30 32 0D 0A
+    reading: {value: "00.000", unit: "µF", range_mode: manual, flags: [BG]}
+  - source_line: "000.00 µF MAN BG"
+    bytes: 30 30 30 30 30 35 35 30 32 0D 0A
+    reading: {value: "000.00", unit: "µF", range_mode: manual, flags: [BG]}
+  - source_line: "0.0000 mF MAN BG"
+    bytes: 30 30 30 30 30 36 35 30 32 0D 0A
+    reading: {value: "0.0000", unit: "mF", range_mode: manual, flags: [BG]}
+  - source_line: "00.000 mF MAN BG"
+    bytes: 30 30 30 30 30 37 35 30 32 0D 0A
+    reading: {value: "00.000", unit: "mF", range_mode: manual, flags: [BG]}
+    remark: "Endwert 40 mF, Langsames Arbeiten, Anzeige in Bargraf! 5 s/Wert = 0,2 Sa/s"
+  - source_line: "DC  000.00 µA AUTO BG"
+    bytes: 30 30 30 30 30 30 37 30 31 0D 0A
+    reading: {value: "000.00", unit: "µA", coupling: DC, range_mode: auto, flags: [BG]}
+    remark: "Endwert 400 µA"
+  - source_line: "DC  000.00 µA MAN BG"
+    bytes: 30 30 30 30 30 30 37 30 32 0D 0A
+    reading: {value: "000.00", unit: "µA", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  0000.0 µA MAN BG"
+    bytes: 30 30 30 30 30 31 37 30 32 0D 0A
+    reading: {value: "0000.0", unit: "µA", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "AC  000.00 µA AUTO BG"
+    bytes: 30 30 30 30 30 30 37 31 31 0D 0A
+    reading: {value: "000.00", unit: "µA", coupling: AC, range_mode: auto, flags: [BG]}
+  - source_line: "AC  000.00 µA MAN BG"
+    bytes: 30 30 30 30 30 30 37 31 32 0D 0A
+    reading: {value: "000.00", unit: "µA", coupling: AC, range_mode: manual, flags: [BG]}
+  - source_line: "AC  0000.0 µA MAN BG"
+    bytes: 30 30 30 30 30 31 37 31 32 0D 0A
+    reading: {value: "0000.0", unit: "µA", coupling: AC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  00.000 mA AUTO BG"
+    bytes: 30 30 30 30 30 30 38 30 31 0D 0A
+    reading: {value: "00.000", unit: "mA", coupling: DC, range_mode: auto, flags: [BG]}
+    remark: "Endwert 40 mA"
+  - source_line: "DC  00.000 mA MAN BG"
+    bytes: 30 30 30 30 30 30 38 30 32 0D 0A
+    reading: {value: "00.000", unit: "mA", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC  000.00 mA MAN BG"
+    bytes: 30 30 30 30 30 31 38 30 32 0D 0A
+    reading: {value: "000.00", unit: "mA", coupling: DC, range_mode: manual, flags: [BG]}
+    remark: "Endwert 400 mA"
+  - source_line: "DC  00.000 A FIX BG"
+    bytes: 30 30 30 30 30 31 39 30 30 0D 0A
+    reading: {value: "00.000", unit: "A", coupling: DC, range_mode: manual, flags: [BG]}
+    remark: "Endwert 10 A"
+  - source_line: "AC  00.000 A FIX BG"
+    bytes: 30 30 30 30 30 31 39 31 30 0D 0A
+    reading: {value: "00.000", unit: "A", coupling: AC, range_mode: manual, flags: [BG]}
+  - source_line: "00.000  Hz AUTO"
+    bytes: 30 30 30 30 30 30 3C 30 31 0D 0A
+    reading: {value: "00.000", unit: "Hz", range_mode: auto}
+    remark: "Endwert 40 Hz"
+  - source_line: "00.000  Hz MAN"
+    bytes: 30 30 30 30 30 30 3C 30 32 0D 0A
+    reading: {value: "00.000", unit: "Hz", range_mode: manual}
+  - source_line: "000.00  Hz MAN"
+    bytes: 30 30 30 30 30 31 3C 30 32 0D 0A
+    reading: {value: "000.00", unit: "Hz", range_mode: manual}
+  - source_line: "0.0000 kHz MAN"
+    bytes: 30 30 30 30 30 32 3C 30 32 0D 0A
+    reading: {value: "0.0000", unit: "kHz", range_mode: manual}
+  - source_line: "00.000 kHz MAN"
+    bytes: 30 30 30 30 30 33 3C 30 32 0D 0A
+    reading: {value: "00.000", unit: "kHz", range_mode: manual}
+  - source_line: "000.00 kHz MAN"
+    bytes: 30 30 30 30 30 34 3C 30 32 0D 0A
+    reading: {value: "000.00", unit: "kHz", range_mode: manual}
+  - source_line: "0.0000 MHz MAN"
+    bytes: 30 30 30 30 30 35 3C 30 32 0D 0A
+    reading: {value: "0.0000", unit: "MHz", range_mode: manual}
+  - source_line: "00.000 MHz MAN"
+    bytes: 30 30 30 30 30 36 3C 30 32 0D 0A
+    reading: {value: "00.000", unit: "MHz", range_mode: manual}
+  - source_line: "000.00 MHz MAN"
+    bytes: 30 30 30 30 30 37 3C 30 32 0D 0A
+    reading: {value: "000.00", unit: "MHz", range_mode: manual}
+    remark: "Endwert 400 MHz"
+  - source_line: "DC  0.000 V AUTO"
+    bytes: 30 30 30 30 3A 31 31 30 31 0D 0A
+    reading: {value: "0.000", unit: "V", coupling: DC, range_mode: auto}
+  # --- docs/protocols/sources/UT804.log ---
+  - source_line: "DC  0.0000 V AUTO 4V"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 31 30 31 0D 0A
+    reading: {value: "0.0000", unit: "V", coupling: DC, range_mode: auto, range_label: "4V"}
+  - source_line: "DC  0.0000 V MAN 4V"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 31 30 32 0D 0A
+    reading: {value: "0.0000", unit: "V", coupling: DC, range_mode: manual, range_label: "4V"}
+  - source_line: "DC  00.000 V MAN 40V"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 32 31 30 32 0D 0A
+    reading: {value: "00.000", unit: "V", coupling: DC, range_mode: manual, range_label: "40V"}
+  - source_line: "DC  000.00 V MAN 400V"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 33 31 30 32 0D 0A
+    reading: {value: "000.00", unit: "V", coupling: DC, range_mode: manual, range_label: "400V"}
+  - source_line: "DC  0000.0 V MAN 1000V"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 34 31 30 32 0D 0A
+    reading: {value: "0000.0", unit: "V", coupling: DC, range_mode: manual, range_label: "1000V"}
+  - source_line: "AC  0.0043 V AUTO 4V"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 34 33 31 32 31 31 0D 0A
+    reading: {value: "0.0043", unit: "V", coupling: AC, range_mode: auto, range_label: "4V"}
+  - source_line: "AC  0000.0 V MAN 1000V"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 34 32 31 32 0D 0A
+    reading: {value: "0000.0", unit: "V", coupling: AC, range_mode: manual, range_label: "1000V"}
+  - source_line: "A+D 0000.0 V MAN 1000V"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 34 32 33 32 0D 0A
+    reading: {value: "0000.0", unit: "V", coupling: AC+DC, range_mode: manual, range_label: "1000V"}
+  - source_line: "DC -132.46 mV FIX 400mV"
+    source: docs/protocols/sources/UT804.log
+    bytes: 31 33 32 34 36 30 33 30 34 0D 0A
+    reading: {value: "-132.46", unit: "mV", coupling: DC, range_mode: manual, range_label: "400mV"}
+  - source_line: "00.000 Hz AUTO 40Hz"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 30 3C 30 31 0D 0A
+    reading: {value: "00.000", unit: "Hz", range_mode: auto, range_label: "40Hz"}
+  - source_line: "00.000 Hz MAN 40Hz"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 30 3C 30 32 0D 0A
+    reading: {value: "00.000", unit: "Hz", range_mode: manual, range_label: "40Hz"}
+  - source_line: "000.00 MHz MAN 400M"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 37 3C 30 32 0D 0A
+    reading: {value: "000.00", unit: "MHz", range_mode: manual, range_label: "400M"}
+  - source_line: ".0L MOhm AUTO 40M"
+    source: docs/protocols/sources/UT804.log
+    bytes: 3A 3A 30 3C 3A 36 34 30 31 0D 0A
+    reading: {value: ".0L", unit: "MOhm", range_mode: auto, range_label: "40M"}
+  - source_line: ".0L MOhm MAN 40M"
+    source: docs/protocols/sources/UT804.log
+    bytes: 3A 3A 30 3C 3A 36 34 30 32 0D 0A
+    reading: {value: ".0L", unit: "MOhm", range_mode: manual, range_label: "40M"}
+  - source_line: "0.L Ohm MAN 400"
+    source: docs/protocols/sources/UT804.log
+    bytes: 3A 3A 30 3C 3A 31 34 30 32 0D 0A
+    reading: {value: "0.L", unit: "Ohm", range_mode: manual, range_label: "400"}
+  - source_line: "0.L Ohm FIX 400"
+    source: docs/protocols/sources/UT804.log
+    bytes: 3A 3A 30 3C 3A 30 3A 30 30 0D 0A
+    reading: {value: "0.L", unit: "Ohm", range_mode: manual, range_label: "400"}
+  - source_line: ". 0L V FIX 4V"
+    source: docs/protocols/sources/UT804.log
+    bytes: 3A 3A 30 3C 3A 30 3B 30 30 0D 0A
+    reading: {value: ". 0L", unit: "V", range_mode: manual, range_label: "4V"}
+  - source_line: "00.000 nF AUTO 40nF"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 35 30 31 0D 0A
+    reading: {value: "00.000", unit: "nF", range_mode: auto, range_label: "40nF"}
+  - source_line: "00.000 nF MAN 40nF"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 35 30 32 0D 0A
+    reading: {value: "00.000", unit: "nF", range_mode: manual, range_label: "40nF"}
+  - source_line: "0.0000 mF MAN 4mF"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 36 35 30 32 0D 0A
+    reading: {value: "0.0000", unit: "mF", range_mode: manual, range_label: "4mF"}
+  - source_line: "0026.4 °C FIX 1000"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 32 36 34 30 36 30 30 0D 0A
+    reading: {value: "0026.4", unit: "°C", range_mode: manual, range_label: "1000"}
+  - source_line: "DC  000.00 µA AUTO 400µ"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 30 37 30 31 0D 0A
+    reading: {value: "000.00", unit: "µA", coupling: DC, range_mode: auto, range_label: "400µ"}
+  - source_line: "DC  000.00 µA MAN 400µ"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 30 37 30 32 0D 0A
+    reading: {value: "000.00", unit: "µA", coupling: DC, range_mode: manual, range_label: "400µ"}
+  - source_line: "DC  0000.0 µA MAN 4000µ"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 37 30 32 0D 0A
+    reading: {value: "0000.0", unit: "µA", coupling: DC, range_mode: manual, range_label: "4000µ"}
+  - source_line: "AC  0000.0 µA MAN 4000µ"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 37 31 32 0D 0A
+    reading: {value: "0000.0", unit: "µA", coupling: AC, range_mode: manual, range_label: "4000µ"}
+  - source_line: "A+D 0000.0 µA MAN 4000µ"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 37 33 32 0D 0A
+    reading: {value: "0000.0", unit: "µA", coupling: AC+DC, range_mode: manual, range_label: "4000µ"}
+  - source_line: "DC  00.000 mA AUTO 40mA"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 30 38 30 31 0D 0A
+    reading: {value: "00.000", unit: "mA", coupling: DC, range_mode: auto, range_label: "40mA"}
+  - source_line: "A+D  000.00 mA MAN 400m"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 38 33 32 0D 0A
+    reading: {value: "000.00", unit: "mA", coupling: AC+DC, range_mode: manual, range_label: "400m"}
+  - source_line: "L0.  % FIX 100%"
+    source: docs/protocols/sources/UT804.log
+    bytes: 3A 3C 30 3A 3A 30 3F 30 30 0D 0A
+    reading: {value: "L0.", unit: "%", range_mode: manual, range_label: "100%"}
+    remark: "// Unterlauf"
+  - source_line: "HI.  % FIX 100%"
+    source: docs/protocols/sources/UT804.log
+    bytes: 3A 3F 31 3A 3A 30 3F 30 30 0D 0A
+    reading: {value: "HI.", unit: "%", range_mode: manual, range_label: "100%"}
+    remark: "// Überlauf"
+  - source_line: "0.L % FIX 100%"
+    source: docs/protocols/sources/UT804.log
+    bytes: 3A 3A 30 3C 3A 30 3F 30 30 0D 0A
+    reading: {value: "0.L", unit: "%", range_mode: manual, range_label: "100%"}
+    remark: "// Mehr als 400 mA"
+  - source_line: "DC   00.000 A FIX 10A"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 39 30 30 0D 0A
+    reading: {value: "00.000", unit: "A", coupling: DC, range_mode: manual, range_label: "10A"}
+  - source_line: "A+D  00.000 A FIX 10A"
+    source: docs/protocols/sources/UT804.log
+    bytes: 30 30 30 30 30 31 39 33 30 0D 0A
+    reading: {value: "00.000", unit: "A", coupling: AC+DC, range_mode: manual, range_label: "10A"}
+
+skipped:
+  - source_line: "AC  0.0585 V AUTO BG TR"
+    bytes: 30 30 35 38 34 31 32 31 31 0D 0A
+    reason: "label '0.0585' is shared by four consecutive captures; this frame's digits read 00584"
+  - source_line: "AC  0.0585 V AUTO BG TR"
+    bytes: 30 30 35 38 36 31 32 31 31 0D 0A
+    reason: "label '0.0585' is shared by four consecutive captures; this frame's digits read 00586"
+  - source_line: "AC  0.0043 V MAN 4V"
+    bytes: 30 30 30 31 30 31 32 31 32 0D 0A
+    reason: "label reads 0.0043 but the frame's digits are 00010 (0.0010 V); label not updated between captures"
+  - source_line: "0076.8 °F FIX 1832"
+    bytes: 30 30 37 37 33 30 3D 30 30 0D 0A
+    reason: "label reads 0076.8 °F but the frame's digits are 00773; label not updated between captures"
+  - source_line: "000.00 % FIX 100%"
+    bytes: 30 30 30 30 30 30 3C 30 35 0D 0A
+    reason: "duty cycle (0x3C with NEG): label says FIX but byte 8 has the AUTO bit set; the % display has no range, so which indicator applies is unclear"
+  - source_line: "0.L Ω Pieps BG"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: ". 0L V Diode BG"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "0026.4 °C"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "0078.2 °F"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "0000.0 W"
+    reason: "no unit token found"
+  - source_line: "000.00 %"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "DC -002.51 mV PEAK"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "LO. %"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "HI. %"
+    reason: "no range mode (AUTO/MANU/...) after the unit"

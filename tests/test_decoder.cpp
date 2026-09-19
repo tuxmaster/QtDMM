@@ -112,6 +112,12 @@ int main(int argc, char **argv)
     frame.resize(decoder->getPacketLength());
     auto result = decoder->decode(frame, 0);
 
+    if (!result)
+    {
+      fail(QString("[decode] '%1' produced no result").arg(hexString));
+      continue;
+    }
+
 
     auto check = [&](const QString & key, const auto & actual, const QJsonValue & expectedVal)
     {
@@ -165,7 +171,7 @@ int main(int argc, char **argv)
   // a correct guard from one that silently drops readings.
   //
   // Some meters transmit every telegram more than once (the UT803 and UT70B send
-  // each one twice - see docs/protocols/UT803.log and UT70B.log), and their
+  // each one twice - see docs/protocols/sources/UT803.log and UT70B.log), and their
   // decoders deliberately match only the last copy so one measurement yields one
   // reading. Such fixtures declare "framesPerReading" so this check expects the
   // deduplication instead of flagging it.

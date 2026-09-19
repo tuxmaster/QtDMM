@@ -1,0 +1,264 @@
+protocol: CyrustekES51922
+decoder: src/decoders/cyrustek_es51922.cpp
+devices: [Uni-Trend UT61E, Wintex TD2200]
+frames_per_reading: 1
+unit_map:                      # log spelling -> what the decoder emits
+  "µ": "u"
+sources:
+  - docs/protocols/sources/UT61E.log
+  - hardware capture, Uni-Trend UT61E on /dev/ttyUSB0 (PL2303), 2026-09-18
+  - hardware capture, Uni-Trend UT61E with signal generator, display read by
+    Sarah, 2026-09-19 (verifies the frequency, duty and diode fixes live)
+
+# 'reading' is what the log says the meter displayed; dval, unit, range and
+# hold are derived from it. Put decoder-specific assertions (special, val)
+# under 'expect' by hand. 'range_label' and 'remark' are informational.
+vectors:
+  - source_line: "DC  0.0000 V AUTO BG"
+    bytes: 30 30 30 30 30 30 3B 30 30 30 3A 30 0D 0A
+    reading: {value: "0.0000", unit: "V", coupling: DC, range_mode: auto, flags: [BG]}
+  - source_line: "DC  0.0000 V MANU BG"
+    bytes: 30 30 30 30 30 30 3B 30 30 30 38 30 0D 0A
+    reading: {value: "0.0000", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC   0.000 V MANU BG"
+    bytes: 31 30 30 30 30 30 3B 30 30 30 38 30 0D 0A
+    reading: {value: "0.000", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+    remark: "UT61E.EXE zeigt stets führende Nullen"
+  - source_line: "DC    0.00 V MANU BG"
+    bytes: 32 30 30 30 30 30 3B 30 30 30 38 30 0D 0A
+    reading: {value: "0.00", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC     0.0 V MANU BG"
+    bytes: 33 30 30 30 30 30 3B 30 30 30 38 30 0D 0A
+    reading: {value: "0.0", unit: "V", coupling: DC, range_mode: manual, flags: [BG]}
+  - source_line: "DC -0.0000 V M. BG Rel"
+    bytes: 30 30 30 30 30 30 3B 30 32 30 38 30 0D 0A
+    reading: {value: "-0.0000", unit: "V", coupling: DC, range_mode: manual, flags: [BG, Rel]}
+  - source_line: "DC  0.0197 V M. BG MAX"
+    bytes: 30 30 30 31 39 37 3B 30 30 34 38 30 0D 0A
+    reading: {value: "0.0197", unit: "V", coupling: DC, range_mode: manual, flags: [BG, MAX]}
+  - source_line: "DC -0.0222 V M. BG MIN"
+    bytes: 30 30 30 32 32 32 3B 34 30 32 38 30 0D 0A
+    reading: {value: "-0.0222", unit: "V", coupling: DC, range_mode: manual, flags: [BG, MIN]}
+  - source_line: "DC    0.00 Hz AUTO"
+    bytes: 30 30 30 30 30 30 3B 30 30 30 3B 30 0D 0A
+    reading: {value: "0.00", unit: "Hz", coupling: DC, range_mode: auto}
+  - source_line: "DC  0.0000 V A. LowBat"
+    bytes: 30 30 30 30 30 30 3B 32 30 30 3A 30 0D 0A
+    reading: {value: "0.0000", unit: "V", coupling: DC, range_mode: auto, flags: [LowBat]}
+  - source_line: "DC - 30.55 mV MANU BG"
+    bytes: 34 30 33 30 35 35 3B 34 30 30 38 30 0D 0A
+    reading: {value: "- 30.55", unit: "mV", coupling: DC, range_mode: manual, flags: [BG]}
+    remark: "Keine Bereichsumschaltung!"
+  - source_line: "AC   81.53 mV MANU BG"
+    bytes: 34 30 38 31 35 33 3B 30 30 30 34 30 0D 0A
+    reading: {value: "81.53", unit: "mV", coupling: AC, range_mode: manual, flags: [BG]}
+  - source_line: "DC    0.00 Hz AUTO"
+    bytes: 30 30 30 30 30 30 3B 30 30 30 3B 30 0D 0A
+    reading: {value: "0.00", unit: "Hz", coupling: DC, range_mode: auto}
+    remark: "unabhängig ob V- oder mV-Bereich!"
+  - source_line: "UL .   % MANU"
+    bytes: 30 30 30 30 30 30 3B 38 30 38 39 30 0D 0A
+    reading: {value: "UL .", unit: "%", range_mode: manual}
+  - source_line: "0L.   MOhm AUTO"
+    bytes: 36 32 32 35 38 30 33 31 30 30 32 30 0D 0A
+    reading: {value: "0L.", unit: "MOhm", range_mode: auto}
+  - source_line: "0L.   MOhm MANU"
+    bytes: 36 32 32 35 38 30 33 31 30 30 30 30 0D 0A
+    reading: {value: "0L.", unit: "MOhm", range_mode: manual}
+  - source_line: "0.00 MOhm MANU"
+    bytes: 36 30 30 30 30 30 33 30 30 30 30 30 0D 0A
+    reading: {value: "0.00", unit: "MOhm", range_mode: manual}
+  - source_line: "0L.   Ohm MANU"
+    bytes: 30 32 32 35 38 30 33 31 30 30 30 30 0D 0A
+    reading: {value: "0L.", unit: "Ohm", range_mode: manual}
+  - source_line: ".0L   kOhm MANU"
+    bytes: 31 32 32 35 38 30 33 31 30 30 30 30 0D 0A
+    reading: {value: ".0L", unit: "kOhm", range_mode: manual}
+  - source_line: "0.L   kOhm MANU"
+    bytes: 32 32 32 35 38 30 33 31 30 30 30 30 0D 0A
+    reading: {value: "0.L", unit: "kOhm", range_mode: manual}
+  - source_line: "0L.   kOhm MANU"
+    bytes: 33 32 32 35 38 30 33 31 30 30 30 30 0D 0A
+    reading: {value: "0L.", unit: "kOhm", range_mode: manual}
+  - source_line: ".0L   MOhm MANU"
+    bytes: 34 32 32 35 38 30 33 31 30 30 30 30 0D 0A
+    reading: {value: ".0L", unit: "MOhm", range_mode: manual}
+  - source_line: "0.L   MOhm MANU"
+    bytes: 35 32 32 35 38 30 33 31 30 30 30 30 0D 0A
+    reading: {value: "0.L", unit: "MOhm", range_mode: manual}
+  - source_line: "0L.   Ohm M. Pieps"
+    bytes: 30 32 32 35 38 30 35 31 30 30 30 30 0D 0A
+    reading: {value: "0L.", unit: "Ohm", range_mode: manual, flags: [Pieps]}
+    remark: "Keine Bereichsumschaltung!"
+  - source_line: "0.042 nF AUTO"
+    bytes: 30 30 30 30 34 32 36 30 30 30 32 30 0D 0A
+    reading: {value: "0.042", unit: "nF", range_mode: auto}
+  - source_line: "0.03 nF MANU"
+    bytes: 31 30 30 30 30 33 36 30 30 30 30 30 0D 0A
+    reading: {value: "0.03", unit: "nF", range_mode: manual}
+  - source_line: "0.0000 µF MANU"
+    bytes: 32 30 30 30 30 30 36 30 30 30 30 30 0D 0A
+    reading: {value: "0.0000", unit: "µF", range_mode: manual}
+  - source_line: "0.000 µF MANU"
+    bytes: 33 30 30 30 30 30 36 30 30 30 30 30 0D 0A
+    reading: {value: "0.000", unit: "µF", range_mode: manual}
+  - source_line: "0.00 µF MANU"
+    bytes: 34 30 30 30 30 30 36 30 30 30 30 30 0D 0A
+    reading: {value: "0.00", unit: "µF", range_mode: manual}
+  - source_line: "0.0000 mF MANU"
+    bytes: 35 30 30 30 30 30 36 30 30 30 30 30 0D 0A
+    reading: {value: "0.0000", unit: "mF", range_mode: manual}
+  - source_line: "0.000 mF MANU"
+    bytes: 36 30 30 30 30 30 36 30 30 30 30 30 0D 0A
+    reading: {value: "0.000", unit: "mF", range_mode: manual}
+  - source_line: "0.00 mF MANU"
+    bytes: 37 30 30 30 30 30 36 30 30 30 30 30 0D 0A
+    reading: {value: "0.00", unit: "mF", range_mode: manual}
+  - source_line: "0.00 Hz AUTO"
+    bytes: 30 30 30 30 30 30 32 30 30 30 32 30 0D 0A
+    reading: {value: "0.00", unit: "Hz", range_mode: auto}
+  - source_line: "0.0 Hz MANU"
+    bytes: 31 30 30 30 30 30 32 30 30 30 30 30 0D 0A
+    reading: {value: "0.0", unit: "Hz", range_mode: manual}
+  - source_line: "UL .   % MANU"
+    bytes: 30 30 30 30 30 30 32 38 30 38 30 30 0D 0A
+    reading: {value: "UL .", unit: "%", range_mode: manual}
+    remark: "UT61E.EXE zeigt \"00L0.0 %\""
+  - source_line: "DC    0.00 µA AUTO"
+    bytes: 30 30 30 30 30 30 3D 30 30 30 3A 30 0D 0A
+    reading: {value: "0.00", unit: "µA", coupling: DC, range_mode: auto}
+    remark: "UT61E.EXE zeigt u.a. auch den Bereich: ±220"
+  - source_line: "DC     0.0 µA MANU"
+    bytes: 31 30 30 30 30 30 3D 30 30 30 38 30 0D 0A
+    reading: {value: "0.0", unit: "µA", coupling: DC, range_mode: manual}
+    remark: "UT61E.EXE zeigt hier den Bereich falsch!"
+  - source_line: "AC     0.9 µA MANU"
+    bytes: 31 30 30 30 30 39 3D 30 30 30 34 30 0D 0A
+    reading: {value: "0.9", unit: "µA", coupling: AC, range_mode: manual}
+  - source_line: "AC    0.00 Hz AUTO"
+    bytes: 30 30 30 30 30 30 3D 30 30 30 37 30 0D 0A
+    reading: {value: "0.00", unit: "Hz", coupling: AC, range_mode: auto}
+  - source_line: "AC  UL .   % MANU"
+    bytes: 30 30 30 30 30 30 3D 38 30 38 35 30 0D 0A
+    reading: {value: "UL .", unit: "%", coupling: AC, range_mode: manual}
+  - source_line: "AC   0.007 mA AUTO"
+    bytes: 30 30 30 30 30 37 3F 30 30 30 36 30 0D 0A
+    reading: {value: "0.007", unit: "mA", coupling: AC, range_mode: auto}
+  - source_line: "AC   0.016 A MANU"
+    bytes: 30 30 30 30 31 36 30 30 30 30 34 30 0D 0A
+    reading: {value: "0.016", unit: "A", coupling: AC, range_mode: manual}
+  - source_line: "AC   0.000 A MANU HOLD"
+    bytes: 30 30 30 30 30 30 30 30 30 30 34 32 0D 0A
+    reading: {value: "0.000", unit: "A", coupling: AC, range_mode: manual, flags: [HOLD]}
+
+  # --- hardware captures, 2026-09-18 ---
+  - source_line: "DC 0.0001 V AUTO"
+    source: hardware capture 2026-09-18
+    bytes: 30 30 30 30 30 31 3B 30 30 30 3A 30 0D 0A
+    reading: {value: "0.0001", unit: "V", coupling: DC, range_mode: auto}
+    expect: {val: "0.0001", special: DC}
+  - source_line: "DC 0.0117 V AUTO"
+    source: hardware capture 2026-09-18
+    bytes: 30 30 30 31 31 37 3B 30 30 30 3A 30 0D 0A
+    reading: {value: "0.0117", unit: "V", coupling: DC, range_mode: auto}
+    expect: {val: "0.0117", special: DC}
+  - source_line: "DC -0.0097 V AUTO"
+    source: hardware capture 2026-09-18
+    bytes: 30 30 30 30 39 37 3B 34 30 30 3A 30 0D 0A
+    reading: {value: "-0.0097", unit: "V", coupling: DC, range_mode: auto}
+    expect: {val: "-0.0097", special: DC}
+  # --- formerly 'pending': decoder disagreed with the log's Hz range table, the
+  # Hz/duty sub-mode scaling and the diode unit; fixed in the decoder after
+  # heha's DMM.EXE (ut.cpp) independently confirmed the log ---
+  - source_line: "0.000 kHz MANU"
+    bytes: 33 30 30 30 30 30 32 30 30 30 30 30 0D 0A
+    reading: {value: "0.000", unit: "kHz", range_mode: manual}
+  - source_line: "0.00 kHz MANU"
+    bytes: 34 30 30 30 30 30 32 30 30 30 30 30 0D 0A
+    reading: {value: "0.00", unit: "kHz", range_mode: manual}
+  - source_line: "0.0000 MHz MANU"
+    bytes: 35 30 30 30 30 30 32 30 30 30 30 30 0D 0A
+    reading: {value: "0.0000", unit: "MHz", range_mode: manual}
+  - source_line: "0.000 MHz MANU"
+    bytes: 36 30 30 30 30 30 32 30 30 30 30 30 0D 0A
+    reading: {value: "0.000", unit: "MHz", range_mode: manual}
+  - source_line: "0.00 MHz MANU"
+    bytes: 37 30 30 30 30 30 32 30 30 30 30 30 0D 0A
+    reading: {value: "0.00", unit: "MHz", range_mode: manual}
+  - source_line: "DC    50.0 Hz AUTO"
+    bytes: 31 30 30 35 30 30 3B 30 30 30 3B 30 0D 0A
+    reading: {value: "50.0", unit: "Hz", coupling: DC, range_mode: auto}
+  - source_line: "DC    49.4 % MANU"
+    bytes: 30 30 30 34 39 34 3B 38 30 30 39 30 0D 0A
+    reading: {value: "49.4", unit: "%", coupling: DC, range_mode: manual}
+  - source_line: "16.3 % MANU"
+    bytes: 34 30 30 31 36 33 32 38 30 30 30 30 0D 0A
+    reading: {value: "16.3", unit: "%", range_mode: manual}
+  - source_line: ".0L   V MANU Diode"
+    bytes: 30 32 32 35 38 30 31 31 30 30 30 30 0D 0A
+    reading: {value: ".0L", unit: "V", range_mode: manual, flags: [Diode]}
+    remark: "Keine Bereichsumschaltung!"
+
+  # --- hardware captures 2026-09-19, signal generator on the UT61E, each display
+  # value read off the meter while the frame was captured ---
+  - source_line: "Hz function AUTO, generator 1.5 kHz: 1.601 kHz"
+    source: hardware capture 2026-09-19
+    bytes: 33 30 31 36 30 31 32 30 30 30 32 30 0D 0A
+    reading: {value: "1.601", unit: "kHz", range_mode: auto}
+    expect: {special: FR}
+  - source_line: "Hz MANU range 3 (22.000 kHz): 01.546 kHz"
+    source: hardware capture 2026-09-19
+    bytes: 33 30 31 35 34 36 32 30 30 30 30 30 0D 0A
+    reading: {value: "01.546", unit: "kHz", range_mode: manual}
+  - source_line: "Hz MANU range 4 (220.00 kHz): 001.55 kHz"
+    source: hardware capture 2026-09-19
+    bytes: 34 30 30 31 35 35 32 30 30 30 30 30 0D 0A
+    reading: {value: "001.55", unit: "kHz", range_mode: manual}
+  - source_line: "Hz MANU range 5 (2.2000 MHz): 0.0016 MHz"
+    source: hardware capture 2026-09-19
+    bytes: 35 30 30 30 31 36 32 30 30 30 30 30 0D 0A
+    reading: {value: "0.0016", unit: "MHz", range_mode: manual}
+  - source_line: "Hz MANU range 6 (22.000 MHz): 00.002 MHz"
+    source: hardware capture 2026-09-19
+    bytes: 36 30 30 30 30 32 32 30 30 30 30 30 0D 0A
+    reading: {value: "00.002", unit: "MHz", range_mode: manual}
+  - source_line: "Hz MANU range 7 (220.00 MHz): 000.01 MHz"
+    source: hardware capture 2026-09-19
+    bytes: 37 30 30 30 30 31 32 30 30 30 30 30 0D 0A
+    reading: {value: "000.01", unit: "MHz", range_mode: manual}
+  - source_line: "Hz MANU range 1 (2200.0 Hz), generator 154.4 Hz: 0154.4 Hz"
+    source: hardware capture 2026-09-19
+    bytes: 31 30 31 35 34 34 32 30 30 30 30 30 0D 0A
+    reading: {value: "0154.4", unit: "Hz", range_mode: manual}
+  - source_line: "Hz MANU range 0 (220.00 Hz), generator 15 Hz: 014.95 Hz (two decimals on the display)"
+    source: hardware capture 2026-09-19
+    bytes: 30 30 31 34 39 35 32 30 30 30 30 30 0D 0A
+    reading: {value: "014.95", unit: "Hz", range_mode: manual}
+  - source_line: "V function, Hz button, generator 1.544 kHz: 1.544 kHz"
+    source: hardware capture 2026-09-19
+    bytes: 33 30 31 35 34 34 3B 30 30 30 3B 30 0D 0A
+    reading: {value: "01.544", unit: "kHz", coupling: DC, range_mode: auto}
+    expect: {special: DC}
+  - source_line: "V function, Hz button twice = duty cycle, display around 41 %: 42.4 %"
+    source: hardware capture 2026-09-19
+    bytes: 33 30 30 34 32 34 3B 38 30 30 39 30 0D 0A
+    reading: {value: "0042.4", unit: "%", coupling: DC, range_mode: manual}
+    remark: "display fluctuated 40.8-42.4 % while capturing"
+  - source_line: "Diode, reverse: OL"
+    source: hardware capture 2026-09-19
+    bytes: 30 31 39 30 30 30 31 31 30 30 30 30 0D 0A
+    reading: {value: "OL", unit: "V", range_mode: manual}
+    expect: {val: "OL", special: DI}
+  - source_line: "Diode, forward: 0.7466 V"
+    source: hardware capture 2026-09-19
+    bytes: 30 30 37 34 36 36 31 30 30 30 30 30 0D 0A
+    reading: {value: "0.7466", unit: "V", range_mode: manual}
+    expect: {val: "0.7466", special: DI}
+
+skipped:
+  - source_line: "AC    0.03 mA AUTO"
+    bytes: 31 30 30 30 30 33 3F 30 30 30 34 30 0D 0A
+    reason: >-
+      label says AUTO but byte 10 is 0x34, i.e. the AUTO bit (bit 1) is clear;
+      the neighbouring 'AC 0.007 mA AUTO' has 0x36 with the bit set. Internal
+      inconsistency of the log, not a decoder question.
