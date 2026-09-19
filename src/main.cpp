@@ -48,33 +48,28 @@ static void attachParentConsole()
 }
 #endif
 
-void qtdmmMessageOutput(QtMsgType type, const QMessageLogContext &, const QString &msg)
+// Everything goes to stderr, prefixed by severity. Written with fprintf on
+// purpose: calling qDebug() & co. from inside the handler re-enters it.
+// Debug messages only appear for logging categories switched on by --debug
+// (see MainWin::setConsoleLogging), which keeps release builds quiet.
+void qtdmmMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+  const char *prefix = "";
   switch (type)
   {
     case QtDebugMsg:
-#ifdef QT_DEBUG
-      qDebug() << "Debug: " << msg;
-#endif
+      prefix = context.category ? context.category : "Debug";
       break;
-    case QtWarningMsg:
-#ifdef QT_DEBUG
-      if (msg.contains("Absolute index"))
-        abort();
-#endif
-      qWarning() << "Warning: " << msg;
-      break;
-    case QtFatalMsg:
-      qFatal("Fatal: %s", msg.toUtf8().constData());
-    case QtCriticalMsg:
-      qCritical() << "Critial: " << msg;
-      break;
-    case QtInfoMsg:
-      qInfo() << "Info: " << msg;
-      break;
+    case QtInfoMsg:     prefix = "Info"; break;
+    case QtWarningMsg:  prefix = "Warning"; break;
+    case QtCriticalMsg: prefix = "Critical"; break;
+    case QtFatalMsg:    prefix = "Fatal"; break;
   }
+  fprintf(stderr, "%s: %s\n", prefix, msg.toLocal8Bit().constData());
+  fflush(stderr);
+  if (type == QtFatalMsg)
+    abort();
 }
-
 
 void initTranslation(QApplication *app,QTranslator *QtTranslation, QTranslator *AppTranslation)
 {

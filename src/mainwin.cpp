@@ -32,6 +32,7 @@
 #include "meterwid.h"
 #include "settings.h"
 #include <QDockWidget>
+#include <QLoggingCategory>
 
 MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   : QMainWindow(parent)
@@ -201,6 +202,8 @@ void MainWin::sendStateSLOT(const QString & state)
 
 void MainWin::setConsoleLogging(bool on)
 {
+  if (on)
+    QLoggingCategory::setFilterRules("qtdmm.hid.debug=true");
   m_wid->setConsoleLogging(on);
 }
 

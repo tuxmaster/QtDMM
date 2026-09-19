@@ -13,6 +13,9 @@
 #endif
 
 #include "dmmdecoder.h"
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(lcHid)
 
 // hiddevice.h  (wrapp‑t hidapi oder libusb)
 class HIDSerialDevice : public QIODevice {

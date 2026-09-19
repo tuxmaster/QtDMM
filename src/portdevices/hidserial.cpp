@@ -1,5 +1,8 @@
 #include "hidserial.h"
 
+// Low-level trace of the HID cable, enabled by --debug
+Q_LOGGING_CATEGORY(lcHid, "qtdmm.hid", QtWarningMsg)
+
 HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device, QObject *p)
   : QIODevice(p)
   , m_dmmInfo(info)
@@ -11,6 +14,7 @@ HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device,
     qWarning() << "HID: cannot open" << device << QString::fromWCharArray(hid_error(nullptr));
   else
   {
+    qCDebug(lcHid) << "opened" << device;
     m_isOpen = true;
     QThread* thread = new QThread;
     this->moveToThread(thread);
@@ -99,6 +103,8 @@ void HIDSerialDevice::run()
     m_buffer[4] = bps >> 24;
     m_buffer[5] = 0x03; // 3 = enable?
     int res = hid_send_feature_report(m_handle, m_buffer, 6); // 6 bytes
+    qCDebug(lcHid) << "feature report" << QByteArray(reinterpret_cast<const char *>(m_buffer), 6).toHex(' ')
+                   << "baud" << bps << "->" << res;
 
     if (res < 0)
     {
@@ -127,6 +133,7 @@ void HIDSerialDevice::run()
 
         if (res > 0)
         {
+          qCDebug(lcHid) << "report" << QByteArray(reinterpret_cast<const char *>(buf), res).toHex(' ');
           // format data
           int len = buf[0] & 0x07; // the first byte contains the length in the lower 3 bits ( 111 = 7 )
           for (int i = 1; i <= len; i++)
