@@ -148,6 +148,7 @@ public Q_SLOTS:
   void                  thresholdChangedSLOT(DMMGraph::CursorMode, double);
 
 Q_SIGNALS:
+  void applied();   // Apply pressed: settings saved, dialog stays open
   void                  accepted();
   void                  rejected();
   void                  showTips(bool);

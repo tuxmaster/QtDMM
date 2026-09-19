@@ -311,6 +311,8 @@ void ConfigDlg::on_ui_buttonBox_accepted()
     Q_EMIT accepted();
     hide();
   }
+  else
+    Q_EMIT applied();
 }
 
 void ConfigDlg::on_ui_buttonBox_clicked(QAbstractButton *button)
