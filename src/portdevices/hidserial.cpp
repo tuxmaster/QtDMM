@@ -137,8 +137,11 @@ void HIDSerialDevice::run()
         if (res > 0)
         {
           qCDebug(lcHid) << "report" << QByteArray(reinterpret_cast<const char *>(buf), res).toHex(' ');
+          m_reportsSeen++;
           // format data
           int len = buf[0] & 0x07; // the first byte contains the length in the lower 3 bits ( 111 = 7 )
+          if (len > 0)
+            m_dataSeen = true;
           for (int i = 1; i <= len; i++)
           {
             m_buffer[m_buffer_w] = buf[i] & 0x7f; // bitwise and with 0111 1111, mask the upper bit which is always 1

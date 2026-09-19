@@ -26,6 +26,7 @@
 #include <QMessageBox>
 
 #include "dmm.h"
+#include "portdevices/hidserial.h"
 #include "decoders.h"
 
 #include <stdio.h>
@@ -282,7 +283,16 @@ void DMM::readEventSLOT(const QByteArray &data, int id)
     if (ReaderThread::Error == m_readerThread->status())
       m_error = tr("Read error on device %1.\nDMM connected and switched on?").arg(m_device);
     else if (ReaderThread::Timeout == m_readerThread->status())
-      m_error = tr("Timeout on device %1.\nDMM connected and switched on?").arg(m_device);
+    {
+      // a HID cable that answers but never carries UART bytes: the meter's
+      // serial output is off (UNI-T: the RS232/USB button)
+      auto *hid = dynamic_cast<HIDSerialDevice *>(m_portHandler->port());
+      if (hid && hid->cableAnswers() && !hid->dataSeen())
+        m_error = tr("The USB cable answers, but the meter sends nothing.\n"
+                     "Switch on the meter's serial output (on UNI-T meters: hold the RS232/USB button).");
+      else
+        m_error = tr("Timeout on device %1.\nDMM connected and switched on?").arg(m_device);
+    }
     else if (ReaderThread::NotConnected == m_readerThread->status())
       m_error = tr("Not connected");
   }
