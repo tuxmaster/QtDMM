@@ -1,5 +1,6 @@
 #include "dmmdecoder.h"
 #include "decoders.h"
+#include "siprefix.h"
 
 std::vector<DmmDecoder::DMMInfo> *DmmDecoder::m_configurations;
 
@@ -47,19 +48,7 @@ bool DmmDecoder::bit(const QByteArray &data, int byte, int bit) const {
 
 double DmmDecoder::prefixFactor(const QString &prefix)
 {
-  static const QHash<QString, double> scaleMap = {
-    { "",     1.0 },
-    { "k",    1e3 },
-    { "M",    1e6 },
-    { "G",    1e9 },
-    { "m",    1e-3 },
-    { "µ",    1e-6 },
-    { "u",    1e-6 },  // optional: ASCII fallback
-    { "n",    1e-9 },
-    { "p",    1e-12 }
-  };
-
-  return scaleMap.value(prefix, 1.0);
+  return SiPrefix::factor(prefix);
 }
 
 void DmmDecoder::formatResultValue(int commaPos, const QString& prefix, const QString& baseUnit)

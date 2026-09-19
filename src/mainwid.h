@@ -50,15 +50,13 @@ public:
   void        setDisplay(DisplayWid *);
   void        setConsoleLogging(bool);
   void        setToolbarVisibility(bool, bool, bool, bool);
-
-  QString     deviceListText() const;
+  Settings   *settings() const { return m_settings; }
 
 Q_SIGNALS:
   void        running(bool);
   void        info(const QString &);
   void        error(const QString &);
   void        useTextLabel(bool);
-  void        winGeometry(const QRect &);
   void        setConnect(bool);
   void        toolbarVisibility(bool, bool, bool, bool);
   void        connectDMM(bool);

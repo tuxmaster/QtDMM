@@ -110,4 +110,13 @@
         <file alias="fr">../build/qtdmm_fr.qm</file>
         <file alias="pl">../build/qtdmm_pl.qm</file>
     </qresource>
+    <qresource prefix="/Help">
+        <file alias="command-line.md">../docs/user/command-line.md</file>
+        <file alias="connecting.md">../docs/user/connecting.md</file>
+        <file alias="index.md">../docs/user/index.md</file>
+        <file alias="keyboard.md">../docs/user/keyboard.md</file>
+        <file alias="recorder.md">../docs/user/recorder.md</file>
+        <file alias="supported-devices.md">../docs/user/supported-devices.md</file>
+        <file alias="troubleshooting.md">../docs/user/troubleshooting.md</file>
+    </qresource>
 </RCC>

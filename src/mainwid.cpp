@@ -97,11 +97,6 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
     showTipsSLOT();
 }
 
-QString MainWid::deviceListText() const
-{
-  return m_configDlg->deviceListText();
-}
-
 void MainWid::setConsoleLogging(bool on)
 {
   m_dmm->setConsoleLogging(on);

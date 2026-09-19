@@ -17,3 +17,6 @@ Documentation for people working on QtDMM itself. Planned pages:
   `docs/protocols/spec/`.
 
 None of these pages exist yet.
+
+Longer-term idea from the original README: split measuring and recording into
+a separate background daemon.

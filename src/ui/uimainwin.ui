@@ -424,6 +424,27 @@
     <bool>true</bool>
    </property>
   </action>
+  <action name="action_Help">
+   <property name="icon">
+    <iconset theme="help-contents" resource="../resources.qrc">
+     <normaloff>:/Symbols/help.xpm</normaloff>:/Symbols/help.xpm</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Handbook</string>
+   </property>
+   <property name="iconText">
+    <string>Handbook</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Handbook&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Open the QtDMM handbook: connecting a meter, the recorder, troubleshooting and the list of supported devices.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">F1</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
   <action name="action_About">
    <property name="icon">
     <iconset theme="help-about" resource="../resources.qrc">
@@ -434,9 +455,6 @@
    </property>
    <property name="whatsThis">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true">F1</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>

@@ -104,137 +104,137 @@ DMM connected and switched on?</source>
 <context>
     <name>DMMGraph</name>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="110"/>
+        <location filename="../../src/dmmgraph.cpp" line="111"/>
         <source>[sec]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="160"/>
+        <location filename="../../src/dmmgraph.cpp" line="161"/>
         <source>QtDMM: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="180"/>
-        <location filename="../../src/dmmgraph.cpp" line="185"/>
+        <location filename="../../src/dmmgraph.cpp" line="181"/>
+        <location filename="../../src/dmmgraph.cpp" line="186"/>
         <source>Sampling start:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="181"/>
-        <location filename="../../src/dmmgraph.cpp" line="190"/>
+        <location filename="../../src/dmmgraph.cpp" line="182"/>
+        <location filename="../../src/dmmgraph.cpp" line="191"/>
         <source>Sampling resolution:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="193"/>
+        <location filename="../../src/dmmgraph.cpp" line="194"/>
         <source>%1 Seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="570"/>
-        <location filename="../../src/dmmgraph.cpp" line="572"/>
-        <location filename="../../src/dmmgraph.cpp" line="574"/>
-        <location filename="../../src/dmmgraph.cpp" line="576"/>
+        <location filename="../../src/dmmgraph.cpp" line="567"/>
+        <location filename="../../src/dmmgraph.cpp" line="569"/>
+        <location filename="../../src/dmmgraph.cpp" line="571"/>
+        <location filename="../../src/dmmgraph.cpp" line="573"/>
         <source>Sampling</source>
         <translation>Muestreo</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="570"/>
-        <location filename="../../src/dmmgraph.cpp" line="572"/>
-        <location filename="../../src/dmmgraph.cpp" line="574"/>
-        <location filename="../../src/dmmgraph.cpp" line="576"/>
+        <location filename="../../src/dmmgraph.cpp" line="567"/>
+        <location filename="../../src/dmmgraph.cpp" line="569"/>
+        <location filename="../../src/dmmgraph.cpp" line="571"/>
+        <location filename="../../src/dmmgraph.cpp" line="573"/>
         <source>Stopped</source>
         <translation>Detenido</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="638"/>
+        <location filename="../../src/dmmgraph.cpp" line="635"/>
         <source>Disconnect</source>
         <translation>Desconectar</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="645"/>
+        <location filename="../../src/dmmgraph.cpp" line="642"/>
         <source>Connect</source>
         <translation>Conectar</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="654"/>
+        <location filename="../../src/dmmgraph.cpp" line="651"/>
         <source>Stop recorder</source>
         <translation>Detener grabador</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="661"/>
+        <location filename="../../src/dmmgraph.cpp" line="658"/>
         <source>Start recorder</source>
         <translation>Iniciar grabador</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="666"/>
+        <location filename="../../src/dmmgraph.cpp" line="663"/>
         <source>Clear graph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="672"/>
+        <location filename="../../src/dmmgraph.cpp" line="669"/>
         <source>Configure...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="680"/>
+        <location filename="../../src/dmmgraph.cpp" line="677"/>
         <source>Export data...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="684"/>
+        <location filename="../../src/dmmgraph.cpp" line="681"/>
         <source>Import data...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="891"/>
+        <location filename="../../src/dmmgraph.cpp" line="839"/>
         <source>Export data</source>
         <translation>Exportar datos</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="909"/>
-        <location filename="../../src/dmmgraph.cpp" line="990"/>
+        <location filename="../../src/dmmgraph.cpp" line="857"/>
+        <location filename="../../src/dmmgraph.cpp" line="938"/>
         <source>Cannot open file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="944"/>
+        <location filename="../../src/dmmgraph.cpp" line="892"/>
         <source>QtDMM: Unsaved data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="945"/>
+        <location filename="../../src/dmmgraph.cpp" line="893"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="957"/>
+        <location filename="../../src/dmmgraph.cpp" line="905"/>
         <source>Export data first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="961"/>
+        <location filename="../../src/dmmgraph.cpp" line="909"/>
         <source>Import &amp; overwrite data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="972"/>
+        <location filename="../../src/dmmgraph.cpp" line="920"/>
         <source>Import data</source>
         <translation>Importar datos</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="972"/>
+        <location filename="../../src/dmmgraph.cpp" line="920"/>
         <source>CSV (*.csv);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="999"/>
-        <location filename="../../src/dmmgraph.cpp" line="1041"/>
+        <location filename="../../src/dmmgraph.cpp" line="947"/>
+        <location filename="../../src/dmmgraph.cpp" line="989"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1010"/>
+        <location filename="../../src/dmmgraph.cpp" line="958"/>
         <source>File contains only header</source>
         <translation type="unfinished"></translation>
     </message>
@@ -284,18 +284,18 @@ DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="490"/>
+        <location filename="../../src/dmmprefs.cpp" line="468"/>
         <source>Load DMM description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="490"/>
-        <location filename="../../src/dmmprefs.cpp" line="516"/>
+        <location filename="../../src/dmmprefs.cpp" line="468"/>
+        <location filename="../../src/dmmprefs.cpp" line="494"/>
         <source>DMM description (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="516"/>
+        <location filename="../../src/dmmprefs.cpp" line="494"/>
         <source>Save DMM description</source>
         <translation type="unfinished"></translation>
     </message>
@@ -340,6 +340,14 @@ DMM connected and switched on?</source>
     </message>
 </context>
 <context>
+    <name>HelpDlg</name>
+    <message>
+        <location filename="../../src/helpdlg.cpp" line="70"/>
+        <source>Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>InstancesDlg</name>
     <message>
         <location filename="../../src/instancesdlg.cpp" line="98"/>
@@ -373,78 +381,78 @@ DMM connected and switched on?</source>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="126"/>
+        <location filename="../../src/mainwid.cpp" line="121"/>
         <source>QtDMM: Unsaved data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="127"/>
+        <location filename="../../src/mainwid.cpp" line="122"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="142"/>
+        <location filename="../../src/mainwid.cpp" line="137"/>
         <source>Export data first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="146"/>
+        <location filename="../../src/mainwid.cpp" line="141"/>
         <source>Quit without saving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="442"/>
+        <location filename="../../src/mainwid.cpp" line="437"/>
         <source>Automatic start at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="444"/>
+        <location filename="../../src/mainwid.cpp" line="439"/>
         <source>Raising threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="446"/>
+        <location filename="../../src/mainwid.cpp" line="441"/>
         <source>Falling threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="467"/>
-        <location filename="../../src/mainwid.cpp" line="508"/>
+        <location filename="../../src/mainwid.cpp" line="462"/>
+        <location filename="../../src/mainwid.cpp" line="503"/>
         <source>QtDMM: Launch error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="468"/>
+        <location filename="../../src/mainwid.cpp" line="463"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="480"/>
+        <location filename="../../src/mainwid.cpp" line="475"/>
         <source>Yes, kill it!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="484"/>
+        <location filename="../../src/mainwid.cpp" line="479"/>
         <source>No, keep running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="509"/>
+        <location filename="../../src/mainwid.cpp" line="504"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="520"/>
+        <location filename="../../src/mainwid.cpp" line="515"/>
         <source>Bummer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="526"/>
+        <location filename="../../src/mainwid.cpp" line="521"/>
         <source>Launched %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="531"/>
+        <location filename="../../src/mainwid.cpp" line="526"/>
         <source>%1 terminated with exit code %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -452,39 +460,44 @@ DMM connected and switched on?</source>
 <context>
     <name>MainWin</name>
     <message>
-        <location filename="../../src/mainwin.cpp" line="127"/>
+        <location filename="../../src/mainwin.cpp" line="129"/>
         <source>Another instance is running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="203"/>
+        <location filename="../../src/mainwin.cpp" line="205"/>
         <source>Record DMM data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="204"/>
+        <location filename="../../src/mainwin.cpp" line="206"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="207"/>
+        <location filename="../../src/mainwin.cpp" line="209"/>
         <source>This instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="208"/>
+        <location filename="../../src/mainwin.cpp" line="210"/>
         <source>All instances</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="256"/>
-        <source>QtDMM: Welcome!</source>
+        <location filename="../../src/mainwin.cpp" line="268"/>
+        <source>About QtDMM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="256"/>
-        <source>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;A simple recorder for DMM&apos;s&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;A simple display software for a variety of digital multimeter. Currently confirmed are:&lt;table&gt;%2&lt;/table&gt;Other compatible models may work also.&lt;p&gt;QtDMM features min/max memory and a configurable recorder with import/export and printing function. Sampling may be started manually, at a given time or triggered by a measured threshold. Additionally an external program may be started when given thresholds are reached.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; uses the platform independent toolkit &lt;b&gt;Qt&lt;/b&gt; version %3 and is licensed under &lt;b&gt;GPL 3&lt;/b&gt; (Versions prior to v0.9.0 where licensed under GPL 2)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;The icons (except the DMM icon) have been taken from the KDE project.&lt;p&gt;</source>
+        <location filename="../../src/mainwin.cpp" line="271"/>
+        <source>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;A readout and transient recorder for digital multimeters.&lt;/p&gt;&lt;p&gt;Built with &lt;b&gt;Qt&lt;/b&gt; %2. Licensed under the &lt;b&gt;GNU GPL 3&lt;/b&gt; (versions before 0.9.0 under GPL 2).&lt;/p&gt;&lt;p&gt;0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.&lt;br&gt;0.9.3 and before: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Project page: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Icons (except the DMM icon) are taken from the KDE project.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="285"/>
+        <source>Supported devices...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1217,6 +1230,62 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
     </message>
 </context>
 <context>
+    <name>UIHelpDlg</name>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="14"/>
+        <source>QtDMM: Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="37"/>
+        <location filename="../../src/ui/uihelpdlg.ui" line="43"/>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="40"/>
+        <source>Go back to the previously shown help page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="56"/>
+        <location filename="../../src/ui/uihelpdlg.ui" line="62"/>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="59"/>
+        <source>Go forward again after going back.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="75"/>
+        <location filename="../../src/ui/uihelpdlg.ui" line="81"/>
+        <source>Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="78"/>
+        <source>Return to the table of contents.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="107"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Cerrar</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="123"/>
+        <source>Table of contents. Click an entry to show that page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="134"/>
+        <source>The help page. Links inside the text navigate to other pages; web links open in your browser.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UIInstancesDlg</name>
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="14"/>
@@ -1445,8 +1514,8 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="101"/>
-        <location filename="../../src/ui/uimainwin.ui" line="451"/>
-        <location filename="../../src/ui/uimainwin.ui" line="454"/>
+        <location filename="../../src/ui/uimainwin.ui" line="469"/>
+        <location filename="../../src/ui/uimainwin.ui" line="472"/>
         <source>Menu</source>
         <translation>Menú</translation>
     </message>
@@ -1630,31 +1699,46 @@ The maximum resolution for data aquisition is 1/10th of a second, but may also b
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="433"/>
+        <source>&amp;Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uimainwin.ui" line="436"/>
+        <source>Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uimainwin.ui" line="439"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Handbook&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Open the QtDMM handbook: connecting a meter, the recorder, troubleshooting and the list of supported devices.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uimainwin.ui" line="454"/>
         <source>&amp;About</source>
         <translation>&amp;Acerca de</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="436"/>
+        <location filename="../../src/ui/uimainwin.ui" line="457"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="457"/>
+        <location filename="../../src/ui/uimainwin.ui" line="475"/>
         <source>Ctrl+M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="466"/>
+        <location filename="../../src/ui/uimainwin.ui" line="484"/>
         <source>Instances</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="469"/>
+        <location filename="../../src/ui/uimainwin.ui" line="487"/>
         <source>Instance Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="472"/>
+        <location filename="../../src/ui/uimainwin.ui" line="490"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>

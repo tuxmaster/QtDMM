@@ -129,7 +129,6 @@ public:
   bool                  showDisplay() const;
   void                  setToolbarVisibility(bool, bool, bool, bool);
 
-  QString               deviceListText() const;
 
 public Q_SLOTS:
   void                  connectSLOT(bool);

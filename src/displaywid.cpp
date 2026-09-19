@@ -24,6 +24,7 @@
 #include <QtWidgets>
 
 #include "displaywid.h"
+#include "siprefix.h"
 
 #include <iostream>
 
@@ -461,7 +462,6 @@ void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
     return;
 
   int x = 0;
-  int index = 0;
 
   // Map of SI prefixes to corresponding big-sized pixmaps
   static const QMap<QString, const QPixmap *> prefixMap =
@@ -476,18 +476,16 @@ void DisplayWid::drawBigUnit(QPainter *p, const QString &str)
     { "p", m_bigp }
   };
 
-  QString firstChar = str.first(1);
-  if (prefixMap.contains(firstChar))
+  const SiPrefix::Split parts = SiPrefix::split(str);
+  if (!parts.prefix.isEmpty() && prefixMap.contains(parts.prefix))
   {
-    const QPixmap *prefixPixmap = prefixMap.value(firstChar);
-    int y = (firstChar == "u" || firstChar == "µ" || firstChar == "p" ) ? 3 : 0; // offset µ prefix vertically
+    const QPixmap *prefixPixmap = prefixMap.value(parts.prefix);
+    int y = (parts.prefix == "u" || parts.prefix == "µ" || parts.prefix == "p") ? 3 : 0; // offset µ prefix vertically
     p->drawPixmap(x, y, *prefixPixmap);
     x += prefixPixmap->width() + 2;
-    ++index;
   }
 
-  // Unit suffix after prefix
-  const QString unitSuffix = str.mid(index);
+  const QString unitSuffix = parts.baseUnit;
 
   // Map of unit suffixes to corresponding big-sized pixmaps
   static const QMap<QString, const QPixmap *> unitMap =
@@ -519,7 +517,6 @@ void DisplayWid::drawSmallUnit(QPainter *p, const QString &str)
     return;
 
   int x = 0;
-  int index = 0;
 
   static const QMap<QString, const QPixmap *> prefixMap =
   {
@@ -533,17 +530,16 @@ void DisplayWid::drawSmallUnit(QPainter *p, const QString &str)
     { "p", m_smallp }
   };
 
-  QString firstChar = str.first(1);
-  if (prefixMap.contains(firstChar))
+  const SiPrefix::Split parts = SiPrefix::split(str);
+  if (!parts.prefix.isEmpty() && prefixMap.contains(parts.prefix))
   {
-    const QPixmap *pix = prefixMap.value(firstChar);
-    int y = (firstChar == "u" || firstChar == "µ" || firstChar == "p" ) ? 3 : 0;  // µ must move some pixel down
+    const QPixmap *pix = prefixMap.value(parts.prefix);
+    int y = (parts.prefix == "u" || parts.prefix == "µ" || parts.prefix == "p") ? 3 : 0;  // µ must move some pixel down
     p->drawPixmap(x, y, *pix);
     x += pix->width() + 1;
-    ++index;
   }
 
-  const QString unitSuffix = str.mid(index);
+  const QString unitSuffix = parts.baseUnit;
 
   static const QMap<QString, const QPixmap *> unitMap =
   {

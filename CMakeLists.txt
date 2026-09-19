@@ -39,6 +39,18 @@ foreach(translation_file IN LISTS TRANSLATIONS)
 endforeach()
 set(RES_CONTENT "${RES_CONTENT}    </qresource>\n")
 
+## in-app help: the user guide pages, aliased by their path below docs/user so
+## relative Markdown links resolve the same way in QTextBrowser and in MkDocs
+file(GLOB_RECURSE HELP_FILES CONFIGURE_DEPENDS docs/user/*.md docs/user/*.png docs/user/*.svg docs/user/*.jpg)
+list(SORT HELP_FILES)
+set(RES_CONTENT "${RES_CONTENT}    <qresource prefix=\"/Help\">\n")
+foreach(file_path IN LISTS HELP_FILES)
+	file(RELATIVE_PATH alias "${CMAKE_SOURCE_DIR}/docs/user" "${file_path}")
+	file(RELATIVE_PATH rel "${CMAKE_SOURCE_DIR}/src" "${file_path}")
+	set(RES_CONTENT "${RES_CONTENT}        <file alias=\"${alias}\">${rel}</file>\n")
+endforeach()
+set(RES_CONTENT "${RES_CONTENT}    </qresource>\n")
+
 file(WRITE "src/resources.qrc" "<!-- ATTENTION this file is auto generated -->\n<RCC>\n${RES_CONTENT}</RCC>\n")
 
 ## generate header file for drivers, to make adding a driver easier

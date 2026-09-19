@@ -198,8 +198,6 @@ protected:
   double           m_integrationThreshold;
   double           m_integrationOffset;
   bool             m_showIntegration;
-  double           m_factor;
-  QString          m_prefix;
   bool             m_includeZero;
   QMenu           *m_popup;
 
@@ -229,7 +227,6 @@ protected:
   void             handleChartWheel(QWheelEvent *);
 
   void             emitInfo();
-  void             computeUnitFactor();
   bool             computeMinMax(double);
   void             rebuildSeries();
   void             updateXAxisRange();

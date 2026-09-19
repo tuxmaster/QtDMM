@@ -27,6 +27,7 @@
 #include <QToolTip>
 
 #include "dmmgraph.h"
+#include "siprefix.h"
 #include "settings.h"
 
 
@@ -476,7 +477,7 @@ void DMMGraph::addValue(double val)
     {
       resFlag = computeMinMax(val);
       //cerr << "val=" << val << " min=" << m_scaleMin << " max=" << m_scaleMax << endl;
-      computeUnitFactor();
+
     }
 
     if (shifted)
@@ -518,13 +519,9 @@ void DMMGraph::addValue(double val)
 
 void DMMGraph::setUnit(const QString &unit)
 {
-  const QString prefix = unit.left(1);
-
-  if (prefix == "G" || prefix == "M" || prefix == "k" || prefix == "m"
-      || prefix == "u" || prefix == "n" || prefix == "p")
-    m_unit = unit.mid(1);
-  else
-    m_unit = unit;
+  // Values arrive in SI base units (see DmmResponse), so the axis shows the
+  // base unit and the prefix is dropped here.
+  m_unit = SiPrefix::split(unit).baseUnit;
 
   m_yAxis->setTitleText(m_unit.isEmpty() ? QString() : QString("[%1]").arg(m_unit));
 }
@@ -815,69 +812,20 @@ void DMMGraph::handleChartWheel(QWheelEvent *ev)
     Q_EMIT zoomIn(1.1);
 }
 
-namespace
-{
-struct EngineeringUnit
-{
-  double factor;
-  const char *prefix;
-};
-
-const EngineeringUnit engineeringUnits[] = {
-  {1e9,   "G"},
-  {1e6,   "M"},
-  {1e3,   "k"},
-  {1.0,   ""},
-  {1e-3,  "m"},
-  {1e-6,  "u"},
-  {1e-9,  "n"},
-  {1e-12, "p"}
-};
-}
-
 QString DMMGraph::formatEngineeringValue(double value, QString *unit) const
 {
-  const double absValue = fabs(value);
-  const EngineeringUnit *selected = &engineeringUnits[3]; // "" - no prefix
-
-  if (absValue > 0.0)
-  {
-    for (const EngineeringUnit &candidate : engineeringUnits)
-    {
-      if (absValue >= candidate.factor)
-      {
-        selected = &candidate;
-        break;
-      }
-    }
-  }
-
-  const double scaled = value / selected->factor;
-
+  QString prefix;
+  const QString text = SiPrefix::format(value, &prefix);
   if (unit)
-    *unit = QString("%1%2").arg(selected->prefix).arg(m_unit);
-
-  return QString::number(scaled, 'g', 12);
+    *unit = prefix + m_unit;
+  return text;
 }
 
 double DMMGraph::unitScaleFactor(const QString &unit) const
 {
-  if (unit == m_unit)
-    return 1.0;
-
-  if (unit.endsWith(m_unit))
-  {
-    const QString prefix = unit.left(unit.size() - m_unit.size());
-
-    if (prefix == "G") return 1e9;
-    if (prefix == "M") return 1e6;
-    if (prefix == "k") return 1e3;
-    if (prefix == "m") return 1e-3;
-    if (prefix == "u") return 1e-6;
-    if (prefix == "n") return 1e-9;
-    if (prefix == "p") return 1e-12;
-  }
-
+  // Older exports wrote the ASCII "u" for micro; SiPrefix::factor() takes both.
+  if (unit != m_unit && unit.endsWith(m_unit))
+    return SiPrefix::factor(unit.left(unit.size() - m_unit.size()));
   return 1.0;
 }
 
@@ -1108,217 +1056,12 @@ bool DMMGraph::importCsvFile(const QString &fileName)
 
   update();
 
-  computeUnitFactor();
 
   // TEST
   Q_EMIT graphSize(size, cnt * m_sampleTime);
 
   return true;
 }
-
-/*
-
-void DMMGraph::importDataSLOT()
-{
-  if (m_dirty && m_alertUnsaved)
-  {
-    QMessageBox question;
-    question.setWindowTitle(tr("QtDMM: Unsaved data"));
-    question.setText(tr("<font size=+2><b>Unsaved data</b></font><p>"
-                        "Importing data will overwrite your measured data"
-                        "<p>Do you want to export your unsaved data first?"));
-    question.setIcon(QMessageBox::Information);
-    question.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
-
-    // Standard-Buttons
-    question.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
-    question.setDefaultButton(QMessageBox::Yes);
-    question.setEscapeButton(QMessageBox::Cancel);
-
-    QAbstractButton *yesButton = question.button(QMessageBox::Yes);
-    if (yesButton)
-      yesButton->setText(tr("Export data first"));
-
-    QAbstractButton *noButton = question.button(QMessageBox::No);
-    if (noButton)
-      noButton->setText(tr("Import & overwrite data"));
-
-    switch (question.exec())
-    {
-      case QMessageBox::Yes:
-        exportDataSLOT();
-        return;
-      case QMessageBox::Cancel:
-        return;
-    }
-  }
-  QDir path;
-  QString fn = QFileDialog::getOpenFileName(this, tr("Import data"), m_cfg->getString("QtDMM/LastUsesPath", ""));
-
-  int cnt = 0;
-  int sample = 0;
-
-  QDateTime graphEnd;
-
-  if (!fn.isNull())
-  {
-    m_cfg->setString("QtDMM/LastUsesPath", path.absoluteFilePath(fn));
-    // First pass -> figure out size and sample time
-    QFile file(fn);
-
-    QStringList token;
-    QStringList dateToken;
-    QStringList timeToken;
-    QStringList timeParts;
-
-    if (file.open(QIODevice::ReadOnly))
-    {
-      QTextStream ts(&file);
-
-      QString line = ts.readLine();
-
-      if (!line.isNull())
-      {
-        QRegularExpression reLegacy(
-          R"(^(?<day>\d{2})\.(?<month>\d{2})\.(?<year>\d{4})\t(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2}):(?<ms>\d{1,3})\t(?<value>-?\d+(?:\.\d+)?)\t.*$)"
-        );
-        QRegularExpression reCSV(
-          R"(^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})T(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2}),(?<ms>\d{1,3});(?<delta>-?\d+(?:\.\d+)?);(?<value>-?\d+(?:\.\d+)?);(?<unit>.+)$)"
-        );
-        if (!reCSV.match(line).hasMatch())
-        {
-          Q_EMIT error(tr("Oops! Seems not to be a valid file"));
-
-          return;
-        }
-
-        token = line.split("\t");
-        dateToken = token[0].split(".");
-        timeParts = token[1].split('.');
-        timeToken = timeParts[0].split(':');
-        timeToken.append(timeParts.value(1, "0"));
-
-        QTime startTime = QTime(timeToken[0].toInt(),
-                                timeToken[1].toInt(),
-                                timeToken[2].toInt(),
-                                timeToken[3].toInt());
-
-        QDate startDate = QDate(dateToken[2].toInt(),
-                                dateToken[1].toInt(),
-                                dateToken[0].toInt());
-
-        m_graphStartDateTime = QDateTime(startDate, startTime);
-        graphEnd = QDateTime(startDate, startTime);
-
-        setUnit(line.mid(27, 3));
-
-        cnt++;
-
-        while (!ts.atEnd())
-        {
-          line = ts.readLine();
-
-          if (!line.isEmpty())
-          {
-            token = line.split("\t");
-            dateToken = token[0].split(".");
-
-            timeParts = token[1].split('.');
-            timeToken = timeParts[0].split(':');
-            timeToken.append(timeParts.value(1, "0"));
-
-            QTime nowTime = QTime(timeToken[0].toInt(),
-                                  timeToken[1].toInt(),
-                                  timeToken[2].toInt(),
-                                  timeToken[3].toInt());
-            QDate nowDate = QDate(dateToken[2].toInt(),
-                                  dateToken[1].toInt(),
-                                  dateToken[0].toInt());
-
-            sample += QDateTime(startDate, startTime).secsTo(QDateTime(nowDate, nowTime));
-
-            startTime = nowTime;
-            startDate = nowDate;
-
-            graphEnd = QDateTime(startDate, startTime);
-
-            cnt++;
-          }
-        }
-      }
-      file.close();
-    }
-
-    //std::cerr << "sample=" << sample << std::endl;
-
-    m_sampleTime = sample / (cnt > 1 ? cnt - 1 : 1); //m_graphStartDateTime.secsTo( graphEnd );
-
-    int size = m_size * m_sampleTime;
-    //int length = (m_length-1)*m_sampleTime;
-
-    if (cnt > 1)
-    {
-      //if (sample/(cnt-1) != m_sampleTime)
-      {
-        Q_EMIT sampleTime(m_sampleTime);
-      }
-      m_sampleTime = sample / (cnt - 1);
-    }
-
-    //   if (cnt*m_sampleTime > length)
-    // {
-    //   if (size > cnt*m_sampleTime) size = cnt*m_sampleTime;
-    //   emit graphSize( size, cnt*m_sampleTime );
-    //   setGraphSize( size, cnt*m_sampleTime );
-    // }
-
-    m_scaleMin =  1e40;
-    m_scaleMax = -1e40;
-
-    if (file.open(QIODevice::ReadOnly))
-    {
-      // TEST
-      setGraphSize(size, cnt * m_sampleTime);
-
-      int i = 0;
-
-      QTextStream ts(&file);
-      QString line;
-
-      while (!(line = ts.readLine()).isNull())
-      {
-        if (!line.isEmpty())
-        {
-          token = line.split("\t");
-          (*m_array)[i++] = token[2].toDouble();
-        }
-      }
-
-      m_sampleCounter = m_pointer = cnt;
-      setScale(true, true, 0, 0);
-
-      file.close();
-      m_dirty = false;
-
-      Q_EMIT error(fn);
-
-      update();
-
-      computeUnitFactor();
-    }
-
-//std::cerr << "min=" << m_scaleMin << " max=" << m_scaleMax << std::endl;
-//std::cerr << "factor=" << m_factor << " prefix=" <<
-//  m_prefix.latin1() << " unit=" << m_unit.latin1() << std::endl;
-
-//std::cerr << "size=" << size << "cnt*m_sampleTime=" << cnt*m_sampleTime << std::endl;
-    // TEST
-    Q_EMIT graphSize(size, cnt * m_sampleTime);
-  }
-}
-
-*/
-
 
 
 void DMMGraph::setThresholds(double falling, double raising)
@@ -1346,7 +1089,7 @@ void DMMGraph::setScale(bool autoScale, bool includeZero, double min, double max
     m_scaleMin = min;
     m_scaleMax = max;
 
-    computeUnitFactor();
+
   }
   else
   {
@@ -1365,7 +1108,7 @@ void DMMGraph::setScale(bool autoScale, bool includeZero, double min, double max
       computeMinMax(val);
     }
 
-    computeUnitFactor();
+
   }
 
   m_yAxis->setRange(m_scaleMin, m_scaleMax);
@@ -1477,49 +1220,6 @@ void DMMGraph::setIntegration(bool showInt, double sc, double th, double off)
   updateThresholdLinesVisibility();
 }
 
-void DMMGraph::computeUnitFactor()
-{
-  m_factor = 1.;
-  m_prefix = "";
-
-  if (m_unit == "C" || m_unit == "%") return;
-
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) > 1000)
-  {
-    m_factor /= 1000.;
-    m_prefix = "k";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) > 1000)
-  {
-    m_factor /= 1000.;
-    m_prefix = "M";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) > 1000)
-  {
-    m_factor /= 1000.;
-    m_prefix = "G";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) < 1)
-  {
-    m_factor *= 1000.;
-    m_prefix = "m";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) < 1)
-  {
-    m_factor *= 1000.;
-    m_prefix = "µ";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) < 1)
-  {
-    m_factor *= 1000.;
-    m_prefix = "n";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) < 1)
-  {
-    m_factor *= 1000.;
-    m_prefix = "p";
-  }
-}
 
 void DMMGraph::popupSLOT(QAction *action)
 {

@@ -40,7 +40,6 @@ public:
     NotConnected
   };
   ReaderThread(QObject *receiver);
-  void        run();
   void        start();
   void        startRead();
   void        setHandle(QIODevice *handle);
@@ -54,14 +53,12 @@ Q_SIGNALS:
   void        readEvent(const QByteArray &, int id);
 
 protected:
-  QObject*              m_receiver;
   ReadStatus            m_status;
   bool                  m_readValue;
   char                  m_fifo[FIFO_LENGTH];
   char                  m_buffer[FIFO_LENGTH];
   ReadEvent::DataFormat m_format;
   int                   m_length;
-  int                   m_last_check_ok_idx;
   bool                  m_sendRequest;
   int                   m_id;
   int                   m_numValues;

@@ -26,6 +26,7 @@
 #include <QMenu>
 
 #include "mainwin.h"
+#include "helpdlg.h"
 #include "mainwid.h"
 #include "displaywid.h"
 
@@ -33,6 +34,7 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   : QMainWindow(parent)
   , m_running(false)
   , m_menu(Q_NULLPTR)
+  , m_helpDlg(Q_NULLPTR)
   , m_localRecord(true)
 {
   setupUi(this);
@@ -185,7 +187,7 @@ void MainWin::createActions()
 
   connect(new QShortcut(action_Configure->shortcut(), this), SIGNAL(activated()), action_Configure, SLOT(trigger()));
   connect(new QShortcut(action_Direct_help->shortcut(), this), SIGNAL(activated()), action_Direct_help, SLOT(trigger()));
-  connect(new QShortcut(action_About->shortcut(), this), SIGNAL(activated()), action_About, SLOT(trigger()));
+  connect(new QShortcut(action_Help->shortcut(), this), SIGNAL(activated()), action_Help, SLOT(trigger()));
   connect(new QShortcut(action_Quit->shortcut(), this), SIGNAL(activated()), action_Quit, SLOT(trigger()));
 }
 
@@ -251,21 +253,45 @@ void MainWin::connectSLOT(bool on)
     m_running = false;
 }
 
+void MainWin::on_action_Help_triggered()
+{
+  if (!m_helpDlg)
+    m_helpDlg = new HelpDlg(m_wid->settings(), this);
+  m_helpDlg->show();
+  m_helpDlg->raise();
+  m_helpDlg->activateWindow();
+}
+
 void MainWin::on_action_About_triggered()
 {
-  QMessageBox::about(this, tr("QtDMM: Welcome!"), tr("<h1>QtDMM %1</h1><hr>"\
-                     "<div align=right><i>A simple recorder for DMM's</i></div><p>"\
-                     "<div align=justify>A simple display software for a variety of digital multimeter. Currently confirmed are:"\
-                     "<table>%2</table>Other compatible models may work also.<p>"\
-                     "QtDMM features min/max memory and a configurable "\
-                     "recorder with import/export and printing function. Sampling may"\
-                     " be started manually, at a given time or triggered by a measured threshold. "\
-                     "Additionally an external program may be started when given thresholds are reached.</div>"\
-                     "<div align=justify><b>QtDMM</b> uses the platform independent toolkit "\
-                     "<b>Qt</b> version %3 and is licensed under <b>GPL 3</b> (Versions prior to v0.9.0 where licensed under GPL 2)</div><br>"\
-                     "&copy; 2001-2014 Matthias Toussaint &nbsp;-&nbsp;&nbsp;<font color=blue><u><a href='mailto:qtdmm@mtoussaint.de'>qtdmm@mtoussaint.de</a></u></font>"\
-                     "<p><br>The icons (except the DMM icon) have been taken from the KDE project.<p>")
-                     .arg(APP_VERSION).arg(m_wid->deviceListText()).arg(qVersion()));
+  QMessageBox about(this);
+  about.setWindowTitle(tr("About QtDMM"));
+  about.setIconPixmap(QPixmap(":/Symbols/icon.xpm"));
+  about.setTextFormat(Qt::RichText);
+  about.setText(tr("<h2>QtDMM %1</h2>"
+                   "<p>A readout and transient recorder for digital multimeters.</p>"
+                   "<p>Built with <b>Qt</b> %2. Licensed under the <b>GNU GPL 3</b> "
+                   "(versions before 0.9.0 under GPL 2).</p>"
+                   "<p>0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.<br>"
+                   "0.9.3 and before: &copy; 2001-2016 M. Toussaint "
+                   "&lt;<a href='mailto:qtdmm@mtoussaint.de'>qtdmm@mtoussaint.de</a>&gt;</p>"
+                   "<p>Project page: <a href='https://github.com/tuxmaster/QtDMM'>github.com/tuxmaster/QtDMM</a><br>"
+                   "Icons (except the DMM icon) are taken from the KDE project.</p>")
+                .arg(APP_VERSION).arg(qVersion()));
+
+  // The device list used to be pasted in here as a table; it lives in the
+  // handbook now, where it is readable, searchable on the web and generated
+  // from the decoders instead of maintained by hand.
+  QPushButton *devices = about.addButton(tr("Supported devices..."), QMessageBox::ActionRole);
+  about.addButton(QMessageBox::Close);
+  about.setDefaultButton(QMessageBox::Close);
+  about.exec();
+
+  if (about.clickedButton() == devices)
+  {
+    on_action_Help_triggered();
+    m_helpDlg->showPage("supported-devices.md");
+  }
 }
 
 void MainWin::on_action_Menu_triggered()
@@ -275,6 +301,7 @@ void MainWin::on_action_Menu_triggered()
     m_menu = new QMenu(this);
     m_menu->addAction(action_Configure);
     m_menu->addSeparator();
+    m_menu->addAction(action_Help);
     m_menu->addAction(action_Tip_of_the_day);
     m_menu->addAction(action_Direct_help);
     m_menu->addAction(action_About);

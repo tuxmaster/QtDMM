@@ -189,28 +189,6 @@ void DmmPrefs::on_ui_vendor_activated(int id)
   }
 }
 
-QString DmmPrefs::deviceListText() const
-{
-  QString text;
-  QString lastVendor;
-  for (const auto& cfg : dmm_info)
-  {
-    if (lastVendor != cfg.vendor)
-    {
-      if (!text.isEmpty())
-        text += "</td></tr>";
-      text += "<tr><td><b>"+cfg.vendor+"</b></td><td>";
-      lastVendor = cfg.vendor;
-    }
-    else
-      text += ", ";
-
-    text += cfg.model;
-  }
-
-  return text;
-}
-
 
 void DmmPrefs::defaultsSLOT()
 {

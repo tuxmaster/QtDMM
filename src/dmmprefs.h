@@ -49,7 +49,6 @@ public:
   int            display() const;
   QString        dmmName() const;
   QString        device() const;
-  QString        deviceListText() const;
 
 public Q_SLOTS:
   virtual void   defaultsSLOT() Q_DECL_OVERRIDE;

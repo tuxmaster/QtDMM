@@ -32,6 +32,7 @@
 
 class MainWid;
 class DisplayWid;
+class HelpDlg;
 
 // mt: changed all QAction into Q3Action
 class MainWin : public QMainWindow, private Ui::UIMainWin
@@ -48,6 +49,7 @@ protected Q_SLOTS:
   void      stopSLOT();
   void      sendStateSLOT(const QString &);
   void      on_action_About_triggered();
+  void      on_action_Help_triggered();
   void      on_action_Menu_triggered();
   void      setConnectSLOT(bool);
   void      toolbarVisibilitySLOT(bool, bool, bool, bool);
@@ -61,12 +63,12 @@ protected:
   QLabel     *m_error;
   QLabel     *m_info;
   QMenu      *m_menu;
+  HelpDlg    *m_helpDlg;
   SharedStateManager* m_stateMgr;
   QString     m_config_id;
   bool        m_localRecord;
 
   void        setupIcons();
-  void        createToolBars();
   void        createActions();
   void        closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
   void        bringMainWindowToFront();

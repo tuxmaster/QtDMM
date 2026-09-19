@@ -22,10 +22,6 @@ public:
     bool        isOpen() const { return m_port != Q_NULLPTR && m_port->isOpen(); };
 
     static PortType str2portType(const QString str);
-signals:
-    void opened(QIODevice *dev);
-    void closed();
-
 private:
     QIODevice *m_port   = Q_NULLPTR;
     PortType   m_type   = PortType::None;
