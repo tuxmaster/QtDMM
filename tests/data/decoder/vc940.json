@@ -1,7 +1,7 @@
 {
   "decoder": "VC940Continuous",
   "framesPerReading": 2,
-  "comment": "checkFormat() deliberately matches only the second of two identical telegrams, as the original 2015 code did for the VC940 (guard 12 at packet length 11, versus 10 for the M9803R). framesPerReading reflects that contract. The capture below is from docs/protocols/UT71BCDE.log; note that heha's UT71BCDE/UT804 logs mention no telegram duplication for those Uni-T models, which were added to this decoder later - whether they lose every second reading is an open question for per-device handling.",
+  "comment": "checkFormat() deliberately matches only the second of two identical telegrams, as the original 2015 code did for the VC940 (guard 12 at packet length 11, versus 10 for the M9803R). framesPerReading reflects that contract. The capture below is from docs/protocols/sources/UT71BCDE.log; note that heha's UT71BCDE/UT804 logs mention no telegram duplication for those Uni-T models, which were added to this decoder later - whether they lose every second reading is an open question for per-device handling.",
   "tests": [
     {
       "comment": "[UT71BCDE.log] 'DC 0.0000 V AUTO BG'",

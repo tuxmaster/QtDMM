@@ -6,3 +6,6 @@ packages/
 CMakeLists.txt.user
 Testing
 QtDMM.spec
+
+# MkDocs output
+site/

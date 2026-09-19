@@ -1,7 +1,7 @@
 {
   "decoder": "CyrustekES51962",
   "framesPerReading": 2,
-  "comment": "Real captures from docs/protocols/UT70B.log, whose line labels are the reading the meter displayed. The UT70B sends every datagram twice in a row, so checkFormat() deliberately matches only the second copy - see framesPerReading.",
+  "comment": "Real captures from docs/protocols/sources/UT70B.log, whose line labels are the reading the meter displayed. The UT70B sends every datagram twice in a row, so checkFormat() deliberately matches only the second copy - see framesPerReading.",
   "tests": [
     {
       "comment": "[UT70B.log] 'DC 005.8 mV AUTO 400mV'",

@@ -1,6 +1,6 @@
 {
   "decoder": "QM1537Continuous",
-  "comment": "Real captures from docs/protocols/UT61BCD.log, whose line labels are the reading the meter displayed - so the expected values are ground truth, not derived from this decoder. The dval expectations are the regression test for the unscaled-dval bug (dval was computed before the SI prefix was known).",
+  "comment": "Real captures from docs/protocols/sources/UT61BCD.log, whose line labels are the reading the meter displayed - so the expected values are ground truth, not derived from this decoder. The dval expectations are the regression test for the unscaled-dval bug (dval was computed before the SI prefix was known).",
   "tests": [
     {
       "comment": "[UT61BCD.log] 'DC 348.2 mV AUTO BG' - dval must be the SI base value 0.3482, not the displayed 348.2",

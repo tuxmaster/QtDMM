@@ -12,7 +12,7 @@ static const bool registered = []()
 bool DecoderCyrusTekES51962::checkFormat(const char *data, size_t idx)
 {
   // The 12 is deliberate and must stay above the 11-byte packet length: the
-  // UT70B sends every datagram twice in a row (see docs/protocols/UT70B.log),
+  // UT70B sends every datagram twice in a row (see docs/protocols/sources/UT70B.log),
   // so skipping the first copy's terminator at idx == 10 and matching only the
   // second at idx == 21 gives one reading per measurement. Do not "simplify"
   // this to getPacketLength() - unlike vc940, this protocol duplicates frames.
@@ -117,7 +117,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderCyrusTekES51962::decode(const QByt
       }
       break;
     case 0x3f:
-      // docs/protocols/UT70B.log lists byte[5] == '?' (0x3f) as the A range,
+      // docs/protocols/sources/UT70B.log lists byte[5] == '?' (0x3f) as the A range,
       // completing the set next to 0x39 (mA) and 0x3d (uA). This used to read
       // formatResultValue(2,"A","Hz"), i.e. "A" sat in the SI prefix argument
       // where it was meant as the unit, and the "Hz" was left over from the

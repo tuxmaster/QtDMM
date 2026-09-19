@@ -1,6 +1,6 @@
 {
   "decoder": "VC820Continuous",
-  "comment": "Frames marked [UT60AE.log] are real captures from docs/protocols/UT60AE.log, where each line carries the reading the meter displayed - so the expected values below are ground truth, not derived from this decoder.",
+  "comment": "Frames marked [UT60AE.log] are real captures from docs/protocols/sources/UT60AE.log, where each line carries the reading the meter displayed - so the expected values below are ground truth, not derived from this decoder.",
   "tests": [
     {
       "comment": "diode-test mode must be reported as DI, not overwritten by the AC/DC check (regression test for the special-flag overwrite bug)",

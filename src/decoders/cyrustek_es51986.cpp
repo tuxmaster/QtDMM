@@ -12,7 +12,7 @@ static const bool registered = []() {
 bool DecoderCyrusTekES51986::checkFormat(const char* data, size_t idx)
 {
   // The 12 is deliberate and must stay above the 11-byte packet length: the
-  // UT803 sends every telegram twice in a row (see docs/protocols/UT803.log),
+  // UT803 sends every telegram twice in a row (see docs/protocols/sources/UT803.log),
   // so the first copy's terminator lands at idx == 10 and is skipped, and only
   // the second copy at idx == 21 matches. That yields one reading per
   // measurement instead of two identical ones. Do not "simplify" this to
