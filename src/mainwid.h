@@ -50,8 +50,7 @@ public:
   void        setDisplay(DisplayWid *);
   void        setConsoleLogging(bool);
   void        setToolbarVisibility(bool, bool, bool, bool);
-
-  QString     deviceListText() const;
+  Settings   *settings() const { return m_settings; }
 
 Q_SIGNALS:
   void        running(bool);

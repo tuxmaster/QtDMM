@@ -186,11 +186,6 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
   adjustSize();
 }
 
-QString ConfigDlg::deviceListText() const
-{
-  return m_dmm->deviceListText();
-}
-
 void ConfigDlg::showPage(ConfigDlg::PageType page)
 {
   PrefWidget *wid = Q_NULLPTR;

@@ -325,13 +325,13 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Alle Hersteller</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="490"/>
+        <location filename="../../src/dmmprefs.cpp" line="468"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="490"/>
-        <location filename="../../src/dmmprefs.cpp" line="516"/>
+        <location filename="../../src/dmmprefs.cpp" line="468"/>
+        <location filename="../../src/dmmprefs.cpp" line="494"/>
         <source>DMM description (*.cfg)</source>
         <translation>DMM Beschreibung (*.cfg)</translation>
     </message>
@@ -340,7 +340,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">DMM Beschreibung (*.ini)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="516"/>
+        <location filename="../../src/dmmprefs.cpp" line="494"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
@@ -403,6 +403,14 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
 </context>
 <context>
+    <name>HelpDlg</name>
+    <message>
+        <location filename="../../src/helpdlg.cpp" line="70"/>
+        <source>Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>InstancesDlg</name>
     <message>
         <location filename="../../src/instancesdlg.cpp" line="98"/>
@@ -436,47 +444,47 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="126"/>
+        <location filename="../../src/mainwid.cpp" line="121"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="127"/>
+        <location filename="../../src/mainwid.cpp" line="122"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Es befinden sich ungesicherte Daten im Speicher. Wenn Sie das Programm beenden gehen diese verloren.&lt;p&gt;Sollen diese vorher exportiert werden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="142"/>
+        <location filename="../../src/mainwid.cpp" line="137"/>
         <source>Export data first</source>
         <translation>Daten erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="146"/>
+        <location filename="../../src/mainwid.cpp" line="141"/>
         <source>Quit without saving</source>
         <translation>Beenden ohne speichern</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="442"/>
+        <location filename="../../src/mainwid.cpp" line="437"/>
         <source>Automatic start at %1</source>
         <translation>Automatisch starten bei %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="444"/>
+        <location filename="../../src/mainwid.cpp" line="439"/>
         <source>Raising threshold %1</source>
         <translation>Grenzwert steigent %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="446"/>
+        <location filename="../../src/mainwid.cpp" line="441"/>
         <source>Falling threshold %1</source>
         <translation>Grenzwert fallend %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="468"/>
+        <location filename="../../src/mainwid.cpp" line="463"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s läuft noch!&lt;p&gt;Wollen sie es jetzt beenden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="509"/>
+        <location filename="../../src/mainwid.cpp" line="504"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Konnte %1 nicht starten</translation>
     </message>
@@ -485,18 +493,18 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="obsolete">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s is still running!&lt;p&gt;Do you want to kill it now</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="526"/>
+        <location filename="../../src/mainwid.cpp" line="521"/>
         <source>Launched %1</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="531"/>
+        <location filename="../../src/mainwid.cpp" line="526"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 mit dem Rückgabecode %2 beendet.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="467"/>
-        <location filename="../../src/mainwid.cpp" line="508"/>
+        <location filename="../../src/mainwid.cpp" line="462"/>
+        <location filename="../../src/mainwid.cpp" line="503"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: Startfehler</translation>
     </message>
@@ -505,17 +513,17 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %1 läuft noch.&lt;p&gt;Soll es getötet werden</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="480"/>
+        <location filename="../../src/mainwid.cpp" line="475"/>
         <source>Yes, kill it!</source>
         <translation>Ja, töten!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="484"/>
+        <location filename="../../src/mainwid.cpp" line="479"/>
         <source>No, keep running</source>
         <translation>Nein, es laufen lassen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="520"/>
+        <location filename="../../src/mainwid.cpp" line="515"/>
         <source>Bummer!</source>
         <translation>Reinfall!</translation>
     </message>
@@ -523,12 +531,12 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWin</name>
     <message>
-        <location filename="../../src/mainwin.cpp" line="203"/>
+        <location filename="../../src/mainwin.cpp" line="205"/>
         <source>Record DMM data</source>
         <translation>DMM Daten aufnehmen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="204"/>
+        <location filename="../../src/mainwin.cpp" line="206"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
         <translatorcomment>Wählen Sie aus, welche Instanz aufnehmen soll.</translatorcomment>
@@ -536,27 +544,40 @@ Please choose which instance should record.</source>
 Please choose which instance should record.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="207"/>
+        <location filename="../../src/mainwin.cpp" line="209"/>
         <source>This instance</source>
         <translation>Diese Instanz</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="208"/>
+        <location filename="../../src/mainwin.cpp" line="210"/>
         <source>All instances</source>
         <translation>Alle Instanzen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="256"/>
+        <location filename="../../src/mainwin.cpp" line="268"/>
+        <source>About QtDMM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="271"/>
+        <source>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;A readout and transient recorder for digital multimeters.&lt;/p&gt;&lt;p&gt;Built with &lt;b&gt;Qt&lt;/b&gt; %2. Licensed under the &lt;b&gt;GNU GPL 3&lt;/b&gt; (versions before 0.9.0 under GPL 2).&lt;/p&gt;&lt;p&gt;0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.&lt;br&gt;0.9.3 and before: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Project page: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Icons (except the DMM icon) are taken from the KDE project.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="285"/>
+        <source>Supported devices...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>QtDMM: Welcome!</source>
-        <translation>QtDMM: Willkommen!</translation>
+        <translation type="vanished">QtDMM: Willkommen!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="256"/>
         <source>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;A simple recorder for DMM&apos;s&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;A simple display software for a variety of digital multimeter. Currently confirmed are:&lt;table&gt;%2&lt;/table&gt;Other compatible models may work also.&lt;p&gt;QtDMM features min/max memory and a configurable recorder with import/export and printing function. Sampling may be started manually, at a given time or triggered by a measured threshold. Additionally an external program may be started when given thresholds are reached.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; uses the platform independent toolkit &lt;b&gt;Qt&lt;/b&gt; version %3 and is licensed under &lt;b&gt;GPL 3&lt;/b&gt; (Versions prior to v0.9.0 where licensed under GPL 2)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;The icons (except the DMM icon) have been taken from the KDE project.&lt;p&gt;</source>
-        <translation>&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;Ein einfacher Datenrekorder für DMM&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;Ein einfaches Anzeigeprogramm für eine Vielzahl von DMM&apos;s. Aktuell bestätigt sind:&lt;table&gt;%2&lt;/table&gt;Andere kompatible Modelle sollten ebenfalls funktionieren.&lt;p&gt;QtDMM stellt die Funktionen Min/Max Werte halten, ein konfigurierbaren Datenrekorder mit Daten im/export Funktion sowie ein Druckfunktion zur Verfügung. Die Datenaufzeichnung kann manuell, durch einen Grenzwert oder durch eine Zeitfunktion ausgelöst werden. Desweiteren kann ein externes Programm beim erreichen eines Grenzwertes gestartet werden.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; wurde mit der Platformunabhängigen &lt;b&gt;Qt&lt;/b&gt; Bibliothek in der Version %3 welche unter der &lt;b&gt;GPLv3&lt;/b&gt; lizensiert ist erstellt.(Versionen vor 0.9.0 wurden unter der GPLv2 Lizenz veröffentlicht)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;Die Symbole (bis auf das DMM Symbol) stammen von dem KDE Projekt.&lt;p&gt;</translation>
+        <translation type="vanished">&lt;h1&gt;QtDMM %1&lt;/h1&gt;&lt;hr&gt;&lt;div align=right&gt;&lt;i&gt;Ein einfacher Datenrekorder für DMM&lt;/i&gt;&lt;/div&gt;&lt;p&gt;&lt;div align=justify&gt;Ein einfaches Anzeigeprogramm für eine Vielzahl von DMM&apos;s. Aktuell bestätigt sind:&lt;table&gt;%2&lt;/table&gt;Andere kompatible Modelle sollten ebenfalls funktionieren.&lt;p&gt;QtDMM stellt die Funktionen Min/Max Werte halten, ein konfigurierbaren Datenrekorder mit Daten im/export Funktion sowie ein Druckfunktion zur Verfügung. Die Datenaufzeichnung kann manuell, durch einen Grenzwert oder durch eine Zeitfunktion ausgelöst werden. Desweiteren kann ein externes Programm beim erreichen eines Grenzwertes gestartet werden.&lt;/div&gt;&lt;div align=justify&gt;&lt;b&gt;QtDMM&lt;/b&gt; wurde mit der Platformunabhängigen &lt;b&gt;Qt&lt;/b&gt; Bibliothek in der Version %3 welche unter der &lt;b&gt;GPLv3&lt;/b&gt; lizensiert ist erstellt.(Versionen vor 0.9.0 wurden unter der GPLv2 Lizenz veröffentlicht)&lt;/div&gt;&lt;br&gt;&amp;copy; 2001-2014 Matthias Toussaint &amp;nbsp;-&amp;nbsp;&amp;nbsp;&lt;font color=blue&gt;&lt;u&gt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&lt;/u&gt;&lt;/font&gt;&lt;p&gt;&lt;br&gt;Die Symbole (bis auf das DMM Symbol) stammen von dem KDE Projekt.&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="127"/>
+        <location filename="../../src/mainwin.cpp" line="129"/>
         <source>Another instance is running.</source>
         <translation>Andere Instanz läuft noch</translation>
     </message>
@@ -1401,6 +1422,62 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     </message>
 </context>
 <context>
+    <name>UIHelpDlg</name>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="14"/>
+        <source>QtDMM: Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="37"/>
+        <location filename="../../src/ui/uihelpdlg.ui" line="43"/>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="40"/>
+        <source>Go back to the previously shown help page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="56"/>
+        <location filename="../../src/ui/uihelpdlg.ui" line="62"/>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="59"/>
+        <source>Go forward again after going back.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="75"/>
+        <location filename="../../src/ui/uihelpdlg.ui" line="81"/>
+        <source>Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="78"/>
+        <source>Return to the table of contents.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="107"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Schließen</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="123"/>
+        <source>Table of contents. Click an entry to show that page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="134"/>
+        <source>The help page. Links inside the text navigate to other pages; web links open in your browser.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UIInstancesDlg</name>
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="14"/>
@@ -1694,22 +1771,37 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="457"/>
+        <location filename="../../src/ui/uimainwin.ui" line="433"/>
+        <source>&amp;Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uimainwin.ui" line="436"/>
+        <source>Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uimainwin.ui" line="439"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Handbook&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Open the QtDMM handbook: connecting a meter, the recorder, troubleshooting and the list of supported devices.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uimainwin.ui" line="475"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="466"/>
+        <location filename="../../src/ui/uimainwin.ui" line="484"/>
         <source>Instances</source>
         <translation>Instanzen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="469"/>
+        <location filename="../../src/ui/uimainwin.ui" line="487"/>
         <source>Instance Manager</source>
         <translation>Instanzen Verwaltung</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="472"/>
+        <location filename="../../src/ui/uimainwin.ui" line="490"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
@@ -1720,8 +1812,8 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="101"/>
-        <location filename="../../src/ui/uimainwin.ui" line="451"/>
-        <location filename="../../src/ui/uimainwin.ui" line="454"/>
+        <location filename="../../src/ui/uimainwin.ui" line="469"/>
+        <location filename="../../src/ui/uimainwin.ui" line="472"/>
         <source>Menu</source>
         <translation>Menü</translation>
     </message>
@@ -1870,7 +1962,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation type="vanished">Strg+F2</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="433"/>
+        <location filename="../../src/ui/uimainwin.ui" line="454"/>
         <source>&amp;About</source>
         <translation>Ü&amp;ber</translation>
     </message>
@@ -1879,7 +1971,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation type="vanished">Ü&amp;ber die Version</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="436"/>
+        <location filename="../../src/ui/uimainwin.ui" line="457"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Urheber Information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zeigt die Information zum Urheber sowie etwas Werbung zu QtDMM an. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
