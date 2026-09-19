@@ -18,5 +18,17 @@ Documentation for people working on QtDMM itself. Planned pages:
 
 None of these pages exist yet.
 
+## Platforms
+
+Linux and macOS are built and tested by the GitHub workflows with the
+distribution's Qt and hidapi. Windows is built on `windows-latest` with Qt from
+`install-qt-action` and hidapi compiled from source via CMake `FetchContent`
+(see `CMakeLists.txt`); the workflow uploads a portable ZIP and an Inno Setup
+installer, both produced by CPack from the same install tree
+(`cmake/deploy.cmake`). Platform-specific code is limited to the permission
+hint in `src/dmm.cpp`, the process liveness check in
+`src/sharedstatemanager.cpp`, the serial port naming in
+`src/portdevices/serial.cpp` and the console attach in `src/main.cpp`.
+
 Longer-term idea from the original README: split measuring and recording into
 a separate background daemon.

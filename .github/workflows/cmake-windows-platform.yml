@@ -1,0 +1,49 @@
+name: Windows build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: '6.8.*'
+        arch: win64_msvc2022_64
+        modules: 'qtserialport qtcharts'
+        cache: true
+
+    - name: Set up MSVC environment
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
+
+    - name: Configure
+      run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Test
+      run: ctest --test-dir build --output-on-failure
+
+    # ZIP (portable) and Inno Setup installer from the same install tree;
+    # cpack runs install + windeployqt + iscc (preinstalled on the runner).
+    - name: Package
+      run: cpack --config build/CPackConfig.cmake
+
+    - name: Upload packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: QtDMM-windows-x64
+        path: |
+          packages/*.zip
+          packages/*.exe
