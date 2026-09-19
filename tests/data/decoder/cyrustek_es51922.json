@@ -455,6 +455,95 @@
         "val": "-0.0097",
         "special": "DC"
       }
+    },
+    {
+      "comment": "[UT61E.log] '0.000 kHz MANU'",
+      "hex": "33 30 30 30 30 30 32 30 30 30 30 30 0D 0A",
+      "expected": {
+        "dval": 0.0,
+        "unit": "kHz",
+        "range": "MANU",
+        "hold": false
+      }
+    },
+    {
+      "comment": "[UT61E.log] '0.00 kHz MANU'",
+      "hex": "34 30 30 30 30 30 32 30 30 30 30 30 0D 0A",
+      "expected": {
+        "dval": 0.0,
+        "unit": "kHz",
+        "range": "MANU",
+        "hold": false
+      }
+    },
+    {
+      "comment": "[UT61E.log] '0.0000 MHz MANU'",
+      "hex": "35 30 30 30 30 30 32 30 30 30 30 30 0D 0A",
+      "expected": {
+        "dval": 0.0,
+        "unit": "MHz",
+        "range": "MANU",
+        "hold": false
+      }
+    },
+    {
+      "comment": "[UT61E.log] '0.000 MHz MANU'",
+      "hex": "36 30 30 30 30 30 32 30 30 30 30 30 0D 0A",
+      "expected": {
+        "dval": 0.0,
+        "unit": "MHz",
+        "range": "MANU",
+        "hold": false
+      }
+    },
+    {
+      "comment": "[UT61E.log] '0.00 MHz MANU'",
+      "hex": "37 30 30 30 30 30 32 30 30 30 30 30 0D 0A",
+      "expected": {
+        "dval": 0.0,
+        "unit": "MHz",
+        "range": "MANU",
+        "hold": false
+      }
+    },
+    {
+      "comment": "[UT61E.log] 'DC    50.0 Hz AUTO'",
+      "hex": "31 30 30 35 30 30 3B 30 30 30 3B 30 0D 0A",
+      "expected": {
+        "dval": 50.0,
+        "unit": "Hz",
+        "range": "AUTO",
+        "hold": false
+      }
+    },
+    {
+      "comment": "[UT61E.log] 'DC    49.4 % MANU'",
+      "hex": "30 30 30 34 39 34 3B 38 30 30 39 30 0D 0A",
+      "expected": {
+        "dval": 49.4,
+        "unit": "%",
+        "range": "MANU",
+        "hold": false
+      }
+    },
+    {
+      "comment": "[UT61E.log] '16.3 % MANU'",
+      "hex": "34 30 30 31 36 33 32 38 30 30 30 30 0D 0A",
+      "expected": {
+        "dval": 16.3,
+        "unit": "%",
+        "range": "MANU",
+        "hold": false
+      }
+    },
+    {
+      "comment": "[UT61E.log] '.0L   V MANU Diode'",
+      "hex": "30 32 32 35 38 30 31 31 30 30 30 30 0D 0A",
+      "expected": {
+        "unit": "V",
+        "range": "MANU",
+        "hold": false
+      }
     }
   ]
 }
