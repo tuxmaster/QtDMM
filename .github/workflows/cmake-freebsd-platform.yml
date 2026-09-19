@@ -24,6 +24,6 @@ jobs:
           pkg install -y cmake ninja pkgconf git python3 \
             qt6-base qt6-serialport qt6-charts qt6-tools hidapi
         run: |
-          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
           cmake --build build
           ctest --test-dir build --output-on-failure

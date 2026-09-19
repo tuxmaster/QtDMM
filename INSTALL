@@ -42,7 +42,7 @@ FreeBSD:
   (python3 for the documentation check in ctest). CMake-generated Makefiles
   need GNU make (gmake), so either install gmake or use -G Ninja as below.
 - Build, test and install:
-    cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+    cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
     cmake --build build
     ctest --test-dir build
     sudo cmake --install build             (prefix /usr/local)
@@ -61,7 +61,7 @@ Windows:
 - Visual Studio 2019 or newer (Qt 6 does not support MSVC 2017) and a Qt 6.5+
   msvc2022_64 kit; hidapi is fetched and built automatically by CMake.
 - From a "Developer Command Prompt" with Qt's bin directory in PATH:
-    cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+    cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
     cmake --build build
     ctest --test-dir build
     cpack --config build/CPackConfig.cmake      (optional: portable ZIP and

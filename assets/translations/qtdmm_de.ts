@@ -63,69 +63,69 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="161"/>
+        <location filename="../../src/dmm.cpp" line="169"/>
         <source>Error creating port %1.</source>
         <translation>Fehler beim erzeugen von port %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="213"/>
+        <location filename="../../src/dmm.cpp" line="221"/>
         <source>Access denied for %1.</source>
         <translation>Zugriff auf %1 verweigert.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="175"/>
+        <location filename="../../src/dmm.cpp" line="183"/>
         <source>No such device %1.</source>
         <translation>%1 existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="172"/>
+        <location filename="../../src/dmm.cpp" line="180"/>
         <source>Missing Permission</source>
         <translation>Berechtigung fehlt</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="178"/>
+        <location filename="../../src/dmm.cpp" line="186"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Fehler beim Öffnen von %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="190"/>
+        <location filename="../../src/dmm.cpp" line="198"/>
         <source>Error configuring serial port %1.</source>
         <translation>Fehler beim Konfigurieren des Anschlusses %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="196"/>
+        <location filename="../../src/dmm.cpp" line="204"/>
         <source>Connecting ...</source>
         <translation>Verbinde ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="225"/>
-        <location filename="../../src/dmm.cpp" line="279"/>
+        <location filename="../../src/dmm.cpp" line="233"/>
+        <location filename="../../src/dmm.cpp" line="287"/>
         <source>Not connected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="270"/>
+        <location filename="../../src/dmm.cpp" line="278"/>
         <source>Error %1</source>
         <translation>Fehler %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="275"/>
+        <location filename="../../src/dmm.cpp" line="283"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation>Lesefehler auf %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="277"/>
+        <location filename="../../src/dmm.cpp" line="285"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Wartezeit abgelaufr für %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="267"/>
+        <location filename="../../src/dmm.cpp" line="275"/>
         <source>Connected %1</source>
         <translation>Verbunden %1</translation>
     </message>
@@ -611,17 +611,17 @@ Please choose which instance should record.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/main.cpp" line="83"/>
+        <location filename="../../src/main.cpp" line="107"/>
         <source>protocol debugging information</source>
         <translation>Protokol debugging Informationen</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="84"/>
+        <location filename="../../src/main.cpp" line="108"/>
         <source>sets directory where config files are located</source>
         <translation>setzt das Verzeichnis wo die Konfiguration sich befindet</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="85"/>
+        <location filename="../../src/main.cpp" line="109"/>
         <source>sets &lt;config-id&gt;</source>
         <translation>setzt die &lt;config-id&gt;</translation>
     </message>
@@ -644,12 +644,12 @@ sudo usermod -aG dialout $USER
 Danach müssen Sie sich ab- und wieder anmelden.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="71"/>
+        <location filename="../../src/dmm.cpp" line="74"/>
         <source>No permission to access %1.</source>
         <translation>Keine Berechtigung um auf %1 zuzugreifen.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="75"/>
+        <location filename="../../src/dmm.cpp" line="78"/>
         <source>
 
 On this system the device is typically accessible via group &apos;%1&apos;.</source>
@@ -658,7 +658,15 @@ On this system the device is typically accessible via group &apos;%1&apos;.</sou
 Auf diesem System ist das Gerät in der Regel über die Gruppe &apos;%1&apos; zugreifbar.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="77"/>
+        <location filename="../../src/dmm.cpp" line="81"/>
+        <source>
+Add your user with:
+
+sudo pw groupmod %1 -m $USER</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="84"/>
         <source>
 Add your user with:
 
@@ -669,7 +677,7 @@ Gruppe dem Benutzer hinzufügen:
 sudo usermod -aG %1 $USER</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="79"/>
+        <location filename="../../src/dmm.cpp" line="87"/>
         <source>
 
 Then log out and back in so the new group membership becomes active.</source>
