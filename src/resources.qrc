@@ -74,6 +74,7 @@
         <file alias="manu.xpm">../assets/icons/manu.xpm</file>
         <file alias="max_str.xpm">../assets/icons/max_str.xpm</file>
         <file alias="menu.xpm">../assets/icons/menu.xpm</file>
+        <file alias="meter.xpm">../assets/icons/meter.xpm</file>
         <file alias="min_str.xpm">../assets/icons/min_str.xpm</file>
         <file alias="minus.xpm">../assets/icons/minus.xpm</file>
         <file alias="minus_small.xpm">../assets/icons/minus_small.xpm</file>
@@ -111,6 +112,7 @@
         <file alias="pl">../build/qtdmm_pl.qm</file>
     </qresource>
     <qresource prefix="/Help">
+        <file alias="analog-meter.md">../docs/user/analog-meter.md</file>
         <file alias="command-line.md">../docs/user/command-line.md</file>
         <file alias="connecting.md">../docs/user/connecting.md</file>
         <file alias="index.md">../docs/user/index.md</file>

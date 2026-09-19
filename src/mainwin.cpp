@@ -29,6 +29,9 @@
 #include "helpdlg.h"
 #include "mainwid.h"
 #include "displaywid.h"
+#include "meterwid.h"
+#include "settings.h"
+#include <QDockWidget>
 
 MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   : QMainWindow(parent)
@@ -63,6 +66,25 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   toolBarDisplay->addWidget(m_display);
   m_wid->setDisplay(m_display);
 
+  // analog meter in a dock: dockable on any side, floatable as its own
+  // freely resizable window, hidden until the user switches it on
+  m_meter = new MeterWid(this);
+  m_meterDock = new QDockWidget(tr("Analog meter"), this);
+  m_meterDock->setObjectName("meterDock");
+  m_meterDock->setWidget(m_meter);
+  m_meterDock->setAllowedAreas(Qt::AllDockWidgetAreas);
+  addDockWidget(Qt::RightDockWidgetArea, m_meterDock);
+  m_meterDock->hide();
+  m_wid->setMeter(m_meter);
+
+  QAction *meterAction = m_meterDock->toggleViewAction();
+  meterAction->setText(tr("Analog &meter"));
+  meterAction->setIcon(QIcon(":/Symbols/meter.xpm"));
+  meterAction->setWhatsThis(tr("<html><head/><body><p><span style=\" font-weight:600;\">Analog meter</span></p>"
+                               "<p>Show the reading on a moving-coil style instrument. The panel can be docked on any side "
+                               "of the window or dragged out as a separate window.</p></body></html>"));
+  toolBarDisplay->addAction(meterAction);
+
   if (m_config_id.isEmpty())
     setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(version));
   else
@@ -94,6 +116,9 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   QRect winRect = m_wid->winRect();
 
   m_wid->applySLOT();
+  restoreState(m_wid->settings()->getString("MainWindow/state").isEmpty()
+                 ? QByteArray()
+                 : QByteArray::fromBase64(m_wid->settings()->getString("MainWindow/state").toLatin1()));
 
   if (!winRect.isEmpty())
   {
@@ -300,6 +325,7 @@ void MainWin::on_action_Menu_triggered()
   {
     m_menu = new QMenu(this);
     m_menu->addAction(action_Configure);
+    m_menu->addAction(m_meterDock->toggleViewAction());
     m_menu->addSeparator();
     m_menu->addAction(action_Help);
     m_menu->addAction(action_Tip_of_the_day);
@@ -322,6 +348,8 @@ void MainWin::on_action_Menu_triggered()
 void MainWin::closeEvent(QCloseEvent *ev)
 {
   setToolbarVisibilitySLOT();
+  // dock layout (meter position, floating state, size) and toolbar layout
+  m_wid->settings()->setString("MainWindow/state", QString::fromLatin1(saveState().toBase64()));
 
   if (m_wid->closeWin())
     ev->accept();

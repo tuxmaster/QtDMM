@@ -33,6 +33,8 @@
 class MainWid;
 class DisplayWid;
 class HelpDlg;
+class MeterWid;
+class QDockWidget;
 
 // mt: changed all QAction into Q3Action
 class MainWin : public QMainWindow, private Ui::UIMainWin
@@ -59,6 +61,8 @@ protected Q_SLOTS:
 protected:
   MainWid    *m_wid;
   DisplayWid *m_display;
+  MeterWid   *m_meter;
+  QDockWidget *m_meterDock;
   bool        m_running;
   QLabel     *m_error;
   QLabel     *m_info;

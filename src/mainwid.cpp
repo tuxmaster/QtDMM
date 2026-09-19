@@ -24,12 +24,15 @@
 #include <QtWidgets>
 #include <QPrinter>
 #include <iostream>
+#include <cmath>
 
 #include "mainwid.h"
 #include "dmmgraph.h"
 #include "configdlg.h"
 #include "dmm.h"
 #include "displaywid.h"
+#include "meterwid.h"
+#include "siprefix.h"
 #include "tipdlg.h"
 #include "settings.h"
 #include "instancesdlg.h"
@@ -40,6 +43,7 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
   m_min(1.0E20),
   m_max(-1.0E20),
   m_display(0),
+  m_meter(nullptr),
   m_dval(0.0),
   m_tipDlg(0)
 {
@@ -105,6 +109,11 @@ void MainWid::setConsoleLogging(bool on)
 void MainWid::setDisplay(DisplayWid *display)
 {
   m_display = display;
+}
+
+void MainWid::setMeter(MeterWid *meter)
+{
+  m_meter = meter;
 }
 
 bool MainWid::closeWin()
@@ -236,13 +245,51 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
     }
   }
 
+  if (id == 0)
+    feedMeter(val, u, s, hold);
+
   m_display->update();
+}
+
+// The analog meter works in the unit the multimeter displays (with prefix),
+// so its full scale follows the display count and the decimals of the
+// reading, exactly like the meter's own bar graph.
+void MainWid::feedMeter(const QString &val, const QString &unit, const QString &special, bool hold)
+{
+  if (!m_meter)
+    return;
+
+  static const QRegularExpression letters("[A-Za-z]");
+  const bool overload = val.contains(letters);
+
+  const double fs = MeterWid::fullScaleFromReading(val, m_configDlg->display());
+  if (!std::isnan(fs))
+    m_meter->setFullScale(fs);
+
+  QString label = unit;
+  if (special == "AC" || special == "DC")
+    label += " " + special;
+  else if (special == "ACDC")
+    label += " AC+DC";
+  else if (special == "DI" || special == "Diode")
+    label += " DIODE";
+  else if (special == "BUZ")
+    label += " CONT";
+
+  const double value = overload ? 0.0 : QString(val).remove(' ').toDouble();
+  m_meter->setReading(value, val, label, overload, hold);
+
+  // min/max memory is kept in SI base units; bring the peak into display units
+  if (m_max > -1.0E19)
+    m_meter->setPeak(m_max / SiPrefix::factor(SiPrefix::split(unit).prefix));
 }
 
 void MainWid::resetSLOT()
 {
   m_min =  1.0E20;
   m_max = -1.0E20;
+  if (m_meter)
+    m_meter->reset();
 
   m_display->setMinValue("");
   m_display->setMaxValue("");
@@ -425,6 +472,17 @@ void MainWid::readConfig()
   m_display->setDisplayMode(m_configDlg->display(), m_configDlg->showMinMax(),
                             m_configDlg->showBar(), m_configDlg->numValues());
   m_dmm->setNumValues(m_configDlg->numValues());
+
+  if (m_meter)
+  {
+    MeterStyle style = m_configDlg->meterStyle() == 1 ? MeterStyle::ivory() : MeterStyle::dark();
+    style.ballistics = m_configDlg->meterBallistics();
+    style.redZoneFrom = m_configDlg->meterRedZone() / 100.0;
+    m_meter->setStyle(style);
+    m_meter->setScaleMode(static_cast<MeterWid::ScaleMode>(
+      m_configDlg->meterScaleMode() == 1 ? MeterWid::Unipolar :
+      m_configDlg->meterScaleMode() == 2 ? MeterWid::Bipolar : MeterWid::Auto));
+  }
 
   ui_graph->setLine(m_configDlg->lineWidth(), m_configDlg->intLineWidth());
 

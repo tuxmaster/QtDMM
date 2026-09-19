@@ -69,6 +69,11 @@ void GuiPrefs::defaultsSLOT()
   ui_fileToolBar->setChecked(m_cfg->getBool("Toolbar/file", true));
 
   ui_tipOfTheDay->setChecked(m_cfg->getBool("QtDMM/show-tip", true));
+
+  ui_meterScale->setCurrentIndex(qBound(0, m_cfg->getInt("Meter/scale-mode", 0), 2));
+  ui_meterStyle->setCurrentIndex(qBound(0, m_cfg->getInt("Meter/style", 0), 1));
+  ui_meterBallistics->setChecked(m_cfg->getBool("Meter/ballistics", true));
+  ui_meterRedZone->setValue(qBound(50, m_cfg->getInt("Meter/red-zone", 90), 100));
 }
 
 void GuiPrefs::factoryDefaultsSLOT()
@@ -91,6 +96,11 @@ void GuiPrefs::factoryDefaultsSLOT()
   ui_fileToolBar->setChecked(true);
 
   ui_tipOfTheDay->setChecked(true);
+
+  ui_meterScale->setCurrentIndex(0);
+  ui_meterStyle->setCurrentIndex(0);
+  ui_meterBallistics->setChecked(true);
+  ui_meterRedZone->setValue(90);
 }
 
 void GuiPrefs::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
@@ -118,6 +128,30 @@ void GuiPrefs::applySLOT()
   m_cfg->setBool("Toolbar/dmm", showDmmToolbar());
   m_cfg->setBool("Toolbar/graph", showGraphToolbar());
   m_cfg->setBool("Toolbar/file", showFileToolbar());
+  m_cfg->setInt("Meter/scale-mode", meterScaleMode());
+  m_cfg->setInt("Meter/style", meterStyle());
+  m_cfg->setBool("Meter/ballistics", meterBallistics());
+  m_cfg->setInt("Meter/red-zone", meterRedZone());
+}
+
+int GuiPrefs::meterScaleMode() const
+{
+  return ui_meterScale->currentIndex();
+}
+
+int GuiPrefs::meterStyle() const
+{
+  return ui_meterStyle->currentIndex();
+}
+
+bool GuiPrefs::meterBallistics() const
+{
+  return ui_meterBallistics->isChecked();
+}
+
+int GuiPrefs::meterRedZone() const
+{
+  return ui_meterRedZone->value();
 }
 
 bool GuiPrefs::showTip() const

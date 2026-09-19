@@ -277,6 +277,116 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="GroupBoxMeter">
+     <property name="title">
+      <string>Analog meter</string>
+     </property>
+     <layout class="QGridLayout">
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelMeterScale">
+        <property name="text">
+         <string>Scale</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="ui_meterScale">
+        <property name="whatsThis">
+         <string>How the analog meter lays out its scale. &lt;b&gt;Automatic&lt;/b&gt; starts with zero at the left and switches to a centre-zero scale as soon as a clearly negative reading arrives (until the min/max memory is reset). &lt;b&gt;Zero left&lt;/b&gt; and &lt;b&gt;Centre zero&lt;/b&gt; fix one layout.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Automatic</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Zero left</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Centre zero</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="labelMeterStyle">
+        <property name="text">
+         <string>Style</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QComboBox" name="ui_meterStyle">
+        <property name="whatsThis">
+         <string>Colour scheme of the analog meter: a dark studio dial with a white scale, or a classic ivory dial with a black scale.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Dark studio</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Classic ivory</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QCheckBox" name="ui_meterBallistics">
+        <property name="whatsThis">
+         <string>Move the needle with the inertia of a real moving-coil instrument instead of jumping to each new reading.</string>
+        </property>
+        <property name="text">
+         <string>Needle inertia</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="labelMeterRed">
+        <property name="text">
+         <string>Red zone from</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QSpinBox" name="ui_meterRedZone">
+        <property name="whatsThis">
+         <string>Start of the red zone at the top end of the scale, as a percentage of full scale.</string>
+        </property>
+        <property name="suffix">
+         <string> %</string>
+        </property>
+        <property name="minimum">
+         <number>50</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>90</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="GroupBox4_2">
      <property name="title">
       <string>At program exit</string>
