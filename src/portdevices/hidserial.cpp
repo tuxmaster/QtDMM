@@ -101,7 +101,10 @@ void HIDSerialDevice::run()
     m_buffer[2] = bps >> 8;
     m_buffer[3] = bps >> 16;
     m_buffer[4] = bps >> 24;
-    m_buffer[5] = 0x03; // 3 = enable?
+    // data bits as (bits - 5), per sigrok's CH9325 driver; the two bytes
+    // before it are unknown (parity/stop bits?) and left at zero there too
+    const int bits = (m_dmmInfo.bits >= 5 && m_dmmInfo.bits <= 8) ? m_dmmInfo.bits : 8;
+    m_buffer[5] = static_cast<unsigned char>(bits - 5);
     int res = hid_send_feature_report(m_handle, m_buffer, 6); // 6 bytes
     qCDebug(lcHid) << "feature report" << QByteArray(reinterpret_cast<const char *>(m_buffer), 6).toHex(' ')
                    << "baud" << bps << "->" << res;
