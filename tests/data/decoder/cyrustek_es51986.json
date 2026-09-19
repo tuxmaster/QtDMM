@@ -1,0 +1,29 @@
+{
+  "decoder": "CyrustekES51986",
+  "framesPerReading": 2,
+  "comment": "Real captures from docs/protocols/UT803.log, whose line labels are the reading the meter displayed. The UT803 sends every telegram twice in a row, which is why checkFormat() deliberately matches only the second copy - framesPerReading tells the frame-alignment check to expect that deduplication rather than flag it.",
+  "tests": [
+    {
+      "comment": "[UT803.log] 'DC 0.000 V AUTO 6V'",
+      "hex": "30 30 30 30 30 3B 38 30 3A 0D 0A",
+      "expected": {
+        "dval": 0.0,
+        "val": "0.000",
+        "unit": "V",
+        "special": "DC",
+        "range": "AUTO"
+      }
+    },
+    {
+      "comment": "[UT803.log] 'AC 0.014 V AUTO 6V'",
+      "hex": "30 30 30 31 34 3B 38 30 36 0D 0A",
+      "expected": {
+        "dval": 0.014,
+        "val": "0.014",
+        "unit": "V",
+        "special": "AC",
+        "range": "AUTO"
+      }
+    }
+  ]
+}

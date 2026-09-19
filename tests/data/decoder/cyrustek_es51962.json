@@ -1,0 +1,36 @@
+{
+  "decoder": "CyrustekES51962",
+  "framesPerReading": 2,
+  "comment": "Real captures from docs/protocols/UT70B.log, whose line labels are the reading the meter displayed. The UT70B sends every datagram twice in a row, so checkFormat() deliberately matches only the second copy - see framesPerReading.",
+  "tests": [
+    {
+      "comment": "[UT70B.log] 'DC 005.8 mV AUTO 400mV'",
+      "hex": "30 30 30 35 38 3B 30 30 3A 0D 0A",
+      "expected": {
+        "dval": 0.0058,
+        "unit": "mV",
+        "range": "AUTO"
+      }
+    },
+    {
+      "comment": "[UT70B.log] 'DC 0.00 A FIX 40A' - function code 0x3f is the A range per the log's byte[5] table, not Hz (regression test for the unit 'AHz')",
+      "hex": "30 30 30 30 30 3F 30 30 38 0D 0A",
+      "expected": {
+        "dval": 0.0,
+        "val": "00.00",
+        "unit": "A",
+        "special": "DC",
+        "range": "MANU"
+      }
+    },
+    {
+      "comment": "[UT70B.log] 'AC 0.00 A FIX 40A'",
+      "hex": "30 30 30 30 30 3F 30 30 34 0D 0A",
+      "expected": {
+        "unit": "A",
+        "special": "AC",
+        "range": "MANU"
+      }
+    }
+  ]
+}

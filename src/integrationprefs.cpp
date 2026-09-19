@@ -75,9 +75,9 @@ void IntegrationPrefs::factoryDefaultsSLOT()
   ui_intThresholdColor->setColor(Qt::darkBlue);	// mt: removed .rgb()
   ui_intLineMode->setCurrentIndex(0);
   ui_intPointMode->setCurrentIndex(1);
-  ui_intLineWidth->setValue(1);
+  ui_intLineWidth->setValue(2);
   ui_showInt->setChecked(false);
-  ui_intScale->setText("0.1");
+  ui_intScale->setText("1.0");
   ui_intOffset->setText("0.0");
   ui_intThreshold->setText("0.0");
 }

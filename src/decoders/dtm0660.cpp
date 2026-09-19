@@ -114,6 +114,8 @@ std::optional<DmmDecoder::DmmResponse> DecoderDTM0660::decode(const QByteArray &
 
   // try to find prefix
   //
+  // Scales inline rather than via prefixFactor(), but the factors agree with it,
+  // so dval ends up in SI base units as DmmResponse requires.
   if (data[9] & 0x02)
   {
     m_result.dval /= 1e9;

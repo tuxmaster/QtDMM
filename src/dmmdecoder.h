@@ -44,6 +44,21 @@ class DmmDecoder : public QObject
   Q_OBJECT
 
 public:
+  // A single decoded measurement.
+  //
+  // Contract for the value triple - decoders MUST follow this, because the
+  // display and the recorder consume the two forms differently:
+  //
+  //   val, unit  display form, unit carries the SI prefix ("1.234", "kOhm")
+  //   dval       the same measurement in SI *base* units (1234.0)
+  //
+  // DisplayWid shows val+unit verbatim, while DMMGraph plots dval and strips
+  // the prefix off the unit for its axis label (DMMGraph::setUnit). A decoder
+  // that leaves dval unscaled therefore records values whose magnitude jumps
+  // by the prefix factor whenever the meter changes range.
+  //
+  // Use formatResultValue() to get this right; it inserts the decimal point,
+  // scales dval and assembles unit in one step.
   class DmmResponse
   {
   public:
@@ -100,6 +115,8 @@ public:
 protected:
   QString insertComma(const QString &val, int pos);
   QString insertCommaIT(const QString &val, int pos);
+  // Scale factor for an SI prefix ("k" -> 1e3). Unknown prefixes yield 1.0.
+  static double prefixFactor(const QString &prefix);
   void formatResultValue(int commaPos, const QString& prefix, const QString& baseUnit);
   bool bit(const QByteArray &data, int byte, int bit) const;
   QString makeValue(const QByteArray &data, int first, int last, bool neg=false);

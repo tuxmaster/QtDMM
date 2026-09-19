@@ -141,95 +141,95 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DMMGraph</name>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="168"/>
-        <location filename="../../src/dmmgraph.cpp" line="173"/>
+        <location filename="../../src/dmmgraph.cpp" line="180"/>
+        <location filename="../../src/dmmgraph.cpp" line="185"/>
         <source>Sampling start:</source>
         <translation>Abtasten Start:</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="169"/>
-        <location filename="../../src/dmmgraph.cpp" line="178"/>
+        <location filename="../../src/dmmgraph.cpp" line="181"/>
+        <location filename="../../src/dmmgraph.cpp" line="190"/>
         <source>Sampling resolution:</source>
         <translation>Abtastauflösung:</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="148"/>
+        <location filename="../../src/dmmgraph.cpp" line="160"/>
         <source>QtDMM: %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="181"/>
+        <location filename="../../src/dmmgraph.cpp" line="193"/>
         <source>%1 Seconds</source>
         <translation>%1 Sekunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="98"/>
+        <location filename="../../src/dmmgraph.cpp" line="110"/>
         <source>[sec]</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="558"/>
-        <location filename="../../src/dmmgraph.cpp" line="560"/>
-        <location filename="../../src/dmmgraph.cpp" line="562"/>
-        <location filename="../../src/dmmgraph.cpp" line="564"/>
+        <location filename="../../src/dmmgraph.cpp" line="570"/>
+        <location filename="../../src/dmmgraph.cpp" line="572"/>
+        <location filename="../../src/dmmgraph.cpp" line="574"/>
+        <location filename="../../src/dmmgraph.cpp" line="576"/>
         <source>Sampling</source>
         <translation>Beproben</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="558"/>
-        <location filename="../../src/dmmgraph.cpp" line="560"/>
-        <location filename="../../src/dmmgraph.cpp" line="562"/>
-        <location filename="../../src/dmmgraph.cpp" line="564"/>
+        <location filename="../../src/dmmgraph.cpp" line="570"/>
+        <location filename="../../src/dmmgraph.cpp" line="572"/>
+        <location filename="../../src/dmmgraph.cpp" line="574"/>
+        <location filename="../../src/dmmgraph.cpp" line="576"/>
         <source>Stopped</source>
         <translation>Angehalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="626"/>
+        <location filename="../../src/dmmgraph.cpp" line="638"/>
         <source>Disconnect</source>
         <translation>Trennen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="633"/>
+        <location filename="../../src/dmmgraph.cpp" line="645"/>
         <source>Connect</source>
         <translation>Verbinden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="642"/>
+        <location filename="../../src/dmmgraph.cpp" line="654"/>
         <source>Stop recorder</source>
         <translation>Rekorder anhalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="649"/>
+        <location filename="../../src/dmmgraph.cpp" line="661"/>
         <source>Start recorder</source>
         <translation>Rekorder starten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="654"/>
+        <location filename="../../src/dmmgraph.cpp" line="666"/>
         <source>Clear graph</source>
         <translation>Graphen löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="660"/>
+        <location filename="../../src/dmmgraph.cpp" line="672"/>
         <source>Configure...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="668"/>
+        <location filename="../../src/dmmgraph.cpp" line="680"/>
         <source>Export data...</source>
         <translation>Daten exportieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="672"/>
+        <location filename="../../src/dmmgraph.cpp" line="684"/>
         <source>Import data...</source>
         <translation>Daten importieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="879"/>
+        <location filename="../../src/dmmgraph.cpp" line="891"/>
         <source>Export data</source>
         <translation>Daten exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="998"/>
+        <location filename="../../src/dmmgraph.cpp" line="1010"/>
         <source>File contains only header</source>
         <translation>Datei enthält nur den Header</translation>
     </message>
@@ -238,44 +238,44 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="932"/>
+        <location filename="../../src/dmmgraph.cpp" line="944"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="933"/>
+        <location filename="../../src/dmmgraph.cpp" line="945"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Beim Importieren werden alle bisherigen Messwerte gelöscht.&lt;p&gt;Möchten Sie zu ersten die bisherigen Daten exportieren?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="945"/>
+        <location filename="../../src/dmmgraph.cpp" line="957"/>
         <source>Export data first</source>
         <translation>Daten zu erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="949"/>
+        <location filename="../../src/dmmgraph.cpp" line="961"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importieren und Daten löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="960"/>
+        <location filename="../../src/dmmgraph.cpp" line="972"/>
         <source>Import data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="960"/>
+        <location filename="../../src/dmmgraph.cpp" line="972"/>
         <source>CSV (*.csv);;All files (*)</source>
         <translation>CSV (*.csv);;Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="897"/>
-        <location filename="../../src/dmmgraph.cpp" line="978"/>
+        <location filename="../../src/dmmgraph.cpp" line="909"/>
+        <location filename="../../src/dmmgraph.cpp" line="990"/>
         <source>Cannot open file.</source>
         <translation>Datei kann nicht geöffnet werden.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="987"/>
-        <location filename="../../src/dmmgraph.cpp" line="1029"/>
+        <location filename="../../src/dmmgraph.cpp" line="999"/>
+        <location filename="../../src/dmmgraph.cpp" line="1041"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Diese Datei scheint nicht gültig zu sein</translation>
     </message>
@@ -297,7 +297,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DecoderVC870</name>
     <message>
-        <location filename="../../src/decoders/vc870.cpp" line="761"/>
+        <location filename="../../src/decoders/vc870.cpp" line="764"/>
         <source>Parser errors</source>
         <translation>Analyse Fehler</translation>
     </message>
@@ -325,13 +325,13 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Alle Hersteller</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="486"/>
+        <location filename="../../src/dmmprefs.cpp" line="490"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="486"/>
-        <location filename="../../src/dmmprefs.cpp" line="512"/>
+        <location filename="../../src/dmmprefs.cpp" line="490"/>
+        <location filename="../../src/dmmprefs.cpp" line="516"/>
         <source>DMM description (*.cfg)</source>
         <translation>DMM Beschreibung (*.cfg)</translation>
     </message>
@@ -340,7 +340,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">DMM Beschreibung (*.ini)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="512"/>
+        <location filename="../../src/dmmprefs.cpp" line="516"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
@@ -436,47 +436,47 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="122"/>
+        <location filename="../../src/mainwid.cpp" line="126"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="123"/>
+        <location filename="../../src/mainwid.cpp" line="127"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Es befinden sich ungesicherte Daten im Speicher. Wenn Sie das Programm beenden gehen diese verloren.&lt;p&gt;Sollen diese vorher exportiert werden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="138"/>
+        <location filename="../../src/mainwid.cpp" line="142"/>
         <source>Export data first</source>
         <translation>Daten erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="142"/>
+        <location filename="../../src/mainwid.cpp" line="146"/>
         <source>Quit without saving</source>
         <translation>Beenden ohne speichern</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="438"/>
+        <location filename="../../src/mainwid.cpp" line="442"/>
         <source>Automatic start at %1</source>
         <translation>Automatisch starten bei %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="440"/>
+        <location filename="../../src/mainwid.cpp" line="444"/>
         <source>Raising threshold %1</source>
         <translation>Grenzwert steigent %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="442"/>
+        <location filename="../../src/mainwid.cpp" line="446"/>
         <source>Falling threshold %1</source>
         <translation>Grenzwert fallend %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="464"/>
+        <location filename="../../src/mainwid.cpp" line="468"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s läuft noch!&lt;p&gt;Wollen sie es jetzt beenden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="505"/>
+        <location filename="../../src/mainwid.cpp" line="509"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Konnte %1 nicht starten</translation>
     </message>
@@ -485,18 +485,18 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="obsolete">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s is still running!&lt;p&gt;Do you want to kill it now</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="522"/>
+        <location filename="../../src/mainwid.cpp" line="526"/>
         <source>Launched %1</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="527"/>
+        <location filename="../../src/mainwid.cpp" line="531"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 mit dem Rückgabecode %2 beendet.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="463"/>
-        <location filename="../../src/mainwid.cpp" line="504"/>
+        <location filename="../../src/mainwid.cpp" line="467"/>
+        <location filename="../../src/mainwid.cpp" line="508"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: Startfehler</translation>
     </message>
@@ -505,17 +505,17 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %1 läuft noch.&lt;p&gt;Soll es getötet werden</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="476"/>
+        <location filename="../../src/mainwid.cpp" line="480"/>
         <source>Yes, kill it!</source>
         <translation>Ja, töten!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="480"/>
+        <location filename="../../src/mainwid.cpp" line="484"/>
         <source>No, keep running</source>
         <translation>Nein, es laufen lassen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="516"/>
+        <location filename="../../src/mainwid.cpp" line="520"/>
         <source>Bummer!</source>
         <translation>Reinfall!</translation>
     </message>

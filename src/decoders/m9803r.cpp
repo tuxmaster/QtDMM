@@ -313,6 +313,11 @@ std::optional<DmmDecoder::DmmResponse> DecoderM9803R::decode(const QByteArray &d
   }
 
   m_result.val    = val.trimmed();
+  // Note: the unit strings above already carry their SI prefix ("mV", "kOhm"),
+  // while dval is taken from the displayed digits without a matching factor, so
+  // dval is in display units here, not the SI base units DmmResponse describes.
+  // Unclear whether that is intended for this decoder - there is no M9803R log
+  // in docs/protocols to check against, so left as-is.
   m_result.dval   = m_result.val.toDouble();
 
   return m_result;

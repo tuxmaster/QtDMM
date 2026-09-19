@@ -19,10 +19,6 @@ public:
   static bool availablePorts(QStringList &portlist);
 
   void close() override;
-  bool isOpen() const
-  {
-    return m_isOpen;
-  }
 
   qint64 bytesAvailable() const override;
 
@@ -49,7 +45,6 @@ private:
   DmmDecoder::DMMInfo m_dmmInfo;
   QString m_host;
   quint16 m_port;
-  bool m_isOpen = false;
 
   QByteArray m_inputBuffer;
   static constexpr unsigned int m_buflen = 1024;

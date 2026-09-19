@@ -35,6 +35,7 @@
 ReaderThread::ReaderThread(QObject *receiver) :
   QObject(receiver),
   m_receiver(receiver),
+  m_status(ReaderThread::NotConnected),
   m_readValue(false),
   m_format(ReadEvent::Invalid),
   m_length(0),
@@ -49,6 +50,12 @@ ReaderThread::ReaderThread(QObject *receiver) :
 
 void ReaderThread::setHandle(QIODevice *handle)
 {
+  // Drop the previous port's connections first: without this they pile up on
+  // every reconnect (socketNotifierSLOT would run once per connect), and a
+  // still-open old port could fire readyRead after m_port was set to null.
+  if (m_port)
+    disconnect(m_port, Q_NULLPTR, this, Q_NULLPTR);
+
   m_port = handle;
 
   m_readValue = false;
@@ -56,7 +63,6 @@ void ReaderThread::setHandle(QIODevice *handle)
   if (!m_port)
   {
     m_status = ReaderThread::NotConnected;
-    m_readValue = false;
   }
   else
   {

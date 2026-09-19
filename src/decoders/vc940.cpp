@@ -19,6 +19,14 @@ size_t DecoderVC940::getPacketLength()
 
 bool DecoderVC940::checkFormat(const char* data, size_t idx)
 {
+  // The 12 is deliberate: it skips the first of two identical telegrams so one
+  // measurement yields one reading (same scheme as es51986/es51962). Evidence is
+  // the original 2015 readerthread.cpp, which used ">= 10" for the M9803R but
+  // ">= 12" for the VC940 at the identical 11-byte packet length - the author had
+  // the device and chose to differ. Open question: docs/protocols/UT71BCDE.log
+  // and UT804.log mention no duplication for the Uni-T models later added to this
+  // decoder, so those may be losing every second reading here. Resolving that
+  // needs per-device handling, not a change to this guard.
   return (m_type==ReadEvent::VC940Continuous && idx >= 12 && data[(idx - 1 + FIFO_LENGTH) % FIFO_LENGTH] == 0x0d && data[idx] == 0x0a);
 }
 

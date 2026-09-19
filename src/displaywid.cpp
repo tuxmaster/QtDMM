@@ -28,6 +28,7 @@
 #include <iostream>
 
 DisplayWid::DisplayWid(QWidget *parent) : QWidget(parent),
+  m_showHold(false),
   m_showAuto(false),
   m_showManu(false),
   m_paintBar(true),

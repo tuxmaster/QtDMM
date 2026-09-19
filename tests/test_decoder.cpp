@@ -159,6 +159,54 @@ int main(int argc, char **argv)
     if (expected.contains("id2"))     check("id2",     result->id2,     expected["id2"]);
   }
 
+  // Frame alignment invariant: feeding N readings' worth of frames through the
+  // same ring buffer ReaderThread uses must yield exactly N detections. The
+  // per-case loop above retries the same frame up to 5 times, so it cannot tell
+  // a correct guard from one that silently drops readings.
+  //
+  // Some meters transmit every telegram more than once (the UT803 and UT70B send
+  // each one twice - see docs/protocols/UT803.log and UT70B.log), and their
+  // decoders deliberately match only the last copy so one measurement yields one
+  // reading. Such fixtures declare "framesPerReading" so this check expects the
+  // deduplication instead of flagging it.
+  if (!tests.isEmpty())
+  {
+    const QByteArray frame = parseHexStringToByteArray(tests[0].toObject()["hex"].toString());
+    const size_t bytesToRead = decoder->getPacketLength();
+    const int framesPerReading = root.contains("framesPerReading") ? root["framesPerReading"].toInt() : 1;
+    const int readings = 3;
+
+    char fifo[FIFO_LENGTH];
+    memset(fifo, 0, sizeof(fifo));
+    size_t length = 0;
+    int detected = 0;
+
+    for (int c = 0; c < readings * framesPerReading; ++c)
+    {
+      for (int idx = 0; idx < frame.size(); ++idx)
+      {
+        fifo[length] = frame[idx];
+
+        if (decoder->checkFormat(fifo, length))
+        {
+          ++detected;
+          length = 0;
+        }
+        else
+          length = (length + 1) % FIFO_LENGTH;
+      }
+    }
+
+    if (detected != readings)
+    {
+      qWarning() << "[frame alignment] fed" << readings * framesPerReading
+                 << "frames of the declared packet length" << bytesToRead
+                 << "at" << framesPerReading << "frame(s) per reading, expected"
+                 << readings << "detections but got" << detected;
+      failed++;
+    }
+  }
+
   return failed == 0 ? 0 : 1;
 }
 

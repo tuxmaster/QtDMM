@@ -72,6 +72,10 @@ void HIDSerialDevice::close()
       hid_close(m_handle);
       m_handle = Q_NULLPTR;
     }
+
+    // Without this the QIODevice base keeps reporting isOpen() == true, which
+    // is what PortHandler::isOpen() actually queries.
+    QIODevice::close();
   }
 #endif
 }
@@ -83,7 +87,7 @@ void HIDSerialDevice::run()
   {
     memset(m_buffer, 0, m_buflen);
 
-    unsigned int bps = 19200; // possibly take baud rate from DmmInfo?
+    unsigned int bps = m_dmmInfo.baud > 0 ? static_cast<unsigned int>(m_dmmInfo.baud) : 19200;
     // Send a Feature Report to the device
     m_buffer[0] = 0x0; // report ID
     m_buffer[1] = bps;
@@ -138,9 +142,9 @@ void HIDSerialDevice::run()
 }
 
 
-qint64 HIDSerialDevice::bytesAvailable()
+qint64 HIDSerialDevice::bytesAvailable() const
 {
-  return (m_buffer_w + m_buflen - m_buffer_r) % m_buflen;;
+  return QIODevice::bytesAvailable() + (m_buffer_w + m_buflen - m_buffer_r) % m_buflen;
 }
 
 

@@ -90,27 +90,23 @@ qint64 SigrokDevice::writeData(const char *, qint64)
 
 void SigrokDevice::close()
 {
-  if (isOpen())
+  // Keyed off the process state rather than isOpen(), so a process that was
+  // started by init() but never reached QIODevice::open() still gets reaped.
+  if (m_process->state() != QProcess::NotRunning)
   {
-    if (m_process->state() != QProcess::NotRunning)
+    m_process->terminate();
+    if (!m_process->waitForFinished(2000))
     {
-      m_process->terminate();
-      if (!m_process->waitForFinished(2000))
-      {
-        m_process->kill();
-        m_process->waitForFinished();
-      }
+      m_process->kill();
+      m_process->waitForFinished();
     }
-
-    m_buffer.clear();
-    m_outLine.clear();
-    QIODevice::close();
   }
-}
 
-bool SigrokDevice::isOpen() const
-{
-  return m_process && m_process->isOpen() && (m_process->state() == QProcess::Running || m_process->state() == QProcess::Starting);
+  m_buffer.clear();
+  m_outLine.clear();
+
+  if (QIODevice::isOpen())
+    QIODevice::close();
 }
 
 bool SigrokDevice::availablePorts(QStringList &list)

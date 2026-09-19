@@ -21,9 +21,11 @@ public:
 
   static bool availablePorts(QStringList &portlist);
   void close() override;
-  bool isOpen() { return m_isOpen; };
 
-  qint64 bytesAvailable();
+  // Must stay const: QIODevice::bytesAvailable() is const and virtual, so a
+  // non-const version silently hides it instead of overriding, and callers
+  // holding a QIODevice* (ReaderThread) get the base implementation.
+  qint64 bytesAvailable() const override;
 
   Q_SIGNALS:
   void finished();
