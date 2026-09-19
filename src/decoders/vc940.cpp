@@ -43,7 +43,10 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &da
   int function = data[6] & 0x0f;
   int range    = data[5] & 0x0f;
   int mode2    = data[8];
-  bool neg     = bit(data,8,3);
+  // Byte 8 carries NEG, MAN and AUTO in bits 2, 1 and 0 (field table in
+  // docs/protocols/sources/UT71BCDE.log; heha's ut.cpp: rbuf[8]&4). Bit 3 was
+  // read before, so negative readings came out positive.
+  bool neg     = bit(data,8,2);
 
   Q_UNUSED(mode2)
 
@@ -56,7 +59,9 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &da
     case 0x0:formatResultValue(3,"m","V"); break;
     case 0x1:formatResultValue(range,"","V");  m_result.special = "DC"; break;
     case 0x2:formatResultValue(range,"","V");  m_result.special = "AC"; break;
-    case 0x3:formatResultValue(range,"m","V"); m_result.special = "DC"; break;
+    // mV has a single 400.00 range whose code is 0; the code is not the
+    // decimal position here as it is for the V ranges.
+    case 0x3:formatResultValue(3,"m","V");     m_result.special = "DC"; break;
     case 0x4:
       m_result.special = "OH";
       switch (range)
@@ -78,8 +83,8 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &da
         case 3:formatResultValue(1,"u","F"); break;
         case 4:formatResultValue(2,"u","F"); break;
         case 5:formatResultValue(3,"u","F"); break;
-        case 6:formatResultValue(4,"u","F"); break;
-        case 7:formatResultValue(1,"m","F"); break;
+        case 6:formatResultValue(1,"m","F"); break;   // 4.000 mF per the range table
+        case 7:formatResultValue(2,"m","F"); break;   // 40.00 mF
       }
       break;
     case 0x6:formatResultValue(4,"","C");  m_result.special = "TE"; break;
@@ -123,14 +128,20 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC940::decode(const QByteArray &da
           case 3:formatResultValue(2,"k","Hz"); break;
           case 4:formatResultValue(3,"k","Hz"); break;
           case 5:formatResultValue(1,"M","Hz"); break;
-          case 6:formatResultValue(2,"k","Hz"); break;
-          case 7:formatResultValue(3,"k","Hz"); break;
+          case 6:formatResultValue(2,"M","Hz"); break;  // 40.00 MHz per the range table
+          case 7:formatResultValue(3,"M","Hz"); break;  // 400.0 MHz
         }
       }
       break;
     case 0xD:
       m_result.special = "TE";
       formatResultValue(4,"","dF"); break;
+    case 0xF:
+      // 4-20 mA loop tester, shown in percent (function table in UT71BCDE.log;
+      // heha's ut.cpp mode 15). Full scale "100" on five digits -> 100.00.
+      m_result.special = "PC";
+      formatResultValue(3,"","%");
+      break;
       break;
   }
 
