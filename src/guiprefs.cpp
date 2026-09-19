@@ -48,10 +48,10 @@ void GuiPrefs::defaultsSLOT()
 
   ui_showDisplay->setChecked(m_cfg->getBool("Display/show", true));
   if (!m_cfg->fileConverted())
-    ui_bgColorDisplay->setColor(m_cfg->getColor("Display/display-background", QColor(0xb6, 0xcf, 0xa4)));
+    ui_bgColorDisplay->setColor(m_cfg->getColor("Display/display-background", QColor(0xda, 0xdc, 0x77)));
   else
   {
-    ui_bgColorDisplay->setColor(QColor(0xb6, 0xcf, 0xa4));
+    ui_bgColorDisplay->setColor(QColor(0xda, 0xdc, 0x77));
     m_cfg->save();
   }
   ui_showBar->setChecked(m_cfg->getBool("Display/display-bar", true));
@@ -78,7 +78,7 @@ void GuiPrefs::factoryDefaultsSLOT()
   ui_saveWindowSize->setChecked(true);
 
   ui_showDisplay->setChecked(true);
-  ui_bgColorDisplay->setColor(QColor(0xb6, 0xcf, 0xa4));
+  ui_bgColorDisplay->setColor(QColor(0xda, 0xdc, 0x77));
 
   ui_showBar->setChecked(true);
   ui_showMinMax->setChecked(true);
