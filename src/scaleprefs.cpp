@@ -36,7 +36,7 @@
 ScalePrefs::ScalePrefs(QWidget *parent) : PrefWidget(parent)
 {
   setupUi(this);
-  m_label = tr("Scale settings");
+  m_label = tr("Scales");
   m_description = tr("<b>Here you can configure the vertical scale"
                      " of the recorder and the length (in time)"
                      " of the window.</b>");

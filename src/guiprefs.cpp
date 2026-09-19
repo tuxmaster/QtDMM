@@ -31,7 +31,7 @@
 GuiPrefs::GuiPrefs(QWidget *parent) : PrefWidget(parent)
 {
   setupUi(this);
-  m_label = tr("GUI settings");
+  m_label = tr("Appearance");
   m_description = tr("<b>Here you can configure QtDMM's visual"
                      " appearance and behaviour.</b>");
   m_pixmap = new QPixmap(":/Symbols/gui.xpm");
@@ -58,7 +58,7 @@ void GuiPrefs::defaultsSLOT()
   ui_showMinMax->setChecked(m_cfg->getBool("Display/display-min-max", true));
 
   ui_alertUnsavedData->setChecked(m_cfg->getBool("Alert/unsaved-file", true));
-  ui_textLabel->setChecked(m_cfg->getBool("Icons/text-label", true));
+  ui_textLabel->setChecked(m_cfg->getBool("Icons/text-label", false));
 
   ui_dmmToolBar->setChecked(m_cfg->getBool("Toolbar/dmm", true));
   ui_graphToolBar->setChecked(m_cfg->getBool("Toolbar/graph", true));
@@ -84,7 +84,7 @@ void GuiPrefs::factoryDefaultsSLOT()
   ui_showMinMax->setChecked(true);
 
   ui_alertUnsavedData->setChecked(true);
-  ui_textLabel->setChecked(true);
+  ui_textLabel->setChecked(false);
 
   ui_dmmToolBar->setChecked(true);
   ui_graphToolBar->setChecked(true);

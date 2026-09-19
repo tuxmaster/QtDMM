@@ -35,7 +35,7 @@
 RecorderPrefs::RecorderPrefs(QWidget *parent) : PrefWidget(parent)
 {
   setupUi(this);
-  m_label = tr("Recorder settings");
+  m_label = tr("Recording");
   m_description = tr("<b>Here you can configure the sampling"
                      " frequency and start options for the"
                      " recorder.</b>");

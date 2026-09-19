@@ -33,7 +33,7 @@
 GraphPrefs::GraphPrefs(QWidget *parent) : PrefWidget(parent)
 {
   setupUi(this);
-  m_label = tr("Graph settings");
+  m_label = tr("Graph");
   m_description = tr("<b>Here you can configure the colors and"
                      " drawing style for the graph.</b>");
   m_pixmap = new QPixmap(":/Symbols/graph.xpm");
