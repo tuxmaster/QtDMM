@@ -76,6 +76,18 @@ int main(int argc, char **argv)
   if (!dump.isEmpty()) value.save(QDir(dump).filePath("display_value.png"));
   check(qAlpha(value.pixel(0, 0)) == 0, "corners outside the bezel stay transparent");
 
+  // --- 3. aspect clamp: a strip-shaped widget keeps a panel of sane shape ---
+  {
+    QImage wide = render(w, QSize(1400, 200));
+    // far left/right of a very wide widget is outside the panel
+    check(qAlpha(wide.pixel(20, 100)) == 0 && qAlpha(wide.pixel(1379, 100)) == 0,
+          "very wide widget: panel does not stretch to the edges");
+    check(qAlpha(wide.pixel(700, 100)) != 0, "very wide widget: panel is centred");
+    QImage tall = render(w, QSize(300, 400));
+    check(qAlpha(tall.pixel(150, 10)) == 0 && qAlpha(tall.pixel(150, 389)) == 0,
+          "very tall widget: panel does not stretch vertically");
+  }
+
   if (!dump.isEmpty())
   {
     w.setValue(0, "0.L");
@@ -103,6 +115,10 @@ int main(int argc, char **argv)
     render(w, QSize(1000, 400)).save(QDir(dump).filePath("display_large_plain.png"));
     w.setFaceColor(QColor(0x20, 0x30, 0x40));
     render(w, size).save(QDir(dump).filePath("display_dark_face.png"));
+    w.setFaceColor(QColor(0xb6, 0xcf, 0xa4));
+    w.setDisplayMode(4000, true, true, 1);
+    render(w, QSize(1400, 200)).save(QDir(dump).filePath("display_very_wide.png"));
+    render(w, QSize(300, 400)).save(QDir(dump).filePath("display_very_tall.png"));
   }
 
   if (failed == 0)

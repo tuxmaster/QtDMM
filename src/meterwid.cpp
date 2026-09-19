@@ -256,7 +256,7 @@ void MeterWid::stepBallistics()
 MeterWid::Geometry MeterWid::geometry() const
 {
   Geometry g;
-  const QRectF r = rect().adjusted(1, 1, -1, -1);
+  const QRectF r = PanelFrame::panelRect(QRectF(rect()).adjusted(1, 1, -1, -1), 1.3, 2.2);
   g.bezel = r;
   g.face = PanelFrame::faceRect(r);
   const double fh = g.face.height();

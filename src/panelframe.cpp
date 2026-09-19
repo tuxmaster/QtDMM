@@ -31,6 +31,18 @@ static double bezelWidth(const QRectF &bezel)
   return qMax(4.0, bezel.height() * 0.06);
 }
 
+QRectF panelRect(const QRectF &available, double minAspect, double maxAspect)
+{
+  double w = available.width();
+  double h = available.height();
+  const double aspect = w / h;
+  if (aspect > maxAspect)
+    w = h * maxAspect;
+  else if (aspect < minAspect)
+    h = w / minAspect;
+  return QRectF(available.center().x() - w / 2.0, available.center().y() - h / 2.0, w, h);
+}
+
 QRectF faceRect(const QRectF &bezel)
 {
   const double w = bezelWidth(bezel);
