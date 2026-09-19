@@ -2,39 +2,23 @@
 <RCC>
     <qresource prefix="/Symbols">
         <file alias="add.xpm">../assets/icons/add.xpm</file>
-        <file alias="all_digits.xpm">../assets/icons/all_digits.xpm</file>
-        <file alias="bar.xpm">../assets/icons/bar.xpm</file>
         <file alias="clear.xpm">../assets/icons/clear.xpm</file>
-        <file alias="conf.xpm">../assets/icons/conf.xpm</file>
         <file alias="config.xpm">../assets/icons/config.xpm</file>
         <file alias="connect_icon.xpm">../assets/icons/connect_icon.xpm</file>
-        <file alias="connect_off.xpm">../assets/icons/connect_off.xpm</file>
         <file alias="connect_on.xpm">../assets/icons/connect_on.xpm</file>
-        <file alias="connection.xpm">../assets/icons/connection.xpm</file>
         <file alias="display.xpm">../assets/icons/display.xpm</file>
         <file alias="dmm.xpm">../assets/icons/dmm.xpm</file>
-        <file alias="dmm_big.xpm">../assets/icons/dmm_big.xpm</file>
-        <file alias="ee.xpm">../assets/icons/ee.xpm</file>
         <file alias="execute.xpm">../assets/icons/execute.xpm</file>
         <file alias="export.xpm">../assets/icons/export.xpm</file>
         <file alias="graph.xpm">../assets/icons/graph.xpm</file>
         <file alias="gui.xpm">../assets/icons/gui.xpm</file>
         <file alias="help.xpm">../assets/icons/help.xpm</file>
-        <file alias="hi.xpm">../assets/icons/hi.xpm</file>
         <file alias="icon.xpm">../assets/icons/icon.xpm</file>
-        <file alias="icon_gray.xpm">../assets/icons/icon_gray.xpm</file>
         <file alias="import.xpm">../assets/icons/import.xpm</file>
         <file alias="instances.xpm">../assets/icons/instances.xpm</file>
         <file alias="integration.xpm">../assets/icons/integration.xpm</file>
-        <file alias="integration_old.xpm">../assets/icons/integration_old.xpm</file>
-        <file alias="l.xpm">../assets/icons/l.xpm</file>
-        <file alias="l_small.xpm">../assets/icons/l_small.xpm</file>
-        <file alias="m.xpm">../assets/icons/m.xpm</file>
         <file alias="menu.xpm">../assets/icons/menu.xpm</file>
         <file alias="meter.xpm">../assets/icons/meter.xpm</file>
-        <file alias="n.xpm">../assets/icons/n.xpm</file>
-        <file alias="numers_tiny.xpm">../assets/icons/numers_tiny.xpm</file>
-        <file alias="p.xpm">../assets/icons/p.xpm</file>
         <file alias="print.xpm">../assets/icons/print.xpm</file>
         <file alias="quit.xpm">../assets/icons/quit.xpm</file>
         <file alias="recorder.xpm">../assets/icons/recorder.xpm</file>
@@ -43,7 +27,6 @@
         <file alias="scale.xpm">../assets/icons/scale.xpm</file>
         <file alias="start.xpm">../assets/icons/start.xpm</file>
         <file alias="stop.xpm">../assets/icons/stop.xpm</file>
-        <file alias="u.xpm">../assets/icons/u.xpm</file>
     </qresource>
     <qresource prefix="/Translations">
         <file alias="de">../build/qtdmm_de.qm</file>
