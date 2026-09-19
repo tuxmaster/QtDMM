@@ -1,0 +1,117 @@
+protocol: CyrustekES51986
+decoder: src/decoders/cyrustek_es51986.cpp
+devices: [Iso-Tech IDM 73, Tenma 72-1016, Uni-Trend UT803]
+frames_per_reading: 2
+unit_map:                      # log spelling -> what the decoder emits
+  "µ": "u"
+  "°C": "C"
+  "°F": "F"
+sources:
+  - docs/protocols/sources/UT803.log
+
+# 'reading' is what the log says the meter displayed; dval, unit, range and
+# hold are derived from it. Put decoder-specific assertions (special, val)
+# under 'expect' by hand. 'range_label' and 'remark' are informational.
+vectors:
+  - source_line: "DC  0.000 V AUTO 6V"
+    bytes: 30 30 30 30 30 3B 38 30 3A 0D 0A
+    reading: {value: "0.000", unit: "V", coupling: DC, range_mode: auto, range_label: "6V"}
+  - source_line: "DC -0.000 V MAN 6V"
+    bytes: 30 30 30 30 30 3B 3C 30 38 0D 0A
+    reading: {value: "-0.000", unit: "V", coupling: DC, range_mode: manual, range_label: "6V"}
+  - source_line: "DC  -0.00 V MAN 60V"
+    bytes: 31 30 30 30 30 3B 3C 30 38 0D 0A
+    reading: {value: "-0.00", unit: "V", coupling: DC, range_mode: manual, range_label: "60V"}
+  - source_line: "DC    0.0 V MAN 600V"
+    bytes: 32 30 30 30 30 3B 38 30 38 0D 0A
+    reading: {value: "0.0", unit: "V", coupling: DC, range_mode: manual, range_label: "600V"}
+  - source_line: "DC     -0 V MAN 1000V"
+    bytes: 33 30 30 30 30 3B 3C 30 38 0D 0A
+    reading: {value: "-0", unit: "V", coupling: DC, range_mode: manual, range_label: "1000V"}
+  - source_line: "AC  0.014 V AUTO 6V"
+    bytes: 30 30 30 31 34 3B 38 30 36 0D 0A
+    reading: {value: "0.014", unit: "V", coupling: AC, range_mode: auto, range_label: "6V"}
+  - source_line: "A+D 0.012 V AUTO 6V"
+    bytes: 30 30 30 31 32 3B 38 30 36 0D 0A
+    reading: {value: "0.012", unit: "V", coupling: AC+DC, range_mode: auto, range_label: "6V"}
+  - source_line: "A+D    11 V MAN 1000V"
+    bytes: 33 30 30 31 31 3B 38 30 34 0D 0A
+    reading: {value: "11", unit: "V", coupling: AC+DC, range_mode: manual, range_label: "1000V"}
+  - source_line: "0.L MOhm AUTO 60M"
+    bytes: 35 36 30 30 30 33 39 30 32 0D 0A
+    reading: {value: "0.L", unit: "MOhm", range_mode: auto, range_label: "60M"}
+  - source_line: "0.L MOhm MAN 60M"
+    bytes: 35 36 30 30 30 33 39 30 30 0D 0A
+    reading: {value: "0.L", unit: "MOhm", range_mode: manual, range_label: "60M"}
+  - source_line: "0L. Ohm MAN 600"
+    bytes: 30 36 30 30 30 33 39 30 30 0D 0A
+    reading: {value: "0L.", unit: "Ohm", range_mode: manual, range_label: "600"}
+  - source_line: "0L Ohm FIX 600"
+    bytes: 30 36 30 30 30 35 39 30 30 0D 0A
+    reading: {value: "0L", unit: "Ohm", range_mode: manual, range_label: "600"}
+    remark: "// Sehr schnelle Datenübertragung!"
+  - source_line: ".0L V FIX 6V"
+    bytes: 30 32 36 34 37 31 39 30 30 0D 0A
+    reading: {value: ".0L", unit: "V", range_mode: manual, range_label: "6V"}
+    remark: "// Schnelle Datenübertragung!"
+  - source_line: "0.051 nF AUTO 6nF"
+    bytes: 30 30 30 35 31 36 38 30 32 0D 0A
+    reading: {value: "0.051", unit: "nF", range_mode: auto, range_label: "6nF"}
+  - source_line: "0.051 nF MAN 6nF"
+    bytes: 30 30 30 35 31 36 38 30 30 0D 0A
+    reading: {value: "0.051", unit: "nF", range_mode: manual, range_label: "6nF"}
+  - source_line: "0.000 mF MAN 6mF"
+    bytes: 36 30 30 30 30 36 38 30 30 0D 0A
+    reading: {value: "0.000", unit: "mF", range_mode: manual, range_label: "6mF"}
+    remark: "// Langsame Datenübertragung!"
+  - source_line: "0 Hz AUTO 6kHz"
+    bytes: 30 30 30 30 30 32 38 30 32 0D 0A
+    reading: {value: "0", unit: "Hz", range_mode: auto, range_label: "6kHz"}
+  - source_line: "0 Hz MAN 6kHz"
+    bytes: 30 30 30 30 30 32 38 30 30 0D 0A
+    reading: {value: "0", unit: "Hz", range_mode: manual, range_label: "6kHz"}
+  - source_line: "0.00 MHz MAN 60M"
+    bytes: 34 30 30 30 30 32 38 30 30 0D 0A
+    reading: {value: "0.00", unit: "MHz", range_mode: manual, range_label: "60M"}
+  - source_line: "76 °F FIX 1800"
+    bytes: 30 30 30 37 36 34 30 30 30 0D 0A
+    reading: {value: "76", unit: "°F", range_mode: manual, range_label: "1800"}
+  - source_line: "22 °C FIX 1000"
+    bytes: 30 30 30 32 32 34 38 30 30 0D 0A
+    reading: {value: "22", unit: "°C", range_mode: manual, range_label: "1000"}
+  - source_line: "DC  000.0 µA AUTO 600µ"
+    bytes: 30 30 30 30 30 3D 38 30 3A 0D 0A
+    reading: {value: "000.0", unit: "µA", coupling: DC, range_mode: auto, range_label: "600µ"}
+  - source_line: "DC -000.0 µA MAN 600µ"
+    bytes: 30 30 30 30 30 3D 3C 30 38 0D 0A
+    reading: {value: "-000.0", unit: "µA", coupling: DC, range_mode: manual, range_label: "600µ"}
+  - source_line: "DC -0000. µA MAN 6000µ"
+    bytes: 31 30 30 30 30 3D 3C 30 38 0D 0A
+    reading: {value: "-0000.", unit: "µA", coupling: DC, range_mode: manual, range_label: "6000µ"}
+  - source_line: "AC  0037 µA MAN 6000µ"
+    bytes: 31 30 30 33 37 3D 38 30 34 0D 0A
+    reading: {value: "0037", unit: "µA", coupling: AC, range_mode: manual, range_label: "6000µ"}
+  - source_line: "DC - 0.00 mA AUTO 60mA"
+    bytes: 30 30 30 30 30 3F 3C 30 3A 0D 0A
+    reading: {value: "- 0.00", unit: "mA", coupling: DC, range_mode: auto, range_label: "60mA"}
+  - source_line: "A+D   3.2 mA MAN 600m"
+    bytes: 31 30 30 33 32 3F 38 30 34 0D 0A
+    reading: {value: "3.2", unit: "mA", coupling: AC+DC, range_mode: manual, range_label: "600m"}
+  - source_line: "DC - 0.00 A FIX 10A"
+    bytes: 30 30 30 30 30 39 3C 30 38 0D 0A
+    reading: {value: "- 0.00", unit: "A", coupling: DC, range_mode: manual, range_label: "10A"}
+  - source_line: "A+D  0.23 A FIX 10A"
+    bytes: 30 30 30 32 33 39 38 30 34 0D 0A
+    reading: {value: "0.23", unit: "A", coupling: AC+DC, range_mode: manual, range_label: "10A"}
+    remark: "// obwohl nichts angeschlossen: störempfindlich!!"
+
+skipped:
+  - source_line: "A+D 00210 µA MAN 6000µ"
+    bytes: 31 30 30 32 31 3D 38 30 34 0D 0A
+    reason: >-
+      the label has five digits on a 4-digit (6000 count) meter. The frame's
+      digits are 0021 in range '1' (6000µ, no decimal point per the log's own
+      table), i.e. 21 µA - which is what the decoder returns. The neighbouring
+      'AC 0037 µA MAN 6000µ' in the same range decodes correctly. Label typo.
+  - source_line: "0"
+    reason: "no unit token found"
