@@ -59,10 +59,12 @@ those devices.
 
 The decoders largely originate with QtDMM's original author, Matthias
 Toussaint (<http://www.mtoussaint.de/qtdmm.html>), and were extended from
-several external sources. The Uni-Trend protocol logs (`UT*.log`) come from
-the collection at <https://heha.fwh.is/hs/UNI-T/>; further
-protocol knowledge was taken from the sigrok DMM protocol database
-(<https://sigrok.org/>). The datasheets are the respective manufacturers'
-documents. When a decoder looks wrong, consult these sources first — several
-apparent bugs (such as the frame deduplication above) turned out to be
-deliberate once the notes were read.
+several external sources. The Uni-Trend protocol logs (`UT*.log`) are the work
+of heha, author of the Windows read-out tool DMM.EXE, published at
+<https://heha.fwh.is/hs/UNI-T/>; the source of that tool is an independent
+implementation of the same protocols and was used to cross-check several of
+the specs here. Further protocol knowledge was taken from the sigrok DMM
+protocol database (<https://sigrok.org/>). The datasheets are the respective
+manufacturers' documents. When a decoder looks wrong, consult these sources
+first — several apparent bugs (such as the frame deduplication above) turned
+out to be deliberate once the notes were read.

@@ -1,0 +1,134 @@
+protocol: VC820Continuous
+decoder: src/decoders/vc820.cpp
+devices: [Digitek DT-9062, Digitek INO2513, Digitech QM1462, Digitech QM1538, HoldPeak HP-90EPC, PeakTech 3330, Tenma 72-7745, Uni-Trend UT60A, Uni-Trend UT60E, Voltcraft VC 820, Voltcraft VC 840]
+frames_per_reading: 1
+unit_map:                      # log spelling -> what the decoder emits
+  "µ": "u"
+  "°C": "C"
+sources:
+  - docs/protocols/sources/UT60AE.log
+
+# 'reading' is what the log says the meter displayed; dval, unit, range and
+# hold are derived from it. Put decoder-specific assertions (special, val)
+# under 'expect' by hand. 'range_label' and 'remark' are informational.
+vectors:
+  - source_line: "0L MOhm AUTO"
+    bytes: 13 20 30 47 5D 6E 78 80 90 A0 B2 C4 D0 E8
+    reading: {value: "0L", unit: "MOhm", range_mode: auto}
+  - source_line: "DC -000.4 mV AUTO"
+    bytes: 17 2F 3D 47 5D 67 7D 8A 97 A0 B8 C0 D4 E8
+    reading: {value: "-000.4", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -000.5 mV AUTO"
+    bytes: 17 2F 3D 47 5D 67 7D 8B 9E A0 B8 C0 D4 E8
+    reading: {value: "-000.5", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  018.9 mV AUTO"
+    bytes: 17 27 3D 40 55 67 7F 8B 9F A0 B8 C0 D4 E8
+    reading: {value: "018.9", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  018.8 mV AUTO"
+    bytes: 17 27 3D 40 55 67 7F 8F 9F A0 B8 C0 D4 E8
+    reading: {value: "018.8", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  018.7 mV AUTO"
+    bytes: 17 27 3D 40 55 67 7F 89 95 A0 B8 C0 D4 E8
+    reading: {value: "018.7", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -000.0 mV AUTO"
+    bytes: 17 2F 3D 47 5D 67 7D 8F 9D A0 B8 C0 D4 E8
+    reading: {value: "-000.0", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  000.2 mV AUTO"
+    bytes: 17 27 3D 47 5D 67 7D 8D 9B A0 B8 C0 D4 E8
+    reading: {value: "000.2", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  000.5 mV AUTO"
+    bytes: 17 27 3D 47 5D 67 7D 8B 9E A0 B8 C0 D4 E8
+    reading: {value: "000.5", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  000.9 mV AUTO"
+    bytes: 17 27 3D 47 5D 67 7D 8B 9F A0 B8 C0 D4 E8
+    reading: {value: "000.9", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  001.4 mV AUTO"
+    bytes: 17 27 3D 47 5D 60 75 8A 97 A0 B8 C0 D4 E8
+    reading: {value: "001.4", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  001.5 mV AUTO"
+    bytes: 17 27 3D 47 5D 60 75 8B 9E A0 B8 C0 D4 E8
+    reading: {value: "001.5", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  001.7 mV AUTO"
+    bytes: 17 27 3D 47 5D 60 75 89 95 A0 B8 C0 D4 E8
+    reading: {value: "001.7", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  001.8 mV AUTO"
+    bytes: 17 27 3D 47 5D 60 75 8F 9F A0 B8 C0 D4 E8
+    reading: {value: "001.8", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC  001.9 mV AUTO"
+    bytes: 17 27 3D 47 5D 60 75 8B 9F A0 B8 C0 D4 E8
+    reading: {value: "001.9", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -004.7 mV AUTO"
+    bytes: 17 2F 3D 47 5D 62 77 89 95 A0 B8 C0 D4 E8
+    reading: {value: "-004.7", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -004.8 mV AUTO"
+    bytes: 17 2F 3D 47 5D 62 77 8F 9F A0 B8 C0 D4 E8
+    reading: {value: "-004.8", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -004.9 mV AUTO"
+    bytes: 17 2F 3D 47 5D 62 77 8B 9F A0 B8 C0 D4 E8
+    reading: {value: "-004.9", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -005.0 mV AUTO"
+    bytes: 17 2F 3D 47 5D 63 7E 8F 9D A0 B8 C0 D4 E8
+    reading: {value: "-005.0", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -005.1 mV AUTO"
+    bytes: 17 2F 3D 47 5D 63 7E 88 95 A0 B8 C0 D4 E8
+    reading: {value: "-005.1", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -005.2 mV AUTO"
+    bytes: 17 2F 3D 47 5D 63 7E 8D 9B A0 B8 C0 D4 E8
+    reading: {value: "-005.2", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -005.4 mV AUTO"
+    bytes: 17 2F 3D 47 5D 63 7E 8A 97 A0 B8 C0 D4 E8
+    reading: {value: "-005.4", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -005.8 mV AUTO"
+    bytes: 17 2F 3D 47 5D 63 7E 8F 9F A0 B8 C0 D4 E8
+    reading: {value: "-005.8", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC -006.1 mV AUTO"
+    bytes: 17 2F 3D 47 5D 67 7E 88 95 A0 B8 C0 D4 E8
+    reading: {value: "-006.1", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "AC  0.013  V AUTO"
+    bytes: 1B 27 3D 4F 5D 60 75 81 9F A0 B0 C0 D4 E8
+    reading: {value: "0.013", unit: "V", coupling: AC, range_mode: auto}
+  - source_line: "10.72 nF AUTO H"
+    bytes: 13 20 35 47 5D 69 75 85 9B A4 B0 C9 D0 E8
+    reading: {value: "10.72", unit: "nF", range_mode: auto, flags: [HOLD]}
+  - source_line: "10.72 nF AUTO"
+    bytes: 13 20 35 47 5D 69 75 85 9B A4 B0 C8 D0 E8
+    reading: {value: "10.72", unit: "nF", range_mode: auto}
+  - source_line: "DC  000.0 µA MANU"
+    bytes: 15 27 3D 47 5D 67 7D 8F 9D A8 B0 C0 D8 E8
+    reading: {value: "000.0", unit: "µA", coupling: DC, range_mode: manual}
+  - source_line: "DC  000.0 µA MANU Delta"
+    bytes: 15 27 3D 47 5D 67 7D 8F 9D A8 B0 C2 D8 E8
+    reading: {value: "000.0", unit: "µA", coupling: DC, range_mode: manual, flags: [Rel]}
+  - source_line: "DC 323.2 mV AUTO"
+    bytes: 17 21 3F 45 5B 61 7F 8D 9B A0 B8 C0 D4 E8
+    reading: {value: "323.2", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "DC 323.1 mV AUTO"
+    bytes: 17 21 3F 45 5B 61 7F 88 95 A0 B8 C0 D4 E8
+    reading: {value: "323.1", unit: "mV", coupling: DC, range_mode: auto}
+  - source_line: "0023 °C MANU"
+    bytes: 15 27 3D 47 5D 65 7B 81 9F A0 B0 C0 D0 E1
+    reading: {value: "0023", unit: "°C", range_mode: manual}
+
+skipped:
+  - source_line: "DC -004.5 mV AUTO"
+    bytes: 17 27 3D 47 5D 60 75 8B 9E A0 B8 C0 D4 E8
+    reason: >-
+      the bytes are identical to the 'DC 001.5 mV AUTO' line: byte 1 is 0x27
+      (sign bit clear) and digit 3 decodes to '1', so the frame encodes +001.5 mV.
+      Copy-paste slip in the log; the decoder's +0.0015 is what the bytes say.
+  - source_line: "AC TRMS 0.045 V AUTO"
+    bytes: 1B 27 3D 4F 5D 62 77 83 9F A0 B0 C0 D4 E8
+    reason: >-
+      the log's own annotation above this line reads '0 .0 4 5?' - the author
+      was unsure of the last digit. The segment pattern 0x3f is a '9', so the
+      frame encodes 0.049 V. Label uncertain, not a decoder question.
+  - source_line: "0.000 Hz"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "0.000 Hz %"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: ".0L V Diode"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: "0L. V Ton"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
+  - source_line: ".0L kOhm"
+    reason: "no range mode (AUTO/MANU/...) after the unit"
