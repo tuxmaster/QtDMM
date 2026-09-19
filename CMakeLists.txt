@@ -64,9 +64,24 @@ file(WRITE "${CMAKE_BINARY_DIR}/decoders.h" "${DRIVER_HEADER_CONTENT}")
 ## find external libs
 find_package(Qt6 REQUIRED COMPONENTS ${QT_COMPONENTS})
 
-qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR}/src ${TRANSLATIONS})
+## Translations: the build only compiles the .ts files (lrelease). Updating
+## them from the sources is a manual step - `cmake --build build --target
+## update_translations` - because lupdate rewrites files in the source tree,
+## and when two targets ran it in parallel they truncated each other's .ts.
+qt_add_translation(QM_FILES ${TRANSLATIONS})
+add_custom_target(update_translations
+	COMMAND Qt6::lupdate -no-obsolete ${CMAKE_SOURCE_DIR}/src -ts ${TRANSLATIONS}
+	COMMENT "Updating translation sources from src/"
+	VERBATIM
+)
 qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
+
+## Compiled resources (icons, help pages, .qm files) and the generated ui
+## headers live in one object library, so rcc/lrelease/uic run exactly once
+## no matter how many executables (the app, the tests) use them.
+add_library(qtdmm_resources OBJECT ${RES_SOURCES} ${QM_FILES} ${UI_HEADERS})
+target_link_libraries(qtdmm_resources PRIVATE Qt6::Core)
 
 ## hidapi: distro package on Unix (keeps DEB/RPM/AUR dependencies honest),
 ## built from source on Windows where there is no pkg-config and no package
@@ -124,9 +139,6 @@ add_executable(${PROJECT_NAME}
 	MACOSX_BUNDLE
 	WIN32
 	${SRC_FILES}
-	${UI_HEADERS}
-	${RES_SOURCES}
-	${QM_FILES}
 	${WIN_RESOURCES}
 )
 
@@ -138,6 +150,7 @@ add_executable(${PROJECT_NAME}
 #endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
+	qtdmm_resources
 	Qt6::Widgets
 	Qt6::SerialPort
 	Qt6::PrintSupport

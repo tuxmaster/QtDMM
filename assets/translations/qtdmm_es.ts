@@ -37,65 +37,71 @@ Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old.</source>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="169"/>
+        <location filename="../../src/dmm.cpp" line="170"/>
         <source>Error creating port %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="180"/>
+        <location filename="../../src/dmm.cpp" line="181"/>
         <source>Missing Permission</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="183"/>
+        <location filename="../../src/dmm.cpp" line="184"/>
         <source>No such device %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="186"/>
+        <location filename="../../src/dmm.cpp" line="187"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="198"/>
+        <location filename="../../src/dmm.cpp" line="199"/>
         <source>Error configuring serial port %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="204"/>
+        <location filename="../../src/dmm.cpp" line="205"/>
         <source>Connecting ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="221"/>
+        <location filename="../../src/dmm.cpp" line="222"/>
         <source>Access denied for %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="233"/>
-        <location filename="../../src/dmm.cpp" line="287"/>
+        <location filename="../../src/dmm.cpp" line="234"/>
+        <location filename="../../src/dmm.cpp" line="297"/>
         <source>Not connected</source>
         <translation>No conectado</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="275"/>
+        <location filename="../../src/dmm.cpp" line="276"/>
         <source>Connected %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="278"/>
+        <location filename="../../src/dmm.cpp" line="279"/>
         <source>Error %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="283"/>
+        <location filename="../../src/dmm.cpp" line="284"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="285"/>
+        <location filename="../../src/dmm.cpp" line="291"/>
+        <source>The USB cable answers, but the meter sends nothing.
+Switch on the meter&apos;s serial output (on UNI-T meters: hold the RS232/USB button).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="294"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
@@ -410,78 +416,78 @@ DMM connected and switched on?</source>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="130"/>
+        <location filename="../../src/mainwid.cpp" line="134"/>
         <source>QtDMM: Unsaved data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="131"/>
+        <location filename="../../src/mainwid.cpp" line="135"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="146"/>
+        <location filename="../../src/mainwid.cpp" line="150"/>
         <source>Export data first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="150"/>
+        <location filename="../../src/mainwid.cpp" line="154"/>
         <source>Quit without saving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="491"/>
+        <location filename="../../src/mainwid.cpp" line="495"/>
         <source>Automatic start at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="493"/>
+        <location filename="../../src/mainwid.cpp" line="497"/>
         <source>Raising threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="495"/>
+        <location filename="../../src/mainwid.cpp" line="499"/>
         <source>Falling threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="516"/>
-        <location filename="../../src/mainwid.cpp" line="557"/>
+        <location filename="../../src/mainwid.cpp" line="520"/>
+        <location filename="../../src/mainwid.cpp" line="561"/>
         <source>QtDMM: Launch error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="517"/>
+        <location filename="../../src/mainwid.cpp" line="521"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="529"/>
+        <location filename="../../src/mainwid.cpp" line="533"/>
         <source>Yes, kill it!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="533"/>
+        <location filename="../../src/mainwid.cpp" line="537"/>
         <source>No, keep running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="558"/>
+        <location filename="../../src/mainwid.cpp" line="562"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="569"/>
+        <location filename="../../src/mainwid.cpp" line="573"/>
         <source>Bummer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="575"/>
+        <location filename="../../src/mainwid.cpp" line="579"/>
         <source>Launched %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="580"/>
+        <location filename="../../src/mainwid.cpp" line="584"/>
         <source>%1 terminated with exit code %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -489,73 +495,83 @@ DMM connected and switched on?</source>
 <context>
     <name>MainWin</name>
     <message>
-        <location filename="../../src/mainwin.cpp" line="68"/>
+        <location filename="../../src/mainwin.cpp" line="69"/>
         <source>Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="76"/>
+        <location filename="../../src/mainwin.cpp" line="77"/>
         <source>&amp;Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="78"/>
+        <location filename="../../src/mainwin.cpp" line="79"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Display&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show the reading on the LCD-style digital display. The panel can be docked on any side of the window or dragged out as a separate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="84"/>
+        <location filename="../../src/mainwin.cpp" line="85"/>
         <source>Analog meter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="93"/>
+        <location filename="../../src/mainwin.cpp" line="94"/>
         <source>Analog &amp;meter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="95"/>
+        <location filename="../../src/mainwin.cpp" line="96"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Analog meter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show the reading on a moving-coil style instrument. The panel can be docked on any side of the window or dragged out as a separate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="176"/>
+        <location filename="../../src/mainwin.cpp" line="107"/>
+        <source>&amp;Lock panels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="109"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lock panels&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hide the title bars of the display and meter panels. Unlock them to move the panels to another side of the window or to drag them out as separate windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="189"/>
         <source>Another instance is running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="251"/>
+        <location filename="../../src/mainwin.cpp" line="266"/>
         <source>Record DMM data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="252"/>
+        <location filename="../../src/mainwin.cpp" line="267"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="255"/>
+        <location filename="../../src/mainwin.cpp" line="270"/>
         <source>This instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="256"/>
+        <location filename="../../src/mainwin.cpp" line="271"/>
         <source>All instances</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="314"/>
+        <location filename="../../src/mainwin.cpp" line="329"/>
         <source>About QtDMM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="317"/>
+        <location filename="../../src/mainwin.cpp" line="332"/>
         <source>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;A readout and transient recorder for digital multimeters.&lt;/p&gt;&lt;p&gt;Built with &lt;b&gt;Qt&lt;/b&gt; %2. Licensed under the &lt;b&gt;GNU GPL 3&lt;/b&gt; (versions before 0.9.0 under GPL 2).&lt;/p&gt;&lt;p&gt;0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.&lt;br&gt;0.9.3 and before: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Project page: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Icons (except the DMM icon) are taken from the KDE project.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="331"/>
+        <location filename="../../src/mainwin.cpp" line="346"/>
         <source>Supported devices...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -605,19 +621,19 @@ Please choose which instance should record.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="74"/>
+        <location filename="../../src/dmm.cpp" line="75"/>
         <source>No permission to access %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="78"/>
+        <location filename="../../src/dmm.cpp" line="79"/>
         <source>
 
 On this system the device is typically accessible via group &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="81"/>
+        <location filename="../../src/dmm.cpp" line="82"/>
         <source>
 Add your user with:
 
@@ -625,7 +641,7 @@ sudo pw groupmod %1 -m $USER</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="84"/>
+        <location filename="../../src/dmm.cpp" line="85"/>
         <source>
 Add your user with:
 
@@ -633,24 +649,24 @@ sudo usermod -aG %1 $USER</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="87"/>
+        <location filename="../../src/dmm.cpp" line="88"/>
         <source>
 
 Then log out and back in so the new group membership becomes active.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="107"/>
+        <location filename="../../src/main.cpp" line="104"/>
         <source>protocol debugging information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="108"/>
+        <location filename="../../src/main.cpp" line="105"/>
         <source>sets directory where config files are located</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="109"/>
+        <location filename="../../src/main.cpp" line="106"/>
         <source>sets &lt;config-id&gt;</source>
         <translation type="unfinished"></translation>
     </message>
