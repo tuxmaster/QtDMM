@@ -1,18 +1,54 @@
 # QtDMM
 
-QtDMM reads digital multimeters over serial, USB-HID, RFC2217 and sigrok, shows
-the live reading and records it in a transient recorder with CSV export, thresholds
-and an integration curve.
+**QtDMM** is a simple, cross-platform digital multimeter (DMM) readout application
+with a built-in, configurable transient recorder. It's especially useful for users
+of older multimeters whose original software no longer runs on modern operating
+systems.
 
-This documentation is organised in three parts:
+QtDMM provides a reliable, open-source alternative to outdated or proprietary DMM
+software and continues to work on current **Linux** and **macOS** systems
+(*Windows support is currently limited/untested*).
 
-- **[User Guide](user/index.md)** — installing, connecting a meter, recording and
-  exporting.
-- **[Protocols](protocols/index.md)** — the wire protocols of the supported meters:
-  which decoder handles which device, the original protocol notes and captures,
-  and the test vectors derived from them.
+## Features
+
+- Transient Recorder
+  - Manual start
+  - Scheduled start at a specific time
+  - Automatic start triggered when defined thresholds are reached
+- various connection backends
+  - RS232 Serial (USB-Serial and native UART)
+  - USB HID-serial support (HOITEK HE2325U & compatible)
+  - RFC2217 Remote Serial
+  - Sigrok support via sigrok-cli application
+- supports lots of DMMs, see [Supported devices](user/supported-devices.md)
+  - custom serial settings dialog for yet unknown DMMs
+
+## Key Advantages
+
+- Supports many RS232-based/USB-based multimeters
+- Recording via network remote with RFC2217 remote serial support
+- No proprietary software required
+- Fully **open source** and GPL-V3 licensed
+- Easy to use and extend
+
+## Documentation
+
+- **[User Guide](user/index.md)** — connecting a meter, the recorder, CSV
+  export, troubleshooting, keyboard shortcuts. The same pages are built into
+  QtDMM as its handbook (F1).
+- **[Protocols](protocols/index.md)** — the wire protocols of the supported
+  meters: which decoder handles which device, the original protocol notes and
+  captures, and the test vectors derived from them.
 - **[Development](dev/index.md)** — building, testing, and extending QtDMM,
   including how to add support for a new meter.
 
 Build this site locally with `pip install mkdocs` and `mkdocs serve` from the
 repository root.
+
+## Licensing
+
+- **0.9.5 until today tuxmaster and various contributors, see AUTHORS file**
+- **0.9.3 and before (c) 2001-2016 M.Toussaint <qtdmm@mtoussaint.de>**
+
+QtDMM 0.9.0 and beyond is distributed under the GNU Public License, version 3.
+(Prior to 0.9.0 are licensed under GNU GPL 2.0)

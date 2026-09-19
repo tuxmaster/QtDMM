@@ -5,6 +5,13 @@ docs_dir: docs
 
 nav:
   - Home: index.md
-  - User Guide: user/index.md
+  - User Guide:
+      - Overview: user/index.md
+      - Connecting a meter: user/connecting.md
+      - The recorder: user/recorder.md
+      - Supported devices: user/supported-devices.md
+      - Command line: user/command-line.md
+      - Keyboard and mouse: user/keyboard.md
+      - Troubleshooting: user/troubleshooting.md
   - Protocols: protocols/index.md
   - Development: dev/index.md
