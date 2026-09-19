@@ -34,7 +34,6 @@
 
 ReaderThread::ReaderThread(QObject *receiver) :
   QObject(receiver),
-  m_receiver(receiver),
   m_status(ReaderThread::NotConnected),
   m_readValue(false),
   m_format(ReadEvent::Invalid),
@@ -97,7 +96,6 @@ void ReaderThread::startRead()
   //std::cerr << "start read" << std::endl;
   m_readValue = true;
   m_sendRequest = true;
-  m_last_check_ok_idx = -1;
 }
 
 

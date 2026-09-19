@@ -21,8 +21,6 @@ bool PortHandler::create(const DmmDecoder::DMMInfo spec, PortType t, QString dev
 
   m_type   = t;
   m_device = device;
-  emit opened(m_port);
-
   return true;
 }
 
@@ -34,8 +32,6 @@ void PortHandler::close()
   m_port   = Q_NULLPTR;
   m_type   = PortType::None;
   m_device = "";
-
-  emit closed();
 }
 
 int PortHandler::error()

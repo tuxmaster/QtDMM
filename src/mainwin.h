@@ -66,7 +66,6 @@ protected:
   bool        m_localRecord;
 
   void        setupIcons();
-  void        createToolBars();
   void        createActions();
   void        closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
   void        bringMainWindowToFront();

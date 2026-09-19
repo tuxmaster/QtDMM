@@ -58,7 +58,6 @@ Q_SIGNALS:
   void        info(const QString &);
   void        error(const QString &);
   void        useTextLabel(bool);
-  void        winGeometry(const QRect &);
   void        setConnect(bool);
   void        toolbarVisibility(bool, bool, bool, bool);
   void        connectDMM(bool);
