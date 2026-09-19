@@ -20,8 +20,9 @@ None of these pages exist yet.
 
 ## Platforms
 
-Linux and macOS are built and tested by the GitHub workflows with the
-distribution's Qt and hidapi. Windows is built on `windows-latest` with Qt from
+Linux, macOS and FreeBSD are built and tested by the GitHub workflows with
+the distribution's Qt and hidapi (FreeBSD runs inside a VM on an Ubuntu runner
+via `vmactions/freebsd-vm`, since GitHub has no FreeBSD runner). Windows is built on `windows-latest` with Qt from
 `install-qt-action` and hidapi compiled from source via CMake `FetchContent`
 (see `CMakeLists.txt`); the workflow uploads a portable ZIP and an Inno Setup
 installer, both produced by CPack from the same install tree

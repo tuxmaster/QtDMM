@@ -28,10 +28,11 @@ static void check(bool cond, const QString &what)
 }
 
 // Reads a whole file as text (used to compare export output byte-for-byte).
+// Text mode mirrors the exporter, which writes "\r\n" on Windows.
 static QString readFile(const QString &fileName)
 {
   QFile f(fileName);
-  if (!f.open(QIODevice::ReadOnly))
+  if (!f.open(QIODevice::ReadOnly | QIODevice::Text))
     return QString();
   return QString::fromUtf8(f.readAll());
 }

@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 usage()
 {
@@ -57,11 +57,11 @@ cd build
 if ${PACK}
 then
 	rm -rf ../packages/
-	make package_source
+	cpack --config CPackSourceConfig.cmake
 
 	if [ -f /etc/debian_version ]
 	then
-		make package
+		cpack --config CPackConfig.cmake
 	elif [ -f /etc/os-release ] && grep -qiE 'rhel|fedora|suse' /etc/os-release
 	then
 		cp ../packages/qtdmm*.tar.bz2 ~/rpmbuild/SOURCES/
@@ -97,7 +97,7 @@ then
 	mkdir -p AppDir/usr/share/metainfo
 	wget -q https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
 	chmod +x appimagetool-x86_64.AppImage
-	DESTDIR=AppDir make install
+	DESTDIR=AppDir cmake --install .
 	cp -v ../assets/qtdmm.desktop ../qtdmm.png AppDir
 	cp -v ../assets/appimage/qtdmm.appdata.xml AppDir/usr/share/metainfo
 	echo '#!/bin/sh' > AppDir/AppRun
@@ -125,7 +125,9 @@ if [ "$(uname)" != "Darwin" ] && ${INSTALL}
 then
 	echo
 	echo "-- install QtDMM system wide --"
-	sudo make install || exit 1
+	SUDO=""
+	[ "$(id -u)" -ne 0 ] && SUDO="$(command -v sudo || command -v doas)"
+	${SUDO} cmake --install . || exit 1
 	${RUN} && ${QTDMM_EXE}
 elif ${RUN}
 then

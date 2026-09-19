@@ -105,6 +105,12 @@ if(APPLE)
 	set(CMAKE_OSX_ARCHITECTURES "arm64") #x86_64;
 endif()
 
+## the sources are UTF-8 (unit strings such as "µ" and "Ω"); MSVC would
+## otherwise read them in the system code page and mangle those literals
+if(MSVC)
+	add_compile_options(/utf-8)
+endif()
+
 ## compile the application
 add_definitions(-DAPP_VERSION="${PROJECT_VERSION_FULL}" -DAPP_NAME="${APP_NAME}" -DAPP_ORGANIZATION="${APP_ORGANIZATION}" )
 include_directories(src ${CMAKE_BINARY_DIR})
