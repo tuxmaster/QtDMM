@@ -194,9 +194,10 @@ QString ConfigDlg::deviceListText() const
 void ConfigDlg::showPage(ConfigDlg::PageType page)
 {
   PrefWidget *wid = Q_NULLPTR;
-  for (int entry = 0; entry <= static_cast<int>(ui_list->count()); entry++)
+  for (int entry = 0; entry < ui_list->count(); entry++)
   {
-    if (dynamic_cast<ConfigItem *>(ui_list->item(entry))->id() == page)
+    ConfigItem *item = dynamic_cast<ConfigItem *>(ui_list->item(entry));
+    if (item && item->id() == page)
     {
       ui_list->setCurrentRow(entry);
       ui_stack->setCurrentIndex(page);

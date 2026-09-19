@@ -94,7 +94,16 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &da
   else if (in[5] & 0x08) val = insertComma(val, 2);
   else if (in[7] & 0x08) val = insertComma(val, 3);
 
-  m_result.dval  = val.toDouble();
+  // The prefix has to be known here already: dval is contractually in SI base
+  // units (see DmmResponse), so it must be scaled by the prefix factor.
+  QString prefix;
+  if (in[9] & 0x04)       prefix = "n";
+  else if (in[ 9] & 0x08) prefix = "u";
+  else if (in[10] & 0x08) prefix = "m";
+  else if (in[ 9] & 0x02) prefix = "k";
+  else if (in[10] & 0x02) prefix = "M";
+
+  m_result.dval  = val.toDouble() * prefixFactor(prefix);
 
   // try to find some special modes
   if (in[9] & 0x01)
@@ -135,12 +144,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &da
   else
     qWarning() << "Unknown unit!";
 
-  // try to find prefix
-  if (in[9] & 0x04)       unit.prepend("n");
-  else if (in[ 9] & 0x08) unit.prepend("u");
-  else if (in[10] & 0x08) unit.prepend("m");
-  else if (in[ 9] & 0x02) unit.prepend("k");
-  else if (in[10] & 0x02) unit.prepend("M");
+  unit.prepend(prefix);
 
   m_result.special= special;
   m_result.val    = val;

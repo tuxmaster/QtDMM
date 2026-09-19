@@ -38,14 +38,15 @@ bool RFC2217SerialDevice::availablePorts(QStringList &list)
 
 void RFC2217SerialDevice::onConnected()
 {
-  m_isOpen = true;
   QIODevice::open(ReadWrite);
   sendRFC2217Negotiation();
 }
 
 void RFC2217SerialDevice::onDisconnected()
 {
-  m_isOpen = false;
+  // Has to go through the base class: PortHandler::isOpen() asks QIODevice, so
+  // without this a dropped connection still looked open to the rest of the app.
+  QIODevice::close();
   emit finished();
 }
 
@@ -63,7 +64,6 @@ void RFC2217SerialDevice::close()
     m_socket->deleteLater();
     m_socket = nullptr;
   }
-  m_isOpen = false;
   QIODevice::close();
 }
 

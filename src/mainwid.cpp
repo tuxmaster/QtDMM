@@ -37,7 +37,10 @@
 
 
 MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  QFrame(parent),
+  m_min(1.0E20),
+  m_max(-1.0E20),
   m_display(0),
+  m_dval(0.0),
   m_tipDlg(0)
 {
   setupUi(this);
@@ -84,7 +87,8 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
 
   ui_graph->setSettings(m_settings);
 
-  //resetSLOT();
+  // Not resetSLOT() here: it writes to m_display, which MainWin only hands us
+  // later via setDisplay(). The min/max seeds live in the init list instead.
   m_settings->save();
   Q_EMIT sendState("UPDATE_INSTANCES_"+QString::number(QDateTime::currentMSecsSinceEpoch()));
   startTimer(100);
@@ -212,12 +216,12 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
 
     if (id == 0)
     {
-      if (m_lastUnit != s)
+      if (m_lastUnit != u)
       {
         resetSLOT();
         ui_graph->setUnit(u);
       }
-      m_lastUnit = s;
+      m_lastUnit = u;
 
       if (dval > m_max)
       {

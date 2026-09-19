@@ -79,8 +79,6 @@ std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &d
     // default case is no comma/decimal point at all.
   }
 
-  m_result.dval = m_result.val.toDouble();
-
   /* OK, now let's figure out what we're looking at. */
   if (data[10] & 0x80)
   {
@@ -124,14 +122,23 @@ std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &d
     doUnits = false;
   }
 
+  QString prefix;
+
   if (doUnits)
   {
-    if (data[8] & 0x02)      m_result.unit.prepend ('n');
-    else if (data[9] & 0x80) m_result.unit.prepend ('u');
-    else if (data[9] & 0x40) m_result.unit.prepend ('m');
-    else if (data[9] & 0x20) m_result.unit.prepend ('k');
-    else if (data[9] & 0x10) m_result.unit.prepend ('M');
+    if (data[8] & 0x02)      prefix = "n";
+    else if (data[9] & 0x80) prefix = "u";
+    else if (data[9] & 0x40) prefix = "m";
+    else if (data[9] & 0x20) prefix = "k";
+    else if (data[9] & 0x10) prefix = "M";
+
+    m_result.unit.prepend(prefix);
   }
+
+  // Computed only here, because the prefix is not known before the unit switch
+  // above (duty cycle takes no prefix at all). dval is contractually in SI base
+  // units - see DmmResponse.
+  m_result.dval = m_result.val.toDouble() * prefixFactor(prefix);
 
  return m_result;
 }

@@ -1,5 +1,6 @@
 {
   "decoder": "VC820Continuous",
+  "comment": "Frames marked [UT60AE.log] are real captures from docs/protocols/UT60AE.log, where each line carries the reading the meter displayed - so the expected values below are ground truth, not derived from this decoder.",
   "tests": [
     {
       "comment": "diode-test mode must be reported as DI, not overwritten by the AC/DC check (regression test for the special-flag overwrite bug)",
@@ -26,6 +27,38 @@
         "special": "AC",
         "unit": "V",
         "val": "  0L"
+      }
+    },
+    {
+      "comment": "[UT60AE.log] 'DC 018.9 mV AUTO' - dval must be the SI base value 0.0189, not the displayed 18.9 (regression test for the unscaled-dval bug)",
+      "hex": "17 27 3D 40 55 67 7F 8B 9F A0 B8 C0 D4 E8",
+      "expected": {
+        "dval": 0.0189,
+        "val": "  018.9",
+        "unit": "mV",
+        "special": "DC",
+        "range": "AUTO"
+      }
+    },
+    {
+      "comment": "[UT60AE.log] 'DC -000.4 mV AUTO' - negative sign plus prefix scaling",
+      "hex": "17 2F 3D 47 5D 67 7D 8A 97 A0 B8 C0 D4 E8",
+      "expected": {
+        "dval": -0.0004,
+        "unit": "mV",
+        "special": "DC",
+        "range": "AUTO"
+      }
+    },
+    {
+      "comment": "synthetic: 1.234 kOhm, covers the multiplying direction of the prefix scaling (dval 1234.0)",
+      "hex": "16 20 35 4D 5B 61 7F 82 97 A2 B0 C4 D0 E0",
+      "expected": {
+        "dval": 1234.0,
+        "val": "  1.234",
+        "unit": "kOhm",
+        "special": "OH",
+        "range": "AUTO"
       }
     }
   ]

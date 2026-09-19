@@ -16,7 +16,6 @@ public:
   static bool availablePorts(QStringList &portlist);
 
   void close() override;
-  bool isOpen() const;
   bool init();
 
   qint64 bytesAvailable() const override;
@@ -34,7 +33,6 @@ private:
   static constexpr int m_fixedLineLength = 30;
 
   DmmDecoder::DMMInfo m_dmmInfo;
-  bool m_isOpen = false;
   QString m_type, m_device;
   QProcess *m_process;
   QByteArray m_buffer;

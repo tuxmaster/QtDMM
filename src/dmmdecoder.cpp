@@ -45,9 +45,9 @@ bool DmmDecoder::bit(const QByteArray &data, int byte, int bit) const {
 }
 
 
-void DmmDecoder::formatResultValue(int commaPos, const QString& prefix, const QString& baseUnit)
+double DmmDecoder::prefixFactor(const QString &prefix)
 {
-    static const QHash<QString, double> scaleMap = {
+  static const QHash<QString, double> scaleMap = {
     { "",     1.0 },
     { "k",    1e3 },
     { "M",    1e6 },
@@ -59,8 +59,13 @@ void DmmDecoder::formatResultValue(int commaPos, const QString& prefix, const QS
     { "p",    1e-12 }
   };
 
+  return scaleMap.value(prefix, 1.0);
+}
+
+void DmmDecoder::formatResultValue(int commaPos, const QString& prefix, const QString& baseUnit)
+{
   m_result.val = insertCommaIT(m_result.val, commaPos);
-  m_result.dval = m_result.val.toDouble() * scaleMap.value(prefix, 1.0);
+  m_result.dval = m_result.val.toDouble() * prefixFactor(prefix);
 
   m_result.unit = prefix + baseUnit;
 }

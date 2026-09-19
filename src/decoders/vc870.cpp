@@ -35,6 +35,9 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC870::decode(const QByteArray &da
   const uint8_t l_FunctionSelectCode = in[1];
   const uint8_t l_FactorIndex = (in[2] & 0x0f); // Main Display Range
 
+  // Per-range factors instead of SI prefix strings; d_val1 = l_Factor * digits
+  // still lands in SI base units as DmmResponse requires. An unknown function
+  // code leaves these at 0.0 but also sets l_bParserError, which is reported.
   double l_Factor  = 0.0;
   double l_Factor2 = 0.0;
   int    l_DotPos  = 0;

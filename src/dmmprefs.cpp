@@ -234,7 +234,7 @@ void DmmPrefs::defaultsSLOT()
   stopBitsCombo->setCurrentText(m_cfg->getString("Port settings/stop-bits", "1"));
   parityCombo->setCurrentText (m_cfg->getString("Port settings/parity"));
   displayCombo->setCurrentText(m_cfg->getString("DMM/display", "4000"));
-  ui_externalSetup->setChecked(m_cfg->getInt("DMM/exterrnal-setup") == 1);
+  ui_externalSetup->setChecked(m_cfg->getBool("DMM/external-setup", false));
 
   uirts->setChecked(m_cfg->getBool("DMM/rts", true));
   uidtr->setChecked(m_cfg->getBool("DMM/dtr", false));
@@ -302,7 +302,11 @@ void DmmPrefs::applySLOT()
 
   m_cfg->setInt("DMM/data-format", protocolCombo->currentIndex());
   m_cfg->setInt("DMM/number-of-values", ui_numValues->value());
-  m_cfg->setString("DMM/model", (ui_vendor->currentIndex() == 0 ? "Manual" : m_currentVendorModels[ui_model->currentIndex()].name));
+  const int modelIdx = ui_model->currentIndex();
+  const bool haveModel = ui_vendor->currentIndex() != 0
+                         && modelIdx >= 0
+                         && modelIdx < static_cast<int>(m_currentVendorModels.size());
+  m_cfg->setString("DMM/model", haveModel ? m_currentVendorModels[modelIdx].name : "Manual");
 
   m_cfg->setBool("DMM/rts", uirts->isChecked());
   m_cfg->setBool("DMM/dtr", uidtr->isChecked());
@@ -348,7 +352,7 @@ void DmmPrefs::enterManualMode()
   m_dmmInfo.baud = baudRate->currentText().toInt();
   m_dmmInfo.protocol = static_cast<ReadEvent::DataFormat>(protocolCombo->currentIndex()); //!
   m_dmmInfo.bits =  bitsCombo->currentText().toInt();
-  m_dmmInfo.stopBits = bitsCombo->currentText().toInt();
+  m_dmmInfo.stopBits = stopBitsCombo->currentText().toInt();
   m_dmmInfo.parity = parityCombo->currentIndex();
   m_dmmInfo.display = displayCombo->currentText().toInt();
   m_dmmInfo.numValues = ui_numValues->value();
