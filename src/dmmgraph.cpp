@@ -27,6 +27,7 @@
 #include <QToolTip>
 
 #include "dmmgraph.h"
+#include "siprefix.h"
 #include "settings.h"
 
 
@@ -476,7 +477,7 @@ void DMMGraph::addValue(double val)
     {
       resFlag = computeMinMax(val);
       //cerr << "val=" << val << " min=" << m_scaleMin << " max=" << m_scaleMax << endl;
-      computeUnitFactor();
+
     }
 
     if (shifted)
@@ -518,13 +519,9 @@ void DMMGraph::addValue(double val)
 
 void DMMGraph::setUnit(const QString &unit)
 {
-  const QString prefix = unit.left(1);
-
-  if (prefix == "G" || prefix == "M" || prefix == "k" || prefix == "m"
-      || prefix == "u" || prefix == "n" || prefix == "p")
-    m_unit = unit.mid(1);
-  else
-    m_unit = unit;
+  // Values arrive in SI base units (see DmmResponse), so the axis shows the
+  // base unit and the prefix is dropped here.
+  m_unit = SiPrefix::split(unit).baseUnit;
 
   m_yAxis->setTitleText(m_unit.isEmpty() ? QString() : QString("[%1]").arg(m_unit));
 }
@@ -815,69 +812,20 @@ void DMMGraph::handleChartWheel(QWheelEvent *ev)
     Q_EMIT zoomIn(1.1);
 }
 
-namespace
-{
-struct EngineeringUnit
-{
-  double factor;
-  const char *prefix;
-};
-
-const EngineeringUnit engineeringUnits[] = {
-  {1e9,   "G"},
-  {1e6,   "M"},
-  {1e3,   "k"},
-  {1.0,   ""},
-  {1e-3,  "m"},
-  {1e-6,  "u"},
-  {1e-9,  "n"},
-  {1e-12, "p"}
-};
-}
-
 QString DMMGraph::formatEngineeringValue(double value, QString *unit) const
 {
-  const double absValue = fabs(value);
-  const EngineeringUnit *selected = &engineeringUnits[3]; // "" - no prefix
-
-  if (absValue > 0.0)
-  {
-    for (const EngineeringUnit &candidate : engineeringUnits)
-    {
-      if (absValue >= candidate.factor)
-      {
-        selected = &candidate;
-        break;
-      }
-    }
-  }
-
-  const double scaled = value / selected->factor;
-
+  QString prefix;
+  const QString text = SiPrefix::format(value, &prefix);
   if (unit)
-    *unit = QString("%1%2").arg(selected->prefix).arg(m_unit);
-
-  return QString::number(scaled, 'g', 12);
+    *unit = prefix + m_unit;
+  return text;
 }
 
 double DMMGraph::unitScaleFactor(const QString &unit) const
 {
-  if (unit == m_unit)
-    return 1.0;
-
-  if (unit.endsWith(m_unit))
-  {
-    const QString prefix = unit.left(unit.size() - m_unit.size());
-
-    if (prefix == "G") return 1e9;
-    if (prefix == "M") return 1e6;
-    if (prefix == "k") return 1e3;
-    if (prefix == "m") return 1e-3;
-    if (prefix == "u") return 1e-6;
-    if (prefix == "n") return 1e-9;
-    if (prefix == "p") return 1e-12;
-  }
-
+  // Older exports wrote the ASCII "u" for micro; SiPrefix::factor() takes both.
+  if (unit != m_unit && unit.endsWith(m_unit))
+    return SiPrefix::factor(unit.left(unit.size() - m_unit.size()));
   return 1.0;
 }
 
@@ -1108,7 +1056,7 @@ bool DMMGraph::importCsvFile(const QString &fileName)
 
   update();
 
-  computeUnitFactor();
+
 
   // TEST
   Q_EMIT graphSize(size, cnt * m_sampleTime);
@@ -1304,12 +1252,10 @@ void DMMGraph::importDataSLOT()
 
       update();
 
-      computeUnitFactor();
+
     }
 
 //std::cerr << "min=" << m_scaleMin << " max=" << m_scaleMax << std::endl;
-//std::cerr << "factor=" << m_factor << " prefix=" <<
-//  m_prefix.latin1() << " unit=" << m_unit.latin1() << std::endl;
 
 //std::cerr << "size=" << size << "cnt*m_sampleTime=" << cnt*m_sampleTime << std::endl;
     // TEST
@@ -1346,7 +1292,7 @@ void DMMGraph::setScale(bool autoScale, bool includeZero, double min, double max
     m_scaleMin = min;
     m_scaleMax = max;
 
-    computeUnitFactor();
+
   }
   else
   {
@@ -1365,7 +1311,7 @@ void DMMGraph::setScale(bool autoScale, bool includeZero, double min, double max
       computeMinMax(val);
     }
 
-    computeUnitFactor();
+
   }
 
   m_yAxis->setRange(m_scaleMin, m_scaleMax);
@@ -1477,49 +1423,6 @@ void DMMGraph::setIntegration(bool showInt, double sc, double th, double off)
   updateThresholdLinesVisibility();
 }
 
-void DMMGraph::computeUnitFactor()
-{
-  m_factor = 1.;
-  m_prefix = "";
-
-  if (m_unit == "C" || m_unit == "%") return;
-
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) > 1000)
-  {
-    m_factor /= 1000.;
-    m_prefix = "k";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) > 1000)
-  {
-    m_factor /= 1000.;
-    m_prefix = "M";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) > 1000)
-  {
-    m_factor /= 1000.;
-    m_prefix = "G";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) < 1)
-  {
-    m_factor *= 1000.;
-    m_prefix = "m";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) < 1)
-  {
-    m_factor *= 1000.;
-    m_prefix = "µ";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) < 1)
-  {
-    m_factor *= 1000.;
-    m_prefix = "n";
-  }
-  if (qMax(fabs(m_scaleMax * m_factor), fabs(m_scaleMin * m_factor)) < 1)
-  {
-    m_factor *= 1000.;
-    m_prefix = "p";
-  }
-}
 
 void DMMGraph::popupSLOT(QAction *action)
 {

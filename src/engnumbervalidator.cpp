@@ -24,6 +24,7 @@
 
 #include <math.h>
 #include "engnumbervalidator.h"
+#include "siprefix.h"
 
 EngNumberValidator::EngNumberValidator(QObject *parent) : QValidator(parent)
 {
@@ -50,88 +51,20 @@ QValidator::State EngNumberValidator::validate(QString &input, int &pos) const
 
 double EngNumberValidator::value(const QString &string)
 {
-  double factor = 1.;
-
-  // mt: added toAscii
-  switch (string[string.length() - 1].toLatin1())
-  {
-    case 'm':
-      factor = 1e-3;
-      break;
-    case 'u':
-      factor = 1e-6;
-      break;
-    case 'n':
-      factor = 1e-9;
-      break;
-    case 'p':
-      factor = 1e-12;
-      break;
-    case 'k':
-      factor = 1e3;
-      break;
-    case 'M':
-      factor = 1e6;
-      break;
-    case 'G':
-      factor = 1e9;
-      break;
-    case 'T':
-      factor = 1e12;
-      break;
-  }
-
-  return string.toDouble() * factor;
+  // A trailing prefix letter scales the number: "1.5k" -> 1500. "µ" and "u"
+  // are both accepted, so what engValue() writes reads back correctly.
+  const QString last = string.right(1);
+  const double factor = SiPrefix::factor(last);
+  const bool hasPrefix = factor != 1.0 || last == "u";
+  return (hasPrefix ? string.chopped(1) : string).toDouble() * factor;
 }
 
 QString EngNumberValidator::engValue(double value)
 {
-  QString suffix = "";
-
-  if (fabs(value) < 1.)
-  {
-    value *= 1000;
-    suffix = "m";
-  }
-  if (fabs(value) < 1.)
-  {
-    value *= 1000;
-    suffix = "µ";
-  }
-  if (fabs(value) < 1.)
-  {
-    value *= 1000;
-    suffix = "n";
-  }
-  if (fabs(value) < 1.)
-  {
-    value *= 1000;
-    suffix = "p";
-  }
-  if (fabs(value) >= 1000.)
-  {
-    value /= 1000;
-    suffix = "k";
-  }
-  if (fabs(value) >= 1000.)
-  {
-    value /= 1000;
-    suffix = "M";
-  }
-  if (fabs(value) >= 1000.)
-  {
-    value /= 1000;
-    suffix = "G";
-  }
-  if (fabs(value) >= 1000.)
-  {
-    value /= 1000;
-    suffix = "T";
-  }
+  QString prefix;
+  const double scaled = SiPrefix::scale(value, &prefix);
 
   QString str;
-  str.setNum((static_cast<int>(qRound(value * 10.))) / 10.);
-  str += suffix;
-
-  return str;
+  str.setNum((static_cast<int>(qRound(scaled * 10.))) / 10.);
+  return str + prefix;
 }

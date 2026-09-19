@@ -9,6 +9,8 @@
 #include <QFileInfo>
 
 #include "dmmgraph.h"
+#include "siprefix.h"
+#include "engnumbervalidator.h"
 #include "settings.h"
 
 static int failed = 0;
@@ -203,6 +205,83 @@ int main(int argc, char **argv)
       check(!c1.isEmpty() && c1 == c2,
             "pF round-trip: re-exporting a re-imported pF-range file produced different CSV content");
     }
+  }
+
+  // --- 7. micro: export writes "µ", and both "µ" and the ASCII "u" of older
+  //         exports must import with the same 1e-6 factor. Before the shared
+  //         SiPrefix table the importer only knew "u", so a "µA" file came back
+  //         a million times too large. ---
+  {
+    QTemporaryDir outDir;
+
+    {
+      DMMGraph graph(nullptr, &settings);
+      graph.setUnit("A");
+      graph.setSampleTime(10);
+      graph.setGraphSize(5, 5);
+      graph.setMode(DMMGraph::Manual);
+      graph.startSLOT();
+      graph.addValue(2.5e-6);
+      QString path = outDir.path() + "/micro_export.csv";
+      check(graph.exportCsvFile(path), "micro: export failed");
+      QStringList lines = readFile(path).split('\n', Qt::SkipEmptyParts);
+      check(lines.size() >= 2 && lines[1].split(';').value(3) == QString::fromUtf8("µA"),
+            "a 2.5e-6 A value should export with the unit 'µA'");
+    }
+
+    auto importedValue = [&](const QString &unitInFile) -> double
+    {
+      QString path = outDir.path() + "/micro_" + QString::number(qHash(unitInFile)) + ".csv";
+      QFile f(path);
+      if (!f.open(QIODevice::WriteOnly | QIODevice::Text))
+        return -1;
+      QTextStream out(&f);
+      out << "timestamp;time (s);value;unit\n"
+          << "2026-09-19T10:00:00,000;0;2.5;" << unitInFile << "\n"
+          << "2026-09-19T10:00:01,000;1;2.5;" << unitInFile << "\n";
+      f.close();
+
+      DMMGraph graph(nullptr, &settings);
+      if (!graph.importCsvFile(path))
+        return -1;
+      QString exported = path + ".out.csv";
+      if (!graph.exportCsvFile(exported))
+        return -1;
+      QStringList lines = readFile(exported).split('\n', Qt::SkipEmptyParts);
+      if (lines.size() < 2)
+        return -1;
+      QStringList cols = lines[1].split(';');
+      return cols.value(2).toDouble() * SiPrefix::factor(SiPrefix::split(cols.value(3)).prefix);
+    };
+
+    check(qFuzzyCompare(importedValue("µA"), 2.5e-6),
+          "importing '2.5;µA' should yield 2.5e-6 A");
+    check(qFuzzyCompare(importedValue("uA"), 2.5e-6),
+          "importing the older ASCII spelling '2.5;uA' should yield 2.5e-6 A as well");
+  }
+
+  // --- 8. EngNumberValidator: what engValue() writes, value() must read
+  //         back. engValue() emits "µ" while value() used to recognise only
+  //         "u", so micro thresholds silently lost their factor. ---
+  {
+    struct { double v; const char *text; } cases[] = {
+      {1500.0,   "1.5k"},
+      {0.0015,   "1.5m"},
+      {1.5e-6,   "1.5µ"},
+      {2.5e9,    "2.5G"},
+      {42.0,     "42"},
+    };
+    for (const auto &c : cases)
+    {
+      QString written = EngNumberValidator::engValue(c.v);
+      check(written == QString::fromUtf8(c.text),
+            QString("engValue(%1) should be '%2', got '%3'").arg(c.v).arg(c.text).arg(written));
+      check(qFuzzyCompare(EngNumberValidator::value(written) + 1.0, c.v + 1.0),
+            QString("value(engValue(%1)) should round-trip, got %2")
+              .arg(c.v).arg(EngNumberValidator::value(written)));
+    }
+    check(qFuzzyCompare(EngNumberValidator::value("1.5u"), 1.5e-6),
+          "value() should accept the ASCII 'u' for micro");
   }
 
   if (failed == 0)

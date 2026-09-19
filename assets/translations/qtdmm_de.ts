@@ -141,95 +141,95 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DMMGraph</name>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="180"/>
-        <location filename="../../src/dmmgraph.cpp" line="185"/>
+        <location filename="../../src/dmmgraph.cpp" line="181"/>
+        <location filename="../../src/dmmgraph.cpp" line="186"/>
         <source>Sampling start:</source>
         <translation>Abtasten Start:</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="181"/>
-        <location filename="../../src/dmmgraph.cpp" line="190"/>
+        <location filename="../../src/dmmgraph.cpp" line="182"/>
+        <location filename="../../src/dmmgraph.cpp" line="191"/>
         <source>Sampling resolution:</source>
         <translation>Abtastauflösung:</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="160"/>
+        <location filename="../../src/dmmgraph.cpp" line="161"/>
         <source>QtDMM: %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="193"/>
+        <location filename="../../src/dmmgraph.cpp" line="194"/>
         <source>%1 Seconds</source>
         <translation>%1 Sekunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="110"/>
+        <location filename="../../src/dmmgraph.cpp" line="111"/>
         <source>[sec]</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="570"/>
-        <location filename="../../src/dmmgraph.cpp" line="572"/>
-        <location filename="../../src/dmmgraph.cpp" line="574"/>
-        <location filename="../../src/dmmgraph.cpp" line="576"/>
+        <location filename="../../src/dmmgraph.cpp" line="567"/>
+        <location filename="../../src/dmmgraph.cpp" line="569"/>
+        <location filename="../../src/dmmgraph.cpp" line="571"/>
+        <location filename="../../src/dmmgraph.cpp" line="573"/>
         <source>Sampling</source>
         <translation>Beproben</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="570"/>
-        <location filename="../../src/dmmgraph.cpp" line="572"/>
-        <location filename="../../src/dmmgraph.cpp" line="574"/>
-        <location filename="../../src/dmmgraph.cpp" line="576"/>
+        <location filename="../../src/dmmgraph.cpp" line="567"/>
+        <location filename="../../src/dmmgraph.cpp" line="569"/>
+        <location filename="../../src/dmmgraph.cpp" line="571"/>
+        <location filename="../../src/dmmgraph.cpp" line="573"/>
         <source>Stopped</source>
         <translation>Angehalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="638"/>
+        <location filename="../../src/dmmgraph.cpp" line="635"/>
         <source>Disconnect</source>
         <translation>Trennen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="645"/>
+        <location filename="../../src/dmmgraph.cpp" line="642"/>
         <source>Connect</source>
         <translation>Verbinden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="654"/>
+        <location filename="../../src/dmmgraph.cpp" line="651"/>
         <source>Stop recorder</source>
         <translation>Rekorder anhalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="661"/>
+        <location filename="../../src/dmmgraph.cpp" line="658"/>
         <source>Start recorder</source>
         <translation>Rekorder starten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="666"/>
+        <location filename="../../src/dmmgraph.cpp" line="663"/>
         <source>Clear graph</source>
         <translation>Graphen löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="672"/>
+        <location filename="../../src/dmmgraph.cpp" line="669"/>
         <source>Configure...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="680"/>
+        <location filename="../../src/dmmgraph.cpp" line="677"/>
         <source>Export data...</source>
         <translation>Daten exportieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="684"/>
+        <location filename="../../src/dmmgraph.cpp" line="681"/>
         <source>Import data...</source>
         <translation>Daten importieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="891"/>
+        <location filename="../../src/dmmgraph.cpp" line="839"/>
         <source>Export data</source>
         <translation>Daten exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="1010"/>
+        <location filename="../../src/dmmgraph.cpp" line="958"/>
         <source>File contains only header</source>
         <translation>Datei enthält nur den Header</translation>
     </message>
@@ -238,44 +238,44 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation type="vanished">Alle Dateien (*.*)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="944"/>
+        <location filename="../../src/dmmgraph.cpp" line="892"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="945"/>
+        <location filename="../../src/dmmgraph.cpp" line="893"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Beim Importieren werden alle bisherigen Messwerte gelöscht.&lt;p&gt;Möchten Sie zu ersten die bisherigen Daten exportieren?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="957"/>
+        <location filename="../../src/dmmgraph.cpp" line="905"/>
         <source>Export data first</source>
         <translation>Daten zu erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="961"/>
+        <location filename="../../src/dmmgraph.cpp" line="909"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importieren und Daten löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="972"/>
+        <location filename="../../src/dmmgraph.cpp" line="920"/>
         <source>Import data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="972"/>
+        <location filename="../../src/dmmgraph.cpp" line="920"/>
         <source>CSV (*.csv);;All files (*)</source>
         <translation>CSV (*.csv);;Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="909"/>
-        <location filename="../../src/dmmgraph.cpp" line="990"/>
+        <location filename="../../src/dmmgraph.cpp" line="857"/>
+        <location filename="../../src/dmmgraph.cpp" line="938"/>
         <source>Cannot open file.</source>
         <translation>Datei kann nicht geöffnet werden.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="999"/>
-        <location filename="../../src/dmmgraph.cpp" line="1041"/>
+        <location filename="../../src/dmmgraph.cpp" line="947"/>
+        <location filename="../../src/dmmgraph.cpp" line="989"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Diese Datei scheint nicht gültig zu sein</translation>
     </message>
