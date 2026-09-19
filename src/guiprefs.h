@@ -37,7 +37,6 @@ public:
   bool      alertUnsavedData() const;
   bool      useTextLabel() const;
   QColor    displayBgColor() const;
-  QColor    displayTextColor() const;
   bool      saveWindowPosition() const;
   bool      saveWindowSize() const;
   void      on_ui_tipOfTheDay_toggled(bool on);
@@ -46,6 +45,10 @@ public:
   bool      showFileToolbar() const;
   bool      showDisplay() const;
   void      setToolbarVisibility(bool, bool, bool, bool);
+  int       meterScaleMode() const;     // 0 auto, 1 unipolar, 2 bipolar
+  int       meterStyle() const;         // 0 dark, 1 ivory
+  bool      meterBallistics() const;
+  int       meterRedZone() const;       // percent of full scale
 
 Q_SIGNALS:
   void      showTips(bool);

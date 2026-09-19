@@ -8,6 +8,7 @@ nav:
   - User Guide:
       - Overview: user/index.md
       - Connecting a meter: user/connecting.md
+      - Analog meter: user/analog-meter.md
       - The recorder: user/recorder.md
       - Supported devices: user/supported-devices.md
       - Command line: user/command-line.md

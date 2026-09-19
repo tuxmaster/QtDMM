@@ -37,6 +37,7 @@ class DisplayWid;
 class TipDlg;
 class Settings;
 class InstancesDlg;
+class MeterWid;
 
 class MainWid : public QFrame, private Ui::UIMainWid
 {
@@ -48,6 +49,7 @@ public:
   bool        saveWindowPosition() const;
   bool        saveWindowSize() const;
   void        setDisplay(DisplayWid *);
+  void        setMeter(MeterWid *);
   void        setConsoleLogging(bool);
   void        setToolbarVisibility(bool, bool, bool, bool);
   Settings   *settings() const { return m_settings; }
@@ -94,12 +96,14 @@ protected:
   QPrinter    m_printer;
   QProcess   *m_external;
   DisplayWid *m_display;
+  MeterWid   *m_meter;
   double      m_dval;
   TipDlg     *m_tipDlg;
   InstancesDlg *m_instancesDlg;
   Settings    *m_settings;
 
   void        readConfig();
+  void        feedMeter(const QString &val, const QString &unit, const QString &special, bool hold);
   QRect       parentRect() const;
   void        timerEvent(QTimerEvent *);
 

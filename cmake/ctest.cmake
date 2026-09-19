@@ -28,6 +28,21 @@ if (BUILD_TESTING)
 	target_link_libraries(${TEST_HELP} PRIVATE Qt6::Widgets Qt::Core)
 	add_test(NAME handbook COMMAND ${TEST_HELP})
 
+	## the analog meter: angle mapping, full-scale derivation, ballistics and
+	## a headless render check
+	set( TEST_METER test_meter)
+	add_executable(${TEST_METER} MACOSX_BUNDLE tests/test_meter.cpp src/meterwid.cpp src/panelframe.cpp)
+	target_include_directories(${TEST_METER} PRIVATE src)
+	target_link_libraries(${TEST_METER} PRIVATE Qt6::Widgets Qt::Core Qt::Test)
+	add_test(NAME analog_meter COMMAND ${TEST_METER})
+
+	## the digital display: glyph table and a headless render check
+	set( TEST_DISPLAY test_display)
+	add_executable(${TEST_DISPLAY} MACOSX_BUNDLE tests/test_display.cpp src/displaywid.cpp src/panelframe.cpp src/siprefix.cpp)
+	target_include_directories(${TEST_DISPLAY} PRIVATE src)
+	target_link_libraries(${TEST_DISPLAY} PRIVATE Qt6::Widgets Qt::Core)
+	add_test(NAME digital_display COMMAND ${TEST_DISPLAY})
+
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)
 	find_package(Python3 COMPONENTS Interpreter)

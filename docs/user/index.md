@@ -8,6 +8,8 @@ thresholds, an integration curve, CSV export and printing.
 
 - [Connecting a meter](connecting.md) — choosing the device, port types,
   manual settings, the status line.
+- [Analog meter](analog-meter.md) — the moving-coil style instrument: scale,
+  red zone, readouts, styles.
 - [The recorder](recorder.md) — starting manually, at a time or on a threshold;
   zoom, pan and cursor; integration; CSV export and import.
 - [Supported devices](supported-devices.md) — every meter QtDMM knows, with

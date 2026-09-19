@@ -188,7 +188,7 @@
            </size>
           </property>
           <property name="whatsThis">
-           <string>Click this button to change the color of the numerical display for the dmm.</string>
+           <string>Tint of the LCD face of the digital display. The default is a classic greenish LCD.</string>
           </property>
          </widget>
         </item>
@@ -201,7 +201,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Back&amp;ground</string>
+           <string>LCD &amp;colour</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -216,62 +216,115 @@
         </item>
        </layout>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="GroupBoxMeter">
+     <property name="title">
+      <string>Analog meter</string>
+     </property>
+     <layout class="QGridLayout">
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelMeterScale">
+        <property name="text">
+         <string>Scale</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="ui_meterScale">
+        <property name="whatsThis">
+         <string>How the analog meter lays out its scale. &lt;b&gt;Automatic&lt;/b&gt; starts with zero at the left and switches to a centre-zero scale as soon as a clearly negative reading arrives (until the min/max memory is reset). &lt;b&gt;Zero left&lt;/b&gt; and &lt;b&gt;Centre zero&lt;/b&gt; fix one layout.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Automatic</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Zero left</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Centre zero</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="labelMeterStyle">
+        <property name="text">
+         <string>Style</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="3">
-       <layout class="QHBoxLayout">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
+       <widget class="QComboBox" name="ui_meterStyle">
+        <property name="whatsThis">
+         <string>Colour scheme of the analog meter: a dark studio dial with a white scale, or a classic ivory dial with a black scale.</string>
         </property>
         <item>
-         <widget class="ColorButton" name="ui_textColor" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>32767</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Click this button to change the color of the text in the numerical display.</string>
-          </property>
-         </widget>
+         <property name="text">
+          <string>Dark studio</string>
+         </property>
         </item>
         <item>
-         <widget class="QLabel" name="TextLabel2_2_3">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>&amp;Text</string>
-          </property>
-          <property name="wordWrap">
-           <bool>false</bool>
-          </property>
-          <property name="buddy">
-           <cstring>ui_textColor</cstring>
-          </property>
-         </widget>
+         <property name="text">
+          <string>Classic ivory</string>
+         </property>
         </item>
-       </layout>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QCheckBox" name="ui_meterBallistics">
+        <property name="whatsThis">
+         <string>Move the needle with the inertia of a real moving-coil instrument instead of jumping to each new reading.</string>
+        </property>
+        <property name="text">
+         <string>Needle inertia</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="labelMeterRed">
+        <property name="text">
+         <string>Red zone from</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QSpinBox" name="ui_meterRedZone">
+        <property name="whatsThis">
+         <string>Start of the red zone at the top end of the scale, as a percentage of full scale.</string>
+        </property>
+        <property name="suffix">
+         <string> %</string>
+        </property>
+        <property name="minimum">
+         <number>50</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>90</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

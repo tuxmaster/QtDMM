@@ -467,11 +467,6 @@ QColor ConfigDlg::displayBgColor() const
   return m_gui->displayBgColor();
 }
 
-QColor ConfigDlg::displayTextColor() const
-{
-  return m_gui->displayTextColor();
-}
-
 bool ConfigDlg::saveWindowPosition() const
 {
   return m_gui->saveWindowPosition();
@@ -505,6 +500,26 @@ bool ConfigDlg::showFileToolbar() const
 bool ConfigDlg::showDisplay() const
 {
   return m_gui->showDisplay();
+}
+
+int ConfigDlg::meterScaleMode() const
+{
+  return m_gui->meterScaleMode();
+}
+
+int ConfigDlg::meterStyle() const
+{
+  return m_gui->meterStyle();
+}
+
+bool ConfigDlg::meterBallistics() const
+{
+  return m_gui->meterBallistics();
+}
+
+int ConfigDlg::meterRedZone() const
+{
+  return m_gui->meterRedZone();
 }
 
 void ConfigDlg::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)

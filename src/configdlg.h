@@ -90,7 +90,6 @@ public:
   QColor                dataColor() const;
   QColor                cursorColor() const;
   QColor                displayBgColor() const;
-  QColor                displayTextColor() const;
   QColor                startColor() const;
   QColor                externalColor() const;
   QColor                intColor() const;
@@ -127,6 +126,10 @@ public:
   bool                  showGraphToolbar() const;
   bool                  showFileToolbar() const;
   bool                  showDisplay() const;
+  int                   meterScaleMode() const;
+  int                   meterStyle() const;
+  bool                  meterBallistics() const;
+  int                   meterRedZone() const;
   void                  setToolbarVisibility(bool, bool, bool, bool);
 
 

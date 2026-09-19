@@ -59,7 +59,14 @@ Clicking **Connect** again disconnects and frees the port for other programs.
 
 ## The display
 
-The large display mirrors the meter: value, unit, mode (DC, AC, diode, …),
-AUTO/MANU range indicator and, if the meter sends it, HOLD. Below it the
-minimum and maximum since the last **Reset** (Ctrl+R) are kept. Min/max reset
-automatically when the meter switches to a different unit.
+The LCD-style display mirrors the meter: value, unit, the annunciators HOLD,
+AUTO, MANU, AC, DC, diode and continuity (unlit ones stay faintly visible,
+like on the meter itself), the bar graph and, below the value, the minimum
+and maximum since the last **Reset** (Ctrl+R). Min/max reset automatically
+when the meter switches to a different unit.
+
+The display is a panel like the [analog meter](analog-meter.md): drag its
+title bar to dock it on another side of the window or to pull it out as a
+separate window, and resize it — digits and lettering scale with it.
+**Display** in the toolbar or the menu hides and shows it. Bar graph, min/max
+and the LCD tint are set on the GUI settings page.

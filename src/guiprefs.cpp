@@ -48,14 +48,10 @@ void GuiPrefs::defaultsSLOT()
 
   ui_showDisplay->setChecked(m_cfg->getBool("Display/show", true));
   if (!m_cfg->fileConverted())
-  {
-    ui_bgColorDisplay->setColor(m_cfg->getColor("Display/display-background", QColor(212, 220, 207)));
-    ui_textColor->setColor(m_cfg->getColor("Display/display-text", Qt::black));    // mt: removed .rgb()
-  }
+    ui_bgColorDisplay->setColor(m_cfg->getColor("Display/display-background", QColor(0xb6, 0xcf, 0xa4)));
   else
   {
-    ui_bgColorDisplay->setColor(QColor(212, 220, 207));
-    ui_textColor->setColor(Qt::black);
+    ui_bgColorDisplay->setColor(QColor(0xb6, 0xcf, 0xa4));
     m_cfg->save();
   }
   ui_showBar->setChecked(m_cfg->getBool("Display/display-bar", true));
@@ -69,6 +65,11 @@ void GuiPrefs::defaultsSLOT()
   ui_fileToolBar->setChecked(m_cfg->getBool("Toolbar/file", true));
 
   ui_tipOfTheDay->setChecked(m_cfg->getBool("QtDMM/show-tip", true));
+
+  ui_meterScale->setCurrentIndex(qBound(0, m_cfg->getInt("Meter/scale-mode", 0), 2));
+  ui_meterStyle->setCurrentIndex(qBound(0, m_cfg->getInt("Meter/style", 0), 1));
+  ui_meterBallistics->setChecked(m_cfg->getBool("Meter/ballistics", true));
+  ui_meterRedZone->setValue(qBound(50, m_cfg->getInt("Meter/red-zone", 90), 100));
 }
 
 void GuiPrefs::factoryDefaultsSLOT()
@@ -77,8 +78,7 @@ void GuiPrefs::factoryDefaultsSLOT()
   ui_saveWindowSize->setChecked(true);
 
   ui_showDisplay->setChecked(true);
-  ui_bgColorDisplay->setColor(QColor(212, 220, 207));
-  ui_textColor->setColor(Qt::black);
+  ui_bgColorDisplay->setColor(QColor(0xb6, 0xcf, 0xa4));
 
   ui_showBar->setChecked(true);
   ui_showMinMax->setChecked(true);
@@ -91,6 +91,11 @@ void GuiPrefs::factoryDefaultsSLOT()
   ui_fileToolBar->setChecked(true);
 
   ui_tipOfTheDay->setChecked(true);
+
+  ui_meterScale->setCurrentIndex(0);
+  ui_meterStyle->setCurrentIndex(0);
+  ui_meterBallistics->setChecked(true);
+  ui_meterRedZone->setValue(90);
 }
 
 void GuiPrefs::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
@@ -110,7 +115,6 @@ void GuiPrefs::applySLOT()
   m_cfg->setBool("Save/window-size", saveWindowSize());
   m_cfg->setBool("Display/show", showDisplay());
   m_cfg->setColor("Display/display-background", ui_bgColorDisplay->color());
-  m_cfg->setColor("Display/display-text", ui_textColor->color());
   m_cfg->setBool("Display/display-bar", showBar());
   m_cfg->setBool("Display/display-min-max", showMinMax());
   m_cfg->setBool("Alert/unsaved-file", alertUnsavedData());
@@ -118,6 +122,30 @@ void GuiPrefs::applySLOT()
   m_cfg->setBool("Toolbar/dmm", showDmmToolbar());
   m_cfg->setBool("Toolbar/graph", showGraphToolbar());
   m_cfg->setBool("Toolbar/file", showFileToolbar());
+  m_cfg->setInt("Meter/scale-mode", meterScaleMode());
+  m_cfg->setInt("Meter/style", meterStyle());
+  m_cfg->setBool("Meter/ballistics", meterBallistics());
+  m_cfg->setInt("Meter/red-zone", meterRedZone());
+}
+
+int GuiPrefs::meterScaleMode() const
+{
+  return ui_meterScale->currentIndex();
+}
+
+int GuiPrefs::meterStyle() const
+{
+  return ui_meterStyle->currentIndex();
+}
+
+bool GuiPrefs::meterBallistics() const
+{
+  return ui_meterBallistics->isChecked();
+}
+
+int GuiPrefs::meterRedZone() const
+{
+  return ui_meterRedZone->value();
 }
 
 bool GuiPrefs::showTip() const
@@ -169,11 +197,6 @@ bool GuiPrefs::useTextLabel() const
 QColor GuiPrefs::displayBgColor() const
 {
   return ui_bgColorDisplay->color();
-}
-
-QColor GuiPrefs::displayTextColor() const
-{
-  return ui_textColor->color();
 }
 
 bool GuiPrefs::saveWindowPosition() const

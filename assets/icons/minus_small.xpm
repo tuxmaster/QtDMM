@@ -1,8 +1,0 @@
-/* XPM */
-static const char * minus_small_xpm[] = {
-"8 3 2 1",
-" 	c None",
-".	c #000000",
-"  ......",
-" ...... ",
-"......  "};
