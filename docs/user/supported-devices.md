@@ -1,60 +1,11 @@
-<!-- GENERATED from docs/ by tests/generate_docs.py - edit the pages in docs/, not this file -->
-
-# QtDMM
-
-**QtDMM** is a simple, cross-platform digital multimeter (DMM) readout application
-with a built-in, configurable transient recorder. It's especially useful for users
-of older multimeters whose original software no longer runs on modern operating
-systems.
-
-QtDMM provides a reliable, open-source alternative to outdated or proprietary DMM
-software and continues to work on current **Linux** and **macOS** systems
-(*Windows support is currently limited/untested*).
-
-## Features
-
-- Transient Recorder
-  - Manual start
-  - Scheduled start at a specific time
-  - Automatic start triggered when defined thresholds are reached
-- various connection backends
-  - RS232 Serial (USB-Serial and native UART)
-  - USB HID-serial support (HOITEK HE2325U & compatible)
-  - RFC2217 Remote Serial
-  - Sigrok support via sigrok-cli application
-- supports lots of DMMs, see [Supported devices](docs/user/supported-devices.md)
-  - custom serial settings dialog for yet unknown DMMs
-
-## Key Advantages
-
-- Supports many RS232-based/USB-based multimeters
-- Recording via network remote with RFC2217 remote serial support
-- No proprietary software required
-- Fully **open source** and GPL-V3 licensed
-- Easy to use and extend
-
-## Documentation
-
-- **[User Guide](docs/user/index.md)** — connecting a meter, the recorder, CSV
-  export, troubleshooting, keyboard shortcuts. The same pages are built into
-  QtDMM as its handbook (F1).
-- **[Protocols](docs/protocols/index.md)** — the wire protocols of the supported
-  meters: which decoder handles which device, the original protocol notes and
-  captures, and the test vectors derived from them.
-- **[Development](docs/dev/index.md)** — building, testing, and extending QtDMM,
-  including how to add support for a new meter.
-
-Build this site locally with `pip install mkdocs` and `mkdocs serve` from the
-repository root.
-
-## Supported hardware
+# Supported devices
 
 Every meter QtDMM can decode, taken from the decoder registrations in
 `src/decoders/` (this page is generated from them by
 `tests/generate_docs.py`). Choosing one of these models on the DMM settings
 page fills in the serial parameters below; meters not listed can often be
 used with *Manual settings* if they speak one of the listed protocols - see
-[Connecting a meter](docs/user/connecting.md).
+[Connecting a meter](connecting.md).
 
 *Serial* is baud rate, data bits, parity (N/E/O) and stop bits. *Lines* are
 the control lines the cable needs driven. *Counts* is the display
@@ -149,45 +100,3 @@ can confirm one, or get an unlisted meter working, please report it on the
 | Wintex | TD2200 | `CyrustekES51922` | 19200 7N1 | DTR | 22000 |
 
 83 devices across 19 vendors.
-
-## Command line
-
-```
-qtdmm [options]
-```
-
-| Option | Meaning |
-|---|---|
-| `--config-id <id>` | Use the named configuration instead of `default`. Each id has its own settings file, so one meter can be set up per id. |
-| `--config-dir <dir>` | Directory for the configuration files (default: the platform's user config location). |
-| `--debug` | Print every frame received from the meter as hex to the console. Useful when a meter is not decoded correctly — include this output in a bug report. |
-| `-h`, `--help` | Show the options. |
-| `-v`, `--version` | Show the version. |
-
-### Several meters at once
-
-Every QtDMM window is one *instance*, identified by its `--config-id`. Start
-further instances from **Instances** (Ctrl+N): *Add* asks for a name and
-launches a new QtDMM with that id; the list shows which instances are
-configured and which are running, and lets you open or remove them. Running
-instances know about each other through shared memory — the same mechanism
-that stops two windows from using the `default` id at once.
-
-### Debug output
-
-`--debug` writes each received frame as a line of hex bytes, e.g.
-
-```
-30 30 30 30 30 31 3B 30 30 30 3A 30 0D 0A
-```
-
-These lines are exactly what the decoder test fixtures are made of, so a short
-capture together with what the meter displayed at the time is the most useful
-thing to attach when reporting a decoding problem.
-
-## Licensing
-- **0.9.5 until today tuxmaster and various contributors, see AUTHORS file**
-- **0.9.3 and before (c) 2001-2016 M.Toussaint <qtdmm@mtoussaint.de>**
-
-QtDMM 0.9.0 and beyond is distributed under the GNU Public License, version 3.
-(Prior to 0.9.0 are licensed under GNU GPL 2.0)
