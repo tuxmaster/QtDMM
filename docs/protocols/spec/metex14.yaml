@@ -1,0 +1,476 @@
+protocol: Metex14
+decoder: src/decoders/ascii.cpp
+devices: [Voltcraft ME-22T]
+frames_per_reading: 1
+unit_map:                      # log spelling -> what the decoder emits
+  "µ": "u"
+sources:
+  - docs/protocols/sources/metex-22t.log
+
+# 'reading' is what the log says the meter displayed; dval, unit, range and
+# hold are derived from it. Put decoder-specific assertions (special, val)
+# under 'expect' by hand. 'range_label' and 'remark' are informational.
+vectors:
+  - source_line: "FR  0.050 KHz"
+    bytes: 46 52 20 20 30 2E 30 35 30 20 4B 48 7A 0D
+    reading: {value: "0.050", unit: "kHz", function: frequency}
+  - source_line: "DC  0017    V"
+    bytes: 44 43 20 20 30 30 31 37 20 20 20 20 56 0D
+    reading: {value: "0017", unit: "V", coupling: DC}
+  - source_line: "DC  0012    V"
+    bytes: 44 43 20 20 30 30 31 32 20 20 20 20 56 0D
+    reading: {value: "0012", unit: "V", coupling: DC}
+  - source_line: "DC  0001    V"
+    bytes: 44 43 20 20 30 30 30 31 20 20 20 20 56 0D
+    reading: {value: "0001", unit: "V", coupling: DC}
+  - source_line: "DC  000.1   V"
+    bytes: 44 43 20 20 30 30 30 2E 31 20 20 20 56 0D
+    reading: {value: "000.1", unit: "V", coupling: DC}
+  - source_line: "DC  00.00   V"
+    bytes: 44 43 20 20 30 30 2E 30 30 20 20 20 56 0D
+    reading: {value: "00.00", unit: "V", coupling: DC}
+  - source_line: "DC  00.01   V"
+    bytes: 44 43 20 20 30 30 2E 30 31 20 20 20 56 0D
+    reading: {value: "00.01", unit: "V", coupling: DC}
+  - source_line: "DC -00.08   V"
+    bytes: 44 43 20 2D 30 30 2E 30 38 20 20 20 56 0D
+    reading: {value: "-00.08", unit: "V", coupling: DC}
+  - source_line: "DC  00.01   V"
+    bytes: 44 43 20 20 30 30 2E 30 31 20 20 20 56 0D
+    reading: {value: "00.01", unit: "V", coupling: DC}
+  - source_line: "DC  00.03   V"
+    bytes: 44 43 20 20 30 30 2E 30 33 20 20 20 56 0D
+    reading: {value: "00.03", unit: "V", coupling: DC}
+  - source_line: "DC -00.83   V"
+    bytes: 44 43 20 2D 30 30 2E 38 33 20 20 20 56 0D
+    reading: {value: "-00.83", unit: "V", coupling: DC}
+  - source_line: "DC -01.39   V"
+    bytes: 44 43 20 2D 30 31 2E 33 39 20 20 20 56 0D
+    reading: {value: "-01.39", unit: "V", coupling: DC}
+  - source_line: "DC -01.52   V"
+    bytes: 44 43 20 2D 30 31 2E 35 32 20 20 20 56 0D
+    reading: {value: "-01.52", unit: "V", coupling: DC}
+  - source_line: "DC -01.54   V"
+    bytes: 44 43 20 2D 30 31 2E 35 34 20 20 20 56 0D
+    reading: {value: "-01.54", unit: "V", coupling: DC}
+  - source_line: "DC -00.24   V"
+    bytes: 44 43 20 2D 30 30 2E 32 34 20 20 20 56 0D
+    reading: {value: "-00.24", unit: "V", coupling: DC}
+  - source_line: "DC -00.01   V"
+    bytes: 44 43 20 2D 30 30 2E 30 31 20 20 20 56 0D
+    reading: {value: "-00.01", unit: "V", coupling: DC}
+  - source_line: "DC  00.00   V"
+    bytes: 44 43 20 20 30 30 2E 30 30 20 20 20 56 0D
+    reading: {value: "00.00", unit: "V", coupling: DC}
+  - source_line: "DC  00.01   V"
+    bytes: 44 43 20 20 30 30 2E 30 31 20 20 20 56 0D
+    reading: {value: "00.01", unit: "V", coupling: DC}
+  - source_line: "DC  000.1   V"
+    bytes: 44 43 20 20 30 30 30 2E 31 20 20 20 56 0D
+    reading: {value: "000.1", unit: "V", coupling: DC}
+  - source_line: "DC  0001    V"
+    bytes: 44 43 20 20 30 30 30 31 20 20 20 20 56 0D
+    reading: {value: "0001", unit: "V", coupling: DC}
+  - source_line: "DC  0000    V"
+    bytes: 44 43 20 20 30 30 30 30 20 20 20 20 56 0D
+    reading: {value: "0000", unit: "V", coupling: DC}
+  - source_line: "DC -0000    V"
+    bytes: 44 43 20 2D 30 30 30 30 20 20 20 20 56 0D
+    reading: {value: "-0000", unit: "V", coupling: DC}
+  - source_line: "DC  0001    V"
+    bytes: 44 43 20 20 30 30 30 31 20 20 20 20 56 0D
+    reading: {value: "0001", unit: "V", coupling: DC}
+  - source_line: "FR  0.050 KHz"
+    bytes: 46 52 20 20 30 2E 30 35 30 20 4B 48 7A 0D
+    reading: {value: "0.050", unit: "kHz", function: frequency}
+  - source_line: "DC  0.001  mA"
+    bytes: 44 43 20 20 30 2E 30 30 31 20 20 6D 41 0D
+    reading: {value: "0.001", unit: "mA", coupling: DC}
+  - source_line: "DC  000.0  mA"
+    bytes: 44 43 20 20 30 30 30 2E 30 20 20 6D 41 0D
+    reading: {value: "000.0", unit: "mA", coupling: DC}
+  - source_line: "DC  000.1  mA"
+    bytes: 44 43 20 20 30 30 30 2E 31 20 20 6D 41 0D
+    reading: {value: "000.1", unit: "mA", coupling: DC}
+  - source_line: "DC  00.01   A"
+    bytes: 44 43 20 20 30 30 2E 30 31 20 20 20 41 0D
+    reading: {value: "00.01", unit: "A", coupling: DC}
+  - source_line: "DC  00.00   A"
+    bytes: 44 43 20 20 30 30 2E 30 30 20 20 20 41 0D
+    reading: {value: "00.00", unit: "A", coupling: DC}
+  - source_line: "TE  0001    C"
+    bytes: 54 45 20 20 30 30 30 31 20 20 20 20 43 0D
+    reading: {value: "0001", unit: "C", function: temperature}
+  - source_line: "TE    OL    C"
+    bytes: 54 45 20 20 20 20 4F 4C 20 20 20 20 43 0D
+    reading: {value: "OL", unit: "C", function: temperature}
+  - source_line: "DI  0039   mV"
+    bytes: 44 49 20 20 30 30 33 39 20 20 20 6D 56 0D
+    reading: {value: "0039", unit: "mV", function: diode}
+  - source_line: "DI    OL   mV"
+    bytes: 44 49 20 20 20 20 4F 4C 20 20 20 6D 56 0D
+    reading: {value: "OL", unit: "mV", function: diode}
+  - source_line: "OH   OL.  Ohm"
+    bytes: 4F 48 20 20 20 4F 4C 2E 20 20 4F 68 6D 0D
+    reading: {value: "OL.", unit: "Ohm", function: resistance}
+  - source_line: "OH  102.6 Ohm"
+    bytes: 4F 48 20 20 31 30 32 2E 36 20 4F 68 6D 0D
+    reading: {value: "102.6", unit: "Ohm", function: resistance}
+  - source_line: "OH   OL.  Ohm"
+    bytes: 4F 48 20 20 20 4F 4C 2E 20 20 4F 68 6D 0D
+    reading: {value: "OL.", unit: "Ohm", function: resistance}
+  - source_line: "OH  160.6 Ohm"
+    bytes: 4F 48 20 20 31 36 30 2E 36 20 4F 68 6D 0D
+    reading: {value: "160.6", unit: "Ohm", function: resistance}
+  - source_line: "OH   OL.  Ohm"
+    bytes: 4F 48 20 20 20 4F 4C 2E 20 20 4F 68 6D 0D
+    reading: {value: "OL.", unit: "Ohm", function: resistance}
+  - source_line: "OH  035.5 Ohm"
+    bytes: 4F 48 20 20 30 33 35 2E 35 20 4F 68 6D 0D
+    reading: {value: "035.5", unit: "Ohm", function: resistance}
+  - source_line: "OH  000.5 Ohm"
+    bytes: 4F 48 20 20 30 30 30 2E 35 20 4F 68 6D 0D
+    reading: {value: "000.5", unit: "Ohm", function: resistance}
+  - source_line: "OH  049.6 Ohm"
+    bytes: 4F 48 20 20 30 34 39 2E 36 20 4F 68 6D 0D
+    reading: {value: "049.6", unit: "Ohm", function: resistance}
+  - source_line: "OH   OL.  Ohm"
+    bytes: 4F 48 20 20 20 4F 4C 2E 20 20 4F 68 6D 0D
+    reading: {value: "OL.", unit: "Ohm", function: resistance}
+  - source_line: "OH   .OL KOhm"
+    bytes: 4F 48 20 20 20 2E 4F 4C 20 4B 4F 68 6D 0D
+    reading: {value: ".OL", unit: "kOhm", function: resistance}
+  - source_line: "OH  0.951KOhm"
+    bytes: 4F 48 20 20 30 2E 39 35 31 4B 4F 68 6D 0D
+    reading: {value: "0.951", unit: "kOhm", function: resistance}
+  - source_line: "OH  0.005KOhm"
+    bytes: 4F 48 20 20 30 2E 30 30 35 4B 4F 68 6D 0D
+    reading: {value: "0.005", unit: "kOhm", function: resistance}
+  - source_line: "OH  0.114KOhm"
+    bytes: 4F 48 20 20 30 2E 31 31 34 4B 4F 68 6D 0D
+    reading: {value: "0.114", unit: "kOhm", function: resistance}
+  - source_line: "OH   .OL KOhm"
+    bytes: 4F 48 20 20 20 2E 4F 4C 20 4B 4F 68 6D 0D
+    reading: {value: ".OL", unit: "kOhm", function: resistance}
+  - source_line: "OH   O.L KOhm"
+    bytes: 4F 48 20 20 20 4F 2E 4C 20 4B 4F 68 6D 0D
+    reading: {value: "O.L", unit: "kOhm", function: resistance}
+  - source_line: "OH  03.10KOhm"
+    bytes: 4F 48 20 20 30 33 2E 31 30 4B 4F 68 6D 0D
+    reading: {value: "03.10", unit: "kOhm", function: resistance}
+  - source_line: "OH   O.L KOhm"
+    bytes: 4F 48 20 20 20 4F 2E 4C 20 4B 4F 68 6D 0D
+    reading: {value: "O.L", unit: "kOhm", function: resistance}
+  - source_line: "OH  00.00KOhm"
+    bytes: 4F 48 20 20 30 30 2E 30 30 4B 4F 68 6D 0D
+    reading: {value: "00.00", unit: "kOhm", function: resistance}
+  - source_line: "OH   O.L KOhm"
+    bytes: 4F 48 20 20 20 4F 2E 4C 20 4B 4F 68 6D 0D
+    reading: {value: "O.L", unit: "kOhm", function: resistance}
+  - source_line: "OH  05.06KOhm"
+    bytes: 4F 48 20 20 30 35 2E 30 36 4B 4F 68 6D 0D
+    reading: {value: "05.06", unit: "kOhm", function: resistance}
+  - source_line: "OH   O.L KOhm"
+    bytes: 4F 48 20 20 20 4F 2E 4C 20 4B 4F 68 6D 0D
+    reading: {value: "O.L", unit: "kOhm", function: resistance}
+  - source_line: "OH   OL. KOhm"
+    bytes: 4F 48 20 20 20 4F 4C 2E 20 4B 4F 68 6D 0D
+    reading: {value: "OL.", unit: "kOhm", function: resistance}
+  - source_line: "OH   .OL MOhm"
+    bytes: 4F 48 20 20 20 2E 4F 4C 20 4D 4F 68 6D 0D
+    reading: {value: ".OL", unit: "MOhm", function: resistance}
+  - source_line: "OH  0.192MOhm"
+    bytes: 4F 48 20 20 30 2E 31 39 32 4D 4F 68 6D 0D
+    reading: {value: "0.192", unit: "MOhm", function: resistance}
+  - source_line: "OH  1.101MOhm"
+    bytes: 4F 48 20 20 31 2E 31 30 31 4D 4F 68 6D 0D
+    reading: {value: "1.101", unit: "MOhm", function: resistance}
+  - source_line: "OH  0.060MOhm"
+    bytes: 4F 48 20 20 30 2E 30 36 30 4D 4F 68 6D 0D
+    reading: {value: "0.060", unit: "MOhm", function: resistance}
+  - source_line: "OH  0.932MOhm"
+    bytes: 4F 48 20 20 30 2E 39 33 32 4D 4F 68 6D 0D
+    reading: {value: "0.932", unit: "MOhm", function: resistance}
+  - source_line: "OH   O.L MOhm"
+    bytes: 4F 48 20 20 20 4F 2E 4C 20 4D 4F 68 6D 0D
+    reading: {value: "O.L", unit: "MOhm", function: resistance}
+  - source_line: "OH  0007 MOhm"
+    bytes: 4F 48 20 20 30 30 30 37 20 4D 4F 68 6D 0D
+    reading: {value: "0007", unit: "MOhm", function: resistance}
+  - source_line: "OH  0039 MOhm"
+    bytes: 4F 48 20 20 30 30 33 39 20 4D 4F 68 6D 0D
+    reading: {value: "0039", unit: "MOhm", function: resistance}
+  - source_line: "OH  0005 MOhm"
+    bytes: 4F 48 20 20 30 30 30 35 20 4D 4F 68 6D 0D
+    reading: {value: "0005", unit: "MOhm", function: resistance}
+  - source_line: "OH  0000 MOhm"
+    bytes: 4F 48 20 20 30 30 30 30 20 4D 4F 68 6D 0D
+    reading: {value: "0000", unit: "MOhm", function: resistance}
+  - source_line: "OH  0001 MOhm"
+    bytes: 4F 48 20 20 30 30 30 31 20 4D 4F 68 6D 0D
+    reading: {value: "0001", unit: "MOhm", function: resistance}
+  - source_line: "OH  0043 MOhm"
+    bytes: 4F 48 20 20 30 30 34 33 20 4D 4F 68 6D 0D
+    reading: {value: "0043", unit: "MOhm", function: resistance}
+  - source_line: "OH  0253 MOhm"
+    bytes: 4F 48 20 20 30 32 35 33 20 4D 4F 68 6D 0D
+    reading: {value: "0253", unit: "MOhm", function: resistance}
+  - source_line: "OH  0334 MOhm"
+    bytes: 4F 48 20 20 30 33 33 34 20 4D 4F 68 6D 0D
+    reading: {value: "0334", unit: "MOhm", function: resistance}
+  - source_line: "OH  0433 MOhm"
+    bytes: 4F 48 20 20 30 34 33 33 20 4D 4F 68 6D 0D
+    reading: {value: "0433", unit: "MOhm", function: resistance}
+  - source_line: "DC  057.4  mV"
+    bytes: 44 43 20 20 30 35 37 2E 34 20 20 6D 56 0D
+    reading: {value: "057.4", unit: "mV", coupling: DC}
+  - source_line: "DC - OL.   mV"
+    bytes: 44 43 20 2D 20 4F 4C 2E 20 20 20 6D 56 0D
+    reading: {value: "- OL.", unit: "mV", coupling: DC}
+  - source_line: "DC  016.9  mV"
+    bytes: 44 43 20 20 30 31 36 2E 39 20 20 6D 56 0D
+    reading: {value: "016.9", unit: "mV", coupling: DC}
+  - source_line: "DC  007.6  mV"
+    bytes: 44 43 20 20 30 30 37 2E 36 20 20 6D 56 0D
+    reading: {value: "007.6", unit: "mV", coupling: DC}
+  - source_line: "DC  002.1  mV"
+    bytes: 44 43 20 20 30 30 32 2E 31 20 20 6D 56 0D
+    reading: {value: "002.1", unit: "mV", coupling: DC}
+  - source_line: "DC  000.5  mV"
+    bytes: 44 43 20 20 30 30 30 2E 35 20 20 6D 56 0D
+    reading: {value: "000.5", unit: "mV", coupling: DC}
+  - source_line: "DC -000.0  mV"
+    bytes: 44 43 20 2D 30 30 30 2E 30 20 20 6D 56 0D
+    reading: {value: "-000.0", unit: "mV", coupling: DC}
+  - source_line: "DC -000.4  mV"
+    bytes: 44 43 20 2D 30 30 30 2E 34 20 20 6D 56 0D
+    reading: {value: "-000.4", unit: "mV", coupling: DC}
+  - source_line: "DC - OL.   mV"
+    bytes: 44 43 20 2D 20 4F 4C 2E 20 20 20 6D 56 0D
+    reading: {value: "- OL.", unit: "mV", coupling: DC}
+  - source_line: "DC - .OL    V"
+    bytes: 44 43 20 2D 20 2E 4F 4C 20 20 20 20 56 0D
+    reading: {value: "- .OL", unit: "V", coupling: DC}
+  - source_line: "DC -0.842   V"
+    bytes: 44 43 20 2D 30 2E 38 34 32 20 20 20 56 0D
+    reading: {value: "-0.842", unit: "V", coupling: DC}
+  - source_line: "DC -0.233   V"
+    bytes: 44 43 20 2D 30 2E 32 33 33 20 20 20 56 0D
+    reading: {value: "-0.233", unit: "V", coupling: DC}
+  - source_line: "DC -0.057   V"
+    bytes: 44 43 20 2D 30 2E 30 35 37 20 20 20 56 0D
+    reading: {value: "-0.057", unit: "V", coupling: DC}
+  - source_line: "DC -0.268   V"
+    bytes: 44 43 20 2D 30 2E 32 36 38 20 20 20 56 0D
+    reading: {value: "-0.268", unit: "V", coupling: DC}
+  - source_line: "AC  0.050   V"
+    bytes: 41 43 20 20 30 2E 30 35 30 20 20 20 56 0D
+    reading: {value: "0.050", unit: "V", coupling: AC}
+  - source_line: "AC  0.084   V"
+    bytes: 41 43 20 20 30 2E 30 38 34 20 20 20 56 0D
+    reading: {value: "0.084", unit: "V", coupling: AC}
+  - source_line: "AC  0.090   V"
+    bytes: 41 43 20 20 30 2E 30 39 30 20 20 20 56 0D
+    reading: {value: "0.090", unit: "V", coupling: AC}
+  - source_line: "AC  0.445   V"
+    bytes: 41 43 20 20 30 2E 34 34 35 20 20 20 56 0D
+    reading: {value: "0.445", unit: "V", coupling: AC}
+  - source_line: "AC  0.086   V"
+    bytes: 41 43 20 20 30 2E 30 38 36 20 20 20 56 0D
+    reading: {value: "0.086", unit: "V", coupling: AC}
+  - source_line: "AC  0.064   V"
+    bytes: 41 43 20 20 30 2E 30 36 34 20 20 20 56 0D
+    reading: {value: "0.064", unit: "V", coupling: AC}
+  - source_line: "AC  0.340   V"
+    bytes: 41 43 20 20 30 2E 33 34 30 20 20 20 56 0D
+    reading: {value: "0.340", unit: "V", coupling: AC}
+  - source_line: "AC  0.203   V"
+    bytes: 41 43 20 20 30 2E 32 30 33 20 20 20 56 0D
+    reading: {value: "0.203", unit: "V", coupling: AC}
+  - source_line: "AC  0.114   V"
+    bytes: 41 43 20 20 30 2E 31 31 34 20 20 20 56 0D
+    reading: {value: "0.114", unit: "V", coupling: AC}
+  - source_line: "AC  0.068   V"
+    bytes: 41 43 20 20 30 2E 30 36 38 20 20 20 56 0D
+    reading: {value: "0.068", unit: "V", coupling: AC}
+  - source_line: "AC  0.055   V"
+    bytes: 41 43 20 20 30 2E 30 35 35 20 20 20 56 0D
+    reading: {value: "0.055", unit: "V", coupling: AC}
+  - source_line: "AC  0.015   V"
+    bytes: 41 43 20 20 30 2E 30 31 35 20 20 20 56 0D
+    reading: {value: "0.015", unit: "V", coupling: AC}
+  - source_line: "AC  0.011   V"
+    bytes: 41 43 20 20 30 2E 30 31 31 20 20 20 56 0D
+    reading: {value: "0.011", unit: "V", coupling: AC}
+  - source_line: "DC  0.001   V"
+    bytes: 44 43 20 20 30 2E 30 30 31 20 20 20 56 0D
+    reading: {value: "0.001", unit: "V", coupling: DC}
+  - source_line: "DC  0.000   V"
+    bytes: 44 43 20 20 30 2E 30 30 30 20 20 20 56 0D
+    reading: {value: "0.000", unit: "V", coupling: DC}
+  - source_line: "DC  0.002   V"
+    bytes: 44 43 20 20 30 2E 30 30 32 20 20 20 56 0D
+    reading: {value: "0.002", unit: "V", coupling: DC}
+  - source_line: "DC -0.002   V"
+    bytes: 44 43 20 2D 30 2E 30 30 32 20 20 20 56 0D
+    reading: {value: "-0.002", unit: "V", coupling: DC}
+  - source_line: "DC -0.396   V"
+    bytes: 44 43 20 2D 30 2E 33 39 36 20 20 20 56 0D
+    reading: {value: "-0.396", unit: "V", coupling: DC}
+  - source_line: "DC -0.111   V"
+    bytes: 44 43 20 2D 30 2E 31 31 31 20 20 20 56 0D
+    reading: {value: "-0.111", unit: "V", coupling: DC}
+  - source_line: "DC -00.26   V"
+    bytes: 44 43 20 2D 30 30 2E 32 36 20 20 20 56 0D
+    reading: {value: "-00.26", unit: "V", coupling: DC}
+  - source_line: "DC -00.03   V"
+    bytes: 44 43 20 2D 30 30 2E 30 33 20 20 20 56 0D
+    reading: {value: "-00.03", unit: "V", coupling: DC}
+  - source_line: "DC -00.09   V"
+    bytes: 44 43 20 2D 30 30 2E 30 39 20 20 20 56 0D
+    reading: {value: "-00.09", unit: "V", coupling: DC}
+  - source_line: "DC -01.30   V"
+    bytes: 44 43 20 2D 30 31 2E 33 30 20 20 20 56 0D
+    reading: {value: "-01.30", unit: "V", coupling: DC}
+  - source_line: "DC -00.58   V"
+    bytes: 44 43 20 2D 30 30 2E 35 38 20 20 20 56 0D
+    reading: {value: "-00.58", unit: "V", coupling: DC}
+  - source_line: "DC -0.004   V"
+    bytes: 44 43 20 2D 30 2E 30 30 34 20 20 20 56 0D
+    reading: {value: "-0.004", unit: "V", coupling: DC}
+  - source_line: "DC  000.3  mV"
+    bytes: 44 43 20 20 30 30 30 2E 33 20 20 6D 56 0D
+    reading: {value: "000.3", unit: "mV", coupling: DC}
+  - source_line: "DC -000.2  mV"
+    bytes: 44 43 20 2D 30 30 30 2E 32 20 20 6D 56 0D
+    reading: {value: "-000.2", unit: "mV", coupling: DC}
+  - source_line: "DC -000.5  mV"
+    bytes: 44 43 20 2D 30 30 30 2E 35 20 20 6D 56 0D
+    reading: {value: "-000.5", unit: "mV", coupling: DC}
+  - source_line: "DC -000.8  mV"
+    bytes: 44 43 20 2D 30 30 30 2E 38 20 20 6D 56 0D
+    reading: {value: "-000.8", unit: "mV", coupling: DC}
+  - source_line: "DC -133.7  mV"
+    bytes: 44 43 20 2D 31 33 33 2E 37 20 20 6D 56 0D
+    reading: {value: "-133.7", unit: "mV", coupling: DC}
+  - source_line: "DC - OL.   mV"
+    bytes: 44 43 20 2D 20 4F 4C 2E 20 20 20 6D 56 0D
+    reading: {value: "- OL.", unit: "mV", coupling: DC}
+  - source_line: "DC -184.9  mV"
+    bytes: 44 43 20 2D 31 38 34 2E 39 20 20 6D 56 0D
+    reading: {value: "-184.9", unit: "mV", coupling: DC}
+  - source_line: "DC -148.7  mV"
+    bytes: 44 43 20 2D 31 34 38 2E 37 20 20 6D 56 0D
+    reading: {value: "-148.7", unit: "mV", coupling: DC}
+  - source_line: "DC -114.2  mV"
+    bytes: 44 43 20 2D 31 31 34 2E 32 20 20 6D 56 0D
+    reading: {value: "-114.2", unit: "mV", coupling: DC}
+  - source_line: "DC -070.8  mV"
+    bytes: 44 43 20 2D 30 37 30 2E 38 20 20 6D 56 0D
+    reading: {value: "-070.8", unit: "mV", coupling: DC}
+  - source_line: "DC  070.8  mV"
+    bytes: 44 43 20 20 30 37 30 2E 38 20 20 6D 56 0D
+    reading: {value: "070.8", unit: "mV", coupling: DC}
+  - source_line: "DC   OL.   mV"
+    bytes: 44 43 20 20 20 4F 4C 2E 20 20 20 6D 56 0D
+    reading: {value: "OL.", unit: "mV", coupling: DC}
+  - source_line: "DC    OL    V"
+    bytes: 44 43 20 20 20 20 4F 4C 20 20 20 20 56 0D
+    reading: {value: "OL", unit: "V", coupling: DC}
+  - source_line: "DC  0167    V"
+    bytes: 44 43 20 20 30 31 36 37 20 20 20 20 56 0D
+    reading: {value: "0167", unit: "V", coupling: DC}
+  - source_line: "DC  0011    V"
+    bytes: 44 43 20 20 30 30 31 31 20 20 20 20 56 0D
+    reading: {value: "0011", unit: "V", coupling: DC}
+  - source_line: "DC  0001    V"
+    bytes: 44 43 20 20 30 30 30 31 20 20 20 20 56 0D
+    reading: {value: "0001", unit: "V", coupling: DC}
+  - source_line: "FR  0.050 KHz"
+    bytes: 46 52 20 20 30 2E 30 35 30 20 4B 48 7A 0D
+    reading: {value: "0.050", unit: "kHz", function: frequency}
+  - source_line: "DC  0.001  mA"
+    bytes: 44 43 20 20 30 2E 30 30 31 20 20 6D 41 0D
+    reading: {value: "0.001", unit: "mA", coupling: DC}
+  - source_line: "DC  000.1  mA"
+    bytes: 44 43 20 20 30 30 30 2E 31 20 20 6D 41 0D
+    reading: {value: "000.1", unit: "mA", coupling: DC}
+  - source_line: "DC  00.00   A"
+    bytes: 44 43 20 20 30 30 2E 30 30 20 20 20 41 0D
+    reading: {value: "00.00", unit: "A", coupling: DC}
+  - source_line: "TE  0001    C"
+    bytes: 54 45 20 20 30 30 30 31 20 20 20 20 43 0D
+    reading: {value: "0001", unit: "C", function: temperature}
+  - source_line: "TE    OL    C"
+    bytes: 54 45 20 20 20 20 4F 4C 20 20 20 20 43 0D
+    reading: {value: "OL", unit: "C", function: temperature}
+  - source_line: "OH  00.00KOhm"
+    bytes: 4F 48 20 20 30 30 2E 30 30 4B 4F 68 6D 0D
+    reading: {value: "00.00", unit: "kOhm", function: resistance}
+  - source_line: "DI  0226   mV"
+    bytes: 44 49 20 20 30 32 32 36 20 20 20 6D 56 0D
+    reading: {value: "0226", unit: "mV", function: diode}
+  - source_line: "DI    OL   mV"
+    bytes: 44 49 20 20 20 20 4F 4C 20 20 20 6D 56 0D
+    reading: {value: "OL", unit: "mV", function: diode}
+  - source_line: "OH   OL.  Ohm"
+    bytes: 4F 48 20 20 20 4F 4C 2E 20 20 4F 68 6D 0D
+    reading: {value: "OL.", unit: "Ohm", function: resistance}
+  - source_line: "OH  137.4 Ohm"
+    bytes: 4F 48 20 20 31 33 37 2E 34 20 4F 68 6D 0D
+    reading: {value: "137.4", unit: "Ohm", function: resistance}
+  - source_line: "OH   OL.  Ohm"
+    bytes: 4F 48 20 20 20 4F 4C 2E 20 20 4F 68 6D 0D
+    reading: {value: "OL.", unit: "Ohm", function: resistance}
+  - source_line: "OH   .OL KOhm"
+    bytes: 4F 48 20 20 20 2E 4F 4C 20 4B 4F 68 6D 0D
+    reading: {value: ".OL", unit: "kOhm", function: resistance}
+  - source_line: "OH   OL. KOhm"
+    bytes: 4F 48 20 20 20 4F 4C 2E 20 4B 4F 68 6D 0D
+    reading: {value: "OL.", unit: "kOhm", function: resistance}
+  - source_line: "OH   .OL MOhm"
+    bytes: 4F 48 20 20 20 2E 4F 4C 20 4D 4F 68 6D 0D
+    reading: {value: ".OL", unit: "MOhm", function: resistance}
+  - source_line: "OH   O.L MOhm"
+    bytes: 4F 48 20 20 20 4F 2E 4C 20 4D 4F 68 6D 0D
+    reading: {value: "O.L", unit: "MOhm", function: resistance}
+  - source_line: "OH  0000 MOhm"
+    bytes: 4F 48 20 20 30 30 30 30 20 4D 4F 68 6D 0D
+    reading: {value: "0000", unit: "MOhm", function: resistance}
+  - source_line: "OH  0038 MOhm"
+    bytes: 4F 48 20 20 30 30 33 38 20 4D 4F 68 6D 0D
+    reading: {value: "0038", unit: "MOhm", function: resistance}
+  - source_line: "OH  0053 MOhm"
+    bytes: 4F 48 20 20 30 30 35 33 20 4D 4F 68 6D 0D
+    reading: {value: "0053", unit: "MOhm", function: resistance}
+  - source_line: "OH  0072 MOhm"
+    bytes: 4F 48 20 20 30 30 37 32 20 4D 4F 68 6D 0D
+    reading: {value: "0072", unit: "MOhm", function: resistance}
+  - source_line: "OH  0097 MOhm"
+    bytes: 4F 48 20 20 30 30 39 37 20 4D 4F 68 6D 0D
+    reading: {value: "0097", unit: "MOhm", function: resistance}
+  - source_line: "OH  0130 MOhm"
+    bytes: 4F 48 20 20 30 31 33 30 20 4D 4F 68 6D 0D
+    reading: {value: "0130", unit: "MOhm", function: resistance}
+
+skipped:
+  - source_line: "LO   rdy"
+    reason: "no unit in the frame (mode LO)"
+  - source_line: "HF -  OL"
+    reason: "no unit in the frame (mode HF)"
+  - source_line: "HF  0002"
+    reason: "no unit in the frame (mode HF)"
+  - source_line: "LO   rdy"
+    reason: "no unit in the frame (mode LO)"
+  - source_line: "LO - rdy"
+    reason: "no unit in the frame (mode LO)"
+  - source_line: "LO   rdy"
+    reason: "no unit in the frame (mode LO)"
+  - source_line: "HF    OL"
+    reason: "no unit in the frame (mode HF)"
+  - source_line: "HF -0561"
+    reason: "no unit in the frame (mode HF)"
+  - source_line: "HF  0002"
+    reason: "no unit in the frame (mode HF)"
+  - source_line: "HF  0000"
+    reason: "no unit in the frame (mode HF)"

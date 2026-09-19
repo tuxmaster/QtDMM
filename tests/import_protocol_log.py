@@ -76,6 +76,37 @@ def parse_label(label):
     return reading, notes
 
 
+METEX_MODE = {"DC": ("DC", None), "AC": ("AC", None), "OH": (None, "resistance"),
+              "FR": (None, "frequency"), "DI": (None, "diode"), "TE": (None, "temperature"),
+              "HF": (None, "hFE"), "LO": (None, "logic")}
+METEX_LINE = re.compile(r"^'(?P<frame>.{13})\\r'\s*$")
+
+
+def parse_metex(line):
+    """A metex-22t.log line is the 14-byte ASCII frame itself, quoted, e.g.
+    'DC  0017    V\\r'. Mode is chars 0-1, value 2-8, unit 9-12, then CR."""
+    m = METEX_LINE.match(line)
+    if not m:
+        return None
+    frame = m.group("frame")
+    label = frame.strip()
+    mode, value, unit = frame[0:2], frame[2:9].strip(), frame[9:13].strip()
+    bytes_ = " ".join(f"{ord(c):02X}" for c in frame) + " 0D"
+    if mode not in METEX_MODE:
+        return label, bytes_, None, [], f"unknown mode {mode!r}"
+    if not unit:
+        return label, bytes_, None, [], f"no unit in the frame (mode {mode})"
+    coupling, function = METEX_MODE[mode]
+    # the meter writes kilo as a capital K
+    unit = "k" + unit[1:] if unit.startswith("K") else unit
+    reading = {"value": value, "unit": unit}   # Metex14 carries no range mode
+    if coupling:
+        reading["coupling"] = coupling
+    if function:
+        reading["function"] = function
+    return label, bytes_, reading, [], ""
+
+
 def yaml_str(s):
     # JSON string literals are valid YAML double-quoted scalars.
     return json.dumps(s, ensure_ascii=False)
@@ -85,7 +116,10 @@ def render_reading(reading):
     parts = [f"value: {yaml_str(reading['value'])}", f"unit: {yaml_str(reading['unit'])}"]
     if "coupling" in reading:
         parts.append(f"coupling: {reading['coupling']}")
-    parts.append(f"range_mode: {reading['range_mode']}")
+    if "function" in reading:
+        parts.append(f"function: {reading['function']}")
+    if "range_mode" in reading:
+        parts.append(f"range_mode: {reading['range_mode']}")
     if "flags" in reading:
         parts.append("flags: [" + ", ".join(reading["flags"]) + "]")
     if "range_label" in reading:
@@ -102,6 +136,8 @@ def main():
     ap.add_argument("--frames-per-reading", type=int, default=1)
     ap.add_argument("--packet-length", type=int,
                     help="expected frame length; lines with other lengths are skipped")
+    ap.add_argument("--format", choices=["hex", "metex"], default="hex",
+                    help="hex: label TAB bytes (default); metex: quoted 14-byte ASCII frames")
     args = ap.parse_args()
 
     # Most logs are latin-1, two are UTF-8; a UTF-8 decode of latin-1 text fails
@@ -115,6 +151,16 @@ def main():
 
     vectors, skipped = [], []
     for line in text.splitlines():
+        if args.format == "metex":
+            parsed = parse_metex(line)
+            if parsed is None:
+                continue
+            label, frame, reading, notes, problem = parsed
+            if reading is None:
+                skipped.append((label, problem))
+            else:
+                vectors.append((label, frame, reading, notes, ""))
+            continue
         m = CAPTURE.match(line)
         if not m:
             continue

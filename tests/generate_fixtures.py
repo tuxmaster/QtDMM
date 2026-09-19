@@ -69,7 +69,9 @@ def build_case(vector, spec):
         expected["dval"] = dval
 
     expected["unit"] = apply_unit_map(reading["unit"], spec.get("unit_map", {}))
-    expected["range"] = "AUTO" if reading["range_mode"] == "auto" else "MANU"
+    # Protocols that do not transmit the range mode (Metex14) leave it out.
+    if "range_mode" in reading:
+        expected["range"] = "AUTO" if reading["range_mode"] == "auto" else "MANU"
     expected["hold"] = "HOLD" in reading.get("flags", [])
 
     # Hand-curated assertions on top of the derived ones (special, val, ...).
