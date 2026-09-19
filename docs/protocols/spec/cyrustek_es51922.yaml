@@ -7,6 +7,8 @@ unit_map:                      # log spelling -> what the decoder emits
 sources:
   - docs/protocols/sources/UT61E.log
   - hardware capture, Uni-Trend UT61E on /dev/ttyUSB0 (PL2303), 2026-09-18
+  - hardware capture, Uni-Trend UT61E with signal generator, display read by
+    Sarah, 2026-09-19 (verifies the frequency, duty and diode fixes live)
 
 # 'reading' is what the log says the meter displayed; dval, unit, range and
 # hold are derived from it. Put decoder-specific assertions (special, val)
@@ -196,6 +198,62 @@ vectors:
     bytes: 30 32 32 35 38 30 31 31 30 30 30 30 0D 0A
     reading: {value: ".0L", unit: "V", range_mode: manual, flags: [Diode]}
     remark: "Keine Bereichsumschaltung!"
+
+  # --- hardware captures 2026-09-19, signal generator on the UT61E, each display
+  # value read off the meter while the frame was captured ---
+  - source_line: "Hz function AUTO, generator 1.5 kHz: 1.601 kHz"
+    source: hardware capture 2026-09-19
+    bytes: 33 30 31 36 30 31 32 30 30 30 32 30 0D 0A
+    reading: {value: "1.601", unit: "kHz", range_mode: auto}
+    expect: {special: FR}
+  - source_line: "Hz MANU range 3 (22.000 kHz): 01.546 kHz"
+    source: hardware capture 2026-09-19
+    bytes: 33 30 31 35 34 36 32 30 30 30 30 30 0D 0A
+    reading: {value: "01.546", unit: "kHz", range_mode: manual}
+  - source_line: "Hz MANU range 4 (220.00 kHz): 001.55 kHz"
+    source: hardware capture 2026-09-19
+    bytes: 34 30 30 31 35 35 32 30 30 30 30 30 0D 0A
+    reading: {value: "001.55", unit: "kHz", range_mode: manual}
+  - source_line: "Hz MANU range 5 (2.2000 MHz): 0.0016 MHz"
+    source: hardware capture 2026-09-19
+    bytes: 35 30 30 30 31 36 32 30 30 30 30 30 0D 0A
+    reading: {value: "0.0016", unit: "MHz", range_mode: manual}
+  - source_line: "Hz MANU range 6 (22.000 MHz): 00.002 MHz"
+    source: hardware capture 2026-09-19
+    bytes: 36 30 30 30 30 32 32 30 30 30 30 30 0D 0A
+    reading: {value: "00.002", unit: "MHz", range_mode: manual}
+  - source_line: "Hz MANU range 7 (220.00 MHz): 000.01 MHz"
+    source: hardware capture 2026-09-19
+    bytes: 37 30 30 30 30 31 32 30 30 30 30 30 0D 0A
+    reading: {value: "000.01", unit: "MHz", range_mode: manual}
+  - source_line: "Hz MANU range 1 (2200.0 Hz), generator 154.4 Hz: 0154.4 Hz"
+    source: hardware capture 2026-09-19
+    bytes: 31 30 31 35 34 34 32 30 30 30 30 30 0D 0A
+    reading: {value: "0154.4", unit: "Hz", range_mode: manual}
+  - source_line: "Hz MANU range 0 (220.00 Hz), generator 15 Hz: 014.95 Hz (two decimals on the display)"
+    source: hardware capture 2026-09-19
+    bytes: 30 30 31 34 39 35 32 30 30 30 30 30 0D 0A
+    reading: {value: "014.95", unit: "Hz", range_mode: manual}
+  - source_line: "V function, Hz button, generator 1.544 kHz: 1.544 kHz"
+    source: hardware capture 2026-09-19
+    bytes: 33 30 31 35 34 34 3B 30 30 30 3B 30 0D 0A
+    reading: {value: "01.544", unit: "kHz", coupling: DC, range_mode: auto}
+    expect: {special: DC}
+  - source_line: "V function, Hz button twice = duty cycle, display around 41 %: 42.4 %"
+    source: hardware capture 2026-09-19
+    bytes: 33 30 30 34 32 34 3B 38 30 30 39 30 0D 0A
+    reading: {value: "0042.4", unit: "%", coupling: DC, range_mode: manual}
+    remark: "display fluctuated 40.8-42.4 % while capturing"
+  - source_line: "Diode, reverse: OL"
+    source: hardware capture 2026-09-19
+    bytes: 30 31 39 30 30 30 31 31 30 30 30 30 0D 0A
+    reading: {value: "OL", unit: "V", range_mode: manual}
+    expect: {val: "OL", special: DI}
+  - source_line: "Diode, forward: 0.7466 V"
+    source: hardware capture 2026-09-19
+    bytes: 30 30 37 34 36 36 31 30 30 30 30 30 0D 0A
+    reading: {value: "0.7466", unit: "V", range_mode: manual}
+    expect: {val: "0.7466", special: DI}
 
 skipped:
   - source_line: "AC    0.03 mA AUTO"

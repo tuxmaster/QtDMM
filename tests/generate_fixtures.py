@@ -32,7 +32,9 @@ PREFIX_FACTOR = {
     "k": 1e3, "M": 1e6, "G": 1e9, "T": 1e12,
 }
 BASE_UNITS = {"V", "A", "Ohm", "F", "Hz", "%", "°C", "°F", "C", "dF", "RPM", "D"}
-OVERLOAD = re.compile(r"[0U]L|\.L\b|\bL\b")
+# Overload/underload markers as the logs write them (0L. .0L 0.L UL .) and as
+# the decoders emit them (OL, UL).
+OVERLOAD = re.compile(r"[0OU]L|\.L\b|\bL\b")
 
 
 def split_unit(unit):
