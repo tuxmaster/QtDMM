@@ -35,6 +35,17 @@
 
 static const bool registered = []() {
   DmmDecoder::addConfig({"Digitek", "DT-9062"  , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  // FS9721 per libsigrok (digitek-dt4000zc) and ultradmm.com; was listed
+  // under the FS9922 protocol before
+  DmmDecoder::addConfig({"Digitek", "DT4000ZC" , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"TekPower", "TP4000ZC", "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  // models marked "*" come from chip data (libsigrok fs9721 list) and are
+  // not confirmed on hardware yet
+  DmmDecoder::addConfig({"MASTECH", "MS8250B *", "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"PCE", "PCE-DM32 *", "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Tecpel", "DMM-8061 *", "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"V&A", "VA18B *", "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"V&A", "VA40B *", "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Digitek", "INO2513"  , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Digitech", "QM1462"  , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Digitech", "QM1538"  , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});

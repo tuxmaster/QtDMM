@@ -15,6 +15,9 @@ static const bool registered = []() {
   DmmDecoder::addConfig({"Generic", "DTM0660 4000 count", "", 2400, ReadEvent::DTM0660, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Generic", "DTM0660 6000 count", "", 2400, ReadEvent::DTM0660, 8, 1, 1, 0, 6000, 0, 0, 1});
   DmmDecoder::addConfig({"Generic", "DTM0660 8000 count", "", 2400, ReadEvent::DTM0660, 8, 1, 1, 0, 8000, 0, 0, 1});
+  // DTM0660 per libsigrok; "*" = not confirmed on hardware yet
+  DmmDecoder::addConfig({"PeakTech", "3415 *", "", 2400, ReadEvent::DTM0660, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Velleman", "DVM4100 *", "", 2400, ReadEvent::DTM0660, 8, 1, 1, 0, 6000, 0, 0, 1});
   return true;
 }();
 
