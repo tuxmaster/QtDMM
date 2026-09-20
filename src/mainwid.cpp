@@ -326,6 +326,7 @@ void MainWid::resetSLOT()
   m_display->setMaxValue("");
   m_display->setMinUnit("");
   m_display->setMaxUnit("");
+  m_display->update();
 }
 
 void MainWid::connectSLOT(bool on)

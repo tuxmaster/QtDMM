@@ -61,6 +61,7 @@ int main(int argc, char **argv)
 
   DmmDecoder::DMMInfo info;
   info.protocol = ReadEvent::Sigrok;
+  info.display = 40000;
   const qint64 now = QDateTime::currentMSecsSinceEpoch();
 
   // --- 1. the device registered itself as a model ---
@@ -113,7 +114,7 @@ int main(int argc, char **argv)
   i.publishReading(reading(0.0005, "A", now + 1));
   p.checkForChanges();
   r = decode(calc.currentLine(now, nullptr));
-  check(r && qFuzzyCompare(r->dval, 0.006) && r->unit == "mW", QString("6 mW: dval %1 unit %2").arg(r ? r->dval : -1).arg(r ? r->unit : "-"));
+  check(r && std::fabs(r->dval - 0.006) < 1e-9 && r->unit == "mW", QString("6 mW: dval %1 unit %2").arg(r ? r->dval : -1).arg(r ? r->unit : "-"));
 
   // --- 4. stale and invalid inputs ---
   r = decode(calc.currentLine(now + CalcDevice::kStaleMs + 1, &status));
@@ -138,6 +139,18 @@ int main(int argc, char **argv)
   check(alias.open(QIODevice::ReadWrite), "aliased id opens");
   r = decode(alias.currentLine(now + 3, &status));
   check(r && qFuzzyCompare(r->dval, 6.0) && status.isEmpty(), "uni-t_803 is reachable as uni_t_803");
+
+  // --- 5a. rounding to the display's digits ---
+  {
+    QString pre;
+    check(CalcDevice::formatValue(6.6242363, 40000, &pre) == "6.6242" && pre.isEmpty(), "5 digits: 6.6242");
+    check(CalcDevice::formatValue(9.88170524, 40000, &pre) == "9.8817", "5 digits: 9.8817");
+    check(CalcDevice::formatValue(123.456789, 40000, &pre) == "123.46", "5 digits: 123.46");
+    check(CalcDevice::formatValue(0.0012345678, 40000, &pre) == "1.2346" && pre == "m", "prefix then round: 1.2346 m");
+    check(CalcDevice::formatValue(6.0, 400000, &pre) == "6.00000", "6 digits: 6.00000");
+    check(CalcDevice::formatValue(0.0, 40000, &pre) == "0.0000", "zero keeps decimals");
+    check(CalcDevice::formatValue(-2.5, 4000, &pre) == "-2.500", "negative, 4 digits");
+  }
 
   // --- 5b. time and coupling: a signal generator needs no other instance ---
   {
