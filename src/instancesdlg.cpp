@@ -2,6 +2,7 @@
 #include <QtWidgets>
 
 #include "instancesdlg.h"
+#include <QRegularExpression>
 
 
 InstancesDlg::InstancesDlg(Settings *settings, QString instance_id, QString config_path, QWidget *parent)
@@ -98,6 +99,16 @@ void InstancesDlg::on_ui_instance_add_clicked()
   QString configId = QInputDialog::getText(this, tr("QtDMM - new instance"), tr("Instance name:"), QLineEdit::Normal, "", &ok).trimmed();
   if (!ok || configId.isEmpty() || configId == "default")
     return;
+
+  // instance names double as variable names in the formulas of calculated
+  // instances, so they must be identifiers ("u", "psu_1"; not "uni-t 803")
+  static const QRegularExpression identifier("^[A-Za-z_][A-Za-z0-9_]*$");
+  if (!identifier.match(configId).hasMatch())
+  {
+    QMessageBox::warning(this, APP_NAME,
+                         tr("Instance names may contain letters, digits and underscores and must not start with a digit."));
+    return;
+  }
 
   if (m_instancesOnline.contains(configId) || m_instancesConfigured.contains(configId) )
   {

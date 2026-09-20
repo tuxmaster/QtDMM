@@ -400,6 +400,11 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Instanz Name:</translation>
     </message>
     <message>
+        <location filename="../../src/instancesdlg.cpp" line="106"/>
+        <source>Instance names may contain letters, digits and underscores and must not start with a digit.</source>
+        <translation>Instanznamen dürfen Buchstaben, Ziffern und Unterstriche enthalten und nicht mit einer Ziffer beginnen.</translation>
+    </message>
+    <message>
         <location filename="../../src/instancesdlg.cpp" line="104"/>
         <source>Instance already exists.</source>
         <translation>Instanz existiert bereits.</translation>

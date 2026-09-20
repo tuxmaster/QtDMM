@@ -49,6 +49,12 @@ if (BUILD_TESTING)
 	target_include_directories(${TEST_SHAREDSTATE} PRIVATE src)
 	target_link_libraries(${TEST_SHAREDSTATE} PRIVATE Qt::Core)
 	add_test(NAME shared_state COMMAND ${TEST_SHAREDSTATE})
+	## the formula evaluator of calculated instances
+	set( TEST_CALC test_calc)
+	add_executable(${TEST_CALC} MACOSX_BUNDLE tests/test_calc.cpp src/calcexpr.cpp src/siprefix.cpp)
+	target_include_directories(${TEST_CALC} PRIVATE src)
+	target_link_libraries(${TEST_CALC} PRIVATE Qt::Core)
+	add_test(NAME calc_expression COMMAND ${TEST_CALC})
 
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)
