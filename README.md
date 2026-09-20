@@ -11,7 +11,8 @@ QtDMM provides a reliable, open-source alternative to outdated or proprietary DM
 software and runs on current **Linux**, **Windows**, **macOS** and **FreeBSD**
 systems.
 
-Website with downloads and the online handbook: **<https://qtdmm.de>**.
+Website with downloads and the online handbook: **<https://qtdmm.de>**,
+contact: <hello@qtdmm.de>.
 Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
 
 ## Features
