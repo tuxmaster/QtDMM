@@ -926,7 +926,6 @@ void DMMGraph::importDataSLOT()
 bool DMMGraph::importCsvFile(const QString &fileName)
 {
   QDir path;
-  int sample = 0;
 
   QDateTime graphEnd;
 
@@ -1021,22 +1020,19 @@ bool DMMGraph::importCsvFile(const QString &fileName)
   while (!line.isNull());
   file.close();
 
-  sample = m_graphStartDateTime.secsTo(graphEnd);
-
+  // Sample time in tenths of a second from the recording's span: integer
+  // seconds divided by the row count and then by ten (the old formula) came
+  // out as 0 -> 1 for anything sampled slower than every 0.1 s, so a 0.5 s
+  // or 1 s recording was squeezed to a fifth or a tenth of its length.
   int cnt = values.size();
-  m_sampleTime = (sample / (cnt > 1 ? cnt - 1 : 1))/10;
+  const qint64 spanMs = m_graphStartDateTime.msecsTo(graphEnd);
+  m_sampleTime = cnt > 1 ? qRound(spanMs / 100.0 / (cnt - 1)) : 1;
   if (m_sampleTime<1) m_sampleTime=1;
-  qInfo() << m_graphStartDateTime.secsTo( graphEnd ) << m_sampleTime;
 
   int size = m_size * m_sampleTime;
 
   if (cnt > 1)
-  {
     Q_EMIT sampleTime(m_sampleTime);
-    m_sampleTime = (sample / (cnt - 1))/10;
-  }
-  if (m_sampleTime<1) m_sampleTime=1;
-  qInfo() << sample << cnt << m_sampleTime << m_graphStartDateTime.secsTo( graphEnd );
 
   m_scaleMin =  1e40;
   m_scaleMax = -1e40;
