@@ -24,7 +24,7 @@ On FreeBSD the ports are `/dev/cuaU0`, `/dev/cuau0` … and belong to group
   but the meter sends nothing"* when the cable is fine and only the meter's
   output is off.
 - Some cables draw their power from the DTR or RTS line. Compare the DTR/RTS
-  boxes on the DMM settings page with the device table in
+  boxes on the Multimeter settings page with the device table in
   [Supported devices](supported-devices.md); with manual settings, try DTR on
   and RTS off first.
 - With manual settings, double-check baud rate, data bits and parity. Most
@@ -75,7 +75,7 @@ counted from 1.
 
 ## Readings look right on the meter but wrong in QtDMM
 
-Check the model chosen on the DMM page — several meters share a protocol and
+Check the model chosen on the Multimeter page — several meters share a protocol and
 differ only in range or resolution, and a near match can decode with a wrong
 factor. If the model is right and a specific range or function still decodes
 wrongly, please report it with the meter model and, if possible, the debug

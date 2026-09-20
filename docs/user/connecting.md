@@ -2,8 +2,8 @@
 
 ## Choosing the device
 
-Open the settings with **F2** (or the *Configure* button) and go to the **DMM**
-page.
+Open the settings with **F2** (or the *Configure* button) and go to the
+**Multimeter** page.
 
 1. Pick the **vendor** in the first box. The second box then lists only that
    vendor's models. *All vendors* shows the complete list; *Manual settings*
@@ -32,7 +32,7 @@ The port box lists everything QtDMM found, prefixed with its type:
 | `Sigrok` | any meter that `sigrok-cli` supports | `scpi-dmm:conn=/dev/ttyUSB0` |
 
 RFC2217 and sigrok entries are not detected automatically. Add them under
-**Settings → Custom ports**: choose the type and type the host:port or the
+**Settings → Special ports**: choose the type and type the host:port or the
 `sigrok-cli` driver string. For sigrok, `sigrok-cli --help` and the
 [sigrok hardware list](https://sigrok.org/wiki/Supported_hardware#Multimeters)
 tell you the driver string; the path to `sigrok-cli` can be set on the same
@@ -44,8 +44,10 @@ convenient one: `rfc2217_server.py -p 4000 /dev/ttyUSB0`.
 
 ## Connecting
 
-Click **Connect** (Ctrl+C) in the toolbar. The status line at the bottom shows
-what is happening:
+Click **Connect** (Ctrl+C) in the toolbar. QtDMM connects on its own at
+start-up once a meter has been chosen in the settings; a fresh instance
+waits for you to configure one. The status line at the bottom shows what is
+happening:
 
 - *Connecting …* — the port is open, waiting for the first frame.
 - *Connected /dev/ttyUSB0* — readings arrive; the display and the recorder are
@@ -69,4 +71,13 @@ The display is a panel like the [analog meter](analog-meter.md): drag its
 title bar to dock it on another side of the window or to pull it out as a
 separate window, and resize it — digits and lettering scale with it.
 **Display** in the toolbar or the menu hides and shows it. Bar graph, min/max
-and the LCD tint are set on the GUI settings page.
+and the LCD tint are set on the *Appearance* settings page.
+
+## Window layout
+
+A fresh QtDMM starts as a compact instrument: display and analog meter side
+by side, the recorder graph hidden. The **Graph** button in the toolbar
+shows and hides the graph; starting a recording shows it. Both panels can be
+dragged to another side of the window or out into their own windows once
+**Lock panels** in the menu is switched off; positions are remembered. The
+window title names the configured meter.

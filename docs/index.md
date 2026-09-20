@@ -35,6 +35,7 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
 
 - Supports many RS232-based/USB-based multimeters
 - Recording via network remote with RFC2217 remote serial support
+- Runs several meters side by side and combines them (power from U and I)
 - No proprietary software required
 - Fully **open source** and GPL-V3 licensed
 - Easy to use and extend
@@ -48,10 +49,11 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
   meters: which decoder handles which device, the original protocol notes and
   captures, and the test vectors derived from them.
 - **[Development](dev/index.md)** — building, testing, and extending QtDMM,
-  including how to add support for a new meter.
+  including how to add support for a new meter; the Doxygen API
+  documentation is at <https://qtdmm.de/api/>.
 
-Build this site locally with `pip install mkdocs` and `mkdocs serve` from the
-repository root.
+This site is published at <https://qtdmm.de/docs/>. Build it locally with
+`pip install mkdocs` and `mkdocs serve` from the repository root.
 
 ## Licensing
 

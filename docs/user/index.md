@@ -1,8 +1,10 @@
 # QtDMM Handbook
 
 QtDMM reads a digital multimeter over a serial, USB-HID, RFC2217 or sigrok
-connection, shows the live reading and records it in a transient recorder with
-thresholds, an integration curve, CSV export and printing.
+connection, shows the live reading on an LCD-style display and an analog
+meter, and records it in a transient recorder with thresholds, an
+integration curve, CSV export and printing. Several meters run side by
+side, one window each, and can be combined into calculated values.
 
 ## Contents
 
