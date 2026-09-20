@@ -123,9 +123,38 @@ int main(int argc, char **argv)
       int sampleTime = spy.at(0).at(0).toInt();
       // buggy version summed ~271 growing offsets -> computed a wildly larger
       // value than the true ~54s / 271 rows interval; a healthy value stays small.
-      check(sampleTime >= 1 && sampleTime <= 5,
-            QString("sampleTime regression: got implausible sampleTime %1 for a ~54s/271-row recording").arg(sampleTime));
+      check(sampleTime == 2,
+            QString("sampleTime regression: got sampleTime %1 for a 54s/272-row recording, expected 2 (0.2 s)").arg(sampleTime));
     }
+  }
+
+  // --- 4b. slower recordings: the sample time must follow the timestamps,
+  //         not collapse to 0.1 s (a 5 min / 0.5 s recording used to import
+  //         as one minute) ---
+  {
+    QTemporaryDir dir;
+    const QString slow = dir.path() + "/slow.csv";
+    QFile f(slow);
+    check(f.open(QIODevice::WriteOnly | QIODevice::Text), "slow: create fixture");
+    QTextStream out(&f);
+    out << "timestamp;time (s);value;unit\n";
+    QDateTime t0(QDate(2026, 9, 20), QTime(14, 2, 17, 385));
+    for (int i = 0; i < 600; ++i)
+      out << t0.addMSecs(i * 500).toString("yyyy-MM-ddTHH:mm:ss,zzz") << ";" << i * 0.5 << ";12.0;V\n";
+    f.close();
+
+    DMMGraph graph(nullptr, &settings);
+    QSignalSpy spy(&graph, &DMMGraph::sampleTime);
+    check(graph.importCsvFile(slow), "slow: import failed");
+    check(spy.count() == 1 && spy.at(0).at(0).toInt() == 5,
+          QString("slow: sample time %1, expected 5 (0.5 s)").arg(spy.count() ? spy.at(0).at(0).toInt() : -1));
+
+    // and it exports with the original spacing
+    const QString back = dir.path() + "/back.csv";
+    check(graph.exportCsvFile(back), "slow: export failed");
+    const QStringList lines = readFile(back).split('\n', Qt::SkipEmptyParts);
+    check(lines.size() == 601 && lines.last().startsWith("2026-09-20T14:07:16,885"),
+          QString("slow: exported %1 lines, last '%2'").arg(lines.size()).arg(lines.value(lines.size() - 1).left(23)));
   }
 
   // --- 5. smoke test for addValue()'s live-recording ring buffer against the
