@@ -51,12 +51,6 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
   this->toolBarMenu->addWidget(spacer);
   this->toolBarMenu->addAction(this->action_Menu);
-  QString version = APP_VERSION;
-  int plusIndex = version.indexOf('+');
-  if (plusIndex != -1)
-    version = version.left(plusIndex);
-
-
   m_wid = new MainWid(m_config_id, parser.value("config-dir"), this);
   setCentralWidget(m_wid);
   setConsoleLogging(parser.isSet("debug"));
@@ -114,10 +108,12 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   m_lockPanels->setChecked(m_wid->settings()->getBool("MainWindow/lock-panels", true));
   setPanelsLocked(m_lockPanels->isChecked());
 
-  if (m_config_id.isEmpty())
-    setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(version));
-  else
-    setWindowTitle(QString("%1 %2 [%3]").arg(APP_NAME).arg(version).arg(m_config_id));
+  updateWindowTitle();
+  connect(m_wid, &MainWid::configChanged, this, &MainWin::updateWindowTitle);
+
+  action_Graph->setChecked(m_wid->graphVisible());
+  m_wid->setGraphVisible(m_wid->graphVisible());
+  connect(action_Graph, &QAction::toggled, m_wid, &MainWid::setGraphVisible);
 
   connect(m_wid, SIGNAL(running(bool)), this, SLOT(runningSLOT(bool)));
 
@@ -191,8 +187,19 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
     qApp->quit();
   });
 
- if ( m_stateMgr->registerInstance() )
-   QTimer::singleShot(1000, action_Connect, &QAction::trigger);
+  // auto-connect at start, but not before a meter was ever chosen: a fresh
+  // instance would otherwise try the first serial port it finds
+  if (m_stateMgr->registerInstance() && m_wid->dmmConfigured())
+    QTimer::singleShot(1000, action_Connect, &QAction::trigger);
+}
+
+// "QtDMM: UNI-T UT61E", with the instance id for non-default instances
+void MainWin::updateWindowTitle()
+{
+  QString title = APP_NAME;
+  if (!m_config_id.isEmpty())
+    title += QString(" [%1]").arg(m_config_id);
+  setWindowTitle(QString("%1: %2").arg(title, m_wid->dmmTitle()));
 }
 
 void MainWin::sendStateSLOT(const QString & state)
@@ -364,6 +371,7 @@ void MainWin::on_action_Menu_triggered()
   {
     m_menu = new QMenu(this);
     m_menu->addAction(action_Configure);
+    m_menu->addAction(action_Graph);
     m_menu->addAction(m_displayDock->toggleViewAction());
     m_menu->addAction(m_meterDock->toggleViewAction());
     m_menu->addAction(m_lockPanels);

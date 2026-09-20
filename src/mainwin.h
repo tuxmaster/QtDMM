@@ -75,6 +75,8 @@ protected Q_SLOTS:
   void      setToolbarVisibilitySLOT();
   /// Toolbar button style: icons only or icons with text.
   void      setUseTextLabel(bool on);
+  /// Title = app name, instance id and the configured meter.
+  void      updateWindowTitle();
 
 protected:
   MainWid    *m_wid;

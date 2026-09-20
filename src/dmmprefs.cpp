@@ -87,6 +87,9 @@ void DmmPrefs::setupComboBoxModel()
   }
 
   vendors.sort(Qt::CaseInsensitive);
+  // the virtual meters of QtDMM itself go first, real vendors alphabetically
+  if (vendors.removeOne("QtDMM"))
+    vendors.prepend("QtDMM");
   ui_vendor->addItems(vendors);
 
   // The completer searches the full, unfiltered device list (all vendors),

@@ -68,6 +68,8 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_Graph"/>
+   <addaction name="separator"/>
    <addaction name="action_Start"/>
    <addaction name="action_Stop"/>
    <addaction name="separator"/>
@@ -234,6 +236,30 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+C</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="action_Graph">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/Symbols/graph.xpm</normaloff>:/Symbols/graph.xpm</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Graph</string>
+   </property>
+   <property name="toolTip">
+    <string>show or hide the graph</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show or hide the recorder graph. Recording continues while the graph is hidden; with only the display and the meter panels visible the window can be made much smaller.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
