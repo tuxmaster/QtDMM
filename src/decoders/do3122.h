@@ -2,6 +2,7 @@
 
 #include "dmmdecoder.h"
 
+/// Duratool DO3122: 22 bytes, seven-segment encoded digits.
 class DecoderDO3122 : public DmmDecoder
 {
   Q_OBJECT

@@ -2,6 +2,10 @@
 
 #include "dmmdecoder.h"
 
+/// The ASCII protocol family: Metex14 (14 bytes, polled with 'D'),
+/// PeakTech10, Voltcraft14Continuous, Voltcraft15Continuous and the
+/// sigrok-cli text lines (30 bytes, see SigrokDevice). Frames are readable
+/// text "<mode> <value> <unit>\r".
 class DecoderAscii : public DmmDecoder
 {
   Q_OBJECT

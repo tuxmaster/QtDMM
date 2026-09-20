@@ -2,6 +2,8 @@
 
 #include "dmmdecoder.h"
 
+/// DTM0660 chip (generic 4000/6000/8000 count meters): 15 bytes, VC820-style
+/// nibbles with a seven-segment digit encoding.
 class DecoderDTM0660 : public DmmDecoder
 {
   Q_OBJECT

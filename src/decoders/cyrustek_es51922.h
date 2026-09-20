@@ -2,6 +2,9 @@
 
 #include "dmmdecoder.h"
 
+/// Cyrustek ES51922 chip (Uni-Trend UT61E, Wintex TD2200): 14 bytes,
+/// digits as ASCII, range/function/status as bit fields. Spec in
+/// docs/protocols/spec/cyrustek_es51922.yaml.
 class DecoderCyrusTekES51922 : public DmmDecoder
 {
   Q_OBJECT

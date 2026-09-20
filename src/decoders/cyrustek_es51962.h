@@ -2,6 +2,9 @@
 
 #include "dmmdecoder.h"
 
+/// Cyrustek ES51962 chip (PeakTech 3315, Uni-Trend UT70B): 11 bytes, sent
+/// twice per measurement, only the second copy is decoded. Spec in
+/// docs/protocols/spec/cyrustek_es51962.yaml.
 class DecoderCyrusTekES51962 : public DmmDecoder
 {
   Q_OBJECT

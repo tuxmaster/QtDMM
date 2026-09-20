@@ -25,6 +25,7 @@
 #include <QtGui>
 #include "ui_uigraphprefs.h"
 
+/// Settings page "Graph": colours, line and point style of the recorder curve.
 class GraphPrefs : public PrefWidget, private Ui::UIGraphPrefs
 {
   Q_OBJECT

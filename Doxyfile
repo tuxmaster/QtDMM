@@ -1,0 +1,47 @@
+# Doxygen configuration for QtDMM's developer documentation.
+# Run "doxygen" in the repository root (or "cmake --build build --target doxygen");
+# the HTML lands in build/doxygen/html/index.html.
+
+PROJECT_NAME           = QtDMM
+PROJECT_BRIEF          = "Multimeter readout and recorder (Qt 6)"
+OUTPUT_DIRECTORY       = build/doxygen
+INPUT                  = src docs/dev/index.md
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.cpp *.md
+EXCLUDE                = src/ui
+USE_MDFILE_AS_MAINPAGE = docs/dev/index.md
+STRIP_FROM_PATH        = src
+
+# Comment style: "///" and "///<", first sentence is the brief.
+JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = YES
+MULTILINE_CPP_IS_BRIEF = NO
+
+# Everything with a comment; undocumented members are still listed so the
+# class overviews are complete.
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+HIDE_UNDOC_MEMBERS     = NO
+SHOW_INCLUDE_FILES     = NO
+SOURCE_BROWSER         = YES
+STRIP_CODE_COMMENTS    = NO
+GENERATE_TREEVIEW      = YES
+GENERATE_LATEX         = NO
+HAVE_DOT               = NO
+CLASS_GRAPH            = YES
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
+WARN_NO_PARAMDOC       = NO
+
+# Qt macros that would otherwise confuse the parser
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED             = Q_OBJECT= \
+                         Q_SIGNALS=public \
+                         Q_SLOTS= \
+                         Q_DECL_OVERRIDE=override \
+                         Q_NULLPTR=nullptr \
+                         Q_DECLARE_LOGGING_CATEGORY(x)= \
+                         "Q_LOGGING_CATEGORY(x,y)=" \
+                         __has_include(x)=1

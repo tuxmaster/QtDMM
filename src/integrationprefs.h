@@ -26,6 +26,8 @@
 
 #include "ui_uiintegrationprefs.h"
 
+/// Settings page "Integration curve": scale, threshold, offset and the look
+/// of the integration curve in the graph.
 class IntegrationPrefs : public PrefWidget, private Ui::UIIntegrationPrefs
 {
   Q_OBJECT
@@ -41,6 +43,7 @@ public:
   int           intLineWidth() const;
   int           intLineMode() const;
   int           intPointMode() const;
+  /// Follows the threshold line dragged in the graph.
   void          setThreshold(double);
 
 public Q_SLOTS:

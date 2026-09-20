@@ -28,10 +28,22 @@
 #include "dmmdecoder.h"
 
 class QSerialPort;
+
+/// Collects bytes from the port and cuts them into decoder frames.
+///
+/// Despite the name this is no thread any more: it listens to
+/// QIODevice::readyRead() of the port set with setHandle() and feeds every
+/// byte into a ring buffer. After each byte the decoder's
+/// DmmDecoder::checkFormat() is asked whether the buffer now ends with a
+/// complete frame; if so the frame is emitted through readEvent() and the
+/// value id advances (meters that send several lines per reading, see
+/// setNumValues()). For polled protocols (Metex14) a request is written to
+/// the port once per second (start(), startRead()).
 class ReaderThread : public QObject
 {
   Q_OBJECT
 public:
+  /// Outcome of the last read attempt, reported by status().
   enum ReadStatus
   {
     Ok,
@@ -40,16 +52,24 @@ public:
     NotConnected
   };
   ReaderThread(QObject *receiver);
+  /// Starts the one-second timer that sends poll requests (see startRead()).
   void        start();
+  /// Arms the next poll request; DMM calls this from its own timer.
   void        startRead();
+  /// Switches to a new port (or none). Connections to the old port are dropped.
   void        setHandle(QIODevice *handle);
+  /// Protocol of the connected meter; decides whether polling is needed.
   void        setFormat(ReadEvent::DataFormat format) { m_format = format; };
+  /// Decoder whose checkFormat()/getPacketLength() delimit the frames.
   void        setDecoder(std::shared_ptr<DmmDecoder> decoder) { m_decoder = decoder; };
 
   ReadStatus  status() const  { return m_status;  }
+  /// Number of frames one reading consists of; the id passed with
+  /// readEvent() cycles through 0..num-1.
   void        setNumValues(int num)  { m_numValues = num; }
 
 Q_SIGNALS:
+  /// A complete frame, exactly DmmDecoder::getPacketLength() bytes long.
   void        readEvent(const QByteArray &, int id);
 
 protected:

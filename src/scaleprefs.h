@@ -26,6 +26,8 @@
 
 #include "ui_uiscaleprefs.h"
 
+/// Settings page "Scales": Y axis (automatic/fixed) and the time window of
+/// the recorder.
 class ScalePrefs : public PrefWidget, private Ui::UIScalePrefs
 {
   Q_OBJECT

@@ -28,21 +28,32 @@
 //class SimpleCfg;
 class Settings;
 
+/// Base class of the pages in the settings dialog (ConfigDlg).
+///
+/// A page owns a group of settings keys. It loads them into its widgets in
+/// defaultsSLOT(), writes the widgets back with applySLOT() and resets to the
+/// built-in values with factoryDefaultsSLOT(). ConfigDlg lists the pages by
+/// label() and pixmap() and calls the three slots for all pages at once.
 class PrefWidget : public QWidget
 {
   Q_OBJECT
 public:
   PrefWidget(QWidget *parent = Q_NULLPTR);
+  /// Category name shown in the dialog's list.
   QString label() const { return m_label; }
   QString description() const { return m_description; }
   QPixmap pixmap() const { return *m_pixmap; }
+  /// Page id = ConfigDlg::PageType, also the index in the page stack.
   void    setId(int id) { m_id = id; }
   int     id() const { return m_id; }
   void    setCfg(Settings *cfg) { m_cfg = cfg; }
 
 public Q_SLOTS:
+  /// Loads the stored settings (or their defaults) into the widgets.
   virtual void defaultsSLOT() = 0;
+  /// Resets the widgets to the built-in defaults.
   virtual void factoryDefaultsSLOT() = 0;
+  /// Writes the widgets' values to the Settings (staged until save()).
   virtual void applySLOT() = 0;
 
 protected:

@@ -25,6 +25,7 @@
 #include <QtGui>
 #include <QtWidgets>
 
+/// An entry in the settings dialog's category list, carrying its page id.
 class ConfigItem : public QListWidgetItem
 {
 public:

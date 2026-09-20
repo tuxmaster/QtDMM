@@ -25,6 +25,8 @@
 #include "ui_uirecorderprefs.h"
 #include "dmmgraph.h"
 
+/// Settings page "Recording": how recording starts (DMMGraph::SampleMode),
+/// the thresholds, sample time and length.
 class RecorderPrefs : public PrefWidget, private Ui::UIRecorderPrefs
 {
   Q_OBJECT
@@ -37,6 +39,7 @@ public:
   double      fallingThreshold() const;
   double      raisingThreshold() const;
   QTime       startTime() const;
+  /// Follows the trigger threshold line dragged in the graph.
   void        setThreshold(double);
 
 public Q_SLOTS:

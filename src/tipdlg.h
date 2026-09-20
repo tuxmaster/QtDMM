@@ -25,19 +25,23 @@
 #include <QtCore>
 #include "ui_uitipdlg.h"
 
+/// "Tip of the day" dialog shown at start-up until switched off.
 class TipDlg : public QDialog, private Ui::UITipDlg
 {
   Q_OBJECT
 public:
   TipDlg(QWidget *parent = Q_NULLPTR);
+  /// The "show tips at start-up" check box.
   bool      showTips() const;
   void      setCurrentTip(int c);
   int       currentTip() const { return m_curTip; }
 
+  /// The tips, one entry each (HTML).
   static const QStringList	s_tipText;
 
 Q_SIGNALS:
   void      showTips(bool);
+  /// Tip index changed; ConfigDlg stores it so the next start continues.
   void      currentTip(int);
 
 public Q_SLOTS:

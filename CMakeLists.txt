@@ -77,6 +77,17 @@ add_custom_target(update_translations
 qt_wrap_ui(UI_HEADERS ${UI_FILES})
 qt_add_resources(RES_SOURCES ${RESOURCES})
 
+## developer documentation: "cmake --build build --target doxygen" writes
+## build/doxygen/html; the checked-in Doxyfile also works with plain "doxygen"
+find_package(Doxygen QUIET)
+if(DOXYGEN_FOUND)
+	add_custom_target(doxygen
+		COMMAND Doxygen::doxygen ${CMAKE_SOURCE_DIR}/Doxyfile
+		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+		COMMENT "Generating developer documentation with Doxygen"
+		VERBATIM)
+endif()
+
 ## Compiled resources (icons, help pages, .qm files) and the generated ui
 ## headers live in one object library, so rcc/lrelease/uic run exactly once
 ## no matter how many executables (the app, the tests) use them.
