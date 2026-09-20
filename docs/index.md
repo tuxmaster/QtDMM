@@ -6,8 +6,12 @@ of older multimeters whose original software no longer runs on modern operating
 systems.
 
 QtDMM provides a reliable, open-source alternative to outdated or proprietary DMM
-software and continues to work on current **Linux** and **macOS** systems
-(*Windows support is currently limited/untested*).
+software and runs on current **Linux**, **Windows**, **macOS** and **FreeBSD**
+systems.
+
+Website with downloads and the online handbook: **<https://qtdmm.de>**,
+contact: <hello@qtdmm.de>.
+Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
 
 ## Features
 

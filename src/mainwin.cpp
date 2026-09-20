@@ -337,7 +337,9 @@ void MainWin::on_action_About_triggered()
                    "<p>0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.<br>"
                    "0.9.3 and before: &copy; 2001-2016 M. Toussaint "
                    "&lt;<a href='mailto:qtdmm@mtoussaint.de'>qtdmm@mtoussaint.de</a>&gt;</p>"
-                   "<p>Project page: <a href='https://github.com/tuxmaster/QtDMM'>github.com/tuxmaster/QtDMM</a><br>"
+                   "<p>Website: <a href='https://qtdmm.de'>qtdmm.de</a> &middot; "
+                   "Contact: <a href='mailto:hello@qtdmm.de'>hello@qtdmm.de</a><br>"
+                   "Source and bug reports: <a href='https://github.com/tuxmaster/QtDMM'>github.com/tuxmaster/QtDMM</a><br>"
                    "Icons (except the DMM icon) are taken from the KDE project.</p>")
                 .arg(APP_VERSION).arg(qVersion()));
 
