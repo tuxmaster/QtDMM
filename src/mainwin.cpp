@@ -51,12 +51,6 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
   this->toolBarMenu->addWidget(spacer);
   this->toolBarMenu->addAction(this->action_Menu);
-  QString version = APP_VERSION;
-  int plusIndex = version.indexOf('+');
-  if (plusIndex != -1)
-    version = version.left(plusIndex);
-
-
   m_wid = new MainWid(m_config_id, parser.value("config-dir"), this);
   setCentralWidget(m_wid);
   setConsoleLogging(parser.isSet("debug"));
@@ -86,8 +80,9 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   m_meterDock->setObjectName("meterDock");
   m_meterDock->setWidget(m_meter);
   m_meterDock->setAllowedAreas(Qt::AllDockWidgetAreas);
-  addDockWidget(Qt::RightDockWidgetArea, m_meterDock);
-  m_meterDock->hide();
+  // default layout: display and meter side by side above the (hidden)
+  // graph - a compact instrument; the saved dock state overrides this
+  addDockWidget(Qt::TopDockWidgetArea, m_meterDock);
   m_wid->setMeter(m_meter);
   m_wid->setStateManager(m_stateMgr);
 
@@ -114,10 +109,12 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   m_lockPanels->setChecked(m_wid->settings()->getBool("MainWindow/lock-panels", true));
   setPanelsLocked(m_lockPanels->isChecked());
 
-  if (m_config_id.isEmpty())
-    setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(version));
-  else
-    setWindowTitle(QString("%1 %2 [%3]").arg(APP_NAME).arg(version).arg(m_config_id));
+  updateWindowTitle();
+  connect(m_wid, &MainWid::configChanged, this, &MainWin::updateWindowTitle);
+
+  action_Graph->setChecked(m_wid->graphVisible());
+  connect(action_Graph, &QAction::toggled, this, &MainWin::setGraphVisible);
+  setGraphVisible(m_wid->graphVisible());
 
   connect(m_wid, SIGNAL(running(bool)), this, SLOT(runningSLOT(bool)));
 
@@ -165,8 +162,10 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
     if (m_wid->saveWindowSize())
       resize(winRect.width(), winRect.height());
     else
-      resize(640, 480);
+      resize(550, 250);
   }
+  else
+    resize(550, 250);
 
   connect(m_stateMgr, &SharedStateManager::stateChanged, this, [=](const QString& state){
     if (state == "RECORD")
@@ -191,8 +190,36 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
     qApp->quit();
   });
 
- if ( m_stateMgr->registerInstance() )
-   QTimer::singleShot(1000, action_Connect, &QAction::trigger);
+  // auto-connect at start, but not before a meter was ever chosen: a fresh
+  // instance would otherwise try the first serial port it finds
+  if (m_stateMgr->registerInstance() && m_wid->dmmConfigured())
+    QTimer::singleShot(1000, action_Connect, &QAction::trigger);
+}
+
+// Without the graph the window may shrink to the panels and toolbars; the
+// height it had before hiding comes back when the graph is shown again.
+void MainWin::setGraphVisible(bool on)
+{
+  static const int kMinHeightWithGraph = 450;
+  static const int kMinHeightWithoutGraph = 220;
+  m_wid->setGraphVisible(on);
+  setMinimumHeight(on ? kMinHeightWithGraph : kMinHeightWithoutGraph);
+  if (!on)
+  {
+    m_heightWithGraph = height();
+    resize(width(), qMax(kMinHeightWithoutGraph, minimumSizeHint().height()));
+  }
+  else if (m_heightWithGraph > 0 && height() < m_heightWithGraph)
+    resize(width(), m_heightWithGraph);
+}
+
+// "QtDMM: UNI-T UT61E", with the instance id for non-default instances
+void MainWin::updateWindowTitle()
+{
+  QString title = APP_NAME;
+  if (!m_config_id.isEmpty())
+    title += QString(" [%1]").arg(m_config_id);
+  setWindowTitle(QString("%1: %2").arg(title, m_wid->dmmTitle()));
 }
 
 void MainWin::sendStateSLOT(const QString & state)
@@ -298,6 +325,8 @@ void MainWin::stopSLOT()
 void MainWin::runningSLOT(bool on)
 {
   m_running = on;
+  if (on)
+    action_Graph->setChecked(true);   // a recording wants to be seen
 
   action_Start->setEnabled(!on);
   action_Stop->setEnabled(on);
@@ -364,6 +393,7 @@ void MainWin::on_action_Menu_triggered()
   {
     m_menu = new QMenu(this);
     m_menu->addAction(action_Configure);
+    m_menu->addAction(action_Graph);
     m_menu->addAction(m_displayDock->toggleViewAction());
     m_menu->addAction(m_meterDock->toggleViewAction());
     m_menu->addAction(m_lockPanels);

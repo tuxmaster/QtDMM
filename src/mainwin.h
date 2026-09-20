@@ -75,6 +75,10 @@ protected Q_SLOTS:
   void      setToolbarVisibilitySLOT();
   /// Toolbar button style: icons only or icons with text.
   void      setUseTextLabel(bool on);
+  /// Title = app name, instance id and the configured meter.
+  void      updateWindowTitle();
+  /// Graph button: hides the graph and lets the window shrink to the panels.
+  void      setGraphVisible(bool on);
 
 protected:
   MainWid    *m_wid;
@@ -83,6 +87,7 @@ protected:
   QDockWidget *m_meterDock;
   QDockWidget *m_displayDock;
   QAction    *m_lockPanels;
+  int         m_heightWithGraph = 0;   ///< window height before the graph was hidden
   /// Locked panels have no title bar and cannot be moved or floated.
   void        setPanelsLocked(bool locked);
   bool        m_running;

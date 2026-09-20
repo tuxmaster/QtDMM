@@ -73,6 +73,14 @@ public:
   void        setConsoleLogging(bool);
   /// Stores the toolbar visibility (display, dmm, graph, file) in the settings.
   void        setToolbarVisibility(bool, bool, bool, bool);
+  /// Shows or hides the recorder graph (recording goes on regardless).
+  void        setGraphVisible(bool);
+  bool        graphVisible() const;
+  /// False until a meter has been chosen in the settings once; a fresh
+  /// instance does not try to connect to a guessed port on its own.
+  bool        dmmConfigured() const;
+  /// What the window title shows: the model, else the port, else a hint.
+  QString     dmmTitle() const;
   Settings   *settings() const { return m_settings; }
 
 Q_SIGNALS:
@@ -90,6 +98,8 @@ Q_SIGNALS:
   void        toolbarVisibility(bool, bool, bool, bool);
   /// The connection state changed; MainWin checks the Connect action.
   void        connectDMM(bool);
+  /// The settings were applied; the meter shown in the title may have changed.
+  void        configChanged();
   /// A state string for the other instances (SharedStateManager).
   void        sendState(const QString&);
 

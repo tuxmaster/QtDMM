@@ -389,6 +389,7 @@ void MainWid::applySLOT()
   readConfig();
   ui_graph->setAlertUnsaved(m_configDlg->alertUnsavedData());
   m_dmm->setName(m_configDlg->dmmName());
+  Q_EMIT configChanged();
 
   if ((sender() == m_configDlg))
   {
@@ -622,6 +623,39 @@ void MainWid::showTipsSLOT()
   }
 
   m_tipDlg->show();
+}
+
+void MainWid::setGraphVisible(bool on)
+{
+  ui_graph->setVisible(on);
+  // the graph is all this frame shows; without it collapse the frame so the
+  // panels get the space and no empty strip remains
+  setFrameShape(on ? QFrame::StyledPanel : QFrame::NoFrame);
+  setMaximumHeight(on ? QWIDGETSIZE_MAX : 0);
+  m_settings->setBool("MainWindow/show-graph", on);
+  m_settings->save();
+}
+
+bool MainWid::graphVisible() const
+{
+  return m_settings->getBool("MainWindow/show-graph", false);
+}
+
+bool MainWid::dmmConfigured() const
+{
+  // the keys exist once the settings dialog has been accepted at least once
+  return !m_settings->getString("Port settings/device").isEmpty()
+      || !m_settings->getString("DMM/model").isEmpty();
+}
+
+QString MainWid::dmmTitle() const
+{
+  if (!dmmConfigured())
+    return tr("no meter configured");
+  const QString model = m_configDlg->dmmName().trimmed();
+  if (!model.isEmpty())
+    return model;
+  return m_configDlg->device().trimmed();
 }
 
 void MainWid::setToolbarVisibility(bool disp, bool dmm, bool graph, bool file)
