@@ -17,7 +17,10 @@ class SharedStateManager;
 /// text line ("DC 6.02 W AUTO", padded to 30 bytes like SigrokDevice does),
 /// so the ASCII decoder (ReadEvent::Sigrok) and everything after it work
 /// unchanged. Instance ids are the variables; a hyphen in an id can be
-/// written as an underscore in the formula. While an input is missing,
+/// written as an underscore in the formula. The variable t is reserved: the
+/// seconds since the device was opened, which together with sin(), rand()
+/// and friends makes a signal generator ("QtDMM / Virtual meter" is this
+/// device with a formula built from a few fields). While an input is missing,
 /// invalid or older than three seconds the line carries "inf", which the
 /// display shows as OL, and status() explains which input is the problem.
 class CalcDevice : public QIODevice
@@ -25,7 +28,8 @@ class CalcDevice : public QIODevice
   Q_OBJECT
 public:
   /// @param info   the "QtDMM / Calculated value" entry
-  /// @param device "<unit> <formula>", e.g. "W u * i"
+  /// @param device "<unit>[/<coupling>] <formula>", e.g. "W u * i" or
+  ///               "V/AC 12 + sin(2*pi*t/5)"; coupling defaults to DC
   /// @param state  where the other instances' readings come from
   /// @param parent parent object
   explicit CalcDevice(const DmmDecoder::DMMInfo &info, const QString &device,
@@ -43,11 +47,14 @@ public:
 
   /// The unit given with the device string.
   QString unit() const { return m_unit; }
+  /// "DC" or "AC" as given with the device string.
+  QString coupling() const { return m_special; }
   /// The formula as parsed, empty before open().
   QString formula() const { return m_expr ? m_expr->text() : QString(); }
 
   /// Builds the decoder line for the current inputs; exposed for tests.
   /// @param now    reference time for the staleness check (ms since epoch)
+  ///               and for t (seconds since open())
   /// @param status receives the message status() would carry, empty when fine
   QByteArray currentLine(qint64 now, QString *status = nullptr) const;
 
@@ -75,6 +82,8 @@ private:
   DmmDecoder::DMMInfo m_dmmInfo;
   SharedStateManager *m_state;
   QString m_unit;
+  QString m_special = QStringLiteral("DC");
+  qint64 m_openedMs = 0;        ///< when open() was called, for t
   QString m_source;             ///< formula text from the device string
   std::optional<CalcExpr> m_expr;
   QTimer m_timer;

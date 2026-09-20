@@ -97,6 +97,26 @@ int main(int argc, char **argv)
   expectValue("min(u, i)", 0.5, vars);
   expectValue("max(u, i*100)", 50, vars);
   expectValue("sqrt(abs(-16))", 4);
+  expectValue("sin(pi/2)", 1);
+  expectValue("cos(0)", 1);
+  expectValue("exp(0)", 1);
+  expectValue("floor(2.7)", 2);
+  expectValue("floor(-0.5)", -1);
+  expectValue("2*pi", 2 * M_PI);
+  {
+    auto e = CalcExpr::parse("rand()");
+    bool inRange = true, varies = false;
+    double first = e ? *e->eval({}) : -1;
+    for (int i = 0; i < 20 && e; ++i)
+    {
+      double v = *e->eval({});
+      inRange = inRange && v >= 0.0 && v < 1.0;
+      varies = varies || v != first;
+    }
+    check(e && inRange && varies, "rand() is uniform in [0,1) and changes per evaluation");
+    e = CalcExpr::parse("pi");
+    check(e && e->variables().isEmpty(), "pi is a constant, not a variable");
+  }
 
   {
     auto e = CalcExpr::parse("u * i + u - sqrt(r_1)");
@@ -105,6 +125,31 @@ int main(int argc, char **argv)
     check(e && e->variables().isEmpty(), "constant expression has no variables");
     e = CalcExpr::parse("  u*i ");
     check(e && e->text() == "u*i", "text() is the trimmed source");
+  }
+
+  // --- 3b. the virtual meter's waveforms ---
+  {
+    auto at = [](CalcExpr::Waveform w, double t, const QString &noise = "0")
+    {
+      QString err;
+      auto e = CalcExpr::parse(CalcExpr::waveformFormula(w, "2", "6", "8", noise), &err);
+      check(e.has_value(), QString("waveform %1 parses: %2").arg(int(w)).arg(err));
+      auto v = e ? e->eval({{"t", t}}) : std::nullopt;
+      check(v.has_value(), QString("waveform %1 evaluates").arg(int(w)));
+      return v.value_or(-1e9);
+    };
+    auto near = [](double a, double b) { return std::fabs(a - b) < 1e-9; };
+    check(near(at(CalcExpr::Constant, 0), 6), "constant = max");
+    check(near(at(CalcExpr::Sine, 0), 4) && near(at(CalcExpr::Sine, 2), 6) && near(at(CalcExpr::Sine, 6), 2), "sine: mid, max at P/4, min at 3P/4");
+    check(near(at(CalcExpr::Triangle, 0), 2) && near(at(CalcExpr::Triangle, 4), 6) && near(at(CalcExpr::Triangle, 2), 4), "triangle: min, max at P/2, mid at P/4");
+    check(near(at(CalcExpr::Square, 1), 2) && near(at(CalcExpr::Square, 5), 6) && near(at(CalcExpr::Square, 9), 2), "square: low half, high half, repeats");
+    check(near(at(CalcExpr::Sawtooth, 0), 2) && near(at(CalcExpr::Sawtooth, 4), 4) && near(at(CalcExpr::Sawtooth, 8), 2), "sawtooth: ramps min..max, restarts");
+    check(near(at(CalcExpr::Discharge, 0), 6) && near(at(CalcExpr::Discharge, 8), 2 + 4 * std::exp(-1.0)), "discharge: max, 1/e at t = P");
+    const double r = at(CalcExpr::Random, 0);
+    check(r >= 2 && r < 6, "random within min..max");
+    const double n = at(CalcExpr::Constant, 0, "0.5");
+    check(n >= 5.75 && n <= 6.25, "noise adds at most +-noise/2");
+    check(CalcExpr::waveformFormula(CalcExpr::Custom, "0", "1", "1", "0").isEmpty(), "custom has no preset");
   }
 
   // --- 4. parse errors, with position ---
@@ -122,6 +167,8 @@ int main(int argc, char **argv)
   expectParseError("3kg", 1);
   expectParseError("*2", 0);
   expectParseError("2**3", 2);
+  expectParseError("rand(1)", 5);
+  expectParseError("sin()", 4);
 
   // --- 5. evaluation failures ---
   expectEvalFails("u * i", {{"u", 1}});   // i missing

@@ -11,6 +11,7 @@
 static const bool registered = []()
 {
   DmmDecoder::addConfig({"QtDMM", "Calculated value", "", 0, ReadEvent::Sigrok, 8, 1, 1, 0, 400000, 0, 0, 0});
+  DmmDecoder::addConfig({"QtDMM", "Virtual meter", "", 0, ReadEvent::Sigrok, 8, 1, 1, 0, 40000, 0, 0, 0});
   return true;
 }();
 
@@ -25,6 +26,15 @@ CalcDevice::CalcDevice(const DmmDecoder::DMMInfo &info, const QString &device,
   const int space = d.indexOf(' ');
   m_unit = space < 0 ? d : d.left(space);
   m_source = space < 0 ? QString() : d.mid(space + 1).trimmed();
+  // "V/AC": coupling rides along with the unit token
+  const int slash = m_unit.indexOf('/');
+  if (slash >= 0)
+  {
+    const QString c = m_unit.mid(slash + 1).toUpper();
+    m_unit = m_unit.left(slash);
+    if (c == "AC" || c == "DC")
+      m_special = c;
+  }
 
   m_timer.setInterval(kIntervalMs);
   connect(&m_timer, &QTimer::timeout, this, &CalcDevice::tick);
@@ -62,6 +72,7 @@ bool CalcDevice::open(OpenMode mode)
   m_pending.clear();
   m_lastStatus.clear();
   m_statusSent = false;
+  m_openedMs = QDateTime::currentMSecsSinceEpoch();
   m_timer.start();
   return true;
 }
@@ -85,15 +96,18 @@ QByteArray CalcDevice::currentLine(qint64 now, QString *status) const
   QByteArray line;
 
   if (!m_expr || !m_state)
-    line = "DC inf " + m_unit.toUtf8();
+    line = m_special.toUtf8() + " inf " + m_unit.toUtf8();
   else
   {
     // instance ids as variables; "uni-t_803" is reachable as uni_t_803
     const auto readings = m_state->readings();
     QMap<QString, double> values;
+    values.insert("t", (now - m_openedMs) / 1000.0);
     QStringList missing, stale, invalid;
     for (const QString &var : m_expr->variables())
     {
+      if (var == "t")
+        continue;
       QString id = var;
       if (!readings.contains(id))
       {
@@ -132,10 +146,10 @@ QByteArray CalcDevice::currentLine(qint64 now, QString *status) const
     {
       QString prefix;
       const QString value = SiPrefix::format(*result, &prefix);
-      line = "DC " + value.toUtf8() + " " + (prefix + m_unit).toUtf8() + " AUTO";
+      line = m_special.toUtf8() + " " + value.toUtf8() + " " + (prefix + m_unit).toUtf8() + " AUTO";
     }
     else
-      line = "DC inf " + m_unit.toUtf8() + " AUTO";
+      line = m_special.toUtf8() + " inf " + m_unit.toUtf8() + " AUTO";
   }
 
   // fixed length, like SigrokDevice: the decoder's frame is 30 bytes ending in LF

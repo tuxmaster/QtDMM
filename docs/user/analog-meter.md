@@ -33,7 +33,9 @@ page lets you move it.
 ## Readouts and lamp
 
 **CURRENT** shows the reading exactly as the multimeter sends it, **MAX** the
-maximum since the last reset in the same unit. The **OL** lamp lights and the
+maximum since the last reset in the same unit. The min/max memory is also
+marked on the scale: a small red triangle at the minimum, a green one at
+the maximum; *Reset* (Ctrl+R) clears both. The **OL** lamp lights and the
 needle rests against the right stop while the meter reports overload; **HOLD**
 appears while the meter's hold function is active.
 

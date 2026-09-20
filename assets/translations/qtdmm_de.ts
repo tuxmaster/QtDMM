@@ -4,37 +4,37 @@
 <context>
     <name>CalcDevice</name>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="43"/>
+        <location filename="../../src/portdevices/calc.cpp" line="53"/>
         <source>No unit given for the calculated value.</source>
         <translation>Keine Einheit für den berechneten Wert angegeben.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="51"/>
+        <location filename="../../src/portdevices/calc.cpp" line="61"/>
         <source>Formula error at position %1: %2</source>
         <translation>Fehler in der Formel an Position %1: %2</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="56"/>
+        <location filename="../../src/portdevices/calc.cpp" line="66"/>
         <source>No instance data available.</source>
         <translation>Keine Instanzdaten verfügbar.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="123"/>
+        <location filename="../../src/portdevices/calc.cpp" line="137"/>
         <source>Waiting for instance &apos;%1&apos;</source>
         <translation>Warte auf Instanz &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="125"/>
+        <location filename="../../src/portdevices/calc.cpp" line="139"/>
         <source>No current value from instance &apos;%1&apos;</source>
         <translation>Kein aktueller Wert von Instanz &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="127"/>
+        <location filename="../../src/portdevices/calc.cpp" line="141"/>
         <source>Instance &apos;%1&apos; shows no numeric value</source>
         <translation>Instanz &apos;%1&apos; zeigt keinen Zahlenwert</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="129"/>
+        <location filename="../../src/portdevices/calc.cpp" line="143"/>
         <source>Formula has no result (division by zero?)</source>
         <translation>Formel hat kein Ergebnis (Division durch Null?)</translation>
     </message>
@@ -42,45 +42,50 @@
 <context>
     <name>CalcExpr</name>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="105"/>
+        <location filename="../../src/calcexpr.cpp" line="106"/>
         <source>Unexpected end of expression</source>
         <translation>Unerwartetes Ende des Ausdrucks</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="113"/>
-        <location filename="../../src/calcexpr.cpp" line="200"/>
+        <location filename="../../src/calcexpr.cpp" line="114"/>
+        <location filename="../../src/calcexpr.cpp" line="215"/>
         <source>Missing &apos;)&apos;</source>
         <translation>Fehlende &apos;)&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="120"/>
-        <location filename="../../src/calcexpr.cpp" line="218"/>
+        <location filename="../../src/calcexpr.cpp" line="121"/>
+        <location filename="../../src/calcexpr.cpp" line="260"/>
         <source>Unexpected &apos;%1&apos;</source>
         <translation>Unerwartetes &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="145"/>
+        <location filename="../../src/calcexpr.cpp" line="146"/>
         <source>Bad number &apos;%1&apos;</source>
         <translation>Ungültige Zahl &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="153"/>
-        <location filename="../../src/calcexpr.cpp" line="155"/>
+        <location filename="../../src/calcexpr.cpp" line="154"/>
+        <location filename="../../src/calcexpr.cpp" line="156"/>
         <source>Unknown unit prefix &apos;%1&apos;</source>
         <translation>Unbekannter Einheitenpräfix &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="189"/>
+        <location filename="../../src/calcexpr.cpp" line="197"/>
         <source>Unknown function &apos;%1&apos;</source>
         <translation>Unbekannte Funktion &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="196"/>
+        <location filename="../../src/calcexpr.cpp" line="202"/>
+        <source>&apos;%1&apos; takes no arguments</source>
+        <translation>&apos;%1&apos; hat keine Argumente</translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="211"/>
         <source>&apos;%1&apos; needs two arguments</source>
         <translation>&apos;%1&apos; braucht zwei Argumente</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="212"/>
+        <location filename="../../src/calcexpr.cpp" line="254"/>
         <source>Empty expression</source>
         <translation>Leerer Ausdruck</translation>
     </message>
@@ -403,48 +408,49 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>&lt;b&gt;Hier können Sie den Anschluss und das Protokoll für Ihr DMM einstellen. Es gibt schon eine Reihe vorkonfigurierter Modelle.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="71"/>
+        <location filename="../../src/dmmprefs.cpp" line="76"/>
         <source>Manual settings</source>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="72"/>
+        <location filename="../../src/dmmprefs.cpp" line="77"/>
         <source>All vendors</source>
         <translation>Alle Hersteller</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="356"/>
+        <location filename="../../src/dmmprefs.cpp" line="365"/>
+        <location filename="../../src/dmmprefs.cpp" line="405"/>
         <source>Position %1: %2</source>
         <translation>Position %1: %2</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="372"/>
+        <location filename="../../src/dmmprefs.cpp" line="421"/>
         <source>%1: no such instance running</source>
         <translation>%1: keine solche Instanz läuft</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="382"/>
+        <location filename="../../src/dmmprefs.cpp" line="431"/>
         <source>Running instances: %1</source>
         <translation>Laufende Instanzen: %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="384"/>
+        <location filename="../../src/dmmprefs.cpp" line="433"/>
         <source>No other instance is running.</source>
         <translation>Keine andere Instanz läuft.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="558"/>
+        <location filename="../../src/dmmprefs.cpp" line="610"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="558"/>
-        <location filename="../../src/dmmprefs.cpp" line="584"/>
+        <location filename="../../src/dmmprefs.cpp" line="610"/>
+        <location filename="../../src/dmmprefs.cpp" line="636"/>
         <source>DMM description (*.cfg)</source>
         <translation>DMM Beschreibung (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="584"/>
+        <location filename="../../src/dmmprefs.cpp" line="636"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
@@ -555,63 +561,63 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Beenden ohne speichern</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="519"/>
+        <location filename="../../src/mainwid.cpp" line="523"/>
         <source>Automatic start at %1</source>
         <translation>Automatisch starten bei %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="521"/>
+        <location filename="../../src/mainwid.cpp" line="525"/>
         <source>Raising threshold %1</source>
         <translation>Grenzwert steigent %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="523"/>
+        <location filename="../../src/mainwid.cpp" line="527"/>
         <source>Falling threshold %1</source>
         <translation>Grenzwert fallend %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="545"/>
+        <location filename="../../src/mainwid.cpp" line="549"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s läuft noch!&lt;p&gt;Wollen sie es jetzt beenden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="586"/>
+        <location filename="../../src/mainwid.cpp" line="590"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Konnte %1 nicht starten</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="603"/>
+        <location filename="../../src/mainwid.cpp" line="607"/>
         <source>Launched %1</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="608"/>
+        <location filename="../../src/mainwid.cpp" line="612"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 mit dem Rückgabecode %2 beendet.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="650"/>
+        <location filename="../../src/mainwid.cpp" line="654"/>
         <source>no meter configured</source>
         <translation>kein Multimeter konfiguriert</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="544"/>
-        <location filename="../../src/mainwid.cpp" line="585"/>
+        <location filename="../../src/mainwid.cpp" line="548"/>
+        <location filename="../../src/mainwid.cpp" line="589"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: Startfehler</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="557"/>
+        <location filename="../../src/mainwid.cpp" line="561"/>
         <source>Yes, kill it!</source>
         <translation>Ja, töten!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="561"/>
+        <location filename="../../src/mainwid.cpp" line="565"/>
         <source>No, keep running</source>
         <translation>Nein, es laufen lassen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="597"/>
+        <location filename="../../src/mainwid.cpp" line="601"/>
         <source>Bummer!</source>
         <translation>Reinfall!</translation>
     </message>
@@ -705,23 +711,23 @@ Please choose which instance should record.</translation>
 <context>
     <name>MeterWid</name>
     <message>
-        <location filename="../../src/meterwid.cpp" line="464"/>
+        <location filename="../../src/meterwid.cpp" line="479"/>
         <source>CURRENT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/meterwid.cpp" line="465"/>
+        <location filename="../../src/meterwid.cpp" line="480"/>
         <source>MAX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/meterwid.cpp" line="470"/>
-        <location filename="../../src/meterwid.cpp" line="483"/>
+        <location filename="../../src/meterwid.cpp" line="485"/>
+        <location filename="../../src/meterwid.cpp" line="498"/>
         <source>OL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/meterwid.cpp" line="500"/>
+        <location filename="../../src/meterwid.cpp" line="515"/>
         <source>HOLD</source>
         <translation type="unfinished"></translation>
     </message>
@@ -974,47 +980,147 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
         <translation>Der Wert, den diese Instanz anzeigt, berechnet aus den Messwerten der anderen laufenden Instanzen. Deren Namen sind die Variablen; erlaubt sind + - * / ^, Klammern, Zahlen mit SI-Suffix (1.5k) sowie sqrt, abs, log10, min, max.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="713"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="628"/>
+        <source>Signal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="634"/>
+        <source>&amp;Waveform:</source>
+        <translation>&amp;Signalform:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="644"/>
+        <source>What the virtual meter shows over time. Constant and Random stay within Min..Max; the periodic waveforms swing between Min and Max once per Period; Discharge falls from Max towards Min with the time constant Period; Custom uses your own formula (t = seconds since connecting).</source>
+        <translation>Was das virtuelle Multimeter über die Zeit anzeigt. Konstant und Zufall bleiben zwischen Min und Max; die periodischen Signalformen schwingen einmal pro Periode zwischen Min und Max; Entladung fällt von Max mit der Zeitkonstante Periode gegen Min; Eigene Formel verwendet Ihre eigene Formel (t = Sekunden seit dem Verbinden).</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="646"/>
+        <source>Constant</source>
+        <translation>Konstant</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="647"/>
+        <source>Random</source>
+        <translation>Zufall</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="648"/>
+        <source>Sine</source>
+        <translation>Sinus</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="649"/>
+        <source>Triangle</source>
+        <translation>Dreieck</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="650"/>
+        <source>Square</source>
+        <translation>Rechteck</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="651"/>
+        <source>Sawtooth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="652"/>
+        <source>Discharge</source>
+        <translation>Entladung</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="653"/>
+        <source>Custom formula</source>
+        <translation>Eigene Formel</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="659"/>
+        <source>U&amp;nit:</source>
+        <translation>Ei&amp;nheit:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="682"/>
+        <source>Cou&amp;pling:</source>
+        <translation>Ko&amp;pplung:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="698"/>
+        <source>M&amp;in:</source>
+        <translation>M&amp;in:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="715"/>
+        <source>Ma&amp;x:</source>
+        <translation>Ma&amp;x:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="732"/>
+        <source>Peri&amp;od (s):</source>
+        <translation>Peri&amp;ode (s):</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="749"/>
+        <source>Noi&amp;se:</source>
+        <translation>Rau&amp;schen:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="759"/>
+        <source>Peak-to-peak amplitude of random noise added to the signal, in the unit above. 0 for a clean signal.</source>
+        <translation>Spitze-Spitze-Amplitude des zufälligen Rauschens, das dem Signal überlagert wird, in der Einheit oben. 0 für ein sauberes Signal.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="769"/>
+        <source>Formu&amp;la:</source>
+        <translation>Forme&amp;l:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="779"/>
+        <source>The formula the waveform above expands to; editable with Custom formula. t is the time in seconds since connecting, pi, sin, cos, exp, floor, sqrt, abs, rand() and the readings of other instances may be used.</source>
+        <translation>Die Formel, zu der die Signalform oben wird; bei Eigene Formel editierbar. t ist die Zeit in Sekunden seit dem Verbinden; pi, sin, cos, exp, floor, sqrt, abs, rand() und die Messwerte anderer Instanzen sind erlaubt.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="874"/>
         <source>variable bytes ASCII, Sigrok</source>
         <translation>variable bytes ASCII, Sigrok</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="796"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="957"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocol settings have not been confirmed by a user yet. If you own this model and can confirm that they work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, dass sie funktionieren, eröffnen Sie bitte ein Issue unter &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="821"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="982"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; with the model and the settings. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, das hier nicht aufgeführt ist, und passende manuelle Einstellungen gefunden haben, eröffnen Sie bitte ein Issue unter &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; mit Modell und Einstellungen. So profitieren künftige Benutzer dieses DMM von Ihrer Hilfe.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="668"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="829"/>
         <source>11 bytes binary, continuous (CyrustekES51986)</source>
         <translation>11 bytes binär, kontinuierlich (CyrustekES51986)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="688"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="849"/>
         <source>23 bytes ASCII, continuous (VC870)</source>
         <translation>23 bytes ASCII, kontinuierlich (VC870)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="693"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="854"/>
         <source>22 bytes binary, continuous (DO3122)</source>
         <translation>22 bytes binary, kontinuierlich (DO3122)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="698"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="859"/>
         <source>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</source>
         <translation>14 bytes halb-ASCII, UNI-T UT61E (CyrustekES51922)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="703"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="864"/>
         <source>DTM0660</source>
         <translation>DTM0660</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="708"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="869"/>
         <source>11 bytes binary, continuous (CyrustekES51962)</source>
         <translation>11 bytes binär, kontinuierlich(CyrustekES51962)</translation>
     </message>
@@ -1074,68 +1180,68 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
         <translation>Hier kann das DMM-Modell ausgewählt werden. Ist Ihr DMM nicht in der Liste, versuchen Sie passende Einstellungen zu finden und eröffnen Sie ein Issue unter github.com/tuxmaster/QtDMM/issues, damit sie in der nächsten Version in die Liste kommen.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="628"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="789"/>
         <source>Protocol</source>
         <translation>Protokoll</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="634"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="795"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translatorcomment>Hier wird das Kommunikationsprotokoll ausgewählt. Wenn Sie kein &quot;offiziell&quot; unterstützes DMM benutzte, versuchen Sie eines der bereits vorhanden Protokolle. Mit etwas etwas Glück passt eines. Wenn Sie eins finden, teilen Sie es bitte dem Autor mit.</translatorcomment>
         <translation>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="638"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="799"/>
         <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
         <translation>14 Bytes ASCII, auf Abfrage (Metex/Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="643"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="804"/>
         <source>11 bytes ASCII, continuous (PeakTech 451)</source>
         <translation>11 Bytes ASCII, kontinuierlich (PeakTech 451)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="648"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="809"/>
         <source>14 bytes ASCII, continuous (Voltcraft)</source>
         <translation>14 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="653"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="814"/>
         <source>15 bytes ASCII, continuous (Voltcraft)</source>
         <translation>15 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="658"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="819"/>
         <source>11 bytes binary, continuous (M9803R)</source>
         <translation>11 Bytes binär, kontinuierlich (M9803R)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="663"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="824"/>
         <source>14 bytes binary, continuous (VC820)</source>
         <translation>14 Bytes binär, kontinuierlich (VC820)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="673"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="834"/>
         <source>11 bytes binary, continuous (VC940)</source>
         <translation>11 Bytes binär, kontinuierlich (VC940)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="678"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="839"/>
         <source>14 bytes ASCII/binary, continuous (QM1537)</source>
         <translation>14 Bytes ASCII/Binär, kontinuierlich (QM1537)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="683"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="844"/>
         <source>9 bytes binary, continuous (RS 22-812)</source>
         <translation>9 Bytes binär, kontinuierlich (RS 22-812)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="728"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="889"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Anzahl der Werte:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="738"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="899"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Einige Multimeter senden verschiedenen Zeile mit verschiedenen Messwerten. Hier kann die Anzahl der zu ignorieren Zeilen eingetragen werden.( Das bedeutet, QtDMM verarbeitet nur die erste Zeile).</translation>
     </message>
@@ -1422,7 +1528,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="204"/>
         <source>LCD &amp;colour</source>
-        <translation type="unfinished"></translation>
+        <translation>LCD-&amp;Farbe</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="225"/>
@@ -1442,57 +1548,57 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="254"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="259"/>
         <source>Zero left</source>
-        <translation type="unfinished"></translation>
+        <translation>Null links</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="264"/>
         <source>Centre zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Null in der Mitte</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="272"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="279"/>
         <source>Colour scheme of the analog meter: a dark studio dial with a white scale, or a classic ivory dial with a black scale.</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbschema des Zeigerinstruments: dunkles Studio-Ziffernblatt mit weißer Skala oder klassisches elfenbeinfarbenes Blatt mit schwarzer Skala.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="283"/>
         <source>Dark studio</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkles Studio</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="288"/>
         <source>Classic ivory</source>
-        <translation type="unfinished"></translation>
+        <translation>Klassisch Elfenbein</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="296"/>
         <source>Move the needle with the inertia of a real moving-coil instrument instead of jumping to each new reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Nadel mit der Trägheit eines echten Drehspulinstruments bewegen statt zu jedem neuen Wert zu springen.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="299"/>
         <source>Needle inertia</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeigerträgheit</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="306"/>
         <source>Red zone from</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotzone ab</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="313"/>
         <source>Start of the red zone at the top end of the scale, as a percentage of full scale.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beginn der roten Zone am oberen Skalenende in Prozent des Vollausschlags.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="316"/>
@@ -1622,7 +1728,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="134"/>
         <source>The help page. Links inside the text navigate to other pages; web links open in your browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Hilfeseite. Links im Text führen zu anderen Seiten; Web-Links öffnen sich im Browser.</translation>
     </message>
 </context>
 <context>
@@ -1914,7 +2020,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="430"/>
         <source>Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Handbuch</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="433"/>
@@ -2024,7 +2130,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="262"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show or hide the recorder graph. Recording continues while the graph is hidden; with only the display and the meter panels visible the window can be made much smaller.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-weight:600;"&gt;Graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Den Rekorder-Graphen ein- oder ausblenden. Die Aufnahme läuft auch bei ausgeblendetem Graphen weiter; mit nur Anzeige und Zeigerinstrument lässt sich das Fenster deutlich kleiner machen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Den Rekorder-Graphen ein- oder ausblenden. Die Aufnahme läuft auch bei ausgeblendetem Graphen weiter; mit nur Anzeige und Zeigerinstrument lässt sich das Fenster deutlich kleiner machen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="274"/>

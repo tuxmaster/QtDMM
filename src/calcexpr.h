@@ -13,8 +13,9 @@
 /// associative, unary minus binds weaker than ^ so -2^2 is -4),
 /// parentheses, numbers in decimal or exponent form with an optional SI
 /// suffix ("1.5k", "22u", "4.7n"), variables (identifiers, in QtDMM the ids
-/// of the running instances) and the functions sqrt, abs, log10, min(a,b)
-/// and max(a,b). Names are case-sensitive.
+/// of the running instances), the constant pi and the functions sqrt, abs,
+/// log10, sin, cos, exp, floor, min(a,b), max(a,b) and rand() (uniform in
+/// [0, 1), new value per evaluation). Names are case-sensitive.
 ///
 /// parse() reports the first error with its position; eval() yields nothing
 /// when a variable is missing or the result is not finite (1/0, sqrt(-1)).
@@ -32,8 +33,18 @@ public:
   /// The expression as parsed (trimmed source text).
   QString text() const { return m_text; }
 
+  /// The signal shapes of the virtual meter; order = the settings combo.
+  enum Waveform { Constant, Random, Sine, Triangle, Square, Sawtooth, Discharge, Custom };
+  /// The formula over t (seconds) a waveform expands to: Constant is max,
+  /// Random and the periodic shapes stay within [min, max] with the given
+  /// period, Discharge decays from max to min with time constant period.
+  /// A noise amplitude > 0 adds uniform noise of that peak-to-peak size.
+  /// Custom gives an empty string. Arguments are taken as typed.
+  static QString waveformFormula(Waveform wave, const QString &min, const QString &max,
+                                 const QString &period, const QString &noise);
+
 private:
-  enum class Op { Num, Var, Neg, Add, Sub, Mul, Div, Pow, Sqrt, Abs, Log10, Min, Max };
+  enum class Op { Num, Var, Neg, Add, Sub, Mul, Div, Pow, Sqrt, Abs, Log10, Sin, Cos, Exp, Floor, Min, Max, Rand };
   struct Node
   {
     Op op;

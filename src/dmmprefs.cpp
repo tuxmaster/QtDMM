@@ -52,7 +52,12 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
 
   message2->hide();
   ui_calcGroup->hide();
+  ui_virtualGroup->hide();
   connect(ui_calcExpression, &QLineEdit::textChanged, this, &DmmPrefs::updateCalcHint);
+  connect(ui_virtualSignal, &QComboBox::currentIndexChanged, this, &DmmPrefs::updateVirtualFormula);
+  for (QLineEdit *e : {ui_virtualMin, ui_virtualMax, ui_virtualPeriod, ui_virtualNoise})
+    connect(e, &QLineEdit::textChanged, this, &DmmPrefs::updateVirtualFormula);
+  connect(ui_virtualFormula, &QLineEdit::textChanged, this, [this]{ if (ui_virtualSignal->currentIndex() == 7) updateVirtualFormula(); });
   m_calcHintTimer.setInterval(1000);   // live values of the input instances
   connect(&m_calcHintTimer, &QTimer::timeout, this, &DmmPrefs::updateCalcHint);
 
@@ -219,6 +224,15 @@ void DmmPrefs::defaultsSLOT()
   port->setCurrentText        (m_cfg->getString("Port settings/device"));
   ui_calcUnit->setText        (m_cfg->getString("DMM/calc-unit", "W"));
   ui_calcExpression->setText  (m_cfg->getString("DMM/calc-expression"));
+  ui_virtualSignal->setCurrentIndex(m_cfg->getInt("DMM/virtual-waveform", 2));
+  ui_virtualUnit->setText     (m_cfg->getString("DMM/virtual-unit", "V"));
+  ui_virtualCoupling->setCurrentText(m_cfg->getString("DMM/virtual-coupling", "DC"));
+  ui_virtualMin->setText      (m_cfg->getString("DMM/virtual-min", "0"));
+  ui_virtualMax->setText      (m_cfg->getString("DMM/virtual-max", "10"));
+  ui_virtualPeriod->setText   (m_cfg->getString("DMM/virtual-period", "20"));
+  ui_virtualNoise->setText    (m_cfg->getString("DMM/virtual-noise", "0"));
+  if (ui_virtualSignal->currentIndex() == 7)
+    ui_virtualFormula->setText(m_cfg->getString("DMM/virtual-formula"));
   baudRate->setCurrentText    (m_cfg->getString("Port settings/baud"));
   bitsCombo->setCurrentText   (m_cfg->getString("Port settings/bits", "7"));
   stopBitsCombo->setCurrentText(m_cfg->getString("Port settings/stop-bits", "1"));
@@ -284,6 +298,14 @@ void DmmPrefs::applySLOT()
   m_cfg->setString("Port settings/device", port->currentText());
   m_cfg->setString("DMM/calc-unit", ui_calcUnit->text().trimmed());
   m_cfg->setString("DMM/calc-expression", ui_calcExpression->text().trimmed());
+  m_cfg->setInt("DMM/virtual-waveform", ui_virtualSignal->currentIndex());
+  m_cfg->setString("DMM/virtual-unit", ui_virtualUnit->text().trimmed());
+  m_cfg->setString("DMM/virtual-coupling", ui_virtualCoupling->currentText());
+  m_cfg->setString("DMM/virtual-min", ui_virtualMin->text().trimmed());
+  m_cfg->setString("DMM/virtual-max", ui_virtualMax->text().trimmed());
+  m_cfg->setString("DMM/virtual-period", ui_virtualPeriod->text().trimmed());
+  m_cfg->setString("DMM/virtual-noise", ui_virtualNoise->text().trimmed());
+  m_cfg->setString("DMM/virtual-formula", ui_virtualFormula->text().trimmed());
   m_cfg->setString("Port settings/baud", baudRate->currentText());
   m_cfg->setString("Port settings/bits", bitsCombo->currentText());
   m_cfg->setString("Port settings/stop-bits", stopBitsCombo->currentText());
@@ -317,7 +339,30 @@ void DmmPrefs::on_ui_externalSetup_toggled()
 
 bool DmmPrefs::isCalculated() const
 {
-  return ui_vendor->currentIndex() != 0 && m_dmmInfo.vendor == "QtDMM";
+  return ui_vendor->currentIndex() != 0 && m_dmmInfo.vendor == "QtDMM" && m_dmmInfo.model == "Calculated value";
+}
+
+bool DmmPrefs::isVirtual() const
+{
+  return ui_vendor->currentIndex() != 0 && m_dmmInfo.vendor == "QtDMM" && m_dmmInfo.model == "Virtual meter";
+}
+
+void DmmPrefs::updateVirtualFormula()
+{
+  const int wave = ui_virtualSignal->currentIndex();
+  const bool custom = wave == 7;
+  ui_virtualFormula->setReadOnly(!custom);
+  for (QWidget *w : std::initializer_list<QWidget *>{ui_virtualMin, ui_virtualMax, ui_virtualPeriod, ui_virtualNoise})
+    w->setEnabled(!custom);
+  ui_virtualPeriod->setEnabled(!custom && wave >= 2);
+  if (!custom)
+    ui_virtualFormula->setText(CalcExpr::waveformFormula(static_cast<CalcExpr::Waveform>(wave), ui_virtualMin->text(), ui_virtualMax->text(),
+                                              ui_virtualPeriod->text(), ui_virtualNoise->text()));
+  QString error;
+  int pos = -1;
+  const bool ok = CalcExpr::parse(ui_virtualFormula->text(), &error, &pos).has_value();
+  ui_virtualFormula->setStyleSheet(ok ? QString() : QStringLiteral("QLineEdit { color: #b00; }"));
+  ui_virtualFormula->setToolTip(ok ? QString() : tr("Position %1: %2").arg(pos + 1).arg(error));
 }
 
 void DmmPrefs::setStateManager(SharedStateManager *state)
@@ -331,9 +376,13 @@ void DmmPrefs::setStateManager(SharedStateManager *state)
 void DmmPrefs::updateCalcMode()
 {
   const bool calc = isCalculated();
-  ButtonGroup11->setVisible(!calc);
-  ui_protocol->setVisible(!calc);
+  const bool virt = isVirtual();
+  ButtonGroup11->setVisible(!calc && !virt);
+  ui_protocol->setVisible(!calc && !virt);
   ui_calcGroup->setVisible(calc);
+  ui_virtualGroup->setVisible(virt);
+  if (virt)
+    updateVirtualFormula();
   if (calc)
   {
     updateCalcHint();
@@ -550,6 +599,9 @@ QString DmmPrefs::device() const
 {
   if (isCalculated())
     return QString("calc %1 %2").arg(ui_calcUnit->text().trimmed(), ui_calcExpression->text().trimmed());
+  if (isVirtual())
+    return QString("calc %1/%2 %3").arg(ui_virtualUnit->text().trimmed(), ui_virtualCoupling->currentText(),
+                                        ui_virtualFormula->text().trimmed());
   return port->currentText();
 }
 

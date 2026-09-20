@@ -4,37 +4,37 @@
 <context>
     <name>CalcDevice</name>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="43"/>
+        <location filename="../../src/portdevices/calc.cpp" line="53"/>
         <source>No unit given for the calculated value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="51"/>
+        <location filename="../../src/portdevices/calc.cpp" line="61"/>
         <source>Formula error at position %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="56"/>
+        <location filename="../../src/portdevices/calc.cpp" line="66"/>
         <source>No instance data available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="123"/>
+        <location filename="../../src/portdevices/calc.cpp" line="137"/>
         <source>Waiting for instance &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="125"/>
+        <location filename="../../src/portdevices/calc.cpp" line="139"/>
         <source>No current value from instance &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="127"/>
+        <location filename="../../src/portdevices/calc.cpp" line="141"/>
         <source>Instance &apos;%1&apos; shows no numeric value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="129"/>
+        <location filename="../../src/portdevices/calc.cpp" line="143"/>
         <source>Formula has no result (division by zero?)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -42,45 +42,50 @@
 <context>
     <name>CalcExpr</name>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="105"/>
+        <location filename="../../src/calcexpr.cpp" line="106"/>
         <source>Unexpected end of expression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="113"/>
-        <location filename="../../src/calcexpr.cpp" line="200"/>
+        <location filename="../../src/calcexpr.cpp" line="114"/>
+        <location filename="../../src/calcexpr.cpp" line="215"/>
         <source>Missing &apos;)&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="120"/>
-        <location filename="../../src/calcexpr.cpp" line="218"/>
+        <location filename="../../src/calcexpr.cpp" line="121"/>
+        <location filename="../../src/calcexpr.cpp" line="260"/>
         <source>Unexpected &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="145"/>
+        <location filename="../../src/calcexpr.cpp" line="146"/>
         <source>Bad number &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="153"/>
-        <location filename="../../src/calcexpr.cpp" line="155"/>
+        <location filename="../../src/calcexpr.cpp" line="154"/>
+        <location filename="../../src/calcexpr.cpp" line="156"/>
         <source>Unknown unit prefix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="189"/>
+        <location filename="../../src/calcexpr.cpp" line="197"/>
         <source>Unknown function &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="196"/>
+        <location filename="../../src/calcexpr.cpp" line="202"/>
+        <source>&apos;%1&apos; takes no arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="211"/>
         <source>&apos;%1&apos; needs two arguments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="212"/>
+        <location filename="../../src/calcexpr.cpp" line="254"/>
         <source>Empty expression</source>
         <translation type="unfinished"></translation>
     </message>
@@ -398,48 +403,49 @@ DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="71"/>
+        <location filename="../../src/dmmprefs.cpp" line="76"/>
         <source>Manual settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="72"/>
+        <location filename="../../src/dmmprefs.cpp" line="77"/>
         <source>All vendors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="356"/>
+        <location filename="../../src/dmmprefs.cpp" line="365"/>
+        <location filename="../../src/dmmprefs.cpp" line="405"/>
         <source>Position %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="372"/>
+        <location filename="../../src/dmmprefs.cpp" line="421"/>
         <source>%1: no such instance running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="382"/>
+        <location filename="../../src/dmmprefs.cpp" line="431"/>
         <source>Running instances: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="384"/>
+        <location filename="../../src/dmmprefs.cpp" line="433"/>
         <source>No other instance is running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="558"/>
+        <location filename="../../src/dmmprefs.cpp" line="610"/>
         <source>Load DMM description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="558"/>
-        <location filename="../../src/dmmprefs.cpp" line="584"/>
+        <location filename="../../src/dmmprefs.cpp" line="610"/>
+        <location filename="../../src/dmmprefs.cpp" line="636"/>
         <source>DMM description (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="584"/>
+        <location filename="../../src/dmmprefs.cpp" line="636"/>
         <source>Save DMM description</source>
         <translation type="unfinished"></translation>
     </message>
@@ -550,63 +556,63 @@ DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="519"/>
+        <location filename="../../src/mainwid.cpp" line="523"/>
         <source>Automatic start at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="521"/>
+        <location filename="../../src/mainwid.cpp" line="525"/>
         <source>Raising threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="523"/>
+        <location filename="../../src/mainwid.cpp" line="527"/>
         <source>Falling threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="544"/>
-        <location filename="../../src/mainwid.cpp" line="585"/>
+        <location filename="../../src/mainwid.cpp" line="548"/>
+        <location filename="../../src/mainwid.cpp" line="589"/>
         <source>QtDMM: Launch error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="545"/>
+        <location filename="../../src/mainwid.cpp" line="549"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="557"/>
+        <location filename="../../src/mainwid.cpp" line="561"/>
         <source>Yes, kill it!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="561"/>
+        <location filename="../../src/mainwid.cpp" line="565"/>
         <source>No, keep running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="586"/>
+        <location filename="../../src/mainwid.cpp" line="590"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="597"/>
+        <location filename="../../src/mainwid.cpp" line="601"/>
         <source>Bummer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="603"/>
+        <location filename="../../src/mainwid.cpp" line="607"/>
         <source>Launched %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="608"/>
+        <location filename="../../src/mainwid.cpp" line="612"/>
         <source>%1 terminated with exit code %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="650"/>
+        <location filename="../../src/mainwid.cpp" line="654"/>
         <source>no meter configured</source>
         <translation type="unfinished"></translation>
     </message>
@@ -698,23 +704,23 @@ Please choose which instance should record.</source>
 <context>
     <name>MeterWid</name>
     <message>
-        <location filename="../../src/meterwid.cpp" line="464"/>
+        <location filename="../../src/meterwid.cpp" line="479"/>
         <source>CURRENT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/meterwid.cpp" line="465"/>
+        <location filename="../../src/meterwid.cpp" line="480"/>
         <source>MAX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/meterwid.cpp" line="470"/>
-        <location filename="../../src/meterwid.cpp" line="483"/>
+        <location filename="../../src/meterwid.cpp" line="485"/>
+        <location filename="../../src/meterwid.cpp" line="498"/>
         <source>OL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/meterwid.cpp" line="500"/>
+        <location filename="../../src/meterwid.cpp" line="515"/>
         <source>HOLD</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1011,111 +1017,211 @@ Then log out and back in so the new group membership becomes active.</source>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="628"/>
-        <source>Protocol</source>
+        <source>Signal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="634"/>
-        <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
+        <source>&amp;Waveform:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="638"/>
-        <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
+        <location filename="../../src/ui/uidmmprefs.ui" line="644"/>
+        <source>What the virtual meter shows over time. Constant and Random stay within Min..Max; the periodic waveforms swing between Min and Max once per Period; Discharge falls from Max towards Min with the time constant Period; Custom uses your own formula (t = seconds since connecting).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="643"/>
-        <source>11 bytes ASCII, continuous (PeakTech 451)</source>
+        <location filename="../../src/ui/uidmmprefs.ui" line="646"/>
+        <source>Constant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="647"/>
+        <source>Random</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="648"/>
-        <source>14 bytes ASCII, continuous (Voltcraft)</source>
+        <source>Sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="649"/>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="650"/>
+        <source>Square</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="651"/>
+        <source>Sawtooth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="652"/>
+        <source>Discharge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="653"/>
-        <source>15 bytes ASCII, continuous (Voltcraft)</source>
+        <source>Custom formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="658"/>
-        <source>11 bytes binary, continuous (M9803R)</source>
+        <location filename="../../src/ui/uidmmprefs.ui" line="659"/>
+        <source>U&amp;nit:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="663"/>
-        <source>14 bytes binary, continuous (VC820)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="668"/>
-        <source>11 bytes binary, continuous (CyrustekES51986)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="673"/>
-        <source>11 bytes binary, continuous (VC940)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="678"/>
-        <source>14 bytes ASCII/binary, continuous (QM1537)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="683"/>
-        <source>9 bytes binary, continuous (RS 22-812)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="688"/>
-        <source>23 bytes ASCII, continuous (VC870)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="693"/>
-        <source>22 bytes binary, continuous (DO3122)</source>
+        <location filename="../../src/ui/uidmmprefs.ui" line="682"/>
+        <source>Cou&amp;pling:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="698"/>
+        <source>M&amp;in:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="715"/>
+        <source>Ma&amp;x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="732"/>
+        <source>Peri&amp;od (s):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="749"/>
+        <source>Noi&amp;se:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="759"/>
+        <source>Peak-to-peak amplitude of random noise added to the signal, in the unit above. 0 for a clean signal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="769"/>
+        <source>Formu&amp;la:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="779"/>
+        <source>The formula the waveform above expands to; editable with Custom formula. t is the time in seconds since connecting, pi, sin, cos, exp, floor, sqrt, abs, rand() and the readings of other instances may be used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="789"/>
+        <source>Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="795"/>
+        <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="799"/>
+        <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="804"/>
+        <source>11 bytes ASCII, continuous (PeakTech 451)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="809"/>
+        <source>14 bytes ASCII, continuous (Voltcraft)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="814"/>
+        <source>15 bytes ASCII, continuous (Voltcraft)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="819"/>
+        <source>11 bytes binary, continuous (M9803R)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="824"/>
+        <source>14 bytes binary, continuous (VC820)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="829"/>
+        <source>11 bytes binary, continuous (CyrustekES51986)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="834"/>
+        <source>11 bytes binary, continuous (VC940)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="839"/>
+        <source>14 bytes ASCII/binary, continuous (QM1537)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="844"/>
+        <source>9 bytes binary, continuous (RS 22-812)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="849"/>
+        <source>23 bytes ASCII, continuous (VC870)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="854"/>
+        <source>22 bytes binary, continuous (DO3122)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="859"/>
         <source>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="703"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="864"/>
         <source>DTM0660</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="708"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="869"/>
         <source>11 bytes binary, continuous (CyrustekES51962)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="713"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="874"/>
         <source>variable bytes ASCII, Sigrok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="728"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="889"/>
         <source>&amp;Number of values:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="738"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="899"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="796"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="957"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocol settings have not been confirmed by a user yet. If you own this model and can confirm that they work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="821"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="982"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; with the model and the settings. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>

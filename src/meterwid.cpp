@@ -85,6 +85,8 @@ MeterStyle MeterStyle::dark()
   s.lampOff = QColor(0x4a, 0x12, 0x12);
   s.lampOn = QColor(0xff, 0x30, 0x30);
   s.hold = QColor(0xff, 0xb0, 0x20);
+  s.minMark = QColor(0xe0, 0x40, 0x40);
+  s.maxMark = QColor(0x50, 0xd0, 0x50);
   return s;
 }
 
@@ -103,12 +105,16 @@ MeterStyle MeterStyle::ivory()
   s.lampOff = QColor(0x6a, 0x20, 0x20);
   s.lampOn = QColor(0xff, 0x30, 0x30);
   s.hold = QColor(0xb0, 0x60, 0x00);
+  s.minMark = QColor(0xc0, 0x20, 0x20);
+  s.maxMark = QColor(0x20, 0x90, 0x20);
   return s;
 }
 
 MeterWid::MeterWid(QWidget *parent)
   : QWidget(parent)
   , m_peak(kNaN)
+  , m_markMin(kNaN)
+  , m_markMax(kNaN)
 {
   setAttribute(Qt::WA_OpaquePaintEvent, false);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -185,6 +191,13 @@ void MeterWid::setPeak(double value)
   update();
 }
 
+void MeterWid::setMinMax(double minValue, double maxValue)
+{
+  m_markMin = minValue;
+  m_markMax = maxValue;
+  update();
+}
+
 void MeterWid::setScaleMode(ScaleMode mode)
 {
   m_scaleMode = mode;
@@ -213,6 +226,8 @@ void MeterWid::setStyle(const MeterStyle &style)
 void MeterWid::reset()
 {
   m_peak = kNaN;
+  m_markMin = kNaN;
+  m_markMax = kNaN;
   if (m_scaleMode == Auto && m_bipolar)
   {
     m_bipolar = false;
@@ -527,6 +542,32 @@ void MeterWid::drawLamp(QPainter &p, const Geometry &g) const
   p.drawEllipse(c, r, r);
 }
 
+// Small triangles just inside the arc, pointing at the scale: red for the
+// minimum, green for the maximum of the min/max memory (as Ultra DMM does).
+void MeterWid::drawMarks(QPainter &p, const Geometry &g) const
+{
+  auto mark = [&](double value, const QColor &color)
+  {
+    if (std::isnan(value))
+      return;
+    const double angle = angleForValue(value, m_fullScale, m_bipolar);
+    const double h = qMax(3.0, g.radius * 0.055);
+    QPolygonF tri;
+    // inside the arc, tip touching it, so the scale labels stay clear
+    tri << QPointF(0, -(g.radius * 0.985)) << QPointF(-h * 0.6, -(g.radius * 0.985 - h)) << QPointF(h * 0.6, -(g.radius * 0.985 - h));
+    p.save();
+    PanelFrame::clipToFace(p, g.face);
+    p.translate(g.pivot);
+    p.rotate(angle);
+    p.setPen(QPen(QColor(0, 0, 0, 120), 1));
+    p.setBrush(color);
+    p.drawPolygon(tri);
+    p.restore();
+  };
+  mark(m_markMin, m_style.minMark);
+  mark(m_markMax, m_style.maxMark);
+}
+
 void MeterWid::drawNeedle(QPainter &p, const Geometry &g) const
 {
   const double len = g.radius * 1.02;
@@ -587,5 +628,6 @@ void MeterWid::paintEvent(QPaintEvent *)
   const Geometry g = geometry();
   drawReadouts(p, g);
   drawLamp(p, g);
+  drawMarks(p, g);
   drawNeedle(p, g);
 }

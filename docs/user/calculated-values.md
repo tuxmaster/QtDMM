@@ -36,12 +36,15 @@ prefix: 12 V times 0.5 mA is `6.00 mW`.
 
 - Operators `+ - * / ^`, parentheses. `^` binds tightest, so `-2^2` is `-4`
   and `u^2/r` is what you expect.
-- Numbers may have an exponent or an SI suffix: `1e-3`, `1.5k`, `22u`, `4.7n`.
-- Functions: `sqrt(x)`, `abs(x)`, `log10(x)`, `min(a, b)`, `max(a, b)`.
+- Numbers may have an exponent or an SI suffix: `1e-3`, `1.5k`, `22u`, `4.7n`;
+  `pi` is a constant.
+- Functions: `sqrt(x)`, `abs(x)`, `log10(x)`, `sin(x)`, `cos(x)`, `exp(x)`,
+  `floor(x)`, `min(a, b)`, `max(a, b)` and `rand()` (a new value in [0, 1)
+  every time).
 - Variables are the names of running instances. A name with a hyphen, such
   as `uni-t_803`, is written with an underscore in the formula
   (`uni_t_803`). A calculated instance can itself be an input for another
-  one.
+  one. `t` is reserved: the seconds since the instance connected.
 
 Examples:
 
@@ -53,6 +56,28 @@ Examples:
 | Apparent power from RMS readings | `VA` | `u * i` |
 | Magnitude of two components | `V` | `sqrt(a^2 + b^2)` |
 | A reading scaled by a probe factor | `V` | `probe * 10` |
+
+## The virtual meter
+
+For trying QtDMM without a multimeter, for demonstrations or for feeding a
+known signal into a calculation there is a second built-in model,
+**QtDMM / Virtual meter**. It is the calculated instance with the formula
+built for you from a few fields:
+
+- **Waveform** — *Constant* (the Max value), *Random* (a new value between
+  Min and Max each time), *Sine*, *Triangle*, *Square*, *Sawtooth* (between
+  Min and Max, once per Period), *Discharge* (from Max towards Min with the
+  time constant Period, like a battery under load) or *Custom formula*.
+- **Unit** and **Coupling** (DC or AC) — what the display and the graph
+  label the value with.
+- **Min**, **Max**, **Period (s)**, **Noise** — noise is the peak-to-peak
+  amplitude of uniform noise added on top, in the unit above.
+- **Formula** — what the fields expand to; with *Custom formula* you edit
+  it directly and may use everything from the section above, including the
+  readings of other instances.
+
+The virtual meter needs no other instance and publishes its value like a
+real one, so `u * i` works just as well with a virtual `u`.
 
 ## When an input is missing
 
