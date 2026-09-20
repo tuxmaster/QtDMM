@@ -112,8 +112,8 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   connect(m_wid, &MainWid::configChanged, this, &MainWin::updateWindowTitle);
 
   action_Graph->setChecked(m_wid->graphVisible());
-  m_wid->setGraphVisible(m_wid->graphVisible());
-  connect(action_Graph, &QAction::toggled, m_wid, &MainWid::setGraphVisible);
+  connect(action_Graph, &QAction::toggled, this, &MainWin::setGraphVisible);
+  setGraphVisible(m_wid->graphVisible());
 
   connect(m_wid, SIGNAL(running(bool)), this, SLOT(runningSLOT(bool)));
 
@@ -191,6 +191,23 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   // instance would otherwise try the first serial port it finds
   if (m_stateMgr->registerInstance() && m_wid->dmmConfigured())
     QTimer::singleShot(1000, action_Connect, &QAction::trigger);
+}
+
+// Without the graph the window may shrink to the panels and toolbars; the
+// height it had before hiding comes back when the graph is shown again.
+void MainWin::setGraphVisible(bool on)
+{
+  static const int kMinHeightWithGraph = 450;
+  static const int kMinHeightWithoutGraph = 220;
+  m_wid->setGraphVisible(on);
+  setMinimumHeight(on ? kMinHeightWithGraph : kMinHeightWithoutGraph);
+  if (!on)
+  {
+    m_heightWithGraph = height();
+    resize(width(), qMax(kMinHeightWithoutGraph, minimumSizeHint().height()));
+  }
+  else if (m_heightWithGraph > 0 && height() < m_heightWithGraph)
+    resize(width(), m_heightWithGraph);
 }
 
 // "QtDMM: UNI-T UT61E", with the instance id for non-default instances
@@ -305,6 +322,8 @@ void MainWin::stopSLOT()
 void MainWin::runningSLOT(bool on)
 {
   m_running = on;
+  if (on)
+    action_Graph->setChecked(true);   // a recording wants to be seen
 
   action_Start->setEnabled(!on);
   action_Stop->setEnabled(on);
