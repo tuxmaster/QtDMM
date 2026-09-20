@@ -34,18 +34,34 @@
 
 class Settings;
 
+/// The recorder: samples the reading, keeps the recorded curve and plots it.
+///
+/// MainWid calls addValue() ten times a second with the current reading;
+/// while recording the values are averaged over the sample time and stored
+/// in a ring of @c m_length samples, of which a window of @c m_size is shown
+/// (scrollable). Recording starts manually, at a clock time or when the
+/// reading crosses a threshold (SampleMode), and can trigger the external
+/// application the same way (setExternal()). An integration curve (running
+/// sum above a threshold) is kept alongside. Rendering uses Qt Charts; the
+/// cursor and threshold lines are QGraphicsLineItems on top of the chart.
+/// Data can be exported/imported as CSV and printed.
+///
+/// Times are in tenths of a second internally: a sample time of 5 means
+/// one stored sample per 0.5 s.
 class DMMGraph : public QWidget
 {
   Q_OBJECT
 public:
+  /// How recording is started.
   enum SampleMode
   {
-    Manual = 0,
-    Time,
-    Raising,
-    Falling
+    Manual = 0,   ///< Start button
+    Time,         ///< at setStartTime()
+    Raising,      ///< when the reading rises through the raising threshold
+    Falling       ///< when the reading falls through the falling threshold
   };
 
+  /// Marker drawn at each sample.
   enum PointMode
   {
     NoPoint = 0,
@@ -59,6 +75,7 @@ public:
     LargeX
   };
 
+  /// Line style between samples.
   enum LineMode
   {
     NoLine = 0,
@@ -66,14 +83,16 @@ public:
     Dot
   };
 
+  /// Which horizontal threshold line the mouse is dragging.
   enum CursorMode
   {
     NoCursor = 0,
-    Trigger,
-    External,
-    Integration
+    Trigger,      ///< recording start threshold
+    External,     ///< external application threshold
+    Integration   ///< integration threshold
   };
 
+  /// Entries of the context menu.
   enum PopupID
   {
     IDConnect = 1,
@@ -89,54 +108,84 @@ public:
   DMMGraph(QWidget *parent, Settings *settings);
   DMMGraph(QWidget *parent = Q_NULLPTR);
   ~DMMGraph();
+  /// Visible window and total recording length, both in seconds.
   void             setGraphSize(int size, int length);
+  /// The current reading; called every 100 ms. Handles the start triggers
+  /// and, while recording, averaging and storing.
   void             addValue(double);
+  /// Unit of the recorded quantity for the axis label; the SI prefix is
+  /// stripped because values arrive in base units (see DmmDecoder::DmmResponse).
   void             setUnit(const QString &);
+  /// Sample time in tenths of a second.
   void             setSampleTime(int v) { m_sampleTime = v; }
+  /// Recording duration in tenths of a second after which recording stops
+  /// on its own (0 = until stopped).
   void             setSampleLength(int v) { m_sampleLength = v; }
+  /// Clock time for SampleMode::Time.
   void             setStartTime(const QTime &time) { m_startTime = time; }
   void             setMode(DMMGraph::SampleMode mode);
+  /// Prints the curve with title and comment.
   void             print(QPrinter *prt, const QString &, const QString &);
+  /// Thresholds for the Raising/Falling start modes.
   void             setThresholds(double falling, double raising);
+  /// Y axis: automatic (optionally always including zero) or fixed min/max.
   void             setScale(bool autoScale, bool includeZero, double min, double max);
   void             setColors(const QColor &bg, const QColor &grid,
                              const QColor &data, const QColor &cursor,
                              const QColor &start, const QColor &external,
                              const QColor &integration, const QColor &intThreshold);
+  /// Line widths of the data and the integration curve.
   void             setLine(int d, int i);
+  /// External application trigger: fire externalTriggered() once per
+  /// recording when the reading crosses @p threshold in the given direction.
   void             setExternal(bool on, bool falling = false, double threshold = 0);
+  /// Unsaved recorded data in memory.
   bool             dirty() const { return m_dirty; }
   void             setAlertUnsaved(bool on) { m_alertUnsaved = on; }
   void             setCrosshair(bool on) { m_crosshair = on; }
+  /// LineMode and PointMode for the data and the integration curve.
   void             setLineStyle(int, int, int, int);
+  /// Integration curve: shown, scale factor, threshold (values at or below
+  /// it reset the sum) and offset.
   void             setIntegration(bool, double, double, double);
   void             setSettings(Settings *settings) { m_cfg = settings; }
 
 Q_SIGNALS:
+  /// Status bar text: sample time, window and remaining length.
   void             info(const QString &);
   void             error(const QString &);
+  /// Recording started/stopped.
   void             running(bool);
+  /// Window/total size changed by zooming (seconds).
   void             graphSize(int, int);
+  /// Sample time changed by a CSV import (tenths of a second).
   void             sampleTime(int);
+  /// The external application threshold was crossed.
   void             externalTriggered();
   void             zoomIn(double);
   void             zoomOut(double);
+  /// A threshold line was dragged with the mouse.
   void             thresholdChanged(DMMGraph::CursorMode, double);
+  /// @name Context menu requests, handled by MainWid
+  /// @{
   void             connectDMM(bool);
   void             configure();
   void             exportData();
   void             importData();
+  /// @}
 
 public Q_SLOTS:
+  /// Discards the recorded data.
   void             clearSLOT();
   void             startSLOT();
   void             stopSLOT();
+  /// Export with a file dialog; returns false when cancelled or failed.
   bool             exportDataSLOT();
   void             importDataSLOT();
   void             connectSLOT(bool on) { m_connected = on; }
 
-  // File-path-driven, non-interactive halves of export/importDataSLOT (no QFileDialog),
-  // split out so the CSV parsing/writing logic can be exercised from tests.
+  /// File-path-driven, non-interactive halves of export/importDataSLOT (no QFileDialog),
+  /// split out so the CSV parsing/writing logic can be exercised from tests.
   bool             exportCsvFile(const QString &fileName);
   bool             importCsvFile(const QString &fileName);
 

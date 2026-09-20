@@ -4,18 +4,27 @@
 #include <QProcess>
 #include "dmmdecoder.h"
 
+/// Uses sigrok-cli as the data source for meters QtDMM has no decoder for.
+///
+/// sigrok-cli is started as a child process with the driver named in
+/// DMMInfo::sigrokExe and its text output is reformatted into fixed-length
+/// lines the ASCII decoder understands (see src/decoders/ascii.h).
 class SigrokDevice : public QIODevice
 {
   Q_OBJECT
 public:
+  /// @param device passed to sigrok-cli as --driver, e.g. "uni-t-ut61e-ser:conn=/dev/ttyUSB0"
   explicit SigrokDevice(const DmmDecoder::DMMInfo &info,
                         QString device,
                         QObject *parent = nullptr);
   ~SigrokDevice();
 
+  /// No scan implemented; adds nothing and returns false.
   static bool availablePorts(QStringList &portlist);
 
   void close() override;
+  /// Starts sigrok-cli (DMMInfo::sigrokExe, or "sigrok-cli" from the PATH)
+  /// with --continuous and opens this device for reading.
   bool init();
 
   qint64 bytesAvailable() const override;

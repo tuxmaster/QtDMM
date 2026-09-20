@@ -24,10 +24,14 @@
 
 class QPainter;
 
-// The instrument housing shared by the analog meter and the digital
-// display: a rounded metal bezel with a recessed face, lit from a point.
+/// @file
+/// The bezel and face shared by MeterWid and DisplayWid.
+
+/// The instrument housing shared by the analog meter and the digital
+/// display: a rounded metal bezel with a recessed face, lit from a point.
 namespace PanelFrame
 {
+  /// Colours of the housing; MeterStyle and DisplayWid provide them.
   struct Colors
   {
     QColor bezelLight;
@@ -36,18 +40,18 @@ namespace PanelFrame
     QColor faceGlow;    // radial highlight on the face; transparent = none
   };
 
-  // Largest rect inside `available` whose aspect ratio (w/h) lies within
-  // [minAspect, maxAspect], centred. Keeps an instrument from being
-  // stretched into a strip when its dock is resized far beyond its shape;
-  // the rest of the widget shows the window background.
+  /// Largest rect inside `available` whose aspect ratio (w/h) lies within
+  /// [minAspect, maxAspect], centred. Keeps an instrument from being
+  /// stretched into a strip when its dock is resized far beyond its shape;
+  /// the rest of the widget shows the window background.
   QRectF panelRect(const QRectF &available, double minAspect, double maxAspect);
 
-  // Face rect for a bezel rect (the inset the frame uses).
+  /// Face rect for a bezel rect (the inset the frame uses).
   QRectF faceRect(const QRectF &bezel);
 
-  // Paints bezel and face. glowCenter is where the face is lit from.
+  /// Paints bezel and face. glowCenter is where the face is lit from.
   void paint(QPainter &p, const QRectF &bezel, const Colors &c, const QPointF &glowCenter, double glowRadius);
 
-  // Clip path of the face (rounded), for drawing that must stay inside.
+  /// Clip path of the face (rounded), for drawing that must stay inside.
   void clipToFace(QPainter &p, const QRectF &face);
 }

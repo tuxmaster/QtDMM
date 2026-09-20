@@ -4,12 +4,15 @@
 #include "ui_uiinstancesdlg.h"
 #include "settings.h"
 
+/// Dialog listing the configured instance ids, which of them are running,
+/// and buttons to start, raise, add or remove instances.
 class InstancesDlg : public QDialog, private Ui::UIInstancesDlg
 {
   Q_OBJECT
 public:
   InstancesDlg(Settings *settings, QString instance_id, QString config_path, QWidget *parent = Q_NULLPTR);
 
+  /// The ids currently registered in the shared state (SharedStateManager).
   void setInstancesOnline(QStringList instances);
   void updateInstancesListBox();
 
@@ -28,5 +31,6 @@ protected Q_SLOTS:
 
 Q_SIGNALS:
   void raiseApplicationWindow(const QString &);
+  /// A state string for SharedStateManager::writeState().
   void writeState(const QString &);
 };

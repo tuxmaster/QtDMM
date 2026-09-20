@@ -16,7 +16,23 @@ Documentation for people working on QtDMM itself. Planned pages:
   the enum), and the protocol specification and test vectors under
   `docs/protocols/spec/`.
 
-None of these pages exist yet.
+None of these pages exist yet. The architecture is documented in the code
+itself, see below.
+
+## API documentation
+
+The headers under `src/` carry Doxygen comments; the class descriptions of
+`DMM`, `PortHandler`, `ReaderThread`, `DmmDecoder`, `MainWid`, `DMMGraph`
+and `SharedStateManager` together describe the architecture. Generate the
+HTML with
+
+```
+cmake --build build --target doxygen
+```
+
+or plain `doxygen` in the repository root (the `Doxyfile` is checked in) and
+open `build/doxygen/html/index.html`. Doxygen is optional: without it the
+target simply does not exist.
 
 ## Translations
 

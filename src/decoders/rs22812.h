@@ -4,6 +4,8 @@
 
 #include "dmmdecoder.h"
 
+/// RadioShack 22-812: 9 bytes, seven-segment encoded digits, last byte is a
+/// checksum (sum of the first eight plus 57).
 class DecoderRS22812 : public DmmDecoder
 {
   Q_OBJECT

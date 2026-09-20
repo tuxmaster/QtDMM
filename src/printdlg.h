@@ -29,6 +29,8 @@
 class QPrinter;
 namespace qtdmm
 {
+  /// Asks for a title and a comment to print with the graph and lets the
+  /// user configure the printer.
   class PrintDlg : public QDialog, private Ui::UIPrintDlg
   {
     Q_OBJECT

@@ -25,13 +25,16 @@
 #include <QtCore>
 #include <QtGui>
 
+/// Validator for line edits taking numbers with an SI prefix ("1.5k", "22u").
 class EngNumberValidator : public QValidator
 {
 public:
   EngNumberValidator(QObject *parent = Q_NULLPTR);
   QValidator::State	validate(QString &, int &) const Q_DECL_OVERRIDE;
 
+  /// "1.5k" -> 1500.0
   static double   value(const QString &);
+  /// 1500.0 -> "1.5k"
   static QString  engValue(double);
 
 };

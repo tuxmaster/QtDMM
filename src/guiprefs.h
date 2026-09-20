@@ -25,6 +25,9 @@
 #include <QtGui>
 #include "ui_uiguiprefs.h"
 
+/// Settings page "Appearance": window and toolbar options, the LCD display
+/// (colour, bar graph, min/max) and the analog meter (scale mode, style,
+/// ballistics, red zone), tips at start-up.
 class GuiPrefs : public PrefWidget, private Ui::UIGuiPrefs
 {
   Q_OBJECT
@@ -45,10 +48,10 @@ public:
   bool      showFileToolbar() const;
   bool      showDisplay() const;
   void      setToolbarVisibility(bool, bool, bool, bool);
-  int       meterScaleMode() const;     // 0 auto, 1 unipolar, 2 bipolar
-  int       meterStyle() const;         // 0 dark, 1 ivory
+  int       meterScaleMode() const;   ///< 0 auto, 1 unipolar, 2 bipolar
+  int       meterStyle() const;   ///< 0 dark, 1 ivory
   bool      meterBallistics() const;
-  int       meterRedZone() const;       // percent of full scale
+  int       meterRedZone() const;   ///< percent of full scale
 
 Q_SIGNALS:
   void      showTips(bool);

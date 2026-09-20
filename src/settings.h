@@ -20,22 +20,40 @@
 #include <QtCore>
 #include <QColor>
 
+/// Typed access to the QSettings file, with writes staged until save().
+///
+/// Keys are "Group/name" strings as used throughout the preference pages.
+/// set*() writes go to a staging hash first so the settings dialog's Cancel
+/// can drop them (clear()); save() commits them. Reads always come from the
+/// stored file, so a staged value is not visible to get*() until saved.
+///
+/// The file is QSettings' native one (~/.config/QtDMM/QtDMM.conf on Unix,
+/// %APPDATA%\QtDMM\QtDMM.ini on Windows). With an instance id or config
+/// directory (--config-id, --config-dir) a separate ini file
+/// "QtDMM_<id>.<suffix>" in that directory is used instead.
 class Settings : public QObject
 {
   Q_OBJECT
 public:
   explicit       Settings(QObject *parent = Q_NULLPTR);
+  /// Settings of one instance; see the class description for the file used.
   explicit       Settings(const QString &instance_id, const QString &config_path, QObject *parent = Q_NULLPTR);
   ~Settings();
 
+  /// False on the very first start (no settings file yet).
   const bool    &fileExists() const { return m_fileExists; }
+  /// Set when an old-format file was migrated; pages then reset a few keys.
   const bool    &fileConverted() const { return m_fileConverted; }
   const QString &fileName() const { return m_filename; }
 
+  /// Removes the settings file of another instance.
   void           deleteConfig(QString instance_id);
 
+  /// Ids of all instances that have a settings file next to this one.
   QStringList    getConfigInstances();
+  /// Commits staged writes to the file.
   void           save();
+  /// Drops staged writes.
   void           clear();
 
   int            getInt(const QString &name, const int &def = 0) const;

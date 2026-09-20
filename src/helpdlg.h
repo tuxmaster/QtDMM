@@ -6,20 +6,21 @@
 class Settings;
 
 
-// The handbook: renders the Markdown pages from docs/user/, embedded as
-// resources under :/Help/, in a QTextBrowser. The same files feed the MkDocs
-// site, so there is one source for both.
+/// The handbook: renders the Markdown pages from docs/user/, embedded as
+/// resources under :/Help/, in a QTextBrowser. The same files feed the MkDocs
+/// site, so there is one source for both.
 class HelpDlg : public QDialog, private Ui::UIHelpDlg
 {
   Q_OBJECT
 public:
   explicit HelpDlg(Settings *settings, QWidget *parent = Q_NULLPTR);
 
-  // Shows a page by its path below :/Help/, e.g. "recorder.md".
+  /// Shows a page by its path below :/Help/, e.g. "recorder.md".
   void showPage(const QString &page);
 
-  // Pages listed in the table of contents, as derived from index.md.
+  /// Pages listed in the table of contents, as derived from index.md.
   QStringList contentPages() const { return m_contentPages; }
+  /// Path of the page shown, e.g. "recorder.md".
   QString currentPage() const;
 
 protected:

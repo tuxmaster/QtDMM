@@ -27,6 +27,7 @@
 
 class QPainter;
 
+/// A push button showing a colour swatch; clicking it opens QColorDialog.
 class ColorButton : public QPushButton
 {
   Q_OBJECT
@@ -38,6 +39,7 @@ public:
   void		setColor(const QColor &);
 
 Q_SIGNALS:
+  /// The user picked a new colour.
   void		valueChanged();
   void		valueChanged(const QColor &);
 

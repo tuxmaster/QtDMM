@@ -26,6 +26,8 @@
 
 #include "ui_uiexecuteprefs.h"
 
+/// Settings page "External application": the command to run when the
+/// reading crosses a threshold while recording.
 class ExecutePrefs : public PrefWidget, private Ui::UIExecutePrefs
 {
   Q_OBJECT
@@ -37,6 +39,7 @@ public:
   double        externalThreshold() const;
   bool          disconnectExternal() const;
   QString       externalCommand() const;
+  /// Follows the external threshold line dragged in the graph.
   void          setThreshold(double);
 
 public Q_SLOTS:

@@ -29,6 +29,10 @@
 #include "readevent.h"
 #include "dmmdecoder.h"
 
+/// Settings page "Multimeter": vendor/model choice (from the registered
+/// DmmDecoder::DMMInfo entries), port and the serial parameters, which
+/// become editable in manual mode. Descriptions can be saved to and loaded
+/// from .cfg files.
 class DmmPrefs : public PrefWidget, private Ui::UIDmmPrefs
 {
   Q_OBJECT
@@ -36,6 +40,7 @@ public:
   DmmPrefs(QWidget *parent = Q_NULLPTR);
   ~DmmPrefs();
 
+  /// The DMMInfo of the chosen model, or the manual settings.
   DmmDecoder::DMMInfo dmmInfo() { return m_dmmInfo; };
   QSerialPort::Parity parity() const;
   QSerialPort::DataBits bits() const;
@@ -46,8 +51,10 @@ public:
   bool           rts() const;
   bool           dtr() const;
   ReadEvent::DataFormat format() const;
+  /// Display counts (4000, 6000, ...).
   int            display() const;
   QString        dmmName() const;
+  /// The port entry as typed or chosen, e.g. "/dev/ttyUSB0" or "HID 0x1a86:0xe008 ...".
   QString        device() const;
 
 public Q_SLOTS:
@@ -58,7 +65,9 @@ public Q_SLOTS:
 protected Q_SLOTS:
   void           on_ui_vendor_activated(int);
   void           on_ui_model_activated(int);
+  /// Load a DMM description (.cfg).
   void           on_ui_load_clicked();
+  /// Save the current settings as a DMM description (.cfg).
   void           on_ui_save_clicked();
   void           on_ui_externalSetup_toggled();
 

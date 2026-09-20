@@ -2,6 +2,9 @@
 
 #include "dmmdecoder.h"
 
+/// Cyrustek ES51986 chip (Uni-Trend UT803, Iso-Tech IDM 73, Tenma 72-1016):
+/// 11 bytes, sent twice per measurement, only the second copy is decoded.
+/// Spec in docs/protocols/spec/cyrustek_es51986.yaml.
 class DecoderCyrusTekES51986 : public DmmDecoder
 {
   Q_OBJECT

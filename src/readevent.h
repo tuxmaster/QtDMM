@@ -23,13 +23,20 @@
 #pragma once
 
 #include <QtCore>
-// moved from readerthread, so this is accessibly in dmmdriver.
-// should be solved in another way ...
+/// Size of the byte ring buffer ReaderThread collects frames in. Lives here
+/// (not in readerthread.h) because DmmDecoder needs it too.
 #define FIFO_LENGTH 100
 
+/// Names the wire protocols QtDMM can decode.
+///
+/// The enum is the key that ties a DmmDecoder::DMMInfo entry, the decoder
+/// class registered for it (DmmDecoder::getInstance) and the settings file
+/// together. Values are persisted by name (toString/fromString), never by
+/// number, so reordering is harmless as long as EndOfList stays last.
 class ReadEvent
 {
 public:
+  /// One entry per decoder; see docs/protocols for the frame formats.
   enum DataFormat
   {
     Invalid = -1,
@@ -52,6 +59,7 @@ public:
     EndOfList              // new stuff always before!
   };
 
+  /// Name of a format as used in the settings file and in DMMInfo::protocol.
   static QString toString(DataFormat format)
   {
     const auto it = formatToStringMap().find(format);
@@ -60,6 +68,7 @@ public:
     return "Invalid";
   }
 
+  /// Inverse of toString(); unknown names give Invalid.
   static DataFormat fromString(const QString& str)
   {
     for (auto it = formatToStringMap().cbegin(); it != formatToStringMap().cend(); ++it)
