@@ -3,6 +3,7 @@
 #include "portdevices/hidserial.h"
 #include "portdevices/rfc2217serial.h"
 #include "portdevices/sigrok.h"
+#include "portdevices/calc.h"
 
 #include <QSerialPortInfo>
 
@@ -16,6 +17,7 @@ bool PortHandler::create(const DmmDecoder::DMMInfo spec, PortType t, QString dev
     case PortType::Hid:    m_port = new HIDSerialDevice(spec, device);   break;
     case PortType::Sigrok: m_port = new SigrokDevice(spec,device);       break;
     case PortType::RFC2217:m_port = new RFC2217SerialDevice(spec,device);break;
+    case PortType::Calc:   m_port = new CalcDevice(spec, device, m_state); break;
     default: return false;
   }
 
@@ -52,6 +54,7 @@ PortHandler::PortType PortHandler::str2portType(const QString str)
   if (str.toLower() == "hid")     return PortType::Hid;
   if (str.toLower() == "sigrok")  return PortType::Sigrok;
   if (str.toLower() == "rfc2217") return PortType::RFC2217;
+  if (str.toLower() == "calc")    return PortType::Calc;
 
   return PortType::None;
 }

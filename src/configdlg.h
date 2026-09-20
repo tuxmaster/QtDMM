@@ -30,6 +30,7 @@
 #include "dmmdecoder.h"
 
 class Settings;
+class SharedStateManager;
 class QPrinter;
 class RecorderPrefs;
 class ScalePrefs;
@@ -166,6 +167,8 @@ public:
   void                  readPrinter(QPrinter *);
   /// Raises the dialog on the given page.
   void                  showPage(PageType);
+  /// Instance coordinator for the multimeter page's formula hint.
+  void                  setStateManager(SharedStateManager *);
 
 
 public Q_SLOTS:

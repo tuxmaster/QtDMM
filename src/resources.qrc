@@ -36,6 +36,7 @@
     </qresource>
     <qresource prefix="/Help">
         <file alias="analog-meter.md">../docs/user/analog-meter.md</file>
+        <file alias="calculated-values.md">../docs/user/calculated-values.md</file>
         <file alias="command-line.md">../docs/user/command-line.md</file>
         <file alias="connecting.md">../docs/user/connecting.md</file>
         <file alias="index.md">../docs/user/index.md</file>

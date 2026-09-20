@@ -30,6 +30,8 @@
 #include "dmmdecoder.h"
 #include "porthandler.h"
 
+class SharedStateManager;
+
 /// The connection to one multimeter: port, frame reader and decoder.
 ///
 /// MainWid configures it from the settings (setDevice(), setFormat(),
@@ -73,6 +75,8 @@ public:
   void    setNumValues(int);
   /// --debug: dump every frame as hex to stdout.
   void    setConsoleLogging(bool on) { m_consoleLogging = on; }
+  /// Instance coordinator, the input of a calculated value (PortType::Calc).
+  void    setStateManager(SharedStateManager *state);
 
 Q_SIGNALS:
   /// One decoded reading; the parameters mirror DmmDecoder::DmmResponse.
@@ -88,6 +92,8 @@ protected:
   /// Platform-specific advice when the port cannot be opened for lack of
   /// permission (the dialout/dialer group on Unix).
   QString               permissionHint() const;
+  /// Status bar text while readings arrive.
+  QString               connectedMessage() const;
   PortHandler          *m_portHandler;
   int                   m_speed;
   QSerialPort::Parity   m_parity;

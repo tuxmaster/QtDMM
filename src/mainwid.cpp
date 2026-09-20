@@ -274,6 +274,8 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
 void MainWid::setStateManager(SharedStateManager *mgr)
 {
   m_stateMgr = mgr;
+  m_dmm->setStateManager(mgr);
+  m_configDlg->setStateManager(mgr);
 }
 
 // The analog meter works in the unit the multimeter displays (with prefix),

@@ -14,6 +14,8 @@ thresholds, an integration curve, CSV export and printing.
   zoom, pan and cursor; integration; CSV export and import.
 - [Supported devices](supported-devices.md) — every meter QtDMM knows, with
   protocol and serial settings.
+- [Calculated values](calculated-values.md) — power from a voltage and a
+  current instance: formulas over the readings of other instances.
 - [Command line](command-line.md) — options, multiple instances, debug output.
 - [Keyboard and mouse](keyboard.md) — shortcuts in the main window and the
   graph.

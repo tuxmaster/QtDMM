@@ -11,6 +11,7 @@ nav:
       - Analog meter: user/analog-meter.md
       - The recorder: user/recorder.md
       - Supported devices: user/supported-devices.md
+      - Calculated values: user/calculated-values.md
       - Command line: user/command-line.md
       - Keyboard and mouse: user/keyboard.md
       - Troubleshooting: user/troubleshooting.md

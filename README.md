@@ -18,6 +18,8 @@ software and continues to work on current **Linux** and **macOS** systems
   - Scheduled start at a specific time
   - Automatic start triggered when defined thresholds are reached
 - Analog meter display with auto-ranging scale, dockable or as its own window
+- Several meters at once, one window each, recording in sync
+- Calculated values across meters (power from voltage and current, ...)
 - various connection backends
   - RS232 Serial (USB-Serial and native UART)
   - USB HID-serial support (HOITEK HE2325U & compatible)
@@ -172,7 +174,9 @@ further instances from **Instances** (Ctrl+N): *Add* asks for a name and
 launches a new QtDMM with that id; the list shows which instances are
 configured and which are running, and lets you open or remove them. Running
 instances know about each other through shared memory — the same mechanism
-that stops two windows from using the `default` id at once.
+that stops two windows from using the `default` id at once. An instance can
+also compute its value from the others' readings, see
+[Calculated values](docs/user/calculated-values.md).
 
 ### Debug output
 

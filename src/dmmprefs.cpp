@@ -28,6 +28,9 @@
 #include <vector>
 
 #include "dmmprefs.h"
+#include "calcexpr.h"
+#include "sharedstatemanager.h"
+#include "siprefix.h"
 #include "settings.h"
 #include "decoders.h"
 #include "porthandler.h"
@@ -48,6 +51,10 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
   setupComboBoxModel();
 
   message2->hide();
+  ui_calcGroup->hide();
+  connect(ui_calcExpression, &QLineEdit::textChanged, this, &DmmPrefs::updateCalcHint);
+  m_calcHintTimer.setInterval(1000);   // live values of the input instances
+  connect(&m_calcHintTimer, &QTimer::timeout, this, &DmmPrefs::updateCalcHint);
 
   m_path = QDir::currentPath();
 }
@@ -207,6 +214,8 @@ void DmmPrefs::defaultsSLOT()
   m_portlist->setStringList(list);
 
   port->setCurrentText        (m_cfg->getString("Port settings/device"));
+  ui_calcUnit->setText        (m_cfg->getString("DMM/calc-unit", "W"));
+  ui_calcExpression->setText  (m_cfg->getString("DMM/calc-expression"));
   baudRate->setCurrentText    (m_cfg->getString("Port settings/baud"));
   bitsCombo->setCurrentText   (m_cfg->getString("Port settings/bits", "7"));
   stopBitsCombo->setCurrentText(m_cfg->getString("Port settings/stop-bits", "1"));
@@ -270,6 +279,8 @@ void DmmPrefs::factoryDefaultsSLOT()
 void DmmPrefs::applySLOT()
 {
   m_cfg->setString("Port settings/device", port->currentText());
+  m_cfg->setString("DMM/calc-unit", ui_calcUnit->text().trimmed());
+  m_cfg->setString("DMM/calc-expression", ui_calcExpression->text().trimmed());
   m_cfg->setString("Port settings/baud", baudRate->currentText());
   m_cfg->setString("Port settings/bits", bitsCombo->currentText());
   m_cfg->setString("Port settings/stop-bits", stopBitsCombo->currentText());
@@ -299,6 +310,77 @@ void DmmPrefs::on_ui_externalSetup_toggled()
     stopBitsCombo->setDisabled(ui_externalSetup->isChecked());
     parityCombo->setDisabled(ui_externalSetup->isChecked());
   }
+}
+
+bool DmmPrefs::isCalculated() const
+{
+  return ui_vendor->currentIndex() != 0 && m_dmmInfo.vendor == "QtDMM";
+}
+
+void DmmPrefs::setStateManager(SharedStateManager *state)
+{
+  m_state = state;
+}
+
+// A calculated value has no port and no protocol to set up; the formula
+// group takes their place. The port field then carries "calc <unit> <formula>"
+// (see device()), so DMM and PortHandler need no special settings keys.
+void DmmPrefs::updateCalcMode()
+{
+  const bool calc = isCalculated();
+  ButtonGroup11->setVisible(!calc);
+  ui_protocol->setVisible(!calc);
+  ui_calcGroup->setVisible(calc);
+  if (calc)
+  {
+    updateCalcHint();
+    m_calcHintTimer.start();
+  }
+  else
+    m_calcHintTimer.stop();
+}
+
+void DmmPrefs::updateCalcHint()
+{
+  QString error;
+  int pos = -1;
+  const auto expr = CalcExpr::parse(ui_calcExpression->text(), &error, &pos);
+  QStringList lines;
+
+  if (!expr)
+  {
+    if (!ui_calcExpression->text().trimmed().isEmpty())
+      lines << QString("<span style=\"color:#b00\">%1</span>").arg(tr("Position %1: %2").arg(pos + 1).arg(error.toHtmlEscaped()));
+  }
+  else if (m_state)
+  {
+    const auto readings = m_state->readings();
+    for (const QString &var : expr->variables())
+    {
+      QString id = var;
+      for (auto it = readings.constBegin(); it != readings.constEnd(); ++it)
+        if (it.key() == var || QString(it.key()).replace('-', '_') == var)
+          id = it.key();
+      if (readings.contains(id) && readings[id].valid)
+        lines << QString("%1 = %2 %3").arg(var.toHtmlEscaped(), SiPrefix::format(readings[id].value), readings[id].unit.toHtmlEscaped());
+      else if (readings.contains(id))
+        lines << QString("%1 = OL").arg(var.toHtmlEscaped());
+      else
+        lines << QString("<span style=\"color:#b00\">%1</span>").arg(tr("%1: no such instance running").arg(var.toHtmlEscaped()));
+    }
+  }
+
+  QStringList others;
+  if (m_state)
+    for (const QString &id : m_state->instances())
+      if (id != m_state->id())
+        others << id;
+  if (!others.isEmpty())
+    lines << tr("Running instances: %1").arg(others.join(", ").toHtmlEscaped());
+  else
+    lines << tr("No other instance is running.");
+
+  ui_calcHint->setText(lines.join("<br>"));
 }
 
 void DmmPrefs::enterManualMode()
@@ -337,6 +419,8 @@ void DmmPrefs::enterManualMode()
   m_dmmInfo.externalSetup = ui_externalSetup->isChecked();
   m_dmmInfo.rts = uirts->isChecked();
   m_dmmInfo.dtr = uidtr->isChecked();
+
+  updateCalcMode();
 }
 
 void DmmPrefs::on_ui_model_activated(int id)
@@ -384,6 +468,7 @@ void DmmPrefs::on_ui_model_activated(int id)
   uidtr->setChecked(m_currentVendorModels[id].dtr);
 
   ui_filename->setText("");
+  updateCalcMode();
 }
 
 bool DmmPrefs::rts() const
@@ -460,6 +545,8 @@ QString DmmPrefs::dmmName() const
 
 QString DmmPrefs::device() const
 {
+  if (isCalculated())
+    return QString("calc %1 %2").arg(ui_calcUnit->text().trimmed(), ui_calcExpression->text().trimmed());
   return port->currentText();
 }
 

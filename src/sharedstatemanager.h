@@ -50,6 +50,8 @@ public:
   void checkForChanges();
   /// Ids of the instances seen at the last poll.
   QStringList instances() { return m_instances; };
+  /// This instance's id.
+  QString id() const { return m_instanceId; }
   /// Readings of all instances (including this one) as of the last poll,
   /// keyed by instance id. Instances that have not published yet are absent.
   QMap<QString, Reading> readings() const { return m_readings; }

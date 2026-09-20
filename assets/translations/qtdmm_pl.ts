@@ -2,6 +2,90 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pl_PL">
 <context>
+    <name>CalcDevice</name>
+    <message>
+        <location filename="../../src/portdevices/calc.cpp" line="43"/>
+        <source>No unit given for the calculated value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/portdevices/calc.cpp" line="51"/>
+        <source>Formula error at position %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/portdevices/calc.cpp" line="56"/>
+        <source>No instance data available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/portdevices/calc.cpp" line="123"/>
+        <source>Waiting for instance &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/portdevices/calc.cpp" line="125"/>
+        <source>No current value from instance &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/portdevices/calc.cpp" line="127"/>
+        <source>Instance &apos;%1&apos; shows no numeric value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/portdevices/calc.cpp" line="129"/>
+        <source>Formula has no result (division by zero?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CalcExpr</name>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="105"/>
+        <source>Unexpected end of expression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="113"/>
+        <location filename="../../src/calcexpr.cpp" line="200"/>
+        <source>Missing &apos;)&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="120"/>
+        <location filename="../../src/calcexpr.cpp" line="218"/>
+        <source>Unexpected &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="145"/>
+        <source>Bad number &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="153"/>
+        <location filename="../../src/calcexpr.cpp" line="155"/>
+        <source>Unknown unit prefix &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="189"/>
+        <source>Unknown function &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="196"/>
+        <source>&apos;%1&apos; needs two arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="212"/>
+        <source>Empty expression</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigDlg</name>
     <message>
         <location filename="../../src/configdlg.cpp" line="53"/>
@@ -37,71 +121,76 @@ Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old.</source>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="170"/>
+        <location filename="../../src/dmm.cpp" line="181"/>
         <source>Error creating port %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="181"/>
+        <location filename="../../src/dmm.cpp" line="200"/>
         <source>Missing Permission</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="184"/>
+        <location filename="../../src/dmm.cpp" line="203"/>
         <source>No such device %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="187"/>
+        <location filename="../../src/dmm.cpp" line="206"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="199"/>
+        <location filename="../../src/dmm.cpp" line="218"/>
         <source>Error configuring serial port %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="205"/>
+        <location filename="../../src/dmm.cpp" line="224"/>
         <source>Connecting ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="222"/>
+        <location filename="../../src/dmm.cpp" line="247"/>
+        <source>Calculating %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="258"/>
         <source>Access denied for %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="234"/>
-        <location filename="../../src/dmm.cpp" line="297"/>
+        <location filename="../../src/dmm.cpp" line="270"/>
+        <location filename="../../src/dmm.cpp" line="333"/>
         <source>Not connected</source>
         <translation>Niepołączony</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="276"/>
+        <location filename="../../src/dmm.cpp" line="248"/>
         <source>Connected %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="279"/>
+        <location filename="../../src/dmm.cpp" line="315"/>
         <source>Error %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="284"/>
+        <location filename="../../src/dmm.cpp" line="320"/>
         <source>Read error on device %1.
 DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="291"/>
+        <location filename="../../src/dmm.cpp" line="327"/>
         <source>The USB cable answers, but the meter sends nothing.
 Switch on the meter&apos;s serial output (on UNI-T meters: hold the RS232/USB button).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="294"/>
+        <location filename="../../src/dmm.cpp" line="330"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
@@ -299,38 +388,58 @@ DMM connected and switched on?</source>
 <context>
     <name>DmmPrefs</name>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="42"/>
+        <location filename="../../src/dmmprefs.cpp" line="45"/>
         <source>Multimeter</source>
         <translation>Multimetr</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="43"/>
+        <location filename="../../src/dmmprefs.cpp" line="46"/>
         <source>&lt;b&gt;Here you can configure the serial port and protocol for your DMM. There is also a number of predefined models.&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="64"/>
+        <location filename="../../src/dmmprefs.cpp" line="71"/>
         <source>Manual settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="65"/>
+        <location filename="../../src/dmmprefs.cpp" line="72"/>
         <source>All vendors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="468"/>
+        <location filename="../../src/dmmprefs.cpp" line="353"/>
+        <source>Position %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="369"/>
+        <source>%1: no such instance running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="379"/>
+        <source>Running instances: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="381"/>
+        <source>No other instance is running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="555"/>
         <source>Load DMM description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="468"/>
-        <location filename="../../src/dmmprefs.cpp" line="494"/>
+        <location filename="../../src/dmmprefs.cpp" line="555"/>
+        <location filename="../../src/dmmprefs.cpp" line="581"/>
         <source>DMM description (*.cfg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="494"/>
+        <location filename="../../src/dmmprefs.cpp" line="581"/>
         <source>Save DMM description</source>
         <translation type="unfinished"></translation>
     </message>
@@ -385,17 +494,22 @@ DMM connected and switched on?</source>
 <context>
     <name>InstancesDlg</name>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="98"/>
+        <location filename="../../src/instancesdlg.cpp" line="99"/>
         <source>QtDMM - new instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="98"/>
+        <location filename="../../src/instancesdlg.cpp" line="99"/>
         <source>Instance name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="104"/>
+        <location filename="../../src/instancesdlg.cpp" line="109"/>
+        <source>Instance names may contain letters, digits and underscores and must not start with a digit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="115"/>
         <source>Instance already exists.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -416,78 +530,78 @@ DMM connected and switched on?</source>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="134"/>
+        <location filename="../../src/mainwid.cpp" line="136"/>
         <source>QtDMM: Unsaved data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="135"/>
+        <location filename="../../src/mainwid.cpp" line="137"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="150"/>
+        <location filename="../../src/mainwid.cpp" line="152"/>
         <source>Export data first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="154"/>
+        <location filename="../../src/mainwid.cpp" line="156"/>
         <source>Quit without saving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="495"/>
+        <location filename="../../src/mainwid.cpp" line="518"/>
         <source>Automatic start at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="497"/>
+        <location filename="../../src/mainwid.cpp" line="520"/>
         <source>Raising threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="499"/>
+        <location filename="../../src/mainwid.cpp" line="522"/>
         <source>Falling threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="520"/>
-        <location filename="../../src/mainwid.cpp" line="561"/>
+        <location filename="../../src/mainwid.cpp" line="543"/>
+        <location filename="../../src/mainwid.cpp" line="584"/>
         <source>QtDMM: Launch error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="521"/>
+        <location filename="../../src/mainwid.cpp" line="544"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="533"/>
+        <location filename="../../src/mainwid.cpp" line="556"/>
         <source>Yes, kill it!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="537"/>
+        <location filename="../../src/mainwid.cpp" line="560"/>
         <source>No, keep running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="562"/>
+        <location filename="../../src/mainwid.cpp" line="585"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="573"/>
+        <location filename="../../src/mainwid.cpp" line="596"/>
         <source>Bummer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="579"/>
+        <location filename="../../src/mainwid.cpp" line="602"/>
         <source>Launched %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="584"/>
+        <location filename="../../src/mainwid.cpp" line="607"/>
         <source>%1 terminated with exit code %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -515,63 +629,63 @@ DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="94"/>
+        <location filename="../../src/mainwin.cpp" line="95"/>
         <source>Analog &amp;meter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="96"/>
+        <location filename="../../src/mainwin.cpp" line="97"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Analog meter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show the reading on a moving-coil style instrument. The panel can be docked on any side of the window or dragged out as a separate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="107"/>
+        <location filename="../../src/mainwin.cpp" line="108"/>
         <source>&amp;Lock panels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="109"/>
+        <location filename="../../src/mainwin.cpp" line="110"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lock panels&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hide the title bars of the display and meter panels. Unlock them to move the panels to another side of the window or to drag them out as separate windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="189"/>
+        <location filename="../../src/mainwin.cpp" line="190"/>
         <source>Another instance is running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="266"/>
+        <location filename="../../src/mainwin.cpp" line="267"/>
         <source>Record DMM data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="267"/>
+        <location filename="../../src/mainwin.cpp" line="268"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="270"/>
+        <location filename="../../src/mainwin.cpp" line="271"/>
         <source>This instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="271"/>
+        <location filename="../../src/mainwin.cpp" line="272"/>
         <source>All instances</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="329"/>
+        <location filename="../../src/mainwin.cpp" line="330"/>
         <source>About QtDMM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="332"/>
+        <location filename="../../src/mainwin.cpp" line="333"/>
         <source>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;A readout and transient recorder for digital multimeters.&lt;/p&gt;&lt;p&gt;Built with &lt;b&gt;Qt&lt;/b&gt; %2. Licensed under the &lt;b&gt;GNU GPL 3&lt;/b&gt; (versions before 0.9.0 under GPL 2).&lt;/p&gt;&lt;p&gt;0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.&lt;br&gt;0.9.3 and before: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Project page: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Icons (except the DMM icon) are taken from the KDE project.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="346"/>
+        <location filename="../../src/mainwin.cpp" line="347"/>
         <source>Supported devices...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -621,19 +735,19 @@ Please choose which instance should record.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="75"/>
+        <location filename="../../src/dmm.cpp" line="76"/>
         <source>No permission to access %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="79"/>
+        <location filename="../../src/dmm.cpp" line="80"/>
         <source>
 
 On this system the device is typically accessible via group &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="82"/>
+        <location filename="../../src/dmm.cpp" line="83"/>
         <source>
 Add your user with:
 
@@ -641,7 +755,7 @@ sudo pw groupmod %1 -m $USER</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="85"/>
+        <location filename="../../src/dmm.cpp" line="86"/>
         <source>
 Add your user with:
 
@@ -649,7 +763,7 @@ sudo usermod -aG %1 $USER</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="88"/>
+        <location filename="../../src/dmm.cpp" line="89"/>
         <source>
 
 Then log out and back in so the new group membership becomes active.</source>
@@ -867,111 +981,136 @@ Then log out and back in so the new group membership becomes active.</source>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="560"/>
-        <source>Protocol</source>
+        <source>Formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="566"/>
+        <source>&amp;Unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="576"/>
+        <source>The unit of the calculated value, without SI prefix: W, V, A, Ohm, ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="592"/>
+        <source>&amp;Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="602"/>
+        <source>The value this instance shows, computed from the readings of the other running instances. Their names are the variables; + - * / ^, parentheses, numbers with SI suffix (1.5k) and sqrt, abs, log10, min, max are allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="628"/>
+        <source>Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="634"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="570"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="638"/>
         <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="575"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="643"/>
         <source>11 bytes ASCII, continuous (PeakTech 451)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="580"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="648"/>
         <source>14 bytes ASCII, continuous (Voltcraft)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="585"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="653"/>
         <source>15 bytes ASCII, continuous (Voltcraft)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="590"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="658"/>
         <source>11 bytes binary, continuous (M9803R)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="595"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="663"/>
         <source>14 bytes binary, continuous (VC820)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="600"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="668"/>
         <source>11 bytes binary, continuous (CyrustekES51986)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="605"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="673"/>
         <source>11 bytes binary, continuous (VC940)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="610"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="678"/>
         <source>14 bytes ASCII/binary, continuous (QM1537)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="615"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="683"/>
         <source>9 bytes binary, continuous (RS 22-812)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="620"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="688"/>
         <source>23 bytes ASCII, continuous (VC870)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="625"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="693"/>
         <source>22 bytes binary, continuous (DO3122)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="630"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="698"/>
         <source>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="635"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="703"/>
         <source>DTM0660</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="640"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="708"/>
         <source>11 bytes binary, continuous (CyrustekES51962)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="645"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="713"/>
         <source>variable bytes ASCII, Sigrok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="660"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="728"/>
         <source>&amp;Number of values:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="670"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="738"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="728"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="796"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocoll settings have not been confirmed by a user yet. If you own this model and can confirm that it works. Please give me a note. &lt;a href=&quot;https://github.com/tuxmaster/QtDMM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/tuxmaster/QtDMM&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="753"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="821"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please report to &lt;a href=&quot;https://github.com/tuxmaster/QtDMM&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/tuxmaster/QtDMM&lt;/span&gt;&lt;/a&gt;. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
