@@ -20,7 +20,9 @@
   </developer>
 
   <launchable type="desktop-id">qtdmm.desktop</launchable>
-  <url type="homepage">https://github.com/tuxmaster/QtDMM</url>
+  <url type="homepage">https://qtdmm.de</url>
+  <url type="bugtracker">https://github.com/tuxmaster/QtDMM/issues</url>
+  <url type="help">https://qtdmm.de/docs/</url>
   <content_rating type="oars-1.0" />
   <screenshots>
     <screenshot type="default">

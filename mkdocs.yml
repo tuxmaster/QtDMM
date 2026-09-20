@@ -1,5 +1,6 @@
 site_name: QtDMM
 site_description: Readout and recorder for digital multimeters
+site_url: https://qtdmm.de/docs/
 repo_url: https://github.com/tuxmaster/QtDMM
 docs_dir: docs
 

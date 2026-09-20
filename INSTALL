@@ -21,6 +21,7 @@ Basic steps:
 ------------
 - Download and extract the QtDMM source code from GitHub:
   https://github.com/tuxmaster/QtDMM
+  (project website with handbook and downloads: https://qtdmm.de)
 - Open a terminal and change to the QtDMM directory:
     cd QtDMM
 

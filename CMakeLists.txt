@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(qtdmm VERSION "0.0.0" HOMEPAGE_URL "https://github.com/tuxmaster/QtDMM/" LANGUAGES CXX)
+project(qtdmm VERSION "0.0.0" HOMEPAGE_URL "https://qtdmm.de" LANGUAGES CXX)
 
 ## main settings
 set(CMAKE_CXX_STANDARD 17)
