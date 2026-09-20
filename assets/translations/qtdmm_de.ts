@@ -4,37 +4,37 @@
 <context>
     <name>CalcDevice</name>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="53"/>
+        <location filename="../../src/portdevices/calc.cpp" line="54"/>
         <source>No unit given for the calculated value.</source>
         <translation>Keine Einheit für den berechneten Wert angegeben.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="61"/>
+        <location filename="../../src/portdevices/calc.cpp" line="62"/>
         <source>Formula error at position %1: %2</source>
         <translation>Fehler in der Formel an Position %1: %2</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="66"/>
+        <location filename="../../src/portdevices/calc.cpp" line="67"/>
         <source>No instance data available.</source>
         <translation>Keine Instanzdaten verfügbar.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="137"/>
+        <location filename="../../src/portdevices/calc.cpp" line="138"/>
         <source>Waiting for instance &apos;%1&apos;</source>
         <translation>Warte auf Instanz &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="139"/>
+        <location filename="../../src/portdevices/calc.cpp" line="140"/>
         <source>No current value from instance &apos;%1&apos;</source>
         <translation>Kein aktueller Wert von Instanz &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="141"/>
+        <location filename="../../src/portdevices/calc.cpp" line="142"/>
         <source>Instance &apos;%1&apos; shows no numeric value</source>
         <translation>Instanz &apos;%1&apos; zeigt keinen Zahlenwert</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="143"/>
+        <location filename="../../src/portdevices/calc.cpp" line="144"/>
         <source>Formula has no result (division by zero?)</source>
         <translation>Formel hat kein Ergebnis (Division durch Null?)</translation>
     </message>
@@ -505,24 +505,76 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>InstancesDlg</name>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="99"/>
+        <location filename="../../src/instancesdlg.cpp" line="261"/>
         <source>QtDMM - new instance</source>
         <translation>QtDMM - neue Instanz</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="99"/>
+        <location filename="../../src/instancesdlg.cpp" line="261"/>
         <source>Instance name:</source>
         <translation>Instanz Name:</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="109"/>
+        <location filename="../../src/instancesdlg.cpp" line="224"/>
+        <location filename="../../src/instancesdlg.cpp" line="270"/>
         <source>Instance names may contain letters, digits and underscores and must not start with a digit.</source>
         <translation>Instanznamen dürfen Buchstaben, Ziffern und Unterstriche enthalten und nicht mit einer Ziffer beginnen.</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="115"/>
+        <location filename="../../src/instancesdlg.cpp" line="71"/>
+        <source>running</source>
+        <translation>läuft</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="73"/>
+        <source>offline</source>
+        <translation>offline</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="192"/>
+        <source>QtDMM - new calculated instance</source>
+        <translation>QtDMM - neue berechnete Instanz</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="205"/>
+        <source>No instance is running yet; the variables are the instance names.</source>
+        <translation>Noch keine Instanz läuft; die Variablen sind die Instanznamen.</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="206"/>
+        <source>Variables (running instances): %1</source>
+        <translation>Variablen (laufende Instanzen): %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="207"/>
+        <source>&amp;Name:</source>
+        <translation>&amp;Name:</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="208"/>
+        <source>&amp;Unit:</source>
+        <translation>&amp;Einheit:</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="209"/>
+        <source>&amp;Formula:</source>
+        <translation>&amp;Formel:</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="226"/>
+        <location filename="../../src/instancesdlg.cpp" line="276"/>
         <source>Instance already exists.</source>
         <translation>Instanz existiert bereits.</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="228"/>
+        <source>Please give a unit without spaces.</source>
+        <translation>Bitte eine Einheit ohne Leerzeichen angeben.</translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="230"/>
+        <source>Position %1: %2</source>
+        <translation type="unfinished">Position %1: %2</translation>
     </message>
 </context>
 <context>
@@ -561,63 +613,63 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Beenden ohne speichern</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="523"/>
+        <location filename="../../src/mainwid.cpp" line="525"/>
         <source>Automatic start at %1</source>
         <translation>Automatisch starten bei %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="525"/>
+        <location filename="../../src/mainwid.cpp" line="527"/>
         <source>Raising threshold %1</source>
         <translation>Grenzwert steigent %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="527"/>
+        <location filename="../../src/mainwid.cpp" line="529"/>
         <source>Falling threshold %1</source>
         <translation>Grenzwert fallend %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="549"/>
+        <location filename="../../src/mainwid.cpp" line="551"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s läuft noch!&lt;p&gt;Wollen sie es jetzt beenden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="590"/>
+        <location filename="../../src/mainwid.cpp" line="592"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Konnte %1 nicht starten</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="607"/>
+        <location filename="../../src/mainwid.cpp" line="609"/>
         <source>Launched %1</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="612"/>
+        <location filename="../../src/mainwid.cpp" line="614"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 mit dem Rückgabecode %2 beendet.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="654"/>
+        <location filename="../../src/mainwid.cpp" line="660"/>
         <source>no meter configured</source>
         <translation>kein Multimeter konfiguriert</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="548"/>
-        <location filename="../../src/mainwid.cpp" line="589"/>
+        <location filename="../../src/mainwid.cpp" line="550"/>
+        <location filename="../../src/mainwid.cpp" line="591"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: Startfehler</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="561"/>
+        <location filename="../../src/mainwid.cpp" line="563"/>
         <source>Yes, kill it!</source>
         <translation>Ja, töten!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="565"/>
+        <location filename="../../src/mainwid.cpp" line="567"/>
         <source>No, keep running</source>
         <translation>Nein, es laufen lassen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="601"/>
+        <location filename="../../src/mainwid.cpp" line="603"/>
         <source>Bummer!</source>
         <translation>Reinfall!</translation>
     </message>
@@ -645,32 +697,32 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation>Zeigerinstrument</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="89"/>
+        <location filename="../../src/mainwin.cpp" line="90"/>
         <source>Analog &amp;meter</source>
         <translation>&amp;Zeigerinstrument</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="91"/>
+        <location filename="../../src/mainwin.cpp" line="92"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Analog meter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show the reading on a moving-coil style instrument. The panel can be docked on any side of the window or dragged out as a separate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Zeigerinstrument&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zeigt den Messwert auf einem Drehspulinstrument. Das Panel kann an jeder Fensterseite angedockt oder als eigenes Fenster herausgezogen werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="102"/>
+        <location filename="../../src/mainwin.cpp" line="103"/>
         <source>&amp;Lock panels</source>
         <translation>Panels &amp;sperren</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="104"/>
+        <location filename="../../src/mainwin.cpp" line="105"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lock panels&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hide the title bars of the display and meter panels. Unlock them to move the panels to another side of the window or to drag them out as separate windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Panels sperren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Blendet die Titelleisten von Anzeige und Zeigerinstrument aus. Zum Verschieben an eine andere Fensterseite oder zum Herauslösen als eigenes Fenster entsperren.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="274"/>
+        <location filename="../../src/mainwin.cpp" line="294"/>
         <source>Record DMM data</source>
         <translation>DMM Daten aufnehmen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="275"/>
+        <location filename="../../src/mainwin.cpp" line="295"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
         <translatorcomment>Wählen Sie aus, welche Instanz aufnehmen soll.</translatorcomment>
@@ -678,32 +730,32 @@ Please choose which instance should record.</source>
 Please choose which instance should record.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="278"/>
+        <location filename="../../src/mainwin.cpp" line="298"/>
         <source>This instance</source>
         <translation>Diese Instanz</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="279"/>
+        <location filename="../../src/mainwin.cpp" line="299"/>
         <source>All instances</source>
         <translation>Alle Instanzen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="337"/>
+        <location filename="../../src/mainwin.cpp" line="359"/>
         <source>About QtDMM</source>
         <translation>Über QtDMM</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="340"/>
+        <location filename="../../src/mainwin.cpp" line="362"/>
         <source>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;A readout and transient recorder for digital multimeters.&lt;/p&gt;&lt;p&gt;Built with &lt;b&gt;Qt&lt;/b&gt; %2. Licensed under the &lt;b&gt;GNU GPL 3&lt;/b&gt; (versions before 0.9.0 under GPL 2).&lt;/p&gt;&lt;p&gt;0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.&lt;br&gt;0.9.3 and before: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Website: &lt;a href=&apos;https://qtdmm.de&apos;&gt;qtdmm.de&lt;/a&gt; &amp;middot; Contact: &lt;a href=&apos;mailto:hello@qtdmm.de&apos;&gt;hello@qtdmm.de&lt;/a&gt;&lt;br&gt;Source and bug reports: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Icons (except the DMM icon) are taken from the KDE project.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;Anzeige und Transientenrekorder für digitale Multimeter.&lt;/p&gt;&lt;p&gt;Gebaut mit &lt;b&gt;Qt&lt;/b&gt; %2. Lizenziert unter der &lt;b&gt;GNU GPL 3&lt;/b&gt; (Versionen vor 0.9.0 unter GPL 2).&lt;/p&gt;&lt;p&gt;Ab 0.9.5: tuxmaster und Mitwirkende, siehe Datei AUTHORS.&lt;br&gt;0.9.3 und davor: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Website: &lt;a href=&apos;https://qtdmm.de&apos;&gt;qtdmm.de&lt;/a&gt; &amp;middot; Kontakt: &lt;a href=&apos;mailto:hello@qtdmm.de&apos;&gt;hello@qtdmm.de&lt;/a&gt;&lt;br&gt;Quellcode und Fehlermeldungen: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Die Symbole (außer dem DMM-Symbol) stammen aus dem KDE-Projekt.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="356"/>
+        <location filename="../../src/mainwin.cpp" line="378"/>
         <source>Supported devices...</source>
         <translation>Unterstützte Geräte...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="186"/>
+        <location filename="../../src/mainwin.cpp" line="189"/>
         <source>Another instance is running.</source>
         <translation>Andere Instanz läuft noch</translation>
     </message>
@@ -1762,6 +1814,11 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
         <location filename="../../src/ui/uiinstancesdlg.ui" line="72"/>
         <source>-</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uiinstancesdlg.ui" line="86"/>
+        <source>add a calculated instance (a formula over the running instances, e.g. power = u * i)</source>
+        <translation>Berechnete Instanz anlegen (eine Formel über die laufenden Instanzen, z. B. Leistung = u * i)</translation>
     </message>
 </context>
 <context>

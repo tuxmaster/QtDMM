@@ -81,6 +81,16 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="ui_instance_calc">
+       <property name="toolTip">
+        <string>add a calculated instance (a formula over the running instances, e.g. power = u * i)</string>
+       </property>
+       <property name="text">
+        <string notr="true">ƒ</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>

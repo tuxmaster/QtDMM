@@ -276,6 +276,7 @@ void MainWid::setStateManager(SharedStateManager *mgr)
   m_stateMgr = mgr;
   m_dmm->setStateManager(mgr);
   m_configDlg->setStateManager(mgr);
+  m_instancesDlg->setStateManager(mgr);
 }
 
 // The analog meter works in the unit the multimeter displays (with prefix),
