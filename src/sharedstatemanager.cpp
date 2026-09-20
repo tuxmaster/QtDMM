@@ -58,11 +58,39 @@ QString instanceId(const QJsonValue &val)
     return val.toObject()["id"].toString();
   return val.toString();
 }
+
+QJsonObject readingToJson(const SharedStateManager::Reading &r)
+{
+  QJsonObject o;
+  o["value"] = r.value;
+  o["unit"] = r.unit;
+  o["special"] = r.special;
+  o["msecs"] = static_cast<double>(r.msecs);
+  o["valid"] = r.valid;
+  return o;
+}
+
+SharedStateManager::Reading readingFromJson(const QJsonObject &o)
+{
+  SharedStateManager::Reading r;
+  r.value = o["value"].toDouble();
+  r.unit = o["unit"].toString();
+  r.special = o["special"].toString();
+  r.msecs = static_cast<qint64>(o["msecs"].toDouble());
+  r.valid = o["valid"].toBool();
+  return r;
+}
+
+QString segmentKey()
+{
+  const QByteArray key = qgetenv("QTDMM_IPC_KEY");
+  return key.isEmpty() ? QStringLiteral("qtdmm_ipc_memory") : QString::fromLocal8Bit(key);
+}
 }
 
 SharedStateManager::SharedStateManager(const QString &instanceId, QObject *parent)
   : QObject(parent),
-    m_memory("qtdmm_ipc_memory"),
+    m_memory(segmentKey()),
     m_lastState(),
     m_instanceId(instanceId),
     m_registered(false),
@@ -230,8 +258,14 @@ void SharedStateManager::checkForChanges()
 
     QString currentState = data["state"].toString();
     QStringList instances;
+    QMap<QString, Reading> readings;
     for (const QJsonValue &v : data["instances"].toArray())
+    {
       instances << instanceId(v);
+      if (v.isObject() && v.toObject().contains("reading"))
+        readings.insert(instanceId(v), readingFromJson(v.toObject()["reading"].toObject()));
+    }
+    m_readings = readings;
 
     if (instances.count() != m_instances.count())
     {
@@ -253,6 +287,36 @@ void SharedStateManager::checkForChanges()
     m_emit_inUse = false;
     Q_EMIT instanceIdAlreadyInUse();
   }
+}
+
+void SharedStateManager::publishReading(const Reading &reading)
+{
+  if (!m_registered)
+    return;
+  if (reading.valid == m_published.valid && reading.value == m_published.value &&
+      reading.unit == m_published.unit && reading.special == m_published.special &&
+      reading.msecs - m_published.msecs < 1000)
+    return;
+
+  const bool ok = modifyJsonData([this, &reading](QJsonObject &data)
+  {
+    QJsonArray instances = data["instances"].toArray();
+    for (int i = 0; i < instances.size(); ++i)
+    {
+      if (instanceId(instances[i]) != m_instanceId)
+        continue;
+      QJsonObject entry = instances[i].toObject();
+      if (entry.isEmpty())    // old plain-string entry
+        entry["id"] = m_instanceId;
+      entry["reading"] = readingToJson(reading);
+      instances[i] = entry;
+      data["instances"] = instances;
+      return true;
+    }
+    return false;
+  });
+  if (ok)
+    m_published = reading;
 }
 
 bool SharedStateManager::writeState(const QString &newState)

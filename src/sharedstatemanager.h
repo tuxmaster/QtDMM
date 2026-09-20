@@ -4,6 +4,7 @@
 #include <QSharedMemory>
 #include <QTimer>
 #include <QJsonObject>
+#include <QMap>
 #include <functional>
 
 /// Lets several running QtDMM instances see each other and exchange a state.
@@ -15,11 +16,28 @@
 /// MainWin uses this for synchronised recording ("RECORD"/"STOP") and to
 /// raise a specific instance ("RAISE_<id>"). Registrations of instances that
 /// died without unregistering are detected by their pid and removed.
+///
+/// Each instance also publishes its current main reading in its entry
+/// (publishReading()); readings() gives the last seen readings of all
+/// instances, which is what a calculated value (P = U * I) is computed from.
+///
+/// The segment key can be overridden with the environment variable
+/// QTDMM_IPC_KEY so tests do not interfere with a running QtDMM.
 class SharedStateManager : public QObject
 {
   Q_OBJECT
 
 public:
+  /// One instance's main reading as published in the shared state.
+  struct Reading
+  {
+    double  value = 0;      ///< in SI base units (DmmResponse::dval)
+    QString unit;           ///< base unit without prefix, e.g. "V"
+    QString special;        ///< "DC", "AC", ... as the decoder delivers it
+    qint64  msecs = 0;      ///< QDateTime::currentMSecsSinceEpoch() when published
+    bool    valid = false;  ///< false for overload / no numeric value
+  };
+
   explicit SharedStateManager(const QString &instanceId, QObject *parent = nullptr);
   ~SharedStateManager();
 
@@ -32,6 +50,12 @@ public:
   void checkForChanges();
   /// Ids of the instances seen at the last poll.
   QStringList instances() { return m_instances; };
+  /// Readings of all instances (including this one) as of the last poll,
+  /// keyed by instance id. Instances that have not published yet are absent.
+  QMap<QString, Reading> readings() const { return m_readings; }
+  /// Writes this instance's reading into its shared entry. Unchanged values
+  /// are re-published only once a second, so an idle meter costs nothing.
+  void publishReading(const Reading &reading);
 
 signals:
   /// The shared state string changed to @p newState.
@@ -62,4 +86,6 @@ private:
   bool m_registered;
   bool m_emit_inUse;
   QStringList m_instances;
+  QMap<QString, Reading> m_readings;
+  Reading m_published;
 };

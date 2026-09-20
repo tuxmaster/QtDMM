@@ -89,6 +89,7 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   addDockWidget(Qt::RightDockWidgetArea, m_meterDock);
   m_meterDock->hide();
   m_wid->setMeter(m_meter);
+  m_wid->setStateManager(m_stateMgr);
 
   QAction *meterAction = m_meterDock->toggleViewAction();
   meterAction->setText(tr("Analog &meter"));
