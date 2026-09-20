@@ -53,6 +53,7 @@ class MainWid : public QFrame, private Ui::UIMainWid
 public:
   /// @param instance_id  name of this instance for multi-instance setups (--config-id)
   /// @param config_path  directory of the settings file (--config-dir), or empty
+  /// @param parent       the MainWin
   MainWid(QString instance_id, QString config_path, QWidget *parent = Q_NULLPTR);
   /// Disconnects, saves the settings and asks about unsaved data. Returns
   /// false when the user cancels; MainWin then ignores the close event.

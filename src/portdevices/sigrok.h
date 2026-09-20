@@ -13,7 +13,9 @@ class SigrokDevice : public QIODevice
 {
   Q_OBJECT
 public:
+  /// @param info   the meter; DMMInfo::sigrokExe names the sigrok-cli binary
   /// @param device passed to sigrok-cli as --driver, e.g. "uni-t-ut61e-ser:conn=/dev/ttyUSB0"
+  /// @param parent parent object
   explicit SigrokDevice(const DmmDecoder::DMMInfo &info,
                         QString device,
                         QObject *parent = nullptr);

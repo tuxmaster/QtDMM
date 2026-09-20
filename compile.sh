@@ -11,6 +11,7 @@ usage: compile.sh <install|clean|qt6>
    appimage: creates appImage
    clean   : remove build files before build
    ctest   : build and run ctest
+   doxygen : generate the developer documentation (build/doxygen/html)
    install : install system wide
    pack    : create packages (DEB and source)
    run     : run qtdmm after successfull build
@@ -24,6 +25,7 @@ INSTALL=false
 PACK=false
 CTEST=false
 APPIMG=false
+DOXYGEN=false
 
 for arg in $*
 do
@@ -34,6 +36,7 @@ do
 	[ "$arg" = "run"      ] && RUN=true
 	[ "$arg" = "pack"     ] && PACK=true
 	[ "$arg" = "appimage" ] && APPIMG=true
+	[ "$arg" = "doxygen"  ] && DOXYGEN=true
 	[ "$arg" = "help"     ] && usage
 done
 
@@ -80,6 +83,17 @@ then
 	echo
 	ctest --test-dir . --output-on-failure
 	echo
+fi
+
+if ${DOXYGEN}
+then
+	if command -v doxygen >/dev/null
+	then
+		cmake --build . --target doxygen || exit 1
+		echo "developer documentation: build/doxygen/html/index.html"
+	else
+		echo "doxygen not installed, skipping developer documentation"
+	fi
 fi
 
 QTDMM_EXE="qtdmm"

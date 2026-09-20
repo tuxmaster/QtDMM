@@ -17,7 +17,9 @@ class RFC2217SerialDevice : public QIODevice
 {
   Q_OBJECT
 public:
+  /// @param info   the meter, for the line settings sent to the server
   /// @param device "host:port"; the TCP connection is started right away
+  /// @param parent parent object
   explicit RFC2217SerialDevice(const DmmDecoder::DMMInfo &info,
                                QString device,
                                QObject *parent = nullptr);

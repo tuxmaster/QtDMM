@@ -27,10 +27,10 @@ and `SharedStateManager` together describe the architecture. Generate the
 HTML with
 
 ```
-cmake --build build --target doxygen
+./compile.sh doxygen
 ```
 
-or plain `doxygen` in the repository root (the `Doxyfile` is checked in) and
+(or `cmake --build build --target doxygen`, or plain `doxygen` in the repository root - the `Doxyfile` is checked in) and
 open `build/doxygen/html/index.html`. Doxygen is optional: without it the
 target simply does not exist.
 

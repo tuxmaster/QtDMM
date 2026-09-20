@@ -28,7 +28,7 @@
 /// stored file, so a staged value is not visible to get*() until saved.
 ///
 /// The file is QSettings' native one (~/.config/QtDMM/QtDMM.conf on Unix,
-/// %APPDATA%\QtDMM\QtDMM.ini on Windows). With an instance id or config
+/// %APPDATA%\\QtDMM\\QtDMM.ini on Windows). With an instance id or config
 /// directory (--config-id, --config-dir) a separate ini file
 /// "QtDMM_<id>.<suffix>" in that directory is used instead.
 class Settings : public QObject

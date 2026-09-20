@@ -28,7 +28,9 @@ Q_DECLARE_LOGGING_CATEGORY(lcHid)
 class HIDSerialDevice : public QIODevice {
     Q_OBJECT
 public:
+  /// @param info   the meter, for its baud rate and data bits
   /// @param device an entry from availablePorts(): "HID 0xvvvv:0xpppp path"
+  /// @param p      parent object
   explicit HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device, QObject *p = Q_NULLPTR);
  ~HIDSerialDevice();
 
