@@ -35,6 +35,18 @@ ADD_CONFIG = re.compile(
     r'\s*(?P<ext>\d)\s*,\s*(?P<rts>\d)\s*,\s*(?P<dtr>\d)')
 PARITY = {"0": "N", "1": "E", "2": "O"}
 
+# The chip behind a protocol, where it is known: lets a user match an
+# unlisted meter by the chip named in its manual or on sigrok's wiki.
+CHIP = {
+    "VC820Continuous": "FS9721 LP3",
+    "QM1537Continuous": "FS9922-DMM4",
+    "CyrustekES51922": "ES51922",
+    "CyrustekES51986": "ES51986",
+    "CyrustekES51962": "ES51962",
+    "DTM0660": "DTM0660",
+    "Metex14": "Metex ASCII",
+}
+
 
 def devices():
     rows = []
@@ -44,8 +56,11 @@ def devices():
             lines = "DTR" if d["dtr"] == "1" else ""
             if d["rts"] == "1":
                 lines = (lines + " RTS").strip()
+            model = d["model"]
+            unconfirmed = model.endswith("*")
             rows.append({
-                "vendor": d["vendor"], "model": d["model"], "protocol": d["protocol"],
+                "vendor": d["vendor"], "model": model.rstrip("* ").strip() + (" ¹" if unconfirmed else ""),
+                "protocol": d["protocol"], "chip": CHIP.get(d["protocol"], "-"),
                 "serial": f'{d["baud"]} {d["bits"]}{PARITY[d["parity"]]}{d["stop"]}',
                 "counts": d["counts"], "lines": lines or "-",
                 "decoder": src.name,
@@ -60,23 +75,29 @@ def render_devices(rows):
         "",
         "Every meter QtDMM can decode, taken from the decoder registrations in",
         "`src/decoders/` (this page is generated from them by",
-        "`tests/generate_docs.py`). Choosing one of these models on the DMM settings",
-        "page fills in the serial parameters below; meters not listed can often be",
-        "used with *Manual settings* if they speak one of the listed protocols - see",
-        "[Connecting a meter](connecting.md).",
+        "`tests/generate_docs.py`). Choosing one of these models on the Multimeter",
+        "settings page fills in the serial parameters below; meters not listed can",
+        "often be used with *Manual settings* if they speak one of the listed",
+        "protocols - the *Chip* column helps: a meter built around the same chip",
+        "(named in its manual or on the sigrok wiki) usually speaks the same",
+        "protocol. See [Connecting a meter](connecting.md).",
         "",
         "*Serial* is baud rate, data bits, parity (N/E/O) and stop bits. *Lines* are",
         "the control lines the cable needs driven. *Counts* is the display",
-        "resolution. Not every entry has been confirmed on hardware recently; if you",
-        "can confirm one, or get an unlisted meter working, please report it on the",
-        "[project page](https://github.com/tuxmaster/QtDMM).",
+        "resolution. Not every entry has been confirmed on hardware recently; models",
+        "marked ¹ were added from chip data (libsigrok, ultradmm.com) and have not",
+        "been tried with QtDMM at all. If you can confirm one, or get an unlisted",
+        "meter working, please report it on the",
+        "[project page](https://github.com/tuxmaster/QtDMM/issues).",
         "",
-        "| Vendor | Model | Protocol | Serial | Lines | Counts |",
-        "|---|---|---|---|---|---|",
+        "| Vendor | Model | Chip | Protocol | Serial | Lines | Counts |",
+        "|---|---|---|---|---|---|---|",
     ]
     for r in rows:
-        out.append(f'| {r["vendor"]} | {r["model"]} | `{r["protocol"]}` | {r["serial"]} '
+        out.append(f'| {r["vendor"]} | {r["model"]} | {r["chip"]} | `{r["protocol"]}` | {r["serial"]} '
                    f'| {r["lines"]} | {r["counts"]} |')
+    out.append("")
+    out.append("¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.")
     out.append("")
     out.append(f"{len(rows)} devices across {len({r['vendor'] for r in rows})} vendors.")
     return "\n".join(out) + "\n"

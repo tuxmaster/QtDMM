@@ -501,7 +501,7 @@ void DmmPrefs::on_ui_model_activated(int id)
   uidtr->setDisabled(true);
 
   message->hide();
-  if (ui_model->itemText(id)[0] == '*')
+  if (ui_model->itemText(id).contains('*'))   // "Model *": settings from chip data, unconfirmed
     message2->show();
   else
     message2->hide();

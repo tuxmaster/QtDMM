@@ -3,10 +3,16 @@
 // FS9922-DMM4
 
 static const bool registered = []() {
-  DmmDecoder::addConfig({"Digitek", "DT4000ZC", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Digitech", "QM1537", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"PeakTech", "3430", "", 19200, ReadEvent::QM1537Continuous, 7, 2, 1, 0, 4000, 0, 0, 1});
-  DmmDecoder::addConfig({"TekPower", "TP4000ZC", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  // models marked "*" come from chip data (libsigrok, ultradmm.com) and are
+  // not confirmed on hardware yet
+  DmmDecoder::addConfig({"Digitek", "DT-9602R+ *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Pro'sKit", "MT-1820 *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"SparkFun", "70C *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT60D *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Uni-Trend", "UT61A *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"Voltcraft", "VC 830 *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT61B", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT61C", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT61D", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});

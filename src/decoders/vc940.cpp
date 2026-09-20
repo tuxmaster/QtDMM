@@ -4,6 +4,10 @@
 static const bool registered = []() {
   DmmDecoder::addConfig({"Tenma", "72-7732"    , "", 2400, ReadEvent::VC940Continuous, 7, 1, 1, 2, 40000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT71B"  , "", 2400, ReadEvent::VC940Continuous, 7, 1, 1, 2, 200000, 0, 0, 1});
+  // ut71x family per libsigrok; "*" = not confirmed on hardware yet
+  DmmDecoder::addConfig({"Uni-Trend", "UT71A *", "", 2400, ReadEvent::VC940Continuous, 7, 1, 1, 2, 20000, 0, 0, 1});
+  DmmDecoder::addConfig({"Tenma", "72-7730 *", "", 2400, ReadEvent::VC940Continuous, 7, 1, 1, 2, 20000, 0, 0, 1});
+  DmmDecoder::addConfig({"Tenma", "72-9380A *", "", 2400, ReadEvent::VC940Continuous, 7, 1, 1, 2, 40000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT71CDE", "", 2400, ReadEvent::VC940Continuous, 7, 1, 1, 2, 40000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT804"  , "", 2400, ReadEvent::VC940Continuous, 7, 1, 1, 2, 40000, 0, 0, 1});
   DmmDecoder::addConfig({"Voltcraft", "VC 920" , "", 2400, ReadEvent::VC940Continuous, 7, 1, 1, 2, 40000, 0, 0, 1});

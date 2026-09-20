@@ -2,101 +2,126 @@
 
 Every meter QtDMM can decode, taken from the decoder registrations in
 `src/decoders/` (this page is generated from them by
-`tests/generate_docs.py`). Choosing one of these models on the DMM settings
-page fills in the serial parameters below; meters not listed can often be
-used with *Manual settings* if they speak one of the listed protocols - see
-[Connecting a meter](connecting.md).
+`tests/generate_docs.py`). Choosing one of these models on the Multimeter
+settings page fills in the serial parameters below; meters not listed can
+often be used with *Manual settings* if they speak one of the listed
+protocols - the *Chip* column helps: a meter built around the same chip
+(named in its manual or on the sigrok wiki) usually speaks the same
+protocol. See [Connecting a meter](connecting.md).
 
 *Serial* is baud rate, data bits, parity (N/E/O) and stop bits. *Lines* are
 the control lines the cable needs driven. *Counts* is the display
-resolution. Not every entry has been confirmed on hardware recently; if you
-can confirm one, or get an unlisted meter working, please report it on the
-[project page](https://github.com/tuxmaster/QtDMM).
+resolution. Not every entry has been confirmed on hardware recently; models
+marked ¹ were added from chip data (libsigrok, ultradmm.com) and have not
+been tried with QtDMM at all. If you can confirm one, or get an unlisted
+meter working, please report it on the
+[project page](https://github.com/tuxmaster/QtDMM/issues).
 
-| Vendor | Model | Protocol | Serial | Lines | Counts |
-|---|---|---|---|---|---|
-| Digitech | QM1350 | `Metex14` | 600 7N2 | DTR | 4000 |
-| Digitech | QM1462 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Digitech | QM1537 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
-| Digitech | QM1538 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Digitek | DT-9062 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Digitek | DT4000ZC | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
-| Digitek | INO2513 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Duratool | DO3122 | `DO3122Continuous` | 9600 8N1 | - | 4000 |
-| ELV | M9803R | `M9803RContinuous` | 9600 7E1 | DTR | 4000 |
-| Generic | DTM0660 4000 count | `DTM0660` | 2400 8N1 | DTR | 4000 |
-| Generic | DTM0660 6000 count | `DTM0660` | 2400 8N1 | DTR | 6000 |
-| Generic | DTM0660 8000 count | `DTM0660` | 2400 8N1 | DTR | 8000 |
-| HoldPeak | HP-90EPC | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Iso-Tech | IDM 73 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
-| MASTECH | M9803R | `M9803RContinuous` | 9600 7E1 | DTR | 4000 |
-| MASTECH | MAS-343 | `Metex14` | 600 7N2 | DTR | 4000 |
-| MASTECH | MAS-345 | `Metex14` | 600 7N2 | DTR | 4000 |
-| McVoice | M-345pro | `Metex14` | 600 7N2 | DTR | 4000 |
-| McVoice | M-980T | `M9803RContinuous` | 9600 7N1 | DTR | 4000 |
-| Metex | M-3660D | `Metex14` | 1200 7N2 | DTR | 4000 |
-| Metex | M-3830D | `Metex14` | 1200 7N2 | DTR | 4000 |
-| Metex | M-3840D | `Metex14` | 1200 7N2 | DTR | 4000 |
-| Metex | M-3850D | `Metex14` | 1200 7N2 | DTR | 4000 |
-| Metex | M-3850M | `Metex14` | 9600 7N2 | DTR | 4000 |
-| Metex | M-3870D | `Metex14` | 1200 7N1 | DTR | 4000 |
-| Metex | M-4650C | `Metex14` | 1200 7N2 | DTR | 20000 |
-| Metex | ME-11 | `Metex14` | 600 7N2 | DTR | 4000 |
-| Metex | ME-22 | `Metex14` | 2400 7N2 | DTR | 4000 |
-| Metex | ME-32 | `Metex14` | 600 7N2 | DTR | 4000 |
-| Metex | ME-42 | `Metex14` | 600 7N2 | DTR | 4000 |
-| Metex | universal system 9160 | `Metex14` | 1200 7N2 | DTR | 4000 |
-| PeakTech | 3315 | `CyrustekES51962` | 2400 7N1 | DTR | 4000 |
-| PeakTech | 3330 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| PeakTech | 3430 | `QM1537Continuous` | 19200 7N2 | DTR | 4000 |
-| PeakTech | 4010 | `Metex14` | 9600 7N2 | DTR | 4000 |
-| PeakTech | 4015A | `Metex14` | 9600 7N2 | DTR | 100000 |
-| PeakTech | 4360 | `Metex14` | 600 7N2 | DTR | 4000 |
-| PeakTech | 4390 | `Metex14` | 9600 7N2 | DTR | 4000 |
-| PeakTech | 451 | `PeakTech10` | 600 7N2 | DTR | 4000 |
-| Radioshack | 22-805 DMM | `Metex14` | 600 7N2 | DTR | 4000 |
-| Radioshack | 22-812 | `RS22812Continuous` | 4800 8N1 | DTR | 4000 |
-| Radioshack | RS22-168A | `Metex14` | 1200 7N2 | DTR | 4000 |
-| Sinometer | MAS-343 | `Metex14` | 600 7N2 | DTR | 4000 |
-| TekPower | TP4000ZC | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
-| Tenma | 72-1016 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
-| Tenma | 72-7732 | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
-| Tenma | 72-7745 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Uni-Trend | UT60A | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Uni-Trend | UT60E | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Uni-Trend | UT61B | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
-| Uni-Trend | UT61C | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
-| Uni-Trend | UT61D | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
-| Uni-Trend | UT61E | `CyrustekES51922` | 19200 7O1 | DTR | 22000 |
-| Uni-Trend | UT70B | `CyrustekES51962` | 2400 7N1 | DTR | 4000 |
-| Uni-Trend | UT71B | `VC940Continuous` | 2400 7O1 | DTR | 200000 |
-| Uni-Trend | UT71CDE | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
-| Uni-Trend | UT803 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
-| Uni-Trend | UT804 | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
-| Vichy | VC99 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
-| Voltcraft | M-3610D | `Metex14` | 1200 7N2 | DTR | 4000 |
-| Voltcraft | M-3650D | `Metex14` | 1200 7N2 | DTR | 4000 |
-| Voltcraft | M-3860 | `Metex14` | 9600 7N2 | DTR | 20000 |
-| Voltcraft | M-4650CR | `Voltcraft14Continuous` | 1200 7N2 | DTR | 20000 |
-| Voltcraft | M-4660 | `Metex14` | 1200 7N2 | DTR | 50000 |
-| Voltcraft | M-4660A | `Metex14` | 9600 7N2 | DTR | 50000 |
-| Voltcraft | M-4660M | `Metex14` | 9600 7N2 | DTR | 50000 |
-| Voltcraft | ME-11 | `Metex14` | 600 7N2 | DTR | 4000 |
-| Voltcraft | ME-22T | `Metex14` | 2400 7N2 | DTR | 4000 |
-| Voltcraft | ME-32 | `Metex14` | 600 7N2 | DTR | 4000 |
-| Voltcraft | ME-42 | `Metex14` | 600 7N2 | DTR | 4000 |
-| Voltcraft | MXD-4660A | `Metex14` | 9600 7N2 | DTR | 50000 |
-| Voltcraft | VC 630 | `Voltcraft14Continuous` | 4800 7N1 | DTR | 50000 |
-| Voltcraft | VC 635 | `Voltcraft15Continuous` | 2400 7N1 | DTR | 50000 |
-| Voltcraft | VC 650 | `Voltcraft14Continuous` | 4800 7N1 | DTR | 50000 |
-| Voltcraft | VC 655 | `Voltcraft15Continuous` | 2400 7N1 | DTR | 50000 |
-| Voltcraft | VC 670 | `Voltcraft14Continuous` | 4800 7N1 | DTR | 50000 |
-| Voltcraft | VC 820 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Voltcraft | VC 840 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
-| Voltcraft | VC 870 | `VC870Continuous` | 9600 8N1 | DTR | 40000 |
-| Voltcraft | VC 920 | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
-| Voltcraft | VC 940 | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
-| Voltcraft | VC 960 | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
-| Wintex | TD2200 | `CyrustekES51922` | 19200 7N1 | DTR | 22000 |
+| Vendor | Model | Chip | Protocol | Serial | Lines | Counts |
+|---|---|---|---|---|---|---|
+| APPA | 71 ¹ | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
+| APPA | 73 ¹ | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
+| Digitech | QM1350 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| Digitech | QM1462 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Digitech | QM1537 | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
+| Digitech | QM1538 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Digitek | DT-9062 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Digitek | DT-9602R+ ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Digitek | DT4000ZC | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Digitek | INO2513 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Duratool | DO3122 | - | `DO3122Continuous` | 9600 8N1 | - | 4000 |
+| ELV | M9803R | - | `M9803RContinuous` | 9600 7E1 | DTR | 4000 |
+| Generic | DTM0660 4000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 4000 |
+| Generic | DTM0660 6000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
+| Generic | DTM0660 8000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 8000 |
+| HoldPeak | HP-90EPC | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Iso-Tech | IDM 73 | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
+| MASTECH | M9803R | - | `M9803RContinuous` | 9600 7E1 | DTR | 4000 |
+| MASTECH | MAS-343 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| MASTECH | MAS-345 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| MASTECH | MS8250B ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| McVoice | M-345pro | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| McVoice | M-980T | - | `M9803RContinuous` | 9600 7N1 | DTR | 4000 |
+| Metex | M-3640D ¹ | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
+| Metex | M-3660D | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
+| Metex | M-3830D | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
+| Metex | M-3840D | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
+| Metex | M-3850D | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
+| Metex | M-3850M | Metex ASCII | `Metex14` | 9600 7N2 | DTR | 4000 |
+| Metex | M-3870D | Metex ASCII | `Metex14` | 1200 7N1 | DTR | 4000 |
+| Metex | M-4650C | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 20000 |
+| Metex | ME-11 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| Metex | ME-22 | Metex ASCII | `Metex14` | 2400 7N2 | DTR | 4000 |
+| Metex | ME-32 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| Metex | ME-42 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| Metex | universal system 9160 | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
+| PCE | PCE-DM32 ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| PeakTech | 3315 | ES51962 | `CyrustekES51962` | 2400 7N1 | DTR | 4000 |
+| PeakTech | 3330 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| PeakTech | 3415 ¹ | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
+| PeakTech | 3430 | FS9922-DMM4 | `QM1537Continuous` | 19200 7N2 | DTR | 4000 |
+| PeakTech | 4010 | Metex ASCII | `Metex14` | 9600 7N2 | DTR | 4000 |
+| PeakTech | 4015A | Metex ASCII | `Metex14` | 9600 7N2 | DTR | 100000 |
+| PeakTech | 4360 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| PeakTech | 4390 | Metex ASCII | `Metex14` | 9600 7N2 | DTR | 4000 |
+| PeakTech | 451 | - | `PeakTech10` | 600 7N2 | DTR | 4000 |
+| Pro'sKit | MT-1820 ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Radioshack | 22-805 DMM | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| Radioshack | 22-812 | - | `RS22812Continuous` | 4800 8N1 | DTR | 4000 |
+| Radioshack | RS22-168A | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
+| Sinometer | MAS-343 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| SparkFun | 70C ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
+| Tecpel | DMM-8061 ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| TekPower | TP4000ZC | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Tenma | 72-1016 | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
+| Tenma | 72-7730 ¹ | - | `VC940Continuous` | 2400 7O1 | DTR | 20000 |
+| Tenma | 72-7732 | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
+| Tenma | 72-7745 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Tenma | 72-9380A ¹ | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
+| Uni-Trend | UT60A | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Uni-Trend | UT60D ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Uni-Trend | UT60E | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Uni-Trend | UT61A ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Uni-Trend | UT61B | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
+| Uni-Trend | UT61C | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Uni-Trend | UT61D | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Uni-Trend | UT61E | ES51922 | `CyrustekES51922` | 19200 7O1 | DTR | 22000 |
+| Uni-Trend | UT70B | ES51962 | `CyrustekES51962` | 2400 7N1 | DTR | 4000 |
+| Uni-Trend | UT71A ¹ | - | `VC940Continuous` | 2400 7O1 | DTR | 20000 |
+| Uni-Trend | UT71B | - | `VC940Continuous` | 2400 7O1 | DTR | 200000 |
+| Uni-Trend | UT71CDE | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
+| Uni-Trend | UT803 | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
+| Uni-Trend | UT804 | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
+| V&A | VA18B ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| V&A | VA40B ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Velleman | DVM4100 ¹ | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
+| Vichy | VC99 | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Voltcraft | M-3610D | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
+| Voltcraft | M-3650D | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
+| Voltcraft | M-3860 | Metex ASCII | `Metex14` | 9600 7N2 | DTR | 20000 |
+| Voltcraft | M-4650CR | - | `Voltcraft14Continuous` | 1200 7N2 | DTR | 20000 |
+| Voltcraft | M-4660 | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 50000 |
+| Voltcraft | M-4660A | Metex ASCII | `Metex14` | 9600 7N2 | DTR | 50000 |
+| Voltcraft | M-4660M | Metex ASCII | `Metex14` | 9600 7N2 | DTR | 50000 |
+| Voltcraft | ME-11 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| Voltcraft | ME-22T | Metex ASCII | `Metex14` | 2400 7N2 | DTR | 4000 |
+| Voltcraft | ME-32 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| Voltcraft | ME-42 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| Voltcraft | MXD-4660A | Metex ASCII | `Metex14` | 9600 7N2 | DTR | 50000 |
+| Voltcraft | VC 630 | - | `Voltcraft14Continuous` | 4800 7N1 | DTR | 50000 |
+| Voltcraft | VC 635 | - | `Voltcraft15Continuous` | 2400 7N1 | DTR | 50000 |
+| Voltcraft | VC 650 | - | `Voltcraft14Continuous` | 4800 7N1 | DTR | 50000 |
+| Voltcraft | VC 655 | - | `Voltcraft15Continuous` | 2400 7N1 | DTR | 50000 |
+| Voltcraft | VC 670 | - | `Voltcraft14Continuous` | 4800 7N1 | DTR | 50000 |
+| Voltcraft | VC 820 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Voltcraft | VC 830 ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Voltcraft | VC 840 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Voltcraft | VC 870 | - | `VC870Continuous` | 9600 8N1 | DTR | 40000 |
+| Voltcraft | VC 920 | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
+| Voltcraft | VC 940 | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
+| Voltcraft | VC 960 | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
+| Wintex | TD2200 | ES51922 | `CyrustekES51922` | 19200 7N1 | DTR | 22000 |
 
-83 devices across 19 vendors.
+¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
+
+102 devices across 26 vendors.
