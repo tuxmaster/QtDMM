@@ -638,7 +638,7 @@ void MainWid::setGraphVisible(bool on)
 
 bool MainWid::graphVisible() const
 {
-  return m_settings->getBool("MainWindow/show-graph", true);
+  return m_settings->getBool("MainWindow/show-graph", false);
 }
 
 bool MainWid::dmmConfigured() const

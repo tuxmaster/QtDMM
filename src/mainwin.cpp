@@ -80,8 +80,9 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   m_meterDock->setObjectName("meterDock");
   m_meterDock->setWidget(m_meter);
   m_meterDock->setAllowedAreas(Qt::AllDockWidgetAreas);
-  addDockWidget(Qt::RightDockWidgetArea, m_meterDock);
-  m_meterDock->hide();
+  // default layout: display and meter side by side above the (hidden)
+  // graph - a compact instrument; the saved dock state overrides this
+  addDockWidget(Qt::TopDockWidgetArea, m_meterDock);
   m_wid->setMeter(m_meter);
   m_wid->setStateManager(m_stateMgr);
 
@@ -161,8 +162,10 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
     if (m_wid->saveWindowSize())
       resize(winRect.width(), winRect.height());
     else
-      resize(640, 480);
+      resize(550, 250);
   }
+  else
+    resize(550, 250);
 
   connect(m_stateMgr, &SharedStateManager::stateChanged, this, [=](const QString& state){
     if (state == "RECORD")
