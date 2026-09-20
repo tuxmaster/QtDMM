@@ -15,10 +15,12 @@ measured one.
    Names are used as variable names in formulas, so they may contain
    letters, digits and underscores only.
 2. Connect each of them to its meter as usual.
-3. Add a third instance, e.g. `p`, and open its settings. On the
-   *Multimeter* page choose the vendor **QtDMM** and the model
-   **Calculated value**. Instead of the port and protocol settings a
-   *Formula* group appears:
+3. Add a third instance, e.g. `p`. The quick way: the **ƒ** button in
+   *Instances* asks for the name, the unit and the formula, writes the
+   configuration and starts the instance already connected. The long way:
+   add a plain instance, open its settings and on the *Multimeter* page
+   choose the vendor **QtDMM** and the model **Calculated value**. Instead
+   of the port and protocol settings a *Formula* group appears:
     - **Unit** - the unit of the result without SI prefix: `W`, `V`, `A`,
       `Ohm`, ... QtDMM adds `m`, `k` and so on itself.
     - **Formula** - e.g. `u * i`. Below it QtDMM lists the variables with

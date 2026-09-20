@@ -4,37 +4,37 @@
 <context>
     <name>CalcDevice</name>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="53"/>
+        <location filename="../../src/portdevices/calc.cpp" line="54"/>
         <source>No unit given for the calculated value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="61"/>
+        <location filename="../../src/portdevices/calc.cpp" line="62"/>
         <source>Formula error at position %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="66"/>
+        <location filename="../../src/portdevices/calc.cpp" line="67"/>
         <source>No instance data available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="137"/>
+        <location filename="../../src/portdevices/calc.cpp" line="138"/>
         <source>Waiting for instance &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="139"/>
+        <location filename="../../src/portdevices/calc.cpp" line="140"/>
         <source>No current value from instance &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="141"/>
+        <location filename="../../src/portdevices/calc.cpp" line="142"/>
         <source>Instance &apos;%1&apos; shows no numeric value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/calc.cpp" line="143"/>
+        <location filename="../../src/portdevices/calc.cpp" line="144"/>
         <source>Formula has no result (division by zero?)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -500,23 +500,75 @@ DMM connected and switched on?</source>
 <context>
     <name>InstancesDlg</name>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="99"/>
+        <location filename="../../src/instancesdlg.cpp" line="261"/>
         <source>QtDMM - new instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="99"/>
+        <location filename="../../src/instancesdlg.cpp" line="261"/>
         <source>Instance name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="109"/>
+        <location filename="../../src/instancesdlg.cpp" line="224"/>
+        <location filename="../../src/instancesdlg.cpp" line="270"/>
         <source>Instance names may contain letters, digits and underscores and must not start with a digit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="115"/>
+        <location filename="../../src/instancesdlg.cpp" line="71"/>
+        <source>running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="73"/>
+        <source>offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="192"/>
+        <source>QtDMM - new calculated instance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="205"/>
+        <source>No instance is running yet; the variables are the instance names.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="206"/>
+        <source>Variables (running instances): %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="207"/>
+        <source>&amp;Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="208"/>
+        <source>&amp;Unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="209"/>
+        <source>&amp;Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="226"/>
+        <location filename="../../src/instancesdlg.cpp" line="276"/>
         <source>Instance already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="228"/>
+        <source>Please give a unit without spaces.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/instancesdlg.cpp" line="230"/>
+        <source>Position %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -556,63 +608,63 @@ DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="523"/>
+        <location filename="../../src/mainwid.cpp" line="525"/>
         <source>Automatic start at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="525"/>
+        <location filename="../../src/mainwid.cpp" line="527"/>
         <source>Raising threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="527"/>
+        <location filename="../../src/mainwid.cpp" line="529"/>
         <source>Falling threshold %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="548"/>
-        <location filename="../../src/mainwid.cpp" line="589"/>
+        <location filename="../../src/mainwid.cpp" line="550"/>
+        <location filename="../../src/mainwid.cpp" line="591"/>
         <source>QtDMM: Launch error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="549"/>
+        <location filename="../../src/mainwid.cpp" line="551"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="561"/>
+        <location filename="../../src/mainwid.cpp" line="563"/>
         <source>Yes, kill it!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="565"/>
+        <location filename="../../src/mainwid.cpp" line="567"/>
         <source>No, keep running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="590"/>
+        <location filename="../../src/mainwid.cpp" line="592"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="601"/>
+        <location filename="../../src/mainwid.cpp" line="603"/>
         <source>Bummer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="607"/>
+        <location filename="../../src/mainwid.cpp" line="609"/>
         <source>Launched %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="612"/>
+        <location filename="../../src/mainwid.cpp" line="614"/>
         <source>%1 terminated with exit code %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="654"/>
+        <location filename="../../src/mainwid.cpp" line="660"/>
         <source>no meter configured</source>
         <translation type="unfinished"></translation>
     </message>
@@ -640,63 +692,63 @@ DMM connected and switched on?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="89"/>
+        <location filename="../../src/mainwin.cpp" line="90"/>
         <source>Analog &amp;meter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="91"/>
+        <location filename="../../src/mainwin.cpp" line="92"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Analog meter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show the reading on a moving-coil style instrument. The panel can be docked on any side of the window or dragged out as a separate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="102"/>
+        <location filename="../../src/mainwin.cpp" line="103"/>
         <source>&amp;Lock panels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="104"/>
+        <location filename="../../src/mainwin.cpp" line="105"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lock panels&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hide the title bars of the display and meter panels. Unlock them to move the panels to another side of the window or to drag them out as separate windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="186"/>
+        <location filename="../../src/mainwin.cpp" line="189"/>
         <source>Another instance is running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="274"/>
+        <location filename="../../src/mainwin.cpp" line="294"/>
         <source>Record DMM data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="275"/>
+        <location filename="../../src/mainwin.cpp" line="295"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="278"/>
+        <location filename="../../src/mainwin.cpp" line="298"/>
         <source>This instance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="279"/>
+        <location filename="../../src/mainwin.cpp" line="299"/>
         <source>All instances</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="337"/>
+        <location filename="../../src/mainwin.cpp" line="359"/>
         <source>About QtDMM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="340"/>
+        <location filename="../../src/mainwin.cpp" line="362"/>
         <source>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;A readout and transient recorder for digital multimeters.&lt;/p&gt;&lt;p&gt;Built with &lt;b&gt;Qt&lt;/b&gt; %2. Licensed under the &lt;b&gt;GNU GPL 3&lt;/b&gt; (versions before 0.9.0 under GPL 2).&lt;/p&gt;&lt;p&gt;0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.&lt;br&gt;0.9.3 and before: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Website: &lt;a href=&apos;https://qtdmm.de&apos;&gt;qtdmm.de&lt;/a&gt; &amp;middot; Contact: &lt;a href=&apos;mailto:hello@qtdmm.de&apos;&gt;hello@qtdmm.de&lt;/a&gt;&lt;br&gt;Source and bug reports: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Icons (except the DMM icon) are taken from the KDE project.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="356"/>
+        <location filename="../../src/mainwin.cpp" line="378"/>
         <source>Supported devices...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1737,6 +1789,11 @@ You can enter your values with a suffix like m, u, n, p, k, M, G, T&lt;br&gt;Exa
     <message>
         <location filename="../../src/ui/uiinstancesdlg.ui" line="72"/>
         <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uiinstancesdlg.ui" line="86"/>
+        <source>add a calculated instance (a formula over the running instances, e.g. power = u * i)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
