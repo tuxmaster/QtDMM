@@ -129,7 +129,7 @@
        </size>
       </property>
      </widget>
-     <widget class="QTextBrowser" name="ui_page">
+     <widget class="HelpBrowser" name="ui_page">
       <property name="whatsThis">
        <string>The help page. Links inside the text navigate to other pages; web links open in your browser.</string>
       </property>
@@ -141,6 +141,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>HelpBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>helpbrowser.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

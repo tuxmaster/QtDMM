@@ -7,6 +7,7 @@
 #include <QDir>
 #include <QRegularExpression>
 #include <QDebug>
+#include <QElapsedTimer>
 
 #include "helpdlg.h"
 
@@ -97,9 +98,17 @@ int main(int argc, char **argv)
           QString("HelpDlg table of contents %1 differs from the links in index.md %2")
             .arg(dlg.contentPages().join(", "), linked.join(", ")));
     check(dlg.currentPage() == "index.md", "HelpDlg should open on index.md");
+    // the device table is the heaviest page; with the layout left enabled
+    // while parsing QTextBrowser needs seconds for it, not milliseconds
+    dlg.show();
+    QElapsedTimer timer;
+    timer.start();
     dlg.showPage("supported-devices.md");
+    const qint64 ms = timer.elapsed();
     check(dlg.currentPage() == "supported-devices.md",
           "showPage(\"supported-devices.md\") did not switch the page");
+    check(ms < 1500, QString("supported-devices.md took %1 ms to load").arg(ms));
+    qInfo() << "supported-devices.md loaded in" << ms << "ms";
   }
 
   if (failed == 0)

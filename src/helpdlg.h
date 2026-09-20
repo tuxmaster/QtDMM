@@ -5,6 +5,7 @@
 
 class Settings;
 
+
 // The handbook: renders the Markdown pages from docs/user/, embedded as
 // resources under :/Help/, in a QTextBrowser. The same files feed the MkDocs
 // site, so there is one source for both.
