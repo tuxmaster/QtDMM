@@ -107,7 +107,7 @@
     <message>
         <location filename="../../src/configdlg.cpp" line="79"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You seem to have upgraded &lt;b&gt;QtDMM&lt;/b&gt; from a version prior to 0.8.4. Please check your configuration. There are some new parameters to be configured.&lt;p&gt;Thank you for choosing &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</source>
-        <translation>&lt;font size=+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;p&gt;Wie es ausschaut, wurde &lt;b&gt;QtDMM&lt;/b&gt; von einer Version vor 0.8.4 aktualisiert. Bitte überprüfen Sie die Konfiguration. Es gibt einige neue Parameter.&lt;p&gt;Danke das Sie &lt;b&gt;QtDMM&lt;/b&gt; benutzen.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
+        <translation>&lt;font size=+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Wie es aussieht, wurde &lt;b&gt;QtDMM&lt;/b&gt; von einer Version vor 0.8.4 aktualisiert. Bitte überprüfen Sie die Konfiguration, es gibt einige neue Parameter.&lt;p&gt;Danke, dass Sie &lt;b&gt;QtDMM&lt;/b&gt; benutzen.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
     </message>
     <message>
         <location filename="../../src/configdlg.cpp" line="100"/>
@@ -191,7 +191,8 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <location filename="../../src/dmm.cpp" line="327"/>
         <source>The USB cable answers, but the meter sends nothing.
 Switch on the meter&apos;s serial output (on UNI-T meters: hold the RS232/USB button).</source>
-        <translation type="unfinished"></translation>
+        <translation>Das USB-Kabel antwortet, aber das Multimeter sendet nichts.
+Serielle Ausgabe am Multimeter einschalten (bei UNI-T: RS232/USB-Taste gedrückt halten).</translation>
     </message>
     <message>
         <location filename="../../src/dmm.cpp" line="330"/>
@@ -371,28 +372,28 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/displaywid.cpp" line="391"/>
         <source>HOLD</source>
-        <translation type="unfinished"></translation>
+        <translation>HOLD</translation>
     </message>
     <message>
         <location filename="../../src/displaywid.cpp" line="392"/>
         <source>AUTO</source>
-        <translation type="unfinished"></translation>
+        <translation>AUTO</translation>
     </message>
     <message>
         <location filename="../../src/displaywid.cpp" line="393"/>
         <source>MANU</source>
-        <translation type="unfinished"></translation>
+        <translation>MANU</translation>
     </message>
     <message>
         <location filename="../../src/displaywid.cpp" line="447"/>
         <location filename="../../src/displaywid.cpp" line="461"/>
         <source>MAX</source>
-        <translation type="unfinished"></translation>
+        <translation>MAX</translation>
     </message>
     <message>
         <location filename="../../src/displaywid.cpp" line="460"/>
         <source>MIN</source>
-        <translation type="unfinished"></translation>
+        <translation>MIN</translation>
     </message>
 </context>
 <context>
@@ -574,7 +575,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/instancesdlg.cpp" line="230"/>
         <source>Position %1: %2</source>
-        <translation type="unfinished">Position %1: %2</translation>
+        <translation>Position %1: %2</translation>
     </message>
 </context>
 <context>
@@ -630,7 +631,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/mainwid.cpp" line="551"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
-        <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %s läuft noch!&lt;p&gt;Wollen sie es jetzt beenden?</translation>
+        <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %1 läuft noch!&lt;p&gt;Wollen Sie es jetzt beenden?</translation>
     </message>
     <message>
         <location filename="../../src/mainwid.cpp" line="592"/>
@@ -679,7 +680,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
     <message>
         <location filename="../../src/mainwin.cpp" line="63"/>
         <source>Display</source>
-        <translation type="unfinished">DMM Anzeige</translation>
+        <translation>Anzeige</translation>
     </message>
     <message>
         <location filename="../../src/mainwin.cpp" line="71"/>
@@ -765,23 +766,23 @@ Please choose which instance should record.</translation>
     <message>
         <location filename="../../src/meterwid.cpp" line="479"/>
         <source>CURRENT</source>
-        <translation type="unfinished"></translation>
+        <translation>CURRENT</translation>
     </message>
     <message>
         <location filename="../../src/meterwid.cpp" line="480"/>
         <source>MAX</source>
-        <translation type="unfinished"></translation>
+        <translation>MAX</translation>
     </message>
     <message>
         <location filename="../../src/meterwid.cpp" line="485"/>
         <location filename="../../src/meterwid.cpp" line="498"/>
         <source>OL</source>
-        <translation type="unfinished"></translation>
+        <translation>OL</translation>
     </message>
     <message>
         <location filename="../../src/meterwid.cpp" line="515"/>
         <source>HOLD</source>
-        <translation type="unfinished"></translation>
+        <translation>HOLD</translation>
     </message>
 </context>
 <context>
@@ -839,7 +840,10 @@ Auf diesem System ist das Gerät in der Regel über die Gruppe &apos;%1&apos; zu
 Add your user with:
 
 sudo pw groupmod %1 -m $USER</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Benutzer hinzufügen mit:
+
+sudo pw groupmod %1 -m $USER</translation>
     </message>
     <message>
         <location filename="../../src/dmm.cpp" line="86"/>
@@ -1034,7 +1038,7 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="628"/>
         <source>Signal</source>
-        <translation type="unfinished"></translation>
+        <translation>Signal</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="634"/>
@@ -1074,7 +1078,7 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="651"/>
         <source>Sawtooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Sägezahn</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="652"/>
@@ -1555,7 +1559,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="35"/>
         <source>Display</source>
-        <translation>DMM Anzeige</translation>
+        <translation>Anzeige</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="73"/>
@@ -1575,7 +1579,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="191"/>
         <source>Tint of the LCD face of the digital display. The default is a classic greenish LCD.</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbton der LCD-Fläche der Digitalanzeige. Voreingestellt ist ein klassisches grünliches LCD.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="204"/>
@@ -1590,12 +1594,12 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="243"/>
         <source>Scale</source>
-        <translation type="unfinished">Skalierung</translation>
+        <translation>Skala</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="250"/>
         <source>How the analog meter lays out its scale. &lt;b&gt;Automatic&lt;/b&gt; starts with zero at the left and switches to a centre-zero scale as soon as a clearly negative reading arrives (until the min/max memory is reset). &lt;b&gt;Zero left&lt;/b&gt; and &lt;b&gt;Centre zero&lt;/b&gt; fix one layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wie das Zeigerinstrument seine Skala anlegt. &lt;b&gt;Automatisch&lt;/b&gt; beginnt mit der Null links und wechselt auf eine Skala mit Null in der Mitte, sobald ein deutlich negativer Wert kommt (bis der Min/Max-Speicher zurückgesetzt wird). &lt;b&gt;Null links&lt;/b&gt; und &lt;b&gt;Null in der Mitte&lt;/b&gt; legen eine Aufteilung fest.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="254"/>
@@ -1655,7 +1659,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="316"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiguiprefs.ui" line="335"/>
@@ -1732,7 +1736,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="14"/>
         <source>QtDMM: Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>QtDMM: Handbuch</translation>
     </message>
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="37"/>
@@ -1743,7 +1747,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="40"/>
         <source>Go back to the previously shown help page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück zur zuvor angezeigten Hilfeseite.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="56"/>
@@ -1754,7 +1758,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="59"/>
         <source>Go forward again after going back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach dem Zurückgehen wieder vorwärts.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="75"/>
@@ -1765,17 +1769,17 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="78"/>
         <source>Return to the table of contents.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück zum Inhaltsverzeichnis.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="107"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Schließen</translation>
+        <translation>&amp;Schließen</translation>
     </message>
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="123"/>
         <source>Table of contents. Click an entry to show that page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhaltsverzeichnis. Ein Eintrag zeigt die jeweilige Seite.</translation>
     </message>
     <message>
         <location filename="../../src/ui/uihelpdlg.ui" line="134"/>
@@ -2072,7 +2076,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="427"/>
         <source>&amp;Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Handbuch</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="430"/>
@@ -2082,7 +2086,7 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="433"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Handbook&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Open the QtDMM handbook: connecting a meter, the recorder, troubleshooting and the list of supported devices.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Handbuch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Das QtDMM-Handbuch öffnen: Multimeter anschließen, der Rekorder, Fehlersuche und die Liste der unterstützten Geräte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="469"/>
@@ -2608,7 +2612,7 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="34"/>
         <source>Scale</source>
-        <translation>Skalierung</translation>
+        <translation>Skala</translation>
     </message>
     <message>
         <location filename="../../src/ui/uiscaleprefs.ui" line="49"/>
