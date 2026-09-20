@@ -24,6 +24,7 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
 - Analog meter display with auto-ranging scale, dockable or as its own window
 - Several meters at once, one window each, recording in sync
 - Calculated values across meters (power from voltage and current, ...)
+- Virtual meter (sine, square, noise, discharge curve, ...) for demos and testing
 - various connection backends
   - RS232 Serial (USB-Serial and native UART)
   - USB HID-serial support (HOITEK HE2325U & compatible)

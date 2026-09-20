@@ -62,6 +62,8 @@ public:
   QString        device() const;
   /// True while the model "QtDMM / Calculated value" is chosen.
   bool           isCalculated() const;
+  /// True while the model "QtDMM / Virtual meter" is chosen.
+  bool           isVirtual() const;
   /// Source of the other instances' readings, shown as a hint below the formula.
   void           setStateManager(SharedStateManager *state);
 
@@ -80,6 +82,8 @@ protected Q_SLOTS:
   void           on_ui_externalSetup_toggled();
   /// Re-parses the formula and refreshes the hint (variables, live values, errors).
   void           updateCalcHint();
+  /// Rebuilds the virtual meter's formula from the waveform fields.
+  void           updateVirtualFormula();
 
 protected:
   QString        m_path;

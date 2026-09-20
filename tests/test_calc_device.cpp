@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include <QSharedMemory>
 #include <QDebug>
+#include <cmath>
 
 #include "sharedstatemanager.h"
 #include "portdevices/calc.h"
@@ -137,6 +138,22 @@ int main(int argc, char **argv)
   check(alias.open(QIODevice::ReadWrite), "aliased id opens");
   r = decode(alias.currentLine(now + 3, &status));
   check(r && qFuzzyCompare(r->dval, 6.0) && status.isEmpty(), "uni-t_803 is reachable as uni_t_803");
+
+  // --- 5b. time and coupling: a signal generator needs no other instance ---
+  {
+    CalcDevice gen(info, "V/AC 10 + t", &p);
+    check(gen.open(QIODevice::ReadWrite), "generator opens");
+    check(gen.unit() == "V" && gen.coupling() == "AC", "unit/coupling split: " + gen.unit() + "/" + gen.coupling());
+    // t counts from open(); currentLine() takes the reference time
+    const qint64 opened = QDateTime::currentMSecsSinceEpoch();
+    r = decode(gen.currentLine(opened + 2500, &status));
+    check(r && status.isEmpty() && r->special == "AC", "AC coupling in the line");
+    check(r && std::fabs(r->dval - 12.5) < 0.01, QString("t = 2.5 s -> 12.5, got %1").arg(r ? r->dval : -1));
+    CalcDevice rnd(info, "V 5 + rand()", &p);
+    check(rnd.open(QIODevice::ReadWrite), "rand() opens");
+    r = decode(rnd.currentLine(opened, nullptr));
+    check(r && r->dval >= 5.0 && r->dval < 6.0, "rand() based reading in range");
+  }
 
   // --- 6. the QIODevice side: tick() offers the line, readData hands it out bytewise ---
   {

@@ -2,6 +2,7 @@
 #include "siprefix.h"
 
 #include <QCoreApplication>
+#include <QRandomGenerator>
 #include <cmath>
 
 // Recursive descent over the source string. Precedence, loosest first:
@@ -168,6 +169,8 @@ struct CalcExpr::Parser
 
     if (!accept('('))
     {
+      if (id == "pi")
+        return add({Op::Num, M_PI, -1, -1, -1});
       int idx = e.m_variables.indexOf(id);
       if (idx < 0)
       {
@@ -183,10 +186,22 @@ struct CalcExpr::Parser
     if (id == "sqrt")       op = Op::Sqrt;
     else if (id == "abs")   op = Op::Abs;
     else if (id == "log10") op = Op::Log10;
+    else if (id == "sin")   op = Op::Sin;
+    else if (id == "cos")   op = Op::Cos;
+    else if (id == "exp")   op = Op::Exp;
+    else if (id == "floor") op = Op::Floor;
     else if (id == "min")   { op = Op::Min; arity = 2; }
     else if (id == "max")   { op = Op::Max; arity = 2; }
+    else if (id == "rand")  { op = Op::Rand; arity = 0; }
     else
       return fail(QCoreApplication::translate("CalcExpr", "Unknown function '%1'").arg(id), start);
+
+    if (arity == 0)
+    {
+      if (!accept(')'))
+        return fail(QCoreApplication::translate("CalcExpr", "'%1' takes no arguments").arg(id), pos);
+      return add({op, 0, -1, -1, -1});
+    }
 
     int a = expr();
     int b = -1;
@@ -201,6 +216,33 @@ struct CalcExpr::Parser
     return add({op, 0, -1, a, b});
   }
 };
+
+// The waveforms as formulas over t (seconds since connecting). Kept as
+// plain text so the Custom choice can start from any of them.
+QString CalcExpr::waveformFormula(Waveform waveform, const QString &min, const QString &max,
+                                 const QString &period, const QString &noise)
+{
+  const QString lo = "(" + min.trimmed() + ")";
+  const QString hi = "(" + max.trimmed() + ")";
+  const QString span = "(" + hi + " - " + lo + ")";
+  const QString P = "(" + period.trimmed() + ")";
+  QString f;
+  switch (waveform)
+  {
+    case Constant: f = hi; break;                                                          // Constant
+    case Random: f = lo + " + " + span + " * rand()"; break;                             // Random
+    case Sine: f = lo + " + " + span + " * (0.5 + 0.5 * sin(2 * pi * t / " + P + "))"; break;
+    case Triangle: f = lo + " + " + span + " * abs(2 * (t / " + P + " - floor(t / " + P + " + 0.5)))"; break;
+    case Square: f = lo + " + " + span + " * (floor(2 * t / " + P + ") - 2 * floor(t / " + P + "))"; break;
+    case Sawtooth: f = lo + " + " + span + " * (t / " + P + " - floor(t / " + P + "))"; break;
+    case Discharge: f = lo + " + " + span + " * exp(-t / " + P + ")"; break;               // Discharge
+    default: return QString();                                                      // Custom
+  }
+  const double n = noise.trimmed().toDouble();
+  if (n > 0)
+    f += " + " + noise.trimmed() + " * (rand() - 0.5)";
+  return f;
+}
 
 std::optional<CalcExpr> CalcExpr::parse(const QString &text, QString *error, int *errorPos)
 {
@@ -267,8 +309,13 @@ double CalcExpr::evalNode(int idx, const QMap<QString, double> &values, bool &ok
     case Op::Sqrt:  return std::sqrt(A());
     case Op::Abs:   return std::fabs(A());
     case Op::Log10: return std::log10(A());
+    case Op::Sin:   return std::sin(A());
+    case Op::Cos:   return std::cos(A());
+    case Op::Exp:   return std::exp(A());
+    case Op::Floor: return std::floor(A());
     case Op::Min:   return std::min(A(), B());
     case Op::Max:   return std::max(A(), B());
+    case Op::Rand:  return QRandomGenerator::global()->generateDouble();
   }
   ok = false;
   return 0;
