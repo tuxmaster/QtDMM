@@ -4,23 +4,28 @@
 
 #include "dmmdecoder.h"
 
+class SharedStateManager;
+
 /// Owns the QIODevice a meter is talked to through and hides which kind it is.
 ///
 /// The concrete devices live in src/portdevices/: a real serial port
 /// (SerialDevice), a USB HID cable (HIDSerialDevice), a serial port shared
-/// over the network (RFC2217SerialDevice) and sigrok-cli as a data source
-/// (SigrokDevice). DMM only ever sees the QIODevice returned by port().
+/// over the network (RFC2217SerialDevice), sigrok-cli as a data source
+/// (SigrokDevice) and a formula over other instances' readings
+/// (CalcDevice). DMM only ever sees the QIODevice returned by port().
 class PortHandler : public QObject
 {
     Q_OBJECT
 public:
     /// The kinds of port; the settings file stores them by name (str2portType()).
-    enum class PortType { None, Serial, Hid, Sigrok, RFC2217 };
+    enum class PortType { None, Serial, Hid, Sigrok, RFC2217, Calc };
 
     explicit PortHandler(QObject *parent = Q_NULLPTR) : QObject(parent) {}
     /// Creates the device object for @p type (closing any previous one). The
     /// port is not opened yet; call port()->open() and then init().
     bool create(const DmmDecoder::DMMInfo spec, PortType type, QString device);
+    /// The instance coordinator a CalcDevice reads its inputs from.
+    void setStateManager(SharedStateManager *state) { m_state = state; }
     /// Closes and deletes the current device, if any.
     void close();
 
@@ -37,10 +42,11 @@ public:
     bool        init();
     bool        isOpen() const { return m_port != Q_NULLPTR && m_port->isOpen(); };
 
-    /// "serial", "hid", "sigrok" or "rfc2217" (case-insensitive) to PortType.
+    /// "serial", "hid", "sigrok", "rfc2217" or "calc" (case-insensitive) to PortType.
     static PortType str2portType(const QString str);
 private:
     QIODevice *m_port   = Q_NULLPTR;
     PortType   m_type   = PortType::None;
     QString    m_device;
+    SharedStateManager *m_state = Q_NULLPTR;
 };

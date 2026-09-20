@@ -27,6 +27,7 @@
 
 #include "dmm.h"
 #include "portdevices/hidserial.h"
+#include "portdevices/calc.h"
 #include "decoders.h"
 
 #include <stdio.h>
@@ -149,8 +150,18 @@ void DMM::setSpeed(int speed)
 void DMM::setDevice(const QString &device)
 {
   QStringList deviceList = device.split( " " );
-  m_device = deviceList.last();
   m_portType = PortHandler::str2portType(deviceList.first());
+  // "calc <unit> <formula>": the formula may contain spaces, so keep
+  // everything after the type token; the other types take the last token
+  if (m_portType == PortHandler::PortType::Calc)
+    m_device = device.section(' ', 1).trimmed();
+  else
+    m_device = deviceList.last();
+}
+
+void DMM::setStateManager(SharedStateManager *state)
+{
+  m_portHandler->setStateManager(state);
 }
 
 void DMM::initDecoder( ReadEvent::DataFormat df)
@@ -174,6 +185,14 @@ bool DMM::open()
 
   if (m_portHandler->port() && !m_portHandler->port()->open(QIODevice::ReadWrite))
   {
+    if (m_portType == PortHandler::PortType::Calc)
+    {
+      // the formula did not parse; the device says where
+      m_error = m_portHandler->port()->errorString();
+      Q_EMIT error(m_error);
+      m_portHandler->close();
+      return false;
+    }
     switch (m_portHandler->error())
     {
       case QSerialPort::PermissionError:
@@ -204,12 +223,29 @@ bool DMM::open()
   }
   m_error = tr("Connecting ...");
   Q_EMIT error(m_error);
+  if (auto *calc = dynamic_cast<CalcDevice *>(m_portHandler->port()))
+  {
+    // which input instance is missing or silent; shown in the status bar
+    // instead of "Connected" until all inputs deliver
+    connect(calc, &CalcDevice::status, this, [this](const QString &message)
+    {
+      m_error = message.isEmpty() ? connectedMessage() : message;
+      Q_EMIT error(m_error);
+    });
+  }
   m_readerThread->setHandle(m_portHandler->port());
   timerEvent(0);
 
   // mt: added timer id
   m_delayTimer = startTimer(1000);
   return true;
+}
+
+QString DMM::connectedMessage() const
+{
+  if (m_portType == PortHandler::PortType::Calc)
+    return tr("Calculating %1").arg(m_device.section(' ', 1));
+  return tr("Connected %1").arg(m_device);
 }
 
 QString DMM::permissionHint() const
@@ -273,7 +309,7 @@ void DMM::readEventSLOT(const QByteArray &data, int id)
       Q_EMIT value(r->dval, r->val, r->unit, r->special, r->range, r->hold, r->showBar, r->id);
       if (r->id2 > 0)
         Q_EMIT value(r->dval2, r->val2, r->unit2, r->special, r->range, r->hold, r->showBar, r->id2);
-      m_error = r->error.isEmpty() ? tr("Connected %1").arg(m_device) : QString("%1 %2").arg(r->error, m_device);
+      m_error = r->error.isEmpty() ? connectedMessage() : QString("%1 %2").arg(r->error, m_device);
     }
     else
       m_error = tr("Error %1").arg(m_device);

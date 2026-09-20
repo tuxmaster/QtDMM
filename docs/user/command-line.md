@@ -19,7 +19,9 @@ further instances from **Instances** (Ctrl+N): *Add* asks for a name and
 launches a new QtDMM with that id; the list shows which instances are
 configured and which are running, and lets you open or remove them. Running
 instances know about each other through shared memory — the same mechanism
-that stops two windows from using the `default` id at once.
+that stops two windows from using the `default` id at once. An instance can
+also compute its value from the others' readings, see
+[Calculated values](calculated-values.md).
 
 ## Debug output
 

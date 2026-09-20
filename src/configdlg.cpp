@@ -185,6 +185,11 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
   adjustSize();
 }
 
+void ConfigDlg::setStateManager(SharedStateManager *state)
+{
+  m_dmm->setStateManager(state);
+}
+
 void ConfigDlg::showPage(ConfigDlg::PageType page)
 {
   PrefWidget *wid = Q_NULLPTR;

@@ -28,6 +28,9 @@
 #include "ui_uidmmprefs.h"
 #include "readevent.h"
 #include "dmmdecoder.h"
+#include <QTimer>
+
+class SharedStateManager;
 
 /// Settings page "Multimeter": vendor/model choice (from the registered
 /// DmmDecoder::DMMInfo entries), port and the serial parameters, which
@@ -54,8 +57,13 @@ public:
   /// Display counts (4000, 6000, ...).
   int            display() const;
   QString        dmmName() const;
-  /// The port entry as typed or chosen, e.g. "/dev/ttyUSB0" or "HID 0x1a86:0xe008 ...".
+  /// The port entry as typed or chosen, e.g. "/dev/ttyUSB0" or "HID 0x1a86:0xe008 ...";
+  /// for a calculated value "calc <unit> <formula>".
   QString        device() const;
+  /// True while the model "QtDMM / Calculated value" is chosen.
+  bool           isCalculated() const;
+  /// Source of the other instances' readings, shown as a hint below the formula.
+  void           setStateManager(SharedStateManager *state);
 
 public Q_SLOTS:
   virtual void   defaultsSLOT() Q_DECL_OVERRIDE;
@@ -70,6 +78,8 @@ protected Q_SLOTS:
   /// Save the current settings as a DMM description (.cfg).
   void           on_ui_save_clicked();
   void           on_ui_externalSetup_toggled();
+  /// Re-parses the formula and refreshes the hint (variables, live values, errors).
+  void           updateCalcHint();
 
 protected:
   QString        m_path;
@@ -81,4 +91,9 @@ protected:
   void populateModelsForVendor(const QString &vendor);
   void populateAllModels();
   void enterManualMode();
+  /// Shows the formula group instead of the port/protocol groups, or back.
+  void updateCalcMode();
+
+  SharedStateManager *m_state = Q_NULLPTR;
+  QTimer m_calcHintTimer;
 };

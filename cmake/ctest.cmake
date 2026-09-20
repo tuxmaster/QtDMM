@@ -56,6 +56,15 @@ if (BUILD_TESTING)
 	target_link_libraries(${TEST_CALC} PRIVATE Qt::Core)
 	add_test(NAME calc_expression COMMAND ${TEST_CALC})
 
+	## the calculated-value source: formula over the other instances' readings,
+	## checked through the real ASCII decoder
+	set( TEST_CALC_DEVICE test_calc_device)
+	add_executable(${TEST_CALC_DEVICE} MACOSX_BUNDLE tests/test_calc_device.cpp src/portdevices/calc.cpp src/calcexpr.cpp
+		src/sharedstatemanager.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})
+	target_include_directories(${TEST_CALC_DEVICE} PRIVATE src)
+	target_link_libraries(${TEST_CALC_DEVICE} PRIVATE Qt::Core)
+	add_test(NAME calc_device COMMAND ${TEST_CALC_DEVICE})
+
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)
 	find_package(Python3 COMPONENTS Interpreter)

@@ -62,6 +62,17 @@ message appear anyway, no other QtDMM is running, and it persists across
 restarts, remove the shared memory segment with `ipcs -m` / `ipcrm` or simply
 reboot.
 
+## A calculated instance shows OL and "Waiting for instance ..."
+
+The formula names an instance that is not running, or one that has not
+delivered a reading for three seconds (*No current value from instance
+...*), or whose meter shows an overload itself. The status line names the
+variable; the *Formula* group on the Multimeter page lists all variables
+with their current values and the running instances. Remember that instance
+names with a hyphen are written with an underscore in formulas. *Formula
+error at position n* means the formula does not parse; the position is
+counted from 1.
+
 ## Readings look right on the meter but wrong in QtDMM
 
 Check the model chosen on the DMM page — several meters share a protocol and

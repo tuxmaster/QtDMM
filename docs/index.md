@@ -16,6 +16,8 @@ software and continues to work on current **Linux** and **macOS** systems
   - Scheduled start at a specific time
   - Automatic start triggered when defined thresholds are reached
 - Analog meter display with auto-ranging scale, dockable or as its own window
+- Several meters at once, one window each, recording in sync
+- Calculated values across meters (power from voltage and current, ...)
 - various connection backends
   - RS232 Serial (USB-Serial and native UART)
   - USB HID-serial support (HOITEK HE2325U & compatible)
