@@ -628,6 +628,10 @@ void MainWid::showTipsSLOT()
 void MainWid::setGraphVisible(bool on)
 {
   ui_graph->setVisible(on);
+  // the graph is all this frame shows; without it collapse the frame so the
+  // panels get the space and no empty strip remains
+  setFrameShape(on ? QFrame::StyledPanel : QFrame::NoFrame);
+  setMaximumHeight(on ? QWIDGETSIZE_MAX : 0);
   m_settings->setBool("MainWindow/show-graph", on);
   m_settings->save();
 }
