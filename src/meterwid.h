@@ -38,6 +38,8 @@ struct MeterStyle
   QColor lampOff;
   QColor lampOn;
   QColor hold;   ///< HOLD indicator
+  QColor minMark;   ///< min/max memory marks on the arc
+  QColor maxMark;
   bool   percentScale = true;   ///< inner 0..100 % arc
   bool   ballistics = true;   ///< damped needle movement
   double redZoneFrom = 0.9;   ///< fraction of full scale
@@ -75,6 +77,8 @@ public:
   void setReading(double value, const QString &text, const QString &unit, bool overload, bool hold);
   void setFullScale(double fs);   ///< > 0, in display units
   void setPeak(double value);   ///< MAX box, display units; NaN hides it
+  /// Min/max memory as marks on the scale arc (display units; NaN hides one).
+  void setMinMax(double minValue, double maxValue);
   void setScaleMode(ScaleMode mode);
   /// Colours and options; the static layers are re-rendered.
   void setStyle(const MeterStyle &style);
@@ -119,6 +123,7 @@ private:
   void drawNeedle(QPainter &p, const Geometry &g) const;
   void drawReadouts(QPainter &p, const Geometry &g) const;
   void drawLamp(QPainter &p, const Geometry &g) const;
+  void drawMarks(QPainter &p, const Geometry &g) const;
   void retarget();
   void stepBallistics();
 
@@ -135,6 +140,8 @@ private:
   bool m_overload = false;
   bool m_hold = false;
   double m_peak;   ///< NaN = none
+  double m_markMin;   ///< NaN = none
+  double m_markMax;
 
   double m_angle = -45.0;   ///< where the needle is
   double m_velocity = 0.0;

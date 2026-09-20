@@ -203,6 +203,34 @@ int main(int argc, char **argv)
       check(red, "red zone is painted at the top end of the scale");
     }
 
+    // min/max marks: a green triangle just outside the arc at the max value,
+    // a red one at the min; both gone after reset()
+    {
+      auto markColor = [&](const QImage &img, double value, bool wantGreen)
+      {
+        const double a = MeterWid::angleForValue(value, 4.0, false) * M_PI / 180.0;
+        for (double f = 0.90; f <= 0.98; f += 0.01)
+        {
+          const QPoint pt(int(pivot.x() + radius * f * std::sin(a)), int(pivot.y() - radius * f * std::cos(a)));
+          if (!img.rect().contains(pt)) continue;
+          const QRgb px = img.pixel(pt);
+          if (wantGreen && qGreen(px) > 150 && qRed(px) < 120) return true;
+          if (!wantGreen && qRed(px) > 150 && qGreen(px) < 110) return true;
+        }
+        return false;
+      };
+      w.setReading(2.0, "2.000", "V DC", false, false);
+      w.setMinMax(1.0, 3.0);
+      QImage marks = render(w, size);
+      check(markColor(marks, 3.0, true), "green max mark at 3.0");
+      check(markColor(marks, 1.0, false), "red min mark at 1.0");
+      if (!dump.isEmpty()) marks.save(QDir(dump).filePath("meter_dark_marks.png"));
+      w.reset();
+      QImage cleared = render(w, size);
+      check(!markColor(cleared, 3.0, true) && !markColor(cleared, 1.0, false), "reset() removes the marks");
+      w.setMinMax(1.0, 3.0);
+    }
+
     // other variants for the dump
     if (!dump.isEmpty())
     {

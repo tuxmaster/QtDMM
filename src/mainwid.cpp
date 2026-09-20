@@ -306,9 +306,13 @@ void MainWid::feedMeter(const QString &val, const QString &unit, const QString &
   const double value = overload ? 0.0 : QString(val).remove(' ').toDouble();
   m_meter->setReading(value, val, label, overload, hold);
 
-  // min/max memory is kept in SI base units; bring the peak into display units
-  if (m_max > -1.0E19)
-    m_meter->setPeak(m_max / SiPrefix::factor(SiPrefix::split(unit).prefix));
+  // min/max memory is kept in SI base units; bring it into display units
+  const double factor = SiPrefix::factor(SiPrefix::split(unit).prefix);
+  const double minMark = m_min < 1.0E19 ? m_min / factor : std::nan("");
+  const double maxMark = m_max > -1.0E19 ? m_max / factor : std::nan("");
+  if (!std::isnan(maxMark))
+    m_meter->setPeak(maxMark);
+  m_meter->setMinMax(minMark, maxMark);
 }
 
 void MainWid::resetSLOT()
