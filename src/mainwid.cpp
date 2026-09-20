@@ -36,6 +36,7 @@
 #include "tipdlg.h"
 #include "settings.h"
 #include "instancesdlg.h"
+#include "sharedstatemanager.h"
 
 
 
@@ -44,6 +45,7 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
   m_max(-1.0E20),
   m_display(0),
   m_meter(nullptr),
+  m_stateMgr(nullptr),
   m_dval(0.0),
   m_tipDlg(0)
 {
@@ -250,9 +252,28 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
   }
 
   if (id == 0)
+  {
     feedMeter(val, u, s, hold);
 
+    // let the other instances see this value (calculated values, P = U * I)
+    if (m_stateMgr)
+    {
+      SharedStateManager::Reading reading;
+      reading.value = dval;
+      reading.unit = SiPrefix::split(u).baseUnit;
+      reading.special = s;
+      reading.msecs = QDateTime::currentMSecsSinceEpoch();
+      reading.valid = !hold && !val.contains(QRegularExpression("[A-Za-z]"));
+      m_stateMgr->publishReading(reading);
+    }
+  }
+
   m_display->update();
+}
+
+void MainWid::setStateManager(SharedStateManager *mgr)
+{
+  m_stateMgr = mgr;
 }
 
 // The analog meter works in the unit the multimeter displays (with prefix),

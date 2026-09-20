@@ -42,6 +42,14 @@ if (BUILD_TESTING)
 	target_link_libraries(${TEST_DISPLAY} PRIVATE Qt6::Widgets Qt::Core)
 	add_test(NAME digital_display COMMAND ${TEST_DISPLAY})
 
+	## instance coordination over shared memory: registration, state channel
+	## and published readings
+	set( TEST_SHAREDSTATE test_sharedstate)
+	add_executable(${TEST_SHAREDSTATE} MACOSX_BUNDLE tests/test_sharedstate.cpp src/sharedstatemanager.cpp)
+	target_include_directories(${TEST_SHAREDSTATE} PRIVATE src)
+	target_link_libraries(${TEST_SHAREDSTATE} PRIVATE Qt::Core)
+	add_test(NAME shared_state COMMAND ${TEST_SHAREDSTATE})
+
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)
 	find_package(Python3 COMPONENTS Interpreter)
