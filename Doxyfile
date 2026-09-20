@@ -28,8 +28,19 @@ SOURCE_BROWSER         = YES
 STRIP_CODE_COMMENTS    = NO
 GENERATE_TREEVIEW      = YES
 GENERATE_LATEX         = NO
-HAVE_DOT               = NO
+# Diagrams need graphviz ("dot"); without it doxygen falls back to the
+# text-only class hierarchy and warns once.
+HAVE_DOT               = YES
+DOT_IMAGE_FORMAT       = svg
+INTERACTIVE_SVG        = YES
 CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+DIRECTORY_GRAPH        = YES
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO
+DOT_MULTI_TARGETS      = YES
 QUIET                  = YES
 WARN_IF_UNDOCUMENTED   = NO
 WARN_NO_PARAMDOC       = NO

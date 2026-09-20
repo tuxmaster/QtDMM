@@ -1,13 +1,15 @@
 # The recorder
 
-The graph below the display records one reading per sampling interval. What it
+The recorder graph — shown with the **Graph** toolbar button, hidden by
+default and brought up automatically when a recording starts — records one
+reading per sampling interval. What it
 records is the meter's primary value in base units — a reading of 12.3 mV is
 stored as 0.0123 V — so the curve stays continuous when the meter changes
 range.
 
 ## Sampling
 
-**Settings → Recorder** (Ctrl+F2) sets:
+**Settings → Recording** (Ctrl+F2) sets:
 
 - **Sample every** — the interval, in tenths of a second, seconds, minutes,
   hours or days. With an interval longer than the meter's own rate you get the average
@@ -15,12 +17,12 @@ range.
 - **Sample time** — how long to record; the recorder stops by itself when it
   is reached. Leave it at zero to record until stopped.
 
-**Settings → Scale** sets the visible window and the vertical scale
+**Settings → Scales** sets the visible window and the vertical scale
 (automatic, or a fixed minimum and maximum).
 
 ## Starting and stopping
 
-Three start modes, chosen on the Recorder page:
+Three start modes, chosen on the Recording page:
 
 - **Manual** — *Start* (Ctrl+S) and *Stop* (Ctrl+X) in the toolbar, or the
   graph's right-click menu.
@@ -32,11 +34,11 @@ Three start modes, chosen on the Recorder page:
 
 *Clear* (Del) empties the recording. QtDMM warns before you lose unsaved data
 by clearing, importing or quitting; the warning can be switched off under
-**Settings → GUI**.
+**Settings → Appearance**.
 
 ## External command
 
-**Settings → Execute** runs a program when the reading crosses a threshold
+**Settings → External application** runs a program when the reading crosses a threshold
 (raising or falling edge), for example to switch something off. Optionally
 QtDMM disconnects from the meter first so the command can use the serial
 port.
@@ -45,7 +47,7 @@ port.
 
 - **Mouse wheel** zooms the time axis; the **middle button** drags it.
 - Hovering shows a crosshair with time and value at the cursor.
-- **Integration** (Settings → Integration) draws a second curve: the running
+- **Integration** (Settings → Integration curve) draws a second curve: the running
   sum of the readings above a threshold, scaled and offset as configured — for
   charge or energy over time.
 - **Print** (Ctrl+P) prints the graph with a title and comment.

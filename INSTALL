@@ -1,15 +1,22 @@
 QtDMM Installation Instructions
-(c) 2001–2014 M. Toussaint
+(c) 2001–2014 M. Toussaint, 2025–2026 tuxmaster and contributors
 
-QtDMM is a graphical front-end for digital multimeters based on Qt6 framework.
+QtDMM is a graphical front-end for digital multimeters based on the Qt 6
+framework. Website: https://qtdmm.de
 
 
 Requirements:
 =============
-- developer version of Qt 6, qserialport
+- Qt 6 development files with the SerialPort, Charts, PrintSupport, Network
+  and LinguistTools modules (Debian/Ubuntu: qt6-base-dev qt6-serialport-dev
+  qt6-charts-dev qt6-tools-dev qt6-tools-dev-tools)
 - CMake version 3.16 or higher
-- hidapi (ubuntu: libhidapi-devel, libhidapi-hidraw0 | fedora: hidapi-devel, hidapi | MacOSX/FreeBSD: hidapi )
-- A supported or compatible multimeter
+- hidapi (ubuntu: libhidapi-dev | fedora: hidapi-devel | MacOSX/FreeBSD: hidapi;
+  Windows: fetched automatically)
+- optional: python3 for the documentation checks in ctest, doxygen and
+  graphviz for the developer documentation (./compile.sh doxygen)
+- A supported or compatible multimeter - or none: the built-in virtual
+  meter and the calculated values work without hardware
 
 
 Compilation:

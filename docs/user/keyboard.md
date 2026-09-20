@@ -13,8 +13,8 @@
 | Ctrl+I | Import a CSV file |
 | Ctrl+P | Print the graph |
 | F2 | Settings |
-| Shift+F2 | Settings, DMM page |
-| Ctrl+F2 | Settings, Recorder page |
+| Shift+F2 | Settings, Multimeter page |
+| Ctrl+F2 | Settings, Recording page |
 | Ctrl+N | Manage instances |
 | Ctrl+M | Open the menu |
 | F1 | This handbook |
