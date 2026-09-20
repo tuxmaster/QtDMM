@@ -4,6 +4,7 @@
 
 #include <QCoreApplication>
 #include <QDateTime>
+#include <cmath>
 
 // Registered like a meter so it appears in the model list (vendor "QtDMM")
 // and in the supported-devices table. Protocol Sigrok: the ASCII decoder
@@ -145,7 +146,7 @@ QByteArray CalcDevice::currentLine(qint64 now, QString *status) const
     if (result)
     {
       QString prefix;
-      const QString value = SiPrefix::format(*result, &prefix);
+      const QString value = formatValue(*result, m_dmmInfo.display, &prefix);
       line = m_special.toUtf8() + " " + value.toUtf8() + " " + (prefix + m_unit).toUtf8() + " AUTO";
     }
     else
@@ -162,6 +163,19 @@ QByteArray CalcDevice::currentLine(qint64 now, QString *status) const
   if (status)
     *status = message;
   return line;
+}
+
+QString CalcDevice::formatValue(double value, int counts, QString *prefix)
+{
+  const double scaled = SiPrefix::scale(value, prefix);
+  // a 40000 count display has 5 digits; keep that many significant digits
+  int digits = 0;
+  for (int c = qMax(1, counts); c > 0; c /= 10)
+    digits++;
+  digits = qBound(3, digits, 9);
+  const double mag = scaled == 0.0 ? 0.0 : std::floor(std::log10(std::fabs(scaled)));
+  const int decimals = qBound(0, digits - 1 - static_cast<int>(mag), 9);
+  return QString::number(scaled, 'f', decimals);
 }
 
 void CalcDevice::tick()
