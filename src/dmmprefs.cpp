@@ -58,6 +58,9 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
   message2->hide();
   ui_calcGroup->hide();
   ui_bleGroup->hide();
+  ui_sigrokGroup->hide();
+  connect(ui_sigrokHint, &QLabel::linkActivated, this, &DmmPrefs::showPortsPage);
+  connect(ui_sigrokDriver, &QLineEdit::textChanged, this, &DmmPrefs::updateSigrokHint);
   connect(ui_bleKey, &QLineEdit::textChanged, this, &DmmPrefs::updateBleHint);
   connect(ui_bleAddress, &QComboBox::currentTextChanged, this, &DmmPrefs::updateBleHint);
   ui_virtualGroup->hide();
@@ -253,6 +256,8 @@ void DmmPrefs::defaultsSLOT()
   m_portlist->setStringList(list);
 
   port->setCurrentText        (m_cfg->getString("Port settings/device"));
+  ui_sigrokConn->setCurrentText(m_cfg->getString("Port settings/sigrok-conn"));
+  ui_sigrokOptions->setText   (m_cfg->getString("Port settings/sigrok-options"));
   ui_bleAddress->setCurrentText(m_cfg->getString("Port settings/ble-address"));
   ui_bleKey->setText          (m_cfg->getString("Port settings/ble-key"));
   updateBleFields();
@@ -330,6 +335,8 @@ void DmmPrefs::factoryDefaultsSLOT()
 void DmmPrefs::applySLOT()
 {
   m_cfg->setString("Port settings/device", port->currentText());
+  m_cfg->setString("Port settings/sigrok-conn", ui_sigrokConn->currentText().trimmed());
+  m_cfg->setString("Port settings/sigrok-options", ui_sigrokOptions->text().trimmed());
   m_cfg->setString("Port settings/ble-address", ui_bleAddress->currentText().trimmed());
   m_cfg->setString("Port settings/ble-key", ui_bleKey->text().trimmed());
   m_cfg->setString("Port settings/ble-main", ui_bleMain->currentData().toString());
@@ -373,6 +380,11 @@ void DmmPrefs::on_ui_externalSetup_toggled()
     stopBitsCombo->setDisabled(ui_externalSetup->isChecked());
     parityCombo->setDisabled(ui_externalSetup->isChecked());
   }
+}
+
+bool DmmPrefs::isSigrokMeter() const
+{
+  return ui_vendor->currentIndex() != 0 && m_dmmInfo.protocol == ReadEvent::Sigrok && !m_dmmInfo.sigrokDriver.isEmpty();
 }
 
 bool DmmPrefs::isBluetooth() const
@@ -421,11 +433,33 @@ void DmmPrefs::updateCalcMode()
   const bool calc = isCalculated();
   const bool virt = isVirtual();
   const bool ble = isBluetooth();
-  ButtonGroup11->setVisible(!calc && !virt && !ble);
+  const bool sigrok = isSigrokMeter();
+  ButtonGroup11->setVisible(!calc && !virt && !ble && !sigrok);
   ui_protocol->setVisible(!calc && !virt);
   ui_calcGroup->setVisible(calc);
   ui_virtualGroup->setVisible(virt);
   ui_bleGroup->setVisible(ble);
+  ui_sigrokGroup->setVisible(sigrok);
+  if (sigrok)
+  {
+    // the model's driver, unless the user typed another one for this model
+    if (ui_sigrokDriver->property("model").toString() != m_dmmInfo.model)
+    {
+      ui_sigrokDriver->setProperty("model", m_dmmInfo.model);
+      ui_sigrokDriver->setText(m_dmmInfo.sigrokDriver);
+    }
+    if (ui_sigrokConn->count() == 0)
+    {
+      // serial ports first; USB-TMC and LAN are typed in
+      QStringList ports;
+      for (const QSerialPortInfo &info : QSerialPortInfo::availablePorts())
+        ports << info.systemLocation();
+      const QString current = ui_sigrokConn->currentText();
+      ui_sigrokConn->addItems(ports);
+      ui_sigrokConn->setCurrentText(current);
+    }
+    updateSigrokHint();
+  }
   if (ble)
   {
     updateBleFields();
@@ -691,6 +725,102 @@ void DmmPrefs::updateBleFields()
   ui_bleSecond->setCurrentIndex(secondIndex > 0 ? secondIndex : qMin(2, ui_bleSecond->count() - 1));
 }
 
+namespace
+{
+// What this sigrok-cli offers, asked once per executable path: its version
+// line and the drivers of --list-supported. An empty version means it did
+// not run.
+struct SigrokCli
+{
+  QString version;
+  QStringList drivers;
+};
+
+const SigrokCli &sigrokCli(const QString &exe)
+{
+  static QMap<QString, SigrokCli> cache;
+  if (cache.contains(exe))
+    return cache[exe];
+  SigrokCli info;
+  QProcess p;
+  p.start(exe, {"--version"});
+  if (p.waitForFinished(3000) && p.exitStatus() == QProcess::NormalExit && p.exitCode() == 0)
+  {
+    info.version = QString::fromUtf8(p.readAllStandardOutput()).section('\n', 0, 0).trimmed();
+    QProcess l;
+    l.start(exe, {"--list-supported"});
+    if (l.waitForFinished(5000))
+    {
+      // "  scpi-dmm             SCPI DMM" lines under "Supported hardware drivers:"
+      bool inDrivers = false;
+      for (const QString &line : QString::fromUtf8(l.readAllStandardOutput()).split('\n'))
+      {
+        if (line.startsWith("Supported hardware drivers"))
+          inDrivers = true;
+        else if (!line.startsWith(' '))
+          inDrivers = false;
+        else if (inDrivers)
+          info.drivers << line.trimmed().section(' ', 0, 0);
+      }
+    }
+  }
+  cache[exe] = info;
+  return cache[exe];
+}
+}
+
+void DmmPrefs::updateSigrokHint()
+{
+  const QString exe = m_cfg->getString("Port settings/sigrok_exe", "sigrok-cli");
+  const SigrokCli &cli = sigrokCli(exe);
+  const QString driver = ui_sigrokDriver->text().trimmed();
+  QString hint;
+  if (cli.version.isEmpty())
+    hint = tr("%1 was not found or does not run. Install sigrok-cli, or set its path under "
+              "<a href=\"ports\">Special ports</a>.").arg(exe.toHtmlEscaped());
+  else if (!driver.isEmpty() && !cli.drivers.isEmpty() && !cli.drivers.contains(driver))
+    hint = tr("%1 has no driver \"%2\"; see sigrok-cli --list-supported.").arg(cli.version.toHtmlEscaped(), driver.toHtmlEscaped());
+  else
+    hint = tr("%1 found.").arg(cli.version.toHtmlEscaped());
+  ui_sigrokHint->setText(hint);
+  ui_sigrokTest->setEnabled(!cli.version.isEmpty());
+}
+
+void DmmPrefs::on_ui_sigrokTest_clicked()
+{
+  const QString exe = m_cfg->getString("Port settings/sigrok_exe", "sigrok-cli");
+  const QString spec = device().section(' ', 1);   // "<driver>:conn=..."
+  ui_sigrokTest->setEnabled(false);
+  ui_sigrokHint->setText(tr("Running %1 --driver %2 --scan ...").arg(exe.toHtmlEscaped(), spec.toHtmlEscaped()));
+  QCoreApplication::processEvents();
+  QProcess p;
+  p.start(exe, {"--driver", spec, "--scan"});
+  // a serial SCPI scan runs through several timeouts before giving up;
+  // keep the dialog alive meanwhile
+  QElapsedTimer t;
+  t.start();
+  bool finished = false;
+  while (!(finished = p.waitForFinished(100)) && t.elapsed() < 30000)
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
+  if (!finished)
+  {
+    p.kill();
+    p.waitForFinished(1000);
+  }
+  const QString out = QString::fromUtf8(p.readAllStandardOutput() + p.readAllStandardError()).trimmed();
+  QString found;
+  for (const QString &line : out.split('\n'))
+    if (line.contains(spec.section(':', 0, 0) + ':') || line.contains(" - "))
+      found = line.trimmed();
+  if (!finished)
+    ui_sigrokHint->setText(tr("No meter answered within 30 s (a serial port without a SCPI meter keeps sigrok-cli waiting)."));
+  else if (p.exitCode() == 0 && !found.isEmpty())
+    ui_sigrokHint->setText(tr("Found: %1").arg(found.toHtmlEscaped()));
+  else
+    ui_sigrokHint->setText(tr("No meter answered.") + (out.isEmpty() ? QString() : "<br><tt>" + out.toHtmlEscaped().replace('\n', "<br>") + "</tt>"));
+  ui_sigrokTest->setEnabled(true);
+}
+
 // "ble <address> <key> <main> <second>", see BleAdvertisementDevice
 void DmmPrefs::updateBleHint()
 {
@@ -729,6 +859,19 @@ void DmmPrefs::on_ui_bleScan_clicked()
 
 QString DmmPrefs::device() const
 {
+  if (isSigrokMeter())
+  {
+    // "SIGROK <driver>:conn=<connection>[:<options>]" - what the Special
+    // ports page would take as a custom entry
+    QString spec = ui_sigrokDriver->text().trimmed();
+    const QString conn = ui_sigrokConn->currentText().trimmed();
+    if (!conn.isEmpty())
+      spec += ":conn=" + conn;
+    const QString options = ui_sigrokOptions->text().simplified().remove(' ');
+    if (!options.isEmpty())
+      spec += ":" + options;
+    return "SIGROK " + spec;
+  }
   if (isBluetooth())
     return QString("ble %1 %2 %3 %4").arg(ui_bleAddress->currentText().section(' ', 0, 0).trimmed(),
                                           ui_bleKey->text().simplified().remove(' '),

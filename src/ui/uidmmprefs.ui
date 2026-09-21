@@ -739,6 +739,101 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="ui_sigrokGroup">
+     <property name="title">
+      <string>sigrok-cli</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_sigrok">
+      <item row="0" column="0">
+       <widget class="QLabel" name="ui_sigrokDriverLabel">
+        <property name="text">
+         <string>&amp;Driver:</string>
+        </property>
+        <property name="buddy">
+         <cstring>ui_sigrokDriver</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QLineEdit" name="ui_sigrokDriver">
+        <property name="whatsThis">
+         <string>The libsigrok driver for this meter, filled in from the model. Change it only if sigrok-cli --list-supported names another one for your meter.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="ui_sigrokConnLabel">
+        <property name="text">
+         <string>&amp;Connection:</string>
+        </property>
+        <property name="buddy">
+         <cstring>ui_sigrokConn</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="ui_sigrokConn">
+        <property name="whatsThis">
+         <string>How sigrok-cli reaches the meter (its conn= option): a serial port such as /dev/ttyUSB0 or COM3, usbtmc/&lt;vid&gt;.&lt;pid&gt; for USB-TMC, tcp-raw/&lt;host&gt;/5025 for LAN.</string>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="ui_sigrokTest">
+        <property name="text">
+         <string>&amp;Test</string>
+        </property>
+        <property name="whatsThis">
+         <string>Runs sigrok-cli --scan with these settings and shows whether the meter answers.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="ui_sigrokOptionsLabel">
+        <property name="text">
+         <string>&amp;Options:</string>
+        </property>
+        <property name="buddy">
+         <cstring>ui_sigrokOptions</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="2">
+       <widget class="QLineEdit" name="ui_sigrokOptions">
+        <property name="whatsThis">
+         <string>Further driver options, colon separated, e.g. serialcomm=9600/8n1 for a serial connection.</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">serialcomm=9600/8n1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QLabel" name="ui_sigrokHint">
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="ui_virtualGroup">
      <property name="title">
       <string>Signal</string>

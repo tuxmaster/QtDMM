@@ -21,6 +21,9 @@ side, one window each, and can be combined into calculated values.
 - [Calculated values](calculated-values.md) — power from a voltage and a
   current instance: formulas over the readings of other instances; the
   virtual meter for demos without hardware.
+- [Bench meters through sigrok-cli](bench-meters.md) — Keysight, Agilent, HP
+  and Siglent SCPI meters over USB-TMC, LAN or serial, with sigrok-cli doing
+  the talking.
 - [Bluetooth LE](bluetooth.md) — Victron SmartShunt and MPPT chargers over
   their encrypted broadcasts: key from VictronConnect, scan, what is shown.
 - [Meters over the network](remote-bridge.md) — qtdmm-bridge on a Raspberry Pi,

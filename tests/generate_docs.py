@@ -72,8 +72,9 @@ def devices():
             rows.append({
                 "vendor": d["vendor"], "model": model.rstrip("* ").strip() + (" ¹" if unconfirmed else ""),
                 "protocol": d["protocol"], "chip": CHIP.get(d["protocol"], "-"),
-                # baud 0: not a serial device (Bluetooth LE)
-                "serial": f'{d["baud"]} {d["bits"]}{PARITY[d["parity"]]}{d["stop"]}' if d["baud"] != "0" else "Bluetooth LE",
+                # baud 0: not a serial device (Bluetooth LE, or sigrok-cli talks to the meter)
+                "serial": f'{d["baud"]} {d["bits"]}{PARITY[d["parity"]]}{d["stop"]}' if d["baud"] != "0"
+                          else ("sigrok-cli" if d["protocol"] == "Sigrok" else "Bluetooth LE"),
                 "counts": d["counts"], "lines": lines or "-",
                 "decoder": src.name,
             })
