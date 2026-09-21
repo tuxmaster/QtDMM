@@ -72,11 +72,22 @@ if (BUILD_TESTING)
 	target_link_libraries(${TEST_HID} PRIVATE Qt::Core ${HIDAPI_TARGET})
 	add_test(NAME hid_cable COMMAND ${TEST_HID})
 
+	## RFC 2217 client against a fake server: negotiation, telnet filtering, IAC escaping
+	set( TEST_RFC2217 test_rfc2217)
+	add_executable(${TEST_RFC2217} MACOSX_BUNDLE tests/test_rfc2217.cpp src/portdevices/rfc2217serial.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})
+	target_include_directories(${TEST_RFC2217} PRIVATE src)
+	target_link_libraries(${TEST_RFC2217} PRIVATE Qt::Core Qt::Network)
+	add_test(NAME rfc2217_client COMMAND ${TEST_RFC2217})
+
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)
 	find_package(Python3 COMPONENTS Interpreter)
 	if (Python3_Interpreter_FOUND)
 		add_test(NAME docs_generated COMMAND ${Python3_EXECUTABLE} "${CMAKE_SOURCE_DIR}/tests/generate_docs.py" --check)
+		## the network bridge (tools/qtdmm-bridge) has its own unittest suite, no pyserial needed
+		if (Python3_VERSION VERSION_GREATER_EQUAL 3.11)
+			add_test(NAME qtdmm_bridge COMMAND ${Python3_EXECUTABLE} -m unittest discover -s tests WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/tools/qtdmm-bridge")
+		endif()
 	endif()
 
 	## the tests report through qWarning()/qInfo(); on Windows Qt sends those

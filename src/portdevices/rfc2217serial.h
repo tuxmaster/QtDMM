@@ -57,6 +57,12 @@ private:
   QString m_host;
   quint16 m_port;
 
+  /// Strips telnet commands/subnegotiations (the server's option replies)
+  /// from the stream and undoes the IAC IAC escaping; the rest is meter data.
+  void filterTelnet(const QByteArray &raw);
+
   QByteArray m_inputBuffer;
   static constexpr unsigned int m_buflen = 1024;
+  /// telnet parser state between socket reads
+  enum class TelnetState { Data, Iac, Option, Sub, SubIac } m_telnet = TelnetState::Data;
 };
