@@ -262,7 +262,7 @@ void MainWin::sendStateSLOT(const QString & state)
 void MainWin::setConsoleLogging(bool on)
 {
   if (on)
-    QLoggingCategory::setFilterRules("qtdmm.hid.debug=true");
+    QLoggingCategory::setFilterRules("qtdmm.hid.debug=true\nqtdmm.ble.debug=true");
   m_wid->setConsoleLogging(on);
 }
 

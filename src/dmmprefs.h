@@ -70,6 +70,8 @@ public:
   bool           isCalculated() const;
   /// True while the model "QtDMM / Virtual meter" is chosen.
   bool           isVirtual() const;
+  /// Victron over Bluetooth LE: the Bluetooth group replaces the port.
+  bool           isBluetooth() const;
   /// Source of the other instances' readings, shown as a hint below the formula.
   void           setStateManager(SharedStateManager *state);
 
@@ -90,6 +92,12 @@ protected Q_SLOTS:
   void           updateCalcHint();
   /// Rebuilds the virtual meter's formula from the waveform fields.
   void           updateVirtualFormula();
+  /// Validates address and key, explains what is missing.
+  void           updateBleHint();
+  /// Fills the main/second value combos with the fields of the chosen model.
+  void           updateBleFields();
+  /// Five-second scan for Victron devices, fills the device combo.
+  void           on_ui_bleScan_clicked();
 
 protected:
   QString        m_path;

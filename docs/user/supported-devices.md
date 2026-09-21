@@ -25,10 +25,10 @@ meter working, please report it on the
 | Brymen | BM251 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
 | Brymen | BM252 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
 | Brymen | BM257 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
-| Brymen | BM525s ¹ | Brymen BM52x (BU-86X) | `BrymenBM52x` | 0 8N1 | - | 6000 |
-| Brymen | BM829s ¹ | Brymen BM82x (BU-86X) | `BrymenBM82x` | 0 8N1 | - | 6000 |
-| Brymen | BM867s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | 0 8N1 | - | 50000 |
-| Brymen | BM869s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | 0 8N1 | - | 50000 |
+| Brymen | BM525s ¹ | Brymen BM52x (BU-86X) | `BrymenBM52x` | Bluetooth LE | - | 6000 |
+| Brymen | BM829s ¹ | Brymen BM82x (BU-86X) | `BrymenBM82x` | Bluetooth LE | - | 6000 |
+| Brymen | BM867s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | Bluetooth LE | - | 50000 |
+| Brymen | BM869s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | Bluetooth LE | - | 50000 |
 | Digitech | QM1350 | Metex KS57C2016 | `Metex14` | 600 7N2 | DTR | 4000 |
 | Digitech | QM1462 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Digitech | QM1537 | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
@@ -123,6 +123,11 @@ meter working, please report it on the
 | V&A | VA40B ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Velleman | DVM4100 ¹ | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
 | Vichy | VC99 | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Victron | BlueSolar MPPT ¹ | - | `VictronBLE` | Bluetooth LE | - | 1000 |
+| Victron | BMV-712 Smart ¹ | - | `VictronBLE` | Bluetooth LE | - | 6000 |
+| Victron | Phoenix Inverter Smart | - | `VictronBLE` | Bluetooth LE | - | 6000 |
+| Victron | SmartShunt | - | `VictronBLE` | Bluetooth LE | - | 6000 |
+| Victron | SmartSolar MPPT | - | `VictronBLE` | Bluetooth LE | - | 1000 |
 | Voltcraft | GDM 703 ¹ | WENS98A | `GDM703Continuous` | 9600 8N1 | DTR | 4000 |
 | Voltcraft | GDM 704 ¹ | WENS98A | `GDM703Continuous` | 9600 8N1 | DTR | 4000 |
 | Voltcraft | GDM 705 ¹ | WENS98A | `GDM703Continuous` | 9600 8N1 | DTR | 4000 |
@@ -156,4 +161,4 @@ meter working, please report it on the
 
 ¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
 
-134 devices across 31 vendors.
+139 devices across 32 vendors.

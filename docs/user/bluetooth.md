@@ -1,0 +1,61 @@
+# Bluetooth LE: Victron Instant Readout
+
+Victron Energy's SmartShunt, BMV-712 Smart, the SmartSolar / BlueSolar
+MPPT chargers and the Phoenix Inverter Smart broadcast their readings in their Bluetooth LE
+advertisements ("Instant Readout"). QtDMM listens to those broadcasts - no
+connection, no pairing - and shows them like a meter's reading:
+
+Each device broadcasts several values; you choose which one QtDMM treats
+as the reading (**Main value**: display, analog meter, recorder) and which
+goes to the display's second line and the [readings table](readings-table.md)
+as a `2nd` row (**Second value**, or none):
+
+| Device | Values |
+|---|---|
+| SmartShunt, BMV-712 | battery voltage (V), battery current (A, negative when discharging), battery power (W, computed), state of charge (%), consumed Ah, time to go (min), aux input (starter or midpoint voltage in V, or temperature in °C - as configured on the device) |
+| SmartSolar, BlueSolar MPPT | PV power (W), battery voltage (V), battery charging current (A), yield today (Wh), load current (A) |
+| Phoenix Inverter Smart | AC apparent power (VA), battery voltage (V), AC voltage (V), AC current (A) |
+
+The defaults are the first two of each row. About one reading per second
+arrives. Run several QtDMM instances on the same device to record more
+than two of its values at once ([instances](command-line.md)).
+
+## Setting it up
+
+The broadcasts are encrypted with a key that only the device's owner has.
+In the VictronConnect app open the device, then **Settings → Product info →
+Instant readout via Bluetooth** and tap **Show** under *Instant readout
+details* (or *Encryption data*): it shows the **MAC address** and the
+**encryption key** (32 hex digits). Instant readout must be enabled there.
+
+In QtDMM, **Settings → Multimeter**: choose vendor **Victron** and the
+model. The port and serial settings make way for a **Bluetooth** group:
+
+- **Device** - press **Scan** to list the Victron devices in range (five
+  seconds; their names as in VictronConnect), or type the address.
+- **Key** - the 32-digit key. It is stored in QtDMM's settings file and
+  never shown in the status line.
+- **Main value** / **Second value** - which of the device's values to show
+  (table above).
+
+Then **Connect** as usual. The status line says *Connected* once the first
+advertisement decrypted. With the wrong key it reports *The encryption key
+does not match* after a few advertisements; when the device goes out of
+range or is switched off the usual timeout appears and QtDMM keeps
+listening.
+
+## Requirements
+
+A Bluetooth LE adapter and a QtDMM built with Qt's Bluetooth module
+(`QTDMM_WITH_BLE`, on by default when Qt6 Bluetooth is found - on Debian /
+Ubuntu that is the `qt6-connectivity-dev` package at build time and
+`libqt6bluetooth6` at run time). Linux uses BlueZ over D-Bus; QtDMM does
+not need root. Without the module the Victron models are listed but cannot
+be connected.
+
+## What is not there yet
+
+The device state (eco mode, bulk/absorption/float), alarms and charger
+errors are decoded but not shown. Other Victron products (DC-DC converters,
+Smart Lithium, Multi RS, AC chargers) broadcast in the same way and can
+follow once someone has one to test with.

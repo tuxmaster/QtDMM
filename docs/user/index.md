@@ -21,6 +21,8 @@ side, one window each, and can be combined into calculated values.
 - [Calculated values](calculated-values.md) — power from a voltage and a
   current instance: formulas over the readings of other instances; the
   virtual meter for demos without hardware.
+- [Bluetooth LE](bluetooth.md) — Victron SmartShunt and MPPT chargers over
+  their encrypted broadcasts: key from VictronConnect, scan, what is shown.
 - [Meters over the network](remote-bridge.md) — qtdmm-bridge on a Raspberry Pi,
   serial and HID meters over RFC 2217, running it as a service.
 - [Command line](command-line.md) — options, multiple instances, debug output.

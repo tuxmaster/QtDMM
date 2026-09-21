@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>BleAdvertisementDevice</name>
+    <message>
+        <location filename="../../src/portdevices/ble.cpp" line="37"/>
+        <source>No Bluetooth address configured.</source>
+        <translation>Keine Bluetooth-Adresse eingestellt.</translation>
+    </message>
+    <message>
+        <location filename="../../src/portdevices/ble.cpp" line="42"/>
+        <source>The encryption key must be 32 hex digits (VictronConnect: Product info, Instant readout via Bluetooth).</source>
+        <translation>Der Schlüssel muss aus 32 Hex-Ziffern bestehen (VictronConnect: Produktinfo, Sofortanzeige über Bluetooth).</translation>
+    </message>
+    <message>
+        <location filename="../../src/portdevices/ble.cpp" line="106"/>
+        <source>The encryption key does not match %1.</source>
+        <translation>Der Schlüssel passt nicht zu %1.</translation>
+    </message>
+</context>
+<context>
     <name>CalcDevice</name>
     <message>
         <location filename="../../src/portdevices/calc.cpp" line="54"/>
@@ -133,84 +151,84 @@ Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="192"/>
+        <location filename="../../src/dmm.cpp" line="196"/>
         <source>Error creating port %1.</source>
         <translation>Fehler beim erzeugen von port %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="333"/>
+        <location filename="../../src/dmm.cpp" line="351"/>
         <source>Access denied for %1.</source>
         <translation>Zugriff auf %1 verweigert.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="214"/>
+        <location filename="../../src/dmm.cpp" line="219"/>
         <source>No such device %1.</source>
         <translation>%1 existiert nicht.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="211"/>
+        <location filename="../../src/dmm.cpp" line="216"/>
         <source>Missing Permission</source>
         <translation>Berechtigung fehlt</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="217"/>
+        <location filename="../../src/dmm.cpp" line="222"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Fehler beim Öffnen von %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="229"/>
+        <location filename="../../src/dmm.cpp" line="234"/>
         <source>Error configuring serial port %1.</source>
         <translation>Fehler beim Konfigurieren des Anschlusses %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="265"/>
+        <location filename="../../src/dmm.cpp" line="274"/>
         <source>Connecting ...</source>
         <translation>Verbinde ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="311"/>
+        <location filename="../../src/dmm.cpp" line="320"/>
         <source>Lost connection to %1.</source>
         <translation>Verbindung zu %1 verloren.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="315"/>
-        <location filename="../../src/dmm.cpp" line="360"/>
+        <location filename="../../src/dmm.cpp" line="324"/>
+        <location filename="../../src/dmm.cpp" line="378"/>
         <source>Retrying every %1 s.</source>
         <translation>Neuer Versuch alle %1 s.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="322"/>
+        <location filename="../../src/dmm.cpp" line="340"/>
         <source>Calculating %1</source>
         <translation>Berechne %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="345"/>
+        <location filename="../../src/dmm.cpp" line="363"/>
         <source>Not connected</source>
         <translation>Nicht verbunden</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="397"/>
+        <location filename="../../src/dmm.cpp" line="415"/>
         <source>Error %1</source>
         <translation>Fehler %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="291"/>
+        <location filename="../../src/dmm.cpp" line="300"/>
         <source>The USB cable answers, but the meter sends nothing.
 Switch on the meter&apos;s serial output (on UNI-T meters: hold the RS232/USB button).</source>
         <translation>Das USB-Kabel antwortet, aber das Multimeter sendet nichts.
 Serielle Ausgabe am Multimeter einschalten (bei UNI-T: RS232/USB-Taste gedrückt halten).</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="293"/>
+        <location filename="../../src/dmm.cpp" line="302"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Wartezeit abgelaufr für %1.
 Ist das DMM angeschlossen und eingeschaltet?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="323"/>
+        <location filename="../../src/dmm.cpp" line="341"/>
         <source>Connected %1</source>
         <translation>Verbunden %1</translation>
     </message>
@@ -395,59 +413,84 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DmmPrefs</name>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="46"/>
+        <location filename="../../src/dmmprefs.cpp" line="50"/>
         <source>Multimeter</source>
         <translation>Multimeter</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="47"/>
+        <location filename="../../src/dmmprefs.cpp" line="51"/>
         <source>&lt;b&gt;Here you can configure the serial port and protocol for your DMM. There is also a number of predefined models.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Hier können Sie den Anschluss und das Protokoll für Ihr DMM einstellen. Es gibt schon eine Reihe vorkonfigurierter Modelle.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="100"/>
+        <location filename="../../src/dmmprefs.cpp" line="107"/>
         <source>Manual settings</source>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="101"/>
+        <location filename="../../src/dmmprefs.cpp" line="108"/>
         <source>All vendors</source>
         <translation>Alle Hersteller</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="389"/>
-        <location filename="../../src/dmmprefs.cpp" line="429"/>
+        <location filename="../../src/dmmprefs.cpp" line="408"/>
+        <location filename="../../src/dmmprefs.cpp" line="455"/>
         <source>Position %1: %2</source>
         <translation>Position %1: %2</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="445"/>
+        <location filename="../../src/dmmprefs.cpp" line="471"/>
         <source>%1: no such instance running</source>
         <translation>%1: keine solche Instanz läuft</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="455"/>
+        <location filename="../../src/dmmprefs.cpp" line="481"/>
         <source>Running instances: %1</source>
         <translation>Laufende Instanzen: %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="457"/>
+        <location filename="../../src/dmmprefs.cpp" line="483"/>
         <source>No other instance is running.</source>
         <translation>Keine andere Instanz läuft.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="648"/>
+        <location filename="../../src/dmmprefs.cpp" line="682"/>
+        <source>none</source>
+        <translation>keiner</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="701"/>
+        <source>Pick the device or type its Bluetooth address.</source>
+        <translation>Gerät auswählen oder seine Bluetooth-Adresse eingeben.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="703"/>
+        <source>The key is the 32-digit &quot;Encryption key&quot; VictronConnect shows under Product info, Instant readout via Bluetooth.</source>
+        <translation>Der Schlüssel ist der 32-stellige „Verschlüsselungsschlüssel&quot;, den VictronConnect unter Produktinfo, Sofortanzeige über Bluetooth zeigt.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="712"/>
+        <source>Scanning for Victron devices (5 s)...</source>
+        <translation>Suche Victron-Geräte (5 s)…</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="723"/>
+        <source>No Victron device found. Is Bluetooth on, and Instant readout enabled on the device?</source>
+        <translation>Kein Victron-Gerät gefunden. Ist Bluetooth an und die Sofortanzeige am Gerät aktiviert?</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="747"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="648"/>
-        <location filename="../../src/dmmprefs.cpp" line="674"/>
+        <location filename="../../src/dmmprefs.cpp" line="747"/>
+        <location filename="../../src/dmmprefs.cpp" line="773"/>
         <source>DMM description (*.cfg)</source>
         <translation>DMM Beschreibung (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="674"/>
+        <location filename="../../src/dmmprefs.cpp" line="773"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
@@ -966,6 +1009,11 @@ Please choose which instance should record.</translation>
         <source>variable bytes ASCII, polled (Fluke 45 bench meter)</source>
         <translation>variable Länge ASCII, abgefragt (Fluke 45 Tischmultimeter)</translation>
     </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="46"/>
+        <source>Bluetooth LE advertisements, encrypted (Victron Instant Readout)</source>
+        <translation>Bluetooth-LE-Advertisements, verschlüsselt (Victron Sofortanzeige)</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -985,12 +1033,12 @@ Please choose which instance should record.</translation>
         <translation>setzt die &lt;config-id&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="79"/>
+        <location filename="../../src/dmm.cpp" line="82"/>
         <source>No permission to access %1.</source>
         <translation>Keine Berechtigung um auf %1 zuzugreifen.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="83"/>
+        <location filename="../../src/dmm.cpp" line="86"/>
         <source>
 
 On this system the device is typically accessible via group &apos;%1&apos;.</source>
@@ -999,7 +1047,7 @@ On this system the device is typically accessible via group &apos;%1&apos;.</sou
 Auf diesem System ist das Gerät in der Regel über die Gruppe &apos;%1&apos; zugreifbar.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="86"/>
+        <location filename="../../src/dmm.cpp" line="89"/>
         <source>
 Add your user with:
 
@@ -1010,7 +1058,7 @@ Benutzer hinzufügen mit:
 sudo pw groupmod %1 -m $USER</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="89"/>
+        <location filename="../../src/dmm.cpp" line="92"/>
         <source>
 Add your user with:
 
@@ -1021,7 +1069,7 @@ Gruppe dem Benutzer hinzufügen:
 sudo usermod -aG %1 $USER</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="92"/>
+        <location filename="../../src/dmm.cpp" line="95"/>
         <source>
 
 Then log out and back in so the new group membership becomes active.</source>
@@ -1121,12 +1169,12 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
         <translation>Hold</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="182"/>
+        <location filename="../../src/readinglog.cpp" line="187"/>
         <source>Nothing to export.</source>
         <translation>Nichts zu exportieren.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="185"/>
+        <location filename="../../src/readinglog.cpp" line="190"/>
         <source>Cannot open file.</source>
         <translation>Datei kann nicht geöffnet werden.</translation>
     </message>
@@ -1417,111 +1465,161 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="638"/>
+        <source>Bluetooth</source>
+        <translation>Bluetooth</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="644"/>
+        <source>&amp;Device:</source>
+        <translation>&amp;Gerät:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="654"/>
+        <source>The Bluetooth address of the Victron device, as VictronConnect shows it under Product info, Instant readout via Bluetooth. Scan lists the Victron devices in range.</source>
+        <translation>Die Bluetooth-Adresse des Victron-Geräts, wie VictronConnect sie unter Produktinfo, Sofortanzeige über Bluetooth zeigt. Suchen listet die Victron-Geräte in Reichweite.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="670"/>
+        <source>&amp;Scan</source>
+        <translation>&amp;Suchen</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="677"/>
+        <source>&amp;Key:</source>
+        <translation>&amp;Schlüssel:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="687"/>
+        <source>The 32-digit encryption key of the device: VictronConnect, Product info, Instant readout via Bluetooth, Encryption data.</source>
+        <translation>Der 32-stellige Schlüssel des Geräts: VictronConnect, Produktinfo, Sofortanzeige über Bluetooth, Verschlüsselungsdaten.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="697"/>
+        <source>&amp;Main value:</source>
+        <translation>&amp;Hauptwert:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="707"/>
+        <source>Which of the device&apos;s values the display, the analog meter and the recorder show.</source>
+        <translation>Welcher Wert des Geräts auf Display, Analogmeter und im Rekorder erscheint.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="714"/>
+        <source>Se&amp;cond value:</source>
+        <translation>&amp;Zweitwert:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="724"/>
+        <source>A second value shown on the display&apos;s second line and logged in the readings table.</source>
+        <translation>Ein zweiter Wert für die zweite Zeile des Displays und die Messwerttabelle.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="744"/>
         <source>Signal</source>
         <translation>Signal</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="644"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="750"/>
         <source>&amp;Waveform:</source>
         <translation>&amp;Signalform:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="654"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="760"/>
         <source>What the virtual meter shows over time. Constant and Random stay within Min..Max; the periodic waveforms swing between Min and Max once per Period; Discharge falls from Max towards Min with the time constant Period; Custom uses your own formula (t = seconds since connecting).</source>
         <translation>Was das virtuelle Multimeter über die Zeit anzeigt. Konstant und Zufall bleiben zwischen Min und Max; die periodischen Signalformen schwingen einmal pro Periode zwischen Min und Max; Entladung fällt von Max mit der Zeitkonstante Periode gegen Min; Eigene Formel verwendet Ihre eigene Formel (t = Sekunden seit dem Verbinden).</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="656"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="762"/>
         <source>Constant</source>
         <translation>Konstant</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="657"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="763"/>
         <source>Random</source>
         <translation>Zufall</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="658"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="764"/>
         <source>Sine</source>
         <translation>Sinus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="659"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="765"/>
         <source>Triangle</source>
         <translation>Dreieck</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="660"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="766"/>
         <source>Square</source>
         <translation>Rechteck</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="661"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="767"/>
         <source>Sawtooth</source>
         <translation>Sägezahn</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="662"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="768"/>
         <source>Discharge</source>
         <translation>Entladung</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="663"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="769"/>
         <source>Custom formula</source>
         <translation>Eigene Formel</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="669"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="775"/>
         <source>U&amp;nit:</source>
         <translation>Ei&amp;nheit:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="692"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="798"/>
         <source>Cou&amp;pling:</source>
         <translation>Ko&amp;pplung:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="708"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="814"/>
         <source>M&amp;in:</source>
         <translation>M&amp;in:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="725"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="831"/>
         <source>Ma&amp;x:</source>
         <translation>Ma&amp;x:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="742"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="848"/>
         <source>Peri&amp;od (s):</source>
         <translation>Peri&amp;ode (s):</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="759"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="865"/>
         <source>Noi&amp;se:</source>
         <translation>Rau&amp;schen:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="769"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="875"/>
         <source>Peak-to-peak amplitude of random noise added to the signal, in the unit above. 0 for a clean signal.</source>
         <translation>Spitze-Spitze-Amplitude des zufälligen Rauschens, das dem Signal überlagert wird, in der Einheit oben. 0 für ein sauberes Signal.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="779"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="885"/>
         <source>Formu&amp;la:</source>
         <translation>Forme&amp;l:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="789"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="895"/>
         <source>The formula the waveform above expands to; editable with Custom formula. t is the time in seconds since connecting, pi, sin, cos, exp, floor, sqrt, abs, rand() and the readings of other instances may be used.</source>
         <translation>Die Formel, zu der die Signalform oben wird; bei Eigene Formel editierbar. t ist die Zeit in Sekunden seit dem Verbinden; pi, sin, cos, exp, floor, sqrt, abs, rand() und die Messwerte anderer Instanzen sind erlaubt.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="887"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="993"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocol settings have not been confirmed by a user yet. If you own this model and can confirm that they work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, dass sie funktionieren, eröffnen Sie bitte ein Issue unter &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="912"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1018"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; with the model and the settings. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, das hier nicht aufgeführt ist, und passende manuelle Einstellungen gefunden haben, eröffnen Sie bitte ein Issue unter &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; mit Modell und Einstellungen. So profitieren künftige Benutzer dieses DMM von Ihrer Hilfe.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1581,23 +1679,23 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
         <translation>Hier kann das DMM-Modell ausgewählt werden. Ist Ihr DMM nicht in der Liste, versuchen Sie passende Einstellungen zu finden und eröffnen Sie ein Issue unter github.com/tuxmaster/QtDMM/issues, damit sie in der nächsten Version in die Liste kommen.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="799"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="905"/>
         <source>Protocol</source>
         <translation>Protokoll</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="805"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="911"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translatorcomment>Hier wird das Kommunikationsprotokoll ausgewählt. Wenn Sie kein &quot;offiziell&quot; unterstützes DMM benutzte, versuchen Sie eines der bereits vorhanden Protokolle. Mit etwas etwas Glück passt eines. Wenn Sie eins finden, teilen Sie es bitte dem Autor mit.</translatorcomment>
         <translation>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="819"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="925"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Anzahl der Werte:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="829"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="935"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Einige Multimeter senden verschiedenen Zeile mit verschiedenen Messwerten. Hier kann die Anzahl der zu ignorieren Zeilen eingetragen werden.( Das bedeutet, QtDMM verarbeitet nur die erste Zeile).</translation>
     </message>
@@ -3093,6 +3191,81 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
         <location filename="../../src/ui/uitipdlg.ui" line="217"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
+    </message>
+</context>
+<context>
+    <name>VictronBle</name>
+    <message>
+        <location filename="../../src/victronble.cpp" line="108"/>
+        <location filename="../../src/victronble.cpp" line="117"/>
+        <location filename="../../src/victronble.cpp" line="123"/>
+        <source>Battery voltage</source>
+        <translation>Batteriespannung</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="109"/>
+        <source>Battery current</source>
+        <translation>Batteriestrom</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="110"/>
+        <source>Battery power</source>
+        <translation>Batterieleistung</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="111"/>
+        <source>State of charge</source>
+        <translation>Ladezustand</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="112"/>
+        <source>Consumed Ah</source>
+        <translation>Entnommene Ah</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="113"/>
+        <source>Time to go</source>
+        <translation>Restlaufzeit</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="114"/>
+        <source>Aux input (starter voltage, midpoint or temperature)</source>
+        <translation>Aux-Eingang (Starterspannung, Mittelpunkt oder Temperatur)</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="116"/>
+        <source>PV power</source>
+        <translation>PV-Leistung</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="118"/>
+        <source>Battery charging current</source>
+        <translation>Batterieladestrom</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="119"/>
+        <source>Yield today</source>
+        <translation>Ertrag heute</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="120"/>
+        <source>Load current</source>
+        <translation>Laststrom</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="122"/>
+        <source>AC apparent power</source>
+        <translation>AC-Scheinleistung</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="124"/>
+        <source>AC voltage</source>
+        <translation>AC-Spannung</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="125"/>
+        <source>AC current</source>
+        <translation>AC-Strom</translation>
     </message>
 </context>
 </TS>

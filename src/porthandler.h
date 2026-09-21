@@ -18,7 +18,7 @@ class PortHandler : public QObject
     Q_OBJECT
 public:
     /// The kinds of port; the settings file stores them by name (str2portType()).
-    enum class PortType { None, Serial, Hid, Sigrok, RFC2217, Calc };
+    enum class PortType { None, Serial, Hid, Sigrok, RFC2217, Calc, Ble };
 
     explicit PortHandler(QObject *parent = Q_NULLPTR) : QObject(parent) {}
     /// Creates the device object for @p type (closing any previous one). The
@@ -42,7 +42,7 @@ public:
     bool        init();
     bool        isOpen() const { return m_port != Q_NULLPTR && m_port->isOpen(); };
 
-    /// "serial", "hid", "sigrok", "rfc2217" or "calc" (case-insensitive) to PortType.
+    /// "serial", "hid", "sigrok", "rfc2217", "calc" or "ble" (case-insensitive) to PortType.
     static PortType str2portType(const QString str);
 private:
     QIODevice *m_port   = Q_NULLPTR;

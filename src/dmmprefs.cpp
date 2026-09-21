@@ -30,6 +30,10 @@
 #include "dmmprefs.h"
 #include "protocols.h"
 #include "calcexpr.h"
+#include "victronble.h"
+#ifdef QTDMM_WITH_BLE
+#include "portdevices/ble.h"
+#endif
 #include "sharedstatemanager.h"
 #include "siprefix.h"
 #include "settings.h"
@@ -53,6 +57,9 @@ DmmPrefs::DmmPrefs(QWidget *parent) : PrefWidget(parent)
 
   message2->hide();
   ui_calcGroup->hide();
+  ui_bleGroup->hide();
+  connect(ui_bleKey, &QLineEdit::textChanged, this, &DmmPrefs::updateBleHint);
+  connect(ui_bleAddress, &QComboBox::currentTextChanged, this, &DmmPrefs::updateBleHint);
   ui_virtualGroup->hide();
   connect(ui_calcExpression, &QLineEdit::textChanged, this, &DmmPrefs::updateCalcHint);
   connect(ui_virtualSignal, &QComboBox::currentIndexChanged, this, &DmmPrefs::updateVirtualFormula);
@@ -246,6 +253,9 @@ void DmmPrefs::defaultsSLOT()
   m_portlist->setStringList(list);
 
   port->setCurrentText        (m_cfg->getString("Port settings/device"));
+  ui_bleAddress->setCurrentText(m_cfg->getString("Port settings/ble-address"));
+  ui_bleKey->setText          (m_cfg->getString("Port settings/ble-key"));
+  updateBleFields();
   ui_calcUnit->setText        (m_cfg->getString("DMM/calc-unit", "W"));
   ui_calcExpression->setText  (m_cfg->getString("DMM/calc-expression"));
   ui_virtualSignal->setCurrentIndex(m_cfg->getInt("DMM/virtual-waveform", 2));
@@ -320,6 +330,10 @@ void DmmPrefs::factoryDefaultsSLOT()
 void DmmPrefs::applySLOT()
 {
   m_cfg->setString("Port settings/device", port->currentText());
+  m_cfg->setString("Port settings/ble-address", ui_bleAddress->currentText().trimmed());
+  m_cfg->setString("Port settings/ble-key", ui_bleKey->text().trimmed());
+  m_cfg->setString("Port settings/ble-main", ui_bleMain->currentData().toString());
+  m_cfg->setString("Port settings/ble-second", ui_bleSecond->currentData().toString());
   m_cfg->setString("DMM/calc-unit", ui_calcUnit->text().trimmed());
   m_cfg->setString("DMM/calc-expression", ui_calcExpression->text().trimmed());
   m_cfg->setInt("DMM/virtual-waveform", ui_virtualSignal->currentIndex());
@@ -359,6 +373,11 @@ void DmmPrefs::on_ui_externalSetup_toggled()
     stopBitsCombo->setDisabled(ui_externalSetup->isChecked());
     parityCombo->setDisabled(ui_externalSetup->isChecked());
   }
+}
+
+bool DmmPrefs::isBluetooth() const
+{
+  return ui_vendor->currentIndex() != 0 && m_dmmInfo.protocol == ReadEvent::VictronBLE;
 }
 
 bool DmmPrefs::isCalculated() const
@@ -401,10 +420,17 @@ void DmmPrefs::updateCalcMode()
 {
   const bool calc = isCalculated();
   const bool virt = isVirtual();
-  ButtonGroup11->setVisible(!calc && !virt);
+  const bool ble = isBluetooth();
+  ButtonGroup11->setVisible(!calc && !virt && !ble);
   ui_protocol->setVisible(!calc && !virt);
   ui_calcGroup->setVisible(calc);
   ui_virtualGroup->setVisible(virt);
+  ui_bleGroup->setVisible(ble);
+  if (ble)
+  {
+    updateBleFields();
+    updateBleHint();
+  }
   if (virt)
     updateVirtualFormula();
   if (calc)
@@ -633,8 +659,81 @@ QString DmmPrefs::dmmName() const
   return ui_model->currentText();
 }
 
+// The values a Victron model offers; the selection survives a model change
+// when the new model has the same field, otherwise the defaults are taken.
+void DmmPrefs::updateBleFields()
+{
+  const quint8 type = VictronBle::readoutTypeForModel(m_dmmInfo.model);
+  // the combos are empty until the model is known (defaultsSLOT runs
+  // before it), so the saved choice is the fallback
+  QString main = ui_bleMain->currentData().toString();
+  QString second = ui_bleSecond->currentData().toString();
+  if (main.isEmpty())
+  {
+    main = m_cfg->getString("Port settings/ble-main");
+    second = m_cfg->getString("Port settings/ble-second");
+  }
+  const QList<VictronBle::Field> fields = VictronBle::fields(type);
+  if (ui_bleMain->property("readoutType").toInt() == type && !fields.isEmpty())
+    return;
+  ui_bleMain->setProperty("readoutType", type);
+  ui_bleMain->clear();
+  ui_bleSecond->clear();
+  ui_bleSecond->addItem(tr("none"), "-");
+  for (const VictronBle::Field &f : fields)
+  {
+    const QString label = QCoreApplication::translate("VictronBle", f.label);
+    ui_bleMain->addItem(label, QString::fromLatin1(f.id));
+    ui_bleSecond->addItem(label, QString::fromLatin1(f.id));
+  }
+  ui_bleMain->setCurrentIndex(qMax(0, ui_bleMain->findData(main)));
+  const int secondIndex = ui_bleSecond->findData(second);
+  ui_bleSecond->setCurrentIndex(secondIndex > 0 ? secondIndex : qMin(2, ui_bleSecond->count() - 1));
+}
+
+// "ble <address> <key> <main> <second>", see BleAdvertisementDevice
+void DmmPrefs::updateBleHint()
+{
+  const QString address = ui_bleAddress->currentText().section(' ', 0, 0).trimmed();
+  const bool keyOk = VictronBle::keyFromHex(ui_bleKey->text()).size() == 16;
+  QStringList hints;
+  if (address.isEmpty())
+    hints << tr("Pick the device or type its Bluetooth address.");
+  if (!keyOk)
+    hints << tr("The key is the 32-digit \"Encryption key\" VictronConnect shows under Product info, Instant readout via Bluetooth.");
+  ui_bleHint->setText(hints.join(' '));
+  ui_bleKey->setStyleSheet(keyOk || ui_bleKey->text().trimmed().isEmpty() ? QString() : QStringLiteral("color: red"));
+}
+
+void DmmPrefs::on_ui_bleScan_clicked()
+{
+#ifdef QTDMM_WITH_BLE
+  ui_bleScan->setEnabled(false);
+  ui_bleHint->setText(tr("Scanning for Victron devices (5 s)..."));
+  QCoreApplication::processEvents();
+  const QStringList found = BleAdvertisementDevice::scan(5000);
+  const QString current = ui_bleAddress->currentText();
+  ui_bleAddress->clear();
+  ui_bleAddress->addItems(found);
+  if (!current.isEmpty())
+    ui_bleAddress->setCurrentText(current);   // keep what was configured, found or not
+  ui_bleScan->setEnabled(true);
+  if (found.isEmpty())
+  {
+    ui_bleHint->setText(tr("No Victron device found. Is Bluetooth on, and Instant readout enabled on the device?"));
+    return;
+  }
+#endif
+  updateBleHint();
+}
+
 QString DmmPrefs::device() const
 {
+  if (isBluetooth())
+    return QString("ble %1 %2 %3 %4").arg(ui_bleAddress->currentText().section(' ', 0, 0).trimmed(),
+                                          ui_bleKey->text().simplified().remove(' '),
+                                          ui_bleMain->currentData().toString(),
+                                          ui_bleSecond->currentData().toString());
   if (isCalculated())
     return QString("calc %1 %2").arg(ui_calcUnit->text().trimmed(), ui_calcExpression->text().trimmed());
   if (isVirtual())

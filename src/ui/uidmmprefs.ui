@@ -633,6 +633,112 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="ui_bleGroup">
+     <property name="title">
+      <string>Bluetooth</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_ble">
+      <item row="0" column="0">
+       <widget class="QLabel" name="ui_bleAddressLabel">
+        <property name="text">
+         <string>&amp;Device:</string>
+        </property>
+        <property name="buddy">
+         <cstring>ui_bleAddress</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="ui_bleAddress">
+        <property name="whatsThis">
+         <string>The Bluetooth address of the Victron device, as VictronConnect shows it under Product info, Instant readout via Bluetooth. Scan lists the Victron devices in range.</string>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="ui_bleScan">
+        <property name="text">
+         <string>&amp;Scan</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="ui_bleKeyLabel">
+        <property name="text">
+         <string>&amp;Key:</string>
+        </property>
+        <property name="buddy">
+         <cstring>ui_bleKey</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="QLineEdit" name="ui_bleKey">
+        <property name="whatsThis">
+         <string>The 32-digit encryption key of the device: VictronConnect, Product info, Instant readout via Bluetooth, Encryption data.</string>
+        </property>
+        <property name="placeholderText">
+         <string notr="true">32 hex digits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="ui_bleMainLabel">
+        <property name="text">
+         <string>&amp;Main value:</string>
+        </property>
+        <property name="buddy">
+         <cstring>ui_bleMain</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="2">
+       <widget class="QComboBox" name="ui_bleMain">
+        <property name="whatsThis">
+         <string>Which of the device's values the display, the analog meter and the recorder show.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="ui_bleSecondLabel">
+        <property name="text">
+         <string>Se&amp;cond value:</string>
+        </property>
+        <property name="buddy">
+         <cstring>ui_bleSecond</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QComboBox" name="ui_bleSecond">
+        <property name="whatsThis">
+         <string>A second value shown on the display's second line and logged in the readings table.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" colspan="2">
+       <widget class="QLabel" name="ui_bleHint">
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="ui_virtualGroup">
      <property name="title">
       <string>Signal</string>

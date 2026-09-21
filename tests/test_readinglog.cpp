@@ -65,7 +65,7 @@ int main(int argc, char **argv)
   check(s.count == 4 && s.numeric == 2, QString("stats count %1 numeric %2").arg(s.count).arg(s.numeric));
   check(qFuzzyCompare(s.min, 0.0122) && qFuzzyCompare(s.max, 1.234), "stats min/max");
   check(qFuzzyCompare(s.mean, (1.234 + 0.0122) / 2), "stats mean");
-  check(s.unit == "Hz", "stats unit is the newest row's base unit: " + s.unit);
+  check(s.unit == "V", "stats unit is the newest main reading's base unit, not the 2nd value's: " + s.unit);
 
   // --- 3. ring: the oldest rows go ---
   log.setMaxRows(3);

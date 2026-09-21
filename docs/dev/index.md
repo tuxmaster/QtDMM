@@ -71,7 +71,10 @@ via `vmactions/freebsd-vm`, since GitHub has no FreeBSD runner). Windows is buil
 `install-qt-action` and hidapi compiled from source via CMake `FetchContent`
 (see `CMakeLists.txt`); the workflow uploads a portable ZIP and an Inno Setup
 installer, both produced by CPack from the same install tree
-(`cmake/deploy.cmake`). Platform-specific code is limited to the permission
+(`cmake/deploy.cmake`). The Bluetooth LE port (`src/portdevices/ble.cpp`) needs Qt6 Bluetooth and
+is optional: CMake option `QTDMM_WITH_BLE` (on when the module is found;
+the Windows workflow installs `qtconnectivity`, Ubuntu `qt6-connectivity-dev`,
+FreeBSD `qt6-connectivity`). Platform-specific code is limited to the permission
 hint in `src/dmm.cpp`, the process liveness check in
 `src/sharedstatemanager.cpp`, the serial port naming in
 `src/portdevices/serial.cpp` and the console attach in `src/main.cpp`.
