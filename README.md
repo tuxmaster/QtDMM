@@ -80,6 +80,14 @@ meter working, please report it on the
 |---|---|---|---|---|---|---|
 | APPA | 71 ¹ | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
 | APPA | 73 ¹ | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
+| Brymen | BM250 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
+| Brymen | BM251 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
+| Brymen | BM252 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
+| Brymen | BM257 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
+| Brymen | BM525s ¹ | Brymen BM52x (BU-86X) | `BrymenBM52x` | 0 8N1 | - | 6000 |
+| Brymen | BM829s ¹ | Brymen BM82x (BU-86X) | `BrymenBM82x` | 0 8N1 | - | 6000 |
+| Brymen | BM867s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | 0 8N1 | - | 50000 |
+| Brymen | BM869s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | 0 8N1 | - | 50000 |
 | Digitech | QM1350 | Metex KS57C2016 | `Metex14` | 600 7N2 | DTR | 4000 |
 | Digitech | QM1462 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Digitech | QM1537 | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
@@ -200,7 +208,7 @@ meter working, please report it on the
 
 ¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
 
-119 devices across 29 vendors.
+127 devices across 30 vendors.
 
 ## Command line
 

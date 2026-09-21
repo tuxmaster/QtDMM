@@ -1,0 +1,47 @@
+protocol: BrymenBM82x
+decoder: src/decoders/brymen_bm52x.cpp
+devices: [Brymen BM829s]
+frames_per_reading: 1
+sources:
+  - docs/protocols/spec/brymen_bm82x.yaml   # synthetic, see note below
+
+# SYNTHETIC vectors encoded from the layout of libsigrok's bm52x.c (segments
+# bgcpafed with the decimal point in bit 4, unit and prefix bits in bytes
+# 13/14, model id in bytes 16..19, AUTO/HOLD in byte 20). No capture from a
+# real meter exists yet - replace when one arrives.
+vectors:
+  - source_line: "DC 1.234 V AUTO"
+    bytes: 00 20 00 B0 CB E9 E4 00 00 00 00 00 00 00 20 00 82 82 82 82 10 00 00 00
+    reading: {value: "1.234", unit: "V", coupling: "DC", range_mode: "auto"}
+    expect: {special: "DC"}
+  - source_line: "AC 230.1 V + 50.0 Hz secondary"
+    bytes: 00 10 00 CB E9 BF A0 00 00 6D BF AF 00 01 20 00 82 82 82 82 10 00 00 00
+    reading: {value: "230.1", unit: "V", coupling: "AC", range_mode: "auto"}
+    expect: {special: "AC", dval2: 50.0, unit2: "Hz", id2: 1}
+  - source_line: "DC -12.34 mA MANU HOLD"
+    bytes: 00 20 80 A0 DB E9 E4 00 00 00 00 00 00 00 50 00 82 82 82 82 80 00 00 00
+    reading: {value: "-12.34", unit: "mA", coupling: "DC", range_mode: "manual", flags: [HOLD]}
+  - source_line: "4.700 kOhm"
+    bytes: 00 00 00 F4 A8 AF AF 00 00 00 00 00 00 A0 00 00 82 82 82 82 10 00 00 00
+    reading: {value: "4.700", unit: "kOhm", range_mode: "auto"}
+    expect: {special: "OH"}
+  - source_line: "0.L MOhm overload"
+    bytes: 00 00 00 00 00 BF 07 00 00 00 00 00 00 60 00 00 82 82 82 82 10 00 00 00
+    reading: {value: "0.L", unit: "MOhm", range_mode: "auto"}
+    expect: {val: " OL "}
+  - source_line: "100.0 nF"
+    bytes: 00 00 00 A0 AF BF AF 00 00 00 00 00 00 00 09 00 82 82 82 82 10 00 00 00
+    reading: {value: "100.0", unit: "nF", range_mode: "auto"}
+    expect: {special: "CA"}
+  - source_line: "Diode 0.652 V (diod on the second display)"
+    bytes: 00 00 00 BF 6F 6D CB 00 E3 20 63 E3 00 00 20 00 82 82 82 82 10 00 00 00
+    reading: {value: "0.652", unit: "V", range_mode: "auto"}
+    expect: {special: "DI"}
+  - source_line: "Temperature 23.5 C"
+    bytes: 00 00 09 CB F9 6D 0F 00 00 00 00 00 00 00 00 00 82 82 82 82 10 00 00 00
+    reading: {value: "23.5", unit: "C", range_mode: "auto"}
+    expect: {special: "TE", dval: 23.5}
+  - source_line: "-10.0 dBm"
+    bytes: 00 00 80 00 A0 BF BF 00 00 00 00 00 00 00 40 00 82 82 82 82 10 00 00 00
+    reading: {value: "-10.0", unit: "dBm", range_mode: "auto"}
+    expect: {special: "PO", dval: -10.0}

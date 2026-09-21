@@ -28,6 +28,7 @@ int main(int argc, char **argv)
   check(HIDSerialDevice::chipFor(0x04fa, 0x2490) == Chip::CH9325, "04fa:2490 (HE2325U) is CH9325-compatible");
   check(HIDSerialDevice::chipFor(0x1a86, 0xe429) == Chip::CH9329, "1a86:e429 is a CH9329");
   check(HIDSerialDevice::chipFor(0x10c4, 0xea80) == Chip::CP2110, "10c4:ea80 is a CP2110");
+  check(HIDSerialDevice::chipFor(0x0820, 0x0001) == Chip::BU86X, "0820:0001 is a Brymen BU-86X");
   check(HIDSerialDevice::chipFor(0x1234, 0x5678) == Chip::CH9325, "unknown ids fall back to CH9325");
   check(HIDSerialDevice::chipForEntry("HID 0x1a86:0xe429 /dev/hidraw3") == Chip::CH9329, "entry with e429");
   check(HIDSerialDevice::chipForEntry("HID 0x1a86:0xe008 \\\\?\\hid#vid_1a86&pid_e008#7&1a2b#{4d1e55b2}") == Chip::CH9325, "windows entry");
@@ -80,6 +81,20 @@ int main(int argc, char **argv)
     const QByteArray cfg2 = HIDSerialDevice::cp2110ConfigReport(2400, 8, 0, 2);
     check(cfg2.toHex(' ') == "50 00 00 09 60 00 00 03 01", "CP2110 config 2400 8N2: " + cfg2.toHex(' '));
     check(HIDSerialDevice::cp2110ConfigReport(0, 0, 9, 0).mid(1, 4).toHex() == "00002580", "defaults: 9600 when unset");
+  }
+
+  // --- 3c. BU-86X: raw reports, and the write layouts of all chips ---
+  {
+    unsigned char out[64];
+    const unsigned char r[8] = { 0x86, 0x86, 0x86, 0x86, 0x11, 0x22, 0x33, 0x44 };
+    check(HIDSerialDevice::unpackReport(Chip::BU86X, r, 8, out) == 8 && out[0] == 0x86 && out[7] == 0x44, "BU-86X: whole report is data");
+    check(HIDSerialDevice::unpackReport(Chip::BU86X, r, 3, out) == 3, "BU-86X: short report");
+    const QByteArray req = QByteArray::fromHex("008666");
+    check(HIDSerialDevice::packWrite(Chip::BU86X, req).toHex(' ') == "00 00 86 66", "BU-86X write: id placeholder + data");
+    const QByteArray w9329 = HIDSerialDevice::packWrite(Chip::CH9329, QByteArray("D\n"));
+    check(w9329.size() == 65 && w9329.left(4).toHex(' ') == "00 02 44 0a", "CH9329 write: placeholder, count, data, padded to 64");
+    check(HIDSerialDevice::packWrite(Chip::CP2110, QByteArray("D\n")).toHex(' ') == "02 44 0a", "CP2110 write: count as report id");
+    check(HIDSerialDevice::packWrite(Chip::CH9325, QByteArray("D\n")).isEmpty(), "CH9325 cannot write");
   }
 
   // --- 4. a device object without hardware reports itself closed ---

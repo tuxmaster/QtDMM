@@ -879,6 +879,26 @@
           <string>26 bytes ASCII, continuous, two values (Voltcraft GDM 703)</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>15 bytes binary, continuous (Brymen BM25x)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>24 bytes binary, polled over BU-86X (Brymen BM86x)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>24 bytes binary, polled over BU-86X (Brymen BM52x)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>24 bytes binary, polled over BU-86X (Brymen BM82x)</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

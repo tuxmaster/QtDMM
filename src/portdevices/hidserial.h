@@ -33,6 +33,10 @@ Q_DECLARE_LOGGING_CATEGORY(lcHid)
 ///    1a86:e429): a plain UART tunnel, fixed 9600 8N1, no feature report,
 ///    64-byte input reports (count, then up to 63 raw bytes). Layout per
 ///    sigrok PR #298.
+///  - Brymen BU-86X infrared adapter (0820:0001): raw 8-byte reports that
+///    are nothing but UART bytes, fixed speed, no configuration. The meter
+///    only answers to a request (DmmDecoder::pollRequest()), so this is the
+///    one cable QtDMM writes to.
 /// Both UT-D09 revisions look alike; lsusb tells them apart.
 /// hidapi is polled in run(), which runs in a worker thread and fills a ring
 /// buffer; the QIODevice side (readData(), bytesAvailable()) serves
@@ -41,7 +45,7 @@ class HIDSerialDevice : public QIODevice {
     Q_OBJECT
 public:
   /// The cable chip, which decides the report layout.
-  enum class Chip { CH9325, CP2110, CH9329 };
+  enum class Chip { CH9325, CP2110, CH9329, BU86X };
 
   /// @param info   the meter, for its baud rate and data bits
   /// @param device an entry from availablePorts(): "HID 0xvvvv:0xpppp path"
@@ -58,6 +62,9 @@ public:
   /// Extracts the UART bytes of one input report into @p out (at least 63
   /// bytes); returns the count, -1 for a malformed report. Pure, for tests.
   static int unpackReport(Chip chip, const unsigned char *report, int reportLen, unsigned char *out);
+  /// The output report(s) that carry @p data to the cable, report id
+  /// placeholder included; empty when the chip cannot send (CH9325).
+  static QByteArray packWrite(Chip chip, const QByteArray &data);
   /// The CP2110 UART_CONFIG feature report (9 bytes incl. report id 0x50)
   /// for the given line settings; parity 0 none / 1 even / 2 odd. Pure.
   static QByteArray cp2110ConfigReport(int baud, int bits, int parity, int stopBits);

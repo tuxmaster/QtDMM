@@ -46,6 +46,10 @@ CHIP = {
     "DTM0660": "DTM0660",
     "Metex14": "Metex KS57C2016",
     "GDM703Continuous": "WENS98A",
+    "BrymenBM25x": "Brymen BM25x",
+    "BrymenBM86x": "Brymen BM86x (BU-86X)",
+    "BrymenBM52x": "Brymen BM52x (BU-86X)",
+    "BrymenBM82x": "Brymen BM82x (BU-86X)",
 }
 
 

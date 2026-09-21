@@ -88,6 +88,9 @@ public:
   /// at index @p len, ends with a complete frame (typically checked on the
   /// terminator and the high nibbles of the VC820-style byte counters).
   virtual bool                       checkFormat(const char* data, size_t len) = 0; // TBD use qbytearray or similar instead for data
+  /// Bytes to send to the meter to make it emit a frame; empty for meters
+  /// that stream on their own. ReaderThread writes it once per read cycle.
+  virtual QByteArray pollRequest() const { return QByteArray(); }
   /// Decodes one frame of getPacketLength() bytes. @p id tells which of
   /// DMMInfo::numValues frames this is. Returns nothing when the frame is
   /// corrupt; the caller then keeps the previous reading.
