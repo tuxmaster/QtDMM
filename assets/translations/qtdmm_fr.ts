@@ -940,6 +940,11 @@ Choisissez quelle instance doit enregistrer.</translation>
         <source>24 bytes binary, polled over BU-86X (Brymen BM82x)</source>
         <translation>24 octets binaires, interrogé via BU-86X (Brymen BM82x)</translation>
     </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="44"/>
+        <source>variable bytes ASCII, polled with QM (Fluke 18x/28x)</source>
+        <translation>octets variables ASCII, interrogé par QM (Fluke 18x/28x)</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

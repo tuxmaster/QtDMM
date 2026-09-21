@@ -29,7 +29,11 @@ size_t DecoderQM1537::getPacketLength()
 
 bool DecoderQM1537::checkFormat(const char* data, size_t idx)
 {
-  return (m_type == ReadEvent::QM1537Continuous && data[idx] == 0x0d);
+  // The frame ends with CR LF (UT61BCD.log: 14 bytes, bytes 12/13 = 0D 0A).
+  // Firing on the CR alone, as this used to, handed the reader the previous
+  // frame's LF plus 13 bytes - decode() then saw the LF where the sign
+  // belongs and reported "Data error!" for every reading.
+  return (m_type == ReadEvent::QM1537Continuous && idx && data[idx - 1] == 0x0d && data[idx] == 0x0a);
 }
 
 std::optional<DmmDecoder::DmmResponse> DecoderQM1537::decode(const QByteArray &data, int id)

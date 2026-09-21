@@ -941,6 +941,11 @@ Please choose which instance should record.</translation>
         <source>24 bytes binary, polled over BU-86X (Brymen BM82x)</source>
         <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM82x)</translation>
     </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="44"/>
+        <source>variable bytes ASCII, polled with QM (Fluke 18x/28x)</source>
+        <translation>variable Länge ASCII, abgefragt mit QM (Fluke 18x/28x)</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

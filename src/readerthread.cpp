@@ -98,7 +98,7 @@ void ReaderThread::socketNotifierSLOT()
   int r;
   char byte;
 
-  int64_t bytesToRead = (m_decoder == Q_NULLPTR) ? 0 : m_decoder->getPacketLength();
+  const int64_t packetLength = (m_decoder == Q_NULLPTR) ? 0 : m_decoder->getPacketLength();
 
   while ((r = m_port->read( &byte, 1)) > 0)
   {
@@ -106,6 +106,11 @@ void ReaderThread::socketNotifierSLOT()
 
     if (m_decoder != Q_NULLPTR && m_decoder->checkFormat(m_fifo,m_length))
     {
+      // A fixed-length protocol takes the last packetLength bytes; a
+      // variable-length one (packetLength 0, the Fluke QM lines) everything
+      // since the previous frame - m_length restarts at 0 after each frame,
+      // so the frame begins at index 0.
+      const int64_t bytesToRead = packetLength > 0 ? packetLength : m_length + 1;
       m_length = (m_length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
 
       for (int i = 0; i < bytesToRead; ++i)
@@ -125,6 +130,8 @@ void ReaderThread::socketNotifierSLOT()
         break;
       }
     }
+    else if (packetLength == 0 && m_length + 1 >= FIFO_LENGTH)
+      m_length = 0;   // no terminator within the buffer: not a frame, start over
     else
       m_length = (m_length + 1) % FIFO_LENGTH;
   }

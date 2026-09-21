@@ -940,6 +940,11 @@ Elija qué instancia debe grabar.</translation>
         <source>24 bytes binary, polled over BU-86X (Brymen BM82x)</source>
         <translation>24 bytes binarios, sondeado vía BU-86X (Brymen BM82x)</translation>
     </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="44"/>
+        <source>variable bytes ASCII, polled with QM (Fluke 18x/28x)</source>
+        <translation>bytes variables ASCII, sondeado con QM (Fluke 18x/28x)</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

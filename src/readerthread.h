@@ -60,7 +60,9 @@ public:
   void        setNumValues(int num)  { m_numValues = num; }
 
 Q_SIGNALS:
-  /// A complete frame, exactly DmmDecoder::getPacketLength() bytes long.
+  /// A complete frame: exactly DmmDecoder::getPacketLength() bytes, or for a
+  /// variable-length protocol (packet length 0) everything received since
+  /// the previous frame, terminator included.
   void        readEvent(const QByteArray &, int id);
 
 protected:

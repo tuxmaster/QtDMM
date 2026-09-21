@@ -15,7 +15,10 @@ Documentation for people working on QtDMM itself. Planned pages:
   `ReadEvent::toString()`, `DmmDecoder::getInstance()` and the device table
   all read it; ctest `protocol_table` and `docs_generated` fail when enum and
   table disagree), `addConfig()` for each supported device, and the protocol
-  specification and test vectors under `docs/protocols/spec/`.
+  specification and test vectors under `docs/protocols/spec/`. Frames are
+  fixed-length (`getPacketLength()`); a line protocol with variable length
+  returns 0 there and gets everything since the previous frame, terminator
+  included (`fluke_qm.cpp` is the example, it skips the ACK line itself).
 - **Adding a USB-HID cable chip** — the chip table and report layouts live
   twice, in `src/portdevices/hidserial.cpp` (QtDMM) and
   `tools/qtdmm-bridge/qtdmm_bridge.py` (the bridge). Both are tested against
