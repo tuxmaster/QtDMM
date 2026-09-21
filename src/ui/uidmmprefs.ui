@@ -874,6 +874,11 @@
           <string>variable bytes ASCII, Sigrok</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>26 bytes ASCII, continuous, two values (Voltcraft GDM 703)</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

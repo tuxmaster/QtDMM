@@ -1,0 +1,25 @@
+#pragma once
+
+#include "dmmdecoder.h"
+
+/// Voltcraft GDM 703/704/705 bench meters: 26 bytes ASCII, continuous,
+/// STX ... ETX, two readings per frame (main and secondary display).
+/// Layout per Matthias Toussaint's CDMM (ablage/CDMM/src/gdm703.h):
+/// `S mm vvvvvv uuuu _ B VVVVVV UUUU E` - S = 0x02, mm = mode, v = value
+/// with sign, uuuu = prefix + unit, B = 'B', V/U = second value, E = 0x03.
+/// No capture available; the models are marked unconfirmed.
+class DecoderGDM703 : public DmmDecoder
+{
+  Q_OBJECT
+public:
+  DecoderGDM703(ReadEvent::DataFormat df) : DmmDecoder(df) { m_name = "GDM703"; }
+
+  std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id);
+  bool checkFormat(const char* data, size_t idx);
+  size_t getPacketLength();
+
+private:
+  /// Splits "1.2345" + " kV" style fields into val/dval/unit; returns false
+  /// when the value field is not numeric (overload).
+  bool parseValue(const QString &value, const QString &prefixUnit, QString &val, double &dval, QString &unit);
+};

@@ -56,6 +56,7 @@ public:
     DTM0660,
     CyrustekES51962,
     Sigrok,
+    GDM703Continuous,
     EndOfList              // new stuff always before!
   };
 
@@ -97,7 +98,8 @@ private:
       { DO3122Continuous,      "DO3122Continuous" },
       { CyrustekES51922,       "CyrustekES51922" },
       { DTM0660,               "DTM0660" },
-      { CyrustekES51962,       "CyrustekES51962" }
+      { CyrustekES51962,       "CyrustekES51962" },
+      { GDM703Continuous,      "GDM703Continuous" }
     };
     return map;
   }
