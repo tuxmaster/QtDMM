@@ -13,6 +13,8 @@ public:
   DecoderAscii(ReadEvent::DataFormat df) : DmmDecoder(df) {}
 
   std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id);
+  /// Metex14 meters answer to "D\n"; the others stream.
+  QByteArray pollRequest() const override { return m_type == ReadEvent::Metex14 ? QByteArrayLiteral("D\n") : QByteArray(); }
   bool checkFormat(const char* data, size_t len);
   size_t getPacketLength();
 

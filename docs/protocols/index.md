@@ -19,6 +19,8 @@ regression tests.
 | Decoder | Protocol (`ReadEvent`) | Devices | Captures in `sources/` | Test vectors |
 |---|---|---|---|---|
 | `ascii.cpp` | `Metex14`, `PeakTech10`, `Voltcraft14Continuous`, `Voltcraft15Continuous`, `Sigrok` | 41 devices: Metex M-3xxx/M-46xx/ME-xx, Voltcraft M-36xx/M-46xx/ME-xx/VC 6xx, PeakTech 4xxx/451, Mastech MAS-34x, Radioshack 22-805/RS22-168A, Digitech QM1350, McVoice M-345pro, Sinometer MAS-343 | `metex-22t.log` (Voltcraft ME-22T) | Metex14: yes |
+| `brymen_bm52x.cpp` | `BrymenBM52x`, `BrymenBM82x` | Brymen BM525s, BM829s over the BU-86X adapter (unconfirmed) | — (layout from libsigrok's `bm52x.c`, live readings only) | synthetic |
+| `brymen_bm86x.cpp` | `BrymenBM86x` | Brymen BM867s, BM869s over the BU-86X adapter (unconfirmed) | — (layout from libsigrok's `bm86x.c`) | synthetic |
 | `brymen_bm25x.cpp` | `BrymenBM25x` | Brymen BM250/251/252/257 (unconfirmed) | — (layout from libsigrok's `bm25x.c`) | synthetic |
 | `cyrustek_es51922.cpp` | `CyrustekES51922` | Uni-Trend UT61E, Wintex TD2200 | `UT61E.log` | yes |
 | `cyrustek_es51962.cpp` | `CyrustekES51962` | PeakTech 3315, Uni-Trend UT70B | `UT70B.log` | yes |

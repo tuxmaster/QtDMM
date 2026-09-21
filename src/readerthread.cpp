@@ -149,19 +149,10 @@ void ReaderThread::socketNotifierSLOT()
 
 void ReaderThread::sendReadRequest()
 {
-  switch (m_format)
-  {
-    case ReadEvent::Metex14:
-      if (m_sendRequest)
-      {
-        /* TODO: Errorhandling */
-        if (m_port->write("D\n", 2) != 2)
-          m_status = Error;
-         //std::cerr << "WROTE: " << ret << std::endl;
-        m_sendRequest = false;
-      }
-      break;
-    default:
-      break;
-  }
+  const QByteArray request = m_decoder ? m_decoder->pollRequest() : QByteArray();
+  if (request.isEmpty() || !m_sendRequest)
+    return;
+  if (m_port->write(request) != request.size())
+    m_status = Error;
+  m_sendRequest = false;
 }

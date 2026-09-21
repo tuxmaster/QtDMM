@@ -58,6 +58,9 @@ public:
     Sigrok,
     GDM703Continuous,
     BrymenBM25x,
+    BrymenBM86x,
+    BrymenBM52x,
+    BrymenBM82x,
     EndOfList              // new stuff always before!
   };
 
@@ -101,7 +104,10 @@ private:
       { DTM0660,               "DTM0660" },
       { CyrustekES51962,       "CyrustekES51962" },
       { GDM703Continuous,      "GDM703Continuous" },
-      { BrymenBM25x,           "BrymenBM25x" }
+      { BrymenBM25x,           "BrymenBM25x" },
+      { BrymenBM86x,           "BrymenBM86x" },
+      { BrymenBM52x,           "BrymenBM52x" },
+      { BrymenBM82x,           "BrymenBM82x" }
     };
     return map;
   }

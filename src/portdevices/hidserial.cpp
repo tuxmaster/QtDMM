@@ -13,6 +13,7 @@ const KnownCable kCables[] = {
   { 0x1a86, 0xe008, HIDSerialDevice::Chip::CH9325 },   // WCH CH9325 (UT-D04 and friends)
   { 0x10c4, 0xea80, HIDSerialDevice::Chip::CP2110 },   // SiLabs CP2110 (UT-D09 first revision)
   { 0x1a86, 0xe429, HIDSerialDevice::Chip::CH9329 },   // WCH CH9329 custom-HID (UT-D09 second revision)
+  { 0x0820, 0x0001, HIDSerialDevice::Chip::BU86X },    // Brymen BU-86X IR adapter
 };
 }
 
@@ -45,6 +46,12 @@ int HIDSerialDevice::unpackReport(Chip chip, const unsigned char *report, int re
 {
   if (reportLen < 1)
     return -1;
+  if (chip == Chip::BU86X)
+  {
+    // the whole report is UART data
+    memcpy(out, report, reportLen);
+    return reportLen;
+  }
   if (chip == Chip::CH9329 || chip == Chip::CP2110)
   {
     // @0 count (0..63; on the CP2110 this is the report id), @1.. raw UART bytes
@@ -62,6 +69,34 @@ int HIDSerialDevice::unpackReport(Chip chip, const unsigned char *report, int re
   for (int i = 0; i < count; i++)
     out[i] = report[1 + i] & 0x7f;
   return count;
+}
+
+QByteArray HIDSerialDevice::packWrite(Chip chip, const QByteArray &data)
+{
+  QByteArray r;
+  switch (chip)
+  {
+    case Chip::BU86X:
+      // report id placeholder, then the bytes as they are
+      r.append('\0');
+      r.append(data);
+      break;
+    case Chip::CH9329:
+      // (@-1 report id placeholder) @0 count @1.. data, 64-byte report
+      r.append('\0');
+      r.append(static_cast<char>(qMin(63, data.size())));
+      r.append(data.left(63));
+      r.append(QByteArray(65 - r.size(), '\0'));
+      break;
+    case Chip::CP2110:
+      // the report id is the byte count
+      r.append(static_cast<char>(qMin(63, data.size())));
+      r.append(data.left(63));
+      break;
+    case Chip::CH9325:
+      break;   // receive only
+  }
+  return r;
 }
 
 QByteArray HIDSerialDevice::cp2110ConfigReport(int baud, int bits, int parity, int stopBits)
@@ -106,7 +141,8 @@ HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device,
   else
   {
     qCDebug(lcHid) << "opened" << path
-                   << (m_chip == Chip::CH9329 ? "(CH9329)" : m_chip == Chip::CP2110 ? "(CP2110)" : "(CH9325)");
+                   << (m_chip == Chip::CH9329 ? "(CH9329)" : m_chip == Chip::CP2110 ? "(CP2110)"
+                       : m_chip == Chip::BU86X ? "(BU-86X)" : "(CH9325)");
     m_isOpen = true;
     QThread* thread = new QThread;
     this->moveToThread(thread);
@@ -217,6 +253,10 @@ void HIDSerialDevice::run()
         qCDebug(lcHid) << "CP2110 uart config" << cfg.toHex(' ') << "->" << res;
       }
     }
+    else if (m_chip == Chip::BU86X)
+    {
+      qCDebug(lcHid) << "BU-86X: fixed speed, nothing to configure";
+    }
     else
     {
       // CH9329: the line coding is persistent chip configuration (9600 8N1
@@ -310,9 +350,20 @@ qint64 HIDSerialDevice::readData(char *data, qint64 maxSize)
 
 qint64 HIDSerialDevice::writeData(const char *data, qint64 len)
 {
- // not implemented and possible not neccessary
- Q_UNUSED(data);
- Q_UNUSED(len);
- return 0;
+  // poll requests (DmmDecoder::pollRequest()); the CH9325 cables cannot
+  // send and their meters stream anyway
+  if (!m_isOpen || !m_handle)
+    return -1;
+  const QByteArray report = packWrite(m_chip, QByteArray(data, static_cast<int>(len)));
+  if (report.isEmpty())
+    return len;   // nothing to send on this cable, but not an error
+  const int res = hid_write(m_handle, reinterpret_cast<const unsigned char *>(report.constData()), report.size());
+  qCDebug(lcHid) << "write" << report.toHex(' ') << "->" << res;
+  if (res < 0)
+  {
+    qWarning() << "HID: write failed:" << QString::fromWCharArray(hid_error(m_handle));
+    return -1;
+  }
+  return len;
 };
 
