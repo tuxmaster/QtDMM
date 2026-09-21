@@ -2,7 +2,7 @@
 
 #include "dmmdecoder.h"
 
-/// Voltcraft GDM 703/704/705 bench meters: 26 bytes ASCII, continuous,
+/// Voltcraft GDM 703/704/705 bench meters (WENS98A chip): 26 bytes ASCII, continuous,
 /// STX ... ETX, two readings per frame (main and secondary display).
 /// Layout per Matthias Toussaint's CDMM (ablage/CDMM/src/gdm703.h):
 /// `S mm vvvvvv uuuu _ B VVVVVV UUUU E` - S = 0x02, mm = mode, v = value
