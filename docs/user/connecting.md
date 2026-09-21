@@ -39,8 +39,20 @@ tell you the driver string; the path to `sigrok-cli` can be set on the same
 page if it is not in your `PATH`.
 
 Any program that fully implements RFC 2217 (including remote port setup) works
-as the server. `assets/rfc2217_server.py` from the QtDMM sources is a
-convenient one: `rfc2217_server.py -p 4000 /dev/ttyUSB0`.
+as the server, e.g. `ser2net`. QtDMM ships its own: **qtdmm-bridge**
+(`tools/qtdmm-bridge/` in the sources), a single Python file for a Raspberry
+Pi or any other box next to the meters:
+
+```
+qtdmm_bridge.py --list                                   # what is connected?
+qtdmm_bridge.py --port 4000=/dev/ttyUSB0 --port 4001=/dev/ttyUSB1
+```
+
+It serves one meter per TCP port, needs only Python 3.11 and pyserial, keeps
+the connection when a cable is unplugged and re-plugged, and takes the line
+settings from QtDMM - the meter model is chosen in QtDMM as usual. See its
+`README.md` for the configuration file and the SSH-tunnel setup; there is no
+authentication, so keep it on a trusted network.
 
 ## Connecting
 

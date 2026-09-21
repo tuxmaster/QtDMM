@@ -84,13 +84,57 @@ qint64 RFC2217SerialDevice::writeData(const char *data, qint64 len)
 {
   if (!m_socket || !m_socket->isOpen())
     return -1;
-  return m_socket->write(data, len);
+  // 0xff is the telnet IAC and has to be doubled in the data stream
+  QByteArray escaped;
+  escaped.reserve(int(len) + 4);
+  for (qint64 i = 0; i < len; ++i)
+  {
+    escaped.append(data[i]);
+    if (quint8(data[i]) == 0xFF)
+      escaped.append(char(0xFF));
+  }
+  return m_socket->write(escaped) < 0 ? -1 : len;
 }
 
 void RFC2217SerialDevice::onReadyRead()
 {
-  m_inputBuffer.append(m_socket->readAll());
-  emit readyRead();
+  filterTelnet(m_socket->readAll());
+  if (!m_inputBuffer.isEmpty())
+    emit readyRead();
+}
+
+// The server answers every COM-PORT-OPTION with IAC SB 44 <cmd+100> ... IAC SE
+// and may negotiate options with IAC WILL/DO/...; none of that is meter data.
+// A binary protocol's 0xff bytes arrive as IAC IAC.
+void RFC2217SerialDevice::filterTelnet(const QByteArray &raw)
+{
+  const quint8 IAC = 0xFF, SB = 0xFA, SE = 0xF0, WILL = 0xFB, DONT = 0xFE;
+  for (char c : raw)
+  {
+    const quint8 b = quint8(c);
+    switch (m_telnet)
+    {
+      case TelnetState::Data:
+        if (b == IAC) m_telnet = TelnetState::Iac;
+        else m_inputBuffer.append(c);
+        break;
+      case TelnetState::Iac:
+        if (b == IAC) { m_inputBuffer.append(c); m_telnet = TelnetState::Data; }
+        else if (b == SB) m_telnet = TelnetState::Sub;
+        else if (b >= WILL && b <= DONT) m_telnet = TelnetState::Option;   // one option byte follows
+        else m_telnet = TelnetState::Data;                                 // NOP and friends
+        break;
+      case TelnetState::Option:
+        m_telnet = TelnetState::Data;
+        break;
+      case TelnetState::Sub:
+        if (b == IAC) m_telnet = TelnetState::SubIac;
+        break;
+      case TelnetState::SubIac:
+        m_telnet = (b == SE || b != IAC) ? TelnetState::Data : TelnetState::Sub;
+        break;
+    }
+  }
 }
 
 
