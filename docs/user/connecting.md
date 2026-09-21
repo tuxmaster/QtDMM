@@ -50,9 +50,12 @@ qtdmm_bridge.py --port 4000=/dev/ttyUSB0 --port 4001=/dev/ttyUSB1
 
 It serves one meter per TCP port, needs only Python 3.11 and pyserial, keeps
 the connection when a cable is unplugged and re-plugged, and takes the line
-settings from QtDMM - the meter model is chosen in QtDMM as usual. See its
-`README.md` for the configuration file and the SSH-tunnel setup; there is no
-authentication, so keep it on a trusted network.
+settings from QtDMM - the meter model is chosen in QtDMM as usual. On Linux
+it also serves the **USB-HID cables** (`hid:1a86:e008` for a UT-D04/UT803
+type cable, UT-D09, Brymen BU-86X), so a HID meter on a Raspberry Pi is
+reachable over the network too. See its `README.md` for the configuration
+file, the udev rule and the SSH-tunnel setup; there is no authentication, so
+keep it on a trusted network.
 
 ## Connecting
 

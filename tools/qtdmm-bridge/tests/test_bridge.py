@@ -292,9 +292,169 @@ class ConfigTest(unittest.TestCase):
         s = loaded[2].initial_settings()
         self.assertEqual((s.baudrate, s.dtr, s.rts), (2400, False, True))
 
-    def test_hid_reserved(self):
-        with self.assertRaises(SystemExit):
-            qb.make_backend_factory("hid:1a86:e008")
+    def test_device_prefixes(self):
+        self.assertIsInstance(qb.make_backend_factory("serial:/dev/ttyUSB0")(None, None), qb.SerialBackend)
+        if sys.platform.startswith("linux"):
+            self.assertIsInstance(qb.make_backend_factory("hid:1a86:e008")(None, None), qb.HidBackend)
+
+
+class FakeHidRaw:
+    """Stands in for /dev/hidrawN: records feature/output reports, hands out
+    queued input reports."""
+
+    instances = []
+
+    def __init__(self, path):
+        self.path = path
+        self.features = []
+        self.writes = []
+        self.reports = []
+        self.closed = False
+        self.fail_read = False
+        FakeHidRaw.instances.append(self)
+
+    def read(self, timeout):
+        if self.fail_read:
+            raise OSError(19, "No such device")
+        if self.reports:
+            return self.reports.pop(0)
+        threading.Event().wait(min(timeout, 0.01))
+        return None
+
+    def write(self, report):
+        self.writes.append(bytes(report))
+
+    def send_feature(self, report):
+        self.features.append(bytes(report))
+
+    def close(self):
+        self.closed = True
+
+
+class HidReportTest(unittest.TestCase):
+    """Report layouts per chip, the same vectors as QtDMM's test_hid."""
+
+    def test_ch9325_unpack(self):
+        # 0xF0 | count, payload bytes carry the top bit
+        self.assertEqual(qb.unpack_hid_report("CH9325", bytes([0xF3, 0xB1, 0xB2, 0xB3, 0x80, 0x80])), b"123")
+        self.assertEqual(qb.unpack_hid_report("CH9325", bytes([0xF0, 0x80])), b"")
+        self.assertIsNone(qb.unpack_hid_report("CH9325", bytes([0xF5, 0xB1])))
+        self.assertIsNone(qb.unpack_hid_report("CH9325", b""))
+
+    def test_ch9329_cp2110_unpack(self):
+        rep = bytes([3, 0x41, 0x42, 0x43]) + b"\x00" * 60
+        self.assertEqual(qb.unpack_hid_report("CH9329", rep), b"ABC")
+        self.assertEqual(qb.unpack_hid_report("CP2110", rep), b"ABC")
+        self.assertIsNone(qb.unpack_hid_report("CH9329", bytes([64]) + b"\x00" * 63))
+        self.assertIsNone(qb.unpack_hid_report("CP2110", bytes([5, 1, 2])))
+
+    def test_bu86x_unpack(self):
+        self.assertEqual(qb.unpack_hid_report("BU86X", b"\x00\x86\x66\x01\x02\x03\x04\x05"), b"\x00\x86\x66\x01\x02\x03\x04\x05")
+
+    def test_pack_write(self):
+        self.assertEqual(qb.pack_hid_write("BU86X", b"\x00\x86\x66"), b"\x00\x00\x86\x66")
+        r = qb.pack_hid_write("CH9329", b"D\n")
+        self.assertEqual(len(r), 65)
+        self.assertEqual(r[:4], b"\x00\x02D\n")
+        self.assertEqual(qb.pack_hid_write("CP2110", b"D\n"), b"\x02D\n")
+        self.assertEqual(qb.pack_hid_write("CH9325", b"D\n"), b"")
+
+    def test_config_reports(self):
+        s = qb.LineSettings(baudrate=19200, bytesize=7, parity="O", stopbits=1)
+        self.assertEqual(qb.cp2110_config_report(s), bytes([0x50, 0, 0, 0x4B, 0, 2, 0, 2, 0]))
+        self.assertEqual(qb.ch9325_config_report(s), bytes([0, 0, 0x4B, 0, 0, 2]))
+        s = qb.LineSettings(baudrate=2400, bytesize=8, parity="E", stopbits=2)
+        self.assertEqual(qb.cp2110_config_report(s), bytes([0x50, 0, 0, 0x09, 0x60, 1, 0, 3, 1]))
+        self.assertEqual(qb.ch9325_config_report(s), bytes([0, 0x60, 0x09, 0, 0, 3]))
+
+
+class HidBackendTest(unittest.TestCase):
+    def setUp(self):
+        FakeHidRaw.instances.clear()
+        self.data = bytearray()
+        self.errors = []
+        self._orig_devices = qb.hidraw_devices
+        self._orig_raw = qb.HidBackend.raw_factory
+        qb.hidraw_devices = lambda: [("/dev/hidraw0", 0x046D, 0xC077), ("/dev/hidraw2", 0x1A86, 0xE008),
+                                     ("/dev/hidraw3", 0x10C4, 0xEA80), ("/dev/hidraw4", 0x0820, 0x0001)]
+        qb.HidBackend.raw_factory = FakeHidRaw
+
+    def tearDown(self):
+        qb.hidraw_devices = self._orig_devices
+        qb.HidBackend.raw_factory = self._orig_raw
+
+    def backend(self, spec):
+        return qb.HidBackend(spec, self.data.extend, self.errors.append)
+
+    def wait_for(self, cond, timeout=1.0):
+        import time
+
+        end = time.time() + timeout
+        while time.time() < end and not cond():
+            time.sleep(0.005)
+        return cond()
+
+    def test_resolve(self):
+        self.assertEqual(self.backend("1a86:e008").resolve(), ("/dev/hidraw2", "CH9325"))
+        self.assertEqual(self.backend("/dev/hidraw3").resolve(), ("/dev/hidraw3", "CP2110"))
+        self.assertEqual(self.backend("0820:0001").resolve(), ("/dev/hidraw4", "BU86X"))
+        with self.assertRaises(FileNotFoundError):
+            self.backend("1a86:e429").resolve()          # not attached
+        with self.assertRaises(FileNotFoundError):
+            self.backend("/dev/hidraw9").resolve()
+        with self.assertRaises(ValueError):
+            self.backend("nonsense").resolve()
+
+    def test_ch9325_open_configures_and_reads(self):
+        b = self.backend("1a86:e008")
+        b.settings = qb.LineSettings(baudrate=19200, bytesize=7)
+        b.open()
+        try:
+            raw = FakeHidRaw.instances[-1]
+            self.assertEqual(raw.features, [bytes([0, 0, 0x4B, 0, 0, 2])])
+            raw.reports.append(bytes([0xF2, 0xB0, 0xBD]))     # "0="
+            raw.reports.append(bytes([0xF1, 0x8A]))           # "\n"
+            self.assertTrue(self.wait_for(lambda: bytes(self.data) == b"0=\n"), bytes(self.data))
+            # a new baud rate from the client -> another feature report
+            b.apply(qb.LineSettings(baudrate=2400, bytesize=8))
+            self.assertEqual(raw.features[-1], bytes([0, 0x60, 0x09, 0, 0, 3]))
+            b.write(b"D\n")                                   # receive-only cable: nothing goes out
+            self.assertEqual(raw.writes, [])
+        finally:
+            b.close()
+        self.assertTrue(raw.closed)
+
+    def test_cp2110_open_and_write(self):
+        b = self.backend("/dev/hidraw3")
+        b.settings = qb.LineSettings(baudrate=9600, bytesize=8, parity="N", stopbits=1)
+        b.open()
+        try:
+            raw = FakeHidRaw.instances[-1]
+            self.assertEqual(raw.features, [b"\x41\x01", bytes([0x50, 0, 0, 0x25, 0x80, 0, 0, 3, 0])])
+            b.write(b"D\n")
+            self.assertEqual(raw.writes, [b"\x02D\n"])
+            raw.reports.append(bytes([2, 0x4F, 0x4B]))
+            self.assertTrue(self.wait_for(lambda: bytes(self.data) == b"OK"))
+        finally:
+            b.close()
+
+    def test_bu86x_poll_and_unplug(self):
+        b = self.backend("0820:0001")
+        b.open()
+        try:
+            raw = FakeHidRaw.instances[-1]
+            self.assertEqual(raw.features, [])                # fixed speed
+            b.write(b"\x00\x86\x66")
+            self.assertEqual(raw.writes, [b"\x00\x00\x86\x66"])
+            raw.fail_read = True
+            self.assertTrue(self.wait_for(lambda: self.errors), "unplug should be reported")
+            self.assertFalse(b.is_open)
+        finally:
+            b.close()
+
+    def test_open_without_cable(self):
+        with self.assertRaises(FileNotFoundError):
+            self.backend("1a86:e429").open()
 
 
 if __name__ == "__main__":
