@@ -28,6 +28,7 @@
 #include <vector>
 
 #include "dmmprefs.h"
+#include "protocols.h"
 #include "calcexpr.h"
 #include "sharedstatemanager.h"
 #include "siprefix.h"
@@ -70,8 +71,31 @@ DmmPrefs::~DmmPrefs()
   delete m_pixmap;
 }
 
+// The persisted protocol: the name (ReadEvent::toString) since the protocol
+// table exists, the combo index (= enum value) in older configuration files.
+ReadEvent::DataFormat DmmPrefs::formatFromSetting(const QVariant &value)
+{
+  bool isNumber = false;
+  const int number = value.toInt(&isNumber);
+  if (isNumber)
+    return (number >= 0 && number < ReadEvent::EndOfList) ? static_cast<ReadEvent::DataFormat>(number) : ReadEvent::Metex14;
+  const ReadEvent::DataFormat df = ReadEvent::fromString(value.toString());
+  return df == ReadEvent::Invalid ? ReadEvent::Metex14 : df;
+}
+
+void DmmPrefs::selectFormat(ReadEvent::DataFormat df)
+{
+  const int idx = protocolCombo->findData(int(df));
+  protocolCombo->setCurrentIndex(idx >= 0 ? idx : 0);
+}
+
 void DmmPrefs::setupComboBoxModel()
 {
+  // one combo entry per row of the protocol table, the enum value as data
+  protocolCombo->clear();
+  for (const ProtocolInfo &p : protocols())
+    protocolCombo->addItem(QCoreApplication::translate("Protocols", p.description), int(p.id));
+
   ui_vendor->clear();
   ui_vendor->insertItem(-1, tr("Manual settings"));
   ui_vendor->addItem(tr("All vendors"));
@@ -243,7 +267,7 @@ void DmmPrefs::defaultsSLOT()
   uirts->setChecked(m_cfg->getBool("DMM/rts", true));
   uidtr->setChecked(m_cfg->getBool("DMM/dtr", false));
 
-  protocolCombo->setCurrentIndex(m_cfg->getInt("DMM/data-format"));
+  selectFormat(formatFromSetting(m_cfg->getString("DMM/data-format", "Metex14")));
   ui_numValues->setValue(m_cfg->getInt("DMM/number-of-values", 1));
 
   QString model = m_cfg->getString("DMM/model");
@@ -284,7 +308,7 @@ void DmmPrefs::factoryDefaultsSLOT()
   displayCombo->setCurrentIndex(1);
   ui_externalSetup->setChecked(false);
 
-  protocolCombo->setCurrentIndex(0);
+  selectFormat(ReadEvent::Metex14);
   ui_numValues->setValue(1);
   ui_vendor->setCurrentIndex(0);
   ui_model->clear();
@@ -314,7 +338,7 @@ void DmmPrefs::applySLOT()
   m_cfg->setString("DMM/display", displayCombo->currentText());
   m_cfg->setBool("DMM/external-setup", ui_externalSetup->isChecked());
 
-  m_cfg->setInt("DMM/data-format", protocolCombo->currentIndex());
+  m_cfg->setString("DMM/data-format", ReadEvent::toString(format()));
   m_cfg->setInt("DMM/number-of-values", ui_numValues->value());
   const int modelIdx = ui_model->currentIndex();
   const bool haveModel = ui_vendor->currentIndex() != 0
@@ -462,7 +486,7 @@ void DmmPrefs::enterManualMode()
 
   m_dmmInfo.name = "custom";
   m_dmmInfo.baud = baudRate->currentText().toInt();
-  m_dmmInfo.protocol = static_cast<ReadEvent::DataFormat>(protocolCombo->currentIndex()); //!
+  m_dmmInfo.protocol = format();
   m_dmmInfo.bits =  bitsCombo->currentText().toInt();
   m_dmmInfo.stopBits = stopBitsCombo->currentText().toInt();
   m_dmmInfo.parity = parityCombo->currentIndex();
@@ -509,7 +533,7 @@ void DmmPrefs::on_ui_model_activated(int id)
   m_dmmInfo = m_currentVendorModels[id];
 
   baudRate->setCurrentText(QString::number(m_currentVendorModels[id].baud));
-  protocolCombo->setCurrentIndex(m_currentVendorModels[id].protocol);
+  selectFormat(m_currentVendorModels[id].protocol);
   bitsCombo->setCurrentText(QString::number(m_currentVendorModels[id].bits));
   stopBitsCombo->setCurrentText(QString::number(m_currentVendorModels[id].stopBits));
   parityCombo->setCurrentIndex(m_currentVendorModels[id].parity);
@@ -582,7 +606,7 @@ int DmmPrefs::numValues() const
 
 ReadEvent::DataFormat DmmPrefs::format() const
 {
-  return static_cast<ReadEvent::DataFormat>(protocolCombo->currentIndex());
+  return static_cast<ReadEvent::DataFormat>(protocolCombo->currentData().toInt());
 }
 
 // The counts combo is not editable; a value it does not list (a new model's
@@ -638,7 +662,7 @@ void DmmPrefs::on_ui_load_clicked()
     parityCombo->setCurrentIndex(cfg.value("Port settings/parity", 0).toInt());
     selectDisplay(cfg.value("DMM/display", "4000").toString());
     ui_externalSetup->setChecked(cfg.value("DMM/external-setup", false).toBool());
-    protocolCombo->setCurrentIndex(cfg.value("DMM/data-format", 0).toInt());
+    selectFormat(formatFromSetting(cfg.value("DMM/data-format", "Metex14")));
     ui_numValues->setValue(cfg.value("DMM/number-of-values", 1).toInt());
     uirts->setChecked(cfg.value("DMM/rts", true).toBool());
     uidtr->setChecked(cfg.value("DMM/dtr", false).toBool());
@@ -663,7 +687,7 @@ void DmmPrefs::on_ui_save_clicked()
 
     cfg.setValue("DMM/display", displayCombo->currentText());
     cfg.setValue("DMM/external-setup", ui_externalSetup->isChecked());
-    cfg.setValue("DMM/data-format", protocolCombo->currentIndex());
+    cfg.setValue("DMM/data-format", ReadEvent::toString(format()));
     cfg.setValue("DMM/number-of-values", ui_numValues->value());
 
     cfg.setValue("DMM/rts", uirts->isChecked());

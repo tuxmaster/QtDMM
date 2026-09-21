@@ -3,8 +3,9 @@ if (BUILD_TESTING)
 	enable_testing()
 
 	file(GLOB DECODER_FILES CONFIGURE_DEPENDS src/decoders/*.h  src/decoders/*.cpp )
-	add_executable(${TEST_DECODER} MACOSX_BUNDLE tests/test_decoder.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})
+	add_executable(${TEST_DECODER} MACOSX_BUNDLE tests/test_decoder.cpp src/dmmdecoder.cpp src/protocols.cpp src/siprefix.cpp ${DECODER_FILES})
 	target_link_libraries(${TEST_DECODER} PRIVATE Qt::Core Qt::Test)
+	add_test(NAME protocol_table COMMAND ${TEST_DECODER} --table)
 
 	file(GLOB TEST_FILES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/tests/data/decoder/*.json")
 	foreach(test_file ${TEST_FILES})
@@ -52,7 +53,7 @@ if (BUILD_TESTING)
 
 	## instances dialog: list from config files, delete mode, calculated instance
 	set( TEST_INSTANCES test_instances)
-	add_executable(${TEST_INSTANCES} MACOSX_BUNDLE tests/test_instances.cpp src/instancesdlg.cpp src/settings.cpp
+	add_executable(${TEST_INSTANCES} MACOSX_BUNDLE tests/test_instances.cpp src/instancesdlg.cpp src/settings.cpp src/protocols.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES}
 		src/sharedstatemanager.cpp src/calcexpr.cpp src/siprefix.cpp src/ui/uiinstancesdlg.ui)
 	target_include_directories(${TEST_INSTANCES} PRIVATE src)
 	target_link_libraries(${TEST_INSTANCES} PRIVATE Qt6::Widgets Qt::Core)
@@ -68,14 +69,14 @@ if (BUILD_TESTING)
 	## checked through the real ASCII decoder
 	set( TEST_CALC_DEVICE test_calc_device)
 	add_executable(${TEST_CALC_DEVICE} MACOSX_BUNDLE tests/test_calc_device.cpp src/portdevices/calc.cpp src/calcexpr.cpp
-		src/sharedstatemanager.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})
+		src/sharedstatemanager.cpp src/dmmdecoder.cpp src/protocols.cpp src/siprefix.cpp ${DECODER_FILES})
 	target_include_directories(${TEST_CALC_DEVICE} PRIVATE src)
 	target_link_libraries(${TEST_CALC_DEVICE} PRIVATE Qt::Core)
 	add_test(NAME calc_device COMMAND ${TEST_CALC_DEVICE})
 
 	## HID cable chips: report layouts and chip detection, no hardware needed
 	set( TEST_HID test_hid)
-	add_executable(${TEST_HID} MACOSX_BUNDLE tests/test_hid.cpp src/portdevices/hidserial.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})
+	add_executable(${TEST_HID} MACOSX_BUNDLE tests/test_hid.cpp src/portdevices/hidserial.cpp src/dmmdecoder.cpp src/protocols.cpp src/siprefix.cpp ${DECODER_FILES})
 	target_include_directories(${TEST_HID} PRIVATE src)
 	target_link_libraries(${TEST_HID} PRIVATE Qt::Core ${HIDAPI_TARGET})
 	add_test(NAME hid_cable COMMAND ${TEST_HID} "${CMAKE_SOURCE_DIR}/tests/data/hid_cables.json")
@@ -85,14 +86,14 @@ if (BUILD_TESTING)
 	set( TEST_DMM test_dmm)
 	add_executable(${TEST_DMM} MACOSX_BUNDLE tests/test_dmm.cpp src/dmm.cpp src/readerthread.cpp src/porthandler.cpp
 		src/portdevices/serial.cpp src/portdevices/hidserial.cpp src/portdevices/rfc2217serial.cpp src/portdevices/sigrok.cpp
-		src/portdevices/calc.cpp src/calcexpr.cpp src/sharedstatemanager.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})
+		src/portdevices/calc.cpp src/calcexpr.cpp src/sharedstatemanager.cpp src/dmmdecoder.cpp src/protocols.cpp src/siprefix.cpp ${DECODER_FILES})
 	target_include_directories(${TEST_DMM} PRIVATE src)
 	target_link_libraries(${TEST_DMM} PRIVATE Qt6::Widgets Qt6::SerialPort Qt::Network Qt::Core ${HIDAPI_TARGET})
 	add_test(NAME dmm_link_state COMMAND ${TEST_DMM})
 
 	## RFC 2217 client against a fake server: negotiation, telnet filtering, IAC escaping
 	set( TEST_RFC2217 test_rfc2217)
-	add_executable(${TEST_RFC2217} MACOSX_BUNDLE tests/test_rfc2217.cpp src/portdevices/rfc2217serial.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})
+	add_executable(${TEST_RFC2217} MACOSX_BUNDLE tests/test_rfc2217.cpp src/portdevices/rfc2217serial.cpp src/dmmdecoder.cpp src/protocols.cpp src/siprefix.cpp ${DECODER_FILES})
 	target_include_directories(${TEST_RFC2217} PRIVATE src)
 	target_link_libraries(${TEST_RFC2217} PRIVATE Qt::Core Qt::Network)
 	add_test(NAME rfc2217_client COMMAND ${TEST_RFC2217})

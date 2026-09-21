@@ -81,40 +81,7 @@ QString DmmDecoder::toString() const {
                    .arg(m_result.showBar);
 }
 
-std::shared_ptr<DmmDecoder> DmmDecoder::getInstance(ReadEvent::DataFormat df)
-{
-  switch (df)
-  {
-    case ReadEvent::Invalid:                return Q_NULLPTR;
-    case ReadEvent::Sigrok:
-    case ReadEvent::Metex14:
-    case ReadEvent::PeakTech10:
-    case ReadEvent::Voltcraft14Continuous:
-    case ReadEvent::Voltcraft15Continuous:  return std::make_unique<DecoderAscii>(df);
-    case ReadEvent::M9803RContinuous:       return std::make_unique<DecoderM9803R>(df);
-    case ReadEvent::VC820Continuous:        return std::make_unique<DecoderVC820>(df);
-    case ReadEvent::CyrustekES51986:        return std::make_unique<DecoderCyrusTekES51986>(df);
-    case ReadEvent::VC940Continuous:        return std::make_unique<DecoderVC940>(df);
-    case ReadEvent::QM1537Continuous:       return std::make_unique<DecoderQM1537>(df);
-    case ReadEvent::RS22812Continuous:      return std::make_unique<DecoderRS22812>(df);
-    case ReadEvent::VC870Continuous:        return std::make_unique<DecoderVC870>(df);
-    case ReadEvent::DO3122Continuous:       return std::make_unique<DecoderDO3122>(df);
-    case ReadEvent::CyrustekES51922:        return std::make_unique<DecoderCyrusTekES51922>(df);
-    case ReadEvent::DTM0660:                return std::make_unique<DecoderDTM0660>(df);
-    case ReadEvent::CyrustekES51962:        return std::make_unique<DecoderCyrusTekES51962>(df);
-    case ReadEvent::GDM703Continuous:       return std::make_unique<DecoderGDM703>(df);
-    case ReadEvent::BrymenBM25x:            return std::make_unique<DecoderBrymenBM25x>(df);
-    case ReadEvent::BrymenBM86x:            return std::make_unique<DecoderBrymenBM86x>(df);
-    case ReadEvent::BrymenBM52x:
-    case ReadEvent::BrymenBM82x:            return std::make_unique<DecoderBrymenBM52x>(df);
-    default: qWarning() << "invalid decoder ID"; return Q_NULLPTR;
-  }
-}
-
-std::shared_ptr<DmmDecoder> DmmDecoder::getInstance(QString df)
-{
-  return DmmDecoder::getInstance(ReadEvent::fromString(df));
-}
+// getInstance(): see protocols.cpp, the table has the factories
 
 
 
