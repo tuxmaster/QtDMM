@@ -33,7 +33,6 @@
 
 ReaderThread::ReaderThread(QObject *receiver) :
   QObject(receiver),
-  m_status(ReaderThread::NotConnected),
   m_readValue(false),
   m_format(ReadEvent::Invalid),
   m_length(0),
@@ -58,11 +57,7 @@ void ReaderThread::setHandle(QIODevice *handle)
 
   m_readValue = false;
 
-  if (!m_port)
-  {
-    m_status = ReaderThread::NotConnected;
-  }
-  else
+  if (m_port)
   {
     connect(m_port, SIGNAL(readyRead()), this, SLOT(socketNotifierSLOT()));
     connect(m_port, SIGNAL(aboutToClose()), this, SLOT(socketClose()));
@@ -100,16 +95,13 @@ void ReaderThread::startRead()
 
 void ReaderThread::socketNotifierSLOT()
 {
-  int retval = 0;
   int r;
   char byte;
 
-  m_status = ReaderThread::Ok;
   int64_t bytesToRead = (m_decoder == Q_NULLPTR) ? 0 : m_decoder->getPacketLength();
 
   while ((r = m_port->read( &byte, 1)) > 0)
   {
-    retval++;
     m_fifo[m_length] = byte;
 
     if (m_decoder != Q_NULLPTR && m_decoder->checkFormat(m_fifo,m_length))
@@ -136,15 +128,8 @@ void ReaderThread::socketNotifierSLOT()
     else
       m_length = (m_length + 1) % FIFO_LENGTH;
   }
-
-  if (0 == retval) {
-    if (-1 == r) {
-      m_status = ReaderThread::Error;
-    }
-    else if (0 == r) {
-      m_status = ReaderThread::Timeout;
-    }
-  }
+  // an empty read is nothing to report here: DMM's watchdog turns silence
+  // into Timeout, the port devices report their own loss
 }
 
 void ReaderThread::sendReadRequest()
@@ -152,7 +137,6 @@ void ReaderThread::sendReadRequest()
   const QByteArray request = m_decoder ? m_decoder->pollRequest() : QByteArray();
   if (request.isEmpty() || !m_sendRequest)
     return;
-  if (m_port->write(request) != request.size())
-    m_status = Error;
+  m_port->write(request);
   m_sendRequest = false;
 }

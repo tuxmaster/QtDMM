@@ -80,11 +80,15 @@ bool RFC2217SerialDevice::open(OpenMode mode)
 
 void RFC2217SerialDevice::close()
 {
-  if (m_socket)
+  // detach first: disconnectFromHost() can emit disconnected() synchronously,
+  // which would re-enter here through finished() -> DMM::portLost()
+  QTcpSocket *socket = m_socket;
+  m_socket = nullptr;
+  if (socket)
   {
-    m_socket->disconnectFromHost();
-    m_socket->deleteLater();
-    m_socket = nullptr;
+    socket->disconnect(this);
+    socket->disconnectFromHost();
+    socket->deleteLater();
   }
   QIODevice::close();
 }

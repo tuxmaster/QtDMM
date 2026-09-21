@@ -29,11 +29,14 @@ bool PortHandler::create(const DmmDecoder::DMMInfo spec, PortType t, QString dev
 void PortHandler::close()
 {
   if (!m_port) return;
-  m_port->close();
-  m_port->deleteLater();
+  // forget the port before closing it: close() may emit signals whose
+  // handlers ask port() and must not see the dying device
+  QIODevice *port = m_port;
   m_port   = Q_NULLPTR;
   m_type   = PortType::None;
   m_device = "";
+  port->close();
+  port->deleteLater();
 }
 
 int PortHandler::error()

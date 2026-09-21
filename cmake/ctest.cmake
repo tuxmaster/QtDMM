@@ -80,6 +80,16 @@ if (BUILD_TESTING)
 	target_link_libraries(${TEST_HID} PRIVATE Qt::Core ${HIDAPI_TARGET})
 	add_test(NAME hid_cable COMMAND ${TEST_HID})
 
+	## DMM connection state machine (Connecting/Connected/Timeout/Error/reconnect)
+	## against a fake RFC 2217 server; needs the whole port stack
+	set( TEST_DMM test_dmm)
+	add_executable(${TEST_DMM} MACOSX_BUNDLE tests/test_dmm.cpp src/dmm.cpp src/readerthread.cpp src/porthandler.cpp
+		src/portdevices/serial.cpp src/portdevices/hidserial.cpp src/portdevices/rfc2217serial.cpp src/portdevices/sigrok.cpp
+		src/portdevices/calc.cpp src/calcexpr.cpp src/sharedstatemanager.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})
+	target_include_directories(${TEST_DMM} PRIVATE src)
+	target_link_libraries(${TEST_DMM} PRIVATE Qt6::Widgets Qt6::SerialPort Qt::Network Qt::Core ${HIDAPI_TARGET})
+	add_test(NAME dmm_link_state COMMAND ${TEST_DMM})
+
 	## RFC 2217 client against a fake server: negotiation, telnet filtering, IAC escaping
 	set( TEST_RFC2217 test_rfc2217)
 	add_executable(${TEST_RFC2217} MACOSX_BUNDLE tests/test_rfc2217.cpp src/portdevices/rfc2217serial.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})

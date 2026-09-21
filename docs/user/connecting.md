@@ -68,9 +68,15 @@ happening:
 - *Connecting …* — the port is open, waiting for the first frame.
 - *Connected /dev/ttyUSB0* — readings arrive; the display and the recorder are
   live.
-- *Timeout on device …* — the port is open but nothing arrives. Check that the
-  meter is switched on, that its RS-232 output is enabled (many meters have a
-  button or menu entry for it), and DTR/RTS.
+- *Timeout on device …* — the port is open but nothing has arrived for three
+  seconds. Check that the meter is switched on, that its RS-232 output is
+  enabled (many meters have a button or menu entry for it), and DTR/RTS. With
+  a USB-HID cable the message says whether the cable answers while the meter
+  stays silent.
+- *Lost connection to … Retrying every 5 s.* — the port went away: cable
+  unplugged, bridge or sigrok-cli gone, connection refused. QtDMM keeps
+  trying as long as **Connect** is pressed and picks up again as soon as the
+  device is back; the recording continues where it was.
 - *No permission to access …* — see [Troubleshooting](troubleshooting.md).
 
 Clicking **Connect** again disconnects and frees the port for other programs.

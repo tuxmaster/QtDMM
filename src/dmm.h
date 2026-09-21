@@ -37,16 +37,31 @@ class SharedStateManager;
 /// MainWid configures it from the settings (setDevice(), setFormat(),
 /// setPortSettings(), ...) and calls open(). From then on every decoded
 /// reading arrives through value() and every change of the connection state
-/// as a human-readable message through error(), which the main window shows
-/// in its status bar - "Connected", "Timeout", the HID hint, ...
+/// through linkStateChanged() - and, as a human-readable message, through
+/// error(), which the main window shows in its status bar: "Connecting",
+/// "Connected", "Timeout", the HID hint, ...
 ///
-/// Internally a PortHandler owns the QIODevice, a ReaderThread cuts the byte
-/// stream into frames and the DmmDecoder chosen by the format decodes them.
+/// The state is owned here: a one-second watchdog turns silence into
+/// Timeout, a vanished port (USB unplugged, bridge gone, socket refused)
+/// into Error, and while the user still wants the connection the port is
+/// reopened every few seconds. Internally a PortHandler owns the QIODevice,
+/// a ReaderThread cuts the byte stream into frames and the DmmDecoder chosen
+/// by the format decodes them.
 class DMM : public QObject
 {
   Q_OBJECT
 
 public:
+  /// Where the connection stands; error() carries the matching text.
+  enum class LinkState
+  {
+    Closed,       ///< no port, the user did not ask for one (or close()d it)
+    Connecting,   ///< port open, waiting for the first frame
+    Connected,    ///< frames arrive
+    Timeout,      ///< port open but silent for longer than timeout()
+    Error         ///< the port went away; reopened automatically while wanted
+  };
+  Q_ENUM(LinkState)
 
   DMM(QObject *parent);
   /// Baud rate; only used by the serial port types.
@@ -64,6 +79,12 @@ public:
   void    setDmmInfo(const DmmDecoder::DMMInfo info)  {  m_dmmInfo = info; }
   /// The last message emitted through error().
   QString errorString() const  { return m_error; }
+  LinkState linkState() const { return m_state; }
+  /// Silence longer than this (ms) is a Timeout; default 3000.
+  void    setTimeout(int ms) { m_timeoutMs = ms; }
+  int     timeout() const { return m_timeoutMs; }
+  /// Seconds between reopen attempts after the port was lost; 0 disables.
+  void    setReconnectInterval(int seconds) { m_reconnectSeconds = seconds; }
   bool    isOpen() const;
   /// Selects the decoder (see DmmDecoder::getInstance()).
   void    setFormat(ReadEvent::DataFormat);
@@ -86,6 +107,8 @@ Q_SIGNALS:
   /// Connection state as a message for the status bar; despite the name
   /// also "Connecting ..." and "Connected".
   void    error(const QString &);
+  /// The connection state changed; @p detail is the status bar text.
+  void    linkStateChanged(DMM::LinkState state, const QString &detail);
 
 protected:
   void                  initDecoder( ReadEvent::DataFormat df);
@@ -94,6 +117,16 @@ protected:
   QString               permissionHint() const;
   /// Status bar text while readings arrive.
   QString               connectedMessage() const;
+  /// Status bar text for a silent port (with the HID hint where it applies).
+  QString               timeoutMessage() const;
+  /// Sets the state and its message; emits linkStateChanged()/error() on change.
+  void                  setState(LinkState state, const QString &message);
+  /// Creates and opens the port; the common part of open() and a reconnect.
+  bool                  openPort();
+  /// Drops the port without touching m_wanted.
+  void                  closePort();
+  /// The port device reports that it is gone (socket closed, USB unplugged).
+  void                  portLost(QIODevice *from, const QString &reason);
   PortHandler          *m_portHandler;
   int                   m_speed;
   QSerialPort::Parity   m_parity;
@@ -102,7 +135,12 @@ protected:
   QString               m_device;
   QString               m_error;
   ReaderThread         *m_readerThread;
-  ReaderThread::ReadStatus m_oldStatus;
+  LinkState             m_state = LinkState::Closed;
+  bool                  m_wanted = false;       ///< open() called and not close()d
+  int                   m_timeoutMs = 3000;
+  int                   m_reconnectSeconds = 5;
+  int                   m_secondsInError = 0;
+  QElapsedTimer         m_lastFrame;            ///< since the last complete frame (or open)
   QString               m_name;
   bool                  m_consoleLogging;
   bool                  m_externalSetup;
