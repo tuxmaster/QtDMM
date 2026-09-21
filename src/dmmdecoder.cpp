@@ -103,6 +103,7 @@ std::shared_ptr<DmmDecoder> DmmDecoder::getInstance(ReadEvent::DataFormat df)
     case ReadEvent::DTM0660:                return std::make_unique<DecoderDTM0660>(df);
     case ReadEvent::CyrustekES51962:        return std::make_unique<DecoderCyrusTekES51962>(df);
     case ReadEvent::GDM703Continuous:       return std::make_unique<DecoderGDM703>(df);
+    case ReadEvent::BrymenBM25x:            return std::make_unique<DecoderBrymenBM25x>(df);
     default: qWarning() << "invalid decoder ID"; return Q_NULLPTR;
   }
 }

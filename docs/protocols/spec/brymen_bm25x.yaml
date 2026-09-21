@@ -1,0 +1,49 @@
+protocol: BrymenBM25x
+decoder: src/decoders/brymen_bm25x.cpp
+devices: [Brymen BM250, Brymen BM251, Brymen BM252, Brymen BM257]
+frames_per_reading: 1
+sources:
+  - docs/protocols/spec/brymen_bm25x.yaml   # synthetic, see note below
+
+# SYNTHETIC vectors: encoded with the frame layout of libsigrok's bm25x.c
+# (segment table, decimal point, prefix, function and flag bits). No real
+# capture from a BM25x exists yet - replace these when one arrives.
+vectors:
+  - source_line: "DC 1.234 V AUTO"
+    bytes: 02 1C 20 30 4A 5B 6D 78 8F 94 AE B0 C0 D0 E4
+    reading: {value: "1.234", unit: "V", coupling: "DC", range_mode: "auto"}
+    expect: {special: "DC"}
+  - source_line: "DC -12.34 mV AUTO"
+    bytes: 02 1C 20 31 4A 5A 6D 79 8F 94 AE B0 C0 D1 E4
+    reading: {value: "-12.34", unit: "mV", coupling: "DC", range_mode: "auto"}
+  - source_line: "AC 230.1 V MANU"
+    bytes: 02 12 20 3A 4D 58 6F 7E 8B 91 AA B0 C0 D0 E4
+    reading: {value: "230.1", unit: "V", coupling: "AC", range_mode: "manual"}
+    expect: {special: "AC"}
+  - source_line: "DC 0.500 A AUTO HOLD"
+    bytes: 02 1C 20 3E 4B 5D 67 7E 8B 9E AB B8 C0 D0 E2
+    reading: {value: "0.500", unit: "A", coupling: "DC", range_mode: "auto", flags: [HOLD]}
+  - source_line: "4.700 kOhm AUTO"
+    bytes: 02 18 20 34 4E 59 6A 7E 8B 9E AB B1 C4 D0 E0
+    reading: {value: "4.700", unit: "kOhm", range_mode: "auto"}
+    expect: {special: "OH"}
+  - source_line: "0L MOhm AUTO (overload)"
+    bytes: 02 18 20 30 40 5E 6B 76 81 90 A0 B2 C4 D0 E0
+    reading: {value: " 0L ", unit: "MOhm", range_mode: "auto"}
+    expect: {val: " OL "}
+  - source_line: "100.0 nF AUTO"
+    bytes: 02 18 20 30 4A 5E 6B 7E 8B 9F AB B0 C1 D4 E0
+    reading: {value: "100.0", unit: "nF", range_mode: "auto"}
+    expect: {special: "CA"}
+  - source_line: "50.00 kHz AUTO"
+    bytes: 02 18 20 3C 47 5E 6B 7F 8B 9E AB B1 C2 D0 E0
+    reading: {value: "50.00", unit: "kHz", range_mode: "auto"}
+    expect: {special: "HZ"}
+  - source_line: "Diode 0.652 V (no AC/DC flag)"
+    bytes: 02 18 20 3E 4B 5F 67 7C 87 9A AD B0 C0 D0 E4
+    reading: {value: "0.652", unit: "V", range_mode: "auto"}
+    expect: {special: "DI"}
+  - source_line: "Temperature 23.5 C"
+    bytes: 02 18 20 3A 4D 58 6F 7C 87 9F A1 B0 C0 D0 E0
+    reading: {value: "23.5", unit: "C", range_mode: "auto"}
+    expect: {special: "TE", unit: "C", dval: 23.5}
