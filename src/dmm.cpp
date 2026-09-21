@@ -28,6 +28,9 @@
 #include "dmm.h"
 #include "portdevices/hidserial.h"
 #include "portdevices/calc.h"
+#include "portdevices/rfc2217serial.h"
+#include "portdevices/sigrok.h"
+#include <QSerialPort>
 #include "decoders.h"
 
 #include <stdio.h>
@@ -101,7 +104,6 @@ DMM::DMM(QObject *parent)
     m_stopBits(QSerialPort::OneStop),
     m_dataBits(QSerialPort::Data7),
     m_device(""),
-    m_oldStatus(ReaderThread::NotConnected),
     m_consoleLogging(false),
     m_externalSetup(false),
     m_dtr(false),
@@ -176,6 +178,15 @@ void DMM::initDecoder( ReadEvent::DataFormat df)
 
 bool DMM::open()
 {
+  m_wanted = true;
+  if (openPort())
+    return true;
+  m_wanted = false;
+  return false;
+}
+
+bool DMM::openPort()
+{
   if (!m_portHandler->create(m_dmmInfo, m_portType, m_device))
   {
     m_error = tr("Error creating port %1.").arg(m_device);
@@ -221,24 +232,88 @@ bool DMM::open()
       return false;
     }
   }
-  m_error = tr("Connecting ...");
-  Q_EMIT error(m_error);
-  if (auto *calc = dynamic_cast<CalcDevice *>(m_portHandler->port()))
+  QIODevice *port = m_portHandler->port();
+  if (auto *calc = dynamic_cast<CalcDevice *>(port))
   {
     // which input instance is missing or silent; shown in the status bar
     // instead of "Connected" until all inputs deliver
     connect(calc, &CalcDevice::status, this, [this](const QString &message)
     {
-      m_error = message.isEmpty() ? connectedMessage() : message;
-      Q_EMIT error(m_error);
+      if (m_state == LinkState::Connected || m_state == LinkState::Connecting)
+        setState(m_state, message.isEmpty() ? connectedMessage() : message);
     });
   }
-  m_readerThread->setHandle(m_portHandler->port());
+  // the port devices tell when they are gone: socket closed or refused,
+  // USB cable unplugged, sigrok-cli exited, serial device vanished
+  if (auto *rfc = dynamic_cast<RFC2217SerialDevice *>(port))
+    connect(rfc, &RFC2217SerialDevice::finished, this, [this, rfc] { portLost(rfc, rfc->errorString()); });
+  else if (auto *hid = dynamic_cast<HIDSerialDevice *>(port))
+    connect(hid, &HIDSerialDevice::finished, this, [this, hid] { portLost(hid, QString()); });
+  else if (auto *sig = dynamic_cast<SigrokDevice *>(port))
+    connect(sig, &SigrokDevice::finished, this, [this, sig] { portLost(sig, QString()); });
+  else if (auto *serial = dynamic_cast<QSerialPort *>(port))
+    connect(serial, &QSerialPort::errorOccurred, this, [this, serial](QSerialPort::SerialPortError e)
+    {
+      if (e == QSerialPort::ResourceError || e == QSerialPort::DeviceNotFoundError
+          || e == QSerialPort::PermissionError || e == QSerialPort::ReadError)
+        portLost(serial, serial->errorString());
+    });
+
+  m_readerThread->setHandle(port);
+  m_lastFrame.start();
+  m_secondsInError = 0;
+  setState(LinkState::Connecting, tr("Connecting ..."));
   timerEvent(0);
 
-  // mt: added timer id
-  m_delayTimer = startTimer(1000);
+  if (m_delayTimer == 0)
+    m_delayTimer = startTimer(1000);
   return true;
+}
+
+void DMM::setState(LinkState state, const QString &message)
+{
+  const bool changed = state != m_state || message != m_error;
+  m_state = state;
+  m_error = message;
+  if (changed)
+  {
+    Q_EMIT linkStateChanged(state, message);
+    Q_EMIT error(message);
+  }
+}
+
+QString DMM::timeoutMessage() const
+{
+  // a HID cable that answers but never carries UART bytes: the meter's
+  // serial output is off (UNI-T: the RS232/USB button)
+  auto *hid = dynamic_cast<HIDSerialDevice *>(m_portHandler->port());
+  if (hid && hid->cableAnswers() && !hid->dataSeen())
+    return tr("The USB cable answers, but the meter sends nothing.\n"
+              "Switch on the meter's serial output (on UNI-T meters: hold the RS232/USB button).");
+  return tr("Timeout on device %1.\nDMM connected and switched on?").arg(m_device);
+}
+
+void DMM::closePort()
+{
+  m_readerThread->setHandle(Q_NULLPTR);
+  if (m_portHandler->port() && !m_externalSetup)
+    m_portHandler->close();
+}
+
+void DMM::portLost(QIODevice *from, const QString &reason)
+{
+  // finished() also comes when we close the port ourselves, or late from a
+  // port that has already been replaced
+  if (!m_wanted || !m_portHandler->port() || from != m_portHandler->port())
+    return;
+  closePort();
+  m_secondsInError = 0;
+  QString text = tr("Lost connection to %1.").arg(m_device);
+  if (!reason.isEmpty())
+    text += "\n" + reason;
+  if (m_reconnectSeconds > 0)
+    text += "\n" + tr("Retrying every %1 s.").arg(m_reconnectSeconds);
+  setState(LinkState::Error, text);
 }
 
 QString DMM::connectedMessage() const
@@ -260,81 +335,66 @@ QString DMM::permissionHint() const
 
 void DMM::close()
 {
-  // mt: added timer id
+  m_wanted = false;
   if (m_delayTimer > 0)
   {
     killTimer(m_delayTimer);
     m_delayTimer = 0;
   }
-
-  m_error = tr("Not connected");
-  Q_EMIT error(m_error);
-
-  m_readerThread->setHandle(Q_NULLPTR);
-
-  if (m_portHandler->port())
-  {
-    if (!m_externalSetup)
-    {
-      m_portHandler->close();
-    }
-  }
-  m_oldStatus = ReaderThread::NotConnected;
+  closePort();
+  setState(LinkState::Closed, tr("Not connected"));
 }
 
+// Once a second: poll request, silence watchdog, reconnect after a loss.
 void DMM::timerEvent(QTimerEvent *)
 {
+  if (!m_wanted)
+    return;
   if (!m_portHandler->port())
-    Q_EMIT error(m_error);
-  else
-    m_readerThread->startRead();
+  {
+    // lost: try again every m_reconnectSeconds
+    if (m_reconnectSeconds > 0 && ++m_secondsInError >= m_reconnectSeconds)
+    {
+      m_secondsInError = 0;
+      if (!openPort())
+        setState(LinkState::Error, m_error + "\n" + tr("Retrying every %1 s.").arg(m_reconnectSeconds));
+    }
+    return;
+  }
+  m_readerThread->startRead();
+  if ((m_state == LinkState::Connecting || m_state == LinkState::Connected || m_state == LinkState::Timeout)
+      && m_lastFrame.elapsed() > m_timeoutMs)
+    setState(LinkState::Timeout, timeoutMessage());
 }
 
+// A complete frame from the reader: decode it and publish the reading. Frames
+// are the heartbeat of the connection; the watchdog in timerEvent() misses them.
 void DMM::readEventSLOT(const QByteArray &data, int id)
 {
-  if (ReaderThread::Ok == m_readerThread->status() )
+  if (m_consoleLogging)
   {
-    if (m_consoleLogging)
-    {
-      for (int i = 0; i < data.size(); ++i)
-        fprintf(stdout, "%02X ", data[i] & 0x0ff);
-      fprintf(stdout, "\r\n");
-    }
-    if (m_decoder == Q_NULLPTR)
-      return;
+    for (int i = 0; i < data.size(); ++i)
+      fprintf(stdout, "%02X ", data[i] & 0x0ff);
+    fprintf(stdout, "\r\n");
+  }
+  if (m_decoder == Q_NULLPTR)
+    return;
 
-    // call decode of current decoder to convert data into distinct values
-    if (auto r = m_decoder->decode(data, id); r)
-    {
-      Q_EMIT value(r->dval, r->val, r->unit, r->special, r->range, r->hold, r->showBar, r->id);
-      if (r->id2 > 0)
-        Q_EMIT value(r->dval2, r->val2, r->unit2, r->special, r->range, r->hold, r->showBar, r->id2);
-      m_error = r->error.isEmpty() ? connectedMessage() : QString("%1 %2").arg(r->error, m_device);
-    }
+  m_lastFrame.restart();
+  if (auto r = m_decoder->decode(data, id); r)
+  {
+    Q_EMIT value(r->dval, r->val, r->unit, r->special, r->range, r->hold, r->showBar, r->id);
+    if (r->id2 > 0)
+      Q_EMIT value(r->dval2, r->val2, r->unit2, r->special, r->range, r->hold, r->showBar, r->id2);
+    // a calculated value's text comes from CalcDevice::status (which input
+    // is missing); only the state is ours
+    if (m_portType == PortHandler::PortType::Calc)
+      setState(LinkState::Connected, m_error);
     else
-      m_error = tr("Error %1").arg(m_device);
+      setState(LinkState::Connected, r->error.isEmpty() ? connectedMessage() : QString("%1 %2").arg(r->error, m_device));
   }
   else
-  {
-    if (ReaderThread::Error == m_readerThread->status())
-      m_error = tr("Read error on device %1.\nDMM connected and switched on?").arg(m_device);
-    else if (ReaderThread::Timeout == m_readerThread->status())
-    {
-      // a HID cable that answers but never carries UART bytes: the meter's
-      // serial output is off (UNI-T: the RS232/USB button)
-      auto *hid = dynamic_cast<HIDSerialDevice *>(m_portHandler->port());
-      if (hid && hid->cableAnswers() && !hid->dataSeen())
-        m_error = tr("The USB cable answers, but the meter sends nothing.\n"
-                     "Switch on the meter's serial output (on UNI-T meters: hold the RS232/USB button).");
-      else
-        m_error = tr("Timeout on device %1.\nDMM connected and switched on?").arg(m_device);
-    }
-    else if (ReaderThread::NotConnected == m_readerThread->status())
-      m_error = tr("Not connected");
-  }
-  if (m_oldStatus != m_readerThread->status())
-    Q_EMIT error(m_error);
-  m_oldStatus = m_readerThread->status();
+    setState(LinkState::Connected, tr("Error %1").arg(m_device));
 }
 
 void DMM::setNumValues(int numValues)

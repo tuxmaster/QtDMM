@@ -337,6 +337,8 @@ void MainWid::connectSLOT(bool on)
   {
     if (m_dmm->open())
       ui_graph->clearSLOT();
+    else
+      Q_EMIT setConnect(false);   // the port could not be opened: button back to "off"
   }
   else
   {

@@ -43,14 +43,6 @@ class ReaderThread : public QObject
 {
   Q_OBJECT
 public:
-  /// Outcome of the last read attempt, reported by status().
-  enum ReadStatus
-  {
-    Ok,
-    Timeout,
-    Error,
-    NotConnected
-  };
   ReaderThread(QObject *receiver);
   /// Starts the one-second timer that sends poll requests (see startRead()).
   void        start();
@@ -63,7 +55,6 @@ public:
   /// Decoder whose checkFormat()/getPacketLength() delimit the frames.
   void        setDecoder(std::shared_ptr<DmmDecoder> decoder) { m_decoder = decoder; };
 
-  ReadStatus  status() const  { return m_status;  }
   /// Number of frames one reading consists of; the id passed with
   /// readEvent() cycles through 0..num-1.
   void        setNumValues(int num)  { m_numValues = num; }
@@ -73,7 +64,6 @@ Q_SIGNALS:
   void        readEvent(const QByteArray &, int id);
 
 protected:
-  ReadStatus            m_status;
   bool                  m_readValue;
   char                  m_fifo[FIFO_LENGTH];
   char                  m_buffer[FIFO_LENGTH];

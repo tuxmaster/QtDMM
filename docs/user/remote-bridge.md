@@ -83,7 +83,9 @@ shows the log.
 
 - **Unplugging a cable** does not drop the connection: the bridge waits for
   the device to come back and QtDMM shows *Timeout* meanwhile. `--strict`
-  changes that to dropping the client.
+  changes that to dropping the client - QtDMM then shows *Lost connection*
+  and reconnects on its own once the bridge accepts again. The same happens
+  when the bridge itself is restarted.
 - **One client per port.** A second QtDMM connecting to the same port takes
   over; the first one sees the connection close.
 - **Finding the bridge**: with `mdns = true` (or `--mdns`) and the optional

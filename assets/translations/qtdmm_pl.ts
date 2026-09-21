@@ -42,50 +42,55 @@
 <context>
     <name>CalcExpr</name>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="106"/>
+        <location filename="../../src/calcexpr.cpp" line="98"/>
+        <source>Expression too deeply nested</source>
+        <translation>Wyrażenie zbyt głęboko zagnieżdżone</translation>
+    </message>
+    <message>
+        <location filename="../../src/calcexpr.cpp" line="120"/>
         <source>Unexpected end of expression</source>
         <translation>Nieoczekiwany koniec wyrażenia</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="114"/>
-        <location filename="../../src/calcexpr.cpp" line="215"/>
+        <location filename="../../src/calcexpr.cpp" line="128"/>
+        <location filename="../../src/calcexpr.cpp" line="229"/>
         <source>Missing &apos;)&apos;</source>
         <translation>Brak „)”</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="121"/>
-        <location filename="../../src/calcexpr.cpp" line="260"/>
+        <location filename="../../src/calcexpr.cpp" line="135"/>
+        <location filename="../../src/calcexpr.cpp" line="274"/>
         <source>Unexpected &apos;%1&apos;</source>
         <translation>Nieoczekiwane „%1”</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="146"/>
+        <location filename="../../src/calcexpr.cpp" line="160"/>
         <source>Bad number &apos;%1&apos;</source>
         <translation>Nieprawidłowa liczba „%1”</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="154"/>
-        <location filename="../../src/calcexpr.cpp" line="156"/>
+        <location filename="../../src/calcexpr.cpp" line="168"/>
+        <location filename="../../src/calcexpr.cpp" line="170"/>
         <source>Unknown unit prefix &apos;%1&apos;</source>
         <translation>Nieznany przedrostek jednostki „%1”</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="197"/>
+        <location filename="../../src/calcexpr.cpp" line="211"/>
         <source>Unknown function &apos;%1&apos;</source>
         <translation>Nieznana funkcja „%1”</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="202"/>
+        <location filename="../../src/calcexpr.cpp" line="216"/>
         <source>&apos;%1&apos; takes no arguments</source>
         <translation>„%1” nie przyjmuje argumentów</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="211"/>
+        <location filename="../../src/calcexpr.cpp" line="225"/>
         <source>&apos;%1&apos; needs two arguments</source>
         <translation>„%1” wymaga dwóch argumentów</translation>
     </message>
     <message>
-        <location filename="../../src/calcexpr.cpp" line="254"/>
+        <location filename="../../src/calcexpr.cpp" line="268"/>
         <source>Empty expression</source>
         <translation>Puste wyrażenie</translation>
     </message>
@@ -128,79 +133,82 @@ Stara konfiguracja ~/.qtdmmrc została przemianowana na ~/.qtdmmrc.old.</transla
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="181"/>
+        <location filename="../../src/dmm.cpp" line="192"/>
         <source>Error creating port %1.</source>
         <translation>Błąd tworzenia portu %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="200"/>
+        <location filename="../../src/dmm.cpp" line="211"/>
         <source>Missing Permission</source>
         <translation>Brak uprawnień</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="203"/>
+        <location filename="../../src/dmm.cpp" line="214"/>
         <source>No such device %1.</source>
         <translation>Brak urządzenia %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="206"/>
+        <location filename="../../src/dmm.cpp" line="217"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Błąd otwierania %1.
 Czy multimetr jest podłączony i włączony?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="218"/>
+        <location filename="../../src/dmm.cpp" line="229"/>
         <source>Error configuring serial port %1.</source>
         <translation>Błąd konfiguracji portu szeregowego %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="224"/>
+        <location filename="../../src/dmm.cpp" line="265"/>
         <source>Connecting ...</source>
         <translation>Łączenie…</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="247"/>
+        <location filename="../../src/dmm.cpp" line="311"/>
+        <source>Lost connection to %1.</source>
+        <translation>Utracono połączenie z %1.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="315"/>
+        <location filename="../../src/dmm.cpp" line="360"/>
+        <source>Retrying every %1 s.</source>
+        <translation>Ponowna próba co %1 s.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="322"/>
         <source>Calculating %1</source>
         <translation>Obliczanie %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="258"/>
+        <location filename="../../src/dmm.cpp" line="333"/>
         <source>Access denied for %1.</source>
         <translation>Odmowa dostępu do %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="270"/>
-        <location filename="../../src/dmm.cpp" line="333"/>
+        <location filename="../../src/dmm.cpp" line="345"/>
         <source>Not connected</source>
         <translation>Niepołączony</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="248"/>
+        <location filename="../../src/dmm.cpp" line="323"/>
         <source>Connected %1</source>
         <translation>Połączono z %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="315"/>
+        <location filename="../../src/dmm.cpp" line="397"/>
         <source>Error %1</source>
         <translation>Błąd %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="320"/>
-        <source>Read error on device %1.
-DMM connected and switched on?</source>
-        <translation>Błąd odczytu z %1.
-Czy multimetr jest podłączony i włączony?</translation>
-    </message>
-    <message>
-        <location filename="../../src/dmm.cpp" line="327"/>
+        <location filename="../../src/dmm.cpp" line="291"/>
         <source>The USB cable answers, but the meter sends nothing.
 Switch on the meter&apos;s serial output (on UNI-T meters: hold the RS232/USB button).</source>
         <translation>Kabel USB odpowiada, ale multimetr nic nie wysyła.
 Włącz wyjście szeregowe multimetru (w UNI-T: przytrzymaj przycisk RS232/USB).</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="330"/>
+        <location filename="../../src/dmm.cpp" line="293"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Przekroczono czas oczekiwania na %1.
@@ -445,18 +453,18 @@ Czy multimetr jest podłączony i włączony?</translation>
         <translation>Nie działa żadna inna instancja.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="610"/>
+        <location filename="../../src/dmmprefs.cpp" line="624"/>
         <source>Load DMM description</source>
         <translation>Wczytaj opis multimetru</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="610"/>
-        <location filename="../../src/dmmprefs.cpp" line="636"/>
+        <location filename="../../src/dmmprefs.cpp" line="624"/>
+        <location filename="../../src/dmmprefs.cpp" line="650"/>
         <source>DMM description (*.cfg)</source>
         <translation>Opis multimetru (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="636"/>
+        <location filename="../../src/dmmprefs.cpp" line="650"/>
         <source>Save DMM description</source>
         <translation>Zapisz opis multimetru</translation>
     </message>
@@ -511,18 +519,18 @@ Czy multimetr jest podłączony i włączony?</translation>
 <context>
     <name>InstancesDlg</name>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="267"/>
+        <location filename="../../src/instancesdlg.cpp" line="268"/>
         <source>QtDMM - new instance</source>
         <translation>QtDMM – nowa instancja</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="267"/>
+        <location filename="../../src/instancesdlg.cpp" line="268"/>
         <source>Instance name:</source>
         <translation>Nazwa instancji:</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="230"/>
-        <location filename="../../src/instancesdlg.cpp" line="276"/>
+        <location filename="../../src/instancesdlg.cpp" line="231"/>
+        <location filename="../../src/instancesdlg.cpp" line="277"/>
         <source>Instance names may contain letters, digits and underscores and must not start with a digit.</source>
         <translation>Nazwa instancji może zawierać tylko litery, cyfry i podkreślenia i nie może zaczynać się cyfrą.</translation>
     </message>
@@ -537,48 +545,48 @@ Czy multimetr jest podłączony i włączony?</translation>
         <translation>wyłączona</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="198"/>
+        <location filename="../../src/instancesdlg.cpp" line="199"/>
         <source>QtDMM - new calculated instance</source>
         <translation>QtDMM – nowa instancja obliczana</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="211"/>
+        <location filename="../../src/instancesdlg.cpp" line="212"/>
         <source>No instance is running yet; the variables are the instance names.</source>
         <translation>Żadna instancja jeszcze nie działa; zmiennymi są nazwy instancji.</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="212"/>
+        <location filename="../../src/instancesdlg.cpp" line="213"/>
         <source>Variables (running instances): %1</source>
         <translation>Zmienne (działające instancje): %1</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="213"/>
+        <location filename="../../src/instancesdlg.cpp" line="214"/>
         <source>&amp;Name:</source>
         <translation>&amp;Nazwa:</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="214"/>
+        <location filename="../../src/instancesdlg.cpp" line="215"/>
         <source>&amp;Unit:</source>
         <translation>&amp;Jednostka:</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="215"/>
+        <location filename="../../src/instancesdlg.cpp" line="216"/>
         <source>&amp;Formula:</source>
         <translation>&amp;Wzór:</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="232"/>
-        <location filename="../../src/instancesdlg.cpp" line="282"/>
+        <location filename="../../src/instancesdlg.cpp" line="233"/>
+        <location filename="../../src/instancesdlg.cpp" line="283"/>
         <source>Instance already exists.</source>
         <translation>Instancja już istnieje.</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="234"/>
+        <location filename="../../src/instancesdlg.cpp" line="235"/>
         <source>Please give a unit without spaces.</source>
         <translation>Podaj jednostkę bez spacji.</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="236"/>
+        <location filename="../../src/instancesdlg.cpp" line="237"/>
         <source>Position %1: %2</source>
         <translation>Pozycja %1: %2</translation>
     </message>
@@ -619,63 +627,63 @@ Czy multimetr jest podłączony i włączony?</translation>
         <translation>Zakończ bez zapisywania</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="526"/>
+        <location filename="../../src/mainwid.cpp" line="528"/>
         <source>Automatic start at %1</source>
         <translation>Automatyczny start o %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="528"/>
+        <location filename="../../src/mainwid.cpp" line="530"/>
         <source>Raising threshold %1</source>
         <translation>Próg narastający %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="530"/>
+        <location filename="../../src/mainwid.cpp" line="532"/>
         <source>Falling threshold %1</source>
         <translation>Próg opadający %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="551"/>
-        <location filename="../../src/mainwid.cpp" line="592"/>
+        <location filename="../../src/mainwid.cpp" line="553"/>
+        <location filename="../../src/mainwid.cpp" line="594"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: błąd uruchamiania</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="552"/>
+        <location filename="../../src/mainwid.cpp" line="554"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Błąd uruchamiania&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Aplikacja %1 wciąż działa!&lt;p&gt;Czy zakończyć ją teraz?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="564"/>
+        <location filename="../../src/mainwid.cpp" line="566"/>
         <source>Yes, kill it!</source>
         <translation>Tak, zakończ</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="568"/>
+        <location filename="../../src/mainwid.cpp" line="570"/>
         <source>No, keep running</source>
         <translation>Nie, zostaw</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="593"/>
+        <location filename="../../src/mainwid.cpp" line="595"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Błąd uruchamiania&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Nie udało się uruchomić %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="604"/>
+        <location filename="../../src/mainwid.cpp" line="606"/>
         <source>Bummer!</source>
         <translation>Szkoda!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="610"/>
+        <location filename="../../src/mainwid.cpp" line="612"/>
         <source>Launched %1</source>
         <translation>Uruchomiono %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="615"/>
+        <location filename="../../src/mainwid.cpp" line="617"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 zakończył się kodem %2.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="661"/>
+        <location filename="../../src/mainwid.cpp" line="668"/>
         <source>no meter configured</source>
         <translation>nie skonfigurowano multimetru</translation>
     </message>
@@ -845,12 +853,12 @@ Wybierz, która instancja ma rejestrować.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="76"/>
+        <location filename="../../src/dmm.cpp" line="79"/>
         <source>No permission to access %1.</source>
         <translation>Brak uprawnień dostępu do %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="80"/>
+        <location filename="../../src/dmm.cpp" line="83"/>
         <source>
 
 On this system the device is typically accessible via group &apos;%1&apos;.</source>
@@ -859,7 +867,7 @@ On this system the device is typically accessible via group &apos;%1&apos;.</sou
 W tym systemie urządzenie jest zwykle dostępne przez grupę „%1”.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="83"/>
+        <location filename="../../src/dmm.cpp" line="86"/>
         <source>
 Add your user with:
 
@@ -870,7 +878,7 @@ Dodaj swojego użytkownika poleceniem:
 sudo pw groupmod %1 -m $USER</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="86"/>
+        <location filename="../../src/dmm.cpp" line="89"/>
         <source>
 Add your user with:
 
@@ -881,7 +889,7 @@ Dodaj swojego użytkownika poleceniem:
 sudo usermod -aG %1 $USER</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="89"/>
+        <location filename="../../src/dmm.cpp" line="92"/>
         <source>
 
 Then log out and back in so the new group membership becomes active.</source>
@@ -903,6 +911,19 @@ Następnie wyloguj się i zaloguj ponownie, aby członkostwo w grupie zaczęło 
         <location filename="../../src/main.cpp" line="106"/>
         <source>sets &lt;config-id&gt;</source>
         <translation>ustawia &lt;config-id&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>RFC2217SerialDevice</name>
+    <message>
+        <location filename="../../src/portdevices/rfc2217serial.cpp" line="21"/>
+        <source>RFC2217: expected host:port, got &apos;%1&apos;</source>
+        <translation>RFC2217: oczekiwano host:port, otrzymano &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location filename="../../src/portdevices/rfc2217serial.cpp" line="68"/>
+        <source>socket error</source>
+        <translation>błąd gniazda</translation>
     </message>
 </context>
 <context>
@@ -1105,262 +1126,262 @@ Następnie wyloguj się i zaloguj ponownie, aby członkostwo w grupie zaczęło 
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="560"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="570"/>
         <source>Formula</source>
         <translation>Wzór</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="566"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="576"/>
         <source>&amp;Unit:</source>
         <translation>&amp;Jednostka:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="576"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="586"/>
         <source>The unit of the calculated value, without SI prefix: W, V, A, Ohm, ...</source>
         <translation>Jednostka wartości obliczanej, bez przedrostka SI: W, V, A, Ohm…</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="592"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="602"/>
         <source>&amp;Formula:</source>
         <translation>&amp;Wzór:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="602"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="612"/>
         <source>The value this instance shows, computed from the readings of the other running instances. Their names are the variables; + - * / ^, parentheses, numbers with SI suffix (1.5k) and sqrt, abs, log10, min, max are allowed.</source>
         <translation>Wartość pokazywana przez tę instancję, obliczana z odczytów innych działających instancji. Ich nazwy są zmiennymi; dozwolone są + - * / ^, nawiasy, liczby z przyrostkiem SI (1.5k) oraz sqrt, abs, log10, min, max.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="628"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="638"/>
         <source>Signal</source>
         <translation>Sygnał</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="634"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="644"/>
         <source>&amp;Waveform:</source>
         <translation>&amp;Przebieg:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="644"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="654"/>
         <source>What the virtual meter shows over time. Constant and Random stay within Min..Max; the periodic waveforms swing between Min and Max once per Period; Discharge falls from Max towards Min with the time constant Period; Custom uses your own formula (t = seconds since connecting).</source>
         <translation>Co miernik wirtualny pokazuje w czasie. Stała i Losowy pozostają w zakresie Min..Maks; przebiegi okresowe oscylują między Min i Maks raz na okres; Rozładowanie opada od Maks do Min ze stałą czasową Okres; Własny wzór używa Twojego wzoru (t = sekundy od połączenia).</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="646"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="656"/>
         <source>Constant</source>
         <translation>Stała</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="647"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="657"/>
         <source>Random</source>
         <translation>Losowy</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="648"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="658"/>
         <source>Sine</source>
         <translation>Sinus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="649"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="659"/>
         <source>Triangle</source>
         <translation>Trójkąt</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="650"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="660"/>
         <source>Square</source>
         <translation>Prostokąt</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="651"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="661"/>
         <source>Sawtooth</source>
         <translation>Piła</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="652"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="662"/>
         <source>Discharge</source>
         <translation>Rozładowanie</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="653"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="663"/>
         <source>Custom formula</source>
         <translation>Własny wzór</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="659"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="669"/>
         <source>U&amp;nit:</source>
         <translation>Jed&amp;nostka:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="682"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="692"/>
         <source>Cou&amp;pling:</source>
         <translation>S&amp;przężenie:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="698"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="708"/>
         <source>M&amp;in:</source>
         <translation>M&amp;in:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="715"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="725"/>
         <source>Ma&amp;x:</source>
         <translation>Ma&amp;ks:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="732"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="742"/>
         <source>Peri&amp;od (s):</source>
         <translation>&amp;Okres (s):</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="749"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="759"/>
         <source>Noi&amp;se:</source>
         <translation>&amp;Szum:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="759"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="769"/>
         <source>Peak-to-peak amplitude of random noise added to the signal, in the unit above. 0 for a clean signal.</source>
         <translation>Amplituda międzyszczytowa losowego szumu dodawanego do sygnału, w powyższej jednostce. 0 dla czystego sygnału.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="769"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="779"/>
         <source>Formu&amp;la:</source>
         <translation>Wz&amp;ór:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="779"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="789"/>
         <source>The formula the waveform above expands to; editable with Custom formula. t is the time in seconds since connecting, pi, sin, cos, exp, floor, sqrt, abs, rand() and the readings of other instances may be used.</source>
         <translation>Wzór, do którego rozwija się powyższy przebieg; edytowalny przy Własnym wzorze. t to czas w sekundach od połączenia; można używać pi, sin, cos, exp, floor, sqrt, abs, rand() oraz odczytów innych instancji.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="789"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="799"/>
         <source>Protocol</source>
         <translation>Protokół</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="795"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="805"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translation>Wybierz tutaj typ komunikacji. Jeśli Twój multimetr nie jest „oficjalnie” obsługiwany, wypróbuj istniejące protokoły – przy odrobinie szczęścia któryś zadziała. Jeśli znajdziesz działające ustawienia, zgłoś je.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="799"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="809"/>
         <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
         <translation>14 bajtów ASCII, odpytywanie (Metex/Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="804"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="814"/>
         <source>11 bytes ASCII, continuous (PeakTech 451)</source>
         <translation>11 bajtów ASCII, ciągły (PeakTech 451)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="809"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="819"/>
         <source>14 bytes ASCII, continuous (Voltcraft)</source>
         <translation>14 bajtów ASCII, ciągły (Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="814"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="824"/>
         <source>15 bytes ASCII, continuous (Voltcraft)</source>
         <translation>15 bajtów ASCII, ciągły (Voltcraft)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="819"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="829"/>
         <source>11 bytes binary, continuous (M9803R)</source>
         <translation>11 bajtów binarnych, ciągły (M9803R)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="824"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="834"/>
         <source>14 bytes binary, continuous (VC820)</source>
         <translation>14 bajtów binarnych, ciągły (VC820)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="829"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="839"/>
         <source>11 bytes binary, continuous (CyrustekES51986)</source>
         <translation>11 bajtów binarnych, ciągły (CyrustekES51986)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="834"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="844"/>
         <source>11 bytes binary, continuous (VC940)</source>
         <translation>11 bajtów binarnych, ciągły (VC940)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="839"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="849"/>
         <source>14 bytes ASCII/binary, continuous (QM1537)</source>
         <translation>14 bajtów ASCII/binarnych, ciągły (QM1537)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="844"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="854"/>
         <source>9 bytes binary, continuous (RS 22-812)</source>
         <translation>9 bajtów binarnych, ciągły (RS 22-812)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="849"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="859"/>
         <source>23 bytes ASCII, continuous (VC870)</source>
         <translation>23 bajty ASCII, ciągły (VC870)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="854"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="864"/>
         <source>22 bytes binary, continuous (DO3122)</source>
         <translation>22 bajty binarne, ciągły (DO3122)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="859"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="869"/>
         <source>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</source>
         <translation>14 bajtów pół-ASCII, UNI-T UT61E (CyrustekES51922)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="864"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="874"/>
         <source>DTM0660</source>
         <translation>DTM0660</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="869"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="879"/>
         <source>11 bytes binary, continuous (CyrustekES51962)</source>
         <translation>11 bajtów binarnych, ciągły (CyrustekES51962)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="874"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="884"/>
         <source>variable bytes ASCII, Sigrok</source>
         <translation>zmienna liczba bajtów ASCII, Sigrok</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="879"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="889"/>
         <source>26 bytes ASCII, continuous, two values (Voltcraft GDM 703)</source>
         <translation>26 bajtów ASCII, ciągły, dwie wartości (Voltcraft GDM 703)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="884"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="894"/>
         <source>15 bytes binary, continuous (Brymen BM25x)</source>
         <translation>15 bajtów binarnie, ciągły (Brymen BM25x)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="889"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="899"/>
         <source>24 bytes binary, polled over BU-86X (Brymen BM86x)</source>
         <translation>24 bajty binarnie, odpytywany przez BU-86X (Brymen BM86x)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="894"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="904"/>
         <source>24 bytes binary, polled over BU-86X (Brymen BM52x)</source>
         <translation>24 bajty binarnie, odpytywany przez BU-86X (Brymen BM52x)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="899"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="909"/>
         <source>24 bytes binary, polled over BU-86X (Brymen BM82x)</source>
         <translation>24 bajty binarnie, odpytywany przez BU-86X (Brymen BM82x)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="914"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="924"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Liczba wartości:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="924"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="934"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Niektóre multimetry wysyłają kilka linii z różnymi wartościami. Ponieważ QtDMM pokazuje jedną wielkość, podaj tutaj liczbę linii pomijanych na pomiar (QtDMM używa tylko pierwszej linii).</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="982"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="992"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocol settings have not been confirmed by a user yet. If you own this model and can confirm that they work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Te ustawienia protokołu nie zostały jeszcze potwierdzone przez użytkownika. Jeśli masz ten model i możesz potwierdzić, że działają, zgłoś to na &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="1007"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1017"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; with the model and the settings. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jeśli Twojego multimetru nie ma na liście, a znalazłeś działające ustawienia ręczne, zgłoś je na &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; wraz z modelem. Przyszli użytkownicy tego multimetru skorzystają z Twojej pomocy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
