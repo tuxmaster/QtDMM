@@ -20,6 +20,7 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
   - Scheduled start at a specific time
   - Automatic start triggered when defined thresholds are reached
 - Analog meter display with auto-ranging scale, dockable or as its own window
+- Readings table: every value the meter sent, with time, mode and range; copy to a spreadsheet or export as CSV (see [Readings table](user/readings-table.md))
 - Several meters at once, one window each, recording in sync
 - Calculated values across meters (power from voltage and current, ...)
 - Virtual meter (sine, square, noise, discharge curve, ...) for demos and testing

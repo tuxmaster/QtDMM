@@ -32,6 +32,7 @@
 #include "dmm.h"
 #include "displaywid.h"
 #include "meterwid.h"
+#include "readinglog.h"
 #include "siprefix.h"
 #include "tipdlg.h"
 #include "settings.h"
@@ -212,6 +213,20 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
      << " hold=" << hold
      << " id=" << id << std::endl;
 */
+  if (m_readingLog)
+  {
+    ReadingLog::Entry e;
+    e.when = QDateTime::currentDateTime();
+    e.dval = dval;
+    e.val = val;
+    e.unit = u;
+    e.special = s;
+    e.range = r;
+    e.hold = hold;
+    e.id = id;
+    m_readingLog->append(e);
+  }
+
   m_display->setHold(hold);
   if (r == "AUTO") m_display->setAuto(true);
   if (r == "MANU") m_display->setManu(true);
@@ -270,6 +285,11 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
   }
 
   m_display->update();
+}
+
+void MainWid::setReadingLog(ReadingLog *log)
+{
+  m_readingLog = log;
 }
 
 void MainWid::setStateManager(SharedStateManager *mgr)

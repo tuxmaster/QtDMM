@@ -34,6 +34,7 @@ class MainWid;
 class DisplayWid;
 class HelpDlg;
 class MeterWid;
+class ReadingLogWid;
 class QDockWidget;
 
 /// The application window: menus, toolbars, status bar and the two dock
@@ -90,6 +91,8 @@ protected:
   MeterWid   *m_meter;
   QDockWidget *m_meterDock;
   QDockWidget *m_displayDock;
+  ReadingLogWid *m_readings;
+  QDockWidget *m_readingsDock;
   QAction    *m_lockPanels;
   QAction    *m_fullScreen;
   QAction    *m_zoomIn;

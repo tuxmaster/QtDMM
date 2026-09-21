@@ -14,6 +14,8 @@ side, one window each, and can be combined into calculated values.
   red zone, readouts, styles.
 - [The recorder](recorder.md) — starting manually, at a time or on a threshold;
   zoom, pan and cursor; integration; CSV export and import.
+- [Readings table](readings-table.md) — every reading the meter sent, with
+  time, mode and range; copy to a spreadsheet or export as CSV.
 - [Supported devices](supported-devices.md) — every meter QtDMM knows, with
   protocol and serial settings.
 - [Calculated values](calculated-values.md) — power from a voltage and a

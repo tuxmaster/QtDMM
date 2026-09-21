@@ -35,6 +35,7 @@ focus.
 | Ctrl+1 | Show / hide the digital display |
 | Ctrl+2 | Show / hide the analog meter |
 | Ctrl+3 or Ctrl+G | Show / hide the recorder graph |
+| Ctrl+4 | Show / hide the readings table |
 | Ctrl+L | Lock / unlock the panels (hides their title bars) |
 | F11 | Full screen on / off |
 
@@ -55,6 +56,15 @@ The zoom shortcuts work anywhere in the main window; the plain keys
 | Hover | Crosshair with time and value |
 | Left button drag on a threshold line | Move the threshold |
 | Right button | Menu: connect, start/stop, clear, configure, copy image, import/export |
+
+## Readings table
+
+While the table has the focus:
+
+| Key | Action |
+|---|---|
+| Ctrl+C | Copy the selected rows (all when nothing is selected) as tab-separated text |
+| Ctrl+A | Select all rows |
 
 ## Settings dialog
 
