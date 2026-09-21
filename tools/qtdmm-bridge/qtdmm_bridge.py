@@ -73,8 +73,8 @@ SET_MODEMSTATE_MASK = 11
 PURGE_DATA = 12
 SERVER_OFFSET = 100
 
-# SET-PARITY values
-PARITY_NAMES = {1: "N", 2: "E", 3: "O", 4: "M", 5: "S"}
+# SET-PARITY values (RFC 2217 section 2.6: 1 none, 2 odd, 3 even, 4 mark, 5 space)
+PARITY_NAMES = {1: "N", 2: "O", 3: "E", 4: "M", 5: "S"}
 PARITY_CODES = {v: k for k, v in PARITY_NAMES.items()}
 # SET-STOPSIZE values
 STOP_NAMES = {1: 1, 2: 2, 3: 1.5}
@@ -546,6 +546,10 @@ class Rfc2217Protocol:
         self._sb = bytearray()
         self._pending = bytearray()
 
+    # a COM-PORT-OPTION subnegotiation is a handful of bytes; anything longer
+    # is garbage (or an attack) and must not grow the buffer without bound
+    MAX_SUBNEGOTIATION = 256
+
     # --- outgoing -----------------------------------------------------------
 
     @staticmethod
@@ -591,6 +595,9 @@ class Rfc2217Protocol:
         elif state == "sb":
             if byte == IAC:
                 self._state = "sb_iac"
+            elif len(self._sb) >= self.MAX_SUBNEGOTIATION:
+                self._sb.clear()
+                self._state = "data"
             else:
                 self._sb.append(byte)
         elif state == "sb_iac":
@@ -638,13 +645,25 @@ class PortSession:
         self._loop = loop
         self._writer = writer
         self._closed = False
+        self._overflow = False
         self.protocol = Rfc2217Protocol(self._send, self._to_backend, self._option)
 
     # client side
+    # a client that stopped reading (half-open TCP, laptop asleep) must not make
+    # us buffer meter data without bound; beyond this the data is dropped
+    MAX_WRITE_BUFFER = 64 * 1024
+
     def _send(self, data: bytes) -> None:
         if self._closed:
             return
         try:
+            transport = self._writer.transport
+            if transport.get_write_buffer_size() > self.MAX_WRITE_BUFFER:
+                if not self._overflow:
+                    self._overflow = True
+                    log.warning("%s: client is not reading, dropping data", self.name)
+                return
+            self._overflow = False
             self._writer.write(data)
         except Exception:  # noqa: BLE001
             self._closed = True
@@ -654,7 +673,10 @@ class PortSession:
 
     # backend side (may run on the reader thread)
     def from_backend(self, data: bytes) -> None:
-        self._loop.call_soon_threadsafe(self._send, self.protocol.escape(data))
+        try:
+            self._loop.call_soon_threadsafe(self._send, self.protocol.escape(data))
+        except RuntimeError:  # loop already closed, reader thread still winding down
+            pass
 
     def _to_backend(self, data: bytes) -> None:
         self.backend.write(data)
@@ -882,7 +904,10 @@ class PortServer:
 
     def _on_backend_error(self, msg: str) -> None:
         if self._loop is not None:
-            self._loop.call_soon_threadsafe(self._device_lost_now)
+            try:
+                self._loop.call_soon_threadsafe(self._device_lost_now)
+            except RuntimeError:  # loop already closed
+                pass
 
     def _device_lost_now(self) -> None:
         self._device_lost.set()

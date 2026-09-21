@@ -4,6 +4,9 @@
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QSharedMemory>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QDebug>
 
 #include "sharedstatemanager.h"
@@ -89,6 +92,36 @@ int main(int argc, char **argv)
   u.unregisterInstance();
   i.checkForChanges();
   check(!i.instances().contains("u") && !i.readings().contains("u"), "unregister drops the reading");
+
+  // --- 7. an instance that died without unregistering is not "running" ---
+  // (entry left in the segment with a pid that no longer exists)
+  {
+    QSharedMemory mem(QString::fromLocal8Bit(key));
+    check(mem.attach(), "test attaches to the segment");
+    mem.lock();
+    QByteArray raw(static_cast<const char *>(mem.constData()), mem.size());
+    raw.truncate(raw.indexOf('\0'));
+    QJsonObject data = QJsonDocument::fromJson(raw).object();
+    QJsonArray instances = data["instances"].toArray();
+    QJsonObject ghost;
+    ghost["id"] = "ghost";
+    ghost["pid"] = 999999999;   // pid_t max on Linux is far below this
+    QJsonObject reading;
+    reading["value"] = 1.0;
+    reading["unit"] = "V";
+    reading["valid"] = true;
+    ghost["reading"] = reading;
+    instances.append(ghost);
+    data["instances"] = instances;
+    const QByteArray json = QJsonDocument(data).toJson(QJsonDocument::Compact);
+    memset(mem.data(), 0, mem.size());
+    memcpy(mem.data(), json.constData(), json.size());
+    mem.unlock();
+  }
+  i.checkForChanges();
+  check(!i.instances().contains("ghost"), "dead instance is not listed");
+  check(!i.readings().contains("ghost"), "dead instance's last reading is not offered");
+  check(i.instances().contains("i"), "live instance still listed");
 
   if (failed == 0)
     qInfo() << "All shared state tests passed.";

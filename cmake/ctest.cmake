@@ -49,6 +49,14 @@ if (BUILD_TESTING)
 	target_include_directories(${TEST_SHAREDSTATE} PRIVATE src)
 	target_link_libraries(${TEST_SHAREDSTATE} PRIVATE Qt::Core)
 	add_test(NAME shared_state COMMAND ${TEST_SHAREDSTATE})
+
+	## instances dialog: list from config files, delete mode, calculated instance
+	set( TEST_INSTANCES test_instances)
+	add_executable(${TEST_INSTANCES} MACOSX_BUNDLE tests/test_instances.cpp src/instancesdlg.cpp src/settings.cpp
+		src/sharedstatemanager.cpp src/calcexpr.cpp src/siprefix.cpp src/ui/uiinstancesdlg.ui)
+	target_include_directories(${TEST_INSTANCES} PRIVATE src)
+	target_link_libraries(${TEST_INSTANCES} PRIVATE Qt6::Widgets Qt::Core)
+	add_test(NAME instances_dialog COMMAND ${TEST_INSTANCES})
 	## the formula evaluator of calculated instances
 	set( TEST_CALC test_calc)
 	add_executable(${TEST_CALC} MACOSX_BUNDLE tests/test_calc.cpp src/calcexpr.cpp src/siprefix.cpp)
@@ -94,5 +102,5 @@ if (BUILD_TESTING)
 	## to the debugger instead of stderr unless told otherwise, and ctest's
 	## --output-on-failure would show nothing
 	get_property(ALL_TESTS DIRECTORY PROPERTY TESTS)
-	set_tests_properties(${ALL_TESTS} PROPERTIES ENVIRONMENT "QT_FORCE_STDERR_LOGGING=1;QT_LOGGING_TO_CONSOLE=1")
+	set_tests_properties(${ALL_TESTS} PROPERTIES ENVIRONMENT "QT_FORCE_STDERR_LOGGING=1;QT_LOGGING_TO_CONSOLE=1;PYTHONDONTWRITEBYTECODE=1")
 endif()

@@ -43,7 +43,7 @@ int main(int argc, char **argv)
   DmmDecoder::DMMInfo info;
   info.baud = 19200;
   info.bits = 7;
-  info.parity = 1;     // odd
+  info.parity = 1;     // even (DMMInfo: 0 none, 1 even, 2 odd)
   info.stopBits = 1;
   info.dtr = true;
   info.rts = false;
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
   QTcpSocket *peer = server.nextPendingConnection();
   check(peer != nullptr, "server has the connection");
 
-  // --- 1. the negotiation QtDMM sends: baud 19200, 7 bits, odd, 1 stop, DTR on, RTS off
+  // --- 1. the negotiation QtDMM sends: baud 19200, 7 bits, even (RFC code 3), 1 stop, DTR on, RTS off
   QByteArray expected = sub(1, QByteArray::fromHex("00004b00")) + sub(2, QByteArray(1, 7)) + sub(3, QByteArray(1, 3))
                         + sub(4, QByteArray(1, 1)) + sub(5, QByteArray(1, 8)) + sub(5, QByteArray(1, 12));
   QByteArray got;

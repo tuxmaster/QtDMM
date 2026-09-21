@@ -44,6 +44,16 @@ vectors:
     reading: {value: "0.652", unit: "V", range_mode: "auto"}
     expect: {special: "DI"}
   - source_line: "Temperature 23.5 C"
-    bytes: 02 18 20 3A 4D 58 6F 7C 87 9F A1 B0 C0 D0 E0
+    # three numeric digits + C: the point left of display digit 3 (byte 7 bit 0)
+    # gives one decimal, as in libsigrok bm25x.c decode_scale()
+    bytes: 02 18 20 3A 4D 58 6F 7D 87 9E A1 B0 C0 D0 E0
     reading: {value: "23.5", unit: "C", range_mode: "auto"}
     expect: {special: "TE", unit: "C", dval: 23.5}
+  - source_line: "Temperature 2.35 C (point left of digit 2)"
+    bytes: 02 18 20 3A 4D 59 6F 7C 87 9E A1 B0 C0 D0 E0
+    reading: {value: "2.35", unit: "C", range_mode: "auto"}
+    expect: {special: "TE", unit: "C", dval: 2.35}
+  - source_line: "Temperature 235 C (point left of digit 4 = none with three digits)"
+    bytes: 02 18 20 3A 4D 58 6F 7C 87 9F A1 B0 C0 D0 E0
+    reading: {value: "235", unit: "C", range_mode: "auto"}
+    expect: {special: "TE", unit: "C", dval: 235}

@@ -100,9 +100,31 @@
     },
     {
       "comment": "[brymen_bm25x.yaml] 'Temperature 23.5 C'",
-      "hex": "02 18 20 3A 4D 58 6F 7C 87 9F A1 B0 C0 D0 E0",
+      "hex": "02 18 20 3A 4D 58 6F 7D 87 9E A1 B0 C0 D0 E0",
       "expected": {
         "dval": 23.5,
+        "unit": "C",
+        "range": "AUTO",
+        "hold": false,
+        "special": "TE"
+      }
+    },
+    {
+      "comment": "[brymen_bm25x.yaml] 'Temperature 2.35 C (point left of digit 2)'",
+      "hex": "02 18 20 3A 4D 59 6F 7C 87 9E A1 B0 C0 D0 E0",
+      "expected": {
+        "dval": 2.35,
+        "unit": "C",
+        "range": "AUTO",
+        "hold": false,
+        "special": "TE"
+      }
+    },
+    {
+      "comment": "[brymen_bm25x.yaml] 'Temperature 235 C (point left of digit 4 = none with three digits)'",
+      "hex": "02 18 20 3A 4D 58 6F 7C 87 9F A1 B0 C0 D0 E0",
+      "expected": {
+        "dval": 235,
         "unit": "C",
         "range": "AUTO",
         "hold": false,

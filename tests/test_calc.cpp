@@ -154,6 +154,13 @@ int main(int argc, char **argv)
 
   // --- 4. parse errors, with position ---
   expectParseError("", 0);
+  // nesting is bounded (a pasted "(((((" must not blow the stack); moderate depth is fine
+  expectValue(QString(100, '(') + "1" + QString(100, ')'), 1);
+  expectValue(QString(150, '-') + "2", 2);
+  expectParseError(QString(20000, '(') + "1" + QString(20000, ')'));
+  expectParseError(QString(20000, '-') + "1");
+  expectParseError("1e400");   // out of range for a double
+  expectEvalFails("2^1000000");
   expectParseError("   ", 0);
   expectParseError("2 +", 3);
   expectParseError("(2+3", 4);

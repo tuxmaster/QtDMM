@@ -29,6 +29,9 @@ public:
   /// The user types the address into the port field.
   static bool availablePorts(QStringList &portlist);
 
+  /// False when the address could not be parsed (errorString() says so);
+  /// otherwise the device counts as open while the TCP connection comes up.
+  bool open(OpenMode mode) override;
   void close() override;
 
   qint64 bytesAvailable() const override;
@@ -55,7 +58,7 @@ private:
   QTcpSocket *m_socket = nullptr;
   DmmDecoder::DMMInfo m_dmmInfo;
   QString m_host;
-  quint16 m_port;
+  quint16 m_port = 0;
 
   /// Strips telnet commands/subnegotiations (the server's option replies)
   /// from the stream and undoes the IAC IAC escaping; the rest is meter data.

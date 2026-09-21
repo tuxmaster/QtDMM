@@ -236,8 +236,8 @@ void DmmPrefs::defaultsSLOT()
   baudRate->setCurrentText    (m_cfg->getString("Port settings/baud"));
   bitsCombo->setCurrentText   (m_cfg->getString("Port settings/bits", "7"));
   stopBitsCombo->setCurrentText(m_cfg->getString("Port settings/stop-bits", "1"));
-  parityCombo->setCurrentText (m_cfg->getString("Port settings/parity"));
-  displayCombo->setCurrentText(m_cfg->getString("DMM/display", "4000"));
+  parityCombo->setCurrentIndex(m_cfg->getInt("Port settings/parity"));   // stored as index by applySLOT()
+  selectDisplay(m_cfg->getString("DMM/display", "4000"));
   ui_externalSetup->setChecked(m_cfg->getBool("DMM/external-setup", false));
 
   uirts->setChecked(m_cfg->getBool("DMM/rts", true));
@@ -513,7 +513,7 @@ void DmmPrefs::on_ui_model_activated(int id)
   bitsCombo->setCurrentText(QString::number(m_currentVendorModels[id].bits));
   stopBitsCombo->setCurrentText(QString::number(m_currentVendorModels[id].stopBits));
   parityCombo->setCurrentIndex(m_currentVendorModels[id].parity);
-  displayCombo->setCurrentText(QString::number(m_currentVendorModels[id].display));
+  selectDisplay(QString::number(m_currentVendorModels[id].display));
   ui_numValues->setValue(m_currentVendorModels[id].numValues);
   ui_externalSetup->setChecked(m_currentVendorModels[id].externalSetup);
   uirts->setChecked(m_currentVendorModels[id].rts);
@@ -585,6 +585,20 @@ ReadEvent::DataFormat DmmPrefs::format() const
   return static_cast<ReadEvent::DataFormat>(protocolCombo->currentIndex());
 }
 
+// The counts combo is not editable; a value it does not list (a new model's
+// counts, or a hand-edited config) would silently leave the previous entry
+// selected - so unknown values are added instead.
+void DmmPrefs::selectDisplay(const QString &counts)
+{
+  int idx = displayCombo->findText(counts);
+  if (idx < 0)
+  {
+    displayCombo->addItem(counts);
+    idx = displayCombo->count() - 1;
+  }
+  displayCombo->setCurrentIndex(idx);
+}
+
 int DmmPrefs::display() const
 {
   return displayCombo->currentText().toInt();
@@ -622,7 +636,7 @@ void DmmPrefs::on_ui_load_clicked()
     bitsCombo->setCurrentText(cfg.value("Port settings/bits", "7").toString());
     stopBitsCombo->setCurrentText(cfg.value("Port settings/stop-bits", "2").toString());
     parityCombo->setCurrentIndex(cfg.value("Port settings/parity", 0).toInt());
-    displayCombo->setCurrentText(cfg.value("DMM/display", "4000").toString());
+    selectDisplay(cfg.value("DMM/display", "4000").toString());
     ui_externalSetup->setChecked(cfg.value("DMM/external-setup", false).toBool());
     protocolCombo->setCurrentIndex(cfg.value("DMM/data-format", 0).toInt());
     ui_numValues->setValue(cfg.value("DMM/number-of-values", 1).toInt());
