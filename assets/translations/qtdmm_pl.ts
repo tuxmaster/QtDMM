@@ -940,6 +940,11 @@ Wybierz, która instancja ma rejestrować.</translation>
         <source>24 bytes binary, polled over BU-86X (Brymen BM82x)</source>
         <translation>24 bajty binarnie, odpytywany przez BU-86X (Brymen BM82x)</translation>
     </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="44"/>
+        <source>variable bytes ASCII, polled with QM (Fluke 18x/28x)</source>
+        <translation>zmienna liczba bajtów ASCII, odpytywany przez QM (Fluke 18x/28x)</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

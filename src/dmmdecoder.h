@@ -82,7 +82,9 @@ public:
 
   explicit DmmDecoder(ReadEvent::DataFormat df);
   virtual ~DmmDecoder() = default;
-  /// Fixed length of one frame in bytes.
+  /// Fixed length of one frame in bytes. 0 means variable length: the frame
+  /// is everything received since the previous one (a line protocol whose
+  /// checkFormat() fires on the terminator, see DecoderFlukeQM).
   virtual size_t                     getPacketLength() = 0;
   /// Frame delimiter: true when the ring buffer @p data, whose newest byte is
   /// at index @p len, ends with a complete frame (typically checked on the
@@ -91,7 +93,8 @@ public:
   /// Bytes to send to the meter to make it emit a frame; empty for meters
   /// that stream on their own. ReaderThread writes it once per read cycle.
   virtual QByteArray pollRequest() const { return QByteArray(); }
-  /// Decodes one frame of getPacketLength() bytes. @p id tells which of
+  /// Decodes one frame (getPacketLength() bytes, or a variable-length one
+  /// with its terminator). @p id tells which of
   /// DMMInfo::numValues frames this is. Returns nothing when the frame is
   /// corrupt; the caller then keeps the previous reading.
   virtual std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id) = 0;

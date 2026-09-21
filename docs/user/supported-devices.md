@@ -39,6 +39,12 @@ meter working, please report it on the
 | Digitek | INO2513 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Duratool | DO3122 | - | `DO3122Continuous` | 9600 8N1 | - | 4000 |
 | ELV | M9803R | - | `M9803RContinuous` | 9600 7E1 | DTR | 4000 |
+| Fluke | 187 ¹ | - | `FlukeQM` | 9600 8N1 | - | 50000 |
+| Fluke | 189 ¹ | - | `FlukeQM` | 9600 8N1 | - | 50000 |
+| Fluke | 287 ¹ | - | `FlukeQM` | 115200 8N1 | - | 50000 |
+| Fluke | 289 ¹ | - | `FlukeQM` | 115200 8N1 | - | 50000 |
+| Fluke | 87-IV ¹ | - | `FlukeQM` | 9600 8N1 | - | 20000 |
+| Fluke | 89-IV ¹ | - | `FlukeQM` | 9600 8N1 | - | 50000 |
 | Generic | DTM0660 4000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 4000 |
 | Generic | DTM0660 6000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
 | Generic | DTM0660 8000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 8000 |
@@ -149,4 +155,4 @@ meter working, please report it on the
 
 ¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
 
-127 devices across 30 vendors.
+133 devices across 31 vendors.

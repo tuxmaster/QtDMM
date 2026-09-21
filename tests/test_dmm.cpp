@@ -4,7 +4,8 @@
 // DMM's connection state machine against a fake RFC 2217 server: Connecting
 // until the first frame, Connected while frames arrive, Timeout when they
 // stop, Error when the server goes away, reconnect when it is back, and a
-// refused connection reported with its reason.
+// refused connection reported with its reason. Finally a polled,
+// variable-length protocol (Fluke QM) through the reader.
 
 #include <QtCore>
 #include <QtNetwork>
@@ -157,6 +158,57 @@ int main(int argc, char **argv)
   bad.setDevice("RFC2217 nonsense");
   check(!bad.open(), "open() fails for an address without port");
   check(bad.errorString().contains("host:port"), "malformed address text: " + bad.errorString());
+
+  // --- 7. polled, variable-length protocol (Fluke QM) end to end ---
+  // The reader must send the decoder's poll request and cut the answer -
+  // CMD_ACK line plus reading line, arriving in pieces - into one frame.
+  {
+    QTcpServer fluke;
+    check(fluke.listen(QHostAddress::LocalHost, 0), "fluke server listens");
+    QTcpSocket *client = nullptr;
+    QByteArray received;
+    int polls = 0;
+    QObject::connect(&fluke, &QTcpServer::newConnection, [&]
+    {
+      client = fluke.nextPendingConnection();
+      QObject::connect(client, &QTcpSocket::readyRead, [&]
+      {
+        received += client->readAll();
+        while (received.contains("QM\r"))
+        {
+          received.remove(0, received.indexOf("QM\r") + 3);
+          ++polls;
+          client->write("0\r-0.02");
+          client->flush();
+          QTimer::singleShot(50, client, [client] { client->write("3E-3,VDC,NORMAL,NONE\r"); client->flush(); });
+        }
+      });
+    });
+
+    DMM meter(nullptr);
+    DmmDecoder::DMMInfo flukeInfo;
+    flukeInfo.baud = 115200;
+    flukeInfo.bits = 8;
+    meter.setDmmInfo(flukeInfo);
+    meter.setFormat(ReadEvent::FlukeQM);
+    meter.setDevice(QString("RFC2217 127.0.0.1:%1").arg(fluke.serverPort()));
+    double lastValue = 0;
+    QString lastVal, lastUnit;
+    QObject::connect(&meter, &DMM::value, [&](double dval, const QString &val, const QString &unit)
+    {
+      lastValue = dval;
+      lastVal = val;
+      lastUnit = unit;
+    });
+    check(meter.open(), "fluke open()");
+    check(waitFor([&] { return polls >= 1; }, 4000), "poll request QM sent");
+    check(waitFor([&] { return lastUnit == "mV"; }, 4000), "reading decoded from the split answer");
+    check(lastVal == "-0.023" && qFuzzyCompare(lastValue + 1, -0.000023 + 1),
+          "reading is -0.023 mV: " + lastVal + " " + lastUnit);
+    check(meter.linkState() == DMM::LinkState::Connected, "fluke Connected");
+    check(waitFor([&] { return polls >= 2; }, 4000), "polled again");
+    meter.close();
+  }
 
   if (failed == 0)
     qInfo() << "All DMM link state tests passed.";
