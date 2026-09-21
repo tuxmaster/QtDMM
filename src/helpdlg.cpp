@@ -30,6 +30,26 @@ HelpDlg::HelpDlg(Settings *settings, QWidget *parent)
   connect(ui_page, &QTextBrowser::forwardAvailable, ui_forward, &QToolButton::setEnabled);
   connect(ui_page, &QTextBrowser::sourceChanged, this, &HelpDlg::pageChanged);
 
+  // keyboard: Alt+Left/Right/Home like a browser, Ctrl+F for the search
+  // field, F3/Shift+F3 for the next/previous match, Esc closes
+  ui_back->setShortcut(QKeySequence("Alt+Left"));
+  ui_forward->setShortcut(QKeySequence("Alt+Right"));
+  ui_home->setShortcut(QKeySequence("Alt+Home"));
+  ui_close->setShortcut(QKeySequence::Cancel);
+  auto shortcut = [this](const QKeySequence &key, auto slot)
+  {
+    QAction *a = new QAction(this);
+    a->setShortcut(key);
+    connect(a, &QAction::triggered, this, slot);
+    addAction(a);
+  };
+  shortcut(QKeySequence::Find, &HelpDlg::focusSearch);
+  shortcut(QKeySequence::FindNext, &HelpDlg::findNext);
+  shortcut(QKeySequence::FindPrevious, &HelpDlg::findPrevious);
+  shortcut(QKeySequence("Shift+Return"), &HelpDlg::findPrevious);
+  connect(ui_search, &QLineEdit::textChanged, this, &HelpDlg::searchChanged);
+  connect(ui_search, &QLineEdit::returnPressed, this, &HelpDlg::findNext);
+
   ui_splitter->setStretchFactor(0, 0);
   ui_splitter->setStretchFactor(1, 1);
 
@@ -104,6 +124,63 @@ void HelpDlg::pageChanged(const QUrl &url)
 QString HelpDlg::currentPage() const
 {
   return ui_page->source().toString().mid(kHelpRoot.size());
+}
+
+bool HelpDlg::search(const QString &text)
+{
+  ui_search->setText(text);   // searchChanged() runs the search
+  return ui_page->textCursor().hasSelection();
+}
+
+QString HelpDlg::selectedText() const
+{
+  return ui_page->textCursor().selectedText();
+}
+
+void HelpDlg::focusSearch()
+{
+  ui_search->setFocus();
+  ui_search->selectAll();
+}
+
+bool HelpDlg::find(QTextDocument::FindFlags flags)
+{
+  const QString text = ui_search->text();
+  if (text.isEmpty())
+    return true;
+  bool found = ui_page->find(text, flags);
+  if (!found)
+  {
+    // wrap around
+    QTextCursor c = ui_page->textCursor();
+    c.movePosition(flags & QTextDocument::FindBackward ? QTextCursor::End : QTextCursor::Start);
+    ui_page->setTextCursor(c);
+    found = ui_page->find(text, flags);
+  }
+  // red background when there is no match
+  ui_search->setStyleSheet(found ? QString() : QStringLiteral("QLineEdit { background: #f8d0d0; }"));
+  return found;
+}
+
+void HelpDlg::searchChanged(const QString &text)
+{
+  QTextCursor c = ui_page->textCursor();
+  c.movePosition(QTextCursor::Start);
+  ui_page->setTextCursor(c);
+  if (text.isEmpty())
+    ui_search->setStyleSheet(QString());
+  else
+    find(QTextDocument::FindFlags());
+}
+
+void HelpDlg::findNext()
+{
+  find(QTextDocument::FindFlags());
+}
+
+void HelpDlg::findPrevious()
+{
+  find(QTextDocument::FindBackward);
 }
 
 void HelpDlg::on_ui_home_clicked()

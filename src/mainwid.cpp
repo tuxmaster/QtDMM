@@ -92,6 +92,7 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
 
   connect(ui_graph, SIGNAL(zoomOut(double)), m_configDlg, SLOT(zoomOutSLOT(double)));
   connect(ui_graph, SIGNAL(zoomIn(double)), m_configDlg, SLOT(zoomInSLOT(double)));
+  connect(ui_graph, SIGNAL(zoomFit()), m_configDlg, SLOT(zoomFitSLOT()));
   connect(ui_graph, SIGNAL(thresholdChanged(DMMGraph::CursorMode, double)),
           m_configDlg, SLOT(thresholdChangedSLOT(DMMGraph::CursorMode, double)));
 

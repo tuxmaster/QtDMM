@@ -142,6 +142,9 @@ DMMGraph::DMMGraph(QWidget *parent, Settings *settings) :
   m_chartView->setRenderHint(QPainter::Antialiasing);
   m_chartView->viewport()->setMouseTracking(true);
   m_chartView->viewport()->installEventFilter(this);
+  // keyboard zoom/pan once the graph has been clicked
+  m_chartView->setFocusPolicy(Qt::ClickFocus);
+  m_chartView->installEventFilter(this);
 
   m_popup = new QMenu(this);
   connect(m_popup, SIGNAL(triggered(QAction *)), this, SLOT(popupSLOT(QAction *)));
@@ -581,6 +584,9 @@ void DMMGraph::emitInfo()
 // DMMGraph itself (it already owns everything these handlers need).
 bool DMMGraph::eventFilter(QObject *watched, QEvent *event)
 {
+  if (watched == m_chartView && event->type() == QEvent::KeyPress)
+    return handleChartKey(static_cast<QKeyEvent *>(event)) || QWidget::eventFilter(watched, event);
+
   if (watched == m_chartView->viewport())
   {
     switch (event->type())
@@ -670,6 +676,9 @@ void DMMGraph::handleChartMousePress(QMouseEvent *ev)
     action->setProperty("ID", IDConfigure);
     m_popup->addAction(action);
     //m_popup->insertItem( tr("Configure..."), IDConfigure );
+    action = new QAction(tr("Copy image"), m_popup);
+    action->setProperty("ID", IDCopyImage);
+    m_popup->addAction(action);
 
     if (!m_running)
     {
@@ -1245,5 +1254,70 @@ void DMMGraph::popupSLOT(QAction *action)
     case IDImportData:
       Q_EMIT importData();
       break;
+    case IDCopyImage:
+      copyImageSLOT();
+      break;
   }
+}
+
+bool DMMGraph::handleChartKey(QKeyEvent *ev)
+{
+  const bool shift = ev->modifiers() & Qt::ShiftModifier;
+
+  switch (ev->key())
+  {
+    case Qt::Key_Plus:
+    case Qt::Key_Equal:
+      zoomInSLOT();
+      return true;
+    case Qt::Key_Minus:
+      zoomOutSLOT();
+      return true;
+    case Qt::Key_0:
+      zoomFitSLOT();
+      return true;
+    case Qt::Key_Left:
+      pan(shift ? -0.5 : -0.1);
+      return true;
+    case Qt::Key_Right:
+      pan(shift ? 0.5 : 0.1);
+      return true;
+    case Qt::Key_PageUp:
+      pan(-1.0);
+      return true;
+    case Qt::Key_PageDown:
+      pan(1.0);
+      return true;
+    case Qt::Key_Home:
+      scrollToStart();
+      return true;
+    case Qt::Key_End:
+      scrollToEnd();
+      return true;
+    default:
+      return false;
+  }
+}
+
+void DMMGraph::pan(double fraction)
+{
+  int step = qMax(1, qRound(qMax(1, m_size) * fabs(fraction)));
+  if (fraction < 0)
+    step = -step;
+  scrollbar->setValue(qBound(0, scrollbar->value() + step, scrollbar->maximum()));
+}
+
+void DMMGraph::scrollToStart()
+{
+  scrollbar->setValue(0);
+}
+
+void DMMGraph::scrollToEnd()
+{
+  scrollbar->setValue(scrollbar->maximum());
+}
+
+void DMMGraph::copyImageSLOT()
+{
+  QGuiApplication::clipboard()->setPixmap(m_chartView->grab());
 }

@@ -79,6 +79,10 @@ protected Q_SLOTS:
   void      updateWindowTitle();
   /// Graph button: hides the graph and lets the window shrink to the panels.
   void      setGraphVisible(bool on);
+  /// Space: starts the recorder, or stops it when it is running.
+  void      toggleRecordingSLOT();
+  /// F11
+  void      setFullScreen(bool on);
 
 protected:
   MainWid    *m_wid;
@@ -87,6 +91,11 @@ protected:
   QDockWidget *m_meterDock;
   QDockWidget *m_displayDock;
   QAction    *m_lockPanels;
+  QAction    *m_fullScreen;
+  QAction    *m_zoomIn;
+  QAction    *m_zoomOut;
+  QAction    *m_zoomFit;
+  QAction    *m_copyImage;
   int         m_heightWithGraph = 0;   ///< window height before the graph was hidden
   /// Locked panels have no title bar and cannot be moved or floated.
   void        setPanelsLocked(bool locked);
@@ -101,6 +110,10 @@ protected:
 
   void        setupIcons();
   void        createActions();
+  /// Menu-only actions and their shortcuts (the window has no menu bar).
+  void        createExtraActions();
+  /// Appends the shortcut to every action's tooltip: "Start (Ctrl+S)".
+  void        addShortcutsToToolTips();
   /// Saves window/dock state; vetoed by MainWid::closeWin() on unsaved data.
   void        closeEvent(QCloseEvent *)Q_DECL_OVERRIDE;
   /// Raises this window when another instance asks for it ("RAISE_<id>").

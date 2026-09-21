@@ -184,6 +184,7 @@ public Q_SLOTS:
   void                  setCurrentTipSLOT(int);
   void                  zoomInSLOT(double);
   void                  zoomOutSLOT(double);
+  void                  zoomFitSLOT();
   /// A threshold cursor was dragged in the graph; updates the spin box.
   void                  thresholdChangedSLOT(DMMGraph::CursorMode, double);
 

@@ -71,6 +71,8 @@ TipDlg::TipDlg(QWidget *parent) :  QDialog(parent),
   m_curTip(0)
 {
   setupUi(this);
+  ui_previousBut->setShortcut(QKeySequence("Left"));
+  ui_nextBut->setShortcut(QKeySequence("Right"));
   ui_tip->setStyleSheet(QString("background-color: %1;").arg(palette().window().color().name()));
 
   // count tips

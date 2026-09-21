@@ -93,24 +93,24 @@
 <context>
     <name>ConfigDlg</name>
     <message>
-        <location filename="../../src/configdlg.cpp" line="53"/>
-        <location filename="../../src/configdlg.cpp" line="78"/>
-        <location filename="../../src/configdlg.cpp" line="99"/>
+        <location filename="../../src/configdlg.cpp" line="69"/>
+        <location filename="../../src/configdlg.cpp" line="94"/>
+        <location filename="../../src/configdlg.cpp" line="115"/>
         <source>QtDMM: Welcome!</source>
         <translation>QtDMM: Willkommen!</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="54"/>
+        <location filename="../../src/configdlg.cpp" line="70"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;This seems to be your first invocation of QtDMM (Or you have deleted its configuration file).&lt;p&gt;QtDMM has created the file %1 in your home directory to save its settings.</source>
         <translation>&lt;font size+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Dies scheint der erste Aufruf von QtDMM zu sein, bzw. die Konfigurstion wurde gelöscht.&lt;p&gt;QtDMM hate eine neue Datei unter dem Pfad %1 angelegt.</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="79"/>
+        <location filename="../../src/configdlg.cpp" line="95"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You seem to have upgraded &lt;b&gt;QtDMM&lt;/b&gt; from a version prior to 0.8.4. Please check your configuration. There are some new parameters to be configured.&lt;p&gt;Thank you for choosing &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Willkommen!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Wie es aussieht, wurde &lt;b&gt;QtDMM&lt;/b&gt; von einer Version vor 0.8.4 aktualisiert. Bitte überprüfen Sie die Konfiguration, es gibt einige neue Parameter.&lt;p&gt;Danke, dass Sie &lt;b&gt;QtDMM&lt;/b&gt; benutzen.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="100"/>
+        <location filename="../../src/configdlg.cpp" line="116"/>
         <source>Your config file has been converted to the new format.
 Please check your color settings, because they couldn&apos;t be converted automatically.
 Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old.</source>
@@ -119,8 +119,8 @@ Bitte überprüfen Sie die Farbeinstellungen, da diese nicht konvertiert werden 
 Die Datei ~/.qtdmmtc wurden zu ~/.qtdmmrc.old umbenannt.</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="66"/>
-        <location filename="../../src/configdlg.cpp" line="91"/>
+        <location filename="../../src/configdlg.cpp" line="82"/>
+        <location filename="../../src/configdlg.cpp" line="107"/>
         <source>Continue</source>
         <translation>Fortsetzen</translation>
     </message>
@@ -210,24 +210,24 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DMMGraph</name>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="181"/>
-        <location filename="../../src/dmmgraph.cpp" line="186"/>
+        <location filename="../../src/dmmgraph.cpp" line="184"/>
+        <location filename="../../src/dmmgraph.cpp" line="189"/>
         <source>Sampling start:</source>
         <translation>Abtasten Start:</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="182"/>
-        <location filename="../../src/dmmgraph.cpp" line="191"/>
+        <location filename="../../src/dmmgraph.cpp" line="185"/>
+        <location filename="../../src/dmmgraph.cpp" line="194"/>
         <source>Sampling resolution:</source>
         <translation>Abtastauflösung:</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="161"/>
+        <location filename="../../src/dmmgraph.cpp" line="164"/>
         <source>QtDMM: %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="194"/>
+        <location filename="../../src/dmmgraph.cpp" line="197"/>
         <source>%1 Seconds</source>
         <translation>%1 Sekunden</translation>
     </message>
@@ -237,110 +237,115 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="567"/>
-        <location filename="../../src/dmmgraph.cpp" line="569"/>
-        <location filename="../../src/dmmgraph.cpp" line="571"/>
-        <location filename="../../src/dmmgraph.cpp" line="573"/>
+        <location filename="../../src/dmmgraph.cpp" line="570"/>
+        <location filename="../../src/dmmgraph.cpp" line="572"/>
+        <location filename="../../src/dmmgraph.cpp" line="574"/>
+        <location filename="../../src/dmmgraph.cpp" line="576"/>
         <source>Sampling</source>
         <translation>Beproben</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="567"/>
-        <location filename="../../src/dmmgraph.cpp" line="569"/>
-        <location filename="../../src/dmmgraph.cpp" line="571"/>
-        <location filename="../../src/dmmgraph.cpp" line="573"/>
+        <location filename="../../src/dmmgraph.cpp" line="570"/>
+        <location filename="../../src/dmmgraph.cpp" line="572"/>
+        <location filename="../../src/dmmgraph.cpp" line="574"/>
+        <location filename="../../src/dmmgraph.cpp" line="576"/>
         <source>Stopped</source>
         <translation>Angehalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="635"/>
+        <location filename="../../src/dmmgraph.cpp" line="641"/>
         <source>Disconnect</source>
         <translation>Trennen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="642"/>
+        <location filename="../../src/dmmgraph.cpp" line="648"/>
         <source>Connect</source>
         <translation>Verbinden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="651"/>
+        <location filename="../../src/dmmgraph.cpp" line="657"/>
         <source>Stop recorder</source>
         <translation>Rekorder anhalten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="658"/>
+        <location filename="../../src/dmmgraph.cpp" line="664"/>
         <source>Start recorder</source>
         <translation>Rekorder starten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="663"/>
+        <location filename="../../src/dmmgraph.cpp" line="669"/>
         <source>Clear graph</source>
         <translation>Graphen löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="669"/>
+        <location filename="../../src/dmmgraph.cpp" line="675"/>
         <source>Configure...</source>
         <translation>Konfigurieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="677"/>
+        <location filename="../../src/dmmgraph.cpp" line="679"/>
+        <source>Copy image</source>
+        <translation>Bild kopieren</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmgraph.cpp" line="686"/>
         <source>Export data...</source>
         <translation>Daten exportieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="681"/>
+        <location filename="../../src/dmmgraph.cpp" line="690"/>
         <source>Import data...</source>
         <translation>Daten importieren ...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="839"/>
+        <location filename="../../src/dmmgraph.cpp" line="848"/>
         <source>Export data</source>
         <translation>Daten exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="957"/>
+        <location filename="../../src/dmmgraph.cpp" line="966"/>
         <source>File contains only header</source>
         <translation>Datei enthält nur den Header</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="892"/>
+        <location filename="../../src/dmmgraph.cpp" line="901"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="893"/>
+        <location filename="../../src/dmmgraph.cpp" line="902"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Beim Importieren werden alle bisherigen Messwerte gelöscht.&lt;p&gt;Möchten Sie zu ersten die bisherigen Daten exportieren?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="905"/>
+        <location filename="../../src/dmmgraph.cpp" line="914"/>
         <source>Export data first</source>
         <translation>Daten zu erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="909"/>
+        <location filename="../../src/dmmgraph.cpp" line="918"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importieren und Daten löschen</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="920"/>
+        <location filename="../../src/dmmgraph.cpp" line="929"/>
         <source>Import data</source>
         <translation>Daten importieren</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="920"/>
+        <location filename="../../src/dmmgraph.cpp" line="929"/>
         <source>CSV (*.csv);;All files (*)</source>
         <translation>CSV (*.csv);;Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="857"/>
-        <location filename="../../src/dmmgraph.cpp" line="937"/>
+        <location filename="../../src/dmmgraph.cpp" line="866"/>
+        <location filename="../../src/dmmgraph.cpp" line="946"/>
         <source>Cannot open file.</source>
         <translation>Datei kann nicht geöffnet werden.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="946"/>
-        <location filename="../../src/dmmgraph.cpp" line="988"/>
+        <location filename="../../src/dmmgraph.cpp" line="955"/>
+        <location filename="../../src/dmmgraph.cpp" line="997"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Diese Datei scheint nicht gültig zu sein</translation>
     </message>
@@ -498,7 +503,7 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>HelpDlg</name>
     <message>
-        <location filename="../../src/helpdlg.cpp" line="70"/>
+        <location filename="../../src/helpdlg.cpp" line="90"/>
         <source>Contents</source>
         <translation>Inhalt</translation>
     </message>
@@ -506,74 +511,74 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>InstancesDlg</name>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="261"/>
+        <location filename="../../src/instancesdlg.cpp" line="267"/>
         <source>QtDMM - new instance</source>
         <translation>QtDMM - neue Instanz</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="261"/>
+        <location filename="../../src/instancesdlg.cpp" line="267"/>
         <source>Instance name:</source>
         <translation>Instanz Name:</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="224"/>
-        <location filename="../../src/instancesdlg.cpp" line="270"/>
+        <location filename="../../src/instancesdlg.cpp" line="230"/>
+        <location filename="../../src/instancesdlg.cpp" line="276"/>
         <source>Instance names may contain letters, digits and underscores and must not start with a digit.</source>
         <translation>Instanznamen dürfen Buchstaben, Ziffern und Unterstriche enthalten und nicht mit einer Ziffer beginnen.</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="71"/>
+        <location filename="../../src/instancesdlg.cpp" line="77"/>
         <source>running</source>
         <translation>läuft</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="73"/>
+        <location filename="../../src/instancesdlg.cpp" line="79"/>
         <source>offline</source>
         <translation>offline</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="192"/>
+        <location filename="../../src/instancesdlg.cpp" line="198"/>
         <source>QtDMM - new calculated instance</source>
         <translation>QtDMM - neue berechnete Instanz</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="205"/>
+        <location filename="../../src/instancesdlg.cpp" line="211"/>
         <source>No instance is running yet; the variables are the instance names.</source>
         <translation>Noch keine Instanz läuft; die Variablen sind die Instanznamen.</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="206"/>
+        <location filename="../../src/instancesdlg.cpp" line="212"/>
         <source>Variables (running instances): %1</source>
         <translation>Variablen (laufende Instanzen): %1</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="207"/>
+        <location filename="../../src/instancesdlg.cpp" line="213"/>
         <source>&amp;Name:</source>
         <translation>&amp;Name:</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="208"/>
+        <location filename="../../src/instancesdlg.cpp" line="214"/>
         <source>&amp;Unit:</source>
         <translation>&amp;Einheit:</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="209"/>
+        <location filename="../../src/instancesdlg.cpp" line="215"/>
         <source>&amp;Formula:</source>
         <translation>&amp;Formel:</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="226"/>
-        <location filename="../../src/instancesdlg.cpp" line="276"/>
+        <location filename="../../src/instancesdlg.cpp" line="232"/>
+        <location filename="../../src/instancesdlg.cpp" line="282"/>
         <source>Instance already exists.</source>
         <translation>Instanz existiert bereits.</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="228"/>
+        <location filename="../../src/instancesdlg.cpp" line="234"/>
         <source>Please give a unit without spaces.</source>
         <translation>Bitte eine Einheit ohne Leerzeichen angeben.</translation>
     </message>
     <message>
-        <location filename="../../src/instancesdlg.cpp" line="230"/>
+        <location filename="../../src/instancesdlg.cpp" line="236"/>
         <source>Position %1: %2</source>
         <translation>Position %1: %2</translation>
     </message>
@@ -594,83 +599,83 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="136"/>
+        <location filename="../../src/mainwid.cpp" line="137"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: Ungesicherte Daten</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="137"/>
+        <location filename="../../src/mainwid.cpp" line="138"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Ungesicherte Daten&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Es befinden sich ungesicherte Daten im Speicher. Wenn Sie das Programm beenden gehen diese verloren.&lt;p&gt;Sollen diese vorher exportiert werden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="152"/>
+        <location filename="../../src/mainwid.cpp" line="153"/>
         <source>Export data first</source>
         <translation>Daten erst exportieren</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="156"/>
+        <location filename="../../src/mainwid.cpp" line="157"/>
         <source>Quit without saving</source>
         <translation>Beenden ohne speichern</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="525"/>
+        <location filename="../../src/mainwid.cpp" line="526"/>
         <source>Automatic start at %1</source>
         <translation>Automatisch starten bei %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="527"/>
+        <location filename="../../src/mainwid.cpp" line="528"/>
         <source>Raising threshold %1</source>
         <translation>Grenzwert steigent %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="529"/>
+        <location filename="../../src/mainwid.cpp" line="530"/>
         <source>Falling threshold %1</source>
         <translation>Grenzwert fallend %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="551"/>
+        <location filename="../../src/mainwid.cpp" line="552"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Programm %1 läuft noch!&lt;p&gt;Wollen Sie es jetzt beenden?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="592"/>
+        <location filename="../../src/mainwid.cpp" line="593"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Startfehler&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Konnte %1 nicht starten</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="609"/>
+        <location filename="../../src/mainwid.cpp" line="610"/>
         <source>Launched %1</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="614"/>
+        <location filename="../../src/mainwid.cpp" line="615"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 mit dem Rückgabecode %2 beendet.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="660"/>
+        <location filename="../../src/mainwid.cpp" line="661"/>
         <source>no meter configured</source>
         <translation>kein Multimeter konfiguriert</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="550"/>
-        <location filename="../../src/mainwid.cpp" line="591"/>
+        <location filename="../../src/mainwid.cpp" line="551"/>
+        <location filename="../../src/mainwid.cpp" line="592"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: Startfehler</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="563"/>
+        <location filename="../../src/mainwid.cpp" line="564"/>
         <source>Yes, kill it!</source>
         <translation>Ja, töten!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="567"/>
+        <location filename="../../src/mainwid.cpp" line="568"/>
         <source>No, keep running</source>
         <translation>Nein, es laufen lassen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="603"/>
+        <location filename="../../src/mainwid.cpp" line="604"/>
         <source>Bummer!</source>
         <translation>Reinfall!</translation>
     </message>
@@ -678,52 +683,87 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>MainWin</name>
     <message>
-        <location filename="../../src/mainwin.cpp" line="63"/>
+        <location filename="../../src/mainwin.cpp" line="64"/>
         <source>Display</source>
         <translation>Anzeige</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="71"/>
+        <location filename="../../src/mainwin.cpp" line="72"/>
         <source>&amp;Display</source>
         <translation>&amp;Anzeige</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="73"/>
+        <location filename="../../src/mainwin.cpp" line="75"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Display&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show the reading on the LCD-style digital display. The panel can be docked on any side of the window or dragged out as a separate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Anzeige&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zeigt den Messwert auf der LCD-artigen Digitalanzeige. Das Panel kann an jeder Fensterseite angedockt oder als eigenes Fenster herausgezogen werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="79"/>
+        <location filename="../../src/mainwin.cpp" line="81"/>
         <source>Analog meter</source>
         <translation>Zeigerinstrument</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="90"/>
+        <location filename="../../src/mainwin.cpp" line="92"/>
         <source>Analog &amp;meter</source>
         <translation>&amp;Zeigerinstrument</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="92"/>
+        <location filename="../../src/mainwin.cpp" line="95"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Analog meter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show the reading on a moving-coil style instrument. The panel can be docked on any side of the window or dragged out as a separate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Zeigerinstrument&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zeigt den Messwert auf einem Drehspulinstrument. Das Panel kann an jeder Fensterseite angedockt oder als eigenes Fenster herausgezogen werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="103"/>
+        <location filename="../../src/mainwin.cpp" line="106"/>
         <source>&amp;Lock panels</source>
         <translation>Panels &amp;sperren</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="105"/>
+        <location filename="../../src/mainwin.cpp" line="109"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lock panels&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hide the title bars of the display and meter panels. Unlock them to move the panels to another side of the window or to drag them out as separate windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Panels sperren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Blendet die Titelleisten von Anzeige und Zeigerinstrument aus. Zum Verschieben an eine andere Fensterseite oder zum Herauslösen als eigenes Fenster entsperren.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="294"/>
+        <location filename="../../src/mainwin.cpp" line="295"/>
+        <source>&amp;Full screen</source>
+        <translation>&amp;Vollbild</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="298"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Full screen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the whole screen for the instruments, e.g. on a lab monitor. F11 again returns to the normal window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Vollbild&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Den ganzen Bildschirm für die Instrumente nutzen, z. B. auf einem Labormonitor. F11 erneut drücken bringt das normale Fenster zurück.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="303"/>
+        <source>Zoom &amp;in</source>
+        <translation>Ver&amp;größern</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="306"/>
+        <source>Zoom &amp;out</source>
+        <translation>Ver&amp;kleinern</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="309"/>
+        <source>Show &amp;whole recording</source>
+        <translation>&amp;Ganze Aufnahme zeigen</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="312"/>
+        <source>Copy graph &amp;image</source>
+        <translation>Graph als &amp;Bild kopieren</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="314"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copy graph image&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Puts a picture of the recorder graph on the clipboard, ready to paste into a report or a chat.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Graph als Bild kopieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Legt ein Bild des Aufnahme-Graphen in die Zwischenablage, bereit zum Einfügen in einen Bericht oder Chat.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="369"/>
         <source>Record DMM data</source>
         <translation>DMM Daten aufnehmen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="295"/>
+        <location filename="../../src/mainwin.cpp" line="370"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
         <translatorcomment>Wählen Sie aus, welche Instanz aufnehmen soll.</translatorcomment>
@@ -731,32 +771,32 @@ Please choose which instance should record.</source>
 Please choose which instance should record.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="298"/>
+        <location filename="../../src/mainwin.cpp" line="373"/>
         <source>This instance</source>
         <translation>Diese Instanz</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="299"/>
+        <location filename="../../src/mainwin.cpp" line="374"/>
         <source>All instances</source>
         <translation>Alle Instanzen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="359"/>
+        <location filename="../../src/mainwin.cpp" line="434"/>
         <source>About QtDMM</source>
         <translation>Über QtDMM</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="362"/>
+        <location filename="../../src/mainwin.cpp" line="437"/>
         <source>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;A readout and transient recorder for digital multimeters.&lt;/p&gt;&lt;p&gt;Built with &lt;b&gt;Qt&lt;/b&gt; %2. Licensed under the &lt;b&gt;GNU GPL 3&lt;/b&gt; (versions before 0.9.0 under GPL 2).&lt;/p&gt;&lt;p&gt;0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.&lt;br&gt;0.9.3 and before: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Website: &lt;a href=&apos;https://qtdmm.de&apos;&gt;qtdmm.de&lt;/a&gt; &amp;middot; Contact: &lt;a href=&apos;mailto:hello@qtdmm.de&apos;&gt;hello@qtdmm.de&lt;/a&gt;&lt;br&gt;Source and bug reports: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Icons (except the DMM icon) are taken from the KDE project.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;Anzeige und Transientenrekorder für digitale Multimeter.&lt;/p&gt;&lt;p&gt;Gebaut mit &lt;b&gt;Qt&lt;/b&gt; %2. Lizenziert unter der &lt;b&gt;GNU GPL 3&lt;/b&gt; (Versionen vor 0.9.0 unter GPL 2).&lt;/p&gt;&lt;p&gt;Ab 0.9.5: tuxmaster und Mitwirkende, siehe Datei AUTHORS.&lt;br&gt;0.9.3 und davor: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Website: &lt;a href=&apos;https://qtdmm.de&apos;&gt;qtdmm.de&lt;/a&gt; &amp;middot; Kontakt: &lt;a href=&apos;mailto:hello@qtdmm.de&apos;&gt;hello@qtdmm.de&lt;/a&gt;&lt;br&gt;Quellcode und Fehlermeldungen: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Die Symbole (außer dem DMM-Symbol) stammen aus dem KDE-Projekt.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="378"/>
+        <location filename="../../src/mainwin.cpp" line="453"/>
         <source>Supported devices...</source>
         <translation>Unterstützte Geräte...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="189"/>
+        <location filename="../../src/mainwin.cpp" line="197"/>
         <source>Another instance is running.</source>
         <translation>Andere Instanz läuft noch</translation>
     </message>
@@ -1141,12 +1181,37 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
         <translation>variable bytes ASCII, Sigrok</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="957"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="879"/>
+        <source>26 bytes ASCII, continuous, two values (Voltcraft GDM 703)</source>
+        <translation>26 Byte ASCII, kontinuierlich, zwei Werte (Voltcraft GDM 703)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="884"/>
+        <source>15 bytes binary, continuous (Brymen BM25x)</source>
+        <translation>15 Byte binär, kontinuierlich (Brymen BM25x)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="889"/>
+        <source>24 bytes binary, polled over BU-86X (Brymen BM86x)</source>
+        <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM86x)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="894"/>
+        <source>24 bytes binary, polled over BU-86X (Brymen BM52x)</source>
+        <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM52x)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="899"/>
+        <source>24 bytes binary, polled over BU-86X (Brymen BM82x)</source>
+        <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM82x)</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="982"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocol settings have not been confirmed by a user yet. If you own this model and can confirm that they work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, dass sie funktionieren, eröffnen Sie bitte ein Issue unter &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="982"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1007"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; with the model and the settings. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, das hier nicht aufgeführt ist, und passende manuelle Einstellungen gefunden haben, eröffnen Sie bitte ein Issue unter &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; mit Modell und Einstellungen. So profitieren künftige Benutzer dieses DMM von Ihrer Hilfe.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1292,12 +1357,12 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
         <translation>9 Bytes binär, kontinuierlich (RS 22-812)</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="889"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="914"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Anzahl der Werte:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="899"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="924"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Einige Multimeter senden verschiedenen Zeile mit verschiedenen Messwerten. Hier kann die Anzahl der zu ignorieren Zeilen eingetragen werden.( Das bedeutet, QtDMM verarbeitet nur die erste Zeile).</translation>
     </message>
@@ -1772,17 +1837,32 @@ Der Wert kann auch mit einem Suffix wie m, u, n, p, k, M, G oder T angegeben wer
         <translation>Zurück zum Inhaltsverzeichnis.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uihelpdlg.ui" line="107"/>
+        <location filename="../../src/ui/uihelpdlg.ui" line="94"/>
+        <source>Search in the page (Ctrl+F). Enter or F3 finds the next match, Shift+F3 the previous one.</source>
+        <translation>In der Seite suchen (Strg+F). Eingabe oder F3 findet den nächsten Treffer, Umschalt+F3 den vorherigen.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="97"/>
+        <source>Search the shown help page. Enter or F3 jumps to the next match, Shift+Enter or Shift+F3 to the previous one.</source>
+        <translation>Die angezeigte Hilfeseite durchsuchen. Eingabe oder F3 springt zum nächsten Treffer, Umschalt+Eingabe oder Umschalt+F3 zum vorherigen.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="100"/>
+        <source>Search…</source>
+        <translation>Suchen…</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uihelpdlg.ui" line="123"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uihelpdlg.ui" line="123"/>
+        <location filename="../../src/ui/uihelpdlg.ui" line="139"/>
         <source>Table of contents. Click an entry to show that page.</source>
         <translation>Inhaltsverzeichnis. Ein Eintrag zeigt die jeweilige Seite.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uihelpdlg.ui" line="134"/>
+        <location filename="../../src/ui/uihelpdlg.ui" line="150"/>
         <source>The help page. Links inside the text navigate to other pages; web links open in your browser.</source>
         <translation>Die Hilfeseite. Links im Text führen zu anderen Seiten; Web-Links öffnen sich im Browser.</translation>
     </message>
@@ -2049,69 +2129,69 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>DMM verbinden/trennen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="277"/>
+        <location filename="../../src/ui/uimainwin.ui" line="280"/>
         <source>reset min/max</source>
         <translation>Reset min/max</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="315"/>
+        <location filename="../../src/ui/uimainwin.ui" line="318"/>
         <source>Start recording</source>
         <translation>Aufnahme starten</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="339"/>
+        <location filename="../../src/ui/uimainwin.ui" line="342"/>
         <source>Stop recording</source>
         <translation>Aufnahme stoppen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="360"/>
+        <location filename="../../src/ui/uimainwin.ui" line="363"/>
         <source>Clear graph</source>
         <translation>Graphen löschen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="409"/>
+        <location filename="../../src/ui/uimainwin.ui" line="412"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="427"/>
+        <location filename="../../src/ui/uimainwin.ui" line="430"/>
         <source>&amp;Handbook</source>
         <translation>&amp;Handbuch</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="430"/>
+        <location filename="../../src/ui/uimainwin.ui" line="433"/>
         <source>Handbook</source>
         <translation>Handbuch</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="433"/>
+        <location filename="../../src/ui/uimainwin.ui" line="436"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Handbook&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Open the QtDMM handbook: connecting a meter, the recorder, troubleshooting and the list of supported devices.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Handbuch&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Das QtDMM-Handbuch öffnen: Multimeter anschließen, der Rekorder, Fehlersuche und die Liste der unterstützten Geräte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="469"/>
+        <location filename="../../src/ui/uimainwin.ui" line="472"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="478"/>
+        <location filename="../../src/ui/uimainwin.ui" line="481"/>
         <source>Instances</source>
         <translation>Instanzen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="481"/>
+        <location filename="../../src/ui/uimainwin.ui" line="484"/>
         <source>Instance Manager</source>
         <translation>Instanzen Verwaltung</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="484"/>
+        <location filename="../../src/ui/uimainwin.ui" line="487"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="103"/>
-        <location filename="../../src/ui/uimainwin.ui" line="463"/>
         <location filename="../../src/ui/uimainwin.ui" line="466"/>
+        <location filename="../../src/ui/uimainwin.ui" line="469"/>
         <source>Menu</source>
         <translation>Menü</translation>
     </message>
@@ -2147,14 +2227,14 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="190"/>
-        <location filename="../../src/ui/uimainwin.ui" line="291"/>
+        <location filename="../../src/ui/uimainwin.ui" line="294"/>
         <source>&amp;Configure</source>
         <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
         <location filename="../../src/ui/uimainwin.ui" line="193"/>
-        <location filename="../../src/ui/uimainwin.ui" line="294"/>
-        <location filename="../../src/ui/uimainwin.ui" line="377"/>
+        <location filename="../../src/ui/uimainwin.ui" line="297"/>
+        <location filename="../../src/ui/uimainwin.ui" line="380"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Configure QtDMM&lt;/span&gt;&lt;/p&gt;&lt;p&gt;This will open QtDMM&apos;s configuration dialog. Here you can configure it&apos;s visual appearance and all options regarding the multimeter hardware and the recorder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;QtDMM konfigurieren&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Dies öffnen das Konfugurationsfenster für QtDMM. Hier kann die visuelle Erscheinung, alle Optionen die die Datenaufzeichnung betreffen sowie die Einstellungen für das DMM festgelegt werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -2194,77 +2274,77 @@ Die maximale Auflösung für die Datensammlung liegt bei 1/10 Sekunde, bei Bedar
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Den Rekorder-Graphen ein- oder ausblenden. Die Aufnahme läuft auch bei ausgeblendetem Graphen weiter; mit nur Anzeige und Zeigerinstrument lässt sich das Fenster deutlich kleiner machen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="274"/>
+        <location filename="../../src/ui/uimainwin.ui" line="277"/>
         <source>&amp;Reset</source>
         <translation>&amp;Zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="280"/>
+        <location filename="../../src/ui/uimainwin.ui" line="283"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Reset min/max values&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The min/max values in the display will be reset. You can activate this option at any time. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Min/Max Werte zurücksetzen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Die Min/Max Werte in der Anzeige werden zurückgesetzt. Diese Option kann jederzeit aktiviert werden. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="312"/>
+        <location filename="../../src/ui/uimainwin.ui" line="315"/>
         <source>&amp;Start</source>
         <translation>&amp;Starten</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="318"/>
+        <location filename="../../src/ui/uimainwin.ui" line="321"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Start the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If you are in manual mode this will start the recorder. Press F2 to set the recorder options.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Rekorder starten&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Startet den Rekorder wenn sich dieser im manuellen Modus befindet. F2 drücken für die Rekordereinstellungen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="336"/>
+        <location filename="../../src/ui/uimainwin.ui" line="339"/>
         <source>S&amp;top</source>
         <translation>&amp;Anhalten</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="342"/>
+        <location filename="../../src/ui/uimainwin.ui" line="345"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Stop the recorder&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The recorder will be stopped. This is independent from the start mode of the recorder. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Hällt den Rekorder an&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Der Rekoder wird angehalten. Dies ist unabhängig von dem gewählten Startmodus. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="357"/>
+        <location filename="../../src/ui/uimainwin.ui" line="360"/>
         <source>&amp;Clear</source>
         <translation>&amp;Löschen</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="363"/>
+        <location filename="../../src/ui/uimainwin.ui" line="366"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clear the recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder is already started it will clear the graph and continue recording.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lösche den Graphen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Wenn der Rekorder läuft, wird der Graph gelöscht und es wird weiter aufgezeichnet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="374"/>
+        <location filename="../../src/ui/uimainwin.ui" line="377"/>
         <source>C&amp;onfigure</source>
         <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="448"/>
+        <location filename="../../src/ui/uimainwin.ui" line="451"/>
         <source>&amp;About</source>
         <translation>Ü&amp;ber</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="451"/>
+        <location filename="../../src/ui/uimainwin.ui" line="454"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copyright information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show copyright information and some blurb about QtDMM. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Urheber Information&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Zeigt die Information zum Urheber sowie etwas Werbung zu QtDMM an. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="388"/>
+        <location filename="../../src/ui/uimainwin.ui" line="391"/>
         <source>&amp;Tip of the day</source>
         <translation>&amp;Tipp des Tages</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="391"/>
+        <location filename="../../src/ui/uimainwin.ui" line="394"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show tip of the day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeigt den Tipp des Tages an.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="406"/>
+        <location filename="../../src/ui/uimainwin.ui" line="409"/>
         <source>&amp;Direct Help</source>
         <translation>&amp;Direkte Hilfe</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uimainwin.ui" line="412"/>
+        <location filename="../../src/ui/uimainwin.ui" line="415"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direct Help&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Enter the direct help mode. You have done this already when reading this text :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Direkte Hilfe&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Schalten in den direkten Hilfemodus um. Dies haben Sie bereits duch lesen des Textes getan :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>

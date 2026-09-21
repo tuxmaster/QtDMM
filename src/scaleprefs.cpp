@@ -245,6 +245,12 @@ int ScalePrefs::totalSeconds() const
   return sec;
 }
 
+void ScalePrefs::zoomFitSLOT()
+{
+  sizeUnit->setCurrentIndex(lengthUnit->currentIndex());
+  ui_winSize->setValue(winLength->value());
+}
+
 void ScalePrefs::setGraphSizeSLOT(int size, int length)
 {
   ui_winSize->setValue(size);

@@ -49,6 +49,8 @@ public Q_SLOTS:
   void      setAutoScaleSLOT(bool autoScale);
   void      zoomInSLOT(double fac);
   void      zoomOutSLOT(double fac);
+  /// Window = whole recording length (the "show all" zoom).
+  void      zoomFitSLOT();
   void      setGraphSizeSLOT(int size, int length);
 
 };

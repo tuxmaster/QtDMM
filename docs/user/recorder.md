@@ -32,7 +32,7 @@ Three start modes, chosen on the Recording page:
   can drag. A **pre-trigger** time keeps the readings from just before the
   crossing.
 
-*Clear* (Del) empties the recording. QtDMM warns before you lose unsaved data
+*Clear* (Ctrl+Del) empties the recording. QtDMM warns before you lose unsaved data
 by clearing, importing or quitting; the warning can be switched off under
 **Settings → Appearance**.
 
@@ -45,7 +45,12 @@ port.
 
 ## Looking at the data
 
-- **Mouse wheel** zooms the time axis; the **middle button** drags it.
+- **Mouse wheel** zooms the time axis; the **middle button** drags it. On the
+  keyboard: Ctrl++ / Ctrl+- zoom, Ctrl+0 shows the whole recording, after a
+  click into the graph also `+`, `-`, `0`, the arrow keys, Home and End (see
+  [Keyboard and mouse](keyboard.md)).
+- **Copy image** (right-click menu or Ctrl+Shift+C) puts a picture of the graph
+  on the clipboard.
 - Hovering shows a crosshair with time and value at the cursor.
 - **Integration** (Settings → Integration curve) draws a second curve: the running
   sum of the readings above a threshold, scaled and offset as configured — for

@@ -102,7 +102,8 @@ public:
     IDClearGraph,
     IDConfigure,
     IDExportData,
-    IDImportData
+    IDImportData,
+    IDCopyImage
   };
 
   DMMGraph(QWidget *parent, Settings *settings);
@@ -164,6 +165,8 @@ Q_SIGNALS:
   void             externalTriggered();
   void             zoomIn(double);
   void             zoomOut(double);
+  /// Show the whole recording (key 0).
+  void             zoomFit();
   /// A threshold line was dragged with the mouse.
   void             thresholdChanged(DMMGraph::CursorMode, double);
   /// @name Context menu requests, handled by MainWid
@@ -177,6 +180,18 @@ Q_SIGNALS:
 public Q_SLOTS:
   /// Discards the recorded data.
   void             clearSLOT();
+  /// @name Keyboard zoom/pan, also reachable from MainWin's shortcuts
+  /// @{
+  void             zoomInSLOT()  { Q_EMIT zoomIn(1.25); }
+  void             zoomOutSLOT() { Q_EMIT zoomOut(1.25); }
+  void             zoomFitSLOT() { Q_EMIT zoomFit(); }
+  /// Shifts the visible window by a fraction of its width (negative = back).
+  void             pan(double fraction);
+  void             scrollToStart();
+  void             scrollToEnd();
+  /// Puts a picture of the graph on the clipboard.
+  void             copyImageSLOT();
+  /// @}
   void             startSLOT();
   void             stopSLOT();
   /// Export with a file dialog; returns false when cancelled or failed.
@@ -274,6 +289,8 @@ protected:
   void             handleChartMouseMove(QMouseEvent *);
   void             handleChartMouseRelease(QMouseEvent *);
   void             handleChartWheel(QWheelEvent *);
+  /// Returns true when the key was used.
+  bool             handleChartKey(QKeyEvent *);
 
   void             emitInfo();
   bool             computeMinMax(double);
