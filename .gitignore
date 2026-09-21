@@ -9,3 +9,7 @@ QtDMM.spec
 
 # MkDocs output
 site/
+
+# Python bytecode (tools/qtdmm-bridge tests)
+__pycache__/
+*.pyc

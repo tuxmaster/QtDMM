@@ -335,6 +335,10 @@ void ConfigDlg::on_ui_buttonBox_accepted()
 
   if ((sender() == ui_buttonBox) && m_buttonBox_OK)
   {
+    // the user confirmed the dialog - only now does a meter count as chosen
+    // (applySLOT() also runs at exit, which must not turn on auto-connect)
+    m_settings->setBool("DMM/configured", true);
+    m_settings->save();
     Q_EMIT accepted();
     hide();
   }

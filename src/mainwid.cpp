@@ -650,9 +650,14 @@ bool MainWid::graphVisible() const
 
 bool MainWid::dmmConfigured() const
 {
-  // the keys exist once the settings dialog has been accepted at least once
-  return !m_settings->getString("Port settings/device").isEmpty()
-      || !m_settings->getString("DMM/model").isEmpty();
+  // DMM/configured is set when the settings dialog is confirmed with OK (or
+  // by the instances dialog); the model check keeps configs from before
+  // that key working. "Manual" alone proves nothing: applySLOT() writes it
+  // at every exit, dialog or not.
+  if (m_settings->getBool("DMM/configured", false))
+    return true;
+  const QString model = m_settings->getString("DMM/model");
+  return !model.isEmpty() && model != "Manual";
 }
 
 QString MainWid::dmmTitle() const

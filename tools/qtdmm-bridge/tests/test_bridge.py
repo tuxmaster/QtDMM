@@ -112,6 +112,20 @@ class ProtocolTest(unittest.TestCase):
         self.assertIn(b"qtdmm-bridge", bytes(self.sent))
         self.assertEqual(self.options, [])
 
+    def test_parity_codes_match_rfc2217(self):
+        # RFC 2217 section 2.6; pyserial's client is the independent witness
+        self.assertEqual(qb.PARITY_NAMES, {1: "N", 2: "O", 3: "E", 4: "M", 5: "S"})
+        try:
+            from serial import rfc2217
+        except ImportError:
+            self.skipTest("pyserial not installed")
+        self.assertEqual(qb.PARITY_CODES, rfc2217.RFC2217_PARITY_MAP)
+
+    def test_oversized_subnegotiation_dropped(self):
+        self.proto.feed(bytes([IAC, SB]) + b"x" * 1000 + b"data")
+        self.assertEqual(self.options, [])
+        self.assertTrue(bytes(self.data).endswith(b"data"))
+
     def test_unknown_command_ignored(self):
         self.proto.feed(bytes([IAC, qb.NOP]) + b"abc")
         self.assertEqual(bytes(self.data), b"abc")
@@ -145,7 +159,8 @@ class ServerTest(unittest.IsolatedAsyncioTestCase):
 
     async def test_qtdmm_negotiation(self):
         reader, writer, backend = await self.connect()
-        # exactly what RFC2217SerialDevice::sendRFC2217Negotiation() sends for 19200 7O1, DTR on, RTS off
+        # exactly what RFC2217SerialDevice::sendRFC2217Negotiation() sends for 19200 7E1 (RFC parity code 3
+        # = even), DTR on, RTS off
         writer.write(sub(qb.SET_BAUDRATE, (19200).to_bytes(4, "big")) + sub(qb.SET_DATASIZE, b"\x07")
                      + sub(qb.SET_PARITY, b"\x03") + sub(qb.SET_STOPSIZE, b"\x01")
                      + sub(qb.SET_CONTROL, b"\x08") + sub(qb.SET_CONTROL, b"\x0c"))
@@ -155,7 +170,7 @@ class ServerTest(unittest.IsolatedAsyncioTestCase):
         got = await self.read_some(reader, len(expected))
         self.assertEqual(got, expected)
         s = backend.settings
-        self.assertEqual((s.baudrate, s.bytesize, s.parity, s.stopbits, s.dtr, s.rts), (19200, 7, "O", 1, True, False))
+        self.assertEqual((s.baudrate, s.bytesize, s.parity, s.stopbits, s.dtr, s.rts), (19200, 7, "E", 1, True, False))
         writer.close()
 
     async def test_data_both_ways_with_escaping(self):
@@ -262,6 +277,35 @@ class SerialLoopTest(unittest.IsolatedAsyncioTestCase):
             reply = await asyncio.wait_for(reader.readexactly(len(sub(101, (2400).to_bytes(4, "big"))) + 5), 3)
             self.assertEqual(reply, sub(101, (2400).to_bytes(4, "big")) + b"\x1b\x00\xff\xff\x30")
             writer.close()
+        finally:
+            await asyncio.wait_for(server.stop(), 3)
+
+
+class PyserialClientTest(unittest.IsolatedAsyncioTestCase):
+    """pyserial's own RFC 2217 client as an independent witness: whatever it
+    negotiates must land unchanged in the backend."""
+
+    async def test_pyserial_rfc2217_client(self):
+        try:
+            import serial  # noqa: F401
+        except ImportError:
+            self.skipTest("pyserial not installed")
+        FakeBackend.instances.clear()
+        server = qb.PortServer(qb.PortConfig(0, "fake", "fake"), FakeBackend, "127.0.0.1")
+        await server.start()
+        try:
+            def client():
+                ser = serial.serial_for_url(f"rfc2217://127.0.0.1:{server.port}", baudrate=2400, bytesize=7,
+                                            parity="O", stopbits=2, timeout=1)
+                ser.dtr = False
+                ser.write(b"D\n")
+                ser.close()
+
+            await asyncio.get_running_loop().run_in_executor(None, client)
+            backend = FakeBackend.instances[-1]
+            s = backend.settings
+            self.assertEqual((s.baudrate, s.bytesize, s.parity, s.stopbits, s.dtr), (2400, 7, "O", 2, False))
+            self.assertEqual(bytes(backend.written), b"D\n")
         finally:
             await asyncio.wait_for(server.stop(), 3)
 

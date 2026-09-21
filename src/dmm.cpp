@@ -185,9 +185,9 @@ bool DMM::open()
 
   if (m_portHandler->port() && !m_portHandler->port()->open(QIODevice::ReadWrite))
   {
-    if (m_portType == PortHandler::PortType::Calc)
+    if (m_portType == PortHandler::PortType::Calc || m_portType == PortHandler::PortType::RFC2217)
     {
-      // the formula did not parse; the device says where
+      // the formula did not parse / the address is malformed; the device says where
       m_error = m_portHandler->port()->errorString();
       Q_EMIT error(m_error);
       m_portHandler->close();

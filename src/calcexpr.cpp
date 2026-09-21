@@ -15,6 +15,8 @@ struct CalcExpr::Parser
 {
   const QString &s;
   int pos = 0;
+  int depth = 0;   ///< nesting of unary()/atom(), bounded so a pasted "((((..." cannot blow the stack
+  static constexpr int kMaxDepth = 200;
   CalcExpr &e;
   QString error;
   int errorPos = -1;
@@ -80,8 +82,20 @@ struct CalcExpr::Parser
     return left;
   }
 
+  // every recursion into the grammar passes through unary(); one counter
+  // there bounds the parse (and thereby the eval) depth
+  struct DepthGuard
+  {
+    int &d;
+    explicit DepthGuard(int &depth) : d(depth) { ++d; }
+    ~DepthGuard() { --d; }
+  };
+
   int unary()
   {
+    DepthGuard guard(depth);
+    if (depth > kMaxDepth)
+      return fail(QCoreApplication::translate("CalcExpr", "Expression too deeply nested"), pos);
     if (accept('-'))
       return add({Op::Neg, 0, -1, unary(), -1});
     accept('+');

@@ -167,6 +167,7 @@ QString InstancesDlg::createCalculatedInstance(const QString &configId, const QS
   {
     Settings cfg(configId, configPath);
     cfg.setString("DMM/model", "QtDMM Calculated value");
+    cfg.setBool("DMM/configured", true);
     cfg.setInt("DMM/data-format", ReadEvent::Sigrok);
     cfg.setString("DMM/display", "400000");
     cfg.setString("DMM/calc-unit", unit);
@@ -306,7 +307,9 @@ void InstancesDlg::on_ui_instance_del_clicked()
       if (!item)
         continue;
 
-      auto btn = qobject_cast<QPushButton*>(ui_instancesList->itemWidget(item));
+      // the button sits in a row widget next to the live value
+      QWidget *row = ui_instancesList->itemWidget(item);
+      auto btn = row ? row->findChild<QPushButton *>() : nullptr;
       if (!btn || !btn->isChecked())
         continue;
 

@@ -84,19 +84,19 @@ std::optional<DmmDecoder::DmmResponse> DecoderBrymenBM25x::decode(const QByteArr
     digits += c;
   }
 
-  // decimal point: bit 0 of bytes 9, 7, 5 -> after 3, 2, 1 digits
+  // decimal point: bit 0 of bytes 9, 7, 5 = the point left of display digit
+  // 4, 3, 2. Its position is fixed on the display, so with only three
+  // numeric digits (the fourth is C/F) the same bit means one decimal less -
+  // libsigrok bm25x.c decode_scale(): pos = point + digits - 4.
   int point = 0;
   for (int i = 1; i < 4; i++)
     if (buf[11 - 2 * i] & 0x01)
-      point = i;   // i = 1 -> "123.4", 3 -> "1.234"
+      point = i;   // i = 1 -> "123.4", 3 -> "1.234" (four digits)
   const int numDigits = digits.size();
   QString val = digits;
-  if (point > 0)
-  {
-    const int pos = numDigits - point;   // digits before the point
-    if (pos >= 0 && pos <= numDigits)
-      val.insert(pos, '.');
-  }
+  const int decimals = point > 0 ? point + numDigits - 4 : 0;
+  if (decimals > 0 && decimals <= numDigits)
+    val.insert(numDigits - decimals, '.');
   if (buf[3] & 0x01)
     val.prepend('-');
 

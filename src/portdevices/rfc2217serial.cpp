@@ -6,11 +6,21 @@ RFC2217SerialDevice::RFC2217SerialDevice(const DmmDecoder::DMMInfo &info, QStrin
   : QIODevice{parent}
   , m_dmmInfo(info)
 {
-  auto hp = device.split(':');
-  if (hp.size() == 2)
+  // "host:port"; the last colon separates the port so "[::1]:4000" works too
+  const int colon = device.lastIndexOf(':');
+  bool portOk = false;
+  if (colon > 0)
   {
-    m_host = hp[0];
-    m_port = hp[1].toUShort();
+    m_host = device.left(colon);
+    if (m_host.startsWith('[') && m_host.endsWith(']'))
+      m_host = m_host.mid(1, m_host.size() - 2);
+    m_port = device.mid(colon + 1).toUShort(&portOk);
+  }
+  if (!portOk || m_port == 0 || m_host.isEmpty())
+  {
+    setErrorString(tr("RFC2217: expected host:port, got '%1'").arg(device));
+    qWarning() << errorString();
+    return;
   }
 
   m_socket = new QTcpSocket(this);
@@ -52,8 +62,20 @@ void RFC2217SerialDevice::onDisconnected()
 
 void RFC2217SerialDevice::onError(QAbstractSocket::SocketError err)
 {
-  qWarning() << "RFC2217: Socket error:" << err;
+  Q_UNUSED(err)
+  // connection refused, host unreachable, reset by peer: the device is not
+  // usable any more and says why
+  setErrorString(m_socket ? m_socket->errorString() : tr("socket error"));
+  qWarning() << "RFC2217:" << errorString();
+  QIODevice::close();
   emit finished();
+}
+
+bool RFC2217SerialDevice::open(OpenMode mode)
+{
+  if (!m_socket)
+    return false;   // bad address, errorString() set in the constructor
+  return QIODevice::open(mode);
 }
 
 void RFC2217SerialDevice::close()
@@ -152,13 +174,14 @@ void RFC2217SerialDevice::sendRFC2217Negotiation()
   // 2 = SET-DATASIZE
   sendPortOption(2, QByteArray(1, char(m_dmmInfo.bits)));
 
-  // 3 = SET-PARITY
-  quint8 parity = 1; // NONE
+  // 3 = SET-PARITY: RFC 2217 codes 1 none, 2 odd, 3 even; DMMInfo::parity is
+  // 0 none, 1 even, 2 odd
+  quint8 parity = 1;
   switch (m_dmmInfo.parity)
   {
     case 0: parity = 1; break; // none
-    case 1: parity = 3; break; // odd
-    case 2: parity = 2; break; // even
+    case 1: parity = 3; break; // even
+    case 2: parity = 2; break; // odd
     default: break;
   }
   sendPortOption(3, QByteArray(1, char(parity)));

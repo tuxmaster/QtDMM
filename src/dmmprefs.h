@@ -56,6 +56,8 @@ public:
   ReadEvent::DataFormat format() const;
   /// Display counts (4000, 6000, ...).
   int            display() const;
+  /// Selects the display counts, adding the entry when the combo lacks it.
+  void           selectDisplay(const QString &counts);
   QString        dmmName() const;
   /// The port entry as typed or chosen, e.g. "/dev/ttyUSB0" or "HID 0x1a86:0xe008 ...";
   /// for a calculated value "calc <unit> <formula>".

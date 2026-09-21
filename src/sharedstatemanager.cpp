@@ -261,6 +261,11 @@ void SharedStateManager::checkForChanges()
     QMap<QString, Reading> readings;
     for (const QJsonValue &v : data["instances"].toArray())
     {
+      // an instance that died without unregistering (crash, kill -9) would
+      // otherwise stay "running" with its last reading for everyone
+      const qint64 pid = v.isObject() ? static_cast<qint64>(v.toObject()["pid"].toDouble()) : -1;
+      if (pid > 0 && !isProcessAlive(pid))
+        continue;
       instances << instanceId(v);
       if (v.isObject() && v.toObject().contains("reading"))
         readings.insert(instanceId(v), readingFromJson(v.toObject()["reading"].toObject()));
