@@ -103,7 +103,7 @@ int main(int argc, char **argv)
   QString error;
   check(log.write(path, &error), "write succeeds: " + error);
   QFile f(path);
-  f.open(QIODevice::ReadOnly | QIODevice::Text);
+  check(f.open(QIODevice::ReadOnly | QIODevice::Text), "csv opens");
   const QStringList csv = QString::fromUtf8(f.readAll()).split('\n', Qt::SkipEmptyParts);
   check(csv.size() == 3 && csv[0] == "timestamp;value;unit;mode;range;hold", "csv header: " + csv.value(0));
   check(csv[1] == "2026-09-21T14:03:05,250;1.000;V;DC;AUTO;0", "csv row: " + csv.value(1));

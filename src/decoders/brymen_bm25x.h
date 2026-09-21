@@ -14,9 +14,9 @@ class DecoderBrymenBM25x : public DmmDecoder
 public:
   DecoderBrymenBM25x(ReadEvent::DataFormat df) : DmmDecoder(df) { m_name = "BM25x"; }
 
-  std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id);
-  bool checkFormat(const char* data, size_t idx);
-  size_t getPacketLength();
+  std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id) override;
+  bool checkFormat(const char* data, size_t idx) override;
+  size_t getPacketLength() override;
 
   /// Character for digit @p num (0..3) of the frame, '?' for an unknown
   /// segment pattern. Digits are 0-9, blank, '-', 'L', 'C', 'F', 'E', 'n', 'r'.

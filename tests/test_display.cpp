@@ -101,13 +101,22 @@ int main(int argc, char **argv)
     n.setMinUnit("MOhm");
     n.setMaxValue("13.333");
     n.setMaxUnit("MOhm");
+    // CI runners without fonts (Windows, FreeBSD) fall back to a font whose
+    // metrics do not follow the pixel size; the fit cannot hold there
+    QFont probe("Sans");
+    probe.setPixelSize(10);
+    const double at10 = QFontMetricsF(probe).horizontalAdvance("MANU");
+    probe.setPixelSize(20);
+    const bool scalableFont = QFontMetricsF(probe).horizontalAdvance("MANU") > at10 * 1.5;
+    if (!scalableFont)
+      qWarning() << "no scalable font on this machine - width checks skipped";
     for (int width : {160, 200, 260, 320, 400, 520})   // down to well below minimumSizeHint (260)
     {
       n.resize(width, 400);
       const DisplayWid::Layout l = n.layout();
-      check(n.flagsWidth(l.flagsPx) <= l.flags.width() + 0.5,
+      check(!scalableFont || n.flagsWidth(l.flagsPx) <= l.flags.width() + 0.5,
             QString("width %1: annunciators fit (%2 <= %3)").arg(width).arg(n.flagsWidth(l.flagsPx)).arg(l.flags.width()));
-      check(2 * l.minMaxBlockW + l.smallH <= l.minMax.width() + 0.5,
+      check(!scalableFont || 2 * l.minMaxBlockW + l.smallH <= l.minMax.width() + 0.5,
             QString("width %1: MIN and MAX blocks fit (%2 <= %3)").arg(width).arg(2 * l.minMaxBlockW + l.smallH).arg(l.minMax.width()));
       check(l.flagsPx > 0 && l.smallH > 0, QString("width %1: sizes stay positive").arg(width));
       if (!dump.isEmpty())
@@ -116,7 +125,8 @@ int main(int argc, char **argv)
     // a roomy panel is not shrunk by the width rule
     n.resize(520, 200);
     const DisplayWid::Layout l = n.layout();
-    check(qFuzzyCompare(l.flagsPx, l.flags.height() * 0.75), "wide panel: annunciator font is the row's");
+    check(l.flagsPx <= l.flags.height() * 0.75 + 0.01, "annunciator font never exceeds the row's");
+    check(!scalableFont || qFuzzyCompare(l.flagsPx, l.flags.height() * 0.75), "wide panel: annunciator font is the row's");
   }
 
   if (!dump.isEmpty())

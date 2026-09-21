@@ -15,9 +15,9 @@ class DecoderBrymenBM52x : public DmmDecoder
 public:
   DecoderBrymenBM52x(ReadEvent::DataFormat df) : DmmDecoder(df) { m_name = df == ReadEvent::BrymenBM82x ? "BM82x" : "BM52x"; }
 
-  std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id);
-  bool checkFormat(const char* data, size_t idx);
-  size_t getPacketLength();
+  std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id) override;
+  bool checkFormat(const char* data, size_t idx) override;
+  size_t getPacketLength() override;
   QByteArray pollRequest() const override;
 
   /// Character of one segment byte (bit 4 ignored), '\0' for blank/unknown.

@@ -371,7 +371,7 @@ DisplayWid::Layout DisplayWid::layout() const
   // the MIN and MAX blocks side by side, with a gap of one small digit,
   // must fit the width too: on a narrow panel the small glyphs shrink
   if (m_showMinMax)
-    for (int i = 0; i < 8 && 2.0 * minMaxBlockWidth(sh) + sh > inner.width() && sh > 4; ++i)
+    for (int i = 0; i < 20 && 2.0 * minMaxBlockWidth(sh) + sh > inner.width() && sh > 4; ++i)
       sh = qMax(4.0, sh * inner.width() / (2.0 * minMaxBlockWidth(sh) + sh) * 0.97);
   l.smallH = sh;
   l.minMaxBlockW = minMaxBlockWidth(sh);
@@ -381,7 +381,7 @@ DisplayWid::Layout DisplayWid::layout() const
   // (font sizes are whole pixels, so one proportional step may still be a
   // little too wide - repeat until it fits)
   double fpx = flagsH * 0.75;
-  for (int i = 0; i < 8 && flagsWidth(fpx) > inner.width() && fpx > 4; ++i)
+  for (int i = 0; i < 20 && flagsWidth(fpx) > inner.width() && fpx > 4; ++i)
     fpx = qMax(4.0, fpx * inner.width() / flagsWidth(fpx) * 0.97);
   l.flagsPx = fpx;
   return l;

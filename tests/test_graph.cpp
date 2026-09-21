@@ -76,7 +76,7 @@ int main(int argc, char **argv)
     QTemporaryDir badDir;
     QString badFile = badDir.path() + "/broken.csv";
     QFile f(badFile);
-    f.open(QIODevice::WriteOnly);
+    check(f.open(QIODevice::WriteOnly), "temp file opens for writing");
     QTextStream(&f) << "this is not a valid QtDMM export\n";
     f.close();
 
