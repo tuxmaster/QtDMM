@@ -68,19 +68,30 @@ public:
   /// Bits: 0 a (top), 1 b, 2 c, 3 d (bottom), 4 e, 5 f, 6 g (middle).
   static int segmentsFor(QChar ch);
 
-protected:
-  void paintEvent(QPaintEvent *) override;
-  void resizeEvent(QResizeEvent *) override;
-
-private:
+  /// Where the rows sit and how big their glyphs are - all sizes are
+  /// derived from the row height *and* the width, so nothing overlaps on
+  /// a narrow panel (test_display checks the width constraints).
   struct Layout
   {
     QRectF bezel, face;
     QRectF flags, main, minMax, bar, extra;
     double digitH = 0;            // main digit height
-    double smallH = 0;            // secondary digit height
+    double smallH = 0;            // secondary digit height (MIN/MAX, second value)
+    double flagsPx = 0;           // annunciator font size
+    double minMaxBlockW = 0;      // width of one MIN/MAX block at smallH
   };
   Layout layout() const;
+  /// Width the annunciator row needs at font size @p fontPx (all flags
+  /// with their gaps), so layout() can shrink the font to fit.
+  double flagsWidth(double fontPx) const;
+  /// Width of one MIN/MAX block (label, number, unit) at digit height @p h.
+  double minMaxBlockWidth(double h) const;
+
+protected:
+  void paintEvent(QPaintEvent *) override;
+  void resizeEvent(QResizeEvent *) override;
+
+private:
   int numDigits() const;
   void renderStatic();
   void drawFlags(QPainter &p, const Layout &l) const;

@@ -70,7 +70,7 @@ int main(int argc, char **argv)
   {
     const QString path = tmp.path() + "/" + name;
     QFile f(path);
-    f.open(QIODevice::WriteOnly | QIODevice::Text);
+    check(f.open(QIODevice::WriteOnly | QIODevice::Text), "temp file opens for writing");
     QTextStream(&f) << "timestamp;time (s);value;unit\n" << body;
     return path;
   };
@@ -95,7 +95,7 @@ int main(int argc, char **argv)
     QString err;
     check(RecordingFile::write(rec, path, &err), "write succeeds: " + err);
     QFile f(path);
-    f.open(QIODevice::ReadOnly | QIODevice::Text);   // Text: the file has \r\n on Windows
+    check(f.open(QIODevice::ReadOnly | QIODevice::Text), "written file opens");   // Text: the file has \r\n on Windows
     const QStringList lines = QString::fromUtf8(f.readAll()).split('\n', Qt::SkipEmptyParts);
     check(lines.size() == 5 && lines[0] == "timestamp;time (s);value;unit", "header and four rows");
     check(lines.size() > 2 && lines[2].startsWith("2026-09-21T14:03:05,750;0.5;"), "second row 0.5 s later: " + (lines.size() > 2 ? lines[2] : ""));

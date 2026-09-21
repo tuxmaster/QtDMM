@@ -22,7 +22,8 @@ jobs:
         usesh: true
         prepare: |
           pkg install -y cmake ninja pkgconf git python3 \
-            qt6-base qt6-serialport qt6-charts qt6-connectivity qt6-tools hidapi
+            qt6-base qt6-serialport qt6-charts qt6-connectivity qt6-tools hidapi \
+            dejavu fontconfig
         run: |
           cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
           cmake --build build

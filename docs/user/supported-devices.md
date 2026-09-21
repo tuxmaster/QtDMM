@@ -12,7 +12,7 @@ protocol. See [Connecting a meter](connecting.md).
 *Serial* is baud rate, data bits, parity (N/E/O) and stop bits. *Lines* are
 the control lines the cable needs driven. *Counts* is the display
 resolution. Not every entry has been confirmed on hardware recently; models
-marked ¹ were added from chip data (libsigrok, ultradmm.com) and have not
+marked ¹ were added from chip datasheets and protocol documentation and have not
 been tried with QtDMM at all. If you can confirm one, or get an unlisted
 meter working, please report it on the
 [project page](https://github.com/tuxmaster/QtDMM/issues).

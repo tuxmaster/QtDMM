@@ -21,6 +21,18 @@ jobs:
         modules: 'qtserialport qtcharts qtconnectivity'
         cache: true
 
+    # Qt ships no fonts; the offscreen platform used by the widget tests
+    # needs one, so put DejaVu where QFontDatabase looks (lib/fonts)
+    - name: Install fonts for the widget tests
+      shell: pwsh
+      run: |
+        $fonts = Join-Path $env:QT_ROOT_DIR "lib/fonts"
+        New-Item -ItemType Directory -Force $fonts | Out-Null
+        Invoke-WebRequest -Uri https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-2.37.zip -OutFile dejavu.zip
+        Expand-Archive dejavu.zip -DestinationPath dejavu
+        Copy-Item dejavu/dejavu-fonts-ttf-2.37/ttf/DejaVuSans*.ttf $fonts
+        Get-ChildItem $fonts
+
     - name: Set up MSVC environment
       uses: ilammy/msvc-dev-cmd@v1
       with:

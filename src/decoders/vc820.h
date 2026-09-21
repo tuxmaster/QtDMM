@@ -11,9 +11,9 @@ class DecoderVC820 : public DmmDecoder
 public:
   DecoderVC820(ReadEvent::DataFormat df) : DmmDecoder(df) {m_name="VC820";}
 
-  std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id);
-  bool checkFormat(const char* data, size_t idx);
-  size_t getPacketLength();
+  std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id) override;
+  bool checkFormat(const char* data, size_t idx) override;
+  size_t getPacketLength() override;
 
 private:
   const char* vc820Digit(int byte);

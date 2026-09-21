@@ -15,9 +15,9 @@ class DecoderBrymenBM86x : public DmmDecoder
 public:
   DecoderBrymenBM86x(ReadEvent::DataFormat df) : DmmDecoder(df) { m_name = "BM86x"; }
 
-  std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id);
-  bool checkFormat(const char* data, size_t idx);
-  size_t getPacketLength();
+  std::optional<DmmDecoder::DmmResponse> decode(const QByteArray &data, int id) override;
+  bool checkFormat(const char* data, size_t idx) override;
+  size_t getPacketLength() override;
   /// "00 86 66" - the live-reading request the BU-86X forwards to the meter.
   QByteArray pollRequest() const override { return QByteArray::fromHex("008666"); }
 

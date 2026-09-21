@@ -88,6 +88,50 @@ int main(int argc, char **argv)
           "very tall widget: panel does not stretch vertically");
   }
 
+  // --- 4. narrow panels: flags and MIN/MAX blocks must fit the width ---
+  // (they used to overlap: MANU into AC, MIN's unit under MAX)
+  {
+    DisplayWid n;
+    n.setDisplayMode(50000, true, true, 1);   // 5 digits
+    n.setValue(0, "12.345");
+    n.setUnit(0, "MOhm");
+    n.setMode(0, "AC");
+    n.setManu(true);
+    n.setMinValue("11.111");
+    n.setMinUnit("MOhm");
+    n.setMaxValue("13.333");
+    n.setMaxUnit("MOhm");
+    // CI runners without fonts (Windows, FreeBSD) fall back to a font whose
+    // metrics do not follow the pixel size; the fit cannot hold there
+    QFont probe("Sans");
+    probe.setPixelSize(10);
+    const double at10 = QFontMetricsF(probe).horizontalAdvance("MANU");
+    probe.setPixelSize(20);
+    const bool scalableFont = QFontMetricsF(probe).horizontalAdvance("MANU") > at10 * 1.5;
+    if (!scalableFont)
+      qWarning() << "no scalable font on this machine - width checks skipped";
+    for (int width : {160, 200, 260, 320, 400, 520})   // down to well below minimumSizeHint (260)
+    {
+      n.resize(width, 400);
+      const DisplayWid::Layout l = n.layout();
+      // fits - or the font is already at its 5 px floor (a fallback font
+      // on a machine without fonts is wide even there)
+      const bool flagsFloor = l.flagsPx <= 5.5, smallFloor = l.smallH <= 5.5;
+      check(!scalableFont || flagsFloor || n.flagsWidth(l.flagsPx) <= l.flags.width() + 0.5,
+            QString("width %1: annunciators fit (%2 <= %3)").arg(width).arg(n.flagsWidth(l.flagsPx)).arg(l.flags.width()));
+      check(!scalableFont || smallFloor || 2 * l.minMaxBlockW + l.smallH <= l.minMax.width() + 0.5,
+            QString("width %1: MIN and MAX blocks fit (%2 <= %3)").arg(width).arg(2 * l.minMaxBlockW + l.smallH).arg(l.minMax.width()));
+      check(l.flagsPx > 0 && l.smallH > 0, QString("width %1: sizes stay positive").arg(width));
+      if (!dump.isEmpty())
+        render(n, QSize(width, 400)).save(QDir(dump).filePath(QString("display_narrow_%1.png").arg(width)));
+    }
+    // a roomy panel is not shrunk by the width rule
+    n.resize(520, 200);
+    const DisplayWid::Layout l = n.layout();
+    check(l.flagsPx <= l.flags.height() * 0.75 + 0.01, "annunciator font never exceeds the row's");
+    check(!scalableFont || qFuzzyCompare(l.flagsPx, l.flags.height() * 0.75), "wide panel: annunciator font is the row's");
+  }
+
   if (!dump.isEmpty())
   {
     w.setValue(0, "0.L");
