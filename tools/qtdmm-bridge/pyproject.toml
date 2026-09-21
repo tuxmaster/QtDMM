@@ -4,12 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qtdmm-bridge"
-version = "0.1.0"
+version = "0.2.0"
 description = "Serve multimeters to QtDMM over the network (RFC 2217)"
 readme = "README.md"
 license = { text = "GPL-3.0-or-later" }
 requires-python = ">=3.11"
 dependencies = ["pyserial>=3.4"]
+
+[project.optional-dependencies]
+mdns = ["zeroconf>=0.38"]
 authors = [{ name = "The QtDMM developers", email = "hello@qtdmm.de" }]
 urls = { Homepage = "https://qtdmm.de", Source = "https://github.com/tuxmaster/QtDMM" }
 

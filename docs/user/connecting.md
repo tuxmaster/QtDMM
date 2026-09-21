@@ -55,7 +55,8 @@ it also serves the **USB-HID cables** (`hid:1a86:e008` for a UT-D04/UT803
 type cable, UT-D09, Brymen BU-86X), so a HID meter on a Raspberry Pi is
 reachable over the network too. See its `README.md` for the configuration
 file, the udev rule and the SSH-tunnel setup; there is no authentication, so
-keep it on a trusted network.
+keep it on a trusted network. The whole setup, including running the bridge
+as a service, is on [Meters over the network](remote-bridge.md).
 
 ## Connecting
 

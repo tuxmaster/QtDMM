@@ -1,0 +1,42 @@
+# systemd unit for qtdmm-bridge - serve meters to QtDMM over the network.
+#
+#   sudo cp qtdmm_bridge.py /usr/local/bin/qtdmm-bridge
+#   sudo chmod +x /usr/local/bin/qtdmm-bridge
+#   qtdmm-bridge --print-config | sudo tee /etc/qtdmm-bridge.toml   # then edit
+#   sudo cp qtdmm-bridge.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now qtdmm-bridge
+#   journalctl -u qtdmm-bridge -f
+#
+# The service runs as the user "qtdmm-bridge" in the groups that own the
+# devices (dialout for serial ports, plugdev for the HID cables - see the
+# udev rule in the README). Create it with:
+#   sudo useradd --system --no-create-home --groups dialout,plugdev qtdmm-bridge
+
+[Unit]
+Description=qtdmm-bridge - multimeters for QtDMM over the network (RFC 2217)
+Documentation=https://qtdmm.de
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/qtdmm-bridge --config /etc/qtdmm-bridge.toml
+Restart=always
+RestartSec=3
+User=qtdmm-bridge
+SupplementaryGroups=dialout plugdev
+# hardening; the bridge needs the network and the device nodes, nothing else
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+DevicePolicy=closed
+DeviceAllow=char-ttyUSB rw
+DeviceAllow=char-ttyACM rw
+DeviceAllow=char-hidraw rw
+DeviceAllow=/dev/ttyAMA0 rw
+DeviceAllow=/dev/ttyS0 rw
+
+[Install]
+WantedBy=multi-user.target

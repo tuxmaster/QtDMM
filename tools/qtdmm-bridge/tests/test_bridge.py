@@ -292,6 +292,14 @@ class ConfigTest(unittest.TestCase):
         s = loaded[2].initial_settings()
         self.assertEqual((s.baudrate, s.dtr, s.rts), (2400, False, True))
 
+    def test_print_config_and_detected(self):
+        text = qb.print_config([qb.PortConfig(4000, "hid:1a86:e008", "UT803")], "0.0.0.0", mdns=True)
+        self.assertIn("mdns = true", text)
+        self.assertIn('device = "hid:1a86:e008"', text)
+        # detection never raises, gives distinct TCP ports from 4000 up
+        ports = qb.detected_ports()
+        self.assertEqual([p.tcp_port for p in ports], list(range(4000, 4000 + len(ports))))
+
     def test_device_prefixes(self):
         self.assertIsInstance(qb.make_backend_factory("serial:/dev/ttyUSB0")(None, None), qb.SerialBackend)
         if sys.platform.startswith("linux"):

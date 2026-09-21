@@ -36,7 +36,7 @@ import sys
 import threading
 from typing import Callable, Optional
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 log = logging.getLogger("qtdmm-bridge")
 
@@ -911,6 +911,7 @@ def load_config(path: str) -> tuple[list[PortConfig], dict]:
 
     [bridge]
     bind = "0.0.0.0"
+    mdns = false
 
     [[port]]
     name = "UT61E"
@@ -979,21 +980,122 @@ def list_devices() -> str:
     return "\n".join(lines)
 
 
-def print_config(ports: list[PortConfig], bind: str) -> str:
-    out = ["[bridge]", f'bind = "{bind}"', ""]
+def detected_ports(first_tcp: int = 4000) -> list[PortConfig]:
+    """One PortConfig per USB serial adapter (by stable by-id name where there
+    is one) and per known HID cable - the starting point for a configuration."""
+    ports: list[PortConfig] = []
+    tcp = first_tcp
+    try:
+        from serial.tools import list_ports
+
+        for p in sorted(list_ports.comports(), key=lambda p: p.device):
+            if p.device.startswith("/dev/ttyS") and (not p.description or p.description == "n/a"):
+                continue
+            device = p.device
+            by_id = "/dev/serial/by-id"
+            if os.path.isdir(by_id):
+                for link in os.listdir(by_id):
+                    if os.path.realpath(os.path.join(by_id, link)) == p.device:
+                        device = os.path.join(by_id, link)
+            ports.append(PortConfig(tcp, device, p.description if p.description not in ("", "n/a") else ""))
+            tcp += 1
+    except ImportError:
+        pass
+    for path, vid, pid in hidraw_devices():
+        if (vid, pid) in HID_CABLES:
+            ports.append(PortConfig(tcp, f"hid:{vid:04x}:{pid:04x}", HID_CABLES[(vid, pid)][1]))
+            tcp += 1
+    return ports
+
+
+def print_config(ports: list[PortConfig], bind: str, mdns: bool = False) -> str:
+    out = ["# qtdmm-bridge configuration - see tools/qtdmm-bridge/README.md",
+           "[bridge]", f'bind = "{bind}"', f"mdns = {'true' if mdns else 'false'}", ""]
     for p in ports:
         out += ["[[port]]", f'name = "{p.name}"', f"tcp = {p.tcp_port}", f'device = "{p.device}"', ""]
     return "\n".join(out)
 
 
 # ---------------------------------------------------------------------------
+# mDNS (optional, needs the zeroconf package)
+
+
+class Announcer:
+    """Registers one _qtdmm-bridge._tcp service per port so clients can find
+    the bridge without knowing its address. Silently does nothing when the
+    zeroconf package is missing."""
+
+    SERVICE = "_qtdmm-bridge._tcp.local."
+
+    def __init__(self):
+        self._zc = None
+        self._infos = []
+
+    async def start(self, ports: list[PortConfig]) -> bool:
+        try:
+            from zeroconf import ServiceInfo
+            from zeroconf.asyncio import AsyncZeroconf
+        except ImportError:
+            log.warning("mDNS announcement needs the zeroconf package (pip install zeroconf)")
+            return False
+        host = socket.gethostname().split(".")[0]
+        try:
+            addresses = [socket.inet_aton(a) for a in _local_addresses()]
+        except OSError:
+            addresses = []
+        # the async flavour: the sync Zeroconf() blocks when called from inside a running loop
+        self._zc = AsyncZeroconf()
+        for p in ports:
+            name = f"{host} {p.name}".replace(".", "_")[:60]
+            info = ServiceInfo(self.SERVICE, f"{name}.{self.SERVICE}", addresses=addresses, port=p.tcp_port,
+                               properties={"device": p.device, "name": p.name, "version": __version__},
+                               server=f"{host}.local.")
+            await self._zc.async_register_service(info)
+            self._infos.append(info)
+        log.info("mDNS: announcing %d service(s) as %s", len(ports), self.SERVICE)
+        return True
+
+    async def stop(self) -> None:
+        if self._zc is None:
+            return
+        try:
+            await self._zc.async_unregister_all_services()
+            await self._zc.async_close()
+        except Exception:  # noqa: BLE001
+            pass
+        self._zc = None
+
+
+def _local_addresses() -> list[str]:
+    """IPv4 addresses of this host, best effort (the one used for the default route first)."""
+    addrs = []
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("10.255.255.255", 1))
+        addrs.append(s.getsockname()[0])
+        s.close()
+    except OSError:
+        pass
+    try:
+        for a in socket.gethostbyname_ex(socket.gethostname())[2]:
+            if a not in addrs and not a.startswith("127."):
+                addrs.append(a)
+    except OSError:
+        pass
+    return addrs or ["127.0.0.1"]
+
+
+# ---------------------------------------------------------------------------
 # main
 
 
-async def serve(ports: list[PortConfig], bind: str, strict: bool) -> None:
+async def serve(ports: list[PortConfig], bind: str, strict: bool, mdns: bool = False) -> None:
     servers = [PortServer(cfg, make_backend_factory(cfg.device), bind, strict) for cfg in ports]
     for s in servers:
         await s.start()
+    announcer = Announcer()
+    if mdns:
+        await announcer.start(ports)
 
     stop = asyncio.Event()
     loop = asyncio.get_running_loop()
@@ -1004,6 +1106,7 @@ async def serve(ports: list[PortConfig], bind: str, strict: bool) -> None:
             pass
     await stop.wait()
     log.info("shutting down")
+    await announcer.stop()
     for s in servers:
         await s.stop()
 
@@ -1020,8 +1123,11 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--strict", action="store_true",
                         help="drop the client when the device vanishes instead of waiting for it")
     parser.add_argument("--list", action="store_true", help="list serial ports and known meter cables, then exit")
+    parser.add_argument("--mdns", action="store_true",
+                        help="announce the ports via mDNS/DNS-SD (_qtdmm-bridge._tcp; needs the zeroconf package)")
     parser.add_argument("--print-config", action="store_true",
-                        help="print the given ports as a TOML configuration, then exit")
+                        help="print the ports as a TOML configuration and exit; without --port/--config "
+                             "one entry per detected serial adapter and HID cable")
     parser.add_argument("-v", "--verbose", action="count", default=0, help="more log output")
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     args = parser.parse_args(argv)
@@ -1035,15 +1141,21 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     ports: list[PortConfig] = []
     bind = "0.0.0.0"
+    mdns = False
     if args.config:
         ports, glob = load_config(args.config)
         bind = str(glob.get("bind", bind))
+        mdns = bool(glob.get("mdns", False))
     ports += args.port
     if args.bind:
         bind = args.bind
+    if args.mdns:
+        mdns = True
 
     if args.print_config:
-        print(print_config(ports, bind))
+        if not ports:
+            ports = detected_ports()
+        print(print_config(ports, bind, mdns))
         return 0
     if not ports:
         parser.error("nothing to serve: give --port TCPPORT=DEVICE or --config FILE (--list shows devices)")
@@ -1055,7 +1167,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         seen.add(p.tcp_port)
 
     try:
-        asyncio.run(serve(ports, bind, args.strict))
+        asyncio.run(serve(ports, bind, args.strict, mdns))
     except KeyboardInterrupt:
         pass
     return 0
