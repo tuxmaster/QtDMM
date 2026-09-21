@@ -13,7 +13,7 @@ if (BUILD_TESTING)
 	endforeach()
 
 	set( TEST_GRAPH test_graph)
-	add_executable(${TEST_GRAPH} MACOSX_BUNDLE tests/test_graph.cpp src/dmmgraph.cpp src/settings.cpp src/siprefix.cpp src/engnumbervalidator.cpp)
+	add_executable(${TEST_GRAPH} MACOSX_BUNDLE tests/test_graph.cpp src/dmmgraph.cpp src/recordingfile.cpp src/settings.cpp src/siprefix.cpp src/engnumbervalidator.cpp)
 	target_link_libraries(${TEST_GRAPH} PRIVATE Qt6::Widgets Qt6::PrintSupport Qt6::Charts Qt::Core Qt::Test)
 	add_test(NAME dmmgraph COMMAND ${TEST_GRAPH} "${CMAKE_SOURCE_DIR}/tests/data/graph")
 
@@ -96,6 +96,13 @@ if (BUILD_TESTING)
 	target_include_directories(${TEST_RFC2217} PRIVATE src)
 	target_link_libraries(${TEST_RFC2217} PRIVATE Qt::Core Qt::Network)
 	add_test(NAME rfc2217_client COMMAND ${TEST_RFC2217})
+
+	## the recorder's CSV formats, without widgets
+	set( TEST_RECORDING test_recording)
+	add_executable(${TEST_RECORDING} MACOSX_BUNDLE tests/test_recording.cpp src/recordingfile.cpp src/siprefix.cpp)
+	target_include_directories(${TEST_RECORDING} PRIVATE src)
+	target_link_libraries(${TEST_RECORDING} PRIVATE Qt::Core)
+	add_test(NAME recording_file COMMAND ${TEST_RECORDING} "${CMAKE_SOURCE_DIR}/tests/data/graph")
 
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)
