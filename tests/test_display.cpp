@@ -114,9 +114,12 @@ int main(int argc, char **argv)
     {
       n.resize(width, 400);
       const DisplayWid::Layout l = n.layout();
-      check(!scalableFont || n.flagsWidth(l.flagsPx) <= l.flags.width() + 0.5,
+      // fits - or the font is already at its 5 px floor (a fallback font
+      // on a machine without fonts is wide even there)
+      const bool flagsFloor = l.flagsPx <= 5.5, smallFloor = l.smallH <= 5.5;
+      check(!scalableFont || flagsFloor || n.flagsWidth(l.flagsPx) <= l.flags.width() + 0.5,
             QString("width %1: annunciators fit (%2 <= %3)").arg(width).arg(n.flagsWidth(l.flagsPx)).arg(l.flags.width()));
-      check(!scalableFont || 2 * l.minMaxBlockW + l.smallH <= l.minMax.width() + 0.5,
+      check(!scalableFont || smallFloor || 2 * l.minMaxBlockW + l.smallH <= l.minMax.width() + 0.5,
             QString("width %1: MIN and MAX blocks fit (%2 <= %3)").arg(width).arg(2 * l.minMaxBlockW + l.smallH).arg(l.minMax.width()));
       check(l.flagsPx > 0 && l.smallH > 0, QString("width %1: sizes stay positive").arg(width));
       if (!dump.isEmpty())
