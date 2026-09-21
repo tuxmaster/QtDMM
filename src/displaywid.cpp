@@ -317,10 +317,44 @@ double DisplayWid::drawUnit(QPainter &p, const QPointF &origin, double h, const 
   return w + 2;
 }
 
+namespace
+{
+// the diode annunciator is drawn, not typed: the usual schematic symbol
+// (triangle, bar, a line through) as on a meter's LCD
+const QString kDiodeFlag = QStringLiteral("\x01diode");
+double diodeWidth(double fontPx) { return fontPx * 1.7; }
+}
+
 void DisplayWid::drawAnnunciator(QPainter &p, const QRectF &r, const QString &text, bool on, double fontPx) const
 {
+  const QColor c = on ? m_segment : ghost();
+  if (text == kDiodeFlag)
+  {
+    const double h = fontPx * 0.72;                 // symbol height
+    const double w = diodeWidth(fontPx);
+    const double cy = r.center().y();
+    const double x0 = r.left();
+    const double x1 = x0 + w;
+    const double lineW = qMax(1.0, fontPx * 0.09);
+    const double triL = x0 + w * 0.25, triR = x0 + w * 0.68;
+    p.save();
+    p.setRenderHint(QPainter::Antialiasing, true);
+    p.setPen(QPen(c, lineW, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    p.setBrush(c);
+    p.drawLine(QPointF(x0, cy), QPointF(triL, cy));   // anode lead
+    QPainterPath tri;
+    tri.moveTo(triL, cy - h / 2);
+    tri.lineTo(triR, cy);
+    tri.lineTo(triL, cy + h / 2);
+    tri.closeSubpath();
+    p.drawPath(tri);
+    p.drawLine(QPointF(triR, cy - h / 2), QPointF(triR, cy + h / 2));   // cathode bar
+    p.drawLine(QPointF(triR, cy), QPointF(x1, cy));   // cathode lead
+    p.restore();
+    return;
+  }
   p.setFont(sansFont(fontPx));
-  p.setPen(on ? m_segment : ghost());
+  p.setPen(c);
   p.drawText(r, Qt::AlignLeft | Qt::AlignVCenter, text);
 }
 
@@ -396,7 +430,7 @@ const QStringList &leftFlags()
 }
 const QStringList &rightFlags()
 {
-  static const QStringList l = { QStringLiteral("AC"), QStringLiteral("DC"), QStringLiteral("→|←"), QStringLiteral("●))") };
+  static const QStringList l = { QStringLiteral("AC"), QStringLiteral("DC"), kDiodeFlag, QStringLiteral("●))") };
   return l;
 }
 }
@@ -407,7 +441,7 @@ double DisplayWid::flagsWidth(double fontPx) const
   const double gap = fontPx * 0.9;
   double w = gap;   // between the two groups at least one gap
   for (const QString &t : leftFlags() + rightFlags())
-    w += fm.horizontalAdvance(t) + 2 + gap;
+    w += (t == kDiodeFlag ? diodeWidth(fontPx) : fm.horizontalAdvance(t)) + 2 + gap;
   return w - gap;   // no gap after the last one
 }
 
@@ -451,16 +485,17 @@ void DisplayWid::drawFlags(QPainter &p, const Layout &l) const
   };
 
   double x = l.flags.left();
+  auto width = [&](const QString &t) { return t == kDiodeFlag ? diodeWidth(fontPx) : fm.horizontalAdvance(t); };
   for (const Flag &f : left)
   {
-    const double w = fm.horizontalAdvance(f.text);
+    const double w = width(f.text);
     drawAnnunciator(p, QRectF(x, l.flags.top(), w + 2, l.flags.height()), f.text, f.on, fontPx);
     x += w + gap;
   }
   double xr = l.flags.right();
   for (int i = int(sizeof(right) / sizeof(right[0])) - 1; i >= 0; --i)
   {
-    const double w = fm.horizontalAdvance(right[i].text);
+    const double w = width(right[i].text);
     xr -= w;
     drawAnnunciator(p, QRectF(xr, l.flags.top(), w + 2, l.flags.height()), right[i].text, right[i].on, fontPx);
     xr -= gap;
