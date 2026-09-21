@@ -28,6 +28,7 @@
 
 #include "dmmgraph.h"
 #include "siprefix.h"
+#include "recordingfile.h"
 #include "settings.h"
 
 
@@ -830,14 +831,6 @@ QString DMMGraph::formatEngineeringValue(double value, QString *unit) const
   return text;
 }
 
-double DMMGraph::unitScaleFactor(const QString &unit) const
-{
-  // Older exports wrote the ASCII "u" for micro; SiPrefix::factor() takes both.
-  if (unit != m_unit && unit.endsWith(m_unit))
-    return SiPrefix::factor(unit.left(unit.size() - m_unit.size()));
-  return 1.0;
-}
-
 bool DMMGraph::exportDataSLOT()
 {
   QDir path;
@@ -860,35 +853,21 @@ bool DMMGraph::exportCsvFile(const QString &fileName)
 
   m_cfg->setString("QtDMM/LastUsesPath", QDir().absoluteFilePath(fileName));
 
-  QFile file(fileName);
-  if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+  Recording rec;
+  rec.start = m_graphStartDateTime;
+  rec.sampleTimeTenths = m_sampleTime;
+  rec.unit = m_unit;
+  rec.values.reserve(m_pointer);
+  for (int i = 0; i < m_pointer; i++)
+    rec.values << (*m_array)[i];
+
+  QString err;
+  if (!RecordingFile::write(rec, fileName, &err))
   {
-    Q_EMIT error(tr("Cannot open file."));
+    Q_EMIT error(err);
     return false;
   }
-
-  QTextStream ts(&file);
-  QString line = QString("timestamp;time (s);value;unit\n");
-  ts << line;
-
-  for (int i = 0; i < m_pointer; i++)
-  {
-    QDateTime dt = m_graphStartDateTime.addMSecs(i * m_sampleTime * 100);
-    //timestamp: ISO8601
-    double deltaTime = (dt.toMSecsSinceEpoch()-m_graphStartDateTime.toMSecsSinceEpoch())/1000.0f;
-    QString unit;
-    QString value = formatEngineeringValue((*m_array)[i], &unit);
-    line = QString("%1;%2;%3;%4\n")
-      .arg(dt.toString("yyyy-MM-ddTHH:mm:ss,zzz"))
-      .arg(deltaTime, 0, 'g', 12)
-      .arg(value)
-      .arg(unit);
-    ts << line;
-  }
   m_dirty = false;
-
-  file.close();
-
   return true;
 }
 
@@ -934,111 +913,21 @@ void DMMGraph::importDataSLOT()
 
 bool DMMGraph::importCsvFile(const QString &fileName)
 {
-  QDir path;
+  m_cfg->setString("QtDMM/LastUsesPath", QDir().absoluteFilePath(fileName));
 
-  QDateTime graphEnd;
-
-  m_cfg->setString("QtDMM/LastUsesPath", path.absoluteFilePath(fileName));
-  // First pass -> figure out size and sample time
-  QFile file(fileName);
-  if (!file.open(QIODevice::ReadOnly))
+  QString err;
+  const std::optional<Recording> rec = RecordingFile::read(fileName, &err);
+  if (!rec)
   {
-    Q_EMIT error(tr("Cannot open file."));
+    Q_EMIT error(err);
     return false;
   }
 
-  QTextStream ts(&file);
-
-  QString line = ts.readLine();
-  if (line.isNull())
-  {
-    Q_EMIT error(tr("Oops! Seems not to be a valid file"));
-    file.close();
-    return false;
-  }
-
-  // skip CSV-Header
-  if (line.startsWith("timestamp"))
-  {
-    line = ts.readLine();
-    if (line.isNull())
-    {
-      Q_EMIT error(tr("File contains only header"));
-      file.close();
-      return false;
-    }
-  }
-
-  QRegularExpression reLegacy(
-    R"(^(?<day>\d{2})\.(?<month>\d{2})\.(?<year>\d{4})\t(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})(?::(?<ms>\d{1,3}))?\t(?<value>-?\d+(?:\.\d+)?|nan)\t(?<unit>.*)$)",
-    QRegularExpression::CaseInsensitiveOption
-  );
-
-  QRegularExpression reCSV(
-    R"(^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})T(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})[,\.](?<ms>\d{1,3});(?<delta>-?\d+(?:\.\d+)?|nan);(?<value>-?\d+(?:\.\d+)?|nan);(?<unit>.*)$)",
-    QRegularExpression::CaseInsensitiveOption
-  );
-
-  // detect format
-  bool isLegacy = reLegacy.match(line).hasMatch();
-
-  //(*m_array).clear();
-  QVector<double> values;
-  QRegularExpressionMatch match;
-  do
-  {
-    if (!line.trimmed().isEmpty())
-    {
-      match = isLegacy ? reLegacy.match(line) : reCSV.match(line);
-
-      if (!match.hasMatch())
-      {
-        qInfo() << line;
-        Q_EMIT error(tr("Oops! Seems not to be a valid file"));
-        file.close();
-        return false;
-      }
-
-      QDate valueDate(
-        match.captured("year").toInt(),
-        match.captured("month").toInt(),
-        match.captured("day").toInt()
-      );
-
-      QTime valueTime(
-        match.captured("hour").toInt(),
-        match.captured("minute").toInt(),
-        match.captured("second").toInt(),
-        match.captured("ms").toInt()
-      );
-
-      if (values.isEmpty())
-      {
-        setUnit(match.captured("unit"));
-        m_graphStartDateTime = QDateTime(valueDate, valueTime);
-      }
-
-      graphEnd = QDateTime(valueDate, valueTime);
-      values << (match.captured("value") == "nan"
-        ? 0.0f
-        : match.captured("value").toDouble() * unitScaleFactor(match.captured("unit")));
-    }
-
-    line = ts.readLine();
-  }
-  while (!line.isNull());
-  file.close();
-
-  // Sample time in tenths of a second from the recording's span: integer
-  // seconds divided by the row count and then by ten (the old formula) came
-  // out as 0 -> 1 for anything sampled slower than every 0.1 s, so a 0.5 s
-  // or 1 s recording was squeezed to a fifth or a tenth of its length.
-  int cnt = values.size();
-  const qint64 spanMs = m_graphStartDateTime.msecsTo(graphEnd);
-  m_sampleTime = cnt > 1 ? qRound(spanMs / 100.0 / (cnt - 1)) : 1;
-  if (m_sampleTime<1) m_sampleTime=1;
-
-  int size = m_size * m_sampleTime;
+  setUnit(rec->unit);
+  m_graphStartDateTime = rec->start;
+  m_sampleTime = rec->sampleTimeTenths;
+  const int cnt = rec->values.size();
+  const int size = m_size * m_sampleTime;
 
   if (cnt > 1)
     Q_EMIT sampleTime(m_sampleTime);
@@ -1046,25 +935,17 @@ bool DMMGraph::importCsvFile(const QString &fileName)
   m_scaleMin =  1e40;
   m_scaleMax = -1e40;
 
-  // TEST
   setGraphSize(size, cnt * m_sampleTime);
-
-  for(int i=0; i<values.size(); i++)
-    (*m_array)[i] = values[i];
+  for (int i = 0; i < cnt; i++)
+    (*m_array)[i] = rec->values[i];
 
   m_sampleCounter = m_pointer = cnt;
   setScale(true, true, 0, 0);
-
   m_dirty = false;
 
   Q_EMIT error(fileName);
-
   update();
-
-
-  // TEST
   Q_EMIT graphSize(size, cnt * m_sampleTime);
-
   return true;
 }
 
