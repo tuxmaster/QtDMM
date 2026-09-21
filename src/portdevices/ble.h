@@ -14,8 +14,9 @@ class QBluetoothDeviceInfo;
 /// connection is made: a low-energy scan runs for as long as the port is
 /// open, advertisements of the configured address are decrypted with the
 /// configured key and each new one becomes one text line for the reader
-/// (VictronBle::frame). Port string: "<address> <key>", e.g.
-/// "CB:09:E4:16:33:DB 2ac4...". finished() reports a lost adapter or a
+/// (VictronBle::frame). Port string: "<address> <key> [<main> <second>]"
+/// with the field ids the decoder should show, e.g.
+/// "CB:09:E4:16:33:DB 2ac4... SOC V". finished() reports a lost adapter or a
 /// wrong key; silence is left to DMM's watchdog. Built only with
 /// QTDMM_WITH_BLE (Qt6::Bluetooth).
 class BleAdvertisementDevice : public QIODevice
@@ -46,6 +47,7 @@ private:
 
   QString m_address;
   QByteArray m_key;
+  QString m_mainField, m_secondField;
   QBluetoothDeviceDiscoveryAgent *m_agent = nullptr;
   QByteArray m_rx;
   int m_lastIv = -1;

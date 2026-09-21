@@ -17,10 +17,12 @@ Q_LOGGING_CATEGORY(lcBle, "qtdmm.ble")
 BleAdvertisementDevice::BleAdvertisementDevice(const DmmDecoder::DMMInfo &, const QString &device, QObject *parent)
   : QIODevice(parent)
 {
-  // "<address> <key>"
+  // "<address> <key> [<main field> <second field>]"
   const QStringList parts = device.simplified().split(' ');
   m_address = parts.value(0).toUpper();
   m_key = VictronBle::keyFromHex(parts.value(1));
+  m_mainField = parts.value(2);
+  m_secondField = parts.value(3);
 }
 
 BleAdvertisementDevice::~BleAdvertisementDevice()
@@ -110,7 +112,7 @@ void BleAdvertisementDevice::onDevice(const QBluetoothDeviceInfo &info)
   m_keyMismatches = 0;
   m_lastIv = adv->iv;
   qCDebug(lcBle) << VictronBle::modelName(adv->model) << "type" << adv->readoutType << "iv" << adv->iv << plain->toHex();
-  m_rx += VictronBle::frame(adv->readoutType, *plain);
+  m_rx += VictronBle::frame(adv->readoutType, *plain, m_mainField, m_secondField);
   Q_EMIT readyRead();
 }
 

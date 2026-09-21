@@ -5,15 +5,20 @@ MPPT chargers and the Phoenix Inverter Smart broadcast their readings in their B
 advertisements ("Instant Readout"). QtDMM listens to those broadcasts - no
 connection, no pairing - and shows them like a meter's reading:
 
-| Device | Main value | Second value |
-|---|---|---|
-| SmartShunt, BMV-712 | battery voltage (V DC) | battery current (A, negative when discharging) |
-| SmartSolar, BlueSolar MPPT | PV power (W) | battery voltage (V) |
-| Phoenix Inverter Smart | AC apparent power (VA) | battery voltage (V) |
+Each device broadcasts several values; you choose which one QtDMM treats
+as the reading (**Main value**: display, analog meter, recorder) and which
+goes to the display's second line and the [readings table](readings-table.md)
+as a `2nd` row (**Second value**, or none):
 
-The second value goes to the display's second line and to the
-[readings table](readings-table.md) (as a `2nd` row); the main value drives
-the recorder and the analog meter. About one reading per second arrives.
+| Device | Values |
+|---|---|
+| SmartShunt, BMV-712 | battery voltage (V), battery current (A, negative when discharging), battery power (W, computed), state of charge (%), consumed Ah, time to go (min), aux input (starter or midpoint voltage in V, or temperature in °C - as configured on the device) |
+| SmartSolar, BlueSolar MPPT | PV power (W), battery voltage (V), battery charging current (A), yield today (Wh), load current (A) |
+| Phoenix Inverter Smart | AC apparent power (VA), battery voltage (V), AC voltage (V), AC current (A) |
+
+The defaults are the first two of each row. About one reading per second
+arrives. Run several QtDMM instances on the same device to record more
+than two of its values at once ([instances](command-line.md)).
 
 ## Setting it up
 
@@ -30,6 +35,8 @@ model. The port and serial settings make way for a **Bluetooth** group:
   seconds; their names as in VictronConnect), or type the address.
 - **Key** - the 32-digit key. It is stored in QtDMM's settings file and
   never shown in the status line.
+- **Main value** / **Second value** - which of the device's values to show
+  (table above).
 
 Then **Connect** as usual. The status line says *Connected* once the first
 advertisement decrypted. With the wrong key it reports *The encryption key
@@ -48,9 +55,7 @@ be connected.
 
 ## What is not there yet
 
-Only the main and second value are shown; state of charge, consumed Ah,
-time to go, yield, the inverter's AC voltage and current, its state (eco
-mode, inverting) and the aux input (starter voltage / temperature) are
-decoded but not displayed. Other Victron products (DC-DC converters,
-Smart Lithium, Multi RS) broadcast in the same way and can follow once
-someone has one to test with.
+The device state (eco mode, bulk/absorption/float), alarms and charger
+errors are decoded but not shown. Other Victron products (DC-DC converters,
+Smart Lithium, Multi RS, AC chargers) broadcast in the same way and can
+follow once someone has one to test with.

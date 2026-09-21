@@ -255,6 +255,7 @@ void DmmPrefs::defaultsSLOT()
   port->setCurrentText        (m_cfg->getString("Port settings/device"));
   ui_bleAddress->setCurrentText(m_cfg->getString("Port settings/ble-address"));
   ui_bleKey->setText          (m_cfg->getString("Port settings/ble-key"));
+  updateBleFields();
   ui_calcUnit->setText        (m_cfg->getString("DMM/calc-unit", "W"));
   ui_calcExpression->setText  (m_cfg->getString("DMM/calc-expression"));
   ui_virtualSignal->setCurrentIndex(m_cfg->getInt("DMM/virtual-waveform", 2));
@@ -331,6 +332,8 @@ void DmmPrefs::applySLOT()
   m_cfg->setString("Port settings/device", port->currentText());
   m_cfg->setString("Port settings/ble-address", ui_bleAddress->currentText().trimmed());
   m_cfg->setString("Port settings/ble-key", ui_bleKey->text().trimmed());
+  m_cfg->setString("Port settings/ble-main", ui_bleMain->currentData().toString());
+  m_cfg->setString("Port settings/ble-second", ui_bleSecond->currentData().toString());
   m_cfg->setString("DMM/calc-unit", ui_calcUnit->text().trimmed());
   m_cfg->setString("DMM/calc-expression", ui_calcExpression->text().trimmed());
   m_cfg->setInt("DMM/virtual-waveform", ui_virtualSignal->currentIndex());
@@ -424,7 +427,10 @@ void DmmPrefs::updateCalcMode()
   ui_virtualGroup->setVisible(virt);
   ui_bleGroup->setVisible(ble);
   if (ble)
+  {
+    updateBleFields();
     updateBleHint();
+  }
   if (virt)
     updateVirtualFormula();
   if (calc)
@@ -653,7 +659,39 @@ QString DmmPrefs::dmmName() const
   return ui_model->currentText();
 }
 
-// "ble <address> <key>", see BleAdvertisementDevice
+// The values a Victron model offers; the selection survives a model change
+// when the new model has the same field, otherwise the defaults are taken.
+void DmmPrefs::updateBleFields()
+{
+  const quint8 type = VictronBle::readoutTypeForModel(m_dmmInfo.model);
+  // the combos are empty until the model is known (defaultsSLOT runs
+  // before it), so the saved choice is the fallback
+  QString main = ui_bleMain->currentData().toString();
+  QString second = ui_bleSecond->currentData().toString();
+  if (main.isEmpty())
+  {
+    main = m_cfg->getString("Port settings/ble-main");
+    second = m_cfg->getString("Port settings/ble-second");
+  }
+  const QList<VictronBle::Field> fields = VictronBle::fields(type);
+  if (ui_bleMain->property("readoutType").toInt() == type && !fields.isEmpty())
+    return;
+  ui_bleMain->setProperty("readoutType", type);
+  ui_bleMain->clear();
+  ui_bleSecond->clear();
+  ui_bleSecond->addItem(tr("none"), "-");
+  for (const VictronBle::Field &f : fields)
+  {
+    const QString label = QCoreApplication::translate("VictronBle", f.label);
+    ui_bleMain->addItem(label, QString::fromLatin1(f.id));
+    ui_bleSecond->addItem(label, QString::fromLatin1(f.id));
+  }
+  ui_bleMain->setCurrentIndex(qMax(0, ui_bleMain->findData(main)));
+  const int secondIndex = ui_bleSecond->findData(second);
+  ui_bleSecond->setCurrentIndex(secondIndex > 0 ? secondIndex : qMin(2, ui_bleSecond->count() - 1));
+}
+
+// "ble <address> <key> <main> <second>", see BleAdvertisementDevice
 void DmmPrefs::updateBleHint()
 {
   const QString address = ui_bleAddress->currentText().section(' ', 0, 0).trimmed();
@@ -692,8 +730,10 @@ void DmmPrefs::on_ui_bleScan_clicked()
 QString DmmPrefs::device() const
 {
   if (isBluetooth())
-    return QString("ble %1 %2").arg(ui_bleAddress->currentText().section(' ', 0, 0).trimmed(),
-                                    ui_bleKey->text().simplified().remove(' '));
+    return QString("ble %1 %2 %3 %4").arg(ui_bleAddress->currentText().section(' ', 0, 0).trimmed(),
+                                          ui_bleKey->text().simplified().remove(' '),
+                                          ui_bleMain->currentData().toString(),
+                                          ui_bleSecond->currentData().toString());
   if (isCalculated())
     return QString("calc %1 %2").arg(ui_calcUnit->text().trimmed(), ui_calcExpression->text().trimmed());
   if (isVirtual())

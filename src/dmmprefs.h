@@ -94,6 +94,8 @@ protected Q_SLOTS:
   void           updateVirtualFormula();
   /// Validates address and key, explains what is missing.
   void           updateBleHint();
+  /// Fills the main/second value combos with the fields of the chosen model.
+  void           updateBleFields();
   /// Five-second scan for Victron devices, fills the device combo.
   void           on_ui_bleScan_clicked();
 

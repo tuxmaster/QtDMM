@@ -4,17 +4,17 @@
 <context>
     <name>BleAdvertisementDevice</name>
     <message>
-        <location filename="../../src/portdevices/ble.cpp" line="35"/>
+        <location filename="../../src/portdevices/ble.cpp" line="37"/>
         <source>No Bluetooth address configured.</source>
         <translation>Nie skonfigurowano adresu Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/ble.cpp" line="40"/>
+        <location filename="../../src/portdevices/ble.cpp" line="42"/>
         <source>The encryption key must be 32 hex digits (VictronConnect: Product info, Instant readout via Bluetooth).</source>
         <translation>Klucz szyfrowania musi mieć 32 cyfry szesnastkowe (VictronConnect: Informacje o produkcie, Natychmiastowy odczyt przez Bluetooth).</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/ble.cpp" line="104"/>
+        <location filename="../../src/portdevices/ble.cpp" line="106"/>
         <source>The encryption key does not match %1.</source>
         <translation>Klucz szyfrowania nie pasuje do %1.</translation>
     </message>
@@ -433,59 +433,64 @@ Czy multimetr jest podłączony i włączony?</translation>
         <translation>Wszyscy producenci</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="405"/>
-        <location filename="../../src/dmmprefs.cpp" line="449"/>
+        <location filename="../../src/dmmprefs.cpp" line="408"/>
+        <location filename="../../src/dmmprefs.cpp" line="455"/>
         <source>Position %1: %2</source>
         <translation>Pozycja %1: %2</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="465"/>
+        <location filename="../../src/dmmprefs.cpp" line="471"/>
         <source>%1: no such instance running</source>
         <translation>%1: nie działa instancja o takiej nazwie</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="475"/>
+        <location filename="../../src/dmmprefs.cpp" line="481"/>
         <source>Running instances: %1</source>
         <translation>Działające instancje: %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="477"/>
+        <location filename="../../src/dmmprefs.cpp" line="483"/>
         <source>No other instance is running.</source>
         <translation>Nie działa żadna inna instancja.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="663"/>
+        <location filename="../../src/dmmprefs.cpp" line="682"/>
+        <source>none</source>
+        <translation>brak</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="701"/>
         <source>Pick the device or type its Bluetooth address.</source>
         <translation>Wybierz urządzenie lub wpisz jego adres Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="665"/>
+        <location filename="../../src/dmmprefs.cpp" line="703"/>
         <source>The key is the 32-digit &quot;Encryption key&quot; VictronConnect shows under Product info, Instant readout via Bluetooth.</source>
         <translation>Klucz to 32-cyfrowy „klucz szyfrowania&quot;, który VictronConnect pokazuje w Informacjach o produkcie, Natychmiastowy odczyt przez Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="674"/>
+        <location filename="../../src/dmmprefs.cpp" line="712"/>
         <source>Scanning for Victron devices (5 s)...</source>
         <translation>Wyszukiwanie urządzeń Victron (5 s)…</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="685"/>
+        <location filename="../../src/dmmprefs.cpp" line="723"/>
         <source>No Victron device found. Is Bluetooth on, and Instant readout enabled on the device?</source>
         <translation>Nie znaleziono urządzenia Victron. Czy Bluetooth jest włączony, a natychmiastowy odczyt włączony w urządzeniu?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="707"/>
+        <location filename="../../src/dmmprefs.cpp" line="747"/>
         <source>Load DMM description</source>
         <translation>Wczytaj opis multimetru</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="707"/>
-        <location filename="../../src/dmmprefs.cpp" line="733"/>
+        <location filename="../../src/dmmprefs.cpp" line="747"/>
+        <location filename="../../src/dmmprefs.cpp" line="773"/>
         <source>DMM description (*.cfg)</source>
         <translation>Opis multimetru (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="733"/>
+        <location filename="../../src/dmmprefs.cpp" line="773"/>
         <source>Save DMM description</source>
         <translation>Zapisz opis multimetru</translation>
     </message>
@@ -1544,132 +1549,152 @@ Następnie wyloguj się i zaloguj ponownie, aby członkostwo w grupie zaczęło 
         <translation>32-cyfrowy klucz szyfrowania urządzenia: VictronConnect, Informacje o produkcie, Natychmiastowy odczyt przez Bluetooth, Dane szyfrowania.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="710"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="697"/>
+        <source>&amp;Main value:</source>
+        <translation>Wartość &amp;główna:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="707"/>
+        <source>Which of the device&apos;s values the display, the analog meter and the recorder show.</source>
+        <translation>Która wartość urządzenia jest pokazywana na wyświetlaczu, mierniku analogowym i w rejestratorze.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="714"/>
+        <source>Se&amp;cond value:</source>
+        <translation>Wartość &amp;druga:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="724"/>
+        <source>A second value shown on the display&apos;s second line and logged in the readings table.</source>
+        <translation>Druga wartość pokazywana w drugim wierszu wyświetlacza i zapisywana w tabeli odczytów.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="744"/>
         <source>Signal</source>
         <translation>Sygnał</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="716"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="750"/>
         <source>&amp;Waveform:</source>
         <translation>&amp;Przebieg:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="726"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="760"/>
         <source>What the virtual meter shows over time. Constant and Random stay within Min..Max; the periodic waveforms swing between Min and Max once per Period; Discharge falls from Max towards Min with the time constant Period; Custom uses your own formula (t = seconds since connecting).</source>
         <translation>Co miernik wirtualny pokazuje w czasie. Stała i Losowy pozostają w zakresie Min..Maks; przebiegi okresowe oscylują między Min i Maks raz na okres; Rozładowanie opada od Maks do Min ze stałą czasową Okres; Własny wzór używa Twojego wzoru (t = sekundy od połączenia).</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="728"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="762"/>
         <source>Constant</source>
         <translation>Stała</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="729"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="763"/>
         <source>Random</source>
         <translation>Losowy</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="730"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="764"/>
         <source>Sine</source>
         <translation>Sinus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="731"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="765"/>
         <source>Triangle</source>
         <translation>Trójkąt</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="732"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="766"/>
         <source>Square</source>
         <translation>Prostokąt</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="733"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="767"/>
         <source>Sawtooth</source>
         <translation>Piła</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="734"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="768"/>
         <source>Discharge</source>
         <translation>Rozładowanie</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="735"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="769"/>
         <source>Custom formula</source>
         <translation>Własny wzór</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="741"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="775"/>
         <source>U&amp;nit:</source>
         <translation>Jed&amp;nostka:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="764"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="798"/>
         <source>Cou&amp;pling:</source>
         <translation>S&amp;przężenie:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="780"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="814"/>
         <source>M&amp;in:</source>
         <translation>M&amp;in:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="797"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="831"/>
         <source>Ma&amp;x:</source>
         <translation>Ma&amp;ks:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="814"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="848"/>
         <source>Peri&amp;od (s):</source>
         <translation>&amp;Okres (s):</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="831"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="865"/>
         <source>Noi&amp;se:</source>
         <translation>&amp;Szum:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="841"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="875"/>
         <source>Peak-to-peak amplitude of random noise added to the signal, in the unit above. 0 for a clean signal.</source>
         <translation>Amplituda międzyszczytowa losowego szumu dodawanego do sygnału, w powyższej jednostce. 0 dla czystego sygnału.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="851"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="885"/>
         <source>Formu&amp;la:</source>
         <translation>Wz&amp;ór:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="861"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="895"/>
         <source>The formula the waveform above expands to; editable with Custom formula. t is the time in seconds since connecting, pi, sin, cos, exp, floor, sqrt, abs, rand() and the readings of other instances may be used.</source>
         <translation>Wzór, do którego rozwija się powyższy przebieg; edytowalny przy Własnym wzorze. t to czas w sekundach od połączenia; można używać pi, sin, cos, exp, floor, sqrt, abs, rand() oraz odczytów innych instancji.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="871"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="905"/>
         <source>Protocol</source>
         <translation>Protokół</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="877"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="911"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translation>Wybierz tutaj typ komunikacji. Jeśli Twój multimetr nie jest „oficjalnie” obsługiwany, wypróbuj istniejące protokoły – przy odrobinie szczęścia któryś zadziała. Jeśli znajdziesz działające ustawienia, zgłoś je.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="891"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="925"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Liczba wartości:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="901"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="935"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Niektóre multimetry wysyłają kilka linii z różnymi wartościami. Ponieważ QtDMM pokazuje jedną wielkość, podaj tutaj liczbę linii pomijanych na pomiar (QtDMM używa tylko pierwszej linii).</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="959"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="993"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocol settings have not been confirmed by a user yet. If you own this model and can confirm that they work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Te ustawienia protokołu nie zostały jeszcze potwierdzone przez użytkownika. Jeśli masz ten model i możesz potwierdzić, że działają, zgłoś to na &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="984"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1018"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; with the model and the settings. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jeśli Twojego multimetru nie ma na liście, a znalazłeś działające ustawienia ręczne, zgłoś je na &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; wraz z modelem. Przyszli użytkownicy tego multimetru skorzystają z Twojej pomocy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -3164,6 +3189,81 @@ Wartości można podawać z przyrostkiem m, u, n, p, k, M, G, T&lt;br&gt;Przykł
         <location filename="../../src/ui/uitipdlg.ui" line="217"/>
         <source>&amp;Close</source>
         <translation>&amp;Zamknij</translation>
+    </message>
+</context>
+<context>
+    <name>VictronBle</name>
+    <message>
+        <location filename="../../src/victronble.cpp" line="108"/>
+        <location filename="../../src/victronble.cpp" line="117"/>
+        <location filename="../../src/victronble.cpp" line="123"/>
+        <source>Battery voltage</source>
+        <translation>Napięcie akumulatora</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="109"/>
+        <source>Battery current</source>
+        <translation>Prąd akumulatora</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="110"/>
+        <source>Battery power</source>
+        <translation>Moc akumulatora</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="111"/>
+        <source>State of charge</source>
+        <translation>Stan naładowania</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="112"/>
+        <source>Consumed Ah</source>
+        <translation>Pobrane Ah</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="113"/>
+        <source>Time to go</source>
+        <translation>Pozostały czas</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="114"/>
+        <source>Aux input (starter voltage, midpoint or temperature)</source>
+        <translation>Wejście aux (napięcie rozrusznika, punkt środkowy lub temperatura)</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="116"/>
+        <source>PV power</source>
+        <translation>Moc PV</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="118"/>
+        <source>Battery charging current</source>
+        <translation>Prąd ładowania akumulatora</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="119"/>
+        <source>Yield today</source>
+        <translation>Uzysk dzisiaj</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="120"/>
+        <source>Load current</source>
+        <translation>Prąd obciążenia</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="122"/>
+        <source>AC apparent power</source>
+        <translation>Moc pozorna AC</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="124"/>
+        <source>AC voltage</source>
+        <translation>Napięcie AC</translation>
+    </message>
+    <message>
+        <location filename="../../src/victronble.cpp" line="125"/>
+        <source>AC current</source>
+        <translation>Prąd AC</translation>
     </message>
 </context>
 </TS>

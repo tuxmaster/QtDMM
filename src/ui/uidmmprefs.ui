@@ -691,7 +691,41 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="ui_bleMainLabel">
+        <property name="text">
+         <string>&amp;Main value:</string>
+        </property>
+        <property name="buddy">
+         <cstring>ui_bleMain</cstring>
+        </property>
+       </widget>
+      </item>
       <item row="2" column="1" colspan="2">
+       <widget class="QComboBox" name="ui_bleMain">
+        <property name="whatsThis">
+         <string>Which of the device's values the display, the analog meter and the recorder show.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="ui_bleSecondLabel">
+        <property name="text">
+         <string>Se&amp;cond value:</string>
+        </property>
+        <property name="buddy">
+         <cstring>ui_bleSecond</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QComboBox" name="ui_bleSecond">
+        <property name="whatsThis">
+         <string>A second value shown on the display's second line and logged in the readings table.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" colspan="2">
        <widget class="QLabel" name="ui_bleHint">
         <property name="text">
          <string notr="true"/>

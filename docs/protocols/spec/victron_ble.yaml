@@ -8,7 +8,9 @@ sources:
 # Bluetooth LE "Instant Readout": the meter broadcasts AES-128-CTR encrypted
 # records in its advertisements. BleAdvertisementDevice decrypts them and
 # hands the decoder one text line per advertisement - the readout type and
-# the plaintext as hex (VictronBle::frame). The bytes below are that line;
+# the plaintext as hex, optionally followed by the ids of the fields wanted
+# as main and second value (VictronBle::frame; without them the first two
+# fields of the type are taken, as in the vectors below). The bytes below are that line;
 # the plaintexts come from victron-ble's public test vectors (advertisement
 # + key), decrypted. The decryption itself is tested in test_victronble.
 # Battery monitor: voltage main, current second value; solar charger: PV

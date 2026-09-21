@@ -62,9 +62,25 @@ namespace VictronBle
   /// Product name for a model id ("SmartShunt 500A/50mV"), or the id in hex.
   QString modelName(quint16 model);
 
-  /// The frame BleAdvertisementDevice hands to the reader: the readout type
-  /// and the plaintext as hex, one line. DecoderVictronBLE reads it back.
-  QByteArray frame(quint8 readoutType, const QByteArray &plaintext);
+  /// The frame BleAdvertisementDevice hands to the reader, one line: the
+  /// readout type and the plaintext as hex, then the ids of the fields
+  /// wanted as main and second value ("-" for none). DecoderVictronBLE
+  /// reads it back.
+  QByteArray frame(quint8 readoutType, const QByteArray &plaintext,
+                   const QString &mainField = QString(), const QString &secondField = QString());
+
+  /// One value a readout type carries, as the settings offer it.
+  struct Field
+  {
+    const char *id;      ///< persistent, in the port string ("V", "SOC")
+    const char *label;   ///< QT_TRANSLATE_NOOP("VictronBle", ...)
+  };
+  /// The fields of a readout type, the first one is the default main
+  /// value, the second the default second value. Empty for unknown types.
+  QList<Field> fields(quint8 readoutType);
+  /// Which readout type a model in the device table speaks, from its name
+  /// ("SmartShunt" -> BatteryMonitor); 0 when unknown.
+  quint8 readoutTypeForModel(const QString &model);
 
   /// Reads bit fields from a little-endian packed record, LSB first.
   class BitReader

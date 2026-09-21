@@ -119,6 +119,30 @@ int main(int argc, char **argv)
     }
   }
 
+  // --- 4c. choosing the fields ---
+  {
+    // the SmartShunt vector again: 12.53 V, 0 A, SOC 50 %, -50 Ah consumed
+    const auto parsed = VictronBle::parse(QByteArray::fromHex("100289a302b040af925d09a4d89aa0128bdef48c6298a9"));
+    const auto plain = VictronBle::decrypt(*parsed, VictronBle::keyFromHex("aff4d0995b7d1e176c0c33ecb9e70dcd"));
+    const auto soc = decoder.decode(VictronBle::frame(VictronBle::BatteryMonitor, *plain, "SOC", "AH"), 0);
+    check(soc && qFuzzyCompare(soc->dval, 50.0) && soc->val == "50.0" && soc->unit == "%",
+          QString("SOC as main value: %1 %2").arg(soc ? soc->val : "-", soc ? soc->unit : "-"));
+    check(soc && soc->id2 == 1 && qFuzzyCompare(soc->dval2, -50.0) && soc->unit2 == "Ah", "consumed Ah as second value");
+    const auto none = decoder.decode(VictronBle::frame(VictronBle::BatteryMonitor, *plain, "P", "-"), 0);
+    check(none && none->id2 == 0 && none->unit == "W" && qFuzzyCompare(none->dval + 1, 1.0), "power main, no second value");
+    check(!decoder.decode(VictronBle::frame(VictronBle::BatteryMonitor, *plain, "NOPE", "V"), 0).has_value(),
+          "unknown field id gives nothing");
+    const QList<DecoderVictronBLE::Value> all = DecoderVictronBLE::values(VictronBle::BatteryMonitor, *plain);
+    check(all.size() == 7 && all[0].id == "V" && all[6].id == "AUX", "battery monitor has seven fields");
+    check(VictronBle::fields(VictronBle::BatteryMonitor).size() == 7 && VictronBle::fields(0x42).isEmpty(), "field tables");
+    check(VictronBle::readoutTypeForModel("SmartShunt") == VictronBle::BatteryMonitor
+          && VictronBle::readoutTypeForModel("BMV-712 Smart *") == VictronBle::BatteryMonitor
+          && VictronBle::readoutTypeForModel("SmartSolar MPPT") == VictronBle::SolarCharger
+          && VictronBle::readoutTypeForModel("Phoenix Inverter Smart") == VictronBle::Inverter
+          && VictronBle::readoutTypeForModel("UT61E") == 0, "readout type from model name");
+    check(VictronBle::frame(2, QByteArray::fromHex("aa"), "V", "") == "02aa V -\n", "frame with fields: " + VictronBle::frame(2, QByteArray::fromHex("aa"), "V", ""));
+  }
+
   // --- 5. other records and junk ---
   check(!VictronBle::parse(QByteArray::fromHex("0269b907109a")).has_value(), "non-readout record ignored");
   check(!VictronBle::parse(QByteArray()).has_value(), "empty ignored");

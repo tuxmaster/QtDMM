@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "victronble.h"
 
+#include <QCoreApplication>
 #include <QMap>
 #include <QRegularExpression>
 
@@ -90,9 +91,53 @@ QString VictronBle::modelName(quint16 model)
   return names.value(model, QString("0x%1").arg(model, 4, 16, QLatin1Char('0')).toUpper());
 }
 
-QByteArray VictronBle::frame(quint8 readoutType, const QByteArray &plaintext)
+QByteArray VictronBle::frame(quint8 readoutType, const QByteArray &plaintext,
+                             const QString &mainField, const QString &secondField)
 {
-  return QByteArray(1, char(readoutType)).toHex() + plaintext.toHex() + '\n';
+  QByteArray line = QByteArray(1, char(readoutType)).toHex() + plaintext.toHex();
+  if (!mainField.isEmpty())
+    line += ' ' + mainField.toLatin1() + ' ' + (secondField.isEmpty() ? QByteArray("-") : secondField.toLatin1());
+  return line + '\n';
+}
+
+QList<VictronBle::Field> VictronBle::fields(quint8 readoutType)
+{
+  switch (readoutType)
+  {
+    case BatteryMonitor:
+      return { { "V", QT_TRANSLATE_NOOP("VictronBle", "Battery voltage") },
+               { "I", QT_TRANSLATE_NOOP("VictronBle", "Battery current") },
+               { "P", QT_TRANSLATE_NOOP("VictronBle", "Battery power") },
+               { "SOC", QT_TRANSLATE_NOOP("VictronBle", "State of charge") },
+               { "AH", QT_TRANSLATE_NOOP("VictronBle", "Consumed Ah") },
+               { "TTG", QT_TRANSLATE_NOOP("VictronBle", "Time to go") },
+               { "AUX", QT_TRANSLATE_NOOP("VictronBle", "Aux input (starter voltage, midpoint or temperature)") } };
+    case SolarCharger:
+      return { { "PV", QT_TRANSLATE_NOOP("VictronBle", "PV power") },
+               { "V", QT_TRANSLATE_NOOP("VictronBle", "Battery voltage") },
+               { "I", QT_TRANSLATE_NOOP("VictronBle", "Battery charging current") },
+               { "YIELD", QT_TRANSLATE_NOOP("VictronBle", "Yield today") },
+               { "LOAD", QT_TRANSLATE_NOOP("VictronBle", "Load current") } };
+    case Inverter:
+      return { { "VA", QT_TRANSLATE_NOOP("VictronBle", "AC apparent power") },
+               { "V", QT_TRANSLATE_NOOP("VictronBle", "Battery voltage") },
+               { "VAC", QT_TRANSLATE_NOOP("VictronBle", "AC voltage") },
+               { "IAC", QT_TRANSLATE_NOOP("VictronBle", "AC current") } };
+    default:
+      return {};
+  }
+}
+
+quint8 VictronBle::readoutTypeForModel(const QString &model)
+{
+  const QString m = model.toLower();
+  if (m.contains("shunt") || m.contains("bmv"))
+    return BatteryMonitor;
+  if (m.contains("mppt") || m.contains("solar"))
+    return SolarCharger;
+  if (m.contains("inverter"))
+    return Inverter;
+  return 0;
 }
 
 quint32 VictronBle::BitReader::unsignedBits(int bits)
