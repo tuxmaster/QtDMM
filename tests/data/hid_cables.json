@@ -1,0 +1,38 @@
+{
+  "_comment": "USB-HID meter cables: the chip table and the report layouts, shared by QtDMM (src/portdevices/hidserial.cpp, tests/test_hid.cpp) and qtdmm-bridge (tools/qtdmm-bridge/qtdmm_bridge.py, tests/test_bridge.py). generate_docs.py --check verifies both tables against this file. Bytes are hex, 'expect: null' means a malformed report.",
+  "cables": [
+    {"vid": "04fa", "pid": "2490", "chip": "CH9325", "name": "Hoitek HE2325U (UT-D04 type)"},
+    {"vid": "1a86", "pid": "e008", "chip": "CH9325", "name": "WCH CH9325 (UT-D04, UT803, ...)"},
+    {"vid": "10c4", "pid": "ea80", "chip": "CP2110", "name": "SiLabs CP2110 (UT-D09, first revision)"},
+    {"vid": "1a86", "pid": "e429", "chip": "CH9329", "name": "WCH CH9329 (UT-D09, second revision, fixed 9600 8N1)"},
+    {"vid": "0820", "pid": "0001", "chip": "BU86X",  "name": "Brymen BU-86X"}
+  ],
+  "unpack": [
+    {"chip": "CH9325", "report": "f3 b1 b2 b3 00 00 00 00", "expect": "31 32 33", "why": "0xF0|count, top bit stripped"},
+    {"chip": "CH9325", "report": "f0 00 00 00 00 00 00 00", "expect": "", "why": "idle report"},
+    {"chip": "CH9325", "report": "f7 80 81 82 83 84 85 86", "expect": "00 01 02 03 04 05 06", "why": "seven bytes"},
+    {"chip": "CH9325", "report": "f3 b1", "expect": null, "why": "count beyond the report"},
+    {"chip": "CH9325", "report": "", "expect": null, "why": "empty"},
+    {"chip": "CH9329", "report": "04 2b 30 0d 8a 00 00 00", "expect": "2b 30 0d 8a", "why": "count then raw bytes, top bit kept"},
+    {"chip": "CH9329", "report": "00 00 00 00", "expect": "", "why": "idle report"},
+    {"chip": "CH9329", "report": "40 00 00", "expect": null, "why": "count 64 is malformed"},
+    {"chip": "CH9329", "report": "05 01 02", "expect": null, "why": "count beyond the report"},
+    {"chip": "CP2110", "report": "03 41 42 43", "expect": "41 42 43", "why": "report id is the count"},
+    {"chip": "CP2110", "report": "05 01 02", "expect": null, "why": "count beyond the report"},
+    {"chip": "BU86X",  "report": "86 86 86 86 11 22 33 44", "expect": "86 86 86 86 11 22 33 44", "why": "whole report is data"},
+    {"chip": "BU86X",  "report": "00 86 66", "expect": "00 86 66", "why": "short report"}
+  ],
+  "pack": [
+    {"chip": "BU86X",  "data": "00 86 66", "expect": "00 00 86 66", "why": "report id placeholder + data"},
+    {"chip": "CH9329", "data": "44 0a", "expect_prefix": "00 02 44 0a", "expect_length": 65, "why": "placeholder, count, data, padded to 64"},
+    {"chip": "CP2110", "data": "44 0a", "expect": "02 44 0a", "why": "count as report id"},
+    {"chip": "CH9325", "data": "44 0a", "expect": "", "why": "receive-only cable"}
+  ],
+  "config": [
+    {"chip": "CP2110", "baud": 19200, "bits": 7, "parity": "O", "stopbits": 1, "expect": "50 00 00 4b 00 02 00 02 00"},
+    {"chip": "CP2110", "baud": 2400,  "bits": 8, "parity": "N", "stopbits": 2, "expect": "50 00 00 09 60 00 00 03 01"},
+    {"chip": "CP2110", "baud": 9600,  "bits": 8, "parity": "E", "stopbits": 1, "expect": "50 00 00 25 80 01 00 03 00"},
+    {"chip": "CH9325", "baud": 19200, "bits": 7, "parity": "N", "stopbits": 1, "expect": "00 00 4b 00 00 02"},
+    {"chip": "CH9325", "baud": 2400,  "bits": 8, "parity": "N", "stopbits": 1, "expect": "00 60 09 00 00 03"}
+  ]
+}

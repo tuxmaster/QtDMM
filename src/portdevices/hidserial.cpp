@@ -99,6 +99,43 @@ QByteArray HIDSerialDevice::packWrite(Chip chip, const QByteArray &data)
   return r;
 }
 
+QByteArray HIDSerialDevice::ch9325ConfigReport(int baud, int bits)
+{
+  const unsigned int bps = baud > 0 ? static_cast<unsigned int>(baud) : 19200;
+  const int b = (bits >= 5 && bits <= 8) ? bits : 8;
+  QByteArray r(6, '\0');
+  r[1] = static_cast<char>(bps);
+  r[2] = static_cast<char>(bps >> 8);
+  r[3] = static_cast<char>(bps >> 16);
+  r[4] = static_cast<char>(bps >> 24);
+  r[5] = static_cast<char>(b - 5);
+  return r;
+}
+
+QString HIDSerialDevice::chipName(Chip chip)
+{
+  switch (chip)
+  {
+    case Chip::CH9325: return "CH9325";
+    case Chip::CP2110: return "CP2110";
+    case Chip::CH9329: return "CH9329";
+    case Chip::BU86X:  return "BU86X";
+  }
+  return "CH9325";
+}
+
+HIDSerialDevice::Chip HIDSerialDevice::chipFromName(const QString &name, bool *ok)
+{
+  for (Chip c : {Chip::CH9325, Chip::CP2110, Chip::CH9329, Chip::BU86X})
+    if (chipName(c) == name)
+    {
+      if (ok) *ok = true;
+      return c;
+    }
+  if (ok) *ok = false;
+  return Chip::CH9325;
+}
+
 QByteArray HIDSerialDevice::cp2110ConfigReport(int baud, int bits, int parity, int stopBits)
 {
   // (@-1 report id 0x50) @0 baud big endian, @4 parity (0 none, 1 even,
@@ -284,20 +321,11 @@ bool HIDSerialDevice::configureCable()
   int res = 0;
   if (m_chip == Chip::CH9325)
   {
-    unsigned int bps = m_dmmInfo.baud > 0 ? static_cast<unsigned int>(m_dmmInfo.baud) : 19200;
-    // Feature report: @0 report id, @1..4 baud little endian, @5 data bits
-    // as (bits - 5), per sigrok's CH9325 driver; the two bytes before it
-    // are unknown (parity/stop bits?) and left at zero there too
-    unsigned char report[6] = { 0 };
-    report[1] = bps;
-    report[2] = bps >> 8;
-    report[3] = bps >> 16;
-    report[4] = bps >> 24;
-    const int bits = (m_dmmInfo.bits >= 5 && m_dmmInfo.bits <= 8) ? m_dmmInfo.bits : 8;
-    report[5] = static_cast<unsigned char>(bits - 5);
-    res = hid_send_feature_report(m_handle, report, sizeof(report));
-    qCDebug(lcHid) << "feature report" << QByteArray(reinterpret_cast<const char *>(report), 6).toHex(' ')
-                   << "baud" << bps << "->" << res;
+    // per sigrok's CH9325 driver; the two bytes before the data bits are
+    // unknown (parity/stop bits?) and left at zero there too
+    const QByteArray report = ch9325ConfigReport(m_dmmInfo.baud, m_dmmInfo.bits);
+    res = hid_send_feature_report(m_handle, reinterpret_cast<const unsigned char *>(report.constData()), report.size());
+    qCDebug(lcHid) << "feature report" << report.toHex(' ') << "baud" << m_dmmInfo.baud << "->" << res;
   }
   else if (m_chip == Chip::CP2110)
   {

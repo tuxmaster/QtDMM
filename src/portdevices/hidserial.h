@@ -100,6 +100,12 @@ public:
   /// The CP2110 UART_CONFIG feature report (9 bytes incl. report id 0x50)
   /// for the given line settings; parity 0 none / 1 even / 2 odd. Pure.
   static QByteArray cp2110ConfigReport(int baud, int bits, int parity, int stopBits);
+  /// The CH9325 feature report (6 bytes incl. report id 0): baud little
+  /// endian, data bits as (bits - 5); parity/stop bits are not settable. Pure.
+  static QByteArray ch9325ConfigReport(int baud, int bits);
+  /// Chip name as used in tests/data/hid_cables.json and the bridge.
+  static QString chipName(Chip chip);
+  static Chip chipFromName(const QString &name, bool *ok = nullptr);
   Chip chip() const { return m_chip; }
 
   /// Appends the known cable chips found via hidapi to @p portlist.

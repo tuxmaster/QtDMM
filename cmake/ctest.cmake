@@ -78,7 +78,7 @@ if (BUILD_TESTING)
 	add_executable(${TEST_HID} MACOSX_BUNDLE tests/test_hid.cpp src/portdevices/hidserial.cpp src/dmmdecoder.cpp src/siprefix.cpp ${DECODER_FILES})
 	target_include_directories(${TEST_HID} PRIVATE src)
 	target_link_libraries(${TEST_HID} PRIVATE Qt::Core ${HIDAPI_TARGET})
-	add_test(NAME hid_cable COMMAND ${TEST_HID})
+	add_test(NAME hid_cable COMMAND ${TEST_HID} "${CMAKE_SOURCE_DIR}/tests/data/hid_cables.json")
 
 	## DMM connection state machine (Connecting/Connected/Timeout/Error/reconnect)
 	## against a fake RFC 2217 server; needs the whole port stack

@@ -148,6 +148,30 @@ def render_readme(devices_md):
     return "\n".join(parts)
 
 
+def hid_cable_drift():
+    """The HID cable table exists three times: tests/data/hid_cables.json (the
+    truth both test suites read), kCables in src/portdevices/hidserial.cpp and
+    HID_CABLES in tools/qtdmm-bridge/qtdmm_bridge.py. Returns the problems."""
+    import json
+
+    truth = {(c["vid"].lower(), c["pid"].lower()): c["chip"]
+             for c in json.loads((REPO / "tests" / "data" / "hid_cables.json").read_text(encoding="utf-8"))["cables"]}
+    cpp = {}
+    for m in re.finditer(r"\{\s*0x([0-9a-fA-F]{4}),\s*0x([0-9a-fA-F]{4}),\s*HIDSerialDevice::Chip::(\w+)\s*\}",
+                         (REPO / "src" / "portdevices" / "hidserial.cpp").read_text(encoding="utf-8")):
+        cpp[(m.group(1).lower(), m.group(2).lower())] = m.group(3)
+    py = {}
+    for m in re.finditer(r"\(0x([0-9a-fA-F]{4}),\s*0x([0-9a-fA-F]{4})\):\s*\(\"(\w+)\"",
+                         (REPO / "tools" / "qtdmm-bridge" / "qtdmm_bridge.py").read_text(encoding="utf-8")):
+        py[(m.group(1).lower(), m.group(2).lower())] = m.group(3)
+    problems = []
+    for name, table in (("hidserial.cpp kCables", cpp), ("qtdmm_bridge.py HID_CABLES", py)):
+        if table != truth:
+            problems.append(f"{name} differs from tests/data/hid_cables.json: "
+                            f"{sorted(set(table.items()) ^ set(truth.items()))}")
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--check", action="store_true")
@@ -168,6 +192,10 @@ def main():
         else:
             path.write_text(text, encoding="utf-8")
             print(f"wrote    {rel}")
+
+    for problem in hid_cable_drift():
+        print(f"DRIFT    {problem}", file=sys.stderr)
+        stale += 1
 
     if stale:
         print(f"\n{stale} file(s) differ from their sources - run tests/generate_docs.py",
