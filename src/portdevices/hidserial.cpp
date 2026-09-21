@@ -3,18 +3,110 @@
 // Low-level trace of the HID cable, enabled by --debug
 Q_LOGGING_CATEGORY(lcHid, "qtdmm.hid", QtWarningMsg)
 
+// The chips this driver knows, by USB id. The Hoitek HE2325U is the CH9325's
+// predecessor with the same protocol.
+namespace
+{
+struct KnownCable { unsigned short vid, pid; HIDSerialDevice::Chip chip; };
+const KnownCable kCables[] = {
+  { 0x04fa, 0x2490, HIDSerialDevice::Chip::CH9325 },   // Hoitek HE2325U
+  { 0x1a86, 0xe008, HIDSerialDevice::Chip::CH9325 },   // WCH CH9325 (UT-D04 and friends)
+  { 0x10c4, 0xea80, HIDSerialDevice::Chip::CP2110 },   // SiLabs CP2110 (UT-D09 first revision)
+  { 0x1a86, 0xe429, HIDSerialDevice::Chip::CH9329 },   // WCH CH9329 custom-HID (UT-D09 second revision)
+};
+}
+
+HIDSerialDevice::Chip HIDSerialDevice::chipFor(unsigned short vendorId, unsigned short productId)
+{
+  for (const KnownCable &c : kCables)
+    if (c.vid == vendorId && c.pid == productId)
+      return c.chip;
+  return Chip::CH9325;
+}
+
+HIDSerialDevice::Chip HIDSerialDevice::chipForEntry(const QString &entry)
+{
+  // "0x1a86:0xe429" somewhere in the entry; DMM::setDevice() hands us only
+  // the path, so the ids are looked up from the enumeration in that case
+  static const QRegularExpression ids("0x([0-9a-fA-F]{4}):0x([0-9a-fA-F]{4})");
+  const auto m = ids.match(entry);
+  if (m.hasMatch())
+    return chipFor(m.captured(1).toUShort(nullptr, 16), m.captured(2).toUShort(nullptr, 16));
+  return Chip::CH9325;
+}
+
+QString HIDSerialDevice::pathForEntry(const QString &entry)
+{
+  const QString e = entry.trimmed();
+  return e.contains(' ') ? e.section(' ', -1) : e;
+}
+
+int HIDSerialDevice::unpackReport(Chip chip, const unsigned char *report, int reportLen, unsigned char *out)
+{
+  if (reportLen < 1)
+    return -1;
+  if (chip == Chip::CH9329 || chip == Chip::CP2110)
+  {
+    // @0 count (0..63; on the CP2110 this is the report id), @1.. raw UART bytes
+    const int count = report[0];
+    if (count > 63 || count > reportLen - 1)
+      return -1;
+    memcpy(out, report + 1, count);
+    return count;
+  }
+  // CH9325: @0 = 0xF0 | count (count in the low 3 bits), @1.. bytes with
+  // the top bit always set
+  const int count = report[0] & 0x07;
+  if (count > reportLen - 1)
+    return -1;
+  for (int i = 0; i < count; i++)
+    out[i] = report[1 + i] & 0x7f;
+  return count;
+}
+
+QByteArray HIDSerialDevice::cp2110ConfigReport(int baud, int bits, int parity, int stopBits)
+{
+  // (@-1 report id 0x50) @0 baud big endian, @4 parity (0 none, 1 even,
+  // 2 odd), @5 flow control (0 none), @6 data bits as (bits - 5), @7 stop
+  // bits (0 = 1 bit, 1 = 2 bits)
+  QByteArray r(9, '\0');
+  const unsigned int b = static_cast<unsigned int>(qBound(300, baud > 0 ? baud : 9600, 1000000));
+  r[0] = 0x50;
+  r[1] = static_cast<char>(b >> 24);
+  r[2] = static_cast<char>(b >> 16);
+  r[3] = static_cast<char>(b >> 8);
+  r[4] = static_cast<char>(b);
+  r[5] = static_cast<char>(qBound(0, parity, 2));
+  r[6] = 0;
+  r[7] = static_cast<char>((bits >= 5 && bits <= 8 ? bits : 8) - 5);
+  r[8] = static_cast<char>(stopBits >= 2 ? 1 : 0);
+  return r;
+}
+
 HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device, QObject *p)
   : QIODevice(p)
   , m_dmmInfo(info)
 {
   if (device.isNull())
     return;
-  m_handle = hid_open_path(device.toUtf8().data());
+  const QString path = pathForEntry(device);
+  m_chip = chipForEntry(device);
+  if (!device.contains(':'))
+  {
+    // only the path: find its ids in the enumeration
+    struct hid_device_info *devs = hid_enumerate(0, 0);
+    for (struct hid_device_info *d = devs; d; d = d->next)
+      if (path == QString::fromLatin1(d->path))
+        m_chip = chipFor(d->vendor_id, d->product_id);
+    hid_free_enumeration(devs);
+  }
+  m_handle = hid_open_path(path.toUtf8().data());
   if (!m_handle)
-    qWarning() << "HID: cannot open" << device << QString::fromWCharArray(hid_error(nullptr));
+    qWarning() << "HID: cannot open" << path << QString::fromWCharArray(hid_error(nullptr));
   else
   {
-    qCDebug(lcHid) << "opened" << device;
+    qCDebug(lcHid) << "opened" << path
+                   << (m_chip == Chip::CH9329 ? "(CH9329)" : m_chip == Chip::CP2110 ? "(CP2110)" : "(CH9325)");
     m_isOpen = true;
     QThread* thread = new QThread;
     this->moveToThread(thread);
@@ -34,8 +126,8 @@ HIDSerialDevice::~HIDSerialDevice()
 bool HIDSerialDevice::availablePorts(QStringList &portlist)
 {
   qint64 portlist_len = portlist.size();
-  HIDSerialDevice::availablePorts(portlist,0x04fa, 0x2490);
-  HIDSerialDevice::availablePorts(portlist,0x1a86, 0xe008);
+  for (const KnownCable &c : kCables)
+    HIDSerialDevice::availablePorts(portlist, c.vid, c.pid);
 
   return portlist.size() > portlist_len;
 }
@@ -94,20 +186,45 @@ void HIDSerialDevice::run()
   {
     memset(m_buffer, 0, m_buflen);
 
-    unsigned int bps = m_dmmInfo.baud > 0 ? static_cast<unsigned int>(m_dmmInfo.baud) : 19200;
-    // Send a Feature Report to the device
-    m_buffer[0] = 0x0; // report ID
-    m_buffer[1] = bps;
-    m_buffer[2] = bps >> 8;
-    m_buffer[3] = bps >> 16;
-    m_buffer[4] = bps >> 24;
-    // data bits as (bits - 5), per sigrok's CH9325 driver; the two bytes
-    // before it are unknown (parity/stop bits?) and left at zero there too
-    const int bits = (m_dmmInfo.bits >= 5 && m_dmmInfo.bits <= 8) ? m_dmmInfo.bits : 8;
-    m_buffer[5] = static_cast<unsigned char>(bits - 5);
-    int res = hid_send_feature_report(m_handle, m_buffer, 6); // 6 bytes
-    qCDebug(lcHid) << "feature report" << QByteArray(reinterpret_cast<const char *>(m_buffer), 6).toHex(' ')
-                   << "baud" << bps << "->" << res;
+    int res = 0;
+    if (m_chip == Chip::CH9325)
+    {
+      unsigned int bps = m_dmmInfo.baud > 0 ? static_cast<unsigned int>(m_dmmInfo.baud) : 19200;
+      // Send a Feature Report to the device
+      m_buffer[0] = 0x0; // report ID
+      m_buffer[1] = bps;
+      m_buffer[2] = bps >> 8;
+      m_buffer[3] = bps >> 16;
+      m_buffer[4] = bps >> 24;
+      // data bits as (bits - 5), per sigrok's CH9325 driver; the two bytes
+      // before it are unknown (parity/stop bits?) and left at zero there too
+      const int bits = (m_dmmInfo.bits >= 5 && m_dmmInfo.bits <= 8) ? m_dmmInfo.bits : 8;
+      m_buffer[5] = static_cast<unsigned char>(bits - 5);
+      res = hid_send_feature_report(m_handle, m_buffer, 6); // 6 bytes
+      qCDebug(lcHid) << "feature report" << QByteArray(reinterpret_cast<const char *>(m_buffer), 6).toHex(' ')
+                     << "baud" << bps << "->" << res;
+    }
+    else if (m_chip == Chip::CP2110)
+    {
+      // enable the UART, then set the line coding
+      unsigned char enable[2] = { 0x41, 0x01 };
+      res = hid_send_feature_report(m_handle, enable, 2);
+      qCDebug(lcHid) << "CP2110 uart enable ->" << res;
+      if (res >= 0)
+      {
+        const QByteArray cfg = cp2110ConfigReport(m_dmmInfo.baud, m_dmmInfo.bits, m_dmmInfo.parity, m_dmmInfo.stopBits);
+        res = hid_send_feature_report(m_handle, reinterpret_cast<const unsigned char *>(cfg.constData()), cfg.size());
+        qCDebug(lcHid) << "CP2110 uart config" << cfg.toHex(' ') << "->" << res;
+      }
+    }
+    else
+    {
+      // CH9329: the line coding is persistent chip configuration (9600 8N1
+      // as shipped), nothing to negotiate
+      qCDebug(lcHid) << "CH9329: no feature report, fixed 9600 8N1";
+      if (m_dmmInfo.baud > 0 && m_dmmInfo.baud != 9600)
+        qWarning() << "HID: this cable runs at 9600 baud, the meter is configured for" << m_dmmInfo.baud;
+    }
 
     if (res < 0)
     {
@@ -121,7 +238,8 @@ void HIDSerialDevice::run()
 
       do
       {
-        unsigned char buf[32];
+        unsigned char buf[64];
+        unsigned char payload[64];
 
         res = 0;
         while (res == 0)
@@ -138,13 +256,17 @@ void HIDSerialDevice::run()
         {
           qCDebug(lcHid) << "report" << QByteArray(reinterpret_cast<const char *>(buf), res).toHex(' ');
           m_reportsSeen++;
-          // format data
-          int len = buf[0] & 0x07; // the first byte contains the length in the lower 3 bits ( 111 = 7 )
+          const int len = unpackReport(m_chip, buf, res, payload);
+          if (len < 0)
+          {
+            qWarning() << "HID: malformed report" << QByteArray(reinterpret_cast<const char *>(buf), res).toHex(' ');
+            continue;
+          }
           if (len > 0)
             m_dataSeen = true;
-          for (int i = 1; i <= len; i++)
+          for (int i = 0; i < len; i++)
           {
-            m_buffer[m_buffer_w] = buf[i] & 0x7f; // bitwise and with 0111 1111, mask the upper bit which is always 1
+            m_buffer[m_buffer_w] = payload[i];
             m_buffer_w = (m_buffer_w + 1) % m_buflen;
           }
 

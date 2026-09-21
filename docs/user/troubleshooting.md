@@ -36,8 +36,15 @@ Meters with a USB-HID cable (many Uni-Trend models) appear in the port list as
 `HID 0x1a86:0xe008 /dev/hidrawN`. If the entry is missing or cannot be opened,
 the `/dev/hidraw*` device is usually only readable by root. A udev rule grants
 access to your user; check the cable's vendor:product id with `lsusb` and match
-it in the rule. QtDMM sets the cable's speed from the device table when it
-opens the port.
+it in the rule. QtDMM knows three cable chips: the WCH CH9325 / Hoitek
+HE2325U (`1a86:e008`, `04fa:2490`; UT-D04 and most older cables), whose speed
+QtDMM sets from the device table when it opens the port; and the two
+revisions of the newer UNI-T UT-D09, which look identical — a Silicon Labs
+CP2110 (`10c4:ea80`, configured like the CH9325) or a WCH CH9329
+(`1a86:e429`), which runs at a fixed 9600 8N1, so choose a model or manual
+settings with that rate. `lsusb` tells you which one you have. Both UT-D09
+variants follow the chips' documentation and have not been verified with a
+real cable yet; a report either way is welcome.
 
 On FreeBSD hidapi talks to the cable through libusb, so the entry shows a USB
 address instead of a device file, and your user needs access to the `ugen`
