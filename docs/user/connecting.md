@@ -27,7 +27,7 @@ The port box lists everything QtDMM found, prefixed with its type:
 | Prefix | Backend | Typical entry |
 |---|---|---|
 | `Serial` | RS-232 and USB-serial adapters | `/dev/ttyUSB0`, `/dev/ttyS0` (Linux), `/dev/cuaU0` (FreeBSD), `COM3` (Windows) |
-| `HID` | USB-HID cables (Hoitek HE2325U and compatible, as used by many Uni-Trend meters) | `HID 0x1a86:0xe008 /dev/hidraw2` (Linux), `HID 0x1a86:0xe008 \\?\hid#…` (Windows) |
+| `HID` | USB-HID cables: WCH CH9325 / Hoitek HE2325U (UT-D04 and compatible, many Uni-Trend meters) and both revisions of the newer UT-D09 (SiLabs CP2110, or WCH CH9329 at a fixed 9600 8N1) | `HID 0x1a86:0xe008 /dev/hidraw2` (Linux), `HID 0x1a86:0xe429 \\?\hid#…` (Windows) |
 | `RFC2217` | serial port on another machine, via an RFC 2217 server | `localhost:4000` |
 | `Sigrok` | any meter that `sigrok-cli` supports | `scpi-dmm:conn=/dev/ttyUSB0` |
 

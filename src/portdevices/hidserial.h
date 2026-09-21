@@ -17,22 +17,51 @@
 
 Q_DECLARE_LOGGING_CATEGORY(lcHid)
 
-/// A meter behind a USB HID "serial" cable (WCH CH9325 / Hoitek HE2325U).
+/// A meter behind a USB HID "serial" cable.
 ///
-/// These cables enumerate as HID devices rather than serial ports. The UART
-/// speed is set with a feature report and the meter's bytes then arrive in
-/// input reports (0xF0 | count, up to 7 payload bytes). hidapi is polled in
-/// run(), which runs in a worker thread and fills a ring buffer; the
-/// QIODevice side (readData(), bytesAvailable()) serves ReaderThread from
-/// that buffer and emits readyRead().
+/// These cables enumerate as HID devices rather than serial ports. Three
+/// chips are known (Chip):
+///  - WCH CH9325 / Hoitek HE2325U (UT-D04 and older UNI-T cables, many
+///    others): the UART speed is set with a feature report, the meter's
+///    bytes then arrive in 8-byte input reports (0xF0 | count, up to 7
+///    payload bytes with the top bit set).
+///  - Silicon Labs CP2110 (UNI-T UT-D09 first revision, 10c4:ea80): UART
+///    enabled and configured with two feature reports (0x41, 0x50), data in
+///    reports whose id is the byte count (1..63). Per sigrok's
+///    serial_hid_cp2110.c / SiLabs AN434.
+///  - WCH CH9329 in custom-HID mode (UNI-T UT-D09 second revision,
+///    1a86:e429): a plain UART tunnel, fixed 9600 8N1, no feature report,
+///    64-byte input reports (count, then up to 63 raw bytes). Layout per
+///    sigrok PR #298.
+/// Both UT-D09 revisions look alike; lsusb tells them apart.
+/// hidapi is polled in run(), which runs in a worker thread and fills a ring
+/// buffer; the QIODevice side (readData(), bytesAvailable()) serves
+/// ReaderThread from that buffer and emits readyRead().
 class HIDSerialDevice : public QIODevice {
     Q_OBJECT
 public:
+  /// The cable chip, which decides the report layout.
+  enum class Chip { CH9325, CP2110, CH9329 };
+
   /// @param info   the meter, for its baud rate and data bits
   /// @param device an entry from availablePorts(): "HID 0xvvvv:0xpppp path"
+  ///               (the vid:pid selects the Chip; a bare path means CH9325)
   /// @param p      parent object
   explicit HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device, QObject *p = Q_NULLPTR);
  ~HIDSerialDevice();
+
+  /// Chip for a port entry / vid:pid; unknown ids are treated as CH9325.
+  static Chip chipFor(unsigned short vendorId, unsigned short productId);
+  static Chip chipForEntry(const QString &entry);
+  /// The path part of a port entry ("HID 0x1a86:0xe008 /dev/hidraw2" -> "/dev/hidraw2").
+  static QString pathForEntry(const QString &entry);
+  /// Extracts the UART bytes of one input report into @p out (at least 63
+  /// bytes); returns the count, -1 for a malformed report. Pure, for tests.
+  static int unpackReport(Chip chip, const unsigned char *report, int reportLen, unsigned char *out);
+  /// The CP2110 UART_CONFIG feature report (9 bytes incl. report id 0x50)
+  /// for the given line settings; parity 0 none / 1 even / 2 odd. Pure.
+  static QByteArray cp2110ConfigReport(int baud, int bits, int parity, int stopBits);
+  Chip chip() const { return m_chip; }
 
   /// Appends the known cable chips found via hidapi to @p portlist.
   static bool availablePorts(QStringList &portlist);
@@ -63,6 +92,7 @@ public Q_SLOTS:
 protected:
   static bool availablePorts(QStringList &portlist,unsigned short vendor_id, unsigned short product_id);
   DmmDecoder::DMMInfo m_dmmInfo;
+  Chip m_chip = Chip::CH9325;
   static const unsigned int m_buflen = 1024;
   volatile bool m_isOpen = false;
   volatile int m_reportsSeen = 0;
