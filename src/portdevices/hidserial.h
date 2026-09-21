@@ -3,6 +3,7 @@
 #include <QtCore>
 #include <QIODevice>
 #include <QThread>
+#include <atomic>
 
 // Distro packages (Debian, FreeBSD ports) install hidapi.h below hidapi/; the
 // hidapi CMake target (Windows via FetchContent) and Homebrew put it top-level.
@@ -38,9 +39,40 @@ Q_DECLARE_LOGGING_CATEGORY(lcHid)
 ///    only answers to a request (DmmDecoder::pollRequest()), so this is the
 ///    one cable QtDMM writes to.
 /// Both UT-D09 revisions look alike; lsusb tells them apart.
-/// hidapi is polled in run(), which runs in a worker thread and fills a ring
-/// buffer; the QIODevice side (readData(), bytesAvailable()) serves
-/// ReaderThread from that buffer and emits readyRead().
+/// A HidReader in its own thread blocks in hid_read_timeout() and hands each
+/// report over as a queued signal; this object stays in the main thread,
+/// unpacks the UART bytes into a buffer and serves ReaderThread through
+/// readData()/bytesAvailable() with readyRead(). The line configuration
+/// (feature reports) is sent in the constructor, so a cable that refuses it
+/// fails open() at once.
+/// The blocking hidapi read loop, living in its own thread. It owns the
+/// handle from the moment run() starts until the loop ends, so hid_close()
+/// happens exactly once, in the thread that reads. Reports go to
+/// HIDSerialDevice as queued signals; nothing is shared.
+class HidReader : public QObject
+{
+  Q_OBJECT
+public:
+  HidReader(hid_device *handle);
+  /// Ends the loop at its next timeout (100 ms); thread-safe.
+  void stop() { m_stop.store(true); }
+
+public Q_SLOTS:
+  void run();
+
+Q_SIGNALS:
+  /// One input report as read from the cable.
+  void report(const QByteArray &raw);
+  /// hid_read failed (cable unplugged); the loop has ended.
+  void readError(const QString &what);
+  /// The loop has ended and the handle is closed.
+  void finished();
+
+private:
+  hid_device *m_handle;
+  std::atomic<bool> m_stop{false};
+};
+
 class HIDSerialDevice : public QIODevice {
     Q_OBJECT
 public:
@@ -68,6 +100,12 @@ public:
   /// The CP2110 UART_CONFIG feature report (9 bytes incl. report id 0x50)
   /// for the given line settings; parity 0 none / 1 even / 2 odd. Pure.
   static QByteArray cp2110ConfigReport(int baud, int bits, int parity, int stopBits);
+  /// The CH9325 feature report (6 bytes incl. report id 0): baud little
+  /// endian, data bits as (bits - 5); parity/stop bits are not settable. Pure.
+  static QByteArray ch9325ConfigReport(int baud, int bits);
+  /// Chip name as used in tests/data/hid_cables.json and the bridge.
+  static QString chipName(Chip chip);
+  static Chip chipFromName(const QString &name, bool *ok = nullptr);
   Chip chip() const { return m_chip; }
 
   /// Appends the known cable chips found via hidapi to @p portlist.
@@ -83,31 +121,35 @@ public:
   bool dataSeen() const { return m_dataSeen; }
   void close() override;
 
-  /// Bytes waiting in the ring buffer. Must stay const: QIODevice's version
+  /// Bytes waiting for readData(). Must stay const: QIODevice's version
   /// is const and virtual, so a non-const one would hide instead of override
   /// it and ReaderThread (holding a QIODevice*) would get the base version.
   qint64 bytesAvailable() const override;
 
-  Q_SIGNALS:
-  /// The worker loop has ended (after close()).
+Q_SIGNALS:
+  /// The cable is gone: the read loop ended with an error while the device
+  /// was open. DMM reopens it later.
   void finished();
-
-public Q_SLOTS:
-  /// The hidapi read loop; runs in the worker thread until close().
-  void run();
 
 protected:
   static bool availablePorts(QStringList &portlist,unsigned short vendor_id, unsigned short product_id);
+  /// Sends the chip's line configuration (feature reports); false on failure.
+  bool configureCable();
+  /// Queued from the reader thread: unpack one report into m_rx.
+  void onReport(const QByteArray &raw);
+  void onReadError(const QString &what);
+  /// Stops the reader and waits for it; the reader closes the handle.
+  void stopReader();
+
   DmmDecoder::DMMInfo m_dmmInfo;
   Chip m_chip = Chip::CH9325;
-  static const unsigned int m_buflen = 1024;
-  volatile bool m_isOpen = false;
-  volatile int m_reportsSeen = 0;
-  volatile bool m_dataSeen = false;
-  hid_device *m_handle = Q_NULLPTR;
-  unsigned int m_buffer_r = 0;
-  unsigned int m_buffer_w = 0;
-  unsigned char m_buffer[m_buflen];
+  bool m_isOpen = false;
+  int m_reportsSeen = 0;
+  bool m_dataSeen = false;
+  hid_device *m_handle = Q_NULLPTR;   ///< owned by the reader once it runs
+  QThread *m_thread = Q_NULLPTR;
+  HidReader *m_reader = Q_NULLPTR;
+  QByteArray m_rx;                    ///< UART bytes received, main thread only
 
   qint64 readData(char *data, qint64 maxSize)  override;
   qint64 writeData(const char *data, qint64 len) override;

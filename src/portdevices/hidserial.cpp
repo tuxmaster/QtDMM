@@ -99,6 +99,43 @@ QByteArray HIDSerialDevice::packWrite(Chip chip, const QByteArray &data)
   return r;
 }
 
+QByteArray HIDSerialDevice::ch9325ConfigReport(int baud, int bits)
+{
+  const unsigned int bps = baud > 0 ? static_cast<unsigned int>(baud) : 19200;
+  const int b = (bits >= 5 && bits <= 8) ? bits : 8;
+  QByteArray r(6, '\0');
+  r[1] = static_cast<char>(bps);
+  r[2] = static_cast<char>(bps >> 8);
+  r[3] = static_cast<char>(bps >> 16);
+  r[4] = static_cast<char>(bps >> 24);
+  r[5] = static_cast<char>(b - 5);
+  return r;
+}
+
+QString HIDSerialDevice::chipName(Chip chip)
+{
+  switch (chip)
+  {
+    case Chip::CH9325: return "CH9325";
+    case Chip::CP2110: return "CP2110";
+    case Chip::CH9329: return "CH9329";
+    case Chip::BU86X:  return "BU86X";
+  }
+  return "CH9325";
+}
+
+HIDSerialDevice::Chip HIDSerialDevice::chipFromName(const QString &name, bool *ok)
+{
+  for (Chip c : {Chip::CH9325, Chip::CP2110, Chip::CH9329, Chip::BU86X})
+    if (chipName(c) == name)
+    {
+      if (ok) *ok = true;
+      return c;
+    }
+  if (ok) *ok = false;
+  return Chip::CH9325;
+}
+
 QByteArray HIDSerialDevice::cp2110ConfigReport(int baud, int bits, int parity, int stopBits)
 {
   // (@-1 report id 0x50) @0 baud big endian, @4 parity (0 none, 1 even,
@@ -137,25 +174,70 @@ HIDSerialDevice::HIDSerialDevice(const DmmDecoder::DMMInfo info, QString device,
   }
   m_handle = hid_open_path(path.toUtf8().data());
   if (!m_handle)
-    qWarning() << "HID: cannot open" << path << QString::fromWCharArray(hid_error(nullptr));
-  else
   {
-    qCDebug(lcHid) << "opened" << path
-                   << (m_chip == Chip::CH9329 ? "(CH9329)" : m_chip == Chip::CP2110 ? "(CP2110)"
-                       : m_chip == Chip::BU86X ? "(BU-86X)" : "(CH9325)");
-    m_isOpen = true;
-    QThread* thread = new QThread;
-    this->moveToThread(thread);
-    connect(thread, SIGNAL( started() ), this, SLOT( run() ));
-    connect(this, SIGNAL( finished() ), thread, SLOT( quit() ));
-    connect(thread, SIGNAL( finished() ), thread, SLOT( deleteLater() ));
-    thread->start();
+    qWarning() << "HID: cannot open" << path << QString::fromWCharArray(hid_error(nullptr));
+    return;
   }
+  qCDebug(lcHid) << "opened" << path
+                 << (m_chip == Chip::CH9329 ? "(CH9329)" : m_chip == Chip::CP2110 ? "(CP2110)"
+                     : m_chip == Chip::BU86X ? "(BU-86X)" : "(CH9325)");
+  if (!configureCable())
+  {
+    hid_close(m_handle);
+    m_handle = Q_NULLPTR;
+    return;
+  }
+  m_isOpen = true;
+
+  // The blocking read loop runs in its own thread; this object stays in the
+  // caller's thread, so readData()/bytesAvailable()/deleteLater() are plain
+  // single-threaded code and the reports arrive as queued signals.
+  m_thread = new QThread(this);
+  m_reader = new HidReader(m_handle);
+  m_reader->moveToThread(m_thread);
+  connect(m_thread, &QThread::started, m_reader, &HidReader::run);
+  connect(m_reader, &HidReader::report, this, &HIDSerialDevice::onReport);
+  connect(m_reader, &HidReader::readError, this, &HIDSerialDevice::onReadError);
+  // direct: the thread object lives here, and stopReader() blocks this
+  // thread's event loop while it waits for the quit
+  connect(m_reader, &HidReader::finished, m_thread, &QThread::quit, Qt::DirectConnection);
+  m_thread->start();
 }
+
+// ---------------------------------------------------------------------------
+
+HidReader::HidReader(hid_device *handle)
+  : m_handle(handle)
+{
+}
+
+void HidReader::run()
+{
+  unsigned char buf[64];
+  while (!m_stop.load())
+  {
+    // the timeout keeps stop() effective even when the cable sends nothing
+    // (CP2110/CH9329 send no idle reports)
+    const int res = hid_read_timeout(m_handle, buf, sizeof(buf), 100);
+    if (res < 0)
+    {
+      Q_EMIT readError(QString::fromWCharArray(hid_error(m_handle)));
+      break;
+    }
+    if (res > 0)
+      Q_EMIT report(QByteArray(reinterpret_cast<const char *>(buf), res));
+  }
+  hid_close(m_handle);
+  m_handle = Q_NULLPTR;
+  Q_EMIT finished();
+}
+
+// ---------------------------------------------------------------------------
 
 HIDSerialDevice::~HIDSerialDevice()
 {
   close();
+  stopReader();
 }
 
 
@@ -199,153 +281,133 @@ bool HIDSerialDevice::open(OpenMode mode)
 
 void HIDSerialDevice::close()
 {
-  if (m_isOpen)
+  if (!m_isOpen)
+    return;
+  m_isOpen = false;
+  stopReader();
+  // Without this the QIODevice base keeps reporting isOpen() == true, which
+  // is what PortHandler::isOpen() actually queries.
+  QIODevice::close();
+}
+
+void HIDSerialDevice::stopReader()
+{
+  if (!m_thread)
+    return;
+  if (m_reader)
+    m_reader->stop();
+  m_thread->quit();   // in case the loop already ended
+  if (m_thread->isRunning() && !m_thread->wait(2000))
   {
-    Q_EMIT aboutToClose();
-    m_isOpen = false;
+    // hid_read_timeout() did not return - should not happen; better a
+    // leaked thread than a crash in it
+    qWarning() << "HID: reader thread did not stop";
+    m_thread->setParent(nullptr);
+  }
+  else
+  {
+    // the thread is done, so its object can be deleted from here (a
+    // deleteLater() would never run: no event loop is left in that thread)
+    delete m_reader;
+    delete m_thread;
+  }
+  m_thread = Q_NULLPTR;
+  m_reader = Q_NULLPTR;
+  m_handle = Q_NULLPTR;   // closed by the reader
+}
 
-    if (m_handle != Q_NULLPTR)
+bool HIDSerialDevice::configureCable()
+{
+  int res = 0;
+  if (m_chip == Chip::CH9325)
+  {
+    // per sigrok's CH9325 driver; the two bytes before the data bits are
+    // unknown (parity/stop bits?) and left at zero there too
+    const QByteArray report = ch9325ConfigReport(m_dmmInfo.baud, m_dmmInfo.bits);
+    res = hid_send_feature_report(m_handle, reinterpret_cast<const unsigned char *>(report.constData()), report.size());
+    qCDebug(lcHid) << "feature report" << report.toHex(' ') << "baud" << m_dmmInfo.baud << "->" << res;
+  }
+  else if (m_chip == Chip::CP2110)
+  {
+    // enable the UART, then set the line coding
+    unsigned char enable[2] = { 0x41, 0x01 };
+    res = hid_send_feature_report(m_handle, enable, 2);
+    qCDebug(lcHid) << "CP2110 uart enable ->" << res;
+    if (res >= 0)
     {
-      hid_close(m_handle);
-      m_handle = Q_NULLPTR;
+      const QByteArray cfg = cp2110ConfigReport(m_dmmInfo.baud, m_dmmInfo.bits, m_dmmInfo.parity, m_dmmInfo.stopBits);
+      res = hid_send_feature_report(m_handle, reinterpret_cast<const unsigned char *>(cfg.constData()), cfg.size());
+      qCDebug(lcHid) << "CP2110 uart config" << cfg.toHex(' ') << "->" << res;
     }
+  }
+  else if (m_chip == Chip::BU86X)
+  {
+    qCDebug(lcHid) << "BU-86X: fixed speed, nothing to configure";
+  }
+  else
+  {
+    // CH9329: the line coding is persistent chip configuration (9600 8N1
+    // as shipped), nothing to negotiate
+    qCDebug(lcHid) << "CH9329: no feature report, fixed 9600 8N1";
+    if (m_dmmInfo.baud > 0 && m_dmmInfo.baud != 9600)
+      qWarning() << "HID: this cable runs at 9600 baud, the meter is configured for" << m_dmmInfo.baud;
+  }
 
-    // Without this the QIODevice base keeps reporting isOpen() == true, which
-    // is what PortHandler::isOpen() actually queries.
-    QIODevice::close();
+  if (res < 0)
+  {
+    qCritical() << "HID: unable to send the feature report:" << QString::fromWCharArray(hid_error(m_handle));
+    return false;
+  }
+  return true;
+}
+
+void HIDSerialDevice::onReport(const QByteArray &raw)
+{
+  if (!m_isOpen)
+    return;
+  qCDebug(lcHid) << "report" << raw.toHex(' ');
+  m_reportsSeen++;
+  unsigned char payload[64];
+  const int len = unpackReport(m_chip, reinterpret_cast<const unsigned char *>(raw.constData()), raw.size(), payload);
+  if (len < 0)
+  {
+    qWarning() << "HID: malformed report" << raw.toHex(' ');
+    return;
+  }
+  if (len > 0)
+  {
+    m_dataSeen = true;
+    m_rx.append(reinterpret_cast<const char *>(payload), len);
+    Q_EMIT readyRead();
   }
 }
 
-void HIDSerialDevice::run()
+void HIDSerialDevice::onReadError(const QString &what)
 {
-  if (m_isOpen)
-  {
-    memset(m_buffer, 0, m_buflen);
-
-    int res = 0;
-    if (m_chip == Chip::CH9325)
-    {
-      unsigned int bps = m_dmmInfo.baud > 0 ? static_cast<unsigned int>(m_dmmInfo.baud) : 19200;
-      // Send a Feature Report to the device
-      m_buffer[0] = 0x0; // report ID
-      m_buffer[1] = bps;
-      m_buffer[2] = bps >> 8;
-      m_buffer[3] = bps >> 16;
-      m_buffer[4] = bps >> 24;
-      // data bits as (bits - 5), per sigrok's CH9325 driver; the two bytes
-      // before it are unknown (parity/stop bits?) and left at zero there too
-      const int bits = (m_dmmInfo.bits >= 5 && m_dmmInfo.bits <= 8) ? m_dmmInfo.bits : 8;
-      m_buffer[5] = static_cast<unsigned char>(bits - 5);
-      res = hid_send_feature_report(m_handle, m_buffer, 6); // 6 bytes
-      qCDebug(lcHid) << "feature report" << QByteArray(reinterpret_cast<const char *>(m_buffer), 6).toHex(' ')
-                     << "baud" << bps << "->" << res;
-    }
-    else if (m_chip == Chip::CP2110)
-    {
-      // enable the UART, then set the line coding
-      unsigned char enable[2] = { 0x41, 0x01 };
-      res = hid_send_feature_report(m_handle, enable, 2);
-      qCDebug(lcHid) << "CP2110 uart enable ->" << res;
-      if (res >= 0)
-      {
-        const QByteArray cfg = cp2110ConfigReport(m_dmmInfo.baud, m_dmmInfo.bits, m_dmmInfo.parity, m_dmmInfo.stopBits);
-        res = hid_send_feature_report(m_handle, reinterpret_cast<const unsigned char *>(cfg.constData()), cfg.size());
-        qCDebug(lcHid) << "CP2110 uart config" << cfg.toHex(' ') << "->" << res;
-      }
-    }
-    else if (m_chip == Chip::BU86X)
-    {
-      qCDebug(lcHid) << "BU-86X: fixed speed, nothing to configure";
-    }
-    else
-    {
-      // CH9329: the line coding is persistent chip configuration (9600 8N1
-      // as shipped), nothing to negotiate
-      qCDebug(lcHid) << "CH9329: no feature report, fixed 9600 8N1";
-      if (m_dmmInfo.baud > 0 && m_dmmInfo.baud != 9600)
-        qWarning() << "HID: this cable runs at 9600 baud, the meter is configured for" << m_dmmInfo.baud;
-    }
-
-    if (res < 0)
-    {
-      qCritical() << "HID: unable to send the feature report:" << QString::fromWCharArray(hid_error(m_handle));
-      close();
-    }
-    else
-    {
-      memset(m_buffer, 0, m_buflen);
-      QThread::usleep(100);
-
-      do
-      {
-        unsigned char buf[64];
-        unsigned char payload[64];
-
-        res = 0;
-        while (res == 0)
-        {
-          res = hid_read(m_handle, buf, sizeof(buf));
-          if (res < 0)
-          {
-            qWarning() << "HID: read failed:" << QString::fromWCharArray(hid_error(m_handle));
-            close();
-          }
-        }
-
-        if (res > 0)
-        {
-          qCDebug(lcHid) << "report" << QByteArray(reinterpret_cast<const char *>(buf), res).toHex(' ');
-          m_reportsSeen++;
-          const int len = unpackReport(m_chip, buf, res, payload);
-          if (len < 0)
-          {
-            qWarning() << "HID: malformed report" << QByteArray(reinterpret_cast<const char *>(buf), res).toHex(' ');
-            continue;
-          }
-          if (len > 0)
-            m_dataSeen = true;
-          for (int i = 0; i < len; i++)
-          {
-            m_buffer[m_buffer_w] = payload[i];
-            m_buffer_w = (m_buffer_w + 1) % m_buflen;
-          }
-
-          if (len > 0)
-            Q_EMIT readyRead();
-        }
-      }
-      while (m_isOpen && res >= 0);
-    }
-  }
-
+  if (!m_isOpen)
+    return;   // our own close() ends the loop without an error
+  qWarning() << "HID: read failed:" << what;
+  m_isOpen = false;
+  stopReader();
+  QIODevice::close();
   Q_EMIT finished();
 }
 
-
 qint64 HIDSerialDevice::bytesAvailable() const
 {
-  return QIODevice::bytesAvailable() + (m_buffer_w + m_buflen - m_buffer_r) % m_buflen;
+  return QIODevice::bytesAvailable() + m_rx.size();
 }
 
 
 qint64 HIDSerialDevice::readData(char *data, qint64 maxSize)
 {
-  if (m_isOpen)
-  {
-    qint64 len = 0;
-
-    while (maxSize > 0 && bytesAvailable() > 0)
-    {
-      data[len] = m_buffer[m_buffer_r];
-      len++;
-      maxSize--;
-      m_buffer_r = (m_buffer_r + 1) % m_buflen;
-    }
-
-    return len;
-  }
-  return -1;
-};
+  if (!m_isOpen)
+    return -1;
+  const qint64 len = qMin(maxSize, qint64(m_rx.size()));
+  memcpy(data, m_rx.constData(), len);
+  m_rx.remove(0, len);
+  return len;
+}
 
 
 qint64 HIDSerialDevice::writeData(const char *data, qint64 len)

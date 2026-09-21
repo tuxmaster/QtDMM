@@ -3,6 +3,10 @@
 // hardware needed; the layouts follow sigrok's serial_hid_ch9325.c and PR #298).
 #include <QCoreApplication>
 #include <QDebug>
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <cstring>
 
 #include "portdevices/hidserial.h"
@@ -95,6 +99,67 @@ int main(int argc, char **argv)
     check(w9329.size() == 65 && w9329.left(4).toHex(' ') == "00 02 44 0a", "CH9329 write: placeholder, count, data, padded to 64");
     check(HIDSerialDevice::packWrite(Chip::CP2110, QByteArray("D\n")).toHex(' ') == "02 44 0a", "CP2110 write: count as report id");
     check(HIDSerialDevice::packWrite(Chip::CH9325, QByteArray("D\n")).isEmpty(), "CH9325 cannot write");
+  }
+
+  // --- 3d. the shared vectors: tests/data/hid_cables.json is what the bridge
+  //         tests read too, so both implementations are held to one truth ---
+  {
+    const QString path = argc > 1 ? QString::fromLocal8Bit(argv[1]) : QString();
+    QFile f(path);
+    check(!path.isEmpty() && f.open(QIODevice::ReadOnly), "hid_cables.json given and readable: " + path);
+    const QJsonObject root = QJsonDocument::fromJson(f.readAll()).object();
+    check(!root.isEmpty(), "hid_cables.json parses");
+    auto hex = [](const QJsonValue &v) { return QByteArray::fromHex(v.toString().remove(' ').toLatin1()); };
+
+    int n = 0;
+    for (const QJsonValue &v : root["cables"].toArray())
+    {
+      const QJsonObject c = v.toObject();
+      const Chip chip = HIDSerialDevice::chipFor(c["vid"].toString().toUShort(nullptr, 16),
+                                                 c["pid"].toString().toUShort(nullptr, 16));
+      check(HIDSerialDevice::chipName(chip) == c["chip"].toString(),
+            QString("cable %1:%2 is a %3").arg(c["vid"].toString(), c["pid"].toString(), c["chip"].toString()));
+      ++n;
+    }
+    check(n == 5, "five cables in the table");
+
+    for (const QJsonValue &v : root["unpack"].toArray())
+    {
+      const QJsonObject t = v.toObject();
+      const QByteArray report = hex(t["report"]);
+      unsigned char out[64];
+      const int len = HIDSerialDevice::unpackReport(HIDSerialDevice::chipFromName(t["chip"].toString()),
+                                                    reinterpret_cast<const unsigned char *>(report.constData()),
+                                                    report.size(), out);
+      const QString label = QString("unpack %1 %2 (%3)").arg(t["chip"].toString(), t["report"].toString(), t["why"].toString());
+      if (t["expect"].isNull())
+        check(len == -1, label + ": malformed expected");
+      else
+        check(len >= 0 && QByteArray(reinterpret_cast<const char *>(out), len) == hex(t["expect"]), label);
+    }
+
+    for (const QJsonValue &v : root["pack"].toArray())
+    {
+      const QJsonObject t = v.toObject();
+      const QByteArray r = HIDSerialDevice::packWrite(HIDSerialDevice::chipFromName(t["chip"].toString()), hex(t["data"]));
+      const QString label = QString("pack %1 (%2)").arg(t["chip"].toString(), t["why"].toString());
+      if (t.contains("expect_prefix"))
+        check(r.size() == t["expect_length"].toInt() && r.startsWith(hex(t["expect_prefix"])), label);
+      else
+        check(r == hex(t["expect"]), label + ": " + r.toHex(' '));
+    }
+
+    for (const QJsonValue &v : root["config"].toArray())
+    {
+      const QJsonObject t = v.toObject();
+      const int parity = t["parity"].toString() == "E" ? 1 : t["parity"].toString() == "O" ? 2 : 0;
+      QByteArray r;
+      if (t["chip"].toString() == "CP2110")
+        r = HIDSerialDevice::cp2110ConfigReport(t["baud"].toInt(), t["bits"].toInt(), parity, t["stopbits"].toInt());
+      else
+        r = HIDSerialDevice::ch9325ConfigReport(t["baud"].toInt(), t["bits"].toInt());
+      check(r == hex(t["expect"]), QString("config %1 %2: %3").arg(t["chip"].toString()).arg(t["baud"].toInt()).arg(r.toHex(' ')));
+    }
   }
 
   // --- 4. a device object without hardware reports itself closed ---

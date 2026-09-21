@@ -383,8 +383,64 @@ class FakeHidRaw:
         self.closed = True
 
 
+VECTORS = os.path.join(os.path.dirname(__file__), "..", "..", "..", "tests", "data", "hid_cables.json")
+
+
+def load_vectors():
+    import json
+
+    with open(VECTORS, encoding="utf-8") as f:
+        return json.load(f)
+
+
+class HidSharedVectorsTest(unittest.TestCase):
+    """tests/data/hid_cables.json - the same file QtDMM's test_hid reads, so
+    the C++ and the Python implementation are held to one truth."""
+
+    @classmethod
+    def setUpClass(cls):
+        if not os.path.exists(VECTORS):
+            raise unittest.SkipTest("hid_cables.json not available (bridge checked out alone)")
+        cls.v = load_vectors()
+
+    @staticmethod
+    def hx(text):
+        return bytes.fromhex(text.replace(" ", "")) if text else b""
+
+    def test_cable_table(self):
+        table = {(int(c["vid"], 16), int(c["pid"], 16)): c["chip"] for c in self.v["cables"]}
+        self.assertEqual(table, {k: v[0] for k, v in qb.HID_CABLES.items()})
+
+    def test_unpack(self):
+        for t in self.v["unpack"]:
+            got = qb.unpack_hid_report(t["chip"], self.hx(t["report"]))
+            with self.subTest(chip=t["chip"], report=t["report"], why=t["why"]):
+                if t["expect"] is None:
+                    self.assertIsNone(got)
+                else:
+                    self.assertEqual(got, self.hx(t["expect"]))
+
+    def test_pack(self):
+        for t in self.v["pack"]:
+            got = qb.pack_hid_write(t["chip"], self.hx(t["data"]))
+            with self.subTest(chip=t["chip"], why=t["why"]):
+                if "expect_prefix" in t:
+                    self.assertEqual(len(got), t["expect_length"])
+                    self.assertTrue(got.startswith(self.hx(t["expect_prefix"])))
+                else:
+                    self.assertEqual(got, self.hx(t["expect"]))
+
+    def test_config(self):
+        for t in self.v["config"]:
+            s = qb.LineSettings(baudrate=t["baud"], bytesize=t["bits"], parity=t["parity"], stopbits=t["stopbits"])
+            got = qb.cp2110_config_report(s) if t["chip"] == "CP2110" else qb.ch9325_config_report(s)
+            with self.subTest(chip=t["chip"], baud=t["baud"]):
+                self.assertEqual(got, self.hx(t["expect"]))
+
+
 class HidReportTest(unittest.TestCase):
-    """Report layouts per chip, the same vectors as QtDMM's test_hid."""
+    """Report layouts per chip (the shared vectors above cover the same; these
+    stay as readable examples)."""
 
     def test_ch9325_unpack(self):
         # 0xF0 | count, payload bytes carry the top bit

@@ -15,6 +15,13 @@ Documentation for people working on QtDMM itself. Planned pages:
   the protocol entry in `src/ui/uidmmprefs.ui` (whose order must currently match
   the enum), and the protocol specification and test vectors under
   `docs/protocols/spec/`.
+- **Adding a USB-HID cable chip** — the chip table and report layouts live
+  twice, in `src/portdevices/hidserial.cpp` (QtDMM) and
+  `tools/qtdmm-bridge/qtdmm_bridge.py` (the bridge). Both are tested against
+  the same vectors, `tests/data/hid_cables.json`, and
+  `tests/generate_docs.py --check` (ctest `docs_generated`) fails when either
+  table drifts from that file - so a new chip goes into the JSON first, then
+  into both implementations.
 
 None of these pages exist yet. The architecture is documented in the code
 itself, see below.
