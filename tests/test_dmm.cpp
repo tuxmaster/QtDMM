@@ -143,7 +143,8 @@ int main(int argc, char **argv)
   refused.setReconnectInterval(0);
   refused.setDevice(QString("RFC2217 127.0.0.1:%1").arg(deadPort));
   check(refused.open(), "open() itself succeeds (connect is asynchronous)");
-  check(waitFor([&] { return refused.linkState() == DMM::LinkState::Error; }, 3000),
+  // Windows reports a refused loopback connect only after its SYN retries (~3 s)
+  check(waitFor([&] { return refused.linkState() == DMM::LinkState::Error; }, 15000),
         QString("refused connection -> Error (is %1)").arg(name(refused.linkState())));
   check(!refused.errorString().isEmpty() && refused.errorString().contains("Lost connection"),
         "reason reported: " + refused.errorString());
