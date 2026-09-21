@@ -1,0 +1,100 @@
+protocol: Fluke45
+decoder: src/decoders/fluke45.cpp
+devices: [Fluke 45]
+frames_per_reading: 1
+unit_map:                      # spec spelling -> what the decoder emits
+  "u": "µ"
+sources:
+  - docs/protocols/sources/fluke_45_users_manual.pdf
+
+# Polled protocol: QtDMM sends "FUNC1?;AUTO?;MOD?;VAL1?\r", the meter answers
+# the four response units in one line ("VDC;1;0;+1.2345E+0" CR LF) followed by
+# its prompt line ("=>" CR LF). Frames are variable-length lines; vectors that
+# start with "3D 3E 0D 0A" carry the previous poll's prompt in front of the
+# response, the last one an echo of the query (meter Echo "On"), as the reader
+# hands them to the decoder. Values are NR3 in base units (chapter 5, "How the
+# Meter Processes Output": +1.2345E+0, +12.345E+6, ±1E+9 = overload), FUNC1?
+# returns the function mnemonic (Table 5-8), AUTO? "1"/"0", MOD? the modifier
+# sum (1 MN, 2 MX, 4 HOLD, 8 dB, 16 dB power, 32 REL). No capture available:
+# the lines are built from those tables.
+vectors:
+  - source_line: "VDC;1;0;+1.2345E+0"
+    bytes: 3D 3E 0D 0A 56 44 43 3B 31 3B 30 3B 2B 31 2E 32 33 34 35 45 2B 30 0D 0A
+    reading: {value: "1.2345", unit: "V", coupling: DC, range_mode: auto}
+    expect: {special: DC, val: "1.2345"}
+  - source_line: "VDC;0;0;-121.43E+0"
+    bytes: 56 44 43 3B 30 3B 30 3B 2D 31 32 31 2E 34 33 45 2B 30 0D 0A
+    reading: {value: "-121.43", unit: "V", coupling: DC, range_mode: manual}
+    expect: {special: DC, val: "-121.43"}
+  - source_line: "VDC;1;0;+12.345E-3"
+    bytes: 3D 3E 0D 0A 56 44 43 3B 31 3B 30 3B 2B 31 32 2E 33 34 35 45 2D 33 0D 0A
+    reading: {value: "12.345", unit: "mV", coupling: DC, range_mode: auto}
+    expect: {special: DC, val: "12.345"}
+  - source_line: "VAC;1;0;+230.12E+0"
+    bytes: 56 41 43 3B 31 3B 30 3B 2B 32 33 30 2E 31 32 45 2B 30 0D 0A
+    reading: {value: "230.12", unit: "V", coupling: AC, range_mode: auto}
+    expect: {special: AC}
+  - source_line: "VACDC;1;0;+5.0012E+0"
+    bytes: 56 41 43 44 43 3B 31 3B 30 3B 2B 35 2E 30 30 31 32 45 2B 30 0D 0A
+    reading: {value: "5.0012", unit: "V", coupling: ACDC, range_mode: auto}
+    expect: {special: ACDC}
+  - source_line: "ADC;1;0;+979.00E-6"
+    bytes: 41 44 43 3B 31 3B 30 3B 2B 39 37 39 2E 30 30 45 2D 36 0D 0A
+    reading: {value: "979.00", unit: "uA", coupling: DC, range_mode: auto}
+    expect: {special: DC, val: "979.00"}
+  - source_line: "AAC;0;0;+1.0000E+0"
+    bytes: 41 41 43 3B 30 3B 30 3B 2B 31 2E 30 30 30 30 45 2B 30 0D 0A
+    reading: {value: "1.0000", unit: "A", coupling: AC, range_mode: manual}
+    expect: {special: AC}
+  - source_line: "AACDC;1;0;+250.00E-3"
+    bytes: 41 41 43 44 43 3B 31 3B 30 3B 2B 32 35 30 2E 30 30 45 2D 33 0D 0A
+    reading: {value: "250.00", unit: "mA", coupling: ACDC, range_mode: auto}
+    expect: {special: ACDC}
+  - source_line: "OHMS;1;0;+12.345E+6"
+    bytes: 3D 3E 0D 0A 4F 48 4D 53 3B 31 3B 30 3B 2B 31 32 2E 33 34 35 45 2B 36 0D 0A
+    reading: {value: "12.345", unit: "MOhm", function: resistance, range_mode: auto}
+    expect: {special: OH, val: "12.345"}
+  - source_line: "OHMS;1;0;+1.0023E+3"
+    bytes: 4F 48 4D 53 3B 31 3B 30 3B 2B 31 2E 30 30 32 33 45 2B 33 0D 0A
+    reading: {value: "1.0023", unit: "kOhm", function: resistance, range_mode: auto}
+    expect: {special: OH}
+  - source_line: "OHMS;1;0;+1E+9"
+    bytes: 4F 48 4D 53 3B 31 3B 30 3B 2B 31 45 2B 39 0D 0A
+    reading: {value: "OL", unit: "Ohm", function: resistance, range_mode: auto}
+    expect: {special: OH, val: "OL"}
+  - source_line: "VDC;0;0;-1E+9"
+    bytes: 56 44 43 3B 30 3B 30 3B 2D 31 45 2B 39 0D 0A
+    reading: {value: "-OL", unit: "V", coupling: DC, range_mode: manual}
+    expect: {special: DC, val: "-OL"}
+  - source_line: "FREQ;1;0;+50.012E+0"
+    bytes: 46 52 45 51 3B 31 3B 30 3B 2B 35 30 2E 30 31 32 45 2B 30 0D 0A
+    reading: {value: "50.012", unit: "Hz", function: frequency, range_mode: auto}
+    expect: {special: FR}
+  - source_line: "FREQ;1;0;+10.006E+3"
+    bytes: 46 52 45 51 3B 31 3B 30 3B 2B 31 30 2E 30 30 36 45 2B 33 0D 0A
+    reading: {value: "10.006", unit: "kHz", function: frequency, range_mode: auto}
+    expect: {special: FR, val: "10.006"}
+  - source_line: "DIODE;0;0;+0.6512E+0"
+    bytes: 44 49 4F 44 45 3B 30 3B 30 3B 2B 30 2E 36 35 31 32 45 2B 30 0D 0A
+    reading: {value: "0.6512", unit: "V", function: diode, range_mode: manual}
+    expect: {special: DI}
+  - source_line: "CONT;0;0;+0.0123E+0"
+    bytes: 43 4F 4E 54 3B 30 3B 30 3B 2B 30 2E 30 31 32 33 45 2B 30 0D 0A
+    reading: {value: "0.0123", unit: "V", function: continuity, range_mode: manual}
+    expect: {special: BUZ}
+  - source_line: "VDC;0;4;+1.2345E+0"
+    bytes: 56 44 43 3B 30 3B 34 3B 2B 31 2E 32 33 34 35 45 2B 30 0D 0A
+    reading: {value: "1.2345", unit: "V", coupling: DC, range_mode: manual, flags: [HOLD]}
+    expect: {special: DC}
+  - source_line: "VAC;0;8;-3.52E+0"
+    bytes: 56 41 43 3B 30 3B 38 3B 2D 33 2E 35 32 45 2B 30 0D 0A
+    reading: {value: "-3.52", unit: "dBm", coupling: AC, range_mode: manual}
+    expect: {special: AC}
+  - source_line: "VAC;0;16;+2.5000E+0"
+    bytes: 56 41 43 3B 30 3B 31 36 3B 2B 32 2E 35 30 30 30 45 2B 30 0D 0A
+    reading: {value: "2.5000", unit: "W", coupling: AC, range_mode: manual}
+    expect: {special: AC}
+  - source_line: "VDC;1;0;+1.2345E+0"
+    bytes: 46 55 4E 43 31 3F 3B 41 55 54 4F 3F 3B 4D 4F 44 3F 3B 56 41 4C 31 3F 0D 0A 56 44 43 3B 31 3B 30 3B 2B 31 2E 32 33 34 35 45 2B 30 0D 0A
+    reading: {value: "1.2345", unit: "V", coupling: DC, range_mode: auto}
+    expect: {special: DC}

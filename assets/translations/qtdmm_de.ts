@@ -946,6 +946,11 @@ Please choose which instance should record.</translation>
         <source>variable bytes ASCII, polled with QM (Fluke 18x/28x)</source>
         <translation>variable Länge ASCII, abgefragt mit QM (Fluke 18x/28x)</translation>
     </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="45"/>
+        <source>variable bytes ASCII, polled (Fluke 45 bench meter)</source>
+        <translation>variable Länge ASCII, abgefragt (Fluke 45 Tischmultimeter)</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

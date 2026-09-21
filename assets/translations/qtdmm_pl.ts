@@ -945,6 +945,11 @@ Wybierz, która instancja ma rejestrować.</translation>
         <source>variable bytes ASCII, polled with QM (Fluke 18x/28x)</source>
         <translation>zmienna liczba bajtów ASCII, odpytywany przez QM (Fluke 18x/28x)</translation>
     </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="45"/>
+        <source>variable bytes ASCII, polled (Fluke 45 bench meter)</source>
+        <translation>zmienna liczba bajtów ASCII, odpytywany (multimetr stołowy Fluke 45)</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

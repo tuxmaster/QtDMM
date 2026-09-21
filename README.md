@@ -102,6 +102,7 @@ meter working, please report it on the
 | Fluke | 189 ¹ | - | `FlukeQM` | 9600 8N1 | - | 50000 |
 | Fluke | 287 ¹ | - | `FlukeQM` | 115200 8N1 | - | 50000 |
 | Fluke | 289 ¹ | - | `FlukeQM` | 115200 8N1 | - | 50000 |
+| Fluke | 45 ¹ | - | `Fluke45` | 9600 8N1 | - | 100000 |
 | Fluke | 87-IV ¹ | - | `FlukeQM` | 9600 8N1 | - | 20000 |
 | Fluke | 89-IV ¹ | - | `FlukeQM` | 9600 8N1 | - | 50000 |
 | Generic | DTM0660 4000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 4000 |
@@ -214,7 +215,7 @@ meter working, please report it on the
 
 ¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
 
-133 devices across 31 vendors.
+134 devices across 31 vendors.
 
 ## Command line
 

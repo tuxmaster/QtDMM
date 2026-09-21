@@ -27,6 +27,7 @@ regression tests.
 | `cyrustek_es51986.cpp` | `CyrustekES51986` | Iso-Tech IDM 73, Tenma 72-1016, Uni-Trend UT803 | `UT803.log` | yes |
 | `do3122.cpp` | `DO3122Continuous` | Duratool DO3122 | — | none |
 | `fluke_qm.cpp` | `FlukeQM` | Fluke 87-IV/89-IV/187/189 (9600 Bd) and 287/289 (115200 Bd) over the IR serial adapter (unconfirmed) | `fluke_18x_remote.pdf`, `fluke_28x_remote.pdf` (Fluke's Remote Interface Specifications; no capture) | yes, from the specifications' examples |
+| `fluke45.cpp` | `Fluke45` | Fluke 45 bench meter, RS-232 (unconfirmed) | `fluke_45_users_manual.pdf` (chapter 5; no capture) | yes, built from the manual's tables |
 | `gdm703.cpp` | `GDM703Continuous` | Voltcraft GDM 703/704/705 (unconfirmed; chip WENS98A per the [sigrok IC list](https://sigrok.org/wiki/Multimeter_ICs)) | — (layout from Toussaint's CDMM, `ablage/CDMM`) | synthetic |
 | `dtm0660.cpp` | `DTM0660` | Generic DTM0660 (4000/6000/8000 count) | — | none |
 | `m9803r.cpp` | `M9803RContinuous` | ELV M9803R, MASTECH M9803R, McVoice M-980T | — | none |
@@ -36,10 +37,12 @@ regression tests.
 | `vc870.cpp` | `VC870Continuous` | Voltcraft VC 870 | — | none |
 | `vc940.cpp` | `VC940Continuous` | Tenma 72-7732, Uni-Trend UT71B/UT71CDE/UT804, Voltcraft VC 920/940/960 | `UT71BCDE.log`, `UT804.log` | yes |
 
-`FlukeQM` is the one polled protocol with variable-length frames: QtDMM sends
-`QM\r` once a second, the meter answers with a CMD_ACK line (`0\r`) and one
-reading line. The reader hands everything since the previous frame to the
-decoder (`getPacketLength()` 0), which takes the last line.
+`FlukeQM` and `Fluke45` are polled protocols with variable-length frames:
+QtDMM sends the query once a second (`QM\r`, or `FUNC1?;AUTO?;MOD?;VAL1?\r`
+for the 45), the meter answers with status lines (CMD_ACK `0\r`, the 45's
+`=>` prompt or a command echo) and one reading line. The reader hands
+everything since the previous frame to the decoder (`getPacketLength()` 0),
+which takes the last line.
 
 Two protocol families transmit every telegram twice in a row (UT803, UT70B, and
 the VC940 per the original implementation); their decoders deliberately accept
@@ -57,6 +60,8 @@ this as `frames_per_reading: 2`.
 - `fluke_18x_remote.pdf`, `fluke_28x_remote.pdf` — Fluke's Remote Interface
   Specifications for the 189/187/89-IV/87-IV and the 289/287; the `QM`
   examples in them are the test vectors of `spec/fluke_qm.yaml`.
+- `fluke_45_users_manual.pdf` — the Fluke 45 Users Manual; chapter 5
+  (computer interface) is the source of `spec/fluke45.yaml`.
 - `ES232.pdf`, `FS9922-DMM4-DS-15_EN.pdf`, `BM250-BM250s-6000-count-digital-multimeters-r1.pdf`
   — chip and meter documents whose mapping to a decoder has not been confirmed
   here; do not assume one without checking.

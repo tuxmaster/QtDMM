@@ -210,6 +210,54 @@ int main(int argc, char **argv)
     meter.close();
   }
 
+  // --- 8. Fluke 45: compound query, answer line plus prompt line ---
+  // Echo "On" on the meter echoes the query first; the echo and the prompt
+  // must not surface as frames (they would show as "Error").
+  {
+    QTcpServer bench;
+    check(bench.listen(QHostAddress::LocalHost, 0), "fluke 45 server listens");
+    QTcpSocket *client = nullptr;
+    QByteArray received;
+    int polls = 0;
+    QObject::connect(&bench, &QTcpServer::newConnection, [&]
+    {
+      client = bench.nextPendingConnection();
+      QObject::connect(client, &QTcpSocket::readyRead, [&]
+      {
+        received += client->readAll();
+        while (received.contains("VAL1?\r"))
+        {
+          received.remove(0, received.indexOf("VAL1?\r") + 6);
+          ++polls;
+          client->write("FUNC1?;AUTO?;MOD?;VAL1?\r\nOHMS;1;0;+12.345E+6\r\n=>\r\n");
+          client->flush();
+        }
+      });
+    });
+
+    DMM meter(nullptr);
+    DmmDecoder::DMMInfo benchInfo;
+    benchInfo.baud = 9600;
+    benchInfo.bits = 8;
+    meter.setDmmInfo(benchInfo);
+    meter.setFormat(ReadEvent::Fluke45);
+    meter.setDevice(QString("RFC2217 127.0.0.1:%1").arg(bench.serverPort()));
+    int readings45 = 0;
+    QString lastVal, lastUnit;
+    QObject::connect(&meter, &DMM::value, [&](double, const QString &val, const QString &unit)
+    {
+      ++readings45;
+      lastVal = val;
+      lastUnit = unit;
+    });
+    check(meter.open(), "fluke 45 open()");
+    check(waitFor([&] { return polls >= 2 && readings45 >= 2; }, 6000), "fluke 45 polled twice, two readings");
+    check(lastVal == "12.345" && lastUnit == "MOhm", "fluke 45 reading 12.345 MOhm: " + lastVal + " " + lastUnit);
+    check(meter.linkState() == DMM::LinkState::Connected && !meter.errorString().startsWith("Error"),
+          "fluke 45 Connected without error text: " + meter.errorString());
+    meter.close();
+  }
+
   if (failed == 0)
     qInfo() << "All DMM link state tests passed.";
   else

@@ -63,6 +63,7 @@ public:
     BrymenBM52x,
     BrymenBM82x,
     FlukeQM,
+    Fluke45,
     EndOfList              // new stuff always before!
   };
 
