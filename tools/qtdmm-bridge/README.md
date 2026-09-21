@@ -91,9 +91,33 @@ device = "/dev/ttyUSB1"
 ```
 
 ```bash
+./qtdmm_bridge.py --print-config > qtdmm-bridge.toml   # one entry per detected device, then edit
 ./qtdmm_bridge.py -c /etc/qtdmm-bridge.toml
-./qtdmm_bridge.py --port 4000=/dev/ttyUSB0 --print-config > qtdmm-bridge.toml   # a starting point
 ```
+
+### As a service (systemd)
+
+`qtdmm-bridge.service` has the steps in its header; in short:
+
+```bash
+sudo cp qtdmm_bridge.py /usr/local/bin/qtdmm-bridge && sudo chmod +x /usr/local/bin/qtdmm-bridge
+qtdmm-bridge --print-config | sudo tee /etc/qtdmm-bridge.toml     # then edit names/ports
+sudo useradd --system --no-create-home --groups dialout,plugdev qtdmm-bridge
+sudo cp qtdmm-bridge.service /etc/systemd/system/
+sudo systemctl daemon-reload && sudo systemctl enable --now qtdmm-bridge
+journalctl -u qtdmm-bridge -f
+```
+
+The unit runs unprivileged with access to the serial and hidraw device nodes
+only; for a UART on other pins add a `DeviceAllow=` line.
+
+### Finding the bridge (mDNS)
+
+With `mdns = true` in the configuration (or `--mdns`) each port is announced
+as a `_qtdmm-bridge._tcp` service - address, port, device and name in the TXT
+record. This needs the `zeroconf` package (`pip install zeroconf` or
+`apt install python3-zeroconf`); without it the bridge logs a warning and
+carries on. `avahi-browse -rt _qtdmm-bridge._tcp` shows what is announced.
 
 ## Behaviour
 
@@ -128,8 +152,8 @@ sudo usermod -aG dialout $USER     # log out and in again
 
 ## Not yet
 
-- A systemd unit and mDNS announcement - planned.
 - HID cables on Windows/macOS (hidraw is Linux); serial ports work everywhere.
+- QtDMM does not browse mDNS itself yet; the address is typed in.
 
 ## Tests
 

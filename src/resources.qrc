@@ -42,6 +42,7 @@
         <file alias="index.md">../docs/user/index.md</file>
         <file alias="keyboard.md">../docs/user/keyboard.md</file>
         <file alias="recorder.md">../docs/user/recorder.md</file>
+        <file alias="remote-bridge.md">../docs/user/remote-bridge.md</file>
         <file alias="supported-devices.md">../docs/user/supported-devices.md</file>
         <file alias="troubleshooting.md">../docs/user/troubleshooting.md</file>
     </qresource>
