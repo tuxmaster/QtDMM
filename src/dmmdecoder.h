@@ -78,6 +78,7 @@ public:
     bool  rts;                      ///< drive RTS high (some cables are powered from it)
     bool  dtr;                      ///< drive DTR high
     QString sigrokExe;              ///< sigrok-cli path for SigrokDevice, empty otherwise
+    QString sigrokDriver;           ///< libsigrok driver of a bench meter read through sigrok-cli ("scpi-dmm"), empty otherwise
   };
 
   explicit DmmDecoder(ReadEvent::DataFormat df);

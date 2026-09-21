@@ -14,6 +14,7 @@ nav:
       - Readings table: user/readings-table.md
       - Supported devices: user/supported-devices.md
       - Calculated values: user/calculated-values.md
+      - Bench meters through sigrok-cli: user/bench-meters.md
       - Bluetooth LE: user/bluetooth.md
       - Meters over the network: user/remote-bridge.md
       - Command line: user/command-line.md

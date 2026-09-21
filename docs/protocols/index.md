@@ -18,7 +18,7 @@ regression tests.
 
 | Decoder | Protocol (`ReadEvent`) | Devices | Captures in `sources/` | Test vectors |
 |---|---|---|---|---|
-| `ascii.cpp` | `Metex14`, `PeakTech10`, `Voltcraft14Continuous`, `Voltcraft15Continuous`, `Sigrok` | 41 devices: Metex M-3xxx/M-46xx/ME-xx, Voltcraft M-36xx/M-46xx/ME-xx/VC 6xx, PeakTech 4xxx/451, Mastech MAS-34x, Radioshack 22-805/RS22-168A, Digitech QM1350, McVoice M-345pro, Sinometer MAS-343 | `metex-22t.log` (Voltcraft ME-22T) | Metex14: yes |
+| `ascii.cpp` | `Metex14`, `PeakTech10`, `Voltcraft14Continuous`, `Voltcraft15Continuous`, `Sigrok` | 48 devices (`Sigrok`: the SCPI bench meters of `sigrok_devices.cpp` - Keysight 34465A, Agilent 3440xA/34410A, HP 34401A, Siglent SDM3055 - read through sigrok-cli's `scpi-dmm` driver): Metex M-3xxx/M-46xx/ME-xx, Voltcraft M-36xx/M-46xx/ME-xx/VC 6xx, PeakTech 4xxx/451, Mastech MAS-34x, Radioshack 22-805/RS22-168A, Digitech QM1350, McVoice M-345pro, Sinometer MAS-343 | `metex-22t.log` (Voltcraft ME-22T) | Metex14: yes |
 | `brymen_bm52x.cpp` | `BrymenBM52x`, `BrymenBM82x` | Brymen BM525s, BM829s over the BU-86X adapter (unconfirmed) | — (layout from libsigrok's `bm52x.c`, live readings only) | synthetic |
 | `brymen_bm86x.cpp` | `BrymenBM86x` | Brymen BM867s, BM869s over the BU-86X adapter (unconfirmed) | — (layout from libsigrok's `bm86x.c`) | synthetic |
 | `brymen_bm25x.cpp` | `BrymenBM25x` | Brymen BM250/251/252/257 (unconfirmed) | — (layout from libsigrok's `bm25x.c`) | synthetic |

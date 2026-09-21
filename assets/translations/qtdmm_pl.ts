@@ -14,7 +14,7 @@
         <translation>Klucz szyfrowania musi mieć 32 cyfry szesnastkowe (VictronConnect: Informacje o produkcie, Natychmiastowy odczyt przez Bluetooth).</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/ble.cpp" line="106"/>
+        <location filename="../../src/portdevices/ble.cpp" line="112"/>
         <source>The encryption key does not match %1.</source>
         <translation>Klucz szyfrowania nie pasuje do %1.</translation>
     </message>
@@ -423,74 +423,109 @@ Czy multimetr jest podłączony i włączony?</translation>
         <translation>&lt;b&gt;Tutaj skonfigurujesz port szeregowy i protokół multimetru. Dostępnych jest też wiele predefiniowanych modeli.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="107"/>
+        <location filename="../../src/dmmprefs.cpp" line="110"/>
         <source>Manual settings</source>
         <translation>Ustawienia ręczne</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="108"/>
+        <location filename="../../src/dmmprefs.cpp" line="111"/>
         <source>All vendors</source>
         <translation>Wszyscy producenci</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="408"/>
-        <location filename="../../src/dmmprefs.cpp" line="455"/>
+        <location filename="../../src/dmmprefs.cpp" line="420"/>
+        <location filename="../../src/dmmprefs.cpp" line="489"/>
         <source>Position %1: %2</source>
         <translation>Pozycja %1: %2</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="471"/>
+        <location filename="../../src/dmmprefs.cpp" line="505"/>
         <source>%1: no such instance running</source>
         <translation>%1: nie działa instancja o takiej nazwie</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="481"/>
+        <location filename="../../src/dmmprefs.cpp" line="515"/>
         <source>Running instances: %1</source>
         <translation>Działające instancje: %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="483"/>
+        <location filename="../../src/dmmprefs.cpp" line="517"/>
         <source>No other instance is running.</source>
         <translation>Nie działa żadna inna instancja.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="682"/>
+        <location filename="../../src/dmmprefs.cpp" line="716"/>
         <source>none</source>
         <translation>brak</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="701"/>
+        <location filename="../../src/dmmprefs.cpp" line="779"/>
+        <source>%1 was not found or does not run. Install sigrok-cli, or set its path under &lt;a href=&quot;ports&quot;&gt;Special ports&lt;/a&gt;.</source>
+        <translation>Nie znaleziono %1 lub nie da się uruchomić. Zainstaluj sigrok-cli lub ustaw jego ścieżkę w &lt;a href=&quot;ports&quot;&gt;Portach specjalnych&lt;/a&gt;.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="782"/>
+        <source>%1 has no driver &quot;%2&quot;; see sigrok-cli --list-supported.</source>
+        <translation>%1 nie ma sterownika „%2”; zobacz sigrok-cli --list-supported.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="784"/>
+        <source>%1 found.</source>
+        <translation>Znaleziono %1.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="794"/>
+        <source>Running %1 --driver %2 --scan ...</source>
+        <translation>Trwa %1 --driver %2 --scan…</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="816"/>
+        <source>No meter answered within 30 s (a serial port without a SCPI meter keeps sigrok-cli waiting).</source>
+        <translation>Żaden miernik nie odpowiedział w ciągu 30 s (port szeregowy bez miernika SCPI każe sigrok-cli czekać bez końca).</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="818"/>
+        <source>Found: %1</source>
+        <translation>Znaleziono: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="820"/>
+        <source>No meter answered.</source>
+        <translation>Żaden miernik nie odpowiedział.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="831"/>
         <source>Pick the device or type its Bluetooth address.</source>
         <translation>Wybierz urządzenie lub wpisz jego adres Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="703"/>
+        <location filename="../../src/dmmprefs.cpp" line="833"/>
         <source>The key is the 32-digit &quot;Encryption key&quot; VictronConnect shows under Product info, Instant readout via Bluetooth.</source>
         <translation>Klucz to 32-cyfrowy „klucz szyfrowania&quot;, który VictronConnect pokazuje w Informacjach o produkcie, Natychmiastowy odczyt przez Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="712"/>
+        <location filename="../../src/dmmprefs.cpp" line="842"/>
         <source>Scanning for Victron devices (5 s)...</source>
         <translation>Wyszukiwanie urządzeń Victron (5 s)…</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="723"/>
+        <location filename="../../src/dmmprefs.cpp" line="853"/>
         <source>No Victron device found. Is Bluetooth on, and Instant readout enabled on the device?</source>
         <translation>Nie znaleziono urządzenia Victron. Czy Bluetooth jest włączony, a natychmiastowy odczyt włączony w urządzeniu?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="747"/>
+        <location filename="../../src/dmmprefs.cpp" line="890"/>
         <source>Load DMM description</source>
         <translation>Wczytaj opis multimetru</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="747"/>
-        <location filename="../../src/dmmprefs.cpp" line="773"/>
+        <location filename="../../src/dmmprefs.cpp" line="890"/>
+        <location filename="../../src/dmmprefs.cpp" line="916"/>
         <source>DMM description (*.cfg)</source>
         <translation>Opis multimetru (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="773"/>
+        <location filename="../../src/dmmprefs.cpp" line="916"/>
         <source>Save DMM description</source>
         <translation>Zapisz opis multimetru</translation>
     </message>
@@ -1570,131 +1605,176 @@ Następnie wyloguj się i zaloguj ponownie, aby członkostwo w grupie zaczęło 
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="744"/>
+        <source>sigrok-cli</source>
+        <translation>sigrok-cli</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="750"/>
+        <source>&amp;Driver:</source>
+        <translation>&amp;Sterownik:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="760"/>
+        <source>The libsigrok driver for this meter, filled in from the model. Change it only if sigrok-cli --list-supported names another one for your meter.</source>
+        <translation>Sterownik libsigrok tego miernika, wypełniony na podstawie modelu. Zmień tylko wtedy, gdy sigrok-cli --list-supported podaje inny dla twojego miernika.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="767"/>
+        <source>&amp;Connection:</source>
+        <translation>&amp;Połączenie:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="777"/>
+        <source>How sigrok-cli reaches the meter (its conn= option): a serial port such as /dev/ttyUSB0 or COM3, usbtmc/&lt;vid&gt;.&lt;pid&gt; for USB-TMC, tcp-raw/&lt;host&gt;/5025 for LAN.</source>
+        <translation>Jak sigrok-cli dociera do miernika (jego opcja conn=): port szeregowy jak /dev/ttyUSB0 lub COM3, usbtmc/&lt;vid&gt;.&lt;pid&gt; dla USB-TMC, tcp-raw/&lt;host&gt;/5025 dla LAN.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="793"/>
+        <source>&amp;Test</source>
+        <translation>&amp;Testuj</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="796"/>
+        <source>Runs sigrok-cli --scan with these settings and shows whether the meter answers.</source>
+        <translation>Uruchamia sigrok-cli --scan z tymi ustawieniami i pokazuje, czy miernik odpowiada.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="803"/>
+        <source>&amp;Options:</source>
+        <translation>&amp;Opcje:</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="813"/>
+        <source>Further driver options, colon separated, e.g. serialcomm=9600/8n1 for a serial connection.</source>
+        <translation>Dalsze opcje sterownika, oddzielone dwukropkiem, np. serialcomm=9600/8n1 dla połączenia szeregowego.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uidmmprefs.ui" line="839"/>
         <source>Signal</source>
         <translation>Sygnał</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="750"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="845"/>
         <source>&amp;Waveform:</source>
         <translation>&amp;Przebieg:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="760"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="855"/>
         <source>What the virtual meter shows over time. Constant and Random stay within Min..Max; the periodic waveforms swing between Min and Max once per Period; Discharge falls from Max towards Min with the time constant Period; Custom uses your own formula (t = seconds since connecting).</source>
         <translation>Co miernik wirtualny pokazuje w czasie. Stała i Losowy pozostają w zakresie Min..Maks; przebiegi okresowe oscylują między Min i Maks raz na okres; Rozładowanie opada od Maks do Min ze stałą czasową Okres; Własny wzór używa Twojego wzoru (t = sekundy od połączenia).</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="762"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="857"/>
         <source>Constant</source>
         <translation>Stała</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="763"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="858"/>
         <source>Random</source>
         <translation>Losowy</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="764"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="859"/>
         <source>Sine</source>
         <translation>Sinus</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="765"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="860"/>
         <source>Triangle</source>
         <translation>Trójkąt</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="766"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="861"/>
         <source>Square</source>
         <translation>Prostokąt</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="767"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="862"/>
         <source>Sawtooth</source>
         <translation>Piła</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="768"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="863"/>
         <source>Discharge</source>
         <translation>Rozładowanie</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="769"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="864"/>
         <source>Custom formula</source>
         <translation>Własny wzór</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="775"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="870"/>
         <source>U&amp;nit:</source>
         <translation>Jed&amp;nostka:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="798"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="893"/>
         <source>Cou&amp;pling:</source>
         <translation>S&amp;przężenie:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="814"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="909"/>
         <source>M&amp;in:</source>
         <translation>M&amp;in:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="831"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="926"/>
         <source>Ma&amp;x:</source>
         <translation>Ma&amp;ks:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="848"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="943"/>
         <source>Peri&amp;od (s):</source>
         <translation>&amp;Okres (s):</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="865"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="960"/>
         <source>Noi&amp;se:</source>
         <translation>&amp;Szum:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="875"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="970"/>
         <source>Peak-to-peak amplitude of random noise added to the signal, in the unit above. 0 for a clean signal.</source>
         <translation>Amplituda międzyszczytowa losowego szumu dodawanego do sygnału, w powyższej jednostce. 0 dla czystego sygnału.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="885"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="980"/>
         <source>Formu&amp;la:</source>
         <translation>Wz&amp;ór:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="895"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="990"/>
         <source>The formula the waveform above expands to; editable with Custom formula. t is the time in seconds since connecting, pi, sin, cos, exp, floor, sqrt, abs, rand() and the readings of other instances may be used.</source>
         <translation>Wzór, do którego rozwija się powyższy przebieg; edytowalny przy Własnym wzorze. t to czas w sekundach od połączenia; można używać pi, sin, cos, exp, floor, sqrt, abs, rand() oraz odczytów innych instancji.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="905"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1000"/>
         <source>Protocol</source>
         <translation>Protokół</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="911"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1006"/>
         <source>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</source>
         <translation>Wybierz tutaj typ komunikacji. Jeśli Twój multimetr nie jest „oficjalnie” obsługiwany, wypróbuj istniejące protokoły – przy odrobinie szczęścia któryś zadziała. Jeśli znajdziesz działające ustawienia, zgłoś je.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="925"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1020"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Liczba wartości:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="935"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1030"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Niektóre multimetry wysyłają kilka linii z różnymi wartościami. Ponieważ QtDMM pokazuje jedną wielkość, podaj tutaj liczbę linii pomijanych na pomiar (QtDMM używa tylko pierwszej linii).</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="993"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1088"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocol settings have not been confirmed by a user yet. If you own this model and can confirm that they work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Te ustawienia protokołu nie zostały jeszcze potwierdzone przez użytkownika. Jeśli masz ten model i możesz potwierdzić, że działają, zgłoś to na &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="1018"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="1113"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; with the model and the settings. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jeśli Twojego multimetru nie ma na liście, a znalazłeś działające ustawienia ręczne, zgłoś je na &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; wraz z modelem. Przyszli użytkownicy tego multimetru skorzystają z Twojej pomocy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>

@@ -30,7 +30,7 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
   - RS232 Serial (USB-Serial and native UART)
   - USB HID-serial support (HOITEK HE2325U & compatible)
   - RFC2217 remote serial, with **qtdmm-bridge** to serve serial and HID meters from a Raspberry Pi (see [Meters over the network](docs/user/remote-bridge.md))
-  - Sigrok support via sigrok-cli application
+  - Sigrok support via sigrok-cli application - Keysight, Agilent, HP and Siglent SCPI bench meters are in the model list (see [Bench meters](docs/user/bench-meters.md))
   - Bluetooth LE: Victron SmartShunt / BMV-712, SmartSolar / BlueSolar MPPT and Phoenix Inverter Smart over their encrypted "Instant Readout" broadcasts (see [Bluetooth LE](docs/user/bluetooth.md))
 - supports lots of DMMs, see [Supported devices](docs/user/supported-devices.md)
   - custom serial settings dialog for yet unknown DMMs
@@ -80,6 +80,9 @@ meter working, please report it on the
 
 | Vendor | Model | Chip | Protocol | Serial | Lines | Counts |
 |---|---|---|---|---|---|---|
+| Agilent | 34405A (sigrok) ¹ | - | `Sigrok` | sigrok-cli | - | 100000 |
+| Agilent | 34410A (sigrok) ¹ | - | `Sigrok` | sigrok-cli | - | 1000000 |
+| Agilent | 34460A (sigrok) ¹ | - | `Sigrok` | sigrok-cli | - | 1000000 |
 | APPA | 71 ¹ | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
 | APPA | 73 ¹ | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
 | Brymen | BM250 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
@@ -112,7 +115,9 @@ meter working, please report it on the
 | Generic | DTM0660 8000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 8000 |
 | GW Instek | GDM-397 ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
 | HoldPeak | HP-90EPC | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| HP | 34401A (sigrok) ¹ | - | `Sigrok` | sigrok-cli | - | 1000000 |
 | Iso-Tech | IDM 73 | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
+| Keysight | 34465A (sigrok) ¹ | - | `Sigrok` | sigrok-cli | - | 1000000 |
 | MASTECH | M9803R | - | `M9803RContinuous` | 9600 7E1 | DTR | 4000 |
 | MASTECH | MAS-343 | Metex KS57C2016 | `Metex14` | 600 7N2 | DTR | 4000 |
 | MASTECH | MAS-345 | Metex KS57C2016 | `Metex14` | 600 7N2 | DTR | 4000 |
@@ -154,6 +159,8 @@ meter working, please report it on the
 | Radioshack | 22-805 DMM | Metex KS57C2016 | `Metex14` | 600 7N2 | DTR | 4000 |
 | Radioshack | 22-812 | - | `RS22812Continuous` | 4800 8N1 | DTR | 4000 |
 | Radioshack | RS22-168A | Metex KS57C2016 | `Metex14` | 1200 7N2 | DTR | 4000 |
+| Siglent | SDM3055 (sigrok) ¹ | - | `Sigrok` | sigrok-cli | - | 200000 |
+| sigrok | SCPI DMM (any scpi-dmm model) ¹ | - | `Sigrok` | sigrok-cli | - | 100000 |
 | Sinometer | MAS-343 | Metex KS57C2016 | `Metex14` | 600 7N2 | DTR | 4000 |
 | SparkFun | 70C ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
 | Tecpel | DMM-8061 ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
@@ -222,7 +229,7 @@ meter working, please report it on the
 
 ¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
 
-139 devices across 32 vendors.
+146 devices across 37 vendors.
 
 ## Command line
 

@@ -122,6 +122,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
   // CREATE PAGES, in the order the list shows them
 
   m_dmm = new DmmPrefs(ui_stack);
+  connect(m_dmm, &DmmPrefs::showPortsPage, this, [this] { showPage(Ports); });
   m_dmm->setId(ConfigDlg::DMM);
   new ConfigItem(m_dmm->id(),
                  m_dmm->pixmap(),

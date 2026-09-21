@@ -72,8 +72,14 @@ public:
   bool           isVirtual() const;
   /// Victron over Bluetooth LE: the Bluetooth group replaces the port.
   bool           isBluetooth() const;
+  /// A bench meter read through sigrok-cli: the sigrok group replaces the port.
+  bool           isSigrokMeter() const;
   /// Source of the other instances' readings, shown as a hint below the formula.
   void           setStateManager(SharedStateManager *state);
+
+Q_SIGNALS:
+  /// The hint's link: the user wants the Special ports page (sigrok-cli path).
+  void           showPortsPage();
 
 public Q_SLOTS:
   virtual void   defaultsSLOT() Q_DECL_OVERRIDE;
@@ -98,6 +104,10 @@ protected Q_SLOTS:
   void           updateBleFields();
   /// Five-second scan for Victron devices, fills the device combo.
   void           on_ui_bleScan_clicked();
+  /// Checks sigrok-cli and the driver, explains what is missing.
+  void           updateSigrokHint();
+  /// sigrok-cli --scan with the current settings.
+  void           on_ui_sigrokTest_clicked();
 
 protected:
   QString        m_path;
