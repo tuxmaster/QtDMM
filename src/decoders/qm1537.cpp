@@ -13,6 +13,8 @@ static const bool registered = []() {
   DmmDecoder::addConfig({"Uni-Trend", "UT60D *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT61A *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
   DmmDecoder::addConfig({"Voltcraft", "VC 830 *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
+  DmmDecoder::addConfig({"GW Instek", "GDM-397 *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});   // libsigrok-master fs9922
+  DmmDecoder::addConfig({"PeakTech", "2025 *", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});      // libsigrok-master fs9922
   DmmDecoder::addConfig({"Uni-Trend", "UT61B", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT61C", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT61D", "", 2400, ReadEvent::QM1537Continuous, 8, 1, 1, 0, 6000, 0, 0, 1});
