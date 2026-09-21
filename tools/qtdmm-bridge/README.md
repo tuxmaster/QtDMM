@@ -28,7 +28,37 @@ scp qtdmm_bridge.py pi@raspberry:
 
 # stable names survive re-plugging in another order
 ./qtdmm_bridge.py --port 4000=/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller-if00-port0
+
+# a meter on a USB-HID cable (UT-D04/UT803 type, UT-D09, Brymen BU-86X), Linux
+./qtdmm_bridge.py --port 4001=hid:1a86:e008
 ```
+
+## USB-HID cables
+
+Many Uni-T meters (UT-D04 cable, UT803, UT61B/C/D, ...), the two UT-D09
+revisions and Brymen's BU-86X adapter are USB-HID devices, not serial ports.
+The bridge serves them like serial ports: it reads the HID reports directly
+from `/dev/hidrawN` (no extra library), unpacks the UART bytes and, where the
+chip takes one, turns the line settings QtDMM sends into the cable's feature
+report. In QtDMM the port is again an RFC2217 entry; the meter model is chosen
+as usual. Chips: CH9325/HE2325U (receive only, baud rate set by feature
+report), CP2110 (full UART), CH9329 (fixed 9600 8N1), BU-86X (fixed).
+
+Address a cable by `hid:VID:PID` (the first one attached) or by its node
+`hid:/dev/hidraw2`; `--list` prints both. Linux only.
+
+The user needs read/write access to the hidraw node. A udev rule does it:
+
+```
+# /etc/udev/rules.d/60-qtdmm-bridge.rules
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="e008", MODE="0660", GROUP="plugdev"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="04fa", ATTRS{idProduct}=="2490", MODE="0660", GROUP="plugdev"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea80", MODE="0660", GROUP="plugdev"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="e429", MODE="0660", GROUP="plugdev"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="0820", ATTRS{idProduct}=="0001", MODE="0660", GROUP="plugdev"
+```
+
+then `sudo udevadm control --reload && sudo udevadm trigger` and re-plug the cable.
 
 In QtDMM: *Settings → Special ports*, type **RFC2217**, address
 `raspberry:4000`; then choose the meter model as usual. The line settings of
@@ -98,9 +128,8 @@ sudo usermod -aG dialout $USER     # log out and in again
 
 ## Not yet
 
-- USB-HID meter cables (UT-D04/UT803, UT-D09, Brymen BU-86X) - planned; the
-  bridge already lists them.
 - A systemd unit and mDNS announcement - planned.
+- HID cables on Windows/macOS (hidraw is Linux); serial ports work everywhere.
 
 ## Tests
 

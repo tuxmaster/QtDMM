@@ -8,6 +8,7 @@ itself, so the bridge needs to know nothing about the meter - it is a dumb
 pipe that understands the telnet COM-PORT-OPTION commands.
 
     qtdmm_bridge.py --port 4000=/dev/ttyUSB0 --port 4001=/dev/serial/by-id/usb-...
+    qtdmm_bridge.py --port 4002=hid:1a86:e008          # a meter on a USB-HID cable (Linux)
     qtdmm_bridge.py -c /etc/qtdmm-bridge.toml
     qtdmm_bridge.py --list
 
@@ -266,14 +267,258 @@ class SerialBackend(Backend):
         self.on_error(msg)
 
 
+# ---------------------------------------------------------------------------
+# USB-HID meter cables (Linux hidraw, no extra library)
+#
+# The chips and report layouts mirror QtDMM's HIDSerialDevice; keep both in step.
+
+HID_CABLES = {
+    (0x04FA, 0x2490): ("CH9325", "Hoitek HE2325U (UT-D04 type)"),
+    (0x1A86, 0xE008): ("CH9325", "WCH CH9325 (UT-D04, UT803, ...)"),
+    (0x10C4, 0xEA80): ("CP2110", "SiLabs CP2110 (UT-D09, first revision)"),
+    (0x1A86, 0xE429): ("CH9329", "WCH CH9329 (UT-D09, second revision, fixed 9600 8N1)"),
+    (0x0820, 0x0001): ("BU86X", "Brymen BU-86X"),
+}
+
+
+def hidraw_devices() -> list[tuple[str, int, int]]:
+    """(/dev/hidrawN, vid, pid) for every hidraw node (Linux)."""
+    out = []
+    root = "/sys/class/hidraw"
+    if not os.path.isdir(root):
+        return out
+    for node in sorted(os.listdir(root)):
+        try:
+            with open(f"{root}/{node}/device/uevent") as f:
+                uevent = f.read()
+        except OSError:
+            continue
+        for line in uevent.splitlines():
+            if line.startswith("HID_ID="):
+                parts = line.split(":")
+                if len(parts) == 3:
+                    out.append((f"/dev/{node}", int(parts[1], 16), int(parts[2], 16)))
+    return out
+
+
+def unpack_hid_report(chip: str, report: bytes) -> Optional[bytes]:
+    """UART bytes carried in one input report; None for a malformed report."""
+    if not report:
+        return None
+    if chip == "BU86X":
+        return report  # the whole report is UART data
+    if chip in ("CH9329", "CP2110"):
+        # @0 count (0..63; on the CP2110 this is the report id), @1.. raw bytes
+        count = report[0]
+        if count > 63 or count > len(report) - 1:
+            return None
+        return report[1:1 + count]
+    # CH9325: @0 = 0xF0 | count (low 3 bits), @1.. bytes with the top bit set
+    count = report[0] & 0x07
+    if count > len(report) - 1:
+        return None
+    return bytes(b & 0x7F for b in report[1:1 + count])
+
+
+def pack_hid_write(chip: str, data: bytes) -> bytes:
+    """Output report for UART bytes (first byte = report id, hidraw style)."""
+    data = data[:63]
+    if chip == "BU86X":
+        return b"\x00" + data
+    if chip == "CH9329":
+        r = b"\x00" + bytes([len(data)]) + data
+        return r + b"\x00" * (65 - len(r))
+    if chip == "CP2110":
+        return bytes([len(data)]) + data
+    return b""  # CH9325 cables are receive-only
+
+
+def cp2110_config_report(s: LineSettings) -> bytes:
+    """Feature report 0x50: baud big endian, parity (0 none, 1 even, 2 odd),
+    flow control, data bits - 5, stop bits (0 = 1, 1 = 2)."""
+    baud = min(max(s.baudrate or 9600, 300), 1000000)
+    parity = {"N": 0, "E": 1, "O": 2}.get(s.parity, 0)
+    bits = s.bytesize if 5 <= s.bytesize <= 8 else 8
+    return bytes([0x50]) + baud.to_bytes(4, "big") + bytes([parity, 0, bits - 5, 1 if s.stopbits >= 2 else 0])
+
+
+def ch9325_config_report(s: LineSettings) -> bytes:
+    """Feature report (id 0): baud little endian, then data bits - 5."""
+    baud = s.baudrate or 19200
+    bits = s.bytesize if 5 <= s.bytesize <= 8 else 8
+    return b"\x00" + baud.to_bytes(4, "little") + bytes([bits - 5])
+
+
+class HidRaw:
+    """The few hidraw operations the backend needs; replaced by a fake in tests."""
+
+    HIDIOCSFEATURE = lambda length: (3 << 30) | (length << 16) | (ord("H") << 8) | 0x06  # noqa: E731
+
+    def __init__(self, path: str):
+        self.path = path
+        self.fd = os.open(path, os.O_RDWR)
+
+    def read(self, timeout: float) -> Optional[bytes]:
+        """One report, or None after the timeout."""
+        import select
+
+        r, _, _ = select.select([self.fd], [], [], timeout)
+        if not r:
+            return None
+        return os.read(self.fd, 64)
+
+    def write(self, report: bytes) -> None:
+        os.write(self.fd, report)
+
+    def send_feature(self, report: bytes) -> None:
+        import fcntl
+
+        buf = bytearray(report)
+        fcntl.ioctl(self.fd, HidRaw.HIDIOCSFEATURE(len(buf)), buf, True)
+
+    def close(self) -> None:
+        if self.fd >= 0:
+            os.close(self.fd)
+            self.fd = -1
+
+
+class HidBackend(Backend):
+    """A meter behind a USB-HID cable, served like a serial port. The line
+    settings QtDMM sends become the cable's feature report where the chip
+    takes one (CH9325, CP2110); the others run at their fixed speed."""
+
+    raw_factory = HidRaw  # tests swap in a fake
+
+    def __init__(self, spec: str, on_data, on_error):
+        super().__init__(on_data, on_error)
+        # spec: "1a86:e008" (first matching cable) or "/dev/hidraw2"
+        self.name = f"hid:{spec}"
+        self._spec = spec
+        self._raw: Optional[HidRaw] = None
+        self.chip = "CH9325"
+        self._thread: Optional[threading.Thread] = None
+        self._alive = False
+
+    def resolve(self) -> tuple[str, str]:
+        """(path, chip) for the spec; raises when the cable is not there."""
+        devices = hidraw_devices()
+        if self._spec.startswith("/"):
+            for path, vid, pid in devices:
+                if path == self._spec:
+                    chip = HID_CABLES.get((vid, pid), ("CH9325", ""))[0]
+                    return path, chip
+            raise FileNotFoundError(f"{self._spec}: no such HID device")
+        try:
+            vid_s, pid_s = self._spec.split(":", 1)
+            vid, pid = int(vid_s, 16), int(pid_s, 16)
+        except ValueError as exc:
+            raise ValueError(f"{self._spec}: expected VID:PID (hex) or /dev/hidrawN") from exc
+        for path, v, p in devices:
+            if (v, p) == (vid, pid):
+                return path, HID_CABLES.get((vid, pid), ("CH9325", ""))[0]
+        raise FileNotFoundError(f"no HID cable {vid:04x}:{pid:04x} attached")
+
+    def open(self) -> None:
+        path, self.chip = self.resolve()
+        self._raw = self.raw_factory(path)
+        self._alive = True
+        try:
+            self._configure(self.settings)
+        except OSError as exc:
+            self._raw.close()
+            self._raw = None
+            self._alive = False
+            raise OSError(f"{path}: feature report failed: {exc}") from exc
+        self._thread = threading.Thread(target=self._reader, name=f"read {path}", daemon=True)
+        self._thread.start()
+        log.info("%s: opened %s (%s)", self.name, path, self.chip)
+
+    def close(self) -> None:
+        self._alive = False
+        raw, self._raw = self._raw, None
+        if raw is not None:
+            raw.close()
+        if self._thread is not None and self._thread is not threading.current_thread():
+            self._thread.join(timeout=2)
+        self._thread = None
+
+    @property
+    def is_open(self) -> bool:
+        return self._raw is not None and self._alive
+
+    def write(self, data: bytes) -> None:
+        raw = self._raw
+        if raw is None:
+            return
+        for i in range(0, len(data), 63):
+            report = pack_hid_write(self.chip, data[i:i + 63])
+            if not report:
+                return
+            try:
+                raw.write(report)
+            except OSError as exc:
+                self._fail(f"write failed: {exc}")
+                return
+
+    def apply(self, settings: LineSettings) -> LineSettings:
+        self.settings = settings
+        if self._raw is not None:
+            try:
+                self._configure(settings)
+            except OSError as exc:
+                log.warning("%s: cannot apply line settings: %s", self.name, exc)
+        return settings
+
+    def _configure(self, s: LineSettings) -> None:
+        raw = self._raw
+        if raw is None:
+            return
+        if self.chip == "CH9325":
+            raw.send_feature(ch9325_config_report(s))
+        elif self.chip == "CP2110":
+            raw.send_feature(b"\x41\x01")   # UART enable
+            raw.send_feature(cp2110_config_report(s))
+        elif self.chip == "CH9329" and s.baudrate not in (0, 9600):
+            log.warning("%s: this cable runs at 9600 baud, the meter wants %d", self.name, s.baudrate)
+        # BU-86X: fixed speed, nothing to configure
+
+    def _reader(self) -> None:
+        while self._alive:
+            raw = self._raw
+            if raw is None:
+                break
+            try:
+                report = raw.read(0.2)
+            except OSError as exc:  # cable unplugged
+                if self._alive:
+                    self._fail(f"read failed: {exc}")
+                break
+            if report:
+                data = unpack_hid_report(self.chip, report)
+                if data is None:
+                    log.debug("%s: malformed report %s", self.name, report.hex(" "))
+                elif data:
+                    self.on_data(data)
+
+    def _fail(self, msg: str) -> None:
+        if not self._alive:
+            return
+        self._alive = False
+        log.warning("%s: %s", self.name, msg)
+        self.on_error(msg)
+
+
 BackendFactory = Callable[[Callable[[bytes], None], Callable[[str], None]], Backend]
 
 
 def make_backend_factory(device: str) -> BackendFactory:
-    """'/dev/ttyUSB0', 'serial:/dev/ttyUSB0', 'loop://' -> SerialBackend.
-    'hid:...' is reserved for the HID cable backend."""
+    """'/dev/ttyUSB0', 'serial:/dev/ttyUSB0', 'loop://' -> SerialBackend;
+    'hid:1a86:e008' or 'hid:/dev/hidraw2' -> HidBackend."""
     if device.startswith("hid:"):
-        raise SystemExit(f"{device}: HID cables are not supported by this version of qtdmm-bridge")
+        spec = device[len("hid:"):]
+        if not sys.platform.startswith("linux"):
+            raise SystemExit(f"{device}: HID cables are served through hidraw, Linux only")
+        return lambda on_data, on_error: HidBackend(spec, on_data, on_error)
     if device.startswith("serial:"):
         device = device[len("serial:"):]
     return lambda on_data, on_error: SerialBackend(device, on_data, on_error)
@@ -724,32 +969,12 @@ def list_devices() -> str:
     except ImportError:
         lines.append("  pyserial is not installed (pip install pyserial)")
 
-    # the HID cables QtDMM knows; the backend for them is not in this version
-    known = {
-        (0x04FA, 0x2490): "Hoitek HE2325U (UT-D04 type)",
-        (0x1A86, 0xE008): "WCH CH9325 (UT-D04, UT803, ...)",
-        (0x10C4, 0xEA80): "SiLabs CP2110 (UT-D09, first revision)",
-        (0x1A86, 0xE429): "WCH CH9329 (UT-D09, second revision)",
-        (0x0820, 0x0001): "Brymen BU-86X",
-    }
-    lines.append("USB-HID meter cables (not served by this version):")
-    hid_found = False
-    if sys.platform.startswith("linux") and os.path.isdir("/sys/class/hidraw"):
-        for node in sorted(os.listdir("/sys/class/hidraw")):
-            try:
-                with open(f"/sys/class/hidraw/{node}/device/uevent") as f:
-                    uevent = f.read()
-            except OSError:
-                continue
-            for line in uevent.splitlines():
-                if line.startswith("HID_ID="):
-                    parts = line.split(":")
-                    if len(parts) == 3:
-                        vid, pid = int(parts[1], 16), int(parts[2], 16)
-                        if (vid, pid) in known:
-                            lines.append(f"  /dev/{node:<15} {vid:04x}:{pid:04x} {known[(vid, pid)]}")
-                            hid_found = True
-    if not hid_found:
+    lines.append("USB-HID meter cables (device hid:VID:PID or hid:/dev/hidrawN):")
+    cables = [(path, vid, pid) for path, vid, pid in hidraw_devices() if (vid, pid) in HID_CABLES]
+    for path, vid, pid in cables:
+        chip, desc = HID_CABLES[(vid, pid)]
+        lines.append(f"  {path:<20} hid:{vid:04x}:{pid:04x}  {desc}")
+    if not cables:
         lines.append("  (none)")
     return "\n".join(lines)
 

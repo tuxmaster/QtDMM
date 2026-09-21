@@ -28,7 +28,7 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
 - various connection backends
   - RS232 Serial (USB-Serial and native UART)
   - USB HID-serial support (HOITEK HE2325U & compatible)
-  - RFC2217 remote serial, with **qtdmm-bridge** to serve meters from a Raspberry Pi
+  - RFC2217 remote serial, with **qtdmm-bridge** to serve serial and HID meters from a Raspberry Pi
   - Sigrok support via sigrok-cli application
 - supports lots of DMMs, see [Supported devices](docs/user/supported-devices.md)
   - custom serial settings dialog for yet unknown DMMs
