@@ -114,7 +114,8 @@ int main(int argc, char **argv)
     // simulate reading from port
     char fifo[FIFO_LENGTH];
     char buffer[FIFO_LENGTH];
-    size_t bytesToRead = decoder->getPacketLength();
+    const size_t packetLength = decoder->getPacketLength();
+    size_t bytesToRead = packetLength;
     size_t length = 0;
     bool frameValid = false;
 
@@ -122,9 +123,12 @@ int main(int argc, char **argv)
     {
       for (size_t idx = 0; idx < frame.size(); idx++)
       {
-        fifo[length] = QChar(frame[idx]).toLatin1();
+        fifo[length] = frame[idx];
         if (decoder->checkFormat(fifo, length))
         {
+          // variable-length protocols (packet length 0) take the whole line
+          if (packetLength == 0)
+            bytesToRead = length + 1;
           length = (length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
 
           for (int i = 0; i < bytesToRead; ++i)
@@ -152,8 +156,7 @@ int main(int argc, char **argv)
       continue;
     }
 
-    frame.resize(decoder->getPacketLength());
-    auto result = decoder->decode(frame, 0);
+    auto result = decoder->decode(QByteArray(buffer, int(bytesToRead)), 0);
 
     if (!result)
     {
