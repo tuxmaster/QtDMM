@@ -105,6 +105,13 @@ if (BUILD_TESTING)
 	target_link_libraries(${TEST_RECORDING} PRIVATE Qt::Core)
 	add_test(NAME recording_file COMMAND ${TEST_RECORDING} "${CMAKE_SOURCE_DIR}/tests/data/graph")
 
+	## the readings table model, without its widget
+	set( TEST_READINGLOG test_readinglog)
+	add_executable(${TEST_READINGLOG} MACOSX_BUNDLE tests/test_readinglog.cpp src/readinglog.cpp src/siprefix.cpp)
+	target_include_directories(${TEST_READINGLOG} PRIVATE src)
+	target_link_libraries(${TEST_READINGLOG} PRIVATE Qt::Core Qt::Test)
+	add_test(NAME reading_log COMMAND ${TEST_READINGLOG})
+
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)
 	find_package(Python3 COMPONENTS Interpreter)

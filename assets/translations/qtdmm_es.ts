@@ -590,83 +590,83 @@ DMM connected and switched on?</source>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="137"/>
+        <location filename="../../src/mainwid.cpp" line="138"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: datos sin guardar</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="138"/>
+        <location filename="../../src/mainwid.cpp" line="139"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Datos sin guardar&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Todavía hay mediciones sin guardar en memoria. Si sale ahora se perderán.&lt;p&gt;¿Desea exportarlas antes?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="153"/>
+        <location filename="../../src/mainwid.cpp" line="154"/>
         <source>Export data first</source>
         <translation>Exportar primero</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="157"/>
+        <location filename="../../src/mainwid.cpp" line="158"/>
         <source>Quit without saving</source>
         <translation>Salir sin guardar</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="528"/>
+        <location filename="../../src/mainwid.cpp" line="548"/>
         <source>Automatic start at %1</source>
         <translation>Inicio automático a las %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="530"/>
+        <location filename="../../src/mainwid.cpp" line="550"/>
         <source>Raising threshold %1</source>
         <translation>Umbral ascendente %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="532"/>
+        <location filename="../../src/mainwid.cpp" line="552"/>
         <source>Falling threshold %1</source>
         <translation>Umbral descendente %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="553"/>
-        <location filename="../../src/mainwid.cpp" line="594"/>
+        <location filename="../../src/mainwid.cpp" line="573"/>
+        <location filename="../../src/mainwid.cpp" line="614"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: error de ejecución</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="554"/>
+        <location filename="../../src/mainwid.cpp" line="574"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Error de ejecución&lt;/b&gt;&lt;/font&gt;&lt;p&gt;¡La aplicación %1 sigue en ejecución!&lt;p&gt;¿Desea terminarla ahora?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="566"/>
+        <location filename="../../src/mainwid.cpp" line="586"/>
         <source>Yes, kill it!</source>
         <translation>Sí, terminarla</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="570"/>
+        <location filename="../../src/mainwid.cpp" line="590"/>
         <source>No, keep running</source>
         <translation>No, dejarla en ejecución</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="595"/>
+        <location filename="../../src/mainwid.cpp" line="615"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Error de ejecución&lt;/b&gt;&lt;/font&gt;&lt;p&gt;No se pudo ejecutar %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="606"/>
+        <location filename="../../src/mainwid.cpp" line="626"/>
         <source>Bummer!</source>
         <translation>¡Qué pena!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="612"/>
+        <location filename="../../src/mainwid.cpp" line="632"/>
         <source>Launched %1</source>
         <translation>%1 iniciado</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="617"/>
+        <location filename="../../src/mainwid.cpp" line="637"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 terminó con el código %2.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="668"/>
+        <location filename="../../src/mainwid.cpp" line="688"/>
         <source>no meter configured</source>
         <translation>ningún multímetro configurado</translation>
     </message>
@@ -674,119 +674,134 @@ DMM connected and switched on?</source>
 <context>
     <name>MainWin</name>
     <message>
-        <location filename="../../src/mainwin.cpp" line="64"/>
+        <location filename="../../src/mainwin.cpp" line="65"/>
         <source>Display</source>
         <translation>Pantalla</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="72"/>
+        <location filename="../../src/mainwin.cpp" line="73"/>
         <source>&amp;Display</source>
         <translation>&amp;Pantalla</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="75"/>
+        <location filename="../../src/mainwin.cpp" line="76"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Display&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show the reading on the LCD-style digital display. The panel can be docked on any side of the window or dragged out as a separate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Pantalla&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Muestra la lectura en la pantalla digital de tipo LCD. El panel se puede acoplar en cualquier lado de la ventana o separar como ventana independiente.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="81"/>
+        <location filename="../../src/mainwin.cpp" line="82"/>
         <source>Analog meter</source>
         <translation>Instrumento analógico</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="92"/>
+        <location filename="../../src/mainwin.cpp" line="93"/>
         <source>Analog &amp;meter</source>
         <translation>Instrumento &amp;analógico</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="95"/>
+        <location filename="../../src/mainwin.cpp" line="96"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Analog meter&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Show the reading on a moving-coil style instrument. The panel can be docked on any side of the window or dragged out as a separate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Instrumento analógico&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Muestra la lectura en un instrumento de aguja. El panel se puede acoplar en cualquier lado de la ventana o separar como ventana independiente.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="106"/>
+        <location filename="../../src/mainwin.cpp" line="103"/>
+        <source>Readings</source>
+        <translation>Lecturas</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="112"/>
+        <source>&amp;Readings table</source>
+        <translation>&amp;Tabla de lecturas</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="115"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Readings table&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Every reading the meter sent, one row each, with time, mode and range - the raw protocol of the session next to the recorder&apos;s graph. Copy rows to a spreadsheet or export them as CSV.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Tabla de lecturas&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Cada lectura que envió el multímetro, una fila por valor, con hora, modo y rango: el protocolo en bruto de la sesión junto al gráfico del registrador. Copie filas a una hoja de cálculo o expórtelas como CSV.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="129"/>
         <source>&amp;Lock panels</source>
         <translation>&amp;Bloquear paneles</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="109"/>
+        <location filename="../../src/mainwin.cpp" line="132"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lock panels&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Hide the title bars of the display and meter panels. Unlock them to move the panels to another side of the window or to drag them out as separate windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Bloquear paneles&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oculta las barras de título de los paneles de pantalla e instrumento. Desbloquéelos para mover los paneles a otro lado de la ventana o separarlos como ventanas independientes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="197"/>
+        <location filename="../../src/mainwin.cpp" line="220"/>
         <source>Another instance is running.</source>
         <translation>Ya hay otra instancia en ejecución.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="295"/>
+        <location filename="../../src/mainwin.cpp" line="318"/>
         <source>&amp;Full screen</source>
         <translation>&amp;Pantalla completa</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="298"/>
+        <location filename="../../src/mainwin.cpp" line="321"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Full screen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the whole screen for the instruments, e.g. on a lab monitor. F11 again returns to the normal window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Pantalla completa&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Usar toda la pantalla para los instrumentos, p. ej. en un monitor de laboratorio. F11 de nuevo vuelve a la ventana normal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="303"/>
+        <location filename="../../src/mainwin.cpp" line="326"/>
         <source>Zoom &amp;in</source>
         <translation>&amp;Acercar</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="306"/>
+        <location filename="../../src/mainwin.cpp" line="329"/>
         <source>Zoom &amp;out</source>
         <translation>A&amp;lejar</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="309"/>
+        <location filename="../../src/mainwin.cpp" line="332"/>
         <source>Show &amp;whole recording</source>
         <translation>Mostrar &amp;toda la grabación</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="312"/>
+        <location filename="../../src/mainwin.cpp" line="335"/>
         <source>Copy graph &amp;image</source>
         <translation>Copiar gráfico como &amp;imagen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="314"/>
+        <location filename="../../src/mainwin.cpp" line="337"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copy graph image&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Puts a picture of the recorder graph on the clipboard, ready to paste into a report or a chat.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copiar gráfico como imagen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Coloca una imagen del gráfico de la grabadora en el portapapeles, lista para pegar en un informe o un chat.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="369"/>
+        <location filename="../../src/mainwin.cpp" line="393"/>
         <source>Record DMM data</source>
         <translation>Grabar datos del multímetro</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="370"/>
+        <location filename="../../src/mainwin.cpp" line="394"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
         <translation>Se han detectado varias instancias de QtDMM.
 Elija qué instancia debe grabar.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="373"/>
+        <location filename="../../src/mainwin.cpp" line="397"/>
         <source>This instance</source>
         <translation>Esta instancia</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="374"/>
+        <location filename="../../src/mainwin.cpp" line="398"/>
         <source>All instances</source>
         <translation>Todas las instancias</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="434"/>
+        <location filename="../../src/mainwin.cpp" line="458"/>
         <source>About QtDMM</source>
         <translation>Acerca de QtDMM</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="437"/>
+        <location filename="../../src/mainwin.cpp" line="461"/>
         <source>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;A readout and transient recorder for digital multimeters.&lt;/p&gt;&lt;p&gt;Built with &lt;b&gt;Qt&lt;/b&gt; %2. Licensed under the &lt;b&gt;GNU GPL 3&lt;/b&gt; (versions before 0.9.0 under GPL 2).&lt;/p&gt;&lt;p&gt;0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.&lt;br&gt;0.9.3 and before: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Website: &lt;a href=&apos;https://qtdmm.de&apos;&gt;qtdmm.de&lt;/a&gt; &amp;middot; Contact: &lt;a href=&apos;mailto:hello@qtdmm.de&apos;&gt;hello@qtdmm.de&lt;/a&gt;&lt;br&gt;Source and bug reports: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Icons (except the DMM icon) are taken from the KDE project.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;Lectura y registrador de transitorios para multímetros digitales.&lt;/p&gt;&lt;p&gt;Construido con &lt;b&gt;Qt&lt;/b&gt; %2. Bajo licencia &lt;b&gt;GNU GPL 3&lt;/b&gt; (versiones anteriores a 0.9.0 bajo GPL 2).&lt;/p&gt;&lt;p&gt;Desde 0.9.5: tuxmaster y colaboradores, véase el archivo AUTHORS.&lt;br&gt;0.9.3 y anteriores: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Sitio web: &lt;a href=&apos;https://qtdmm.de&apos;&gt;qtdmm.de&lt;/a&gt; &amp;middot; Contacto: &lt;a href=&apos;mailto:hello@qtdmm.de&apos;&gt;hello@qtdmm.de&lt;/a&gt;&lt;br&gt;Código fuente e informes de errores: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Los iconos (salvo el del multímetro) proceden del proyecto KDE.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="453"/>
+        <location filename="../../src/mainwin.cpp" line="477"/>
         <source>Supported devices...</source>
         <translation>Dispositivos compatibles…</translation>
     </message>
@@ -1025,6 +1040,173 @@ Después cierre la sesión y vuelva a iniciarla para que la pertenencia al grupo
         <location filename="../../src/portdevices/rfc2217serial.cpp" line="68"/>
         <source>socket error</source>
         <translation>error de socket</translation>
+    </message>
+</context>
+<context>
+    <name>ReadingLog</name>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="34"/>
+        <source>AC+DC</source>
+        <translation>AC+DC</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="35"/>
+        <source>Diode</source>
+        <translation>Diodo</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="36"/>
+        <source>Continuity</source>
+        <translation>Continuidad</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="37"/>
+        <source>Resistance</source>
+        <translation>Resistencia</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="38"/>
+        <source>Capacitance</source>
+        <translation>Capacidad</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="39"/>
+        <source>Frequency</source>
+        <translation>Frecuencia</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="40"/>
+        <source>Temperature</source>
+        <translation>Temperatura</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="62"/>
+        <source>2nd</source>
+        <translation>2.º</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="64"/>
+        <source>HOLD</source>
+        <translation>HOLD</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="77"/>
+        <source>Time</source>
+        <translation>Hora</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="78"/>
+        <source>Value</source>
+        <translation>Valor</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="79"/>
+        <source>Unit</source>
+        <translation>Unidad</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="80"/>
+        <source>Mode</source>
+        <translation>Modo</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="81"/>
+        <source>Range</source>
+        <translation>Rango</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="82"/>
+        <source>Hold</source>
+        <translation>Hold</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="180"/>
+        <source>Nothing to export.</source>
+        <translation>Nada que exportar.</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="183"/>
+        <source>Cannot open file.</source>
+        <translation>No se puede abrir el archivo.</translation>
+    </message>
+</context>
+<context>
+    <name>ReadingLogWid</name>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="46"/>
+        <source>&amp;Copy</source>
+        <translation>&amp;Copiar</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="47"/>
+        <source>Select &amp;all</source>
+        <translation>Seleccionar &amp;todo</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="49"/>
+        <location filename="../../src/readinglogwid.cpp" line="78"/>
+        <source>&amp;Export...</source>
+        <translation>&amp;Exportar…</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="50"/>
+        <location filename="../../src/readinglogwid.cpp" line="81"/>
+        <source>C&amp;lear</source>
+        <translation>&amp;Borrar</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="61"/>
+        <source>&amp;Follow</source>
+        <translation>&amp;Seguir</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="63"/>
+        <source>Keep the newest reading in view. Scrolling up switches this off.</source>
+        <translation>Mantener a la vista la lectura más reciente. Desplazarse hacia arriba lo desactiva.</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="67"/>
+        <source>Keep</source>
+        <translation>Conservar</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="73"/>
+        <source> rows</source>
+        <translation> filas</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="74"/>
+        <source>How many readings the table keeps; the oldest are dropped.</source>
+        <translation>Cuántas lecturas conserva la tabla; las más antiguas se descartan.</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="128"/>
+        <source>No readings yet.</source>
+        <translation>Aún no hay lecturas.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/readinglogwid.cpp" line="136"/>
+        <source>%n reading(s)</source>
+        <translation>
+            <numerusform>%n lectura</numerusform>
+            <numerusform>%n lecturas</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="138"/>
+        <source>Min %1   Max %2   Mean %3   Span %4</source>
+        <translation>Mín %1   Máx %2   Media %3   Amplitud %4</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="150"/>
+        <location filename="../../src/readinglogwid.cpp" line="156"/>
+        <source>Export readings</source>
+        <translation>Exportar lecturas</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="151"/>
+        <source>CSV files (*.csv);;All files (*)</source>
+        <translation>Archivos CSV (*.csv);;Todos los archivos (*)</translation>
     </message>
 </context>
 <context>

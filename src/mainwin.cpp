@@ -31,6 +31,7 @@
 #include "dmmgraph.h"
 #include "displaywid.h"
 #include "meterwid.h"
+#include "readinglogwid.h"
 #include "settings.h"
 #include <QDockWidget>
 #include <QLoggingCategory>
@@ -95,9 +96,31 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   meterAction->setWhatsThis(tr("<html><head/><body><p><span style=\" font-weight:600;\">Analog meter</span></p>"
                                "<p>Show the reading on a moving-coil style instrument. The panel can be docked on any side "
                                "of the window or dragged out as a separate window.</p></body></html>"));
+  // the readings table: every value the meter sent, one row each; hidden
+  // until switched on, docked below the instruments
+  m_readings = new ReadingLogWid(this);
+  m_readings->setMaxRows(m_wid->settings()->getInt("ReadingLog/max-rows", 10000));
+  m_readingsDock = new QDockWidget(tr("Readings"), this);
+  m_readingsDock->setObjectName("readingsDock");
+  m_readingsDock->setWidget(m_readings);
+  m_readingsDock->setAllowedAreas(Qt::AllDockWidgetAreas);
+  addDockWidget(Qt::BottomDockWidgetArea, m_readingsDock);
+  m_readingsDock->hide();
+  m_wid->setReadingLog(m_readings->log());
+
+  QAction *readingsAction = m_readingsDock->toggleViewAction();
+  readingsAction->setText(tr("&Readings table"));
+  readingsAction->setShortcut(QKeySequence("Ctrl+4"));
+  readingsAction->setIcon(QIcon(":/Symbols/table.xpm"));
+  readingsAction->setWhatsThis(tr("<html><head/><body><p><span style=\" font-weight:600;\">Readings table</span></p>"
+                                  "<p>Every reading the meter sent, one row each, with time, mode and range - "
+                                  "the raw protocol of the session next to the recorder's graph. Copy rows to a "
+                                  "spreadsheet or export them as CSV.</p></body></html>"));
+
   toolBarDMM->addSeparator();
   toolBarDMM->addAction(displayAction);
   toolBarDMM->addAction(meterAction);
+  toolBarDMM->addAction(readingsAction);
   connect(m_displayDock, SIGNAL(visibilityChanged(bool)), this, SLOT(setToolbarVisibilitySLOT()));
 
   // Locked panels have no title bar (no drag handle, no float/close
@@ -322,7 +345,8 @@ void MainWin::createExtraActions()
   connect(toggleRecord, &QAction::triggered, this, &MainWin::toggleRecordingSLOT);
 
   addActions({action_Configure, action_Direct_help, action_Help, action_Quit, action_Tip_of_the_day,
-              m_displayDock->toggleViewAction(), m_meterDock->toggleViewAction(), m_lockPanels,
+              m_displayDock->toggleViewAction(), m_meterDock->toggleViewAction(),
+              m_readingsDock->toggleViewAction(), m_lockPanels,
               m_fullScreen, m_zoomIn, m_zoomOut, m_zoomFit, m_copyImage, toggleRecord});
 }
 
@@ -471,6 +495,7 @@ void MainWin::on_action_Menu_triggered()
     m_menu->addAction(action_Graph);
     m_menu->addAction(m_displayDock->toggleViewAction());
     m_menu->addAction(m_meterDock->toggleViewAction());
+    m_menu->addAction(m_readingsDock->toggleViewAction());
     m_menu->addAction(m_lockPanels);
     m_menu->addAction(m_fullScreen);
     m_menu->addSeparator();
@@ -503,6 +528,7 @@ void MainWin::closeEvent(QCloseEvent *ev)
   // dock layout (meter position, floating state, size) and toolbar layout
   m_wid->settings()->setString("MainWindow/state", QString::fromLatin1(saveState().toBase64()));
   m_wid->settings()->setBool("MainWindow/lock-panels", m_lockPanels->isChecked());
+  m_wid->settings()->setInt("ReadingLog/max-rows", m_readings->maxRows());
 
   if (m_wid->closeWin())
     ev->accept();
@@ -512,7 +538,7 @@ void MainWin::closeEvent(QCloseEvent *ev)
 
 void MainWin::setPanelsLocked(bool locked)
 {
-  for (QDockWidget *dock : { m_displayDock, m_meterDock })
+  for (QDockWidget *dock : { m_displayDock, m_meterDock, m_readingsDock })
   {
     QWidget *old = dock->titleBarWidget();
     // an empty widget as title bar hides it; nullptr restores the default one

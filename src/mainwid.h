@@ -38,6 +38,7 @@ class TipDlg;
 class Settings;
 class InstancesDlg;
 class MeterWid;
+class ReadingLog;
 class SharedStateManager;
 
 /// The central widget: owns the DMM connection, the settings dialog and the
@@ -67,6 +68,8 @@ public:
   void        setDisplay(DisplayWid *);
   /// The analog meter to feed; created and docked by MainWin.
   void        setMeter(MeterWid *);
+  /// Table model that gets every reading (MainWin owns it).
+  void        setReadingLog(ReadingLog *);
   /// The instance coordinator; readings are published through it.
   void        setStateManager(SharedStateManager *);
   /// --debug: pass on to DMM::setConsoleLogging().
@@ -152,6 +155,7 @@ protected:
   QProcess   *m_external;
   DisplayWid *m_display;
   MeterWid   *m_meter;
+  ReadingLog *m_readingLog = nullptr;
   SharedStateManager *m_stateMgr;
   double      m_dval;
   TipDlg     *m_tipDlg;
