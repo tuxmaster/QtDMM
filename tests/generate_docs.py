@@ -72,7 +72,8 @@ def devices():
             rows.append({
                 "vendor": d["vendor"], "model": model.rstrip("* ").strip() + (" ¹" if unconfirmed else ""),
                 "protocol": d["protocol"], "chip": CHIP.get(d["protocol"], "-"),
-                "serial": f'{d["baud"]} {d["bits"]}{PARITY[d["parity"]]}{d["stop"]}',
+                # baud 0: not a serial device (Bluetooth LE)
+                "serial": f'{d["baud"]} {d["bits"]}{PARITY[d["parity"]]}{d["stop"]}' if d["baud"] != "0" else "Bluetooth LE",
                 "counts": d["counts"], "lines": lines or "-",
                 "decoder": src.name,
             })

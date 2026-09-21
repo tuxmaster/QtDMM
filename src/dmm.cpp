@@ -28,6 +28,9 @@
 #include "dmm.h"
 #include "portdevices/hidserial.h"
 #include "portdevices/calc.h"
+#ifdef QTDMM_WITH_BLE
+#include "portdevices/ble.h"
+#endif
 #include "portdevices/rfc2217serial.h"
 #include "portdevices/sigrok.h"
 #include <QSerialPort>
@@ -155,7 +158,8 @@ void DMM::setDevice(const QString &device)
   m_portType = PortHandler::str2portType(deviceList.first());
   // "calc <unit> <formula>": the formula may contain spaces, so keep
   // everything after the type token; the other types take the last token
-  if (m_portType == PortHandler::PortType::Calc)
+  // "ble <address> <key>" likewise
+  if (m_portType == PortHandler::PortType::Calc || m_portType == PortHandler::PortType::Ble)
     m_device = device.section(' ', 1).trimmed();
   else
     m_device = deviceList.last();
@@ -189,16 +193,17 @@ bool DMM::openPort()
 {
   if (!m_portHandler->create(m_dmmInfo, m_portType, m_device))
   {
-    m_error = tr("Error creating port %1.").arg(m_device);
+    m_error = tr("Error creating port %1.").arg(deviceName());
     Q_EMIT error(m_error);
     return false;
   }
 
   if (m_portHandler->port() && !m_portHandler->port()->open(QIODevice::ReadWrite))
   {
-    if (m_portType == PortHandler::PortType::Calc || m_portType == PortHandler::PortType::RFC2217)
+    if (m_portType == PortHandler::PortType::Calc || m_portType == PortHandler::PortType::RFC2217
+        || m_portType == PortHandler::PortType::Ble)
     {
-      // the formula did not parse / the address is malformed; the device says where
+      // the formula did not parse / the address or key is malformed; the device says where
       m_error = m_portHandler->port()->errorString();
       Q_EMIT error(m_error);
       m_portHandler->close();
@@ -211,10 +216,10 @@ bool DMM::openPort()
         QMessageBox::critical(nullptr, tr("Missing Permission"), m_error);
         break;
       case QSerialPort::DeviceNotFoundError:
-        m_error = tr("No such device %1.").arg(m_device);
+        m_error = tr("No such device %1.").arg(deviceName());
         break;
       default:
-        m_error = tr("Error opening %1.\nDMM connected and switched on?").arg(m_device);
+        m_error = tr("Error opening %1.\nDMM connected and switched on?").arg(deviceName());
         break;
     }
     Q_EMIT error(m_error);
@@ -226,7 +231,7 @@ bool DMM::openPort()
   {
     if (!m_portHandler->init())
     {
-      m_error = tr("Error configuring serial port %1.").arg(m_device);
+      m_error = tr("Error configuring serial port %1.").arg(deviceName());
       Q_EMIT error(m_error);
       m_portHandler->close();
       return false;
@@ -251,6 +256,10 @@ bool DMM::openPort()
     connect(hid, &HIDSerialDevice::finished, this, [this, hid] { portLost(hid, QString()); });
   else if (auto *sig = dynamic_cast<SigrokDevice *>(port))
     connect(sig, &SigrokDevice::finished, this, [this, sig] { portLost(sig, QString()); });
+#ifdef QTDMM_WITH_BLE
+  else if (auto *ble = dynamic_cast<BleAdvertisementDevice *>(port))
+    connect(ble, &BleAdvertisementDevice::finished, this, [this, ble](const QString &reason) { portLost(ble, reason); });
+#endif
   else if (auto *serial = dynamic_cast<QSerialPort *>(port))
     connect(serial, &QSerialPort::errorOccurred, this, [this, serial](QSerialPort::SerialPortError e)
     {
@@ -290,7 +299,7 @@ QString DMM::timeoutMessage() const
   if (hid && hid->cableAnswers() && !hid->dataSeen())
     return tr("The USB cable answers, but the meter sends nothing.\n"
               "Switch on the meter's serial output (on UNI-T meters: hold the RS232/USB button).");
-  return tr("Timeout on device %1.\nDMM connected and switched on?").arg(m_device);
+  return tr("Timeout on device %1.\nDMM connected and switched on?").arg(deviceName());
 }
 
 void DMM::closePort()
@@ -308,7 +317,7 @@ void DMM::portLost(QIODevice *from, const QString &reason)
     return;
   closePort();
   m_secondsInError = 0;
-  QString text = tr("Lost connection to %1.").arg(m_device);
+  QString text = tr("Lost connection to %1.").arg(deviceName());
   if (!reason.isEmpty())
     text += "\n" + reason;
   if (m_reconnectSeconds > 0)
@@ -316,11 +325,20 @@ void DMM::portLost(QIODevice *from, const QString &reason)
   setState(LinkState::Error, text);
 }
 
+// The device as the status bar may show it: a Bluetooth port string
+// carries the encryption key, which stays out of messages.
+QString DMM::deviceName() const
+{
+  if (m_portType == PortHandler::PortType::Ble)
+    return m_device.section(' ', 0, 0);
+  return m_device;
+}
+
 QString DMM::connectedMessage() const
 {
   if (m_portType == PortHandler::PortType::Calc)
     return tr("Calculating %1").arg(m_device.section(' ', 1));
-  return tr("Connected %1").arg(m_device);
+  return tr("Connected %1").arg(deviceName());
 }
 
 QString DMM::permissionHint() const
@@ -330,7 +348,7 @@ QString DMM::permissionHint() const
     return serialPermissionHintForDevice(m_device);
 #endif
 
-  return tr("Access denied for %1.").arg(m_device);
+  return tr("Access denied for %1.").arg(deviceName());
 }
 
 void DMM::close()
@@ -391,10 +409,10 @@ void DMM::readEventSLOT(const QByteArray &data, int id)
     if (m_portType == PortHandler::PortType::Calc)
       setState(LinkState::Connected, m_error);
     else
-      setState(LinkState::Connected, r->error.isEmpty() ? connectedMessage() : QString("%1 %2").arg(r->error, m_device));
+      setState(LinkState::Connected, r->error.isEmpty() ? connectedMessage() : QString("%1 %2").arg(r->error, deviceName()));
   }
   else
-    setState(LinkState::Connected, tr("Error %1").arg(m_device));
+    setState(LinkState::Connected, tr("Error %1").arg(deviceName()));
 }
 
 void DMM::setNumValues(int numValues)

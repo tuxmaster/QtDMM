@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(qtdmm VERSION "0.0.0" HOMEPAGE_URL "https://qtdmm.de" LANGUAGES CXX)
+project(qtdmm VERSION "0.0.0" HOMEPAGE_URL "https://qtdmm.de" LANGUAGES C CXX)
 
 ## main settings
 set(CMAKE_CXX_STANDARD 17)
@@ -63,6 +63,22 @@ file(WRITE "${CMAKE_BINARY_DIR}/decoders.h" "${DRIVER_HEADER_CONTENT}")
 
 ## find external libs
 find_package(Qt6 REQUIRED COMPONENTS ${QT_COMPONENTS})
+
+## Bluetooth LE (Victron Instant Readout) needs Qt6::Bluetooth; without it
+## the BLE port is left out and everything else builds as before.
+option(QTDMM_WITH_BLE "Bluetooth LE port (needs Qt6 Bluetooth)" ON)
+if (QTDMM_WITH_BLE)
+	find_package(Qt6 COMPONENTS Bluetooth)
+	if (NOT Qt6Bluetooth_FOUND)
+		message(STATUS "Qt6 Bluetooth not found - building without the BLE port")
+		set(QTDMM_WITH_BLE OFF)
+	endif()
+endif()
+if (NOT QTDMM_WITH_BLE)
+	list(FILTER SRC_FILES EXCLUDE REGEX "portdevices/ble\\.(h|cpp)$")
+endif()
+## AES-128-CTR for the encrypted Victron advertisements (public domain tiny-AES-c)
+list(APPEND SRC_FILES src/3rdparty/tiny-aes/aes.c)
 
 ## Translations: the build only compiles the .ts files (lrelease). Updating
 ## them from the sources is a manual step - `cmake --build build --target
@@ -168,7 +184,11 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::Network
 	Qt6::Charts
 	${HIDAPI_TARGET}
+	$<$<BOOL:${QTDMM_WITH_BLE}>:Qt6::Bluetooth>
 )
+if (QTDMM_WITH_BLE)
+	target_compile_definitions(${PROJECT_NAME} PRIVATE QTDMM_WITH_BLE)
+endif()
 
 ## install files
 install(TARGETS ${PROJECT_NAME}

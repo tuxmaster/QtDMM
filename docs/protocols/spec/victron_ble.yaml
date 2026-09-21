@@ -1,0 +1,24 @@
+protocol: VictronBLE
+decoder: src/decoders/victron_ble.cpp
+devices: [Victron SmartShunt, Victron BMV-712 Smart, Victron SmartSolar MPPT, Victron BlueSolar MPPT]
+frames_per_reading: 1
+sources:
+  - https://github.com/keshavdv/victron-ble (bit layouts and the test vectors below)
+
+# Bluetooth LE "Instant Readout": the meter broadcasts AES-128-CTR encrypted
+# records in its advertisements. BleAdvertisementDevice decrypts them and
+# hands the decoder one text line per advertisement - the readout type and
+# the plaintext as hex (VictronBle::frame). The bytes below are that line;
+# the plaintexts come from victron-ble's public test vectors (advertisement
+# + key), decrypted. The decryption itself is tested in test_victronble.
+# Battery monitor: voltage main, current second value; solar charger: PV
+# power main, battery voltage second value.
+vectors:
+  - source_line: "SmartShunt 500A/50mV: 12.53 V, 0 A, SOC 50 %"
+    bytes: 30 32 66 66 66 66 65 35 30 34 30 30 30 30 30 30 30 30 30 33 30 30 30 30 66 34 30 31 34 30 64 66 0A
+    reading: {value: "12.53", unit: "V", coupling: DC}
+    expect: {special: "DC", val: "12.53"}
+  - source_line: "BlueSolar MPPT 75/15: 19 W PV, 13.88 V, 1.4 A, absorption"
+    bytes: 30 31 30 34 30 30 36 63 30 35 30 65 30 30 30 33 30 30 31 33 30 30 30 30 66 65 0A
+    reading: {value: "19", unit: "W", coupling: DC}
+    expect: {special: "DC", val: "19"}

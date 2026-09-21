@@ -3,6 +3,8 @@ if (BUILD_TESTING)
 	enable_testing()
 
 	file(GLOB DECODER_FILES CONFIGURE_DEPENDS src/decoders/*.h  src/decoders/*.cpp )
+	## the Victron decoder reads bit fields through src/victronble.cpp (which also carries the AES)
+	list(APPEND DECODER_FILES src/victronble.cpp src/3rdparty/tiny-aes/aes.c)
 	add_executable(${TEST_DECODER} MACOSX_BUNDLE tests/test_decoder.cpp src/dmmdecoder.cpp src/protocols.cpp src/siprefix.cpp ${DECODER_FILES})
 	target_link_libraries(${TEST_DECODER} PRIVATE Qt::Core Qt::Test)
 	add_test(NAME protocol_table COMMAND ${TEST_DECODER} --table)
@@ -111,6 +113,13 @@ if (BUILD_TESTING)
 	target_include_directories(${TEST_READINGLOG} PRIVATE src)
 	target_link_libraries(${TEST_READINGLOG} PRIVATE Qt::Core Qt::Test)
 	add_test(NAME reading_log COMMAND ${TEST_READINGLOG})
+
+	## Victron Instant Readout: advertisement parsing, AES-CTR, the decoder
+	set( TEST_VICTRON test_victronble)
+	add_executable(${TEST_VICTRON} MACOSX_BUNDLE tests/test_victronble.cpp src/dmmdecoder.cpp src/protocols.cpp src/siprefix.cpp ${DECODER_FILES})
+	target_include_directories(${TEST_VICTRON} PRIVATE src ${CMAKE_BINARY_DIR})
+	target_link_libraries(${TEST_VICTRON} PRIVATE Qt::Core Qt::Test)
+	add_test(NAME victron_instant_readout COMMAND ${TEST_VICTRON})
 
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)

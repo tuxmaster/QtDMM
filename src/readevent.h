@@ -64,6 +64,7 @@ public:
     BrymenBM82x,
     FlukeQM,
     Fluke45,
+    VictronBLE,
     EndOfList              // new stuff always before!
   };
 

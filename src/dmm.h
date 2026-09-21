@@ -133,6 +133,8 @@ protected:
   QSerialPort::StopBits m_stopBits;
   QSerialPort::DataBits m_dataBits;
   QString               m_device;
+  /// m_device without secrets (the Bluetooth key), for messages.
+  QString               deviceName() const;
   QString               m_error;
   ReaderThread         *m_readerThread;
   LinkState             m_state = LinkState::Closed;

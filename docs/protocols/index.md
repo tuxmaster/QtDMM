@@ -35,6 +35,7 @@ regression tests.
 | `rs22812.cpp` | `RS22812Continuous` | Radioshack 22-812 | — | none |
 | `vc820.cpp` | `VC820Continuous` | Digitek DT-9062/INO2513, Digitech QM1462/QM1538, HoldPeak HP-90EPC, PeakTech 3330, Tenma 72-7745, Uni-Trend UT60A/UT60E, Voltcraft VC 820/840 | `UT60AE.log` | yes |
 | `vc870.cpp` | `VC870Continuous` | Voltcraft VC 870 | — | none |
+| `victron_ble.cpp` | `VictronBLE` | Victron SmartShunt, BMV-712 Smart, SmartSolar / BlueSolar MPPT over Bluetooth LE (SmartShunt 500A/50mV and SmartSolar MPPT 100/20 48V verified live) | — (bit layouts and test vectors from [victron-ble](https://github.com/keshavdv/victron-ble); AES-CTR decryption tested in `test_victronble`) | yes |
 | `vc940.cpp` | `VC940Continuous` | Tenma 72-7732, Uni-Trend UT71B/UT71CDE/UT804, Voltcraft VC 920/940/960 | `UT71BCDE.log`, `UT804.log` | yes |
 
 `FlukeQM` and `Fluke45` are polled protocols with variable-length frames:
@@ -43,6 +44,12 @@ for the 45), the meter answers with status lines (CMD_ACK `0\r`, the 45's
 `=>` prompt or a command echo) and one reading line. The reader hands
 everything since the previous frame to the decoder (`getPacketLength()` 0),
 which takes the last line.
+
+`VictronBLE` is not a serial protocol at all: `BleAdvertisementDevice`
+decrypts each Bluetooth advertisement (`src/victronble.cpp`, AES-128-CTR
+with the key from VictronConnect) and hands the decoder one text line - the
+readout type and the plaintext as hex - so the decoder stays a pure
+bit-field parser that the fixtures can exercise.
 
 Two protocol families transmit every telegram twice in a row (UT803, UT70B, and
 the VC940 per the original implementation); their decoders deliberately accept

@@ -4,6 +4,9 @@
 #include "portdevices/rfc2217serial.h"
 #include "portdevices/sigrok.h"
 #include "portdevices/calc.h"
+#ifdef QTDMM_WITH_BLE
+#include "portdevices/ble.h"
+#endif
 
 #include <QSerialPortInfo>
 
@@ -18,6 +21,9 @@ bool PortHandler::create(const DmmDecoder::DMMInfo spec, PortType t, QString dev
     case PortType::Sigrok: m_port = new SigrokDevice(spec,device);       break;
     case PortType::RFC2217:m_port = new RFC2217SerialDevice(spec,device);break;
     case PortType::Calc:   m_port = new CalcDevice(spec, device, m_state); break;
+#ifdef QTDMM_WITH_BLE
+    case PortType::Ble:    m_port = new BleAdvertisementDevice(spec, device); break;
+#endif
     default: return false;
   }
 
@@ -58,6 +64,7 @@ PortHandler::PortType PortHandler::str2portType(const QString str)
   if (str.toLower() == "sigrok")  return PortType::Sigrok;
   if (str.toLower() == "rfc2217") return PortType::RFC2217;
   if (str.toLower() == "calc")    return PortType::Calc;
+  if (str.toLower() == "ble")     return PortType::Ble;
 
   return PortType::None;
 }

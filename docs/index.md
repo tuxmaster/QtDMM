@@ -29,6 +29,7 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
   - USB HID-serial support (HOITEK HE2325U & compatible)
   - RFC2217 remote serial, with **qtdmm-bridge** to serve serial and HID meters from a Raspberry Pi (see [Meters over the network](user/remote-bridge.md))
   - Sigrok support via sigrok-cli application
+  - Bluetooth LE: Victron SmartShunt / BMV-712 and SmartSolar / BlueSolar MPPT over their encrypted "Instant Readout" broadcasts (see [Bluetooth LE](user/bluetooth.md))
 - supports lots of DMMs, see [Supported devices](user/supported-devices.md)
   - custom serial settings dialog for yet unknown DMMs
 

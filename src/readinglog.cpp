@@ -140,8 +140,13 @@ ReadingLog::Stats ReadingLog::stats() const
   }
   if (s.numeric)
     s.mean = sum / s.numeric;
-  if (!m_entries.isEmpty())
-    s.unit = SiPrefix::split(m_entries.last().unit).baseUnit;
+  // the unit of the newest main reading (second values have their own)
+  for (int i = m_entries.size() - 1; i >= 0; --i)
+    if (m_entries[i].id == 0)
+    {
+      s.unit = SiPrefix::split(m_entries[i].unit).baseUnit;
+      break;
+    }
   return s;
 }
 

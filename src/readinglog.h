@@ -38,7 +38,7 @@ public:
     int count = 0;        ///< rows in the log, overloads included
     int numeric = 0;      ///< rows min/max/mean are computed from
     double min = 0, max = 0, mean = 0;
-    QString unit;         ///< unit of the newest row, prefix stripped
+    QString unit;         ///< unit of the newest main reading, prefix stripped
   };
 
   explicit ReadingLog(QObject *parent = nullptr);

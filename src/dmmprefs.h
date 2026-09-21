@@ -70,6 +70,8 @@ public:
   bool           isCalculated() const;
   /// True while the model "QtDMM / Virtual meter" is chosen.
   bool           isVirtual() const;
+  /// Victron over Bluetooth LE: the Bluetooth group replaces the port.
+  bool           isBluetooth() const;
   /// Source of the other instances' readings, shown as a hint below the formula.
   void           setStateManager(SharedStateManager *state);
 
@@ -103,6 +105,8 @@ protected:
   void enterManualMode();
   /// Shows the formula group instead of the port/protocol groups, or back.
   void updateCalcMode();
+  void updateBleHint();
+  void on_ui_bleScan_clicked();
 
   SharedStateManager *m_state = Q_NULLPTR;
   QTimer m_calcHintTimer;

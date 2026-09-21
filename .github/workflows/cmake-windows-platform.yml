@@ -18,7 +18,7 @@ jobs:
       with:
         version: '6.8.*'
         arch: win64_msvc2022_64
-        modules: 'qtserialport qtcharts'
+        modules: 'qtserialport qtcharts qtconnectivity'
         cache: true
 
     - name: Set up MSVC environment
