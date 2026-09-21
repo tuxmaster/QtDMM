@@ -4,7 +4,7 @@
 
 static const bool registered = []() {
   DmmDecoder::addConfig({"Iso-Tech", "IDM 73", "", 19200, ReadEvent::CyrustekES51986, 7, 1, 1, 2, 6000, 0, 0, 1});
-  // ES51986 per ultradmm.com, settings as the IDM 73 (same family); "*" =
+  // ES51986 per the chip datasheet, settings as the IDM 73 (same family); "*" =
   // not confirmed on hardware yet
   DmmDecoder::addConfig({"APPA", "71 *", "", 19200, ReadEvent::CyrustekES51986, 7, 1, 1, 2, 6000, 0, 0, 1});
   DmmDecoder::addConfig({"APPA", "73 *", "", 19200, ReadEvent::CyrustekES51986, 7, 1, 1, 2, 6000, 0, 0, 1});

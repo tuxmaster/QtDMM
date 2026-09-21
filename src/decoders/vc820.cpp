@@ -35,7 +35,7 @@
 
 static const bool registered = []() {
   DmmDecoder::addConfig({"Digitek", "DT-9062"  , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
-  // FS9721 per libsigrok (digitek-dt4000zc) and ultradmm.com; was listed
+  // FS9721 per libsigrok (digitek-dt4000zc); was listed
   // under the FS9922 protocol before
   DmmDecoder::addConfig({"Digitek", "DT4000ZC" , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"TekPower", "TP4000ZC", "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
