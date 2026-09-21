@@ -72,6 +72,20 @@ QString VictronBle::modelName(quint16 model)
     { 0xA108, "SmartSolar MPPT VE.Can 250/60" }, { 0xA109, "SmartSolar MPPT VE.Can 250/70" }, { 0xA10A, "SmartSolar MPPT VE.Can 250/85" },
     { 0xA10B, "SmartSolar MPPT VE.Can 250/100" }, { 0xA381, "BMV-712 Smart" }, { 0xA382, "BMV-710H Smart" }, { 0xA383, "BMV-712 Smart Rev2" },
     { 0xA3F0, "Smart BuckBoost 12V/12V-50A" },
+    { 0xA200, "Phoenix Inverter" },
+    { 0xA201, "Phoenix Inverter 12V 250VA 230V" }, { 0xA202, "Phoenix Inverter 24V 250VA 230V" }, { 0xA204, "Phoenix Inverter 48V 250VA 230V" },
+    { 0xA211, "Phoenix Inverter 12V 375VA 230V" }, { 0xA212, "Phoenix Inverter 24V 375VA 230V" }, { 0xA214, "Phoenix Inverter 48V 375VA 230V" },
+    { 0xA221, "Phoenix Inverter 12V 500VA 230V" }, { 0xA222, "Phoenix Inverter 24V 500VA 230V" }, { 0xA224, "Phoenix Inverter 48V 500VA 230V" },
+    { 0xA231, "Phoenix Inverter 12V 250VA 230V" }, { 0xA232, "Phoenix Inverter 24V 250VA 230V" }, { 0xA234, "Phoenix Inverter 48V 250VA 230V" },
+    { 0xA239, "Phoenix Inverter 12V 250VA 120V" }, { 0xA23A, "Phoenix Inverter 24V 250VA 120V" }, { 0xA23C, "Phoenix Inverter 48V 250VA 120V" },
+    { 0xA241, "Phoenix Inverter 12V 375VA 230V" }, { 0xA242, "Phoenix Inverter 24V 375VA 230V" }, { 0xA244, "Phoenix Inverter 48V 375VA 230V" },
+    { 0xA249, "Phoenix Inverter 12V 375VA 120V" }, { 0xA24A, "Phoenix Inverter 24V 375VA 120V" }, { 0xA24C, "Phoenix Inverter 48V 375VA 120V" },
+    { 0xA251, "Phoenix Inverter 12V 500VA 230V" }, { 0xA252, "Phoenix Inverter 24V 500VA 230V" }, { 0xA254, "Phoenix Inverter 48V 500VA 230V" },
+    { 0xA259, "Phoenix Inverter 12V 500VA 120V" }, { 0xA25A, "Phoenix Inverter 24V 500VA 120V" }, { 0xA25C, "Phoenix Inverter 48V 500VA 120V" },
+    { 0xA261, "Phoenix Inverter 12V 800VA 230V" }, { 0xA262, "Phoenix Inverter 24V 800VA 230V" }, { 0xA264, "Phoenix Inverter 48V 800VA 230V" },
+    { 0xA269, "Phoenix Inverter 12V 800VA 120V" }, { 0xA26A, "Phoenix Inverter 24V 800VA 120V" }, { 0xA26C, "Phoenix Inverter 48V 800VA 120V" },
+    { 0xA271, "Phoenix Inverter 12V 1200VA 230V" }, { 0xA272, "Phoenix Inverter 24V 1200VA 230V" }, { 0xA274, "Phoenix Inverter 48V 1200VA 230V" },
+    { 0xA279, "Phoenix Inverter 12V 1200VA 120V" }, { 0xA27A, "Phoenix Inverter 24V 1200VA 120V" }, { 0xA27C, "Phoenix Inverter 48V 1200VA 120V" },
   };
   return names.value(model, QString("0x%1").arg(model, 4, 16, QLatin1Char('0')).toUpper());
 }

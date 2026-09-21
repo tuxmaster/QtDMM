@@ -5,14 +5,15 @@
 #include "dmmdecoder.h"
 
 /// Victron Energy devices over Bluetooth LE "Instant Readout": SmartShunt
-/// / BMV-712 (battery monitor) and SmartSolar / BlueSolar MPPT (solar
-/// charger). BleAdvertisementDevice listens to the advertisements and
+/// / BMV-712 (battery monitor), SmartSolar / BlueSolar MPPT (solar
+/// charger) and Phoenix Inverter Smart (inverter). BleAdvertisementDevice listens to the advertisements and
 /// decrypts them (src/victronble.h); this decoder gets one line per
 /// advertisement - the readout type and the plaintext as hex - and turns
 /// the packed bit fields into readings:
 ///
 ///  - battery monitor: battery voltage (main), battery current (second value)
 ///  - solar charger: PV power (main), battery voltage (second value)
+///  - inverter: AC apparent power (main), battery voltage (second value)
 ///
 /// Bit layouts from victron-ble (keshavdv); spec in
 /// docs/protocols/spec/victron_ble.yaml.
@@ -29,4 +30,5 @@ public:
 private:
   bool decodeBatteryMonitor(const QByteArray &plain);
   bool decodeSolarCharger(const QByteArray &plain);
+  bool decodeInverter(const QByteArray &plain);
 };

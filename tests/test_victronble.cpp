@@ -96,10 +96,33 @@ int main(int argc, char **argv)
     }
   }
 
+  // --- 4b. Phoenix Inverter: the plaintext of a live 12V 500VA advertisement
+  // (13.17 V, 6 VA, 230.02 V AC, inverting), re-encrypted with a test key ---
+  {
+    const QByteArray adv = QByteArray::fromHex("100251a20334120124dda175e47aa1fec45db8");
+    const QByteArray key = VictronBle::keyFromHex("0123456789abcdef0123456789abcdef");
+    const auto parsed = VictronBle::parse(adv);
+    check(parsed && parsed->model == 0xA251 && parsed->readoutType == VictronBle::Inverter && parsed->iv == 0x1234, "inverter parses");
+    check(parsed && VictronBle::modelName(parsed->model) == "Phoenix Inverter 12V 500VA 230V", "inverter model name");
+    const auto plain = parsed ? VictronBle::decrypt(*parsed, key) : std::nullopt;
+    check(plain && plain->toHex() == "09000025050600da5900fc", "inverter decrypts to the live plaintext");
+    if (plain)
+    {
+      const auto r = decoder.decode(VictronBle::frame(VictronBle::Inverter, *plain), 0);
+      check(r.has_value(), "inverter decodes");
+      if (r)
+      {
+        check(r->dval == 6.0 && r->val == "6" && r->unit == "VA" && r->special == "AC",
+              QString("6 VA AC: %1 %2 %3").arg(r->val, r->unit, r->special));
+        check(r->id2 == 1 && qFuzzyCompare(r->dval2, 13.17) && r->unit2 == "V", "battery 13.17 V as second value");
+      }
+    }
+  }
+
   // --- 5. other records and junk ---
   check(!VictronBle::parse(QByteArray::fromHex("0269b907109a")).has_value(), "non-readout record ignored");
   check(!VictronBle::parse(QByteArray()).has_value(), "empty ignored");
-  check(!decoder.decode("03" + QByteArray(16, 'a') + "\n", 0).has_value(), "unknown readout type gives nothing");
+  check(!decoder.decode("08" + QByteArray(16, 'a') + "\n", 0).has_value(), "unknown readout type gives nothing");
   check(!decoder.decode("zz\n", 0).has_value(), "junk line gives nothing");
   // a battery monitor with no voltage yet
   check(!decoder.decode(VictronBle::frame(VictronBle::BatteryMonitor, QByteArray::fromHex("ffffff7fffffffffffffffffffffff")), 0).has_value(),

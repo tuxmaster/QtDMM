@@ -31,7 +31,7 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
   - USB HID-serial support (HOITEK HE2325U & compatible)
   - RFC2217 remote serial, with **qtdmm-bridge** to serve serial and HID meters from a Raspberry Pi (see [Meters over the network](docs/user/remote-bridge.md))
   - Sigrok support via sigrok-cli application
-  - Bluetooth LE: Victron SmartShunt / BMV-712 and SmartSolar / BlueSolar MPPT over their encrypted "Instant Readout" broadcasts (see [Bluetooth LE](docs/user/bluetooth.md))
+  - Bluetooth LE: Victron SmartShunt / BMV-712, SmartSolar / BlueSolar MPPT and Phoenix Inverter Smart over their encrypted "Instant Readout" broadcasts (see [Bluetooth LE](docs/user/bluetooth.md))
 - supports lots of DMMs, see [Supported devices](docs/user/supported-devices.md)
   - custom serial settings dialog for yet unknown DMMs
 
@@ -186,6 +186,7 @@ meter working, please report it on the
 | Vichy | VC99 | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
 | Victron | BlueSolar MPPT ¹ | - | `VictronBLE` | Bluetooth LE | - | 1000 |
 | Victron | BMV-712 Smart ¹ | - | `VictronBLE` | Bluetooth LE | - | 6000 |
+| Victron | Phoenix Inverter Smart | - | `VictronBLE` | Bluetooth LE | - | 6000 |
 | Victron | SmartShunt | - | `VictronBLE` | Bluetooth LE | - | 6000 |
 | Victron | SmartSolar MPPT | - | `VictronBLE` | Bluetooth LE | - | 1000 |
 | Voltcraft | GDM 703 ¹ | WENS98A | `GDM703Continuous` | 9600 8N1 | DTR | 4000 |
@@ -221,7 +222,7 @@ meter working, please report it on the
 
 ¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
 
-138 devices across 32 vendors.
+139 devices across 32 vendors.
 
 ## Command line
 

@@ -1,6 +1,6 @@
 protocol: VictronBLE
 decoder: src/decoders/victron_ble.cpp
-devices: [Victron SmartShunt, Victron BMV-712 Smart, Victron SmartSolar MPPT, Victron BlueSolar MPPT]
+devices: [Victron SmartShunt, Victron BMV-712 Smart, Victron SmartSolar MPPT, Victron BlueSolar MPPT, Victron Phoenix Inverter Smart]
 frames_per_reading: 1
 sources:
   - https://github.com/keshavdv/victron-ble (bit layouts and the test vectors below)
@@ -12,7 +12,10 @@ sources:
 # the plaintexts come from victron-ble's public test vectors (advertisement
 # + key), decrypted. The decryption itself is tested in test_victronble.
 # Battery monitor: voltage main, current second value; solar charger: PV
-# power main, battery voltage second value.
+# power main, battery voltage second value; inverter: AC apparent power
+# main, battery voltage second value. The inverter line is a live capture
+# from a Phoenix Inverter 12V 500VA 230V (its ciphertext is device-keyed,
+# so only the plaintext is kept).
 vectors:
   - source_line: "SmartShunt 500A/50mV: 12.53 V, 0 A, SOC 50 %"
     bytes: 30 32 66 66 66 66 65 35 30 34 30 30 30 30 30 30 30 30 30 33 30 30 30 30 66 34 30 31 34 30 64 66 0A
@@ -22,3 +25,7 @@ vectors:
     bytes: 30 31 30 34 30 30 36 63 30 35 30 65 30 30 30 33 30 30 31 33 30 30 30 30 66 65 0A
     reading: {value: "19", unit: "W", coupling: DC}
     expect: {special: "DC", val: "19"}
+  - source_line: "Phoenix Inverter 12V 500VA 230V: 6 VA, 13.17 V battery, 230.02 V AC, inverting"
+    bytes: 30 33 30 39 30 30 30 30 32 35 30 35 30 36 30 30 64 61 35 39 30 30 66 63 0A
+    reading: {value: "6", unit: "VA", coupling: AC}
+    expect: {special: "AC", val: "6"}

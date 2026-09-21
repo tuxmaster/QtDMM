@@ -23,6 +23,17 @@
         "special": "DC",
         "val": "19"
       }
+    },
+    {
+      "comment": "[victron-ble (bit layouts and the test vectors below)] 'Phoenix Inverter 12V 500VA 230V: 6 VA, 13.17 V battery, 230.02 V AC, inverting'",
+      "hex": "30 33 30 39 30 30 30 30 32 35 30 35 30 36 30 30 64 61 35 39 30 30 66 63 0A",
+      "expected": {
+        "dval": 6.0,
+        "unit": "VA",
+        "hold": false,
+        "special": "AC",
+        "val": "6"
+      }
     }
   ]
 }

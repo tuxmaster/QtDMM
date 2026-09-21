@@ -1,7 +1,7 @@
 # Bluetooth LE: Victron Instant Readout
 
-Victron Energy's SmartShunt, BMV-712 Smart and the SmartSolar / BlueSolar
-MPPT chargers with Bluetooth broadcast their readings in their Bluetooth LE
+Victron Energy's SmartShunt, BMV-712 Smart, the SmartSolar / BlueSolar
+MPPT chargers and the Phoenix Inverter Smart broadcast their readings in their Bluetooth LE
 advertisements ("Instant Readout"). QtDMM listens to those broadcasts - no
 connection, no pairing - and shows them like a meter's reading:
 
@@ -9,6 +9,7 @@ connection, no pairing - and shows them like a meter's reading:
 |---|---|---|
 | SmartShunt, BMV-712 | battery voltage (V DC) | battery current (A, negative when discharging) |
 | SmartSolar, BlueSolar MPPT | PV power (W) | battery voltage (V) |
+| Phoenix Inverter Smart | AC apparent power (VA) | battery voltage (V) |
 
 The second value goes to the display's second line and to the
 [readings table](readings-table.md) (as a `2nd` row); the main value drives
@@ -48,7 +49,8 @@ be connected.
 ## What is not there yet
 
 Only the main and second value are shown; state of charge, consumed Ah,
-time to go, yield and the aux input (starter voltage / temperature) are
-decoded but not displayed. Other Victron products (inverters, DC-DC
-converters, Smart Lithium) broadcast in the same way and can follow once
+time to go, yield, the inverter's AC voltage and current, its state (eco
+mode, inverting) and the aux input (starter voltage / temperature) are
+decoded but not displayed. Other Victron products (DC-DC converters,
+Smart Lithium, Multi RS) broadcast in the same way and can follow once
 someone has one to test with.

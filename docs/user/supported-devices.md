@@ -125,6 +125,7 @@ meter working, please report it on the
 | Vichy | VC99 | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
 | Victron | BlueSolar MPPT ¹ | - | `VictronBLE` | Bluetooth LE | - | 1000 |
 | Victron | BMV-712 Smart ¹ | - | `VictronBLE` | Bluetooth LE | - | 6000 |
+| Victron | Phoenix Inverter Smart | - | `VictronBLE` | Bluetooth LE | - | 6000 |
 | Victron | SmartShunt | - | `VictronBLE` | Bluetooth LE | - | 6000 |
 | Victron | SmartSolar MPPT | - | `VictronBLE` | Bluetooth LE | - | 1000 |
 | Voltcraft | GDM 703 ¹ | WENS98A | `GDM703Continuous` | 9600 8N1 | DTR | 4000 |
@@ -160,4 +161,4 @@ meter working, please report it on the
 
 ¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
 
-138 devices across 32 vendors.
+139 devices across 32 vendors.

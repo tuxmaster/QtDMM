@@ -30,10 +30,10 @@
         <file alias="table.xpm">../assets/icons/table.xpm</file>
     </qresource>
     <qresource prefix="/Translations">
-        <file alias="de">../../tmp/victron/build_noble/qtdmm_de.qm</file>
-        <file alias="es">../../tmp/victron/build_noble/qtdmm_es.qm</file>
-        <file alias="fr">../../tmp/victron/build_noble/qtdmm_fr.qm</file>
-        <file alias="pl">../../tmp/victron/build_noble/qtdmm_pl.qm</file>
+        <file alias="de">../build/qtdmm_de.qm</file>
+        <file alias="es">../build/qtdmm_es.qm</file>
+        <file alias="fr">../build/qtdmm_fr.qm</file>
+        <file alias="pl">../build/qtdmm_pl.qm</file>
     </qresource>
     <qresource prefix="/Help">
         <file alias="analog-meter.md">../docs/user/analog-meter.md</file>

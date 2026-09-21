@@ -14,6 +14,7 @@ static const bool registered = []() {
   DmmDecoder::addConfig({"Victron", "BMV-712 Smart *", "", 0, ReadEvent::VictronBLE, 8, 1, 1, 0, 6000, 0, 0, 0});
   DmmDecoder::addConfig({"Victron", "SmartSolar MPPT", "", 0, ReadEvent::VictronBLE, 8, 1, 1, 0, 1000, 0, 0, 0});
   DmmDecoder::addConfig({"Victron", "BlueSolar MPPT *", "", 0, ReadEvent::VictronBLE, 8, 1, 1, 0, 1000, 0, 0, 0});
+  DmmDecoder::addConfig({"Victron", "Phoenix Inverter Smart", "", 0, ReadEvent::VictronBLE, 8, 1, 1, 0, 6000, 0, 0, 0});
   return true;
 }();
 
@@ -36,6 +37,7 @@ std::optional<DmmDecoder::DmmResponse> DecoderVictronBLE::decode(const QByteArra
   {
     case VictronBle::BatteryMonitor: ok = decodeBatteryMonitor(plain); break;
     case VictronBle::SolarCharger:   ok = decodeSolarCharger(plain); break;
+    case VictronBle::Inverter:       ok = decodeInverter(plain); break;
     default: break;
   }
   if (!ok)
@@ -88,6 +90,33 @@ bool DecoderVictronBLE::decodeSolarCharger(const QByteArray &plain)
   if (voltage != 0x7FFF)
   {
     m_result.dval2 = voltage / 100.0;
+    m_result.val2 = QString::number(m_result.dval2, 'f', 2);
+    m_result.unit2 = "V";
+    m_result.id2 = 1;
+  }
+  return true;
+}
+
+// Device state u8 | alarm u16 | battery voltage s16 /100 V | AC apparent
+// power u16 VA | AC voltage u15 /100 V | AC current u11 /10 A
+bool DecoderVictronBLE::decodeInverter(const QByteArray &plain)
+{
+  VictronBle::BitReader r(plain);
+  r.unsignedBits(8);                             // device state
+  r.unsignedBits(16);                            // alarm reason
+  const qint32 battery = r.signedBits(16);
+  const quint32 apparent = r.unsignedBits(16);
+  r.unsignedBits(15);                            // AC voltage
+  r.unsignedBits(11);                            // AC current
+  if (apparent == 0xFFFF)
+    return false;
+  m_result.special = "AC";
+  m_result.dval = apparent;
+  m_result.val = QString::number(apparent);
+  m_result.unit = "VA";
+  if (battery != 0x7FFF)
+  {
+    m_result.dval2 = battery / 100.0;
     m_result.val2 = QString::number(m_result.dval2, 'f', 2);
     m_result.unit2 = "V";
     m_result.id2 = 1;
