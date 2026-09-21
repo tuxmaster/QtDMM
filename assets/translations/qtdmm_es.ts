@@ -945,6 +945,11 @@ Elija qué instancia debe grabar.</translation>
         <source>variable bytes ASCII, polled with QM (Fluke 18x/28x)</source>
         <translation>bytes variables ASCII, sondeado con QM (Fluke 18x/28x)</translation>
     </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="45"/>
+        <source>variable bytes ASCII, polled (Fluke 45 bench meter)</source>
+        <translation>bytes variables ASCII, sondeado (multímetro de mesa Fluke 45)</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

@@ -42,6 +42,7 @@ const std::vector<ProtocolInfo> &protocols()
     { ReadEvent::BrymenBM52x,           "BrymenBM52x",           QT_TRANSLATE_NOOP("Protocols", "24 bytes binary, polled over BU-86X (Brymen BM52x)"),          "Brymen BM52x (BU-86X)", make<DecoderBrymenBM52x> },
     { ReadEvent::BrymenBM82x,           "BrymenBM82x",           QT_TRANSLATE_NOOP("Protocols", "24 bytes binary, polled over BU-86X (Brymen BM82x)"),          "Brymen BM82x (BU-86X)", make<DecoderBrymenBM52x> },
     { ReadEvent::FlukeQM,               "FlukeQM",               QT_TRANSLATE_NOOP("Protocols", "variable bytes ASCII, polled with QM (Fluke 18x/28x)"),        "",                      make<DecoderFlukeQM> },
+    { ReadEvent::Fluke45,               "Fluke45",               QT_TRANSLATE_NOOP("Protocols", "variable bytes ASCII, polled (Fluke 45 bench meter)"),           "",                      make<DecoderFluke45> },
   };
   return table;
 }

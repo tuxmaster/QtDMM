@@ -945,6 +945,11 @@ Choisissez quelle instance doit enregistrer.</translation>
         <source>variable bytes ASCII, polled with QM (Fluke 18x/28x)</source>
         <translation>octets variables ASCII, interrogé par QM (Fluke 18x/28x)</translation>
     </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="45"/>
+        <source>variable bytes ASCII, polled (Fluke 45 bench meter)</source>
+        <translation>octets variables ASCII, interrogé (multimètre de table Fluke 45)</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
