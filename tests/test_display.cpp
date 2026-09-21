@@ -88,6 +88,37 @@ int main(int argc, char **argv)
           "very tall widget: panel does not stretch vertically");
   }
 
+  // --- 4. narrow panels: flags and MIN/MAX blocks must fit the width ---
+  // (they used to overlap: MANU into AC, MIN's unit under MAX)
+  {
+    DisplayWid n;
+    n.setDisplayMode(50000, true, true, 1);   // 5 digits
+    n.setValue(0, "12.345");
+    n.setUnit(0, "MOhm");
+    n.setMode(0, "AC");
+    n.setManu(true);
+    n.setMinValue("11.111");
+    n.setMinUnit("MOhm");
+    n.setMaxValue("13.333");
+    n.setMaxUnit("MOhm");
+    for (int width : {160, 200, 260, 320, 400, 520})   // down to well below minimumSizeHint (260)
+    {
+      n.resize(width, 400);
+      const DisplayWid::Layout l = n.layout();
+      check(n.flagsWidth(l.flagsPx) <= l.flags.width() + 0.5,
+            QString("width %1: annunciators fit (%2 <= %3)").arg(width).arg(n.flagsWidth(l.flagsPx)).arg(l.flags.width()));
+      check(2 * l.minMaxBlockW + l.smallH <= l.minMax.width() + 0.5,
+            QString("width %1: MIN and MAX blocks fit (%2 <= %3)").arg(width).arg(2 * l.minMaxBlockW + l.smallH).arg(l.minMax.width()));
+      check(l.flagsPx > 0 && l.smallH > 0, QString("width %1: sizes stay positive").arg(width));
+      if (!dump.isEmpty())
+        render(n, QSize(width, 400)).save(QDir(dump).filePath(QString("display_narrow_%1.png").arg(width)));
+    }
+    // a roomy panel is not shrunk by the width rule
+    n.resize(520, 200);
+    const DisplayWid::Layout l = n.layout();
+    check(qFuzzyCompare(l.flagsPx, l.flags.height() * 0.75), "wide panel: annunciator font is the row's");
+  }
+
   if (!dump.isEmpty())
   {
     w.setValue(0, "0.L");

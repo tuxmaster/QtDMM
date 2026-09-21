@@ -368,8 +368,57 @@ DisplayWid::Layout DisplayWid::layout() const
   double sh = qMin(minMaxH > 0 ? minMaxH * 0.7 : extraH * 0.7, h * 0.5);
   if (sh <= 0)
     sh = h * 0.4;
+  // the MIN and MAX blocks side by side, with a gap of one small digit,
+  // must fit the width too: on a narrow panel the small glyphs shrink
+  if (m_showMinMax)
+    for (int i = 0; i < 8 && 2.0 * minMaxBlockWidth(sh) + sh > inner.width() && sh > 4; ++i)
+      sh = qMax(4.0, sh * inner.width() / (2.0 * minMaxBlockWidth(sh) + sh) * 0.97);
   l.smallH = sh;
+  l.minMaxBlockW = minMaxBlockWidth(sh);
+
+  // annunciators: HOLD/AUTO/MANU left, AC/DC/diode/continuity right, all
+  // present as ghosts - shrink the font until the row holds them
+  // (font sizes are whole pixels, so one proportional step may still be a
+  // little too wide - repeat until it fits)
+  double fpx = flagsH * 0.75;
+  for (int i = 0; i < 8 && flagsWidth(fpx) > inner.width() && fpx > 4; ++i)
+    fpx = qMax(4.0, fpx * inner.width() / flagsWidth(fpx) * 0.97);
+  l.flagsPx = fpx;
   return l;
+}
+
+namespace
+{
+const QStringList &leftFlags()
+{
+  static const QStringList l = { DisplayWid::tr("HOLD"), DisplayWid::tr("AUTO"), DisplayWid::tr("MANU") };
+  return l;
+}
+const QStringList &rightFlags()
+{
+  static const QStringList l = { QStringLiteral("AC"), QStringLiteral("DC"), QStringLiteral("→|←"), QStringLiteral("●))") };
+  return l;
+}
+}
+
+double DisplayWid::flagsWidth(double fontPx) const
+{
+  const QFontMetricsF fm(sansFont(fontPx));
+  const double gap = fontPx * 0.9;
+  double w = gap;   // between the two groups at least one gap
+  for (const QString &t : leftFlags() + rightFlags())
+    w += fm.horizontalAdvance(t) + 2 + gap;
+  return w - gap;   // no gap after the last one
+}
+
+double DisplayWid::minMaxBlockWidth(double h) const
+{
+  const QFontMetricsF fm(sansFont(h * 0.7));
+  const double labelW = fm.horizontalAdvance(tr("MAX")) + h * 0.3;
+  // the unit at 0.62 h: three characters ("MΩ", "µF" with a margin)
+  const QFontMetricsF um(sansFont(h * 0.62));
+  const double unitW = um.horizontalAdvance(QStringLiteral("MΩ")) * 1.3 + 2;
+  return labelW + numberWidth(h, numDigits()) + h * 0.25 + unitW;
 }
 
 void DisplayWid::resizeEvent(QResizeEvent *)
@@ -381,22 +430,24 @@ void DisplayWid::resizeEvent(QResizeEvent *)
 
 void DisplayWid::drawFlags(QPainter &p, const Layout &l) const
 {
-  const double fontPx = l.flags.height() * 0.75;
+  const double fontPx = l.flagsPx;   // sized by layout() to fit the width
   const QFontMetricsF fm(sansFont(fontPx));
   const double gap = fontPx * 0.9;
   const QString mode = m_mode[0];
 
   struct Flag { QString text; bool on; };
+  const QStringList &lt = leftFlags();
+  const QStringList &rt = rightFlags();
   const Flag left[] = {
-    { tr("HOLD"), m_hold },
-    { tr("AUTO"), m_auto },
-    { tr("MANU"), m_manu },
+    { lt[0], m_hold },
+    { lt[1], m_auto },
+    { lt[2], m_manu },
   };
   const Flag right[] = {
-    { QStringLiteral("AC"), mode == "AC" || mode == "ACDC" },
-    { QStringLiteral("DC"), mode == "DC" || mode == "ACDC" },
-    { QStringLiteral("→|←"), mode == "DI" || mode == "Diode" },   // diode
-    { QStringLiteral("●))"), mode == "BUZ" },                          // continuity
+    { rt[0], mode == "AC" || mode == "ACDC" },
+    { rt[1], mode == "DC" || mode == "ACDC" },
+    { rt[2], mode == "DI" || mode == "Diode" },   // diode
+    { rt[3], mode == "BUZ" },                     // continuity
   };
 
   double x = l.flags.left();
@@ -457,8 +508,10 @@ void DisplayWid::drawMinMax(QPainter &p, const Layout &l) const
     drawUnit(p, QPointF(x, y), h, unit);
   };
 
+  // MAX starts right after MIN's block (plus a gap), never under it; what is
+  // left of the row stays free on the right
   block(l.minMax.left(), tr("MIN"), m_minValue, m_minUnit);
-  block(l.minMax.left() + l.minMax.width() / 2.0, tr("MAX"), m_maxValue, m_maxUnit);
+  block(l.minMax.left() + qMax(l.minMaxBlockW + h, l.minMax.width() / 2.0), tr("MAX"), m_maxValue, m_maxUnit);
 }
 
 void DisplayWid::drawExtra(QPainter &p, const Layout &l) const
