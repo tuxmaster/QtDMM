@@ -44,7 +44,8 @@ CHIP = {
     "CyrustekES51986": "ES51986",
     "CyrustekES51962": "ES51962",
     "DTM0660": "DTM0660",
-    "Metex14": "Metex ASCII",
+    "Metex14": "Metex KS57C2016",
+    "GDM703Continuous": "WENS98A",
 }
 
 

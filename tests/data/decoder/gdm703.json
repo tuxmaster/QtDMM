@@ -1,0 +1,54 @@
+{
+  "decoder": "GDM703Continuous",
+  "comment": "SYNTHETIC: built from the frame layout documented in Matthias Toussaint's CDMM (ablage/CDMM/src/gdm703.h), no capture from a real GDM 703 exists. Replace with real data when available.",
+  "tests": [
+    {
+      "comment": "main 1.234 V DC, secondary 50.00 Hz",
+      "hex": "02 44 43 20 31 2E 32 33 34 56 20 20 20 20 42 20 35 30 2E 30 30 20 20 48 7A 03",
+      "expected": {
+        "dval": 1.234,
+        "val": "1.234",
+        "unit": "V",
+        "special": "DC",
+        "id": 0,
+        "dval2": 50.0,
+        "val2": "50.00",
+        "unit2": "Hz",
+        "id2": 1
+      }
+    },
+    {
+      "comment": "main -12.34 mV AC, secondary 60.0 Hz",
+      "hex": "02 41 43 2D 31 32 2E 33 34 6D 56 20 20 20 42 20 20 36 30 2E 30 20 20 48 7A 03",
+      "expected": {
+        "dval": -0.01234,
+        "val": "-12.34",
+        "unit": "mV",
+        "special": "AC",
+        "dval2": 60.0,
+        "unit2": "Hz",
+        "id2": 1
+      }
+    },
+    {
+      "comment": "resistance 4.700 kOhm, no secondary value",
+      "hex": "02 4F 48 20 34 2E 37 30 30 6B 4F 68 6D 20 42 20 20 20 20 20 20 20 20 20 20 03",
+      "expected": {
+        "dval": 4700.0,
+        "val": "4.700",
+        "unit": "kOhm",
+        "special": "OH",
+        "id2": 0
+      }
+    },
+    {
+      "comment": "overload on the main display",
+      "hex": "02 44 43 20 20 20 4F 2E 4C 56 20 20 20 20 42 20 20 20 20 20 20 20 20 20 20 03",
+      "expected": {
+        "val": " OL ",
+        "unit": "V",
+        "special": "DC"
+      }
+    }
+  ]
+}
