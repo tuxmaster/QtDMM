@@ -12,7 +12,7 @@
 
 #include "victronble.h"
 
-Q_LOGGING_CATEGORY(lcBle, "qtdmm.ble")
+Q_LOGGING_CATEGORY(lcBle, "qtdmm.ble", QtWarningMsg)
 
 BleAdvertisementDevice::BleAdvertisementDevice(const DmmDecoder::DMMInfo &, const QString &device, QObject *parent)
   : QIODevice(parent)
@@ -42,6 +42,12 @@ bool BleAdvertisementDevice::open(OpenMode mode)
     setErrorString(tr("The encryption key must be 32 hex digits (VictronConnect: Product info, Instant readout via Bluetooth)."));
     return false;
   }
+
+  // BlueZ warns on every scan that it cannot tell random from public
+  // addresses without CAP_NET_ADMIN - harmless for listening, so it stays
+  // quiet unless --debug switched our own category on
+  if (!lcBle().isDebugEnabled())
+    QLoggingCategory::setFilterRules(QStringLiteral("qt.bluetooth.bluez.warning=false\nqt.bluetooth.bluez.info=false"));
 
   m_agent = new QBluetoothDeviceDiscoveryAgent(this);
   // advertisements keep changing, so every update of a known device counts
