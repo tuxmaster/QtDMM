@@ -677,8 +677,8 @@ void DmmPrefs::on_ui_bleScan_clicked()
   const QString current = ui_bleAddress->currentText();
   ui_bleAddress->clear();
   ui_bleAddress->addItems(found);
-  if (!current.isEmpty() && !found.contains(current))
-    ui_bleAddress->setCurrentText(current);
+  if (!current.isEmpty())
+    ui_bleAddress->setCurrentText(current);   // keep what was configured, found or not
   ui_bleScan->setEnabled(true);
   if (found.isEmpty())
   {

@@ -92,6 +92,10 @@ protected Q_SLOTS:
   void           updateCalcHint();
   /// Rebuilds the virtual meter's formula from the waveform fields.
   void           updateVirtualFormula();
+  /// Validates address and key, explains what is missing.
+  void           updateBleHint();
+  /// Five-second scan for Victron devices, fills the device combo.
+  void           on_ui_bleScan_clicked();
 
 protected:
   QString        m_path;
@@ -105,8 +109,6 @@ protected:
   void enterManualMode();
   /// Shows the formula group instead of the port/protocol groups, or back.
   void updateCalcMode();
-  void updateBleHint();
-  void on_ui_bleScan_clicked();
 
   SharedStateManager *m_state = Q_NULLPTR;
   QTimer m_calcHintTimer;
