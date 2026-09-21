@@ -52,6 +52,7 @@ static const bool registered = []() {
   DmmDecoder::addConfig({"HoldPeak", "HP-90EPC", "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"PeakTech", "3330"    , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Tenma", "72-7745"    , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Tenma", "72-6870 *"  , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});   // sigrok PR #282
   DmmDecoder::addConfig({"Uni-Trend", "UT60A"  , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Uni-Trend", "UT60E"  , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Voltcraft", "VC 820" , "", 2400, ReadEvent::VC820Continuous, 8, 1, 1, 0, 4000, 0, 0, 1});
@@ -147,7 +148,12 @@ std::optional<DmmDecoder::DmmResponse> DecoderVC820::decode(const QByteArray &da
     unit    = "%";
     special = "PC";
   }
-  else if (in[13] & 0x01)
+  // byte 13 carries the four "user defined" flags c2c1 of the FS9721; their
+  // meaning is per meter. Per libsigrok: c2c1_00 (bit 0) is degrees C on the
+  // UT60E, Tenma 72-7745, VA18B; c2c1_10 (bit 2) on the DT4000ZC, Tenma
+  // 72-6870, PCE-DM32; c2c1_01 (bit 1) is C on the VA40B but F on the
+  // PCE-DM32 and PeakTech 3330, so it stays unhandled here.
+  else if (in[13] & 0x01 || in[13] & 0x04)
   {
     unit    = "C";
     special = "TE";

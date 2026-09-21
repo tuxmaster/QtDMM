@@ -16,6 +16,7 @@ static const bool registered = []() {
   DmmDecoder::addConfig({"Metex", "ME-11", "", 600, ReadEvent::Metex14, 7, 2, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Metex", "ME-22", "", 2400, ReadEvent::Metex14, 7, 2, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Metex", "ME-32", "", 600, ReadEvent::Metex14, 7, 2, 1, 0, 4000, 0, 0, 1});
+  DmmDecoder::addConfig({"Metex", "ME-21 *", "", 600, ReadEvent::Metex14, 7, 2, 1, 0, 4000, 0, 0, 1});   // libsigrok-master metex14; unconfirmed
   DmmDecoder::addConfig({"Metex", "ME-42", "", 600, ReadEvent::Metex14, 7, 2, 1, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"Metex", "universal system 9160", "", 1200, ReadEvent::Metex14, 7, 2, 4, 0, 4000, 0, 0, 1});
   DmmDecoder::addConfig({"PeakTech", "4010", "", 9600, ReadEvent::Metex14, 7, 2, 1, 0, 4000, 0, 0, 1});

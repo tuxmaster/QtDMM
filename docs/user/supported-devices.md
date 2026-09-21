@@ -34,6 +34,7 @@ meter working, please report it on the
 | Generic | DTM0660 4000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 4000 |
 | Generic | DTM0660 6000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
 | Generic | DTM0660 8000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 8000 |
+| GW Instek | GDM-397 ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
 | HoldPeak | HP-90EPC | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Iso-Tech | IDM 73 | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
 | MASTECH | M9803R | - | `M9803RContinuous` | 9600 7E1 | DTR | 4000 |
@@ -51,11 +52,13 @@ meter working, please report it on the
 | Metex | M-3870D | Metex ASCII | `Metex14` | 1200 7N1 | DTR | 4000 |
 | Metex | M-4650C | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 20000 |
 | Metex | ME-11 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
+| Metex | ME-21 ¹ | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
 | Metex | ME-22 | Metex ASCII | `Metex14` | 2400 7N2 | DTR | 4000 |
 | Metex | ME-32 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
 | Metex | ME-42 | Metex ASCII | `Metex14` | 600 7N2 | DTR | 4000 |
 | Metex | universal system 9160 | Metex ASCII | `Metex14` | 1200 7N2 | DTR | 4000 |
 | PCE | PCE-DM32 ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| PeakTech | 2025 ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
 | PeakTech | 3315 | ES51962 | `CyrustekES51962` | 2400 7N1 | DTR | 4000 |
 | PeakTech | 3330 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | PeakTech | 3415 ¹ | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
@@ -74,6 +77,7 @@ meter working, please report it on the
 | Tecpel | DMM-8061 ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | TekPower | TP4000ZC | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Tenma | 72-1016 | ES51986 | `CyrustekES51986` | 19200 7O1 | DTR | 6000 |
+| Tenma | 72-6870 ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Tenma | 72-7730 ¹ | - | `VC940Continuous` | 2400 7O1 | DTR | 20000 |
 | Tenma | 72-7732 | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
 | Tenma | 72-7745 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
@@ -124,4 +128,4 @@ meter working, please report it on the
 
 ¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
 
-102 devices across 26 vendors.
+106 devices across 27 vendors.
