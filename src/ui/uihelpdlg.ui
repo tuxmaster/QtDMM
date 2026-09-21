@@ -89,6 +89,22 @@
       </widget>
      </item>
      <item>
+      <widget class="QLineEdit" name="ui_search">
+       <property name="toolTip">
+        <string>Search in the page (Ctrl+F). Enter or F3 finds the next match, Shift+F3 the previous one.</string>
+       </property>
+       <property name="whatsThis">
+        <string>Search the shown help page. Enter or F3 jumps to the next match, Shift+Enter or Shift+F3 to the previous one.</string>
+       </property>
+       <property name="placeholderText">
+        <string>Search…</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="navSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>

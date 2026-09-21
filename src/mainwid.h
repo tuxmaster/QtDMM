@@ -76,6 +76,8 @@ public:
   /// Shows or hides the recorder graph (recording goes on regardless).
   void        setGraphVisible(bool);
   bool        graphVisible() const;
+  /// The recorder graph (for the zoom/pan shortcuts in MainWin).
+  DMMGraph   *graph() const { return ui_graph; }
   /// False until a meter has been chosen in the settings once; a fresh
   /// instance does not try to connect to a guessed port on its own.
   bool        dmmConfigured() const;

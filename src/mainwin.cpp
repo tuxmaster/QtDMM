@@ -28,6 +28,7 @@
 #include "mainwin.h"
 #include "helpdlg.h"
 #include "mainwid.h"
+#include "dmmgraph.h"
 #include "displaywid.h"
 #include "meterwid.h"
 #include "settings.h"
@@ -69,6 +70,7 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
 
   QAction *displayAction = m_displayDock->toggleViewAction();
   displayAction->setText(tr("&Display"));
+  displayAction->setShortcut(QKeySequence("Ctrl+1"));
   displayAction->setIcon(QIcon(":/Symbols/display.xpm"));
   displayAction->setWhatsThis(tr("<html><head/><body><p><span style=\" font-weight:600;\">Display</span></p>"
                                  "<p>Show the reading on the LCD-style digital display. The panel can be docked on any side "
@@ -88,6 +90,7 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
 
   QAction *meterAction = m_meterDock->toggleViewAction();
   meterAction->setText(tr("Analog &meter"));
+  meterAction->setShortcut(QKeySequence("Ctrl+2"));
   meterAction->setIcon(QIcon(":/Symbols/meter.xpm"));
   meterAction->setWhatsThis(tr("<html><head/><body><p><span style=\" font-weight:600;\">Analog meter</span></p>"
                                "<p>Show the reading on a moving-coil style instrument. The panel can be docked on any side "
@@ -102,6 +105,7 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   // rearrange them.
   m_lockPanels = new QAction(tr("&Lock panels"), this);
   m_lockPanels->setCheckable(true);
+  m_lockPanels->setShortcut(QKeySequence("Ctrl+L"));
   m_lockPanels->setWhatsThis(tr("<html><head/><body><p><span style=\" font-weight:600;\">Lock panels</span></p>"
                                 "<p>Hide the title bars of the display and meter panels. Unlock them to move the panels "
                                 "to another side of the window or to drag them out as separate windows.</p></body></html>"));
@@ -113,8 +117,12 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   connect(m_wid, &MainWid::configChanged, this, &MainWin::updateWindowTitle);
 
   action_Graph->setChecked(m_wid->graphVisible());
+  action_Graph->setShortcuts({QKeySequence("Ctrl+G"), QKeySequence("Ctrl+3")});
   connect(action_Graph, &QAction::toggled, this, &MainWin::setGraphVisible);
   setGraphVisible(m_wid->graphVisible());
+
+  createExtraActions();
+  addShortcutsToToolTips();
 
   connect(m_wid, SIGNAL(running(bool)), this, SLOT(runningSLOT(bool)));
 
@@ -274,10 +282,77 @@ void MainWin::createActions()
 
   connect(m_stateMgr, SIGNAL(instancesChanged(QStringList&)), m_wid, SLOT(instancesChangedSlot(QStringList&)));
 
-  connect(new QShortcut(action_Configure->shortcut(), this), SIGNAL(activated()), action_Configure, SLOT(trigger()));
-  connect(new QShortcut(action_Direct_help->shortcut(), this), SIGNAL(activated()), action_Direct_help, SLOT(trigger()));
-  connect(new QShortcut(action_Help->shortcut(), this), SIGNAL(activated()), action_Help, SLOT(trigger()));
-  connect(new QShortcut(action_Quit->shortcut(), this), SIGNAL(activated()), action_Quit, SLOT(trigger()));
+}
+
+// Actions that live only in the popup menu are not attached to any widget,
+// so their shortcuts would be dead - adding them to the window fixes that.
+void MainWin::createExtraActions()
+{
+  // Ctrl+C is the historical Connect key; Ctrl+D is the one that does not
+  // fight the copy reflex.
+  action_Connect->setShortcuts({QKeySequence("Ctrl+C"), QKeySequence("Ctrl+D")});
+
+  m_fullScreen = new QAction(tr("&Full screen"), this);
+  m_fullScreen->setCheckable(true);
+  m_fullScreen->setShortcut(QKeySequence("F11"));
+  m_fullScreen->setWhatsThis(tr("<html><head/><body><p><span style=\" font-weight:600;\">Full screen</span></p>"
+                                "<p>Use the whole screen for the instruments, e.g. on a lab monitor. F11 again "
+                                "returns to the normal window.</p></body></html>"));
+  connect(m_fullScreen, &QAction::toggled, this, &MainWin::setFullScreen);
+
+  m_zoomIn = new QAction(tr("Zoom &in"), this);
+  m_zoomIn->setShortcuts({QKeySequence::ZoomIn, QKeySequence("Ctrl+=")});
+  connect(m_zoomIn, &QAction::triggered, m_wid->graph(), &DMMGraph::zoomInSLOT);
+  m_zoomOut = new QAction(tr("Zoom &out"), this);
+  m_zoomOut->setShortcut(QKeySequence::ZoomOut);
+  connect(m_zoomOut, &QAction::triggered, m_wid->graph(), &DMMGraph::zoomOutSLOT);
+  m_zoomFit = new QAction(tr("Show &whole recording"), this);
+  m_zoomFit->setShortcut(QKeySequence("Ctrl+0"));
+  connect(m_zoomFit, &QAction::triggered, m_wid->graph(), &DMMGraph::zoomFitSLOT);
+  m_copyImage = new QAction(tr("Copy graph &image"), this);
+  m_copyImage->setShortcut(QKeySequence("Ctrl+Shift+C"));
+  m_copyImage->setWhatsThis(tr("<html><head/><body><p><span style=\" font-weight:600;\">Copy graph image</span></p>"
+                               "<p>Puts a picture of the recorder graph on the clipboard, ready to paste into a "
+                               "report or a chat.</p></body></html>"));
+  connect(m_copyImage, &QAction::triggered, m_wid->graph(), &DMMGraph::copyImageSLOT);
+
+  // Space toggles the recorder; a bare key, so only while this window is active
+  QAction *toggleRecord = new QAction(this);
+  toggleRecord->setShortcut(QKeySequence(Qt::Key_Space));
+  connect(toggleRecord, &QAction::triggered, this, &MainWin::toggleRecordingSLOT);
+
+  addActions({action_Configure, action_Direct_help, action_Help, action_Quit, action_Tip_of_the_day,
+              m_displayDock->toggleViewAction(), m_meterDock->toggleViewAction(), m_lockPanels,
+              m_fullScreen, m_zoomIn, m_zoomOut, m_zoomFit, m_copyImage, toggleRecord});
+}
+
+void MainWin::addShortcutsToToolTips()
+{
+  for (QAction *a : findChildren<QAction *>())
+  {
+    if (a->shortcut().isEmpty() || a->isSeparator())
+      continue;
+    QString tip = a->toolTip();
+    if (tip.isEmpty())
+      tip = a->text().remove('&');
+    a->setToolTip(QString("%1 (%2)").arg(tip, a->shortcut().toString(QKeySequence::NativeText)));
+  }
+}
+
+void MainWin::toggleRecordingSLOT()
+{
+  if (m_running)
+    action_Stop->trigger();
+  else if (action_Start->isEnabled())
+    action_Start->trigger();
+}
+
+void MainWin::setFullScreen(bool on)
+{
+  if (on)
+    showFullScreen();
+  else
+    showNormal();
 }
 
 void MainWin::startSLOT()
@@ -397,6 +472,12 @@ void MainWin::on_action_Menu_triggered()
     m_menu->addAction(m_displayDock->toggleViewAction());
     m_menu->addAction(m_meterDock->toggleViewAction());
     m_menu->addAction(m_lockPanels);
+    m_menu->addAction(m_fullScreen);
+    m_menu->addSeparator();
+    m_menu->addAction(m_zoomIn);
+    m_menu->addAction(m_zoomOut);
+    m_menu->addAction(m_zoomFit);
+    m_menu->addAction(m_copyImage);
     m_menu->addSeparator();
     m_menu->addAction(action_Help);
     m_menu->addAction(action_Tip_of_the_day);

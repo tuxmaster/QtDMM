@@ -109,6 +109,11 @@ int main(int argc, char **argv)
           "showPage(\"supported-devices.md\") did not switch the page");
     check(ms < 1500, QString("supported-devices.md took %1 ms to load").arg(ms));
     qInfo() << "supported-devices.md loaded in" << ms << "ms";
+
+    // Ctrl+F search: first match selected, wraps around, misses reported
+    check(dlg.search("UT61E") && dlg.selectedText() == "UT61E",
+          "search(\"UT61E\") should select the first match in the device table");
+    check(!dlg.search("no-such-meter-xyz"), "search() should report a miss");
   }
 
   if (failed == 0)

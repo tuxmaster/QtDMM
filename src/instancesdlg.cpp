@@ -24,6 +24,12 @@ InstancesDlg::InstancesDlg(Settings *settings, QString instance_id, QString conf
 {
   setupUi(this);
   ui_instancesList->setStyleSheet("background-color: palette(window);");
+  // Ins/Del/Ctrl+F for the three buttons; the tooltips say so
+  ui_instance_add->setShortcut(QKeySequence("Ins"));
+  ui_instance_del->setShortcut(QKeySequence::Delete);
+  ui_instance_calc->setShortcut(QKeySequence::Find);
+  for (QAbstractButton *b : {ui_instance_add, ui_instance_del, ui_instance_calc})
+    b->setToolTip(QString("%1 (%2)").arg(b->toolTip(), b->shortcut().toString(QKeySequence::NativeText)));
   m_refresh.setInterval(1000);
   connect(&m_refresh, &QTimer::timeout, this, &InstancesDlg::updateValues);
 }

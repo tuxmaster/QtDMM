@@ -264,6 +264,9 @@
    <property name="iconVisibleInMenu">
     <bool>true</bool>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+G</string>
+   </property>
   </action>
   <action name="action_Reset">
    <property name="icon">
@@ -363,7 +366,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Clear the recorder graph&lt;/span&gt;&lt;/p&gt;&lt;p&gt;If the recorder is already started it will clear the graph and continue recording.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="shortcut">
-    <string notr="true">Del</string>
+    <string notr="true">Ctrl+Del</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -391,7 +394,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show tip of the day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="shortcut">
-    <string notr="true"/>
+    <string notr="true">Ctrl+T</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>

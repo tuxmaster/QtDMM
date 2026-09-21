@@ -46,6 +46,22 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
   m_buttonBox_OK = false;
   setupUi(this);
 
+  // Ctrl+PgUp/PgDn flip through the pages, like tabs
+  auto pageShortcut = [this](const QKeySequence &key, int delta)
+  {
+    QAction *a = new QAction(this);
+    a->setShortcut(key);
+    connect(a, &QAction::triggered, this, [this, delta]
+    {
+      const int n = ui_list->count();
+      if (n > 0)
+        ui_list->setCurrentRow((ui_list->currentRow() + delta + n) % n);
+    });
+    addAction(a);
+  };
+  pageShortcut(QKeySequence("Ctrl+PgUp"), -1);
+  pageShortcut(QKeySequence("Ctrl+PgDown"), 1);
+
   // Check if configuration file exists. If not welcome user
   if (!m_settings->fileExists())
   {
@@ -225,6 +241,12 @@ void ConfigDlg::zoomInSLOT(double fac)
 void ConfigDlg::zoomOutSLOT(double fac)
 {
   m_scale->zoomOutSLOT(fac);
+  Q_EMIT zoomed();
+}
+
+void ConfigDlg::zoomFitSLOT()
+{
+  m_scale->zoomFitSLOT();
   Q_EMIT zoomed();
 }
 
