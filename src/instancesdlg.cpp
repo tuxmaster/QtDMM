@@ -168,7 +168,7 @@ QString InstancesDlg::createCalculatedInstance(const QString &configId, const QS
     Settings cfg(configId, configPath);
     cfg.setString("DMM/model", "QtDMM Calculated value");
     cfg.setBool("DMM/configured", true);
-    cfg.setInt("DMM/data-format", ReadEvent::Sigrok);
+    cfg.setString("DMM/data-format", ReadEvent::toString(ReadEvent::Sigrok));
     cfg.setString("DMM/display", "400000");
     cfg.setString("DMM/calc-unit", unit);
     cfg.setString("DMM/calc-expression", formula);

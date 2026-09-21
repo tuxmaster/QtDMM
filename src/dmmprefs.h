@@ -58,6 +58,10 @@ public:
   int            display() const;
   /// Selects the display counts, adding the entry when the combo lacks it.
   void           selectDisplay(const QString &counts);
+  /// Selects the protocol combo entry for @p df.
+  void           selectFormat(ReadEvent::DataFormat df);
+  /// Protocol from a settings value: name, or the enum number of old files.
+  static ReadEvent::DataFormat formatFromSetting(const QVariant &value);
   QString        dmmName() const;
   /// The port entry as typed or chosen, e.g. "/dev/ttyUSB0" or "HID 0x1a86:0xe008 ...";
   /// for a calculated value "calc <unit> <formula>".

@@ -412,59 +412,59 @@ Ist das DMM angeschlossen und eingeschaltet?</translation>
 <context>
     <name>DmmPrefs</name>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="45"/>
+        <location filename="../../src/dmmprefs.cpp" line="46"/>
         <source>Multimeter</source>
         <translation>Multimeter</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="46"/>
+        <location filename="../../src/dmmprefs.cpp" line="47"/>
         <source>&lt;b&gt;Here you can configure the serial port and protocol for your DMM. There is also a number of predefined models.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Hier können Sie den Anschluss und das Protokoll für Ihr DMM einstellen. Es gibt schon eine Reihe vorkonfigurierter Modelle.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="76"/>
+        <location filename="../../src/dmmprefs.cpp" line="100"/>
         <source>Manual settings</source>
         <translation>Manuelle Einstellung</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="77"/>
+        <location filename="../../src/dmmprefs.cpp" line="101"/>
         <source>All vendors</source>
         <translation>Alle Hersteller</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="365"/>
-        <location filename="../../src/dmmprefs.cpp" line="405"/>
+        <location filename="../../src/dmmprefs.cpp" line="389"/>
+        <location filename="../../src/dmmprefs.cpp" line="429"/>
         <source>Position %1: %2</source>
         <translation>Position %1: %2</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="421"/>
+        <location filename="../../src/dmmprefs.cpp" line="445"/>
         <source>%1: no such instance running</source>
         <translation>%1: keine solche Instanz läuft</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="431"/>
+        <location filename="../../src/dmmprefs.cpp" line="455"/>
         <source>Running instances: %1</source>
         <translation>Laufende Instanzen: %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="433"/>
+        <location filename="../../src/dmmprefs.cpp" line="457"/>
         <source>No other instance is running.</source>
         <translation>Keine andere Instanz läuft.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="624"/>
+        <location filename="../../src/dmmprefs.cpp" line="648"/>
         <source>Load DMM description</source>
         <translation>DMM Beschreibung laden</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="624"/>
-        <location filename="../../src/dmmprefs.cpp" line="650"/>
+        <location filename="../../src/dmmprefs.cpp" line="648"/>
+        <location filename="../../src/dmmprefs.cpp" line="674"/>
         <source>DMM description (*.cfg)</source>
         <translation>DMM Beschreibung (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="650"/>
+        <location filename="../../src/dmmprefs.cpp" line="674"/>
         <source>Save DMM description</source>
         <translation>DMM Beschreibung speichern</translation>
     </message>
@@ -852,6 +852,114 @@ Please choose which instance should record.</translation>
     </message>
 </context>
 <context>
+    <name>Protocols</name>
+    <message>
+        <location filename="../../src/protocols.cpp" line="23"/>
+        <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
+        <translation>14 Bytes ASCII, auf Abfrage (Metex/Voltcraft)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="24"/>
+        <source>11 bytes ASCII, continuous (PeakTech 451)</source>
+        <translation>11 Bytes ASCII, kontinuierlich (PeakTech 451)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="25"/>
+        <source>14 bytes ASCII, continuous (Voltcraft)</source>
+        <translation>14 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="26"/>
+        <source>15 bytes ASCII, continuous (Voltcraft)</source>
+        <translation>15 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="27"/>
+        <source>11 bytes binary, continuous (M9803R)</source>
+        <translation>11 Bytes binär, kontinuierlich (M9803R)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="28"/>
+        <source>14 bytes binary, continuous (VC820)</source>
+        <translation>14 Bytes binär, kontinuierlich (VC820)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="29"/>
+        <source>11 bytes binary, continuous (CyrustekES51986)</source>
+        <translation>11 bytes binär, kontinuierlich (CyrustekES51986)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="30"/>
+        <source>11 bytes binary, continuous (VC940)</source>
+        <translation>11 Bytes binär, kontinuierlich (VC940)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="31"/>
+        <source>14 bytes ASCII/binary, continuous (QM1537)</source>
+        <translation>14 Bytes ASCII/Binär, kontinuierlich (QM1537)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="32"/>
+        <source>9 bytes binary, continuous (RS 22-812)</source>
+        <translation>9 Bytes binär, kontinuierlich (RS 22-812)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="33"/>
+        <source>23 bytes ASCII, continuous (VC870)</source>
+        <translation>23 bytes ASCII, kontinuierlich (VC870)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="34"/>
+        <source>22 bytes binary, continuous (DO3122)</source>
+        <translation>22 bytes binary, kontinuierlich (DO3122)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="35"/>
+        <source>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</source>
+        <translation>14 bytes halb-ASCII, UNI-T UT61E (CyrustekES51922)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="36"/>
+        <source>DTM0660</source>
+        <translation>DTM0660</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="37"/>
+        <source>11 bytes binary, continuous (CyrustekES51962)</source>
+        <translation>11 bytes binär, kontinuierlich(CyrustekES51962)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="38"/>
+        <source>variable bytes ASCII, Sigrok</source>
+        <translation>variable bytes ASCII, Sigrok</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="39"/>
+        <source>26 bytes ASCII, continuous, two values (Voltcraft GDM 703)</source>
+        <translation>26 Byte ASCII, kontinuierlich, zwei Werte (Voltcraft GDM 703)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="40"/>
+        <source>15 bytes binary, continuous (Brymen BM25x)</source>
+        <translation>15 Byte binär, kontinuierlich (Brymen BM25x)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="41"/>
+        <source>24 bytes binary, polled over BU-86X (Brymen BM86x)</source>
+        <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM86x)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="42"/>
+        <source>24 bytes binary, polled over BU-86X (Brymen BM52x)</source>
+        <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM52x)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="43"/>
+        <source>24 bytes binary, polled over BU-86X (Brymen BM82x)</source>
+        <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM82x)</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../../src/main.cpp" line="104"/>
@@ -1197,74 +1305,14 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
         <translation>Die Formel, zu der die Signalform oben wird; bei Eigene Formel editierbar. t ist die Zeit in Sekunden seit dem Verbinden; pi, sin, cos, exp, floor, sqrt, abs, rand() und die Messwerte anderer Instanzen sind erlaubt.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="884"/>
-        <source>variable bytes ASCII, Sigrok</source>
-        <translation>variable bytes ASCII, Sigrok</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="889"/>
-        <source>26 bytes ASCII, continuous, two values (Voltcraft GDM 703)</source>
-        <translation>26 Byte ASCII, kontinuierlich, zwei Werte (Voltcraft GDM 703)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="894"/>
-        <source>15 bytes binary, continuous (Brymen BM25x)</source>
-        <translation>15 Byte binär, kontinuierlich (Brymen BM25x)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="899"/>
-        <source>24 bytes binary, polled over BU-86X (Brymen BM86x)</source>
-        <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM86x)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="904"/>
-        <source>24 bytes binary, polled over BU-86X (Brymen BM52x)</source>
-        <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM52x)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="909"/>
-        <source>24 bytes binary, polled over BU-86X (Brymen BM82x)</source>
-        <translation>24 Byte binär, abgefragt über BU-86X (Brymen BM82x)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="992"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="887"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;These protocol settings have not been confirmed by a user yet. If you own this model and can confirm that they work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Diese Protokolleinstellungen wurden bisher von keinem Benutzer bestätigt. Wenn Sie dieses Modell besitzen und bestätigen können, dass sie funktionieren, eröffnen Sie bitte ein Issue unter &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="1017"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="912"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have a DMM not listed above and find manual settings that work, please open an issue at &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; with the model and the settings. This way future users of this DMM can benefit from your help.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie ein DMM verwenden, das hier nicht aufgeführt ist, und passende manuelle Einstellungen gefunden haben, eröffnen Sie bitte ein Issue unter &lt;a href=&quot;https://github.com/tuxmaster/QtDMM/issues&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/tuxmaster/QtDMM/issues&lt;/span&gt;&lt;/a&gt; mit Modell und Einstellungen. So profitieren künftige Benutzer dieses DMM von Ihrer Hilfe.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="839"/>
-        <source>11 bytes binary, continuous (CyrustekES51986)</source>
-        <translation>11 bytes binär, kontinuierlich (CyrustekES51986)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="859"/>
-        <source>23 bytes ASCII, continuous (VC870)</source>
-        <translation>23 bytes ASCII, kontinuierlich (VC870)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="864"/>
-        <source>22 bytes binary, continuous (DO3122)</source>
-        <translation>22 bytes binary, kontinuierlich (DO3122)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="869"/>
-        <source>14 bytes half-ASCII, UNI-T UT61E (CyrustekES51922)</source>
-        <translation>14 bytes halb-ASCII, UNI-T UT61E (CyrustekES51922)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="874"/>
-        <source>DTM0660</source>
-        <translation>DTM0660</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="879"/>
-        <source>11 bytes binary, continuous (CyrustekES51962)</source>
-        <translation>11 bytes binär, kontinuierlich(CyrustekES51962)</translation>
     </message>
     <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="346"/>
@@ -1333,57 +1381,12 @@ Melden Sie sich anschließend ab und wieder an, damit die neue Gruppenzugehörig
         <translation>Here you may select the Communication type. If you have a not &quot;officially&quot; supported multimeter, just try out the existing protocols. If you are lucky it may work. If you find working settings, send the to me.</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="809"/>
-        <source>14 bytes ASCII, polling (Metex/Voltcraft)</source>
-        <translation>14 Bytes ASCII, auf Abfrage (Metex/Voltcraft)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="814"/>
-        <source>11 bytes ASCII, continuous (PeakTech 451)</source>
-        <translation>11 Bytes ASCII, kontinuierlich (PeakTech 451)</translation>
-    </message>
-    <message>
         <location filename="../../src/ui/uidmmprefs.ui" line="819"/>
-        <source>14 bytes ASCII, continuous (Voltcraft)</source>
-        <translation>14 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="824"/>
-        <source>15 bytes ASCII, continuous (Voltcraft)</source>
-        <translation>15 Bytes ASCII, kontinuierlich (Voltcraft)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="829"/>
-        <source>11 bytes binary, continuous (M9803R)</source>
-        <translation>11 Bytes binär, kontinuierlich (M9803R)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="834"/>
-        <source>14 bytes binary, continuous (VC820)</source>
-        <translation>14 Bytes binär, kontinuierlich (VC820)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="844"/>
-        <source>11 bytes binary, continuous (VC940)</source>
-        <translation>11 Bytes binär, kontinuierlich (VC940)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="849"/>
-        <source>14 bytes ASCII/binary, continuous (QM1537)</source>
-        <translation>14 Bytes ASCII/Binär, kontinuierlich (QM1537)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="854"/>
-        <source>9 bytes binary, continuous (RS 22-812)</source>
-        <translation>9 Bytes binär, kontinuierlich (RS 22-812)</translation>
-    </message>
-    <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="924"/>
         <source>&amp;Number of values:</source>
         <translation>&amp;Anzahl der Werte:</translation>
     </message>
     <message>
-        <location filename="../../src/ui/uidmmprefs.ui" line="934"/>
+        <location filename="../../src/ui/uidmmprefs.ui" line="829"/>
         <source>Some multimeter send several lines of data containing different measured values. As QtDMM only shows one variable here you can set the number of lines to be ignored for each measurement (That means that QtDMM only uses the first line).</source>
         <translation>Einige Multimeter senden verschiedenen Zeile mit verschiedenen Messwerten. Hier kann die Anzahl der zu ignorieren Zeilen eingetragen werden.( Das bedeutet, QtDMM verarbeitet nur die erste Zeile).</translation>
     </message>

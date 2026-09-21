@@ -30,9 +30,10 @@
 /// Names the wire protocols QtDMM can decode.
 ///
 /// The enum is the key that ties a DmmDecoder::DMMInfo entry, the decoder
-/// class registered for it (DmmDecoder::getInstance) and the settings file
-/// together. Values are persisted by name (toString/fromString), never by
-/// number, so reordering is harmless as long as EndOfList stays last.
+/// class registered for it (DmmDecoder::getInstance), the protocol combo and
+/// the settings file together; everything else about a protocol is one row
+/// in protocols.cpp. Settings persist the name (toString/fromString); older
+/// files hold the number, which is why the values are still stable.
 class ReadEvent
 {
 public:
@@ -64,51 +65,10 @@ public:
     EndOfList              // new stuff always before!
   };
 
-  /// Name of a format as used in the settings file and in DMMInfo::protocol.
-  static QString toString(DataFormat format)
-  {
-    const auto it = formatToStringMap().find(format);
-    if (it != formatToStringMap().end())
-      return it.value();
-    return "Invalid";
-  }
+  /// Name of a format as used in the settings file and in DMMInfo::protocol
+  /// (from the table in protocols.cpp); "Invalid" for unknown values.
+  static QString toString(DataFormat format);
 
   /// Inverse of toString(); unknown names give Invalid.
-  static DataFormat fromString(const QString& str)
-  {
-    for (auto it = formatToStringMap().cbegin(); it != formatToStringMap().cend(); ++it)
-    {
-      if (it.value() == str)
-        return it.key();
-    }
-    return Invalid;
-  }
-
-private:
-  static const QMap<DataFormat, QString>& formatToStringMap()
-  {
-    static const QMap<DataFormat, QString> map = {
-      { Metex14,               "Metex14" },
-      { PeakTech10,            "PeakTech10" },
-      { Voltcraft14Continuous, "Voltcraft14Continuous" },
-      { Voltcraft15Continuous, "Voltcraft15Continuous" },
-      { M9803RContinuous,      "M9803RContinuous" },
-      { VC820Continuous,       "VC820Continuous" },
-      { CyrustekES51986,       "CyrustekES51986" },
-      { VC940Continuous,       "VC940Continuous" },
-      { QM1537Continuous,      "QM1537Continuous" },
-      { RS22812Continuous,     "RS22812Continuous" },
-      { VC870Continuous,       "VC870Continuous" },
-      { DO3122Continuous,      "DO3122Continuous" },
-      { CyrustekES51922,       "CyrustekES51922" },
-      { DTM0660,               "DTM0660" },
-      { CyrustekES51962,       "CyrustekES51962" },
-      { GDM703Continuous,      "GDM703Continuous" },
-      { BrymenBM25x,           "BrymenBM25x" },
-      { BrymenBM86x,           "BrymenBM86x" },
-      { BrymenBM52x,           "BrymenBM52x" },
-      { BrymenBM82x,           "BrymenBM82x" }
-    };
-    return map;
-  }
+  static DataFormat fromString(const QString &str);
 };

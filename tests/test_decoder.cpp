@@ -8,6 +8,7 @@
 #include <QRegularExpression>
 
 #include "dmmdecoder.h"
+#include "protocols.h"
 
 QByteArray parseHexStringToByteArray(const QString &hexString)
 {
@@ -27,9 +28,51 @@ int main(int argc, char **argv)
 {
   QCoreApplication app(argc, argv);
 
+  if (argc == 2 && QString::fromLocal8Bit(argv[1]) == "--table")
+  {
+    // the protocol table: one row per enum value, names round-trip, every
+    // factory delivers a decoder of its own type
+    int problems = 0;
+    for (int i = 0; i < ReadEvent::EndOfList; ++i)
+    {
+      const auto df = static_cast<ReadEvent::DataFormat>(i);
+      const ProtocolInfo *p = protocolInfo(df);
+      if (!p)
+      {
+        qWarning() << "no protocol table row for enum value" << i;
+        ++problems;
+        continue;
+      }
+      if (ReadEvent::fromString(ReadEvent::toString(df)) != df || ReadEvent::toString(df) != QLatin1String(p->name))
+      {
+        qWarning() << "name does not round-trip for" << p->name;
+        ++problems;
+      }
+      auto decoder = DmmDecoder::getInstance(df);
+      if (!decoder || decoder->getType() != df)
+      {
+        qWarning() << "factory gives no decoder of type" << p->name;
+        ++problems;
+      }
+    }
+    if (protocols().size() != size_t(ReadEvent::EndOfList))
+    {
+      qWarning() << "table has" << protocols().size() << "rows for" << int(ReadEvent::EndOfList) << "enum values";
+      ++problems;
+    }
+    if (ReadEvent::fromString("NoSuchProtocol") != ReadEvent::Invalid || DmmDecoder::getInstance(ReadEvent::Invalid))
+    {
+      qWarning() << "unknown names must give Invalid / no decoder";
+      ++problems;
+    }
+    if (problems == 0)
+      qInfo() << "Protocol table consistent:" << protocols().size() << "protocols.";
+    return problems == 0 ? 0 : 1;
+  }
+
   if (argc != 2)
   {
-    qCritical() << "Usage: test_decoder <jsonfile>";
+    qCritical() << "Usage: test_decoder <jsonfile> | --table";
     return 1;
   }
 

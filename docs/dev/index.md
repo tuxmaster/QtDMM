@@ -9,12 +9,13 @@ Documentation for people working on QtDMM itself. Planned pages:
   through `ReaderThread` and the `DmmDecoder` subclasses to `DMM`, `MainWid`,
   `DisplayWid` and `DMMGraph`; the `DmmResponse` value contract; the
   `SharedStateManager` used for multiple instances.
-- **Adding a protocol** — every place a new meter protocol has to be registered:
-  the `DmmDecoder` subclass, the `ReadEvent::DataFormat` enum, the
-  `DmmDecoder::getInstance()` factory, `addConfig()` for each supported device,
-  the protocol entry in `src/ui/uidmmprefs.ui` (whose order must currently match
-  the enum), and the protocol specification and test vectors under
-  `docs/protocols/spec/`.
+- **Adding a protocol** — the `DmmDecoder` subclass, a value in the
+  `ReadEvent::DataFormat` enum (before `EndOfList`), one row in the table in
+  `src/protocols.cpp` (name, combo text, chip, factory - the settings combo,
+  `ReadEvent::toString()`, `DmmDecoder::getInstance()` and the device table
+  all read it; ctest `protocol_table` and `docs_generated` fail when enum and
+  table disagree), `addConfig()` for each supported device, and the protocol
+  specification and test vectors under `docs/protocols/spec/`.
 - **Adding a USB-HID cable chip** — the chip table and report layouts live
   twice, in `src/portdevices/hidserial.cpp` (QtDMM) and
   `tools/qtdmm-bridge/qtdmm_bridge.py` (the bridge). Both are tested against

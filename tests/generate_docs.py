@@ -36,21 +36,27 @@ ADD_CONFIG = re.compile(
 PARITY = {"0": "N", "1": "E", "2": "O"}
 
 # The chip behind a protocol, where it is known: lets a user match an
-# unlisted meter by the chip named in its manual or on sigrok's wiki.
-CHIP = {
-    "VC820Continuous": "FS9721 LP3",
-    "QM1537Continuous": "FS9922-DMM4",
-    "CyrustekES51922": "ES51922",
-    "CyrustekES51986": "ES51986",
-    "CyrustekES51962": "ES51962",
-    "DTM0660": "DTM0660",
-    "Metex14": "Metex KS57C2016",
-    "GDM703Continuous": "WENS98A",
-    "BrymenBM25x": "Brymen BM25x",
-    "BrymenBM86x": "Brymen BM86x (BU-86X)",
-    "BrymenBM52x": "Brymen BM52x (BU-86X)",
-    "BrymenBM82x": "Brymen BM82x (BU-86X)",
-}
+# unlisted meter to a protocol. Read from the protocol table in
+# src/protocols.cpp - one row per line:
+#   { ReadEvent::<Id>, "<Name>", QT_TRANSLATE_NOOP("Protocols", "<text>"), "<chip>", make<...> },
+PROTOCOL_ROW = re.compile(
+    r'\{\s*ReadEvent::(?P<id>\w+)\s*,\s*"(?P<name>\w+)"\s*,\s*QT_TRANSLATE_NOOP\("Protocols",\s*"(?P<text>[^"]*)"\)'
+    r'\s*,\s*"(?P<chip>[^"]*)"\s*,\s*make<(?P<decoder>\w+)>')
+
+
+def protocol_table():
+    """{name: {"id", "text", "chip", "decoder"}} from src/protocols.cpp."""
+    text = (REPO / "src" / "protocols.cpp").read_text(encoding="utf-8")
+    rows = {}
+    for m in PROTOCOL_ROW.finditer(text):
+        rows[m.group("name")] = {"id": m.group("id"), "text": m.group("text"),
+                                 "chip": m.group("chip"), "decoder": m.group("decoder")}
+    if not rows:
+        sys.exit("no protocol rows found in src/protocols.cpp - format changed?")
+    return rows
+
+
+CHIP = {name: row["chip"] for name, row in protocol_table().items() if row["chip"]}
 
 
 def devices():
@@ -148,6 +154,25 @@ def render_readme(devices_md):
     return "\n".join(parts)
 
 
+def protocol_drift():
+    """Every ReadEvent::DataFormat value before EndOfList must have exactly
+    one row in src/protocols.cpp, with the enum id as its name."""
+    header = (REPO / "src" / "readevent.h").read_text(encoding="utf-8")
+    body = header[header.index("enum DataFormat"):header.index("EndOfList")]
+    enum_ids = [m.group(1) for m in re.finditer(r"^\s*(\w+)\s*(?:=\s*-?\d+)?\s*,", body, re.M) if m.group(1) != "Invalid"]
+    rows = protocol_table()
+    problems = []
+    for e in enum_ids:
+        if e not in rows:
+            problems.append(f"ReadEvent::{e} has no row in src/protocols.cpp")
+    for name, row in rows.items():
+        if row["id"] != name:
+            problems.append(f"protocols.cpp row {name}: enum id {row['id']} differs from the name")
+        if row["id"] not in enum_ids:
+            problems.append(f"protocols.cpp row {name}: ReadEvent::{row['id']} is not in the enum")
+    return problems
+
+
 def hid_cable_drift():
     """The HID cable table exists three times: tests/data/hid_cables.json (the
     truth both test suites read), kCables in src/portdevices/hidserial.cpp and
@@ -193,7 +218,7 @@ def main():
             path.write_text(text, encoding="utf-8")
             print(f"wrote    {rel}")
 
-    for problem in hid_cable_drift():
+    for problem in protocol_drift() + hid_cable_drift():
         print(f"DRIFT    {problem}", file=sys.stderr)
         stale += 1
 
