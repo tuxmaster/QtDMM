@@ -10,6 +10,7 @@ class QCheckBox;
 class QLabel;
 class QSpinBox;
 class QTableView;
+class QToolButton;
 
 /// The readings table panel: a ReadingLog in a table that follows the
 /// newest row, a statistics line, and clear / export / copy. Lives in a
@@ -42,6 +43,7 @@ private Q_SLOTS:
 private:
   ReadingLog *m_log;
   QTableView *m_view;
+  QToolButton *m_pause;
   QCheckBox *m_follow;
   QSpinBox *m_maxRows;
   QLabel *m_stats;

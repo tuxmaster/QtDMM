@@ -15,7 +15,9 @@
 #include <QPushButton>
 #include <QScrollBar>
 #include <QSpinBox>
+#include <QStyle>
 #include <QTableView>
+#include <QToolButton>
 #include <QVBoxLayout>
 
 #include "siprefix.h"
@@ -58,6 +60,20 @@ ReadingLogWid::ReadingLogWid(QWidget *parent) :
   layout->addWidget(m_view, 1);
 
   QHBoxLayout *bar = new QHBoxLayout;
+  // one button, pause while logging, play while paused
+  m_pause = new QToolButton(this);
+  m_pause->setCheckable(true);
+  m_pause->setAutoRaise(true);
+  m_pause->setToolTip(tr("Pause logging"));
+  connect(m_pause, &QToolButton::toggled, this, [this](bool paused)
+  {
+    m_log->setPaused(paused);
+    m_pause->setIcon(style()->standardIcon(paused ? QStyle::SP_MediaPlay : QStyle::SP_MediaPause));
+    m_pause->setToolTip(paused ? tr("Resume logging") : tr("Pause logging"));
+  });
+  m_pause->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
+  bar->addWidget(m_pause);
+
   m_follow = new QCheckBox(tr("&Follow"), this);
   m_follow->setChecked(true);
   m_follow->setToolTip(tr("Keep the newest reading in view. Scrolling up switches this off."));

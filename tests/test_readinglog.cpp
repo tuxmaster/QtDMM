@@ -78,6 +78,14 @@ int main(int argc, char **argv)
   check(log.maxRows() == 1 && log.rowCount() == 1, "maxRows is at least 1");
   log.setMaxRows(1000);
 
+  // --- 3b. paused: readings pass by ---
+  log.setPaused(true);
+  log.append(entry(9.0, "9.000", "V", 5));
+  check(log.rowCount() == 1 && log.isPaused(), "paused log drops the reading");
+  log.setPaused(false);
+  log.append(entry(9.0, "9.000", "V", 5));
+  check(log.rowCount() == 2, "resumed log takes readings again");
+
   // --- 4. clipboard text ---
   log.clear();
   check(log.rowCount() == 0 && resets == 1, "clear resets");

@@ -48,8 +48,12 @@ public:
   QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
   QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
-  /// Appends a row; the oldest one goes when the log is full.
+  /// Appends a row; the oldest one goes when the log is full. Dropped
+  /// while paused.
   void append(const Entry &entry);
+  /// Paused: readings pass by without being logged (the pause button).
+  bool isPaused() const { return m_paused; }
+  void setPaused(bool paused) { m_paused = paused; }
   void clear();
   const Entry &entry(int row) const { return m_entries[row]; }
 
@@ -75,4 +79,5 @@ public:
 private:
   QVector<Entry> m_entries;
   int m_maxRows = 10000;
+  bool m_paused = false;
 };

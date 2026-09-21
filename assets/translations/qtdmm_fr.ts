@@ -1120,12 +1120,12 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
         <translation>Hold</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="180"/>
+        <location filename="../../src/readinglog.cpp" line="182"/>
         <source>Nothing to export.</source>
         <translation>Rien à exporter.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="183"/>
+        <location filename="../../src/readinglog.cpp" line="185"/>
         <source>Cannot open file.</source>
         <translation>Impossible d&apos;ouvrir le fichier.</translation>
     </message>
@@ -1133,59 +1133,70 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
 <context>
     <name>ReadingLogWid</name>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="46"/>
+        <location filename="../../src/readinglogwid.cpp" line="48"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copier</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="47"/>
+        <location filename="../../src/readinglogwid.cpp" line="49"/>
         <source>Select &amp;all</source>
         <translation>Tout &amp;sélectionner</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="49"/>
-        <location filename="../../src/readinglogwid.cpp" line="78"/>
+        <location filename="../../src/readinglogwid.cpp" line="51"/>
+        <location filename="../../src/readinglogwid.cpp" line="94"/>
         <source>&amp;Export...</source>
         <translation>&amp;Exporter…</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="50"/>
-        <location filename="../../src/readinglogwid.cpp" line="81"/>
+        <location filename="../../src/readinglogwid.cpp" line="52"/>
+        <location filename="../../src/readinglogwid.cpp" line="97"/>
         <source>C&amp;lear</source>
         <translation>&amp;Effacer</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="61"/>
+        <location filename="../../src/readinglogwid.cpp" line="67"/>
+        <location filename="../../src/readinglogwid.cpp" line="72"/>
+        <source>Pause logging</source>
+        <translation>Suspendre la journalisation</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="72"/>
+        <source>Resume logging</source>
+        <translation>Reprendre la journalisation</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="77"/>
         <source>&amp;Follow</source>
         <translation>&amp;Suivre</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="63"/>
+        <location filename="../../src/readinglogwid.cpp" line="79"/>
         <source>Keep the newest reading in view. Scrolling up switches this off.</source>
         <translation>Garder la dernière mesure en vue. Faire défiler vers le haut désactive ce suivi.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="67"/>
+        <location filename="../../src/readinglogwid.cpp" line="83"/>
         <source>Keep</source>
         <translation>Conserver</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="73"/>
+        <location filename="../../src/readinglogwid.cpp" line="89"/>
         <source> rows</source>
         <translation> lignes</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="74"/>
+        <location filename="../../src/readinglogwid.cpp" line="90"/>
         <source>How many readings the table keeps; the oldest are dropped.</source>
         <translation>Nombre de mesures conservées par le tableau ; les plus anciennes sont supprimées.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="128"/>
+        <location filename="../../src/readinglogwid.cpp" line="144"/>
         <source>No readings yet.</source>
         <translation>Pas encore de mesures.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/readinglogwid.cpp" line="136"/>
+        <location filename="../../src/readinglogwid.cpp" line="152"/>
         <source>%n reading(s)</source>
         <translation>
             <numerusform>%n mesure</numerusform>
@@ -1193,18 +1204,18 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
         </translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="138"/>
+        <location filename="../../src/readinglogwid.cpp" line="154"/>
         <source>Min %1   Max %2   Mean %3   Span %4</source>
         <translation>Min %1   Max %2   Moyenne %3   Étendue %4</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="150"/>
-        <location filename="../../src/readinglogwid.cpp" line="156"/>
+        <location filename="../../src/readinglogwid.cpp" line="166"/>
+        <location filename="../../src/readinglogwid.cpp" line="172"/>
         <source>Export readings</source>
         <translation>Exporter les mesures</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="151"/>
+        <location filename="../../src/readinglogwid.cpp" line="167"/>
         <source>CSV files (*.csv);;All files (*)</source>
         <translation>Fichiers CSV (*.csv);;Tous les fichiers (*)</translation>
     </message>

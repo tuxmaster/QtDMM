@@ -1120,12 +1120,12 @@ Następnie wyloguj się i zaloguj ponownie, aby członkostwo w grupie zaczęło 
         <translation>Hold</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="180"/>
+        <location filename="../../src/readinglog.cpp" line="182"/>
         <source>Nothing to export.</source>
         <translation>Nie ma nic do wyeksportowania.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="183"/>
+        <location filename="../../src/readinglog.cpp" line="185"/>
         <source>Cannot open file.</source>
         <translation>Nie można otworzyć pliku.</translation>
     </message>
@@ -1133,59 +1133,70 @@ Następnie wyloguj się i zaloguj ponownie, aby członkostwo w grupie zaczęło 
 <context>
     <name>ReadingLogWid</name>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="46"/>
+        <location filename="../../src/readinglogwid.cpp" line="48"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopiuj</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="47"/>
+        <location filename="../../src/readinglogwid.cpp" line="49"/>
         <source>Select &amp;all</source>
         <translation>Zaznacz &amp;wszystko</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="49"/>
-        <location filename="../../src/readinglogwid.cpp" line="78"/>
+        <location filename="../../src/readinglogwid.cpp" line="51"/>
+        <location filename="../../src/readinglogwid.cpp" line="94"/>
         <source>&amp;Export...</source>
         <translation>&amp;Eksportuj…</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="50"/>
-        <location filename="../../src/readinglogwid.cpp" line="81"/>
+        <location filename="../../src/readinglogwid.cpp" line="52"/>
+        <location filename="../../src/readinglogwid.cpp" line="97"/>
         <source>C&amp;lear</source>
         <translation>Wy&amp;czyść</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="61"/>
+        <location filename="../../src/readinglogwid.cpp" line="67"/>
+        <location filename="../../src/readinglogwid.cpp" line="72"/>
+        <source>Pause logging</source>
+        <translation>Wstrzymaj rejestrowanie</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="72"/>
+        <source>Resume logging</source>
+        <translation>Wznów rejestrowanie</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="77"/>
         <source>&amp;Follow</source>
         <translation>&amp;Śledź</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="63"/>
+        <location filename="../../src/readinglogwid.cpp" line="79"/>
         <source>Keep the newest reading in view. Scrolling up switches this off.</source>
         <translation>Utrzymuj najnowszy odczyt w widoku. Przewinięcie w górę to wyłącza.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="67"/>
+        <location filename="../../src/readinglogwid.cpp" line="83"/>
         <source>Keep</source>
         <translation>Zachowaj</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="73"/>
+        <location filename="../../src/readinglogwid.cpp" line="89"/>
         <source> rows</source>
         <translation> wierszy</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="74"/>
+        <location filename="../../src/readinglogwid.cpp" line="90"/>
         <source>How many readings the table keeps; the oldest are dropped.</source>
         <translation>Ile odczytów przechowuje tabela; najstarsze są usuwane.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="128"/>
+        <location filename="../../src/readinglogwid.cpp" line="144"/>
         <source>No readings yet.</source>
         <translation>Brak odczytów.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/readinglogwid.cpp" line="136"/>
+        <location filename="../../src/readinglogwid.cpp" line="152"/>
         <source>%n reading(s)</source>
         <translation>
             <numerusform>%n odczyt</numerusform>
@@ -1194,18 +1205,18 @@ Następnie wyloguj się i zaloguj ponownie, aby członkostwo w grupie zaczęło 
         </translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="138"/>
+        <location filename="../../src/readinglogwid.cpp" line="154"/>
         <source>Min %1   Max %2   Mean %3   Span %4</source>
         <translation>Min %1   Maks %2   Średnia %3   Rozstęp %4</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="150"/>
-        <location filename="../../src/readinglogwid.cpp" line="156"/>
+        <location filename="../../src/readinglogwid.cpp" line="166"/>
+        <location filename="../../src/readinglogwid.cpp" line="172"/>
         <source>Export readings</source>
         <translation>Eksportuj odczyty</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="151"/>
+        <location filename="../../src/readinglogwid.cpp" line="167"/>
         <source>CSV files (*.csv);;All files (*)</source>
         <translation>Pliki CSV (*.csv);;Wszystkie pliki (*)</translation>
     </message>

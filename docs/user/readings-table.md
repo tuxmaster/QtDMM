@@ -29,6 +29,10 @@ voltage, say) get an extra row for it, marked `2nd` in the Mode column.
 
 ## Following, keeping, clearing
 
+The **pause** button at the left of the bar stops the table from taking
+new readings (the meter keeps running, the recorder is not affected); it
+turns into a play button, and a second click resumes.
+
 The table **follows** the newest reading: it scrolls to the bottom as rows
 arrive. Scroll up to look at older rows and following pauses; scroll back
 to the end, or tick **Follow**, to resume.

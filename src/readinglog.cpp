@@ -86,6 +86,8 @@ QVariant ReadingLog::headerData(int section, Qt::Orientation orientation, int ro
 
 void ReadingLog::append(const Entry &entry)
 {
+  if (m_paused)
+    return;
   if (m_entries.size() >= m_maxRows)
   {
     const int excess = m_entries.size() - m_maxRows + 1;
