@@ -8,6 +8,7 @@
 #include <QTextStream>
 
 #include "siprefix.h"
+#include "spreadsheet.h"
 
 ReadingLog::ReadingLog(QObject *parent) : QAbstractTableModel(parent)
 {
@@ -213,4 +214,28 @@ bool ReadingLog::write(const QString &path, QString *error) const
             .arg(e.when.toString("yyyy-MM-ddTHH:mm:ss,zzz"), e.val.trimmed(), e.unit,
                  e.id > 0 ? "2nd " + modeText(e.special) : modeText(e.special), e.range, e.hold ? "1" : "0");
   return true;
+}
+
+bool ReadingLog::writeAny(const QString &path, QString *error) const
+{
+  const auto format = SpreadsheetWriter::formatForFile(path);
+  if (!format)
+    return write(path, error);
+  if (m_entries.isEmpty())
+  {
+    if (error)
+      *error = tr("Nothing to export.");
+    return false;
+  }
+  SpreadsheetWriter sheet(tr("Readings"));
+  sheet.setHeader({tr("Time"), tr("Value"), tr("Unit"), tr("Mode"), tr("Range"), tr("Hold"), tr("Alarm")});
+  for (const Entry &e : m_entries)
+  {
+    const QString val = e.val.trimmed();
+    bool numeric = false;
+    const double number = val.toDouble(&numeric);
+    sheet.addRow({e.when, numeric ? QVariant(number) : QVariant(val), e.unit,
+                  e.id > 0 ? "2nd " + modeText(e.special) : modeText(e.special), e.range, e.hold ? tr("HOLD") : QString(), e.alarmName});
+  }
+  return sheet.write(path, *format, error);
 }

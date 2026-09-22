@@ -32,6 +32,10 @@ std::optional<Recording> read(const QString &path, QString *error = nullptr);
 /// Writes @p recording to @p path; false with @p error on failure or when
 /// there is nothing to write.
 bool write(const Recording &recording, const QString &path, QString *error = nullptr);
+/// The same columns as an Excel (.xlsx) or OpenDocument (.ods) sheet, with
+/// real date and number cells (SpreadsheetWriter); the format follows the
+/// suffix. Falls back to CSV for any other suffix.
+bool writeAny(const Recording &recording, const QString &path, QString *error = nullptr);
 
 /// Factor that brings a value in @p unit to @p baseUnit: 1e-3 for "mV" and
 /// "V", 1.0 when the units are the same or unrelated. Older exports wrote the

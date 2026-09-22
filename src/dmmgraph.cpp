@@ -875,13 +875,18 @@ bool DMMGraph::exportDataSLOT()
 {
   QDir path;
   QFileInfo fileInfo(m_cfg->getString("QtDMM/LastUsesPath"));
-  QStringList validSuffixes = { "csv" };
+  QStringList validSuffixes = { "csv", "xlsx", "ods" };
   QString fnSuffix = validSuffixes.contains(fileInfo.suffix()) ? fileInfo.suffix() : "csv";
-  QString fn = fileInfo.baseName().isEmpty() ? "untitled.csv" : fileInfo.absolutePath() + "/untitled." + fnSuffix;
-  fn = QFileDialog::getSaveFileName(this, tr("Export data"), fn, "CSV (*.csv)");
+  QString fn = fileInfo.baseName().isEmpty() ? "untitled." + fnSuffix : fileInfo.absolutePath() + "/untitled." + fnSuffix;
+  const QString csvFilter = tr("CSV (*.csv)"), xlsxFilter = tr("Excel (*.xlsx)"), odsFilter = tr("OpenDocument (*.ods)");
+  QString filter = fnSuffix == "xlsx" ? xlsxFilter : fnSuffix == "ods" ? odsFilter : csvFilter;
+  fn = QFileDialog::getSaveFileName(this, tr("Export data"), fn, csvFilter + ";;" + xlsxFilter + ";;" + odsFilter, &filter);
 
   if (fn.isNull())
     return false;
+  // the chosen filter decides when no suffix was typed
+  if (QFileInfo(fn).suffix().isEmpty())
+    fn += filter == xlsxFilter ? ".xlsx" : filter == odsFilter ? ".ods" : ".csv";
 
   return exportCsvFile(fn);
 }
@@ -902,7 +907,7 @@ bool DMMGraph::exportCsvFile(const QString &fileName)
     rec.values << (*m_array)[i];
 
   QString err;
-  if (!RecordingFile::write(rec, fileName, &err))
+  if (!RecordingFile::writeAny(rec, fileName, &err))
   {
     Q_EMIT error(err);
     return false;

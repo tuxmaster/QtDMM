@@ -163,12 +163,16 @@ void ReadingLogWid::clearSLOT()
 
 void ReadingLogWid::exportSLOT()
 {
-  const QString path = QFileDialog::getSaveFileName(this, tr("Export readings"), QString(),
-                                                    tr("CSV files (*.csv);;All files (*)"));
+  const QString csvFilter = tr("CSV (*.csv)"), xlsxFilter = tr("Excel (*.xlsx)"), odsFilter = tr("OpenDocument (*.ods)");
+  QString filter = csvFilter;
+  QString path = QFileDialog::getSaveFileName(this, tr("Export readings"), QString(),
+                                              csvFilter + ";;" + xlsxFilter + ";;" + odsFilter, &filter);
   if (path.isEmpty())
     return;
+  if (QFileInfo(path).suffix().isEmpty())
+    path += filter == xlsxFilter ? ".xlsx" : filter == odsFilter ? ".ods" : ".csv";
   QString error;
-  if (!m_log->write(path, &error))
+  if (!m_log->writeAny(path, &error))
     QMessageBox::warning(this, tr("Export readings"), error);
 }
 

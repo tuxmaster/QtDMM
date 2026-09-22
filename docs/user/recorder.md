@@ -60,9 +60,17 @@ port.
   charge or energy over time.
 - **Print** (Ctrl+P) prints the graph with a title and comment.
 
-## CSV export and import
+## Export and import
 
-*Export* (Ctrl+E) writes a semicolon-separated file:
+*Export* (Ctrl+E) writes the recording as CSV, or - pick the file type in
+the dialog or just name the file `.xlsx` / `.ods` - as an Excel or
+OpenDocument spreadsheet with the same four columns. In the spreadsheet
+the timestamps are date cells (shown with milliseconds) and the values
+numbers, so charts and formulas work without converting anything; the
+header row is bold and stays put when you scroll. CSV is what *Import*
+reads back (spreadsheets are not imported; save as CSV from there).
+
+The CSV is semicolon-separated:
 
 ```
 timestamp;time (s);value;unit

@@ -54,6 +54,8 @@ and second values are left out), in the unit of the newest row.
   spreadsheet. Ctrl+A selects everything.
 - **Export...** writes the whole table as CSV: `timestamp;value;unit;mode;range;hold`
   with ISO 8601 timestamps (`2026-09-21T14:03:05,250`), the value and unit
-  exactly as displayed. The recorder's own export
+  exactly as displayed - or, with a `.xlsx` / `.ods` file name or the file
+  type picked in the dialog, as an Excel / OpenDocument sheet with date and
+  number cells and an extra *Alarm* column. The recorder's own export
   ([The recorder](recorder.md)) remains the one to use for the time-gridded
   series the graph shows.

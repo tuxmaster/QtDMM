@@ -122,6 +122,28 @@ int main(int argc, char **argv)
     check(!RecordingFile::write(Recording(), tmp.path() + "/none.csv", &err) && !err.isEmpty(), "empty recording is not written");
   }
 
+  // --- 6. writeAny: a spreadsheet by suffix, the CSV otherwise ---
+  {
+    Recording rec;
+    rec.start = QDateTime(QDate(2026, 9, 21), QTime(14, 3, 5, 250));
+    rec.sampleTimeTenths = 5;
+    rec.unit = "V";
+    rec.values = {1.0, 2.0, 3.0};
+    QString err;
+    check(RecordingFile::writeAny(rec, tmp.filePath("a.xlsx"), &err), "xlsx via writeAny: " + err);
+    check(RecordingFile::writeAny(rec, tmp.filePath("a.ods"), &err), "ods via writeAny: " + err);
+    check(RecordingFile::writeAny(rec, tmp.filePath("a.csv"), &err), "csv via writeAny: " + err);
+    check(QFileInfo(tmp.filePath("a.xlsx")).size() > 1000 && QFile(tmp.filePath("a.xlsx")).open(QIODevice::ReadOnly), "xlsx exists");
+    QFile z(tmp.filePath("a.xlsx"));
+    z.open(QIODevice::ReadOnly);
+    check(z.read(2) == "PK", "xlsx is a zip");
+    QFile c(tmp.filePath("a.csv"));
+    c.open(QIODevice::ReadOnly | QIODevice::Text);
+    check(QString::fromUtf8(c.readLine()).startsWith("timestamp;"), "csv is the csv");
+    Recording empty;
+    check(!RecordingFile::writeAny(empty, tmp.filePath("e.ods"), &err) && !err.isEmpty(), "empty refuses");
+  }
+
   if (failed == 0)
     qInfo() << "All recording file tests passed.";
   else
