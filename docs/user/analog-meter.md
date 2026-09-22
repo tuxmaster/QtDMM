@@ -15,7 +15,8 @@ freely — the dial, scale and lettering scale with the window.
 The scale is drawn in the unit the multimeter shows, prefix included, and its
 full scale follows the meter's range: a 4000-count meter reading `3.856 V`
 gets a 0 … 4 V scale, `385.6 mV` a 0 … 400 mV scale. When the meter changes
-range the scale relabels itself. The inner 0 … 100 arc is the same reading as
+range the scale relabels itself. A percentage (state of charge, duty cycle)
+always gets a 0 … 100 % scale. The inner 0 … 100 arc is the same reading as
 a percentage of full scale, like the bar graph on the meter itself.
 
 Negative readings push the needle into the short stub left of zero and show

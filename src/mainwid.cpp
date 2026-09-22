@@ -311,7 +311,7 @@ void MainWid::feedMeter(const QString &val, const QString &unit, const QString &
   static const QRegularExpression letters("[A-Za-z]");
   const bool overload = val.contains(letters);
 
-  const double fs = MeterWid::fullScaleFromReading(val, m_configDlg->display());
+  const double fs = MeterWid::fullScaleFromReading(val, m_configDlg->display(), unit);
   if (!std::isnan(fs))
     m_meter->setFullScale(fs);
 

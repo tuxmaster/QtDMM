@@ -99,6 +99,9 @@ public:
   /// ("3.856", 4000) -> 4, ("385.6", 4000) -> 400. NaN if the string is not
   /// a number (OL etc.), so the caller keeps the previous scale.
   static double fullScaleFromReading(const QString &value, int counts);
+  /// The same, but a percentage (unit "%": state of charge, duty cycle) is
+  /// always a 0..100 scale, whatever the display count says.
+  static double fullScaleFromReading(const QString &value, int counts, const QString &unit);
 
   QSize sizeHint() const override;
   QSize minimumSizeHint() const override;

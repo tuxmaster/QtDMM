@@ -90,6 +90,9 @@ int main(int argc, char **argv)
   check(near(MeterWid::fullScaleFromReading("3.856", 4000), 4.0), "\"3.856\" @4000 -> 4");
   check(near(MeterWid::fullScaleFromReading(" 385.6", 4000), 400.0), "\"385.6\" @4000 -> 400");
   check(near(MeterWid::fullScaleFromReading("-1234", 2000), 2000.0), "\"-1234\" @2000 -> 2000");
+  check(near(MeterWid::fullScaleFromReading("71.5", 6000, "%"), 100.0), "a percentage is a 0..100 scale (SOC \"71.5\" @6000)");
+  check(near(MeterWid::fullScaleFromReading("50.0", 4000, "%"), 100.0), "duty cycle too");
+  check(near(MeterWid::fullScaleFromReading("3.856", 4000, "V"), 4.0), "other units keep the count rule");
   check(near(MeterWid::fullScaleFromReading("0.000", 6000), 6.0), "\"0.000\" @6000 -> 6");
   check(near(MeterWid::fullScaleFromReading("19.99", 2000), 20.0), "\"19.99\" @2000 -> 20");
   check(std::isnan(MeterWid::fullScaleFromReading("0.L", 4000)), "\"0.L\" is not a number");
