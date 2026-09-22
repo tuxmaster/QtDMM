@@ -18,8 +18,11 @@ nav:
       - Bench meters through sigrok-cli: user/bench-meters.md
       - Bluetooth LE: user/bluetooth.md
       - Meters over the network: user/remote-bridge.md
+      - SCPI server: user/scpi-server.md
       - Command line: user/command-line.md
       - Keyboard and mouse: user/keyboard.md
       - Troubleshooting: user/troubleshooting.md
   - Protocols: protocols/index.md
-  - Development: dev/index.md
+  - Development:
+      - Overview: dev/index.md
+      - SCPI command reference: dev/scpi-commands.md

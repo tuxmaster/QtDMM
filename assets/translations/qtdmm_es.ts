@@ -389,30 +389,30 @@
 <context>
     <name>ConfigDlg</name>
     <message>
-        <location filename="../../src/configdlg.cpp" line="70"/>
-        <location filename="../../src/configdlg.cpp" line="95"/>
-        <location filename="../../src/configdlg.cpp" line="116"/>
+        <location filename="../../src/configdlg.cpp" line="71"/>
+        <location filename="../../src/configdlg.cpp" line="96"/>
+        <location filename="../../src/configdlg.cpp" line="117"/>
         <source>QtDMM: Welcome!</source>
         <translation>QtDMM: ¡Bienvenido!</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="71"/>
+        <location filename="../../src/configdlg.cpp" line="72"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;This seems to be your first invocation of QtDMM (Or you have deleted its configuration file).&lt;p&gt;QtDMM has created the file %1 in your home directory to save its settings.</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;¡Bienvenido!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Parece que es la primera vez que inicia QtDMM (o ha borrado su archivo de configuración).&lt;p&gt;QtDMM ha creado el archivo %1 en su directorio personal para guardar sus ajustes.</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="83"/>
-        <location filename="../../src/configdlg.cpp" line="108"/>
+        <location filename="../../src/configdlg.cpp" line="84"/>
+        <location filename="../../src/configdlg.cpp" line="109"/>
         <source>Continue</source>
         <translation>Continuar</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="96"/>
+        <location filename="../../src/configdlg.cpp" line="97"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You seem to have upgraded &lt;b&gt;QtDMM&lt;/b&gt; from a version prior to 0.8.4. Please check your configuration. There are some new parameters to be configured.&lt;p&gt;Thank you for choosing &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;¡Bienvenido!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Parece que ha actualizado &lt;b&gt;QtDMM&lt;/b&gt; desde una versión anterior a 0.8.4. Revise su configuración: hay parámetros nuevos que configurar.&lt;p&gt;Gracias por elegir &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="117"/>
+        <location filename="../../src/configdlg.cpp" line="118"/>
         <source>Your config file has been converted to the new format.
 Please check your color settings, because they couldn&apos;t be converted automatically.
 Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old.</source>
@@ -957,103 +957,138 @@ DMM connected and switched on?</source>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="155"/>
+        <location filename="../../src/mainwid.cpp" line="174"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM: datos sin guardar</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="156"/>
+        <location filename="../../src/mainwid.cpp" line="175"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Datos sin guardar&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Todavía hay mediciones sin guardar en memoria. Si sale ahora se perderán.&lt;p&gt;¿Desea exportarlas antes?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="171"/>
+        <location filename="../../src/mainwid.cpp" line="190"/>
         <source>Export data first</source>
         <translation>Exportar primero</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="175"/>
+        <location filename="../../src/mainwid.cpp" line="194"/>
         <source>Quit without saving</source>
         <translation>Salir sin guardar</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="573"/>
+        <location filename="../../src/mainwid.cpp" line="608"/>
         <source>Automatic start at %1</source>
         <translation>Inicio automático a las %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="575"/>
+        <location filename="../../src/mainwid.cpp" line="610"/>
         <source>Raising threshold %1</source>
         <translation>Umbral ascendente %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="577"/>
+        <location filename="../../src/mainwid.cpp" line="612"/>
         <source>Falling threshold %1</source>
         <translation>Umbral descendente %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="598"/>
-        <location filename="../../src/mainwid.cpp" line="639"/>
+        <location filename="../../src/mainwid.cpp" line="647"/>
+        <source>SCPI server: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="670"/>
+        <source>The server is not running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="675"/>
+        <source>1 client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="675"/>
+        <source>%1 clients</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="676"/>
+        <source>SCPI %1:%2 (%3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="677"/>
+        <source>Listening on %1, port %2, %3 connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="679"/>
+        <source>Announced as &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="688"/>
+        <location filename="../../src/mainwid.cpp" line="729"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM: error de ejecución</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="599"/>
+        <location filename="../../src/mainwid.cpp" line="689"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Error de ejecución&lt;/b&gt;&lt;/font&gt;&lt;p&gt;¡La aplicación %1 sigue en ejecución!&lt;p&gt;¿Desea terminarla ahora?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="611"/>
+        <location filename="../../src/mainwid.cpp" line="701"/>
         <source>Yes, kill it!</source>
         <translation>Sí, terminarla</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="615"/>
+        <location filename="../../src/mainwid.cpp" line="705"/>
         <source>No, keep running</source>
         <translation>No, dejarla en ejecución</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="640"/>
+        <location filename="../../src/mainwid.cpp" line="730"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Error de ejecución&lt;/b&gt;&lt;/font&gt;&lt;p&gt;No se pudo ejecutar %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="651"/>
+        <location filename="../../src/mainwid.cpp" line="741"/>
         <source>Bummer!</source>
         <translation>¡Qué pena!</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="657"/>
+        <location filename="../../src/mainwid.cpp" line="747"/>
         <source>Launched %1</source>
         <translation>%1 iniciado</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="662"/>
+        <location filename="../../src/mainwid.cpp" line="752"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 terminó con el código %2.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="713"/>
+        <location filename="../../src/mainwid.cpp" line="803"/>
         <source>no meter configured</source>
         <translation>ningún multímetro configurado</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="741"/>
+        <location filename="../../src/mainwid.cpp" line="831"/>
         <source>Alarm %1: %2 (%3)</source>
         <translation>Alarma %1: %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="768"/>
+        <location filename="../../src/mainwid.cpp" line="858"/>
         <source>Alarm %1: could not run %2</source>
         <translation>Alarma %1: no se pudo ejecutar %2</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="773"/>
+        <location filename="../../src/mainwid.cpp" line="863"/>
         <source>QtDMM alarm: %1</source>
         <translation>Alarma de QtDMM: %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="785"/>
+        <location filename="../../src/mainwid.cpp" line="875"/>
         <source>Alarm %1 cleared</source>
         <translation>Alarma %1 apagada</translation>
     </message>
@@ -1116,79 +1151,84 @@ DMM connected and switched on?</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Bloquear paneles&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Oculta las barras de título de los paneles de pantalla e instrumento. Desbloquéelos para mover los paneles a otro lado de la ventana o separarlos como ventanas independientes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="220"/>
+        <location filename="../../src/mainwin.cpp" line="168"/>
+        <source>The SCPI server: other programs can read the meter here (Settings, SCPI server).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwin.cpp" line="232"/>
         <source>Another instance is running.</source>
         <translation>Ya hay otra instancia en ejecución.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="318"/>
+        <location filename="../../src/mainwin.cpp" line="330"/>
         <source>&amp;Full screen</source>
         <translation>&amp;Pantalla completa</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="321"/>
+        <location filename="../../src/mainwin.cpp" line="333"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Full screen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Use the whole screen for the instruments, e.g. on a lab monitor. F11 again returns to the normal window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Pantalla completa&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Usar toda la pantalla para los instrumentos, p. ej. en un monitor de laboratorio. F11 de nuevo vuelve a la ventana normal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="326"/>
+        <location filename="../../src/mainwin.cpp" line="338"/>
         <source>Zoom &amp;in</source>
         <translation>&amp;Acercar</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="329"/>
+        <location filename="../../src/mainwin.cpp" line="341"/>
         <source>Zoom &amp;out</source>
         <translation>A&amp;lejar</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="332"/>
+        <location filename="../../src/mainwin.cpp" line="344"/>
         <source>Show &amp;whole recording</source>
         <translation>Mostrar &amp;toda la grabación</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="335"/>
+        <location filename="../../src/mainwin.cpp" line="347"/>
         <source>Copy graph &amp;image</source>
         <translation>Copiar gráfico como &amp;imagen</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="337"/>
+        <location filename="../../src/mainwin.cpp" line="349"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copy graph image&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Puts a picture of the recorder graph on the clipboard, ready to paste into a report or a chat.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Copiar gráfico como imagen&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Coloca una imagen del gráfico de la grabadora en el portapapeles, lista para pegar en un informe o un chat.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="393"/>
+        <location filename="../../src/mainwin.cpp" line="405"/>
         <source>Record DMM data</source>
         <translation>Grabar datos del multímetro</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="394"/>
+        <location filename="../../src/mainwin.cpp" line="406"/>
         <source>Multiple instances of QtDMM have been detected.
 Please choose which instance should record.</source>
         <translation>Se han detectado varias instancias de QtDMM.
 Elija qué instancia debe grabar.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="397"/>
+        <location filename="../../src/mainwin.cpp" line="409"/>
         <source>This instance</source>
         <translation>Esta instancia</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="398"/>
+        <location filename="../../src/mainwin.cpp" line="410"/>
         <source>All instances</source>
         <translation>Todas las instancias</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="458"/>
+        <location filename="../../src/mainwin.cpp" line="470"/>
         <source>About QtDMM</source>
         <translation>Acerca de QtDMM</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="461"/>
+        <location filename="../../src/mainwin.cpp" line="473"/>
         <source>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;A readout and transient recorder for digital multimeters.&lt;/p&gt;&lt;p&gt;Built with &lt;b&gt;Qt&lt;/b&gt; %2. Licensed under the &lt;b&gt;GNU GPL 3&lt;/b&gt; (versions before 0.9.0 under GPL 2).&lt;/p&gt;&lt;p&gt;0.9.5 onwards: tuxmaster and contributors, see the AUTHORS file.&lt;br&gt;0.9.3 and before: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Website: &lt;a href=&apos;https://qtdmm.de&apos;&gt;qtdmm.de&lt;/a&gt; &amp;middot; Contact: &lt;a href=&apos;mailto:hello@qtdmm.de&apos;&gt;hello@qtdmm.de&lt;/a&gt;&lt;br&gt;Source and bug reports: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Icons (except the DMM icon) are taken from the KDE project.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;QtDMM %1&lt;/h2&gt;&lt;p&gt;Lectura y registrador de transitorios para multímetros digitales.&lt;/p&gt;&lt;p&gt;Construido con &lt;b&gt;Qt&lt;/b&gt; %2. Bajo licencia &lt;b&gt;GNU GPL 3&lt;/b&gt; (versiones anteriores a 0.9.0 bajo GPL 2).&lt;/p&gt;&lt;p&gt;Desde 0.9.5: tuxmaster y colaboradores, véase el archivo AUTHORS.&lt;br&gt;0.9.3 y anteriores: &amp;copy; 2001-2016 M. Toussaint &amp;lt;&lt;a href=&apos;mailto:qtdmm@mtoussaint.de&apos;&gt;qtdmm@mtoussaint.de&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;p&gt;Sitio web: &lt;a href=&apos;https://qtdmm.de&apos;&gt;qtdmm.de&lt;/a&gt; &amp;middot; Contacto: &lt;a href=&apos;mailto:hello@qtdmm.de&apos;&gt;hello@qtdmm.de&lt;/a&gt;&lt;br&gt;Código fuente e informes de errores: &lt;a href=&apos;https://github.com/tuxmaster/QtDMM&apos;&gt;github.com/tuxmaster/QtDMM&lt;/a&gt;&lt;br&gt;Los iconos (salvo el del multímetro) proceden del proyecto KDE.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/mainwin.cpp" line="477"/>
+        <location filename="../../src/mainwin.cpp" line="489"/>
         <source>Supported devices...</source>
         <translation>Dispositivos compatibles…</translation>
     </message>
@@ -1763,6 +1803,74 @@ Después cierre la sesión y vuelva a iniciarla para que la pertenencia al grupo
         <location filename="../../src/scaleprefs.cpp" line="40"/>
         <source>&lt;b&gt;Here you can configure the vertical scale of the recorder and the length (in time) of the window.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Aquí puede configurar la escala vertical del registrador y la duración de la ventana.&lt;/b&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>ScpiPrefs</name>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="18"/>
+        <source>SCPI server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="19"/>
+        <source>&lt;b&gt;Lets other programs read the meter over the network:&lt;/b&gt; QtDMM answers SCPI queries (*IDN?, READ?, ...) on a TCP port, like a bench instrument.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="24"/>
+        <source>With the server on, lxi-tools, LabVIEW, PyVISA or a few lines of Python can read the current value as if the multimeter were a bench instrument with a LAN port. The server only reports; it never sends anything to the meter. INITiate/ABORt start and stop the recorder, INPut ON/OFF connect and disconnect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="32"/>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="34"/>
+        <source>&amp;Enable the SCPI server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="39"/>
+        <source>5025 is the usual raw-socket SCPI port. When it is taken (another QtDMM instance), the next free one is used and shown in the status bar.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="41"/>
+        <source>&amp;Port:</source>
+        <translation type="unfinished">&amp;Puerto:</translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="45"/>
+        <source>This computer only (localhost)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="46"/>
+        <source>All network interfaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="47"/>
+        <source>There is no authentication: anyone who can reach the port can read the meter and start the recorder. Open it to the network only where you trust it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="49"/>
+        <source>&amp;Listen on:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="52"/>
+        <source>&amp;Announce by mDNS (_scpi-raw._tcp), so lxi discover finds it</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/scpiprefs.cpp" line="100"/>
+        <source>Try it: &lt;code&gt;lxi scpi -a %1 -p %2 &quot;*IDN?&quot;&lt;/code&gt; or &lt;code&gt;printf &apos;READ?\n&apos; | nc %1 %2&lt;/code&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

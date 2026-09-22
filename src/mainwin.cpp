@@ -162,6 +162,18 @@ MainWin::MainWin(QCommandLineParser &parser, QWidget *parent)
   statusBar()->addWidget(m_info, 10);
   m_info->setLineWidth(1);
 
+  m_scpi = new QLabel(statusBar());
+  m_scpi->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+  m_scpi->setLineWidth(1);
+  m_scpi->setToolTip(tr("The SCPI server: other programs can read the meter here (Settings, SCPI server)."));
+  statusBar()->addPermanentWidget(m_scpi);
+  m_scpi->hide();
+  connect(m_wid, &MainWid::scpiStatus, this, [this](const QString &text)
+  {
+    m_scpi->setText(text);
+    m_scpi->setVisible(!text.isEmpty());
+  });
+
   // messages such as the permission hint span several lines; the status bar
   // shows the first one and keeps the rest in the tooltip
   connect(m_wid, &MainWid::error, this, [this](const QString &text)
@@ -262,7 +274,7 @@ void MainWin::sendStateSLOT(const QString & state)
 void MainWin::setConsoleLogging(bool on)
 {
   if (on)
-    QLoggingCategory::setFilterRules("qtdmm.hid.debug=true\nqtdmm.ble.debug=true");
+    QLoggingCategory::setFilterRules("qtdmm.hid.debug=true\nqtdmm.ble.debug=true\nqtdmm.mdns.debug=true\nqtdmm.scpi.debug=true");
   m_wid->setConsoleLogging(on);
 }
 

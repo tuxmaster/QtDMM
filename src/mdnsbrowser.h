@@ -37,6 +37,23 @@ namespace MdnsMessage
 
   /// A query for the PTR records of @p service ("_qtdmm-bridge._tcp.local").
   QByteArray query(const QString &service);
+
+  /// One question of a message.
+  struct Question
+  {
+    QString name;
+    quint16 type = 0;
+    bool unicastResponse = false;   ///< QU bit: the asker wants a unicast answer
+  };
+
+  /// The questions of @p packet, if it is a query (QR bit clear).
+  QList<Question> questions(const QByteArray &packet);
+
+  /// A response message carrying @p answers and @p additional records,
+  /// class IN with the cache-flush bit as an authoritative mDNS answer
+  /// (RFC 6762 10.2). Records are written from their by-type fields; a
+  /// ttl of 0 is the goodbye packet.
+  QByteArray response(const QList<Record> &answers, const QList<Record> &additional = {});
 }
 
 /// Finds services in the local network by mDNS (RFC 6762), the way the

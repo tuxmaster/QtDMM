@@ -26,6 +26,7 @@
         <file alias="remove.xpm">../assets/icons/remove.xpm</file>
         <file alias="reset.xpm">../assets/icons/reset.xpm</file>
         <file alias="scale.xpm">../assets/icons/scale.xpm</file>
+        <file alias="scpi.xpm">../assets/icons/scpi.xpm</file>
         <file alias="start.xpm">../assets/icons/start.xpm</file>
         <file alias="stop.xpm">../assets/icons/stop.xpm</file>
         <file alias="table.xpm">../assets/icons/table.xpm</file>
@@ -49,6 +50,7 @@
         <file alias="readings-table.md">../docs/user/readings-table.md</file>
         <file alias="recorder.md">../docs/user/recorder.md</file>
         <file alias="remote-bridge.md">../docs/user/remote-bridge.md</file>
+        <file alias="scpi-server.md">../docs/user/scpi-server.md</file>
         <file alias="supported-devices.md">../docs/user/supported-devices.md</file>
         <file alias="troubleshooting.md">../docs/user/troubleshooting.md</file>
     </qresource>

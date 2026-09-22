@@ -35,6 +35,9 @@
 #include "readinglog.h"
 #include "alarm.h"
 #include "alarmbar.h"
+#include "scpiserver.h"
+#include "mdnsresponder.h"
+#include <QHostInfo>
 #include "siprefix.h"
 #include "engnumbervalidator.h"
 #include "tipdlg.h"
@@ -59,6 +62,7 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
   m_dmm = new DMM(this);
   m_external = new QProcess(this);
 
+  m_instanceId = instance_id;
   m_settings  = new Settings(instance_id, config_path, this);
   m_configDlg = new ConfigDlg(m_settings, this);
   m_configDlg->hide();
@@ -121,6 +125,33 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
     updateAlarmBar();
   });
   m_alarms->setAlarms(m_configDlg->alarms());
+
+  // SCPI server: the meter as a network instrument (applyScpi() starts it)
+  m_scpi = new ScpiServer(this);
+  m_mdns = new MdnsResponder(this);
+  connect(m_scpi, &ScpiServer::startRecording, this, &MainWid::startSLOT);
+  connect(m_scpi, &ScpiServer::stopRecording, this, &MainWid::stopSLOT);
+  connect(m_scpi, &ScpiServer::connectRequested, this, [this](bool on)
+  {
+    if (on == m_dmm->isOpen())
+      return;
+    Q_EMIT setConnect(on);
+    Q_EMIT connectDMM(on);
+    connectSLOT(on);
+  });
+  connect(m_scpi, &ScpiServer::clientsChanged, this, [this](int) { updateScpiStatus(); });
+  // HCOPy:SDUMp:DATA? - the main window as the "instrument screen"
+  m_scpi->setScreenshotSource([this](const QByteArray &format) -> QByteArray
+  {
+    QWidget *top = window() ? window() : this;
+    const QPixmap shot = top->grab();
+    QByteArray bytes;
+    QBuffer buffer(&bytes);
+    buffer.open(QIODevice::WriteOnly);
+    if (!shot.save(&buffer, format.constData()))
+      return {};
+    return bytes;
+  });
 
   if (m_configDlg->showTip())
     showTipsSLOT();
@@ -307,6 +338,20 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
     }
   }
 
+  if (m_scpi)
+  {
+    ScpiServer::Reading reading;
+    reading.value = dval;
+    reading.unit = SiPrefix::split(u).baseUnit;
+    reading.special = s;
+    reading.range = r;
+    reading.hold = hold;
+    reading.overload = val.contains(QRegularExpression("[A-Za-z]"));
+    reading.valid = true;
+    reading.msecs = QDateTime::currentMSecsSinceEpoch();
+    m_scpi->setReading(id, reading);
+  }
+
   m_display->update();
 }
 
@@ -392,6 +437,7 @@ void MainWid::connectSLOT(bool on)
   m_configDlg->connectSLOT(on);
 
   ui_graph->connectSLOT(on);
+  m_scpi->setConnected(m_dmm->isOpen());
 }
 
 void MainWid::quitSLOT()
@@ -443,6 +489,7 @@ void MainWid::applySLOT()
   updateAlarmBar();
   ui_graph->setAlertUnsaved(m_configDlg->alertUnsavedData());
   m_dmm->setName(m_configDlg->dmmName());
+  applyScpi();
   Q_EMIT configChanged();
 
   if ((sender() == m_configDlg))
@@ -587,7 +634,62 @@ void MainWid::readConfig()
 
 void MainWid::runningSLOT(bool on)
 {
+  m_scpi->setRecording(on);
   Q_EMIT running(on);
+}
+
+void MainWid::applyScpi()
+{
+  m_scpi->setModel(m_configDlg->dmmName());
+  const bool wanted = m_configDlg->scpiEnabled();
+  const QHostAddress address = m_configDlg->scpiAllInterfaces() ? QHostAddress::Any : QHostAddress::LocalHost;
+  const quint16 port = quint16(m_configDlg->scpiPort());
+  // keep a running server when nothing about it changed: clients stay
+  const bool same = m_scpi->isListening() && m_scpi->address() == address
+                    && m_scpi->port() >= port && m_scpi->port() < port + 10;
+  if (!wanted)
+  {
+    m_mdns->stop();
+    m_scpi->stop();
+  }
+  else if (!same)
+  {
+    m_mdns->stop();
+    if (!m_scpi->start(address, port))
+      Q_EMIT error(tr("SCPI server: %1").arg(m_scpi->errorString()));
+  }
+  if (m_scpi->isListening() && m_configDlg->scpiMdns() && !m_mdns->isActive())
+  {
+    QMap<QString, QString> txt;
+    txt["txtvers"] = "1";
+    txt["model"] = m_configDlg->dmmName();
+    txt["version"] = APP_VERSION;
+    txt["instance"] = m_instanceId;
+    const QString instance = QString("QtDMM %1").arg(m_instanceId == "default"
+                                                     ? QHostInfo::localHostName() : m_instanceId);
+    m_mdns->start("_scpi-raw._tcp", instance, m_scpi->port(), txt);
+  }
+  else if (!m_configDlg->scpiMdns())
+    m_mdns->stop();
+  updateScpiStatus();
+}
+
+void MainWid::updateScpiStatus()
+{
+  if (!m_scpi->isListening())
+  {
+    Q_EMIT scpiStatus(QString());
+    m_configDlg->setScpiStatus(tr("The server is not running."));
+    return;
+  }
+  const QString where = m_scpi->address() == QHostAddress::LocalHost ? QString("localhost") : QHostInfo::localHostName();
+  const int n = m_scpi->clientCount();
+  const QString clients = n == 1 ? tr("1 client") : tr("%1 clients").arg(n);
+  Q_EMIT scpiStatus(tr("SCPI %1:%2 (%3)").arg(where).arg(m_scpi->port()).arg(clients));
+  QString text = tr("Listening on %1, port %2, %3 connected.").arg(where).arg(m_scpi->port()).arg(clients);
+  if (m_mdns->isActive())
+    text += ' ' + tr("Announced as \"%1\".").arg(m_mdns->instanceName());
+  m_configDlg->setScpiStatus(text);
 }
 
 void MainWid::startExternalSLOT()

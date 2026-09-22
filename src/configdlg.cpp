@@ -29,6 +29,7 @@
 #include "dmmprefs.h"
 #include "executeprefs.h"
 #include "alarmprefs.h"
+#include "scpiprefs.h"
 #include "graphprefs.h"
 #include "guiprefs.h"
 #include "integrationprefs.h"
@@ -203,6 +204,15 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  ui_list);
   m_alarms->setCfg(m_settings);
   ui_stack->insertWidget(m_alarms->id(), m_alarms);
+
+  m_scpi = new ScpiPrefs(ui_stack);
+  m_scpi->setId(ConfigDlg::Scpi);
+  new ConfigItem(m_scpi->id(),
+                 m_scpi->pixmap(),
+                 m_scpi->label(),
+                 ui_list);
+  m_scpi->setCfg(m_settings);
+  ui_stack->insertWidget(m_scpi->id(), m_scpi);
 
   // init stuff
   //
@@ -782,4 +792,14 @@ QList<Alarm> ConfigDlg::alarms() const
 void ConfigDlg::setAlarmUnit(const QString &unit)
 {
   m_alarms->setUnit(unit);
+}
+
+bool ConfigDlg::scpiEnabled() const { return m_scpi->enabled(); }
+int ConfigDlg::scpiPort() const { return m_scpi->port(); }
+bool ConfigDlg::scpiAllInterfaces() const { return m_scpi->allInterfaces(); }
+bool ConfigDlg::scpiMdns() const { return m_scpi->mdns(); }
+
+void ConfigDlg::setScpiStatus(const QString &text)
+{
+  m_scpi->setStatus(text);
 }

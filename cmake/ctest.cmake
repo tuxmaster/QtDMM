@@ -128,6 +128,13 @@ if (BUILD_TESTING)
 	target_link_libraries(${TEST_MDNS} PRIVATE Qt::Core Qt6::Network Qt::Test)
 	add_test(NAME mdns_browse COMMAND ${TEST_MDNS} "${CMAKE_SOURCE_DIR}/tests/data/mdns" "${CMAKE_SOURCE_DIR}/tools/qtdmm-bridge")
 
+	## SCPI server: command interpreter, TCP round trip, mDNS announcement
+	set( TEST_SCPI test_scpi)
+	add_executable(${TEST_SCPI} MACOSX_BUNDLE tests/test_scpi.cpp src/scpiserver.cpp src/mdnsresponder.cpp src/mdnsbrowser.cpp)
+	target_include_directories(${TEST_SCPI} PRIVATE src)
+	target_link_libraries(${TEST_SCPI} PRIVATE Qt::Core Qt6::Network Qt::Test)
+	add_test(NAME scpi_server COMMAND ${TEST_SCPI})
+
 	## alarms: conditions, duration, hysteresis, acknowledge, JSON
 	set( TEST_ALARM test_alarm)
 	add_executable(${TEST_ALARM} MACOSX_BUNDLE tests/test_alarm.cpp src/alarm.cpp src/engnumbervalidator.cpp src/siprefix.cpp)
