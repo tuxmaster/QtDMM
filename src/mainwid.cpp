@@ -438,6 +438,8 @@ void MainWid::connectSLOT(bool on)
 
   ui_graph->connectSLOT(on);
   m_scpi->setConnected(m_dmm->isOpen());
+  // a "no readings" alarm watches a connected meter, so its clock starts here
+  m_alarms->setConnected(m_dmm->isOpen(), QDateTime::currentMSecsSinceEpoch());
 }
 
 void MainWid::quitSLOT()

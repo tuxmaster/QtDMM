@@ -40,6 +40,9 @@ ReadingLogWid::ReadingLogWid(QWidget *parent) :
   m_view->verticalHeader()->setVisible(false);
   m_view->horizontalHeader()->setStretchLastSection(false);
   m_view->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+  // the default is 1000 rows measured per column and per inserted row; the
+  // columns hold fixed-width values, so the newest rows are enough
+  m_view->horizontalHeader()->setResizeContentsPrecision(20);
   m_view->horizontalHeader()->setHighlightSections(false);
   m_view->setContextMenuPolicy(Qt::CustomContextMenu);
   connect(m_view, &QTableView::customContextMenuRequested, this, [this](const QPoint &pos)
@@ -129,9 +132,14 @@ void ReadingLogWid::setMaxRows(int rows)
 
 void ReadingLogWid::followSLOT()
 {
-  // ResizeToContents measures once; a first HOLD or a longer value would
-  // stay clipped without this (visible rows only, so it is cheap)
-  m_view->resizeColumnsToContents();
+  // A first HOLD or a longer value would stay clipped without a resize, but
+  // resizeColumnsToContents() measures up to resizeContentsPrecision() rows
+  // per column - not the visible ones - which costs tens of milliseconds per
+  // reading once the table has filled up. The precision is lowered in the
+  // constructor; the explicit call is only needed while the table is young,
+  // afterwards the widest value has been seen.
+  if (m_log->rowCount() <= 50)
+    m_view->resizeColumnsToContents();
   if (m_follow->isChecked())
     m_view->scrollToBottom();
 }

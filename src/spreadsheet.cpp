@@ -17,10 +17,18 @@ QString tr(const char *text)
   return QCoreApplication::translate("SpreadsheetWriter", text);
 }
 
+// Besides the five entities this drops what XML 1.0 forbids: the C0 control
+// characters except tab, LF and CR. A noisy line or the wrong baud rate makes
+// an ASCII decoder produce readings with such bytes, and a single one of them
+// turns the sheet into a file LibreOffice refuses to open - the writer would
+// still report success. They become U+FFFD so the row stays readable.
 QString xmlEscape(const QString &s)
 {
   QString e = s;
   e.replace('&', "&amp;").replace('<', "&lt;").replace('>', "&gt;").replace('"', "&quot;");
+  for (QChar &c : e)
+    if (c < QChar(' ') && c != QChar('\t') && c != QChar('\n') && c != QChar('\r'))
+      c = QChar(0xFFFD);
   return e;
 }
 

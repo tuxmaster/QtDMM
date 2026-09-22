@@ -957,138 +957,138 @@ Le multimètre est-il branché et allumé ?</translation>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="174"/>
+        <location filename="../../src/mainwid.cpp" line="186"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM : données non enregistrées</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="175"/>
+        <location filename="../../src/mainwid.cpp" line="187"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Données non enregistrées&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Des mesures non enregistrées sont encore en mémoire. Si vous quittez maintenant, elles seront perdues.&lt;p&gt;Voulez-vous d&apos;abord les exporter ?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="190"/>
+        <location filename="../../src/mainwid.cpp" line="202"/>
         <source>Export data first</source>
         <translation>Exporter d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="194"/>
+        <location filename="../../src/mainwid.cpp" line="206"/>
         <source>Quit without saving</source>
         <translation>Quitter sans enregistrer</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="608"/>
+        <location filename="../../src/mainwid.cpp" line="622"/>
         <source>Automatic start at %1</source>
         <translation>Démarrage automatique à %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="610"/>
+        <location filename="../../src/mainwid.cpp" line="624"/>
         <source>Raising threshold %1</source>
         <translation>Seuil montant %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="612"/>
+        <location filename="../../src/mainwid.cpp" line="626"/>
         <source>Falling threshold %1</source>
         <translation>Seuil descendant %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="647"/>
+        <location filename="../../src/mainwid.cpp" line="661"/>
         <source>SCPI server: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="670"/>
+        <location filename="../../src/mainwid.cpp" line="684"/>
         <source>The server is not running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="675"/>
+        <location filename="../../src/mainwid.cpp" line="689"/>
         <source>1 client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="675"/>
+        <location filename="../../src/mainwid.cpp" line="689"/>
         <source>%1 clients</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="676"/>
+        <location filename="../../src/mainwid.cpp" line="690"/>
         <source>SCPI %1:%2 (%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="677"/>
+        <location filename="../../src/mainwid.cpp" line="691"/>
         <source>Listening on %1, port %2, %3 connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="679"/>
+        <location filename="../../src/mainwid.cpp" line="693"/>
         <source>Announced as &quot;%1&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="688"/>
-        <location filename="../../src/mainwid.cpp" line="729"/>
+        <location filename="../../src/mainwid.cpp" line="702"/>
+        <location filename="../../src/mainwid.cpp" line="743"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM : erreur de lancement</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="689"/>
+        <location filename="../../src/mainwid.cpp" line="703"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Erreur de lancement&lt;/b&gt;&lt;/font&gt;&lt;p&gt;L&apos;application %1 est encore en cours d&apos;exécution !&lt;p&gt;Voulez-vous la terminer maintenant ?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="701"/>
+        <location filename="../../src/mainwid.cpp" line="715"/>
         <source>Yes, kill it!</source>
         <translation>Oui, la terminer !</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="705"/>
+        <location filename="../../src/mainwid.cpp" line="719"/>
         <source>No, keep running</source>
         <translation>Non, la laisser tourner</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="730"/>
+        <location filename="../../src/mainwid.cpp" line="744"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Erreur de lancement&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Impossible de lancer %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="741"/>
+        <location filename="../../src/mainwid.cpp" line="755"/>
         <source>Bummer!</source>
         <translation>Dommage !</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="747"/>
+        <location filename="../../src/mainwid.cpp" line="761"/>
         <source>Launched %1</source>
         <translation>%1 lancé</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="752"/>
+        <location filename="../../src/mainwid.cpp" line="766"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 s&apos;est terminé avec le code %2.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="803"/>
+        <location filename="../../src/mainwid.cpp" line="817"/>
         <source>no meter configured</source>
         <translation>aucun multimètre configuré</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="831"/>
+        <location filename="../../src/mainwid.cpp" line="845"/>
         <source>Alarm %1: %2 (%3)</source>
         <translation>Alarme %1 : %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="858"/>
+        <location filename="../../src/mainwid.cpp" line="872"/>
         <source>Alarm %1: could not run %2</source>
         <translation>Alarme %1 : impossible de lancer %2</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="863"/>
+        <location filename="../../src/mainwid.cpp" line="877"/>
         <source>QtDMM alarm: %1</source>
         <translation>Alarme QtDMM : %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="875"/>
+        <location filename="../../src/mainwid.cpp" line="889"/>
         <source>Alarm %1 cleared</source>
         <translation>Alarme %1 effacée</translation>
     </message>
@@ -1631,70 +1631,70 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
 <context>
     <name>ReadingLogWid</name>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="48"/>
+        <location filename="../../src/readinglogwid.cpp" line="51"/>
         <source>&amp;Copy</source>
         <translation>&amp;Copier</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="49"/>
+        <location filename="../../src/readinglogwid.cpp" line="52"/>
         <source>Select &amp;all</source>
         <translation>Tout &amp;sélectionner</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="51"/>
-        <location filename="../../src/readinglogwid.cpp" line="94"/>
+        <location filename="../../src/readinglogwid.cpp" line="54"/>
+        <location filename="../../src/readinglogwid.cpp" line="97"/>
         <source>&amp;Export...</source>
         <translation>&amp;Exporter…</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="52"/>
-        <location filename="../../src/readinglogwid.cpp" line="97"/>
+        <location filename="../../src/readinglogwid.cpp" line="55"/>
+        <location filename="../../src/readinglogwid.cpp" line="100"/>
         <source>C&amp;lear</source>
         <translation>&amp;Effacer</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="67"/>
-        <location filename="../../src/readinglogwid.cpp" line="72"/>
+        <location filename="../../src/readinglogwid.cpp" line="70"/>
+        <location filename="../../src/readinglogwid.cpp" line="75"/>
         <source>Pause logging</source>
         <translation>Suspendre la journalisation</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="72"/>
+        <location filename="../../src/readinglogwid.cpp" line="75"/>
         <source>Resume logging</source>
         <translation>Reprendre la journalisation</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="77"/>
+        <location filename="../../src/readinglogwid.cpp" line="80"/>
         <source>&amp;Follow</source>
         <translation>&amp;Suivre</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="79"/>
+        <location filename="../../src/readinglogwid.cpp" line="82"/>
         <source>Keep the newest reading in view. Scrolling up switches this off.</source>
         <translation>Garder la dernière mesure en vue. Faire défiler vers le haut désactive ce suivi.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="83"/>
+        <location filename="../../src/readinglogwid.cpp" line="86"/>
         <source>Keep</source>
         <translation>Conserver</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="89"/>
+        <location filename="../../src/readinglogwid.cpp" line="92"/>
         <source> rows</source>
         <translation> lignes</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="90"/>
+        <location filename="../../src/readinglogwid.cpp" line="93"/>
         <source>How many readings the table keeps; the oldest are dropped.</source>
         <translation>Nombre de mesures conservées par le tableau ; les plus anciennes sont supprimées.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="144"/>
+        <location filename="../../src/readinglogwid.cpp" line="152"/>
         <source>No readings yet.</source>
         <translation>Pas encore de mesures.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/readinglogwid.cpp" line="152"/>
+        <location filename="../../src/readinglogwid.cpp" line="160"/>
         <source>%n reading(s)</source>
         <translation>
             <numerusform>%n mesure</numerusform>
@@ -1702,28 +1702,28 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
         </translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="154"/>
+        <location filename="../../src/readinglogwid.cpp" line="162"/>
         <source>Min %1   Max %2   Mean %3   Span %4</source>
         <translation>Min %1   Max %2   Moyenne %3   Étendue %4</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="166"/>
+        <location filename="../../src/readinglogwid.cpp" line="174"/>
         <source>CSV (*.csv)</source>
         <translation>CSV (*.csv)</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="166"/>
+        <location filename="../../src/readinglogwid.cpp" line="174"/>
         <source>Excel (*.xlsx)</source>
         <translation>Excel (*.xlsx)</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="166"/>
+        <location filename="../../src/readinglogwid.cpp" line="174"/>
         <source>OpenDocument (*.ods)</source>
         <translation>OpenDocument (*.ods)</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="168"/>
         <location filename="../../src/readinglogwid.cpp" line="176"/>
+        <location filename="../../src/readinglogwid.cpp" line="184"/>
         <source>Export readings</source>
         <translation>Exporter les mesures</translation>
     </message>
@@ -1876,17 +1876,17 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
 <context>
     <name>SpreadsheetWriter</name>
     <message>
-        <location filename="../../src/spreadsheet.cpp" line="312"/>
+        <location filename="../../src/spreadsheet.cpp" line="320"/>
         <source>Nothing to export.</source>
         <translation>Rien à exporter.</translation>
     </message>
     <message>
-        <location filename="../../src/spreadsheet.cpp" line="379"/>
+        <location filename="../../src/spreadsheet.cpp" line="387"/>
         <source>Cannot write the archive.</source>
         <translation>Impossible d&apos;écrire l&apos;archive.</translation>
     </message>
     <message>
-        <location filename="../../src/spreadsheet.cpp" line="384"/>
+        <location filename="../../src/spreadsheet.cpp" line="392"/>
         <source>Cannot open file.</source>
         <translation>Impossible d&apos;ouvrir le fichier.</translation>
     </message>
