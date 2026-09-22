@@ -25,6 +25,8 @@
 #include <QPen>
 #include <QRegularExpression>
 #include <QToolTip>
+#include <QSvgGenerator>
+#include <QPdfWriter>
 
 #include "dmmgraph.h"
 #include "siprefix.h"
@@ -720,6 +722,9 @@ void DMMGraph::handleChartMousePress(QMouseEvent *ev)
     action = new QAction(tr("Copy image"), m_popup);
     action->setProperty("ID", IDCopyImage);
     m_popup->addAction(action);
+    action = new QAction(tr("Export image..."), m_popup);
+    action->setProperty("ID", IDExportImage);
+    m_popup->addAction(action);
 
     if (!m_running)
     {
@@ -1183,6 +1188,9 @@ void DMMGraph::popupSLOT(QAction *action)
     case IDCopyImage:
       copyImageSLOT();
       break;
+    case IDExportImage:
+      exportImageSLOT();
+      break;
   }
 }
 
@@ -1246,4 +1254,113 @@ void DMMGraph::scrollToEnd()
 void DMMGraph::copyImageSLOT()
 {
   QGuiApplication::clipboard()->setPixmap(m_chartView->grab());
+}
+
+bool DMMGraph::exportImageSLOT()
+{
+  QFileInfo fileInfo(m_cfg->getString("QtDMM/LastImagePath"));
+  const QStringList suffixes = { "svg", "pdf", "png", "jpg" };
+  const QString suffix = suffixes.contains(fileInfo.suffix().toLower()) ? fileInfo.suffix().toLower() : "svg";
+  const QString name = fileInfo.baseName().isEmpty() ? QString("untitled")
+                                                     : fileInfo.absolutePath() + "/" + fileInfo.baseName();
+  const QString svgFilter = tr("Scalable vector graphics (*.svg)"), pdfFilter = tr("PDF (*.pdf)"),
+                pngFilter = tr("PNG image (*.png)"), jpgFilter = tr("JPEG image (*.jpg)");
+  QString filter = suffix == "pdf" ? pdfFilter : suffix == "png" ? pngFilter
+                 : suffix == "jpg" ? jpgFilter : svgFilter;
+  QString fn = QFileDialog::getSaveFileName(this, tr("Export image"), name + "." + suffix,
+                                            svgFilter + ";;" + pdfFilter + ";;" + pngFilter + ";;" + jpgFilter,
+                                            &filter);
+  if (fn.isNull())
+    return false;
+  // the dialog leaves the name alone when the user typed one: follow the
+  // chosen filter, so picking "PDF" and typing "plot" does write a PDF
+  const QString chosen = filter == pdfFilter ? "pdf" : filter == pngFilter ? "png"
+                       : filter == jpgFilter ? "jpg" : "svg";
+  if (!suffixes.contains(QFileInfo(fn).suffix().toLower()))
+    fn += "." + chosen;
+
+  m_cfg->setString("QtDMM/LastImagePath", QDir().absoluteFilePath(fn));
+  return exportImageFile(fn);
+}
+
+bool DMMGraph::exportImageFile(const QString &fileName, QSize size)
+{
+  // the crosshair follows the mouse and would be baked into the picture at
+  // whatever point the user right-clicked
+  const bool crosshairShown = m_crosshairVLine->isVisible() || m_crosshairHLine->isVisible();
+  if (crosshairShown)
+  {
+    m_crosshairVLine->hide();
+    m_crosshairHLine->hide();
+  }
+  const bool ok = writeImage(fileName, size);
+  if (crosshairShown)
+  {
+    m_crosshairVLine->show();
+    m_crosshairHLine->show();
+  }
+  return ok;
+}
+
+bool DMMGraph::writeImage(const QString &fileName, QSize size)
+{
+  if (size.isEmpty())
+    size = m_chartView->size();
+  if (size.isEmpty())
+    size = QSize(1024, 640);
+  const QString suffix = QFileInfo(fileName).suffix().toLower();
+
+  if (suffix == "svg")
+  {
+    QSvgGenerator svg;
+    svg.setFileName(fileName);
+    svg.setSize(size);
+    svg.setViewBox(QRect(QPoint(0, 0), size));
+    svg.setTitle(m_graphStartDateTime.isValid()
+                 ? tr("QtDMM recording, %1").arg(m_graphStartDateTime.toString(Qt::ISODate))
+                 : tr("QtDMM graph"));
+    svg.setDescription(tr("%1 values, %2 s per sample, unit %3")
+                       .arg(m_pointer).arg(m_sampleTime / 10.0).arg(m_unit));
+    QPainter p;
+    if (!p.begin(&svg))
+    {
+      Q_EMIT error(tr("Could not write %1").arg(fileName));
+      return false;
+    }
+    m_chartView->render(&p);
+    p.end();
+  }
+  else if (suffix == "pdf")
+  {
+    QPdfWriter pdf(fileName);
+    pdf.setTitle(tr("QtDMM graph"));
+    pdf.setCreator("QtDMM");
+    // the page takes the graph's proportions, so nothing is stretched
+    pdf.setPageSize(QPageSize(QSizeF(size.width(), size.height()), QPageSize::Point,
+                              QString(), QPageSize::ExactMatch));
+    pdf.setPageMargins(QMarginsF(0, 0, 0, 0));
+    QPainter p;
+    if (!p.begin(&pdf))
+    {
+      Q_EMIT error(tr("Could not write %1").arg(fileName));
+      return false;
+    }
+    m_chartView->render(&p, QRectF(QPointF(0, 0), QSizeF(pdf.width(), pdf.height())));
+    p.end();
+  }
+  else
+  {
+    QPixmap pixmap(size);
+    pixmap.fill(Qt::white);
+    QPainter p(&pixmap);
+    m_chartView->render(&p, QRectF(QPointF(0, 0), QSizeF(size)));
+    p.end();
+    if (!pixmap.save(fileName))
+    {
+      Q_EMIT error(tr("Could not write %1").arg(fileName));
+      return false;
+    }
+  }
+  Q_EMIT info(tr("Graph written to %1").arg(QFileInfo(fileName).fileName()));
+  return true;
 }

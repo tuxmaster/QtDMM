@@ -22,6 +22,7 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
 - Analog meter display with auto-ranging scale, dockable or as its own window
 - Alarms: banner, beep, popup, program or recorder start/stop when the reading leaves its range, stays there for a while, overloads or stops coming (see [Alarms](user/alarms.md))
 - Export as CSV, Excel (.xlsx) or OpenDocument (.ods) - recorder and readings table
+- Export the graph as SVG, PDF, PNG or JPEG - vector output for documents and the web
 - Readings table: every value the meter sent, with time, mode and range; copy to a spreadsheet or export (see [Readings table](user/readings-table.md))
 - Several meters at once, one window each, recording in sync
 - Calculated values across meters (power from voltage and current, ...)

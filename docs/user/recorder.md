@@ -54,6 +54,11 @@ port.
   [Keyboard and mouse](keyboard.md)).
 - **Copy image** (right-click menu or Ctrl+Shift+C) puts a picture of the graph
   on the clipboard.
+- **Export image...** (right-click menu) writes the graph to a file: **SVG** or
+  **PDF** keep the curve, the axes and their labels as vectors, so they stay
+  sharp at any size and can be edited in Inkscape or dropped into a document;
+  **PNG** and **JPEG** are pixels. The picture is what the graph shows, so zoom
+  and pan first.
 - Hovering shows a crosshair with time and value at the cursor.
 - **Integration** (Settings → Integration curve) draws a second curve: the running
   sum of the readings above a threshold, scaled and offset as configured — for

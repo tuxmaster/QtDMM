@@ -103,7 +103,8 @@ public:
     IDConfigure,
     IDExportData,
     IDImportData,
-    IDCopyImage
+    IDCopyImage,
+    IDExportImage
   };
 
   DMMGraph(QWidget *parent, Settings *settings);
@@ -195,6 +196,8 @@ public Q_SLOTS:
   void             scrollToEnd();
   /// Puts a picture of the graph on the clipboard.
   void             copyImageSLOT();
+  /// Writes the graph to a file chosen in a dialog (SVG, PDF, PNG).
+  bool             exportImageSLOT();
   /// @}
   void             startSLOT();
   void             stopSLOT();
@@ -207,11 +210,19 @@ public Q_SLOTS:
   /// split out so the CSV parsing/writing logic can be exercised from tests.
   bool             exportCsvFile(const QString &fileName);
   bool             importCsvFile(const QString &fileName);
+  /// Writes the graph to @p fileName, format taken from the suffix (svg, pdf,
+  /// png, jpg, bmp). SVG and PDF keep the curve, the axes and their labels as
+  /// vectors; @p size is the drawing size in points, the widget's own when
+  /// empty. Non-interactive half of exportImageSLOT(), for the test.
+  bool             exportImageFile(const QString &fileName, QSize size = QSize());
 
 protected Q_SLOTS:
   void             popupSLOT(QAction *action);
 
 protected:
+  /// exportImageFile() without hiding the crosshair.
+  bool             writeImage(const QString &fileName, QSize size);
+
   QScrollBar      *scrollbar;
   int              m_size;
   int              m_length;
