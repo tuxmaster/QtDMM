@@ -30,6 +30,12 @@ Documentation for people working on QtDMM itself. Planned pages:
 None of these pages exist yet. The architecture is documented in the code
 itself, see below.
 
+## SCPI command reference
+
+The network instrument QtDMM presents (Settings → SCPI server) is
+specified in [SCPI command reference](scpi-commands.md): message format,
+every accepted header, the answers and the error codes.
+
 ## API documentation
 
 The headers under `src/` carry Doxygen comments; the class descriptions of
