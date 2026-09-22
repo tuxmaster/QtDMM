@@ -2,6 +2,279 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>Alarm</name>
+    <message>
+        <location filename="../../src/alarm.cpp" line="113"/>
+        <source>below %1</source>
+        <translation>sous %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarm.cpp" line="114"/>
+        <source>above %1</source>
+        <translation>au-dessus de %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarm.cpp" line="115"/>
+        <source>outside %1 to %2</source>
+        <translation>hors de %1 à %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarm.cpp" line="116"/>
+        <source>inside %1 to %2</source>
+        <translation>entre %1 et %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarm.cpp" line="117"/>
+        <source>overload</source>
+        <translation>dépassement</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarm.cpp" line="118"/>
+        <source>no readings for %1 s</source>
+        <translation>aucune mesure depuis %1 s</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarm.cpp" line="121"/>
+        <source>for %1 s</source>
+        <translation>pendant %1 s</translation>
+    </message>
+</context>
+<context>
+    <name>AlarmBar</name>
+    <message>
+        <location filename="../../src/alarmbar.cpp" line="21"/>
+        <source>&amp;Acknowledge</source>
+        <translation>&amp;Acquitter</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmbar.cpp" line="22"/>
+        <source>Hides the banner; the alarm stays active until the reading is back.</source>
+        <translation>Masque le bandeau ; l&apos;alarme reste active jusqu&apos;au retour de la mesure.</translation>
+    </message>
+</context>
+<context>
+    <name>AlarmDlg</name>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="153"/>
+        <location filename="../../src/alarmprefs.cpp" line="284"/>
+        <source>Alarm</source>
+        <translation>Alarme</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="158"/>
+        <source>&amp;Enabled</source>
+        <translation>&amp;Activée</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="163"/>
+        <source>&amp;Name:</source>
+        <translation>&amp;Nom :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="169"/>
+        <source>Condition</source>
+        <translation>Condition</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="172"/>
+        <source>Reading below</source>
+        <translation>Mesure inférieure à</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="173"/>
+        <source>Reading above</source>
+        <translation>Mesure supérieure à</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="174"/>
+        <source>Reading outside a range</source>
+        <translation>Mesure hors d&apos;une plage</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="175"/>
+        <source>Reading inside a range</source>
+        <translation>Mesure dans une plage</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="176"/>
+        <source>Overload (OL)</source>
+        <translation>Dépassement (OL)</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="177"/>
+        <source>No readings for a while</source>
+        <translation>Aucune mesure depuis un moment</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="179"/>
+        <source>&amp;Condition:</source>
+        <translation>&amp;Condition :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="187"/>
+        <source>&amp;Upper bound (%1):</source>
+        <translation>Borne s&amp;upérieure (%1) :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="196"/>
+        <source>&amp;Hysteresis (%1):</source>
+        <translation>&amp;Hystérésis (%1) :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="198"/>
+        <source>The reading must come back by this much before the alarm clears - keeps it from flickering when the reading sits at the threshold.</source>
+        <translation>La mesure doit revenir d&apos;autant avant que l&apos;alarme ne s&apos;efface – évite le clignotement quand la mesure reste au seuil.</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="204"/>
+        <source>Actions</source>
+        <translation>Actions</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="207"/>
+        <source>the condition in words</source>
+        <translation>la condition en toutes lettres</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="208"/>
+        <source>&amp;Message:</source>
+        <translation>&amp;Message :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="221"/>
+        <source>Alarm colour</source>
+        <translation>Couleur de l&apos;alarme</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="228"/>
+        <source>Co&amp;lour:</source>
+        <translation>Cou&amp;leur :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="229"/>
+        <source>Banner over the display (with Acknowledge)</source>
+        <translation>Bandeau au-dessus de l&apos;affichage (avec Acquitter)</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="231"/>
+        <source>Beep</source>
+        <translation>Bip</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="233"/>
+        <source>Popup window</source>
+        <translation>Fenêtre surgissante</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="235"/>
+        <source>Bring the QtDMM window to the front</source>
+        <translation>Mettre la fenêtre QtDMM au premier plan</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="237"/>
+        <source>Mark in the recorder graph</source>
+        <translation>Marque dans le graphe de l&apos;enregistreur</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="239"/>
+        <source>Mark in the readings table</source>
+        <translation>Marque dans le tableau des mesures</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="244"/>
+        <source>leave alone</source>
+        <translation>ne rien faire</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="245"/>
+        <source>start</source>
+        <translation>démarrer</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="246"/>
+        <source>stop</source>
+        <translation>arrêter</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="248"/>
+        <source>&amp;Recorder:</source>
+        <translation>&amp;Enregistreur :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="250"/>
+        <source>none</source>
+        <translation>aucun</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="251"/>
+        <source>Program to run when the alarm raises. %v is the value, %u its unit, %n the alarm&apos;s name.</source>
+        <translation>Programme lancé au déclenchement. %v est la valeur, %u son unité, %n le nom de l&apos;alarme.</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="252"/>
+        <source>Run &amp;program:</source>
+        <translation>Lancer un &amp;programme :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="269"/>
+        <source>&amp;Lower bound (%1):</source>
+        <translation>Borne &amp;inférieure (%1) :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="269"/>
+        <source>&amp;Threshold (%1):</source>
+        <translation>&amp;Seuil (%1) :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="275"/>
+        <source>&amp;Silence (s):</source>
+        <translation>&amp;Silence (s) :</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="275"/>
+        <source>&amp;For at least (s):</source>
+        <translation>Pendant au &amp;moins (s) :</translation>
+    </message>
+</context>
+<context>
+    <name>AlarmPrefs</name>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="23"/>
+        <source>Alarms</source>
+        <translation>Alarmes</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="24"/>
+        <source>&lt;b&gt;Alarms watch the reading and tell you when it leaves the range you expect:&lt;/b&gt; a banner over the display, a beep, a popup, a program, the recorder.</source>
+        <translation>&lt;b&gt;Les alarmes surveillent la mesure et vous préviennent quand elle quitte la plage attendue :&lt;/b&gt; un bandeau au-dessus de l&apos;affichage, un bip, une fenêtre, un programme, l&apos;enregistreur.</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="29"/>
+        <source>Each alarm watches the main reading. It raises when its condition has held for the given time and clears once the reading is back beyond the hysteresis. Untick an alarm to keep it without it firing.</source>
+        <translation>Chaque alarme surveille la mesure principale. Elle se déclenche quand sa condition a tenu le temps indiqué et s&apos;efface une fois la mesure revenue au-delà de l&apos;hystérésis. Décochez une alarme pour la garder sans qu&apos;elle se déclenche.</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="50"/>
+        <source>&amp;Add...</source>
+        <translation>&amp;Ajouter…</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="51"/>
+        <source>&amp;Edit...</source>
+        <translation>&amp;Modifier…</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="52"/>
+        <source>&amp;Remove</source>
+        <translation>&amp;Supprimer</translation>
+    </message>
+    <message>
+        <location filename="../../src/alarmprefs.cpp" line="110"/>
+        <source>Alarm %1</source>
+        <translation>Alarme %1</translation>
+    </message>
+</context>
+<context>
     <name>BleAdvertisementDevice</name>
     <message>
         <location filename="../../src/portdevices/ble.cpp" line="37"/>
@@ -116,30 +389,30 @@
 <context>
     <name>ConfigDlg</name>
     <message>
-        <location filename="../../src/configdlg.cpp" line="69"/>
-        <location filename="../../src/configdlg.cpp" line="94"/>
-        <location filename="../../src/configdlg.cpp" line="115"/>
+        <location filename="../../src/configdlg.cpp" line="70"/>
+        <location filename="../../src/configdlg.cpp" line="95"/>
+        <location filename="../../src/configdlg.cpp" line="116"/>
         <source>QtDMM: Welcome!</source>
         <translation>QtDMM : Bienvenue !</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="70"/>
+        <location filename="../../src/configdlg.cpp" line="71"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;This seems to be your first invocation of QtDMM (Or you have deleted its configuration file).&lt;p&gt;QtDMM has created the file %1 in your home directory to save its settings.</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Bienvenue !&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Il semble que ce soit votre premier lancement de QtDMM (ou vous avez supprimé son fichier de configuration).&lt;p&gt;QtDMM a créé le fichier %1 dans votre répertoire personnel pour y enregistrer ses réglages.</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="82"/>
-        <location filename="../../src/configdlg.cpp" line="107"/>
+        <location filename="../../src/configdlg.cpp" line="83"/>
+        <location filename="../../src/configdlg.cpp" line="108"/>
         <source>Continue</source>
         <translation>Continuer</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="95"/>
+        <location filename="../../src/configdlg.cpp" line="96"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Welcome!&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You seem to have upgraded &lt;b&gt;QtDMM&lt;/b&gt; from a version prior to 0.8.4. Please check your configuration. There are some new parameters to be configured.&lt;p&gt;Thank you for choosing &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Bienvenue !&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Vous semblez avoir mis à jour &lt;b&gt;QtDMM&lt;/b&gt; depuis une version antérieure à 0.8.4. Veuillez vérifier votre configuration : de nouveaux paramètres sont à régler.&lt;p&gt;Merci d&apos;avoir choisi &lt;b&gt;QtDMM&lt;/b&gt;.&lt;p&gt;&lt;i&gt;Matthias Toussaint&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/configdlg.cpp" line="116"/>
+        <location filename="../../src/configdlg.cpp" line="117"/>
         <source>Your config file has been converted to the new format.
 Please check your color settings, because they couldn&apos;t be converted automatically.
 Your old config ~/.qtdmmrc was renamed to ~/.qtdmmrc.old.</source>
@@ -263,98 +536,98 @@ Le multimètre est-il branché et allumé ?</translation>
         <translation>%1 secondes</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="571"/>
-        <location filename="../../src/dmmgraph.cpp" line="573"/>
-        <location filename="../../src/dmmgraph.cpp" line="575"/>
-        <location filename="../../src/dmmgraph.cpp" line="577"/>
+        <location filename="../../src/dmmgraph.cpp" line="611"/>
+        <location filename="../../src/dmmgraph.cpp" line="613"/>
+        <location filename="../../src/dmmgraph.cpp" line="615"/>
+        <location filename="../../src/dmmgraph.cpp" line="617"/>
         <source>Sampling</source>
         <translation>Échantillonnage</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="571"/>
-        <location filename="../../src/dmmgraph.cpp" line="573"/>
-        <location filename="../../src/dmmgraph.cpp" line="575"/>
-        <location filename="../../src/dmmgraph.cpp" line="577"/>
+        <location filename="../../src/dmmgraph.cpp" line="611"/>
+        <location filename="../../src/dmmgraph.cpp" line="613"/>
+        <location filename="../../src/dmmgraph.cpp" line="615"/>
+        <location filename="../../src/dmmgraph.cpp" line="617"/>
         <source>Stopped</source>
         <translation>Arrêté</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="642"/>
+        <location filename="../../src/dmmgraph.cpp" line="682"/>
         <source>Disconnect</source>
         <translation>Déconnecter</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="649"/>
+        <location filename="../../src/dmmgraph.cpp" line="689"/>
         <source>Connect</source>
         <translation>Connecter</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="658"/>
+        <location filename="../../src/dmmgraph.cpp" line="698"/>
         <source>Stop recorder</source>
         <translation>Arrêter l&apos;enregistreur</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="665"/>
+        <location filename="../../src/dmmgraph.cpp" line="705"/>
         <source>Start recorder</source>
         <translation>Démarrer l&apos;enregistreur</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="670"/>
+        <location filename="../../src/dmmgraph.cpp" line="710"/>
         <source>Clear graph</source>
         <translation>Effacer le graphe</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="676"/>
+        <location filename="../../src/dmmgraph.cpp" line="716"/>
         <source>Configure...</source>
         <translation>Configurer…</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="680"/>
+        <location filename="../../src/dmmgraph.cpp" line="720"/>
         <source>Copy image</source>
         <translation>Copier l’image</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="687"/>
+        <location filename="../../src/dmmgraph.cpp" line="727"/>
         <source>Export data...</source>
         <translation>Exporter les données…</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="691"/>
+        <location filename="../../src/dmmgraph.cpp" line="731"/>
         <source>Import data...</source>
         <translation>Importer des données…</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="841"/>
+        <location filename="../../src/dmmgraph.cpp" line="881"/>
         <source>Export data</source>
         <translation>Exporter les données</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="880"/>
+        <location filename="../../src/dmmgraph.cpp" line="920"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM : données non enregistrées</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="881"/>
+        <location filename="../../src/dmmgraph.cpp" line="921"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Données non enregistrées&lt;/b&gt;&lt;/font&gt;&lt;p&gt;L&apos;importation écrasera vos mesures.&lt;p&gt;Voulez-vous d&apos;abord exporter vos données non enregistrées ?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="893"/>
+        <location filename="../../src/dmmgraph.cpp" line="933"/>
         <source>Export data first</source>
         <translation>Exporter d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="897"/>
+        <location filename="../../src/dmmgraph.cpp" line="937"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importer et écraser</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="908"/>
+        <location filename="../../src/dmmgraph.cpp" line="948"/>
         <source>Import data</source>
         <translation>Importer les données</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="908"/>
+        <location filename="../../src/dmmgraph.cpp" line="948"/>
         <source>CSV (*.csv);;All files (*)</source>
         <translation>CSV (*.csv);;Tous les fichiers (*)</translation>
     </message>
@@ -669,85 +942,105 @@ Le multimètre est-il branché et allumé ?</translation>
 <context>
     <name>MainWid</name>
     <message>
-        <location filename="../../src/mainwid.cpp" line="138"/>
+        <location filename="../../src/mainwid.cpp" line="155"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM : données non enregistrées</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="139"/>
+        <location filename="../../src/mainwid.cpp" line="156"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;You still have unsaved measured data in memory. If you quit now it will be lost.&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Données non enregistrées&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Des mesures non enregistrées sont encore en mémoire. Si vous quittez maintenant, elles seront perdues.&lt;p&gt;Voulez-vous d&apos;abord les exporter ?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="154"/>
+        <location filename="../../src/mainwid.cpp" line="171"/>
         <source>Export data first</source>
         <translation>Exporter d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="158"/>
+        <location filename="../../src/mainwid.cpp" line="175"/>
         <source>Quit without saving</source>
         <translation>Quitter sans enregistrer</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="548"/>
+        <location filename="../../src/mainwid.cpp" line="573"/>
         <source>Automatic start at %1</source>
         <translation>Démarrage automatique à %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="550"/>
+        <location filename="../../src/mainwid.cpp" line="575"/>
         <source>Raising threshold %1</source>
         <translation>Seuil montant %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="552"/>
+        <location filename="../../src/mainwid.cpp" line="577"/>
         <source>Falling threshold %1</source>
         <translation>Seuil descendant %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="573"/>
-        <location filename="../../src/mainwid.cpp" line="614"/>
+        <location filename="../../src/mainwid.cpp" line="598"/>
+        <location filename="../../src/mainwid.cpp" line="639"/>
         <source>QtDMM: Launch error</source>
         <translation>QtDMM : erreur de lancement</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="574"/>
+        <location filename="../../src/mainwid.cpp" line="599"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Application %1 is still running!&lt;p&gt;Do you want to kill it now?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Erreur de lancement&lt;/b&gt;&lt;/font&gt;&lt;p&gt;L&apos;application %1 est encore en cours d&apos;exécution !&lt;p&gt;Voulez-vous la terminer maintenant ?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="586"/>
+        <location filename="../../src/mainwid.cpp" line="611"/>
         <source>Yes, kill it!</source>
         <translation>Oui, la terminer !</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="590"/>
+        <location filename="../../src/mainwid.cpp" line="615"/>
         <source>No, keep running</source>
         <translation>Non, la laisser tourner</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="615"/>
+        <location filename="../../src/mainwid.cpp" line="640"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Launch error&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Couldn&apos;t launch %1</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Erreur de lancement&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Impossible de lancer %1</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="626"/>
+        <location filename="../../src/mainwid.cpp" line="651"/>
         <source>Bummer!</source>
         <translation>Dommage !</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="632"/>
+        <location filename="../../src/mainwid.cpp" line="657"/>
         <source>Launched %1</source>
         <translation>%1 lancé</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="637"/>
+        <location filename="../../src/mainwid.cpp" line="662"/>
         <source>%1 terminated with exit code %2.</source>
         <translation>%1 s&apos;est terminé avec le code %2.</translation>
     </message>
     <message>
-        <location filename="../../src/mainwid.cpp" line="688"/>
+        <location filename="../../src/mainwid.cpp" line="713"/>
         <source>no meter configured</source>
         <translation>aucun multimètre configuré</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="741"/>
+        <source>Alarm %1: %2 (%3)</source>
+        <translation>Alarme %1 : %2 (%3)</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="768"/>
+        <source>Alarm %1: could not run %2</source>
+        <translation>Alarme %1 : impossible de lancer %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="773"/>
+        <source>QtDMM alarm: %1</source>
+        <translation>Alarme QtDMM : %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwid.cpp" line="785"/>
+        <source>Alarm %1 cleared</source>
+        <translation>Alarme %1 effacée</translation>
     </message>
 </context>
 <context>
@@ -888,23 +1181,23 @@ Choisissez quelle instance doit enregistrer.</translation>
 <context>
     <name>MeterWid</name>
     <message>
-        <location filename="../../src/meterwid.cpp" line="479"/>
+        <location filename="../../src/meterwid.cpp" line="487"/>
         <source>CURRENT</source>
         <translation>CURRENT</translation>
     </message>
     <message>
-        <location filename="../../src/meterwid.cpp" line="480"/>
+        <location filename="../../src/meterwid.cpp" line="488"/>
         <source>MAX</source>
         <translation>MAX</translation>
     </message>
     <message>
-        <location filename="../../src/meterwid.cpp" line="485"/>
-        <location filename="../../src/meterwid.cpp" line="498"/>
+        <location filename="../../src/meterwid.cpp" line="493"/>
+        <location filename="../../src/meterwid.cpp" line="506"/>
         <source>OL</source>
         <translation>OL</translation>
     </message>
     <message>
-        <location filename="../../src/meterwid.cpp" line="515"/>
+        <location filename="../../src/meterwid.cpp" line="523"/>
         <source>HOLD</source>
         <translation>HOLD</translation>
     </message>
@@ -1207,52 +1500,57 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
         <translation>Température</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="62"/>
+        <location filename="../../src/readinglog.cpp" line="59"/>
+        <source>Alarm %1</source>
+        <translation>Alarme %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="70"/>
         <source>2nd</source>
         <translation>2e</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="64"/>
+        <location filename="../../src/readinglog.cpp" line="72"/>
         <source>HOLD</source>
         <translation>HOLD</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="77"/>
+        <location filename="../../src/readinglog.cpp" line="85"/>
         <source>Time</source>
         <translation>Heure</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="78"/>
+        <location filename="../../src/readinglog.cpp" line="86"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="79"/>
+        <location filename="../../src/readinglog.cpp" line="87"/>
         <source>Unit</source>
         <translation>Unité</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="80"/>
+        <location filename="../../src/readinglog.cpp" line="88"/>
         <source>Mode</source>
         <translation>Mode</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="81"/>
+        <location filename="../../src/readinglog.cpp" line="89"/>
         <source>Range</source>
         <translation>Gamme</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="82"/>
+        <location filename="../../src/readinglog.cpp" line="90"/>
         <source>Hold</source>
         <translation>Hold</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="187"/>
+        <location filename="../../src/readinglog.cpp" line="205"/>
         <source>Nothing to export.</source>
         <translation>Rien à exporter.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="190"/>
+        <location filename="../../src/readinglog.cpp" line="208"/>
         <source>Cannot open file.</source>
         <translation>Impossible d&apos;ouvrir le fichier.</translation>
     </message>

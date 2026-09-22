@@ -111,7 +111,7 @@ if (BUILD_TESTING)
 	set( TEST_READINGLOG test_readinglog)
 	add_executable(${TEST_READINGLOG} MACOSX_BUNDLE tests/test_readinglog.cpp src/readinglog.cpp src/siprefix.cpp)
 	target_include_directories(${TEST_READINGLOG} PRIVATE src)
-	target_link_libraries(${TEST_READINGLOG} PRIVATE Qt::Core Qt::Test)
+	target_link_libraries(${TEST_READINGLOG} PRIVATE Qt6::Gui Qt::Core Qt::Test)
 	add_test(NAME reading_log COMMAND ${TEST_READINGLOG})
 
 	## Victron Instant Readout: advertisement parsing, AES-CTR, the decoder
@@ -127,6 +127,13 @@ if (BUILD_TESTING)
 	target_include_directories(${TEST_MDNS} PRIVATE src)
 	target_link_libraries(${TEST_MDNS} PRIVATE Qt::Core Qt6::Network Qt::Test)
 	add_test(NAME mdns_browse COMMAND ${TEST_MDNS} "${CMAKE_SOURCE_DIR}/tests/data/mdns" "${CMAKE_SOURCE_DIR}/tools/qtdmm-bridge")
+
+	## alarms: conditions, duration, hysteresis, acknowledge, JSON
+	set( TEST_ALARM test_alarm)
+	add_executable(${TEST_ALARM} MACOSX_BUNDLE tests/test_alarm.cpp src/alarm.cpp src/engnumbervalidator.cpp src/siprefix.cpp)
+	target_include_directories(${TEST_ALARM} PRIVATE src)
+	target_link_libraries(${TEST_ALARM} PRIVATE Qt6::Gui Qt::Core Qt::Test)
+	add_test(NAME alarms COMMAND ${TEST_ALARM})
 
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)

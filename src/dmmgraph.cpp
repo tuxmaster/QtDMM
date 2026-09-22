@@ -87,7 +87,7 @@ DMMGraph::DMMGraph(QWidget *parent, Settings *settings) :
   scrollbar->setTracking(true);
   scrollbar->setCursor(Qt::ArrowCursor);
 
-  connect(scrollbar, &QScrollBar::valueChanged, this, [this](int) { updateXAxisRange(); });
+  connect(scrollbar, &QScrollBar::valueChanged, this, [this](int) { updateXAxisRange(); updateMarkPositions(); });
 
   m_remainingLength = m_sampleLength;
   emitInfo();
@@ -328,6 +328,36 @@ void DMMGraph::updateThresholdLinePositions()
   positionLine(m_triggerLine, m_mode == Raising ? m_raisingThreshold : m_fallingThreshold);
   positionLine(m_externalLine, m_externalThreshold);
   positionLine(m_integrationLine, m_integrationThreshold);
+  updateMarkPositions();
+}
+
+void DMMGraph::addMark(const QColor &color, const QString &name)
+{
+  Mark m;
+  m.sample = qMax(0, m_pointer - 1);
+  m.name = name;
+  m.line = new QGraphicsLineItem(m_chart);
+  m.line->setPen(QPen(color, 2, Qt::DashLine));
+  m.line->setZValue(999);
+  m.line->setToolTip(name);
+  m_marks << m;
+  updateMarkPositions();
+}
+
+void DMMGraph::updateMarkPositions()
+{
+  const QRectF plot = m_chart->plotArea();
+  const double step = m_sampleTime / 10.0;
+  for (const Mark &m : m_marks)
+  {
+    const double x = m.sample * step;
+    const bool inView = x >= m_xAxis->min() && x <= m_xAxis->max();
+    m.line->setVisible(inView);
+    if (!inView)
+      continue;
+    const double px = m_chart->mapToPosition(QPointF(x, m_yAxis->min()), m_dataSeries).x();
+    m.line->setLine(px, plot.top(), px, plot.bottom());
+  }
 }
 
 void DMMGraph::setGraphSize(int size, int length)
@@ -462,6 +492,13 @@ void DMMGraph::addValue(double val)
         (*m_arrayInt)[i - 1] = (*m_arrayInt)[i];
       }
       m_pointer = m_length - 1;
+      // the marks slide along with the data; the oldest falls off
+      for (int i = m_marks.size() - 1; i >= 0; --i)
+        if (--m_marks[i].sample < 0)
+        {
+          delete m_marks[i].line;
+          m_marks.removeAt(i);
+        }
     }
 
     if (m_pointer > 0)
@@ -533,6 +570,9 @@ void DMMGraph::setUnit(const QString &unit)
 void DMMGraph::clearSLOT()
 {
   m_pointer = 0;
+  for (const Mark &m : m_marks)
+    delete m.line;
+  m_marks.clear();
   if (m_autoScale)
   {
     if (m_includeZero)

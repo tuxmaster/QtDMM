@@ -28,6 +28,7 @@
 #include "configitem.h"
 #include "dmmprefs.h"
 #include "executeprefs.h"
+#include "alarmprefs.h"
 #include "graphprefs.h"
 #include "guiprefs.h"
 #include "integrationprefs.h"
@@ -193,6 +194,15 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  ui_list);
   m_execute->setCfg(m_settings);
   ui_stack->insertWidget(m_execute->id(), m_execute);
+
+  m_alarms = new AlarmPrefs(ui_stack);
+  m_alarms->setId(ConfigDlg::Alarms);
+  new ConfigItem(m_alarms->id(),
+                 m_alarms->pixmap(),
+                 m_alarms->label(),
+                 ui_list);
+  m_alarms->setCfg(m_settings);
+  ui_stack->insertWidget(m_alarms->id(), m_alarms);
 
   // init stuff
   //
@@ -762,4 +772,14 @@ int ConfigDlg::lineMode() const
 int ConfigDlg::pointMode() const
 {
   return m_graph->pointMode();
+}
+
+QList<Alarm> ConfigDlg::alarms() const
+{
+  return m_alarms->alarms();
+}
+
+void ConfigDlg::setAlarmUnit(const QString &unit)
+{
+  m_alarms->setUnit(unit);
 }

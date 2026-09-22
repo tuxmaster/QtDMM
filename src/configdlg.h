@@ -39,6 +39,8 @@ class GuiPrefs;
 class GraphPrefs;
 class IntegrationPrefs;
 class ExecutePrefs;
+class AlarmPrefs;
+#include "alarm.h"
 class PortsPrefs;
 
 /// The settings dialog: a category list beside a stack of PrefWidget pages.
@@ -65,6 +67,7 @@ public:
     Recorder,
     Ports,
     External,
+    Alarms,
     NumItems,
   };
 
@@ -161,6 +164,10 @@ public:
   QString               externalCommand() const;
   bool                  disconnectExternal() const;
   /// @}
+  /// The alarms as applied (Alarms page).
+  QList<Alarm>          alarms() const;
+  /// Base unit of the reading, for the alarm page's threshold labels.
+  void                  setAlarmUnit(const QString &unit);
 
   /// Printer settings are kept in the Settings too.
   void                  writePrinter(QPrinter *);
@@ -209,6 +216,7 @@ protected:
   GraphPrefs           *m_graph;
   IntegrationPrefs     *m_integration;
   ExecutePrefs         *m_execute;
+  AlarmPrefs           *m_alarms;
   bool                  m_buttonBox_OK;
 
   void                  reloadSettings();

@@ -33,7 +33,10 @@
 #include "displaywid.h"
 #include "meterwid.h"
 #include "readinglog.h"
+#include "alarm.h"
+#include "alarmbar.h"
 #include "siprefix.h"
+#include "engnumbervalidator.h"
 #include "tipdlg.h"
 #include "settings.h"
 #include "instancesdlg.h"
@@ -104,6 +107,20 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
   m_settings->save();
   Q_EMIT sendState("UPDATE_INSTANCES_"+QString::number(QDateTime::currentMSecsSinceEpoch()));
   startTimer(100);
+
+  // alarms: the manager judges every reading, the banner sits above the graph
+  m_alarms = new AlarmManager(this);
+  m_alarmBar = new AlarmBar(this);
+  if (auto *box = qobject_cast<QBoxLayout *>(layout()))
+    box->insertWidget(0, m_alarmBar);
+  connect(m_alarms, &AlarmManager::raised, this, &MainWid::alarmRaised);
+  connect(m_alarms, &AlarmManager::cleared, this, &MainWid::alarmCleared);
+  connect(m_alarmBar, &AlarmBar::acknowledged, this, [this]
+  {
+    m_alarms->acknowledgeAll();
+    updateAlarmBar();
+  });
+  m_alarms->setAlarms(m_configDlg->alarms());
 
   if (m_configDlg->showTip())
     showTipsSLOT();
@@ -199,6 +216,7 @@ QRect MainWid::parentRect() const
 void MainWid::timerEvent(QTimerEvent *)
 {
   ui_graph->addValue(m_dval);
+  m_alarms->tick(QDateTime::currentMSecsSinceEpoch());
 }
 
 void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const QString &s, const QString &r, bool hold, bool showBar, int id)
@@ -270,6 +288,11 @@ void MainWid::valueSLOT(double dval, const QString &val, const QString &u, const
   if (id == 0)
   {
     feedMeter(val, u, s, hold);
+
+    static const QRegularExpression alarmLetters("[A-Za-z]");
+    m_overload = val.contains(alarmLetters);
+    m_baseUnit = SiPrefix::split(u).baseUnit;
+    m_alarms->feed(dval, m_overload, QDateTime::currentMSecsSinceEpoch());
 
     // let the other instances see this value (calculated values, P = U * I)
     if (m_stateMgr)
@@ -416,6 +439,8 @@ void MainWid::rejectSLOT()
 void MainWid::applySLOT()
 {
   readConfig();
+  m_alarms->setAlarms(m_configDlg->alarms());
+  updateAlarmBar();
   ui_graph->setAlertUnsaved(m_configDlg->alertUnsavedData());
   m_dmm->setName(m_configDlg->dmmName());
   Q_EMIT configChanged();
@@ -705,4 +730,77 @@ void MainWid::instancesSLOT()
 void MainWid::instancesChangedSlot(QStringList& instances)
 {
   m_instancesDlg->setInstancesOnline(instances);
+}
+
+// ---------------------------------------------------------------- alarms
+
+void MainWid::alarmRaised(int, const Alarm &alarm, double value)
+{
+  const QString shown = m_overload ? QStringLiteral("OL") : EngNumberValidator::engValue(value) + m_baseUnit;
+  const QString text = alarm.message.isEmpty() ? alarm.describe(m_baseUnit) : alarm.message;
+  Q_EMIT error(tr("Alarm %1: %2 (%3)").arg(alarm.name, text, shown));
+
+  if (alarm.beep)
+    QApplication::beep();
+  if (alarm.raiseWindow && window())
+  {
+    window()->raise();
+    window()->activateWindow();
+    QApplication::alert(window());
+  }
+  if (alarm.recorder == Alarm::RecorderStart)
+    startSLOT();
+  else if (alarm.recorder == Alarm::RecorderStop)
+    stopSLOT();
+  if (alarm.markGraph)
+    ui_graph->addMark(alarm.color, alarm.name);
+  if (alarm.markTable && m_readingLog)
+    m_readingLog->markLast(alarm.color, alarm.name);
+  if (!alarm.command.isEmpty())
+  {
+    QString cmd = alarm.command;
+    cmd.replace("%v", EngNumberValidator::engValue(value)).replace("%u", m_baseUnit).replace("%n", alarm.name);
+    QStringList args = QProcess::splitCommand(cmd);
+    if (!args.isEmpty())
+    {
+      const QString program = args.takeFirst();
+      if (!QProcess::startDetached(program, args))
+        Q_EMIT error(tr("Alarm %1: could not run %2").arg(alarm.name, program));
+    }
+  }
+  if (alarm.popup)
+  {
+    auto *box = new QMessageBox(QMessageBox::Warning, tr("QtDMM alarm: %1").arg(alarm.name),
+                                QString("%1\n%2   %3").arg(text, shown, QDateTime::currentDateTime().toString("HH:mm:ss")),
+                                QMessageBox::Ok, this);
+    box->setAttribute(Qt::WA_DeleteOnClose);
+    box->setModal(false);
+    box->show();
+  }
+  updateAlarmBar();
+}
+
+void MainWid::alarmCleared(int, const Alarm &alarm)
+{
+  Q_EMIT info(tr("Alarm %1 cleared").arg(alarm.name));
+  updateAlarmBar();
+}
+
+// One line per raised alarm (acknowledged ones are silent), on the colour
+// of the first one.
+void MainWid::updateAlarmBar()
+{
+  QStringList lines;
+  QColor color;
+  const QList<Alarm> &list = m_alarms->alarms();
+  for (int i = 0; i < list.size(); ++i)
+  {
+    if (m_alarms->state(i) != AlarmManager::Raised || !list[i].banner)
+      continue;
+    const Alarm &al = list[i];
+    lines << QString("%1: %2").arg(al.name, al.message.isEmpty() ? al.describe(m_baseUnit) : al.message);
+    if (!color.isValid())
+      color = al.color;
+  }
+  m_alarmBar->setAlarms(lines.join('\n'), color);
 }

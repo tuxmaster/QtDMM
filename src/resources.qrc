@@ -2,6 +2,7 @@
 <RCC>
     <qresource prefix="/Symbols">
         <file alias="add.xpm">../assets/icons/add.xpm</file>
+        <file alias="alarm.xpm">../assets/icons/alarm.xpm</file>
         <file alias="clear.xpm">../assets/icons/clear.xpm</file>
         <file alias="config.xpm">../assets/icons/config.xpm</file>
         <file alias="connect_icon.xpm">../assets/icons/connect_icon.xpm</file>
@@ -36,6 +37,7 @@
         <file alias="pl">../build/qtdmm_pl.qm</file>
     </qresource>
     <qresource prefix="/Help">
+        <file alias="alarms.md">../docs/user/alarms.md</file>
         <file alias="analog-meter.md">../docs/user/analog-meter.md</file>
         <file alias="bench-meters.md">../docs/user/bench-meters.md</file>
         <file alias="bluetooth.md">../docs/user/bluetooth.md</file>

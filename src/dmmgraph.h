@@ -137,6 +137,10 @@ public:
                              const QColor &integration, const QColor &intThreshold);
   /// Line widths of the data and the integration curve.
   void             setLine(int d, int i);
+  /// Draws a vertical mark at the current sample (an alarm raised); marks
+  /// move with the data and go with clearSLOT().
+  void             addMark(const QColor &color, const QString &name);
+  int              markCount() const { return m_marks.size(); }
   /// External application trigger: fire externalTriggered() once per
   /// recording when the reading crosses @p threshold in the given direction.
   void             setExternal(bool on, bool falling = false, double threshold = 0);
@@ -281,6 +285,10 @@ protected:
   QGraphicsLineItem *m_triggerLine;
   QGraphicsLineItem *m_externalLine;
   QGraphicsLineItem *m_integrationLine;
+  /// Alarm marks: a vertical line at the sample the alarm raised on.
+  struct Mark { int sample; QGraphicsLineItem *line; QString name; };
+  QList<Mark>      m_marks;
+  void             updateMarkPositions();
 
   void             resizeEvent(QResizeEvent *)Q_DECL_OVERRIDE;
   bool             eventFilter(QObject *watched, QEvent *event) Q_DECL_OVERRIDE;

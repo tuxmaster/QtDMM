@@ -1,0 +1,302 @@
+// Copyright (c) 2026 The QtDMM developers
+// SPDX-License-Identifier: GPL-3.0-or-later
+#include "alarm.h"
+
+#include <QCoreApplication>
+#include <QJsonArray>
+#include <QJsonDocument>
+
+#include "engnumbervalidator.h"
+
+namespace
+{
+const char *conditionKey(Alarm::Condition c)
+{
+  switch (c)
+  {
+    case Alarm::Below: return "below";
+    case Alarm::Above: return "above";
+    case Alarm::Outside: return "outside";
+    case Alarm::Inside: return "inside";
+    case Alarm::Overload: return "overload";
+    case Alarm::NoReadings: return "no-readings";
+  }
+  return "below";
+}
+
+Alarm::Condition conditionFromKey(const QString &k)
+{
+  if (k == "above") return Alarm::Above;
+  if (k == "outside") return Alarm::Outside;
+  if (k == "inside") return Alarm::Inside;
+  if (k == "overload") return Alarm::Overload;
+  if (k == "no-readings") return Alarm::NoReadings;
+  return Alarm::Below;
+}
+
+QString eng(double v, const QString &unit)
+{
+  return EngNumberValidator::engValue(v) + unit;
+}
+}
+
+QJsonObject Alarm::toJson() const
+{
+  QJsonObject o;
+  o["name"] = name;
+  o["enabled"] = enabled;
+  o["condition"] = conditionKey(condition);
+  o["a"] = a;
+  o["b"] = b;
+  o["seconds"] = seconds;
+  o["hysteresis"] = hysteresis;
+  o["message"] = message;
+  o["color"] = color.name();
+  o["banner"] = banner;
+  o["beep"] = beep;
+  o["popup"] = popup;
+  o["raise-window"] = raiseWindow;
+  o["command"] = command;
+  o["recorder"] = recorder == RecorderStart ? "start" : recorder == RecorderStop ? "stop" : "none";
+  o["mark-graph"] = markGraph;
+  o["mark-table"] = markTable;
+  return o;
+}
+
+Alarm Alarm::fromJson(const QJsonObject &o)
+{
+  Alarm al;
+  al.name = o["name"].toString();
+  al.enabled = o["enabled"].toBool(true);
+  al.condition = conditionFromKey(o["condition"].toString());
+  al.a = o["a"].toDouble();
+  al.b = o["b"].toDouble();
+  al.seconds = o["seconds"].toDouble();
+  al.hysteresis = o["hysteresis"].toDouble();
+  al.message = o["message"].toString();
+  al.color = QColor(o["color"].toString(al.color.name()));
+  al.banner = o["banner"].toBool(true);
+  al.beep = o["beep"].toBool(true);
+  al.popup = o["popup"].toBool(false);
+  al.raiseWindow = o["raise-window"].toBool(false);
+  al.command = o["command"].toString();
+  const QString rec = o["recorder"].toString();
+  al.recorder = rec == "start" ? RecorderStart : rec == "stop" ? RecorderStop : RecorderNone;
+  al.markGraph = o["mark-graph"].toBool(true);
+  al.markTable = o["mark-table"].toBool(true);
+  return al;
+}
+
+QList<Alarm> Alarm::listFromJson(const QString &json)
+{
+  QList<Alarm> list;
+  const QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8());
+  for (const QJsonValue &v : doc.array())
+    if (v.isObject())
+      list << fromJson(v.toObject());
+  return list;
+}
+
+QString Alarm::listToJson(const QList<Alarm> &alarms)
+{
+  QJsonArray arr;
+  for (const Alarm &al : alarms)
+    arr << al.toJson();
+  return QString::fromUtf8(QJsonDocument(arr).toJson(QJsonDocument::Compact));
+}
+
+QString Alarm::describe(const QString &unit) const
+{
+  QString text;
+  switch (condition)
+  {
+    case Below:      text = QCoreApplication::translate("Alarm", "below %1").arg(eng(a, unit)); break;
+    case Above:      text = QCoreApplication::translate("Alarm", "above %1").arg(eng(a, unit)); break;
+    case Outside:    text = QCoreApplication::translate("Alarm", "outside %1 to %2").arg(eng(a, unit), eng(b, unit)); break;
+    case Inside:     text = QCoreApplication::translate("Alarm", "inside %1 to %2").arg(eng(a, unit), eng(b, unit)); break;
+    case Overload:   text = QCoreApplication::translate("Alarm", "overload"); break;
+    case NoReadings: return QCoreApplication::translate("Alarm", "no readings for %1 s").arg(seconds);
+  }
+  if (seconds > 0)
+    text += " " + QCoreApplication::translate("Alarm", "for %1 s").arg(seconds);
+  return text;
+}
+
+bool Alarm::matches(double value, bool overload) const
+{
+  switch (condition)
+  {
+    case Overload:   return overload;
+    case NoReadings: return false;
+    default: break;
+  }
+  if (overload)
+    return false;   // OL is neither below nor above anything
+  switch (condition)
+  {
+    case Below:   return value < a;
+    case Above:   return value > a;
+    case Outside: return value < qMin(a, b) || value > qMax(a, b);
+    case Inside:  return value >= qMin(a, b) && value <= qMax(a, b);
+    default:      return false;
+  }
+}
+
+bool Alarm::released(double value, bool overload) const
+{
+  switch (condition)
+  {
+    case Overload:   return !overload;
+    case NoReadings: return true;   // a reading arrived
+    default: break;
+  }
+  if (overload)
+    return false;
+  const double lo = qMin(a, b), hi = qMax(a, b), h = qAbs(hysteresis);
+  switch (condition)
+  {
+    case Below:   return value >= a + h;
+    case Above:   return value <= a - h;
+    case Outside: return value >= lo + h && value <= hi - h;
+    case Inside:  return value < lo - h || value > hi + h;
+    default:      return true;
+  }
+}
+
+// ---------------------------------------------------------------------------
+
+AlarmManager::AlarmManager(QObject *parent) : QObject(parent)
+{
+}
+
+void AlarmManager::setAlarms(const QList<Alarm> &alarms)
+{
+  // raised alarms that survive the edit (same name) keep their state
+  QList<State> state;
+  QList<qint64> since;
+  for (const Alarm &al : alarms)
+  {
+    State s = Off;
+    qint64 t = 0;
+    for (int i = 0; i < m_alarms.size(); ++i)
+      if (m_alarms[i].name == al.name && al.enabled)
+      {
+        s = m_state[i];
+        t = m_since[i];
+      }
+    state << s;
+    since << t;
+  }
+  m_alarms = alarms;
+  m_state = state;
+  m_since = since;
+}
+
+bool AlarmManager::anyRaised() const
+{
+  for (State s : m_state)
+    if (s == Raised)
+      return true;
+  return false;
+}
+
+void AlarmManager::feed(double value, bool overload, qint64 nowMs)
+{
+  m_lastReading = nowMs;
+  m_lastValue = value;
+  m_lastOverload = overload;
+  for (int i = 0; i < m_alarms.size(); ++i)
+  {
+    const Alarm &al = m_alarms[i];
+    if (al.condition == Alarm::NoReadings)
+    {
+      // silence ended
+      if (m_state[i] != Off)
+      {
+        m_state[i] = Off;
+        Q_EMIT cleared(i, al);
+      }
+      m_since[i] = nowMs;
+      continue;
+    }
+    evaluate(i, al.matches(value, overload), al.released(value, overload), value, nowMs);
+  }
+}
+
+void AlarmManager::tick(qint64 nowMs)
+{
+  for (int i = 0; i < m_alarms.size(); ++i)
+  {
+    const Alarm &al = m_alarms[i];
+    if (al.condition != Alarm::NoReadings)
+      continue;
+    if (!al.enabled)
+      continue;
+    const qint64 since = m_lastReading >= 0 ? m_lastReading : m_since[i];
+    const bool silent = nowMs - since >= qint64(al.seconds * 1000.0);
+    if (silent && m_state[i] == Off)
+    {
+      m_state[i] = Raised;
+      Q_EMIT raised(i, al, m_lastValue);
+    }
+  }
+}
+
+void AlarmManager::evaluate(int i, bool matches, bool releasedNow, double value, qint64 nowMs)
+{
+  const Alarm &al = m_alarms[i];
+  State &s = m_state[i];
+  if (!al.enabled)
+  {
+    if (s != Off)
+    {
+      s = Off;
+      Q_EMIT cleared(i, al);
+    }
+    return;
+  }
+  switch (s)
+  {
+    case Off:
+      if (matches)
+      {
+        m_since[i] = nowMs;
+        s = Pending;
+        if (al.seconds <= 0)
+        {
+          s = Raised;
+          Q_EMIT raised(i, al, value);
+        }
+      }
+      break;
+    case Pending:
+      if (!matches)
+        s = Off;
+      else if (nowMs - m_since[i] >= qint64(al.seconds * 1000.0))
+      {
+        s = Raised;
+        Q_EMIT raised(i, al, value);
+      }
+      break;
+    case Raised:
+    case Acknowledged:
+      if (releasedNow)
+      {
+        s = Off;
+        Q_EMIT cleared(i, al);
+      }
+      break;
+  }
+}
+
+void AlarmManager::acknowledge(int index)
+{
+  if (index >= 0 && index < m_state.size() && m_state[index] == Raised)
+    m_state[index] = Acknowledged;
+}
+
+void AlarmManager::acknowledgeAll()
+{
+  for (int i = 0; i < m_state.size(); ++i)
+    acknowledge(i);
+}

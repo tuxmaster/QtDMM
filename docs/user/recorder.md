@@ -36,6 +36,9 @@ Three start modes, chosen on the Recording page:
 by clearing, importing or quitting; the warning can be switched off under
 **Settings → Appearance**.
 
+[Alarms](alarms.md) can start and stop the recorder as well, on any of
+their conditions.
+
 ## External command
 
 **Settings → External application** runs a program when the reading crosses a threshold
