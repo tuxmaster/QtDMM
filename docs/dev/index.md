@@ -71,7 +71,13 @@ via `vmactions/freebsd-vm`, since GitHub has no FreeBSD runner). Windows is buil
 `install-qt-action` and hidapi compiled from source via CMake `FetchContent`
 (see `CMakeLists.txt`); the workflow uploads a portable ZIP and an Inno Setup
 installer, both produced by CPack from the same install tree
-(`cmake/deploy.cmake`). The Bluetooth LE port (`src/portdevices/ble.cpp`) needs Qt6 Bluetooth and
+(`cmake/deploy.cmake`). Vendored third-party code lives under `src/3rdparty/`: tiny-AES-c (public
+domain, the Victron decryption) and miniz (MIT, deflate and CRC for the
+XLSX/ODS export - the ZIP container itself is written by
+`SpreadsheetWriter`, since LibreOffice rejects miniz's data descriptors on
+the ODS mimetype entry).
+
+The Bluetooth LE port (`src/portdevices/ble.cpp`) needs Qt6 Bluetooth and
 is optional: CMake option `QTDMM_WITH_BLE` (on when the module is found;
 the Windows workflow installs `qtconnectivity`, Ubuntu `qt6-connectivity-dev`,
 FreeBSD `qt6-connectivity`). Platform-specific code is limited to the permission

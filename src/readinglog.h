@@ -75,6 +75,9 @@ public:
   /// with milliseconds, the value as displayed (with the SI prefix on the
   /// unit). Returns false with @p error on failure or when empty.
   bool write(const QString &path, QString *error = nullptr) const;
+  /// write() for .csv, an Excel/OpenDocument sheet for .xlsx/.ods (real
+  /// date and number cells, plus an Alarm column).
+  bool writeAny(const QString &path, QString *error = nullptr) const;
 
   /// "2026-09-21 14:03:05.250", the Time column.
   static QString formatTime(const QDateTime &when);

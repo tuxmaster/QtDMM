@@ -111,6 +111,16 @@ int main(int argc, char **argv)
   check(!empty.write(path, &error) && !error.isEmpty(), "empty log refuses to export");
   check(!log.write(tmp.filePath("no/such/dir/x.csv"), &error), "unwritable path fails");
 
+  // --- 6. spreadsheet export ---
+  {
+    log.markLast(QColor("#d82222"), "Low voltage");
+    QString err;
+    check(log.writeAny(tmp.filePath("r.xlsx"), &err), "xlsx: " + err);
+    check(log.writeAny(tmp.filePath("r.ods"), &err), "ods: " + err);
+    check(log.writeAny(tmp.filePath("r2.csv"), &err), "csv through writeAny: " + err);
+    check(!empty.writeAny(tmp.filePath("e.ods"), &err), "empty refuses");
+  }
+
   if (failed == 0)
     qInfo() << "All reading log tests passed.";
   else

@@ -8,6 +8,7 @@
 #include <QTextStream>
 
 #include "siprefix.h"
+#include "spreadsheet.h"
 
 namespace
 {
@@ -135,4 +136,24 @@ bool RecordingFile::write(const Recording &recording, const QString &path, QStri
             .arg(prefix + recording.unit);
   }
   return true;
+}
+
+bool RecordingFile::writeAny(const Recording &recording, const QString &path, QString *error)
+{
+  const auto format = SpreadsheetWriter::formatForFile(path);
+  if (!format)
+    return write(recording, path, error);
+  if (recording.values.isEmpty())
+  {
+    setError(error, tr("Nothing to export."));
+    return false;
+  }
+  SpreadsheetWriter sheet(tr("Recording"));
+  sheet.setHeader({tr("timestamp"), tr("time (s)"), tr("value"), tr("unit")});
+  for (int i = 0; i < recording.values.size(); ++i)
+  {
+    const QDateTime dt = recording.start.addMSecs(qint64(i) * recording.sampleTimeTenths * 100);
+    sheet.addRow({dt, i * recording.sampleTimeTenths / 10.0, recording.values[i], recording.unit});
+  }
+  return sheet.write(path, *format, error);
 }

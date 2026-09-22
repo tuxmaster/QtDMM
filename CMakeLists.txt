@@ -79,6 +79,8 @@ if (NOT QTDMM_WITH_BLE)
 endif()
 ## AES-128-CTR for the encrypted Victron advertisements (public domain tiny-AES-c)
 list(APPEND SRC_FILES src/3rdparty/tiny-aes/aes.c)
+## ZIP writer for the XLSX/ODS export (MIT, miniz)
+list(APPEND SRC_FILES src/3rdparty/miniz/miniz.c)
 
 ## Translations: the build only compiles the .ts files (lrelease). Updating
 ## them from the sources is a manual step - `cmake --build build --target

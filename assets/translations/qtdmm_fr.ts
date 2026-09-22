@@ -598,36 +598,51 @@ Le multimètre est-il branché et allumé ?</translation>
     </message>
     <message>
         <location filename="../../src/dmmgraph.cpp" line="881"/>
+        <source>CSV (*.csv)</source>
+        <translation>CSV (*.csv)</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmgraph.cpp" line="881"/>
+        <source>Excel (*.xlsx)</source>
+        <translation>Excel (*.xlsx)</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmgraph.cpp" line="881"/>
+        <source>OpenDocument (*.ods)</source>
+        <translation>OpenDocument (*.ods)</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmgraph.cpp" line="883"/>
         <source>Export data</source>
         <translation>Exporter les données</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="920"/>
+        <location filename="../../src/dmmgraph.cpp" line="925"/>
         <source>QtDMM: Unsaved data</source>
         <translation>QtDMM : données non enregistrées</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="921"/>
+        <location filename="../../src/dmmgraph.cpp" line="926"/>
         <source>&lt;font size=+2&gt;&lt;b&gt;Unsaved data&lt;/b&gt;&lt;/font&gt;&lt;p&gt;Importing data will overwrite your measured data&lt;p&gt;Do you want to export your unsaved data first?</source>
         <translation>&lt;font size=+2&gt;&lt;b&gt;Données non enregistrées&lt;/b&gt;&lt;/font&gt;&lt;p&gt;L&apos;importation écrasera vos mesures.&lt;p&gt;Voulez-vous d&apos;abord exporter vos données non enregistrées ?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="933"/>
+        <location filename="../../src/dmmgraph.cpp" line="938"/>
         <source>Export data first</source>
         <translation>Exporter d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="937"/>
+        <location filename="../../src/dmmgraph.cpp" line="942"/>
         <source>Import &amp; overwrite data</source>
         <translation>Importer et écraser</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="948"/>
+        <location filename="../../src/dmmgraph.cpp" line="953"/>
         <source>Import data</source>
         <translation>Importer les données</translation>
     </message>
     <message>
-        <location filename="../../src/dmmgraph.cpp" line="948"/>
+        <location filename="../../src/dmmgraph.cpp" line="953"/>
         <source>CSV (*.csv);;All files (*)</source>
         <translation>CSV (*.csv);;Tous les fichiers (*)</translation>
     </message>
@@ -1465,94 +1480,112 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
 <context>
     <name>ReadingLog</name>
     <message>
-        <location filename="../../src/readinglog.cpp" line="34"/>
+        <location filename="../../src/readinglog.cpp" line="35"/>
         <source>AC+DC</source>
         <translation>AC+DC</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="35"/>
+        <location filename="../../src/readinglog.cpp" line="36"/>
         <source>Diode</source>
         <translation>Diode</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="36"/>
+        <location filename="../../src/readinglog.cpp" line="37"/>
         <source>Continuity</source>
         <translation>Continuité</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="37"/>
+        <location filename="../../src/readinglog.cpp" line="38"/>
         <source>Resistance</source>
         <translation>Résistance</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="38"/>
+        <location filename="../../src/readinglog.cpp" line="39"/>
         <source>Capacitance</source>
         <translation>Capacité</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="39"/>
+        <location filename="../../src/readinglog.cpp" line="40"/>
         <source>Frequency</source>
         <translation>Fréquence</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="40"/>
+        <location filename="../../src/readinglog.cpp" line="41"/>
         <source>Temperature</source>
         <translation>Température</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="59"/>
+        <location filename="../../src/readinglog.cpp" line="60"/>
         <source>Alarm %1</source>
         <translation>Alarme %1</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="70"/>
+        <location filename="../../src/readinglog.cpp" line="71"/>
         <source>2nd</source>
         <translation>2e</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="72"/>
+        <location filename="../../src/readinglog.cpp" line="73"/>
+        <location filename="../../src/readinglog.cpp" line="238"/>
         <source>HOLD</source>
         <translation>HOLD</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="85"/>
+        <location filename="../../src/readinglog.cpp" line="86"/>
+        <location filename="../../src/readinglog.cpp" line="231"/>
         <source>Time</source>
         <translation>Heure</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="86"/>
+        <location filename="../../src/readinglog.cpp" line="87"/>
+        <location filename="../../src/readinglog.cpp" line="231"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="87"/>
+        <location filename="../../src/readinglog.cpp" line="88"/>
+        <location filename="../../src/readinglog.cpp" line="231"/>
         <source>Unit</source>
         <translation>Unité</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="88"/>
+        <location filename="../../src/readinglog.cpp" line="89"/>
+        <location filename="../../src/readinglog.cpp" line="231"/>
         <source>Mode</source>
         <translation>Mode</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="89"/>
+        <location filename="../../src/readinglog.cpp" line="90"/>
+        <location filename="../../src/readinglog.cpp" line="231"/>
         <source>Range</source>
         <translation>Gamme</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="90"/>
+        <location filename="../../src/readinglog.cpp" line="91"/>
+        <location filename="../../src/readinglog.cpp" line="231"/>
         <source>Hold</source>
         <translation>Hold</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="205"/>
+        <location filename="../../src/readinglog.cpp" line="206"/>
+        <location filename="../../src/readinglog.cpp" line="227"/>
         <source>Nothing to export.</source>
         <translation>Rien à exporter.</translation>
     </message>
     <message>
-        <location filename="../../src/readinglog.cpp" line="208"/>
+        <location filename="../../src/readinglog.cpp" line="209"/>
         <source>Cannot open file.</source>
         <translation>Impossible d&apos;ouvrir le fichier.</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="230"/>
+        <source>Readings</source>
+        <translation>Mesures</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglog.cpp" line="231"/>
+        <source>Alarm</source>
+        <translation>Alarme</translation>
     </message>
 </context>
 <context>
@@ -1635,14 +1668,24 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
     </message>
     <message>
         <location filename="../../src/readinglogwid.cpp" line="166"/>
-        <location filename="../../src/readinglogwid.cpp" line="172"/>
-        <source>Export readings</source>
-        <translation>Exporter les mesures</translation>
+        <source>CSV (*.csv)</source>
+        <translation>CSV (*.csv)</translation>
     </message>
     <message>
-        <location filename="../../src/readinglogwid.cpp" line="167"/>
-        <source>CSV files (*.csv);;All files (*)</source>
-        <translation>Fichiers CSV (*.csv);;Tous les fichiers (*)</translation>
+        <location filename="../../src/readinglogwid.cpp" line="166"/>
+        <source>Excel (*.xlsx)</source>
+        <translation>Excel (*.xlsx)</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="166"/>
+        <source>OpenDocument (*.ods)</source>
+        <translation>OpenDocument (*.ods)</translation>
+    </message>
+    <message>
+        <location filename="../../src/readinglogwid.cpp" line="168"/>
+        <location filename="../../src/readinglogwid.cpp" line="176"/>
+        <source>Export readings</source>
+        <translation>Exporter les mesures</translation>
     </message>
 </context>
 <context>
@@ -1661,26 +1704,52 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
 <context>
     <name>RecordingFile</name>
     <message>
-        <location filename="../../src/recordingfile.cpp" line="38"/>
-        <location filename="../../src/recordingfile.cpp" line="118"/>
+        <location filename="../../src/recordingfile.cpp" line="39"/>
+        <location filename="../../src/recordingfile.cpp" line="119"/>
         <source>Cannot open file.</source>
         <translation>Impossible d&apos;ouvrir le fichier.</translation>
     </message>
     <message>
-        <location filename="../../src/recordingfile.cpp" line="46"/>
-        <location filename="../../src/recordingfile.cpp" line="76"/>
+        <location filename="../../src/recordingfile.cpp" line="47"/>
+        <location filename="../../src/recordingfile.cpp" line="77"/>
         <source>Oops! Seems not to be a valid file</source>
         <translation>Oups ! Ce fichier ne semble pas valide</translation>
     </message>
     <message>
-        <location filename="../../src/recordingfile.cpp" line="54"/>
+        <location filename="../../src/recordingfile.cpp" line="55"/>
         <source>File contains only header</source>
         <translation>Le fichier ne contient que l&apos;en-tête</translation>
     </message>
     <message>
-        <location filename="../../src/recordingfile.cpp" line="112"/>
+        <location filename="../../src/recordingfile.cpp" line="113"/>
+        <location filename="../../src/recordingfile.cpp" line="148"/>
         <source>Nothing to export.</source>
         <translation>Rien à exporter.</translation>
+    </message>
+    <message>
+        <location filename="../../src/recordingfile.cpp" line="151"/>
+        <source>Recording</source>
+        <translation>Enregistrement</translation>
+    </message>
+    <message>
+        <location filename="../../src/recordingfile.cpp" line="152"/>
+        <source>timestamp</source>
+        <translation>horodatage</translation>
+    </message>
+    <message>
+        <location filename="../../src/recordingfile.cpp" line="152"/>
+        <source>time (s)</source>
+        <translation>temps (s)</translation>
+    </message>
+    <message>
+        <location filename="../../src/recordingfile.cpp" line="152"/>
+        <source>value</source>
+        <translation>valeur</translation>
+    </message>
+    <message>
+        <location filename="../../src/recordingfile.cpp" line="152"/>
+        <source>unit</source>
+        <translation>unité</translation>
     </message>
 </context>
 <context>
@@ -1694,6 +1763,24 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
         <location filename="../../src/scaleprefs.cpp" line="40"/>
         <source>&lt;b&gt;Here you can configure the vertical scale of the recorder and the length (in time) of the window.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Configurez ici l&apos;échelle verticale de l&apos;enregistreur et la durée de la fenêtre.&lt;/b&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>SpreadsheetWriter</name>
+    <message>
+        <location filename="../../src/spreadsheet.cpp" line="312"/>
+        <source>Nothing to export.</source>
+        <translation>Rien à exporter.</translation>
+    </message>
+    <message>
+        <location filename="../../src/spreadsheet.cpp" line="379"/>
+        <source>Cannot write the archive.</source>
+        <translation>Impossible d&apos;écrire l&apos;archive.</translation>
+    </message>
+    <message>
+        <location filename="../../src/spreadsheet.cpp" line="384"/>
+        <source>Cannot open file.</source>
+        <translation>Impossible d&apos;ouvrir le fichier.</translation>
     </message>
 </context>
 <context>
