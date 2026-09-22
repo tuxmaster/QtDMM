@@ -76,7 +76,9 @@ protocol. See [Connecting a meter](docs/user/connecting.md).
 the control lines the cable needs driven. *Counts* is the display
 resolution. Not every entry has been confirmed on hardware recently; models
 marked ¹ were added from chip datasheets and protocol documentation and have not
-been tried with QtDMM at all. If you can confirm one, or get an unlisted
+been tried with QtDMM at all. Models marked ² are sold without a serial
+interface and need a hardware modification first (see the notes below the
+table). If you can confirm one, or get an unlisted
 meter working, please report it on the
 [project page](https://github.com/tuxmaster/QtDMM/issues).
 
@@ -112,9 +114,9 @@ meter working, please report it on the
 | Fluke | 45 ¹ | - | `Fluke45` | 9600 8N1 | - | 100000 |
 | Fluke | 87-IV ¹ | - | `FlukeQM` | 9600 8N1 | - | 20000 |
 | Fluke | 89-IV ¹ | - | `FlukeQM` | 9600 8N1 | - | 50000 |
-| Generic | DTM0660 4000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 4000 |
-| Generic | DTM0660 6000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
-| Generic | DTM0660 8000 count | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 8000 |
+| Generic | DTM0660 4000 count ² | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 4000 |
+| Generic | DTM0660 6000 count ² | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
+| Generic | DTM0660 8000 count ² | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 8000 |
 | GW Instek | GDM-397 ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
 | HoldPeak | HP-90EPC | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | HP | 34401A (sigrok) ¹ | - | `Sigrok` | sigrok-cli | - | 1000000 |
@@ -192,7 +194,7 @@ meter working, please report it on the
 | V&A | VA18B ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | V&A | VA40B ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Velleman | DVM4100 ¹ | DTM0660 | `DTM0660` | 2400 8N1 | DTR | 6000 |
-| Vichy | VC99 | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
+| Vichy | VC99 ² | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
 | Victron | BlueSolar MPPT ¹ | - | `VictronBLE` | Bluetooth LE | - | 1000 |
 | Victron | BMV-712 Smart ¹ | - | `VictronBLE` | Bluetooth LE | - | 6000 |
 | Victron | Phoenix Inverter Smart | - | `VictronBLE` | Bluetooth LE | - | 6000 |
@@ -230,6 +232,11 @@ meter working, please report it on the
 | Wintex | TD2200 | ES51922 | `CyrustekES51922` | 19200 7N1 | DTR | 22000 |
 
 ¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.
+
+² needs a hardware modification - the meter has no interface as sold:
+
+- **Generic DTM0660 4000 count, DTM0660 6000 count, DTM0660 8000 count**: the DTM0660 chip has a UART, but meters built on it (Victor VC921 and similar) ship without an interface: an IR LED with a 100 Ω resistor goes on the chip's TX pin and the RS232 bit in the 24C02 EEPROM has to be set - [eevblog: hacking the Victor VC-921](https://www.eevblog.com/forum/testgear/hacking-the-victor-vc-921/). PeakTech 3415 and Velleman DVM4100 use the same chip but come with a cable and need no change.
+- **Vichy VC99**: the FS9922-DMM4 chip sends the display at 2400 baud on an unused pin; a wire or IR LED has to be soldered to it and *REL* held to start the output - [Hackaday](https://hackaday.com/2010/11/30/unlocking-rs232-serial-comm-on-a-multimeter/), [David Pilling](https://www.davidpilling.com/wiki/index.php/VC99).
 
 146 devices across 37 vendors.
 
