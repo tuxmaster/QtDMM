@@ -284,7 +284,7 @@ QByteArray ScpiServer::process(const QByteArray &message)
     return {};
   QByteArray out;
   for (const QByteArray &a : answers)
-    out += (out.isEmpty() ? "" : ";") + a;
+    out += (out.isEmpty() ? QByteArray() : QByteArray(";")) + a;
   return out + '\n';
 }
 
@@ -321,7 +321,7 @@ QByteArray ScpiServer::handle(const Command &cmd, bool &isQuery)
       return m_screenshotFormat;
     const QByteArray f = cmd.args.trimmed().toUpper().toLatin1();
     if (f == "PNG" || f == "BMP" || f == "JPG" || f == "JPEG")
-      m_screenshotFormat = f == "JPEG" ? "JPG" : f;
+      m_screenshotFormat = f == "JPEG" ? QByteArray("JPG") : f;
     else
       pushError(f.isEmpty() ? -109 : -224, f.isEmpty() ? "Missing parameter" : "Illegal parameter value");
     return {};
