@@ -4,37 +4,37 @@
 <context>
     <name>Alarm</name>
     <message>
-        <location filename="../../src/alarm.cpp" line="113"/>
+        <location filename="../../src/alarm.cpp" line="115"/>
         <source>below %1</source>
         <translation>sous %1</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="114"/>
+        <location filename="../../src/alarm.cpp" line="116"/>
         <source>above %1</source>
         <translation>au-dessus de %1</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="115"/>
+        <location filename="../../src/alarm.cpp" line="117"/>
         <source>outside %1 to %2</source>
         <translation>hors de %1 à %2</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="116"/>
+        <location filename="../../src/alarm.cpp" line="118"/>
         <source>inside %1 to %2</source>
         <translation>entre %1 et %2</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="117"/>
+        <location filename="../../src/alarm.cpp" line="119"/>
         <source>overload</source>
         <translation>dépassement</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="118"/>
+        <location filename="../../src/alarm.cpp" line="120"/>
         <source>no readings for %1 s</source>
         <translation>aucune mesure depuis %1 s</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="121"/>
+        <location filename="../../src/alarm.cpp" line="123"/>
         <source>for %1 s</source>
         <translation>pendant %1 s</translation>
     </message>
@@ -994,37 +994,37 @@ Le multimètre est-il branché et allumé ?</translation>
     <message>
         <location filename="../../src/mainwid.cpp" line="661"/>
         <source>SCPI server: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveur SCPI : %1</translation>
     </message>
     <message>
         <location filename="../../src/mainwid.cpp" line="684"/>
         <source>The server is not running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le serveur n&apos;est pas actif.</translation>
     </message>
     <message>
         <location filename="../../src/mainwid.cpp" line="689"/>
         <source>1 client</source>
-        <translation type="unfinished"></translation>
+        <translation>1 client</translation>
     </message>
     <message>
         <location filename="../../src/mainwid.cpp" line="689"/>
         <source>%1 clients</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 clients</translation>
     </message>
     <message>
         <location filename="../../src/mainwid.cpp" line="690"/>
         <source>SCPI %1:%2 (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>SCPI %1:%2 (%3)</translation>
     </message>
     <message>
         <location filename="../../src/mainwid.cpp" line="691"/>
         <source>Listening on %1, port %2, %3 connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>À l&apos;écoute sur %1, port %2, %3 connecté(s).</translation>
     </message>
     <message>
         <location filename="../../src/mainwid.cpp" line="693"/>
         <source>Announced as &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Annoncé sous « %1 ».</translation>
     </message>
     <message>
         <location filename="../../src/mainwid.cpp" line="702"/>
@@ -1153,7 +1153,7 @@ Le multimètre est-il branché et allumé ?</translation>
     <message>
         <location filename="../../src/mainwin.cpp" line="168"/>
         <source>The SCPI server: other programs can read the meter here (Settings, SCPI server).</source>
-        <translation type="unfinished"></translation>
+        <translation>Le serveur SCPI : d&apos;autres programmes peuvent lire le multimètre ici (Préférences, Serveur SCPI).</translation>
     </message>
     <message>
         <location filename="../../src/mainwin.cpp" line="232"/>
@@ -1810,67 +1810,67 @@ Puis déconnectez-vous et reconnectez-vous pour que l&apos;appartenance au group
     <message>
         <location filename="../../src/scpiprefs.cpp" line="18"/>
         <source>SCPI server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveur SCPI</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="19"/>
         <source>&lt;b&gt;Lets other programs read the meter over the network:&lt;/b&gt; QtDMM answers SCPI queries (*IDN?, READ?, ...) on a TCP port, like a bench instrument.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Permet à d&apos;autres programmes de lire le multimètre par le réseau :&lt;/b&gt; QtDMM répond aux requêtes SCPI (*IDN?, READ?, ...) sur un port TCP, comme un instrument de laboratoire.</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="24"/>
         <source>With the server on, lxi-tools, LabVIEW, PyVISA or a few lines of Python can read the current value as if the multimeter were a bench instrument with a LAN port. The server only reports; it never sends anything to the meter. INITiate/ABORt start and stop the recorder, INPut ON/OFF connect and disconnect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Avec le serveur actif, lxi-tools, LabVIEW, PyVISA ou quelques lignes de Python lisent la valeur courante comme si le multimètre était un instrument de laboratoire doté d&apos;un port LAN. Le serveur ne fait que rapporter ; il n&apos;envoie jamais rien au multimètre. INITiate/ABORt démarrent et arrêtent l&apos;enregistreur, INPut ON/OFF connectent et déconnectent.</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="32"/>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveur</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="34"/>
         <source>&amp;Enable the SCPI server</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Activer le serveur SCPI</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="39"/>
         <source>5025 is the usual raw-socket SCPI port. When it is taken (another QtDMM instance), the next free one is used and shown in the status bar.</source>
-        <translation type="unfinished"></translation>
+        <translation>5025 est le port SCPI habituel en socket brut. S&apos;il est pris (une autre instance de QtDMM), le suivant libre est utilisé et affiché dans la barre d&apos;état.</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="41"/>
         <source>&amp;Port:</source>
-        <translation type="unfinished">&amp;Port :</translation>
+        <translation>&amp;Port :</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="45"/>
         <source>This computer only (localhost)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cet ordinateur seulement (localhost)</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="46"/>
         <source>All network interfaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les interfaces réseau</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="47"/>
         <source>There is no authentication: anyone who can reach the port can read the meter and start the recorder. Open it to the network only where you trust it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il n&apos;y a aucune authentification : quiconque atteint le port peut lire le multimètre et démarrer l&apos;enregistreur. Ne l&apos;ouvrez au réseau que là où vous avez confiance.</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="49"/>
         <source>&amp;Listen on:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Écouter sur :</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="52"/>
         <source>&amp;Announce by mDNS (_scpi-raw._tcp), so lxi discover finds it</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Annoncer par mDNS (_scpi-raw._tcp), pour que lxi discover le trouve</translation>
     </message>
     <message>
         <location filename="../../src/scpiprefs.cpp" line="100"/>
         <source>Try it: &lt;code&gt;lxi scpi -a %1 -p %2 &quot;*IDN?&quot;&lt;/code&gt; or &lt;code&gt;printf &apos;READ?\n&apos; | nc %1 %2&lt;/code&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>À essayer : &lt;code&gt;lxi scpi -a %1 -p %2 &quot;*IDN?&quot;&lt;/code&gt; ou &lt;code&gt;printf &apos;READ?\n&apos; | nc %1 %2&lt;/code&gt;</translation>
     </message>
 </context>
 <context>

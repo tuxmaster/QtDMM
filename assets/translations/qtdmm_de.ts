@@ -4,37 +4,37 @@
 <context>
     <name>Alarm</name>
     <message>
-        <location filename="../../src/alarm.cpp" line="113"/>
+        <location filename="../../src/alarm.cpp" line="115"/>
         <source>below %1</source>
         <translation>unter %1</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="114"/>
+        <location filename="../../src/alarm.cpp" line="116"/>
         <source>above %1</source>
         <translation>über %1</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="115"/>
+        <location filename="../../src/alarm.cpp" line="117"/>
         <source>outside %1 to %2</source>
         <translation>außerhalb %1 bis %2</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="116"/>
+        <location filename="../../src/alarm.cpp" line="118"/>
         <source>inside %1 to %2</source>
         <translation>innerhalb %1 bis %2</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="117"/>
+        <location filename="../../src/alarm.cpp" line="119"/>
         <source>overload</source>
         <translation>Überlauf</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="118"/>
+        <location filename="../../src/alarm.cpp" line="120"/>
         <source>no readings for %1 s</source>
         <translation>keine Messwerte seit %1 s</translation>
     </message>
     <message>
-        <location filename="../../src/alarm.cpp" line="121"/>
+        <location filename="../../src/alarm.cpp" line="123"/>
         <source>for %1 s</source>
         <translation>für %1 s</translation>
     </message>

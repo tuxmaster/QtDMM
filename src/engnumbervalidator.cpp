@@ -68,3 +68,12 @@ QString EngNumberValidator::engValue(double value)
   str.setNum((static_cast<int>(qRound(scaled * 10.))) / 10.);
   return str + prefix;
 }
+
+QString EngNumberValidator::engText(double value, int significantDigits)
+{
+  QString prefix;
+  const double scaled = SiPrefix::scale(value, &prefix);
+  // 'g' drops trailing zeros and never writes an exponent within the range
+  // a prefix covers, so this reads back through value() unchanged
+  return QString::number(scaled, 'g', significantDigits) + prefix;
+}

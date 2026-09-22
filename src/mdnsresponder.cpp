@@ -27,7 +27,7 @@ MdnsResponder::~MdnsResponder()
   stop();
 }
 
-bool MdnsResponder::start(const QString &service, const QString &instance, quint16 port, const QMap<QString, QString> &txt)
+bool MdnsResponder::prepare(const QString &service, const QString &instance, quint16 port, const QMap<QString, QString> &txt)
 {
   stop();
   m_service = service.toLower();
@@ -40,6 +40,12 @@ bool MdnsResponder::start(const QString &service, const QString &instance, quint
   if (host.isEmpty())
     host = "qtdmm";
   m_host = host + ".local";
+  return true;
+}
+
+bool MdnsResponder::start(const QString &service, const QString &instance, quint16 port, const QMap<QString, QString> &txt)
+{
+  prepare(service, instance, port, txt);   // names first, then the sockets
 
   for (const QNetworkInterface &iface : QNetworkInterface::allInterfaces())
   {
@@ -67,7 +73,7 @@ bool MdnsResponder::start(const QString &service, const QString &instance, quint
         continue;
       }
       connect(s, &QUdpSocket::readyRead, this, &MdnsResponder::onReadyRead);
-      m_sockets << qMakePair(s, entry.ip());
+      m_sockets << Endpoint{s, entry.ip(), entry.prefixLength()};
       // unsolicited announcement (RFC 6762 8.3), twice
       const QByteArray a = announcement(entry.ip(), 120);
       s->writeDatagram(a, kMdnsGroup, kMdnsPort);
@@ -80,12 +86,12 @@ bool MdnsResponder::start(const QString &service, const QString &instance, quint
 
 void MdnsResponder::stop()
 {
-  for (const auto &p : m_sockets)
+  for (const Endpoint &e : m_sockets)
   {
-    p.first->writeDatagram(announcement(p.second, 0), kMdnsGroup, kMdnsPort);   // goodbye
-    p.first->disconnect(this);
-    p.first->close();
-    p.first->deleteLater();
+    e.socket->writeDatagram(announcement(e.address, 0), kMdnsGroup, kMdnsPort);   // goodbye
+    e.socket->disconnect(this);
+    e.socket->close();
+    e.socket->deleteLater();
   }
   m_sockets.clear();
 }
@@ -94,9 +100,13 @@ void MdnsResponder::onReadyRead()
 {
   auto *s = qobject_cast<QUdpSocket *>(sender());
   QHostAddress ifaceAddress;
-  for (const auto &p : m_sockets)
-    if (p.first == s)
-      ifaceAddress = p.second;
+  int prefixLength = 0;
+  for (const Endpoint &e : m_sockets)
+    if (e.socket == s)
+    {
+      ifaceAddress = e.address;
+      prefixLength = e.prefixLength;
+    }
   while (s && s->hasPendingDatagrams())
   {
     QByteArray packet(int(s->pendingDatagramSize()), '\0');
@@ -105,11 +115,7 @@ void MdnsResponder::onReadyRead()
     s->readDatagram(packet.data(), packet.size(), &from, &fromPort);
     // every socket sees every datagram of the group; the one bound to the
     // asker's subnet answers, so the A record fits the asker
-    bool mine = false;
-    for (const QNetworkInterface &iface : QNetworkInterface::allInterfaces())
-      for (const QNetworkAddressEntry &entry : iface.addressEntries())
-        if (entry.ip() == ifaceAddress && from.isInSubnet(entry.ip(), entry.prefixLength()))
-          mine = true;
+    const bool mine = from.isInSubnet(ifaceAddress, prefixLength);
     if (!mine && m_sockets.size() > 1)
       continue;
     const QByteArray a = answer(packet, ifaceAddress);

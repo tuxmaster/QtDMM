@@ -32,6 +32,9 @@ public:
   /// "<localHostName>.local". Returns false when no interface could be
   /// joined.
   bool start(const QString &service, const QString &instance, quint16 port, const QMap<QString, QString> &txt);
+  /// Takes the same names without opening a socket or announcing anything:
+  /// answer() then builds the records it would send. For tests.
+  bool prepare(const QString &service, const QString &instance, quint16 port, const QMap<QString, QString> &txt);
   void stop();
   bool isActive() const { return !m_sockets.isEmpty(); }
 
@@ -52,5 +55,15 @@ private:
   QString m_host;       ///< "dory.local"
   quint16 m_port = 0;
   QMap<QString, QString> m_txt;
-  QList<QPair<QUdpSocket *, QHostAddress>> m_sockets;   ///< socket, interface address
+  /// One per interface address we answer on: the socket, that address and
+  /// its prefix length. The prefix is kept here because every socket sees
+  /// every mDNS packet on the machine (Avahi, printers, phones) and looking
+  /// the interfaces up again per packet costs more than the answer does.
+  struct Endpoint
+  {
+    QUdpSocket *socket = nullptr;
+    QHostAddress address;
+    int prefixLength = 0;
+  };
+  QList<Endpoint> m_sockets;
 };

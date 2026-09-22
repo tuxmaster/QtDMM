@@ -22,7 +22,9 @@ keeps deciding what it measures.
 
 The status bar shows *SCPI host:port (n clients)* while the server runs.
 There is **no authentication**: whoever can reach the port can read the
-meter, start the recorder and connect or disconnect. Keep *This computer
+meter, start the recorder, connect or disconnect - and fetch a picture of
+the QtDMM window (`HCOPy:SDUMp:DATA?`), which shows the readings, the
+window title and whatever the readings table holds. Keep *This computer
 only* unless the network is yours; from elsewhere use an SSH tunnel
 (`ssh -L 5025:localhost:5025 bench`).
 

@@ -166,9 +166,9 @@ double RecorderPrefs::raisingThreshold() const
 void RecorderPrefs::setThreshold(double value)
 {
   if (raisingBut->isChecked())
-    ui_raisingThreshold->setText(EngNumberValidator::engValue(value));
+    ui_raisingThreshold->setText(EngNumberValidator::engText(value));
   else
-    ui_fallingThreshold->setText(EngNumberValidator::engValue(value));
+    ui_fallingThreshold->setText(EngNumberValidator::engText(value));
 }
 
 QTime RecorderPrefs::startTime() const
