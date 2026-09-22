@@ -27,7 +27,7 @@ Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
 - various connection backends
   - RS232 Serial (USB-Serial and native UART)
   - USB HID-serial support (HOITEK HE2325U & compatible)
-  - RFC2217 remote serial, with **qtdmm-bridge** to serve serial and HID meters from a Raspberry Pi (see [Meters over the network](user/remote-bridge.md))
+  - RFC2217 remote serial, with **qtdmm-bridge** to serve serial and HID meters from a Raspberry Pi, found by mDNS (see [Meters over the network](user/remote-bridge.md))
   - Sigrok support via sigrok-cli application - Keysight, Agilent, HP and Siglent SCPI bench meters are in the model list (see [Bench meters](user/bench-meters.md))
   - Bluetooth LE: Victron SmartShunt / BMV-712, SmartSolar / BlueSolar MPPT and Phoenix Inverter Smart over their encrypted "Instant Readout" broadcasts (see [Bluetooth LE](user/bluetooth.md))
 - supports lots of DMMs, see [Supported devices](user/supported-devices.md)

@@ -121,6 +121,13 @@ if (BUILD_TESTING)
 	target_link_libraries(${TEST_VICTRON} PRIVATE Qt::Core Qt::Test)
 	add_test(NAME victron_instant_readout COMMAND ${TEST_VICTRON})
 
+	## mDNS browsing for qtdmm-bridge announcements
+	set( TEST_MDNS test_mdns)
+	add_executable(${TEST_MDNS} MACOSX_BUNDLE tests/test_mdns.cpp src/mdnsbrowser.cpp)
+	target_include_directories(${TEST_MDNS} PRIVATE src)
+	target_link_libraries(${TEST_MDNS} PRIVATE Qt::Core Qt6::Network Qt::Test)
+	add_test(NAME mdns_browse COMMAND ${TEST_MDNS} "${CMAKE_SOURCE_DIR}/tests/data/mdns" "${CMAKE_SOURCE_DIR}/tools/qtdmm-bridge")
+
 	## generated documents must match their sources (device table from the
 	## decoders, README from docs/)
 	find_package(Python3 COMPONENTS Interpreter)

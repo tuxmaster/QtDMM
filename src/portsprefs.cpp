@@ -25,6 +25,70 @@ PortsPrefs::PortsPrefs(QWidget *parent) : PrefWidget(parent)
   };
 
   Q_ASSERT(m_portEdits.size() == m_portTypes.size());
+
+  // qtdmm-bridge announces its ports by mDNS; a browse fills the list,
+  // a double-click takes one over
+  m_browser = new MdnsBrowser(this);
+  connect(m_browser, &MdnsBrowser::found, this, [this](const MdnsBrowser::Service &s)
+  {
+    // "dory — 192.168.178.184:4711 — UT61E": the host, where to connect,
+    // and the port's name on the bridge (its device path when unnamed)
+    const QString where = s.address.isNull() ? s.host : s.address.toString();
+    QString hostShort = s.host;
+    if (hostShort.endsWith(".local"))
+      hostShort.chop(6);
+    const QString device = s.txt.value("name", s.txt.value("device"));
+    auto *item = new QListWidgetItem(QString("%1  —  %2:%3%4").arg(hostShort, where).arg(s.port)
+                                       .arg(device.isEmpty() ? QString() : "  —  " + device), ui_bridgeList);
+    item->setData(Qt::UserRole, QString("%1:%2").arg(where).arg(s.port));
+    item->setToolTip(tr("Bridge %1 on %2, port %3, serving %4 (version %5)")
+                       .arg(s.instance, s.host).arg(s.port).arg(s.txt.value("device"), s.txt.value("version")));
+  });
+  connect(m_browser, &MdnsBrowser::finished, this, [this]
+  {
+    ui_bridgeSearch->setEnabled(true);
+    ui_bridgeHint->setText(ui_bridgeList->count() == 0
+                             ? tr("No bridge found. Is qtdmm-bridge running with --mdns in this network?")
+                             : tr("%n port(s) found.", "", ui_bridgeList->count()));
+  });
+  connect(ui_bridgeList, &QListWidget::itemDoubleClicked, this, [this](QListWidgetItem *) { on_ui_bridgeAdd_clicked(); });
+  connect(ui_bridgeList, &QListWidget::itemSelectionChanged, this,
+          [this] { ui_bridgeAdd->setEnabled(!ui_bridgeList->selectedItems().isEmpty()); });
+}
+
+void PortsPrefs::on_ui_bridgeSearch_clicked()
+{
+  ui_bridgeList->clear();
+  ui_bridgeAdd->setEnabled(false);
+  ui_bridgeSearch->setEnabled(false);
+  ui_bridgeHint->setText(tr("Searching (3 s)..."));
+  m_browser->browse(QStringLiteral("_qtdmm-bridge._tcp.local"), 3000);
+  if (!m_browser->isActive())   // no usable interface: finished() already came
+    ui_bridgeHint->setText(tr("No network interface for multicast."));
+}
+
+void PortsPrefs::on_ui_bridgeAdd_clicked()
+{
+  const QList<QListWidgetItem *> selected = ui_bridgeList->selectedItems();
+  if (selected.isEmpty())
+    return;
+  const QString address = selected.first()->data(Qt::UserRole).toString();
+  // already there?
+  for (int i = 0; i < m_portEdits.size(); ++i)
+    if (m_portTypes[i]->currentText() == "RFC2217" && m_portEdits[i]->text().trimmed() == address)
+    {
+      ui_bridgeHint->setText(tr("%1 is already in line %2.").arg(address).arg(i + 1));
+      return;
+    }
+  for (int i = 0; i < m_portEdits.size(); ++i)
+    if (m_portEdits[i]->text().trimmed().isEmpty())
+    {
+      m_portTypes[i]->setCurrentIndex(qMax(0, m_portTypes[i]->findText("RFC2217")));
+      m_portEdits[i]->setText(address);
+      ui_bridgeHint->setText(tr("Added as custom port %1; it appears in the port list after Apply.").arg(i + 1));
+      return;
+    }
+  ui_bridgeHint->setText(tr("All ten custom port lines are in use."));
 }
 
 PortsPrefs::~PortsPrefs()
