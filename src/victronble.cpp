@@ -146,6 +146,8 @@ quint32 VictronBle::BitReader::unsignedBits(int bits)
   for (int i = 0; i < bits; ++i, ++m_pos)
   {
     const int byte = m_pos / 8;
+    if (byte >= m_data.size())
+      m_ok = false;
     const bool bit = byte < m_data.size() ? (quint8(m_data[byte]) >> (m_pos % 8)) & 1 : true;
     if (bit)
       value |= quint32(1) << i;

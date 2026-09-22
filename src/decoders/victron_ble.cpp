@@ -103,15 +103,18 @@ QList<Value> DecoderVictronBLE::batteryMonitor(const QByteArray &plain)
   VictronBle::BitReader r(plain);
   const quint32 ttg = r.unsignedBits(16);
   const qint32 voltage = r.signedBits(16);
+  const bool voltageComplete = r.ok();
   r.unsignedBits(16);                            // alarm reason
   const quint32 aux = r.unsignedBits(16);
   const quint32 auxMode = r.unsignedBits(2);
   const qint32 current = r.signedBits(22);
+  const bool currentComplete = r.ok();
   const quint32 consumed = r.unsignedBits(20);
   const quint32 soc = r.unsignedBits(10);
 
   QList<Value> v;
-  const bool vOk = voltage != 0x7FFF, iOk = current != 0x1FFFFF;
+  const bool vOk = voltage != 0x7FFF && voltageComplete;
+  const bool iOk = current != 0x1FFFFF && currentComplete;
   v << (vOk ? value("V", voltage / 100.0, 2, "V", "DC") : invalid("V", "V", "DC"));
   v << (iOk ? value("I", current / 1000.0, 3, "A", "DC") : invalid("I", "A", "DC"));
   v << (vOk && iOk ? value("P", voltage / 100.0 * current / 1000.0, 1, "W", "DC") : invalid("P", "W", "DC"));
@@ -137,15 +140,17 @@ QList<Value> DecoderVictronBLE::solarCharger(const QByteArray &plain)
   r.unsignedBits(8);                             // charge state
   r.unsignedBits(8);                             // charger error
   const qint32 voltage = r.signedBits(16);
+  const bool voltageComplete = r.ok();
   const qint32 current = r.signedBits(16);
+  const bool currentComplete = r.ok();
   const quint32 yield = r.unsignedBits(16);
   const quint32 power = r.unsignedBits(16);
   const quint32 load = r.unsignedBits(9);
 
   QList<Value> v;
   v << (power != 0xFFFF ? value("PV", power, 0, "W", "DC") : invalid("PV", "W", "DC"));
-  v << (voltage != 0x7FFF ? value("V", voltage / 100.0, 2, "V", "DC") : invalid("V", "V", "DC"));
-  v << (current != 0x7FFF ? value("I", current / 10.0, 1, "A", "DC") : invalid("I", "A", "DC"));
+  v << (voltage != 0x7FFF && voltageComplete ? value("V", voltage / 100.0, 2, "V", "DC") : invalid("V", "V", "DC"));
+  v << (current != 0x7FFF && currentComplete ? value("I", current / 10.0, 1, "A", "DC") : invalid("I", "A", "DC"));
   v << (yield != 0xFFFF ? value("YIELD", yield * 10.0, 0, "Wh", "DC") : invalid("YIELD", "Wh", "DC"));
   v << (load != 0x1FF ? value("LOAD", load / 10.0, 1, "A", "DC") : invalid("LOAD", "A", "DC"));
   return v;
@@ -159,13 +164,14 @@ QList<Value> DecoderVictronBLE::inverter(const QByteArray &plain)
   r.unsignedBits(8);                             // device state
   r.unsignedBits(16);                            // alarm reason
   const qint32 battery = r.signedBits(16);
+  const bool batteryComplete = r.ok();
   const quint32 apparent = r.unsignedBits(16);
   const quint32 acVoltage = r.unsignedBits(15);
   const quint32 acCurrent = r.unsignedBits(11);
 
   QList<Value> v;
   v << (apparent != 0xFFFF ? value("VA", apparent, 0, "VA", "AC") : invalid("VA", "VA", "AC"));
-  v << (battery != 0x7FFF ? value("V", battery / 100.0, 2, "V", "DC") : invalid("V", "V", "DC"));
+  v << (battery != 0x7FFF && batteryComplete ? value("V", battery / 100.0, 2, "V", "DC") : invalid("V", "V", "DC"));
   v << (acVoltage != 0x7FFF ? value("VAC", acVoltage / 100.0, 2, "V", "AC") : invalid("VAC", "V", "AC"));
   v << (acCurrent != 0x7FF ? value("IAC", acCurrent / 10.0, 1, "A", "AC") : invalid("IAC", "A", "AC"));
   return v;

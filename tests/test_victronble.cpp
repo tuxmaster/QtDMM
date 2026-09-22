@@ -37,6 +37,30 @@ int main(int argc, char **argv)
     check(s.unsignedBits(1) == 0 && s.signedBits(7) == -1, "bit split and sign");
     VictronBle::BitReader t(QByteArray::fromHex("ffffff3f"));         // 22 bits of ones = -1
     check(t.signedBits(22) == -1, "s22 minus one");
+    // ok() tells a real -1 from one that was read past the end: for an
+    // unsigned field all ones is the NA pattern, for a signed one it is not
+    VictronBle::BitReader u(QByteArray::fromHex("ffffff3f"));
+    check(u.signedBits(22) == -1 && u.ok(), "a complete s22 is ok");
+    u.unsignedBits(20);          // 22 + 20 bits > the 32 the record has
+    check(!u.ok(), "reading past the end is not");
+    VictronBle::BitReader e(QByteArray::fromHex("0000"));
+    check(e.signedBits(16) == 0 && e.ok() && e.signedBits(16) == -1 && !e.ok(), "and it stays not ok");
+  }
+
+  // --- 1b. a record cut short must not show values ---
+  {
+    DecoderVictronBLE d(ReadEvent::VictronBLE);
+    // battery monitor: 4 bytes instead of 12 - voltage is still there, the
+    // current is not. Before, its all-ones bits became -1 = -0.001 A.
+    const auto r = d.decode(VictronBle::frame(VictronBle::BatteryMonitor, QByteArray::fromHex("e803e504")), 0);
+    check(r.has_value(), "short battery monitor record still decodes");
+    if (r)
+    {
+      check(r->val == "12.53" && r->unit == "V", "the voltage that is there is shown: " + r->val);
+      check(r->val2.isEmpty() || r->val2 == "---", "the truncated current is not: '" + r->val2 + "'");
+    }
+    const auto sc = d.decode(VictronBle::frame(VictronBle::SolarCharger, QByteArray::fromHex("0000e504"), "V", "I"), 0);
+    check(sc.has_value() && (sc->val2.isEmpty() || sc->val2 == "---"), "solar charger: truncated current is not shown");
   }
 
   // --- 2. key parsing ---

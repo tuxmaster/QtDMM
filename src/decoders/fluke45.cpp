@@ -54,6 +54,11 @@ std::optional<DmmDecoder::DmmResponse> DecoderFluke45::decode(const QByteArray &
   QString number = fields[3].trimmed();
   if (number.contains(','))   // both displays on: "VAL1" would not do that, but be safe
     number = number.section(',', 0, 0).trimmed();
+  // The meter's FORMAT setting decides whether the value carries its unit
+  // ("+12.345E+6 OHM", manual table 5-16A); it is stored in the meter and
+  // QtDMM never sets it, so both have to be read. The unit itself comes
+  // from FUNC1 above - it says the same thing and is always there.
+  number = number.section(' ', 0, 0);
 
   struct FunctionRow { const char *mnemonic; const char *unit; const char *special; };
   static const FunctionRow functions[] = {

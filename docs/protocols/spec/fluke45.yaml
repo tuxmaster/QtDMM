@@ -17,6 +17,11 @@ sources:
 # returns the function mnemonic (Table 5-8), AUTO? "1"/"0", MOD? the modifier
 # sum (1 MN, 2 MX, 4 HOLD, 8 dB, 16 dB power, 32 REL). No capture available:
 # the lines are built from those tables.
+#
+# The FORMAT command (Table 5-16A, appendix C) decides whether values come
+# with their unit appended ("+12.345E+6 OHM", format 2, "intended primarily
+# for use with RS-232 print-only mode") or without (format 1). It is stored
+# in the meter and QtDMM never sets it, so the vectors cover both.
 vectors:
   - source_line: "VDC;1;0;+1.2345E+0"
     bytes: 3D 3E 0D 0A 56 44 43 3B 31 3B 30 3B 2B 31 2E 32 33 34 35 45 2B 30 0D 0A
@@ -98,3 +103,15 @@ vectors:
     bytes: 46 55 4E 43 31 3F 3B 41 55 54 4F 3F 3B 4D 4F 44 3F 3B 56 41 4C 31 3F 0D 0A 56 44 43 3B 31 3B 30 3B 2B 31 2E 32 33 34 35 45 2B 30 0D 0A
     reading: {value: "1.2345", unit: "V", coupling: DC, range_mode: auto}
     expect: {special: DC}
+  - source_line: "OHMS;1;0;+12.345E+6 OHM"
+    bytes: 4F 48 4D 53 3B 31 3B 30 3B 2B 31 32 2E 33 34 35 45 2B 36 20 4F 48 4D 0D 0A
+    reading: {value: "12.345", unit: "MOhm", function: resistance, range_mode: auto}
+    expect: {special: OH, val: "12.345"}
+  - source_line: "VDC;1;0;+1.2345E+0 VDC"
+    bytes: 56 44 43 3B 31 3B 30 3B 2B 31 2E 32 33 34 35 45 2B 30 20 56 44 43 0D 0A
+    reading: {value: "1.2345", unit: "V", coupling: DC, range_mode: auto}
+    expect: {special: DC, val: "1.2345"}
+  - source_line: "OHMS;1;0;+1E+9 OHM"
+    bytes: 4F 48 4D 53 3B 31 3B 30 3B 2B 31 45 2B 39 20 4F 48 4D 0D 0A
+    reading: {value: "OL", unit: "Ohm", function: resistance, range_mode: auto}
+    expect: {special: OH, val: "OL"}
