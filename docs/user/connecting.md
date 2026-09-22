@@ -32,7 +32,9 @@ The port box lists everything QtDMM found, prefixed with its type:
 | `Sigrok` | any meter that `sigrok-cli` supports; the SCPI bench meters in the model list set this up in their own group ([Bench meters](bench-meters.md)) | `scpi-dmm:conn=/dev/ttyUSB0` |
 | `BLE` | Bluetooth LE broadcasts: Victron SmartShunt / MPPT / Phoenix Inverter ([Bluetooth LE](bluetooth.md)); set up in its own group instead of the port box | `CB:09:E4:16:33:DB` |
 
-RFC2217 and sigrok entries are not detected automatically. Add them under
+RFC2217 and sigrok entries are not detected automatically - except the
+ports of a [qtdmm-bridge](remote-bridge.md) announcing itself by mDNS, which
+**Find bridges** on the Special ports page lists. Otherwise add them under
 **Settings → Special ports**: choose the type and type the host:port or the
 `sigrok-cli` driver string. For sigrok, `sigrok-cli --help` and the
 [sigrok hardware list](https://sigrok.org/wiki/Supported_hardware#Multimeters)

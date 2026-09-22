@@ -395,6 +395,73 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </layout>
    </item>
    <item>
+    <widget class="QGroupBox" name="ui_bridgeGroup">
+     <property name="title">
+      <string>Bridges in the network</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_bridges">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_bridges">
+        <item>
+         <widget class="QPushButton" name="ui_bridgeSearch">
+          <property name="text">
+           <string>Find &amp;bridges</string>
+          </property>
+          <property name="whatsThis">
+           <string>Looks for qtdmm-bridge instances announcing themselves by mDNS in the local network and lists their ports.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="ui_bridgeHint">
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QListWidget" name="ui_bridgeList">
+        <property name="whatsThis">
+         <string>Ports the bridges serve. Double-click one, or select it and press Add, to put it into the next free custom port line as an RFC2217 entry.</string>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>110</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_bridgeAdd">
+        <item>
+         <spacer name="spacer_bridgeAdd">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="ui_bridgeAdd">
+          <property name="text">
+           <string>&amp;Add as custom port</string>
+          </property>
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <spacer name="Spacer1_8">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

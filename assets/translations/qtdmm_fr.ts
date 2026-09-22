@@ -384,28 +384,29 @@ Le multimètre est-il branché et allumé ?</translation>
 <context>
     <name>DisplayWid</name>
     <message>
-        <location filename="../../src/displaywid.cpp" line="391"/>
+        <location filename="../../src/displaywid.cpp" line="428"/>
         <source>HOLD</source>
         <translation>HOLD</translation>
     </message>
     <message>
-        <location filename="../../src/displaywid.cpp" line="392"/>
+        <location filename="../../src/displaywid.cpp" line="428"/>
         <source>AUTO</source>
         <translation>AUTO</translation>
     </message>
     <message>
-        <location filename="../../src/displaywid.cpp" line="393"/>
+        <location filename="../../src/displaywid.cpp" line="428"/>
         <source>MANU</source>
         <translation>MANU</translation>
     </message>
     <message>
-        <location filename="../../src/displaywid.cpp" line="447"/>
-        <location filename="../../src/displaywid.cpp" line="461"/>
+        <location filename="../../src/displaywid.cpp" line="451"/>
+        <location filename="../../src/displaywid.cpp" line="533"/>
+        <location filename="../../src/displaywid.cpp" line="549"/>
         <source>MAX</source>
         <translation>MAX</translation>
     </message>
     <message>
-        <location filename="../../src/displaywid.cpp" line="460"/>
+        <location filename="../../src/displaywid.cpp" line="548"/>
         <source>MIN</source>
         <translation>MIN</translation>
     </message>
@@ -921,7 +922,50 @@ Choisissez quelle instance doit enregistrer.</translation>
         <translation>&lt;b&gt;Configurez ici des ports personnalisés pour RFC2217 et SIGROK.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/portsprefs.cpp" line="108"/>
+        <location filename="../../src/portsprefs.cpp" line="44"/>
+        <source>Bridge %1 on %2, port %3, serving %4 (version %5)</source>
+        <translation>Pont %1 sur %2, port %3, dessert %4 (version %5)</translation>
+    </message>
+    <message>
+        <location filename="../../src/portsprefs.cpp" line="51"/>
+        <source>No bridge found. Is qtdmm-bridge running with --mdns in this network?</source>
+        <translation>Aucun pont trouvé. qtdmm-bridge tourne-t-il avec --mdns sur ce réseau ?</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/portsprefs.cpp" line="52"/>
+        <source>%n port(s) found.</source>
+        <translation>
+            <numerusform>%n port trouvé.</numerusform>
+            <numerusform>%n ports trouvés.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../src/portsprefs.cpp" line="64"/>
+        <source>Searching (3 s)...</source>
+        <translation>Recherche (3 s)…</translation>
+    </message>
+    <message>
+        <location filename="../../src/portsprefs.cpp" line="67"/>
+        <source>No network interface for multicast.</source>
+        <translation>Aucune interface réseau pour le multicast.</translation>
+    </message>
+    <message>
+        <location filename="../../src/portsprefs.cpp" line="80"/>
+        <source>%1 is already in line %2.</source>
+        <translation>%1 est déjà à la ligne %2.</translation>
+    </message>
+    <message>
+        <location filename="../../src/portsprefs.cpp" line="88"/>
+        <source>Added as custom port %1; it appears in the port list after Apply.</source>
+        <translation>Ajouté comme port spécial %1 ; il apparaît dans la liste des ports après « Appliquer ».</translation>
+    </message>
+    <message>
+        <location filename="../../src/portsprefs.cpp" line="91"/>
+        <source>All ten custom port lines are in use.</source>
+        <translation>Les dix lignes de ports spéciaux sont toutes utilisées.</translation>
+    </message>
+    <message>
+        <location filename="../../src/portsprefs.cpp" line="172"/>
         <source>Sigrok-cli executable</source>
         <translation>Exécutable sigrok-cli</translation>
     </message>
@@ -2799,6 +2843,31 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <location filename="../../src/ui/uiportsprefs.ui" line="377"/>
         <source>Sigrok executable</source>
         <translation>Exécutable sigrok</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uiportsprefs.ui" line="400"/>
+        <source>Bridges in the network</source>
+        <translation>Ponts sur le réseau</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uiportsprefs.ui" line="408"/>
+        <source>Find &amp;bridges</source>
+        <translation>Chercher des &amp;ponts</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uiportsprefs.ui" line="411"/>
+        <source>Looks for qtdmm-bridge instances announcing themselves by mDNS in the local network and lists their ports.</source>
+        <translation>Cherche les instances de qtdmm-bridge qui s&apos;annoncent par mDNS sur le réseau local et liste leurs ports.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uiportsprefs.ui" line="430"/>
+        <source>Ports the bridges serve. Double-click one, or select it and press Add, to put it into the next free custom port line as an RFC2217 entry.</source>
+        <translation>Ports desservis par les ponts. Double-cliquez sur l&apos;un d&apos;eux, ou sélectionnez-le et appuyez sur Ajouter, pour le placer en entrée RFC2217 dans la prochaine ligne libre.</translation>
+    </message>
+    <message>
+        <location filename="../../src/ui/uiportsprefs.ui" line="452"/>
+        <source>&amp;Add as custom port</source>
+        <translation>&amp;Ajouter comme port spécial</translation>
     </message>
 </context>
 <context>

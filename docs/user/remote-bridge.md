@@ -37,7 +37,16 @@ serial ports, and a udev rule for the HID cables (in the bridge's README).
 
 ## Connecting from QtDMM
 
-In QtDMM open **Settings → Special ports**, choose type *RFC2217* and enter
+In QtDMM open **Settings → Special ports**. When the bridge runs with
+`mdns = true` (or `--mdns`), press **Find bridges**: QtDMM asks the local
+network by mDNS and lists every bridge port it hears back from within
+three seconds - host, address and port, and the port's name on the bridge.
+Double-click one (or select it and press **Add as custom port**) and it
+goes into the next free line as an *RFC2217* entry with the bridge's IP
+address. No Avahi or Bonjour is needed on the QtDMM side; the search only
+needs multicast to reach the bridge, i.e. the same network segment.
+
+Without mDNS, choose type *RFC2217* yourself and enter
 `host:port`, e.g. `raspberry:4000` or `192.168.1.20:4000`. Then, on the
 *Multimeter* page, pick that port and the meter model as usual. When QtDMM
 connects, the bridge applies the model's baud rate, data bits, parity and
@@ -89,8 +98,9 @@ shows the log.
 - **One client per port.** A second QtDMM connecting to the same port takes
   over; the first one sees the connection close.
 - **Finding the bridge**: with `mdns = true` (or `--mdns`) and the optional
-  `zeroconf` package the ports are announced as `_qtdmm-bridge._tcp`, so
-  `avahi-browse -rt _qtdmm-bridge._tcp` lists them with address and port.
+  `zeroconf` package the ports are announced as `_qtdmm-bridge._tcp`; QtDMM's
+  **Find bridges** button lists them, as does
+  `avahi-browse -rt _qtdmm-bridge._tcp`.
 - **Security**: none. Anyone who can reach the port can read the meter and
   change its line settings. Outside a trusted network bind to `127.0.0.1`
   and reach the bridge through an SSH tunnel

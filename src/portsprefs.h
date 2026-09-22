@@ -7,6 +7,8 @@
 #include <QComboBox>
 #include <QStringList>
 
+#include "mdnsbrowser.h"
+
 /// Settings page "Special ports": user-defined port entries (type + address,
 /// e.g. RFC2217 host:port or a sigrok driver string) added to the port list
 /// of the multimeter page, and the path of sigrok-cli.
@@ -28,8 +30,14 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
   void           on_ui_sigrokExeButton_clicked();
+  /// mDNS browse for qtdmm-bridge announcements, fills the list.
+  void           on_ui_bridgeSearch_clicked();
+  /// The selected bridge port into the next free custom port line.
+  void           on_ui_bridgeAdd_clicked();
 
 private:
+
+  MdnsBrowser    *m_browser = nullptr;
   QVector<QLineEdit*> m_portEdits;
   QVector<QComboBox*> m_portTypes;
 };
