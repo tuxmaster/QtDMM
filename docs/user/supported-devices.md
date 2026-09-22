@@ -9,8 +9,10 @@ protocols - the *Chip* column helps: a meter built around the same chip
 (named in its manual or on the sigrok wiki) usually speaks the same
 protocol. See [Connecting a meter](connecting.md).
 
-*Serial* is baud rate, data bits, parity (N/E/O) and stop bits. *Lines* are
-the control lines the cable needs driven. *Counts* is the display
+*Serial* is baud rate, data bits, parity (N/E/O) and stop bits; meters that
+are not read over a serial line say how they are reached instead
+(*USB-HID (BU-86X)* for the Brymen cable, *Bluetooth LE*, *sigrok-cli*).
+*Lines* are the control lines the cable needs driven. *Counts* is the display
 resolution. Not every entry has been confirmed on hardware recently; models
 marked ¹ were added from chip datasheets and protocol documentation and have not
 been tried with QtDMM at all. Models marked ² are sold without a serial
@@ -30,10 +32,10 @@ meter working, please report it on the
 | Brymen | BM251 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
 | Brymen | BM252 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
 | Brymen | BM257 ¹ | Brymen BM25x | `BrymenBM25x` | 9600 8N1 | DTR RTS | 6000 |
-| Brymen | BM525s ¹ | Brymen BM52x (BU-86X) | `BrymenBM52x` | Bluetooth LE | - | 6000 |
-| Brymen | BM829s ¹ | Brymen BM82x (BU-86X) | `BrymenBM82x` | Bluetooth LE | - | 6000 |
-| Brymen | BM867s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | Bluetooth LE | - | 50000 |
-| Brymen | BM869s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | Bluetooth LE | - | 50000 |
+| Brymen | BM525s ¹ | Brymen BM52x (BU-86X) | `BrymenBM52x` | USB-HID (BU-86X) | - | 6000 |
+| Brymen | BM829s ¹ | Brymen BM82x (BU-86X) | `BrymenBM82x` | USB-HID (BU-86X) | - | 6000 |
+| Brymen | BM867s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | USB-HID (BU-86X) | - | 50000 |
+| Brymen | BM869s ¹ | Brymen BM86x (BU-86X) | `BrymenBM86x` | USB-HID (BU-86X) | - | 50000 |
 | Digitech | QM1350 | Metex KS57C2016 | `Metex14` | 600 7N2 | DTR | 4000 |
 | Digitech | QM1462 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Digitech | QM1537 | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 4000 |
