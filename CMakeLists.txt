@@ -79,8 +79,14 @@ if (NOT QTDMM_WITH_BLE)
 endif()
 ## AES-128-CTR for the encrypted Victron advertisements (public domain tiny-AES-c)
 list(APPEND SRC_FILES src/3rdparty/tiny-aes/aes.c)
-## ZIP writer for the XLSX/ODS export (MIT, miniz)
+## ZIP writer for the XLSX/ODS export (MIT, miniz). Only deflate and CRC are
+## used - spreadsheet.cpp writes the ZIP container itself - so stdio and the
+## archive writer stay out (the stdio path also prints a "may not support
+## large files" pragma at every build). The archive reader stays for the
+## spreadsheet test, fed from memory. Source property: applies to the tests, too.
 list(APPEND SRC_FILES src/3rdparty/miniz/miniz.c)
+set_source_files_properties(src/3rdparty/miniz/miniz.c PROPERTIES
+	COMPILE_DEFINITIONS "MINIZ_NO_STDIO;MINIZ_NO_ARCHIVE_WRITING_APIS;MINIZ_NO_TIME")
 
 ## Translations: the build only compiles the .ts files (lrelease). Updating
 ## them from the sources is a manual step - `cmake --build build --target
