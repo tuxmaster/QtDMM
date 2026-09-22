@@ -58,6 +58,34 @@ def protocol_table():
 
 CHIP = {name: row["chip"] for name, row in protocol_table().items() if row["chip"]}
 
+# Meters that are sold WITHOUT a serial interface: the chip has the output, but
+# it takes soldering (an IR LED or a wire on a chip pin, sometimes an EEPROM
+# change) before the meter sends anything. Keyed by (vendor, model prefix) as
+# registered; the text ends up in the footnote section of the device table.
+HARDWARE_MOD = {
+    ("Generic", "DTM0660"): (
+        "the DTM0660 chip has a UART, but meters built on it (Victor VC921 and "
+        "similar) ship without an interface: an IR LED with a 100 Ω resistor "
+        "goes on the chip's TX pin and the RS232 bit in the 24C02 EEPROM has to "
+        "be set - "
+        "[eevblog: hacking the Victor VC-921](https://www.eevblog.com/forum/testgear/hacking-the-victor-vc-921/). "
+        "PeakTech 3415 and Velleman DVM4100 use the same chip but come with a "
+        "cable and need no change."),
+    ("Vichy", "VC99"): (
+        "the FS9922-DMM4 chip sends the display at 2400 baud on an unused pin; "
+        "a wire or IR LED has to be soldered to it and *REL* held to start the "
+        "output - [Hackaday](https://hackaday.com/2010/11/30/unlocking-rs232-serial-comm-on-a-multimeter/), "
+        "[David Pilling](https://www.davidpilling.com/wiki/index.php/VC99)."),
+}
+
+
+def hardware_mod(vendor, model):
+    """The HARDWARE_MOD note for a registered meter, or None."""
+    for (v, prefix), note in HARDWARE_MOD.items():
+        if vendor == v and model.startswith(prefix):
+            return note
+    return None
+
 
 def devices():
     rows = []
@@ -69,8 +97,10 @@ def devices():
                 lines = (lines + " RTS").strip()
             model = d["model"]
             unconfirmed = model.endswith("*")
+            marks = (" ¹" if unconfirmed else "") + (" ²" if hardware_mod(d["vendor"], model) else "")
             rows.append({
-                "vendor": d["vendor"], "model": model.rstrip("* ").strip() + (" ¹" if unconfirmed else ""),
+                "vendor": d["vendor"], "model": model.rstrip("* ").strip() + marks,
+                "hardware_mod": hardware_mod(d["vendor"], model),
                 "protocol": d["protocol"], "chip": CHIP.get(d["protocol"], "-"),
                 # baud 0: not a serial device (Bluetooth LE, or sigrok-cli talks to the meter)
                 "serial": f'{d["baud"]} {d["bits"]}{PARITY[d["parity"]]}{d["stop"]}' if d["baud"] != "0"
@@ -99,7 +129,9 @@ def render_devices(rows):
         "the control lines the cable needs driven. *Counts* is the display",
         "resolution. Not every entry has been confirmed on hardware recently; models",
         "marked ¹ were added from chip datasheets and protocol documentation and have not",
-        "been tried with QtDMM at all. If you can confirm one, or get an unlisted",
+        "been tried with QtDMM at all. Models marked ² are sold without a serial",
+        "interface and need a hardware modification first (see the notes below the",
+        "table). If you can confirm one, or get an unlisted",
         "meter working, please report it on the",
         "[project page](https://github.com/tuxmaster/QtDMM/issues).",
         "",
@@ -111,6 +143,18 @@ def render_devices(rows):
                    f'| {r["lines"]} | {r["counts"]} |')
     out.append("")
     out.append("¹ settings taken from the chip, not yet confirmed on hardware with QtDMM.")
+    out.append("")
+    out.append("² needs a hardware modification - the meter has no interface as sold:")
+    out.append("")
+    seen = []
+    for r in rows:
+        if r["hardware_mod"] and r["hardware_mod"] not in seen:
+            seen.append(r["hardware_mod"])
+            group = [x for x in rows if x["hardware_mod"] == r["hardware_mod"]]
+            models = [x["model"].replace(" ²", "").replace(" ¹", "") for x in group]
+            names = f'{r["vendor"]} {", ".join(models)}' if len({x["vendor"] for x in group}) == 1 \
+                else ", ".join(f'{x["vendor"]} {m}' for x, m in zip(group, models))
+            out.append(f"- **{names}**: {r['hardware_mod']}")
     out.append("")
     out.append(f"{len(rows)} devices across {len({r['vendor'] for r in rows})} vendors.")
     return "\n".join(out) + "\n"
