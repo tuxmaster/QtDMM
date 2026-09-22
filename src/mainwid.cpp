@@ -140,6 +140,18 @@ MainWid::MainWid(QString instance_id, QString config_path, QWidget *parent) :  Q
     connectSLOT(on);
   });
   connect(m_scpi, &ScpiServer::clientsChanged, this, [this](int) { updateScpiStatus(); });
+  // HCOPy:SDUMp:DATA? - the main window as the "instrument screen"
+  m_scpi->setScreenshotSource([this](const QByteArray &format) -> QByteArray
+  {
+    QWidget *top = window() ? window() : this;
+    const QPixmap shot = top->grab();
+    QByteArray bytes;
+    QBuffer buffer(&bytes);
+    buffer.open(QIODevice::WriteOnly);
+    if (!shot.save(&buffer, format.constData()))
+      return {};
+    return bytes;
+  });
 
   if (m_configDlg->showTip())
     showTipsSLOT();

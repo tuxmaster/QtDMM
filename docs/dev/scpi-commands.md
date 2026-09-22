@@ -86,6 +86,28 @@ The range is `AUTO`, `MANUAL` or the meter's own range text.
 | `INPut ON`, `INPut 1`, `INPut:STATe ON` | connects the meter (like the Connect button) |
 | `INPut OFF`, `INPut 0` | disconnects the meter |
 
+## Screen dump
+
+| Command | Answer |
+|---|---|
+| `HCOPy:SDUMp:DATA?`, `DISPlay:DATA?` | the main window as an image in an IEEE 488.2 definite-length block: `#` + number of length digits + length + bytes, e.g. `#676714<PNG…>`, then `\n` |
+| `HCOPy:SDUMp:DATA:FORMat PNG|BMP|JPG`, `…:FORMat?` | image format, PNG by default |
+
+The same command Keysight and Rigol instruments use for their screenshots,
+so a generic "grab screen" routine works. Read the block, not a line:
+
+```python
+s.sendall(b"HCOP:SDUM:DATA?\n")
+head = s.recv(2)                       # b"#6"
+length = int(s.recv(int(head[1:2])))
+png = b""
+while len(png) < length:
+    png += s.recv(length - len(png))
+```
+
+(`lxi screenshot` and the lxi-gui button talk VXI-11 only and pick a
+plugin by `*IDN?`; both are on the list for a later round.)
+
 ## Error queue
 
 | Command | Answer |
@@ -104,6 +126,7 @@ The queue holds 20 entries; when full, the last one becomes
 | `-114` | Header suffix out of range | suffix other than 1 or 2 |
 | `-224` | Illegal parameter value | `INPut MAYBE` |
 | `-230` | Data corrupt or stale | a reading query answered `9.91E+37` |
+| `-240` | Hardware error | `HCOPy:SDUMp:DATA?` when no window is there to dump |
 | `-350` | Queue overflow | more than 20 errors unread |
 | `-363` | Input buffer overrun | 64 KB without a line terminator; the buffer was discarded |
 

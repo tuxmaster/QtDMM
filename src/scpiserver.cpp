@@ -194,9 +194,15 @@ void ScpiServer::pushError(int code, const QString &text)
   m_errors << qMakePair(code, text);
 }
 
+QByteArray ScpiServer::block(const QByteArray &data)
+{
+  const QByteArray len = QByteArray::number(data.size());
+  return '#' + QByteArray::number(len.size()) + len + data;
+}
+
 QByteArray ScpiServer::process(const QByteArray &message)
 {
-  QStringList answers;
+  QList<QByteArray> answers;
   bool any = false;
   // program message: units separated by ';'; a unit starting with ':' or
   // '*' is absolute, otherwise it continues at the previous unit's level
@@ -267,7 +273,7 @@ QByteArray ScpiServer::process(const QByteArray &message)
       prefix = path.mid(0, path.size() - 1);
 
     bool isQuery = false;
-    const QString answer = handle(cmd, isQuery);
+    const QByteArray answer = handle(cmd, isQuery);
     if (isQuery)
     {
       answers << answer;
@@ -276,10 +282,54 @@ QByteArray ScpiServer::process(const QByteArray &message)
   }
   if (!any)
     return {};
-  return (answers.join(';') + '\n').toUtf8();
+  QByteArray out;
+  for (const QByteArray &a : answers)
+    out += (out.isEmpty() ? "" : ";") + a;
+  return out + '\n';
 }
 
-QString ScpiServer::handle(const Command &cmd, bool &isQuery)
+// The screen dump is binary, everything else is text: HCOPy:SDUMp:DATA?
+// (and Rigol's DISPlay:DATA?) is answered here, the rest in handleText().
+QByteArray ScpiServer::handle(const Command &cmd, bool &isQuery)
+{
+  const QString head = cmd.path.first();
+  const int depth = cmd.path.size();
+  const bool hcopy = matches(head, "HCOPy") && depth >= 3 && matches(cmd.path[1], "SDUMp") && matches(cmd.path[2], "DATA");
+  const bool dispData = matches(head, "DISPlay") && depth == 2 && matches(cmd.path[1], "DATA");
+  if ((hcopy && depth == 3) || dispData)
+  {
+    isQuery = cmd.query;
+    if (!cmd.query)
+    {
+      pushError(-100, "Command error");
+      isQuery = false;
+      return {};
+    }
+    const QByteArray image = m_screenshot ? m_screenshot(m_screenshotFormat) : QByteArray();
+    if (image.isEmpty())
+    {
+      pushError(-240, "Hardware error; no screen to dump");
+      isQuery = false;
+      return {};
+    }
+    return block(image);
+  }
+  if (hcopy && depth == 4 && matches(cmd.path[3], "FORMat"))
+  {
+    isQuery = cmd.query;
+    if (cmd.query)
+      return m_screenshotFormat;
+    const QByteArray f = cmd.args.trimmed().toUpper().toLatin1();
+    if (f == "PNG" || f == "BMP" || f == "JPG" || f == "JPEG")
+      m_screenshotFormat = f == "JPEG" ? "JPG" : f;
+    else
+      pushError(f.isEmpty() ? -109 : -224, f.isEmpty() ? "Missing parameter" : "Illegal parameter value");
+    return {};
+  }
+  return handleText(cmd, isQuery).toUtf8();
+}
+
+QString ScpiServer::handleText(const Command &cmd, bool &isQuery)
 {
   const QString head = cmd.path.first();
   const int depth = cmd.path.size();

@@ -58,6 +58,7 @@ long or the short form (`MEASure?`, `MEAS?`), case does not matter.
 | `STATus:OPERation?` | 16 while the recorder runs |
 | `INITiate` / `ABORt` | starts / stops the recorder |
 | `INPut ON|OFF`, `INPut?` | connects / disconnects the meter, asks whether it is |
+| `HCOPy:SDUMp:DATA?` | a screenshot of the QtDMM window as PNG (IEEE 488.2 block), like a bench instrument's screen dump |
 | `SYSTem:ERRor?` `SYSTem:ERRor:COUNt?` | the error queue: `0,"No error"`, `-113,"Undefined header"`, `-230,"Data corrupt or stale"`, ... |
 | `*RST` `*CLS` `*OPC?` `*TST?` `*ESR?` `*STB?` `SYSTem:VERSion?` | the usual IEEE 488.2 replies |
 

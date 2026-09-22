@@ -120,6 +120,21 @@ int main(int argc, char **argv)
   check(ask(s, "INP?") == "1", "INP? reports connected");
   s.process("*CLS");
 
+  // screen dump as a definite-length block
+  check(ask(s, "HCOP:SDUM:DATA?").isEmpty() && ask(s, "SYST:ERR?").startsWith("-240,"), "no screenshot source -> -240");
+  s.setScreenshotSource([](const QByteArray &format) { return QByteArray("<") + format + ">"; });
+  check(s.process("HCOPy:SDUMp:DATA?") == "#15<PNG>\n", "block: " + QString::fromUtf8(s.process("HCOP:SDUM:DATA?")));
+  check(s.process("DISP:DATA?") == "#15<PNG>\n", "DISPlay:DATA? alias");
+  s.process("HCOP:SDUM:DATA:FORM BMP");
+  check(ask(s, "HCOP:SDUM:DATA:FORM?") == "BMP" && s.process("HCOP:SDUM:DATA?") == "#15<BMP>\n", "format switch");
+  s.process("HCOP:SDUM:DATA:FORM GIF");
+  check(ask(s, "SYST:ERR?").startsWith("-224,") && ask(s, "HCOP:SDUM:DATA:FORM?") == "BMP", "unknown format rejected");
+  check(ScpiServer::block(QByteArray(1234, 'x')).startsWith("#41234x"), "block header for 1234 bytes");
+  s.setScreenshotSource([](const QByteArray &) { return QByteArray(100000, char(0xAB)); });
+  const QByteArray big = s.process("*OPC?;HCOP:SDUM:DATA?");
+  check(big.size() == 2 + 8 + 100000 + 1 && big.startsWith("1;#6100000") && quint8(big[10]) == 0xAB, "binary survives, mixed with text");
+  s.setScreenshotSource(nullptr);
+
   // error queue overflow
   for (int i = 0; i < 25; ++i)
     s.process("NOPE");
