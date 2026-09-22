@@ -77,5 +77,9 @@ complete list of accepted forms, answers and error codes is the
 - Every instance of QtDMM (`--config-id`) has its own server; with the
   same port configured they line up on 5025, 5026, ...
 - sigrok's `scpi-dmm` driver identifies instruments by `*IDN?` and does not
-  know QtDMM, so it will not talk to this server. lxi-tools, PyVISA
-  (`TCPIP::bench.local::5025::SOCKET`) and plain sockets work.
+  know QtDMM, so it will not talk to this server. lxi-tools, PyVISA and
+  plain sockets work; the PyVISA resource string is
+
+  ```
+  TCPIP::bench.local::5025::SOCKET
+  ```
