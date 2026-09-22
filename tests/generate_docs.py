@@ -38,10 +38,10 @@ PARITY = {"0": "N", "1": "E", "2": "O"}
 # The chip behind a protocol, where it is known: lets a user match an
 # unlisted meter to a protocol. Read from the protocol table in
 # src/protocols.cpp - one row per line:
-#   { ReadEvent::<Id>, "<Name>", QT_TRANSLATE_NOOP("Protocols", "<text>"), "<chip>", make<...> },
+#   { ReadEvent::<Id>, "<Name>", QT_TRANSLATE_NOOP("Protocols", "<text>"), "<chip>", "<transport>", make<...> },
 PROTOCOL_ROW = re.compile(
     r'\{\s*ReadEvent::(?P<id>\w+)\s*,\s*"(?P<name>\w+)"\s*,\s*QT_TRANSLATE_NOOP\("Protocols",\s*"(?P<text>[^"]*)"\)'
-    r'\s*,\s*"(?P<chip>[^"]*)"\s*,\s*make<(?P<decoder>\w+)>')
+    r'\s*,\s*"(?P<chip>[^"]*)"\s*,\s*"(?P<transport>[^"]*)"\s*,\s*make<(?P<decoder>\w+)>')
 
 
 def protocol_table():
@@ -50,13 +50,18 @@ def protocol_table():
     rows = {}
     for m in PROTOCOL_ROW.finditer(text):
         rows[m.group("name")] = {"id": m.group("id"), "text": m.group("text"),
-                                 "chip": m.group("chip"), "decoder": m.group("decoder")}
+                                 "chip": m.group("chip"), "transport": m.group("transport"),
+                                 "decoder": m.group("decoder")}
     if not rows:
         sys.exit("no protocol rows found in src/protocols.cpp - format changed?")
     return rows
 
 
 CHIP = {name: row["chip"] for name, row in protocol_table().items() if row["chip"]}
+# How a meter is reached when it has no baud rate - "Bluetooth LE",
+# "USB-HID (BU-86X)", "sigrok-cli" - straight from src/protocols.cpp, so a
+# new backend is declared next to its protocol rather than guessed here.
+TRANSPORT = {name: row["transport"] for name, row in protocol_table().items() if row["transport"]}
 
 # Meters that are sold WITHOUT a serial interface: the chip has the output, but
 # it takes soldering (an IR LED or a wire on a chip pin, sometimes an EEPROM
@@ -102,9 +107,9 @@ def devices():
                 "vendor": d["vendor"], "model": model.rstrip("* ").strip() + marks,
                 "hardware_mod": hardware_mod(d["vendor"], model),
                 "protocol": d["protocol"], "chip": CHIP.get(d["protocol"], "-"),
-                # baud 0: not a serial device (Bluetooth LE, or sigrok-cli talks to the meter)
+                # baud 0: not a serial line, the protocol's transport says what it is
                 "serial": f'{d["baud"]} {d["bits"]}{PARITY[d["parity"]]}{d["stop"]}' if d["baud"] != "0"
-                          else ("sigrok-cli" if d["protocol"] == "Sigrok" else "Bluetooth LE"),
+                          else TRANSPORT.get(d["protocol"], "?"),
                 "counts": d["counts"], "lines": lines or "-",
                 "decoder": src.name,
             })
@@ -125,8 +130,10 @@ def render_devices(rows):
         "(named in its manual or on the sigrok wiki) usually speaks the same",
         "protocol. See [Connecting a meter](connecting.md).",
         "",
-        "*Serial* is baud rate, data bits, parity (N/E/O) and stop bits. *Lines* are",
-        "the control lines the cable needs driven. *Counts* is the display",
+        "*Serial* is baud rate, data bits, parity (N/E/O) and stop bits; meters that",
+        "are not read over a serial line say how they are reached instead",
+        "(*USB-HID (BU-86X)* for the Brymen cable, *Bluetooth LE*, *sigrok-cli*).",
+        "*Lines* are the control lines the cable needs driven. *Counts* is the display",
         "resolution. Not every entry has been confirmed on hardware recently; models",
         "marked ¹ were added from chip datasheets and protocol documentation and have not",
         "been tried with QtDMM at all. Models marked ² are sold without a serial",
@@ -219,6 +226,20 @@ def protocol_drift():
     return problems
 
 
+def transport_drift():
+    """A device without a baud rate must have a transport on its protocol
+    row, and a protocol with a transport must not carry a baud rate."""
+    problems = []
+    for r in devices():
+        if r["serial"] == "?":
+            problems.append(f'{r["vendor"]} {r["model"]} ({r["protocol"]}) has no baud rate and its '
+                            f'protocol row in src/protocols.cpp has no transport')
+        elif r["serial"][0].isdigit() and r["protocol"] in TRANSPORT:
+            problems.append(f'{r["vendor"]} {r["model"]} has a baud rate although {r["protocol"]} '
+                            f'is reached over {TRANSPORT[r["protocol"]]}')
+    return problems
+
+
 def hid_cable_drift():
     """The HID cable table exists three times: tests/data/hid_cables.json (the
     truth both test suites read), kCables in src/portdevices/hidserial.cpp and
@@ -264,7 +285,7 @@ def main():
             path.write_text(text, encoding="utf-8")
             print(f"wrote    {rel}")
 
-    for problem in protocol_drift() + hid_cable_drift():
+    for problem in protocol_drift() + transport_drift() + hid_cable_drift():
         print(f"DRIFT    {problem}", file=sys.stderr)
         stale += 1
 
