@@ -17,7 +17,7 @@ if (BUILD_TESTING)
 
 	set( TEST_GRAPH test_graph)
 	add_executable(${TEST_GRAPH} MACOSX_BUNDLE tests/test_graph.cpp src/dmmgraph.cpp src/recordingfile.cpp src/spreadsheet.cpp src/3rdparty/miniz/miniz.c src/settings.cpp src/siprefix.cpp src/engnumbervalidator.cpp)
-	target_link_libraries(${TEST_GRAPH} PRIVATE Qt6::Widgets Qt6::PrintSupport Qt6::Charts Qt::Core Qt::Test)
+	target_link_libraries(${TEST_GRAPH} PRIVATE Qt6::Widgets Qt6::PrintSupport Qt6::Charts Qt6::Svg Qt::Core Qt::Test)
 	add_test(NAME dmmgraph COMMAND ${TEST_GRAPH} "${CMAKE_SOURCE_DIR}/tests/data/graph")
 
 	## the handbook: same compiled resources as the application, so the test

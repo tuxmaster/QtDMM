@@ -23,6 +23,7 @@ jobs:
           qt6-serialport-dev \
           qt6-connectivity-dev \
           qt6-charts-dev \
+          qt6-svg-dev \
           libhidapi-dev \
           libhidapi-hidraw0 \
           cmake \

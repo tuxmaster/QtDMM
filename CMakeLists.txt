@@ -9,7 +9,7 @@ set(PROJECT_LICENSE "GPL-3.0")
 set(RESOURCES "src/resources.qrc")
 set(APP_NAME "QtDMM")
 set(APP_ORGANIZATION "QtDMM")
-set(QT_COMPONENTS Widgets SerialPort PrintSupport Test LinguistTools Network Charts)
+set(QT_COMPONENTS Widgets SerialPort PrintSupport Test LinguistTools Network Charts Svg)
 
 include( cmake/git_version.cmake )
 
@@ -191,6 +191,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::PrintSupport
 	Qt6::Network
 	Qt6::Charts
+	Qt6::Svg
 	${HIDAPI_TARGET}
 	$<$<BOOL:${QTDMM_WITH_BLE}>:Qt6::Bluetooth>
 )

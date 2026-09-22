@@ -290,6 +290,48 @@ int main(int argc, char **argv)
           "importing the older ASCII spelling '2.5;uA' should yield 2.5e-6 A as well");
   }
 
+  // --- 7b. image export: SVG and PDF keep the curve as vectors, the pixel
+  //          formats come out with the asked-for size ---
+  {
+    Settings cfg("imgtest", tmpDir.path());
+    DMMGraph graph(nullptr, &cfg);
+    graph.resize(800, 500);
+    check(graph.importCsvFile(dataDir + "/new_larger.csv"), "image export: import failed");
+
+    const QString svg = tmpDir.filePath("graph.svg");
+    check(graph.exportImageFile(svg, QSize(1000, 600)), "SVG written");
+    QFile f(svg);
+    check(f.open(QIODevice::ReadOnly), "SVG opens");
+    const QByteArray content = f.readAll();
+    f.close();
+    QXmlStreamReader xml(content);
+    while (!xml.atEnd())
+      xml.readNext();
+    check(!xml.hasError(), "SVG is well-formed XML: " + xml.errorString());
+    // QSvgGenerator writes width/height in millimetres; the pixel size the
+    // drawing was made for is the viewBox
+    check(content.contains("<svg") && content.contains("viewBox=\"0 0 1000 600\""),
+          "SVG carries the requested size: " + QString::fromUtf8(content.left(200)));
+    // vector output, not a pixel dump: the curve and the axis labels are
+    // paths and text, so there is no embedded raster image
+    check(content.contains("<path") || content.contains("<polyline"), "SVG has vector paths");
+    check(!content.contains("<image"), "SVG holds no embedded bitmap");
+    check(content.contains("QtDMM"), "SVG names its origin in the title");
+
+    const QString pdf = tmpDir.filePath("graph.pdf");
+    check(graph.exportImageFile(pdf, QSize(1000, 600)), "PDF written");
+    QFile pf(pdf);
+    check(pf.open(QIODevice::ReadOnly) && pf.read(5) == "%PDF-", "PDF has its magic");
+    pf.close();
+
+    const QString png = tmpDir.filePath("graph.png");
+    check(graph.exportImageFile(png, QSize(320, 200)), "PNG written");
+    QImage image(png);
+    check(!image.isNull() && image.size() == QSize(320, 200), "PNG has the requested size");
+
+    check(!graph.exportImageFile(tmpDir.filePath("no/such/dir/graph.svg")), "an unwritable path fails");
+  }
+
   // --- 8. EngNumberValidator: what engValue() writes, value() must read
   //         back. engValue() emits "µ" while value() used to recognise only
   //         "u", so micro thresholds silently lost their factor. ---
