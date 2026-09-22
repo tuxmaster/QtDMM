@@ -177,11 +177,15 @@ int main(int argc, char **argv)
 
   // --- 6. mDNS responder: the answer to a browse ---
   MdnsResponder responder;
-  // not started: build the packets only. The name parts are private, so
-  // exercise start() on a machine with a network and fall back otherwise.
+  // The answer is built without touching the network. start() is only needed
+  // because the service and host names come from it - and it would announce
+  // this test run to the whole network, so it stays off unless
+  // QTDMM_TEST_MDNS is set (and it is never set in CI).
   QMap<QString, QString> txt;
   txt["model"] = "UNI-T UT61E";
-  const bool live = responder.start("_scpi-raw._tcp", "QtDMM test", 5025, txt);
+  const bool live = qEnvironmentVariableIsSet("QTDMM_TEST_MDNS")
+                    ? responder.start("_scpi-raw._tcp", "QtDMM test", 5025, txt)
+                    : responder.prepare("_scpi-raw._tcp", "QtDMM test", 5025, txt);
   if (live)
   {
     const QByteArray q = MdnsMessage::query("_scpi-raw._tcp.local");
@@ -213,6 +217,8 @@ int main(int argc, char **argv)
   }
   else
     qInfo() << "no multicast interface, responder not exercised";
+  if (!qEnvironmentVariableIsSet("QTDMM_TEST_MDNS"))
+    qInfo() << "mDNS announcement not sent (set QTDMM_TEST_MDNS to announce on the network)";
 
   if (failed)
     qWarning() << failed << "check(s) failed";

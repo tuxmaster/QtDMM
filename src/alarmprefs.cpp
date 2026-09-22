@@ -178,11 +178,11 @@ AlarmDlg::AlarmDlg(const Alarm &alarm, const QString &unit, QWidget *parent)
   m_condition->setCurrentIndex(m_condition->findData(alarm.condition));
   cf->addRow(tr("&Condition:"), m_condition);
   auto *validator = new EngNumberValidator(this);
-  m_a = new QLineEdit(EngNumberValidator::engValue(alarm.a), cond);
+  m_a = new QLineEdit(EngNumberValidator::engText(alarm.a), cond);
   m_a->setValidator(validator);
   m_aLabel = new QLabel(cond);
   cf->addRow(m_aLabel, m_a);
-  m_b = new QLineEdit(EngNumberValidator::engValue(alarm.b), cond);
+  m_b = new QLineEdit(EngNumberValidator::engText(alarm.b), cond);
   m_b->setValidator(validator);
   m_bLabel = new QLabel(tr("&Upper bound (%1):").arg(unit), cond);
   m_bLabel->setBuddy(m_b);
@@ -191,7 +191,7 @@ AlarmDlg::AlarmDlg(const Alarm &alarm, const QString &unit, QWidget *parent)
   m_seconds->setValidator(new QDoubleValidator(0, 1e6, 1, this));
   m_secondsLabel = new QLabel(cond);
   cf->addRow(m_secondsLabel, m_seconds);
-  m_hysteresis = new QLineEdit(EngNumberValidator::engValue(alarm.hysteresis), cond);
+  m_hysteresis = new QLineEdit(EngNumberValidator::engText(alarm.hysteresis), cond);
   m_hysteresis->setValidator(validator);
   m_hystLabel = new QLabel(tr("&Hysteresis (%1):").arg(unit), cond);
   m_hystLabel->setBuddy(m_hysteresis);

@@ -101,9 +101,9 @@ double ExecutePrefs::externalThreshold() const
 void ExecutePrefs::setThreshold(double value)
 {
   if (ui_execFalling->isChecked())
-    ui_execFallingThreshold->setText(EngNumberValidator::engValue(value));
+    ui_execFallingThreshold->setText(EngNumberValidator::engText(value));
   else
-    ui_execRaisingThreshold->setText(EngNumberValidator::engValue(value));
+    ui_execRaisingThreshold->setText(EngNumberValidator::engText(value));
 }
 
 bool ExecutePrefs::disconnectExternal() const

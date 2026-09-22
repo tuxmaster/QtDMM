@@ -34,8 +34,13 @@ public:
 
   /// "1.5k" -> 1500.0
   static double   value(const QString &);
-  /// 1500.0 -> "1.5k"
+  /// 1500.0 -> "1.5k", rounded to one decimal of the scaled value. For
+  /// display only: 1234 becomes "1.2k".
   static QString  engValue(double);
+  /// 1234.0 -> "1.234k": the same spelling, but with enough digits to read
+  /// the value back unchanged. Use this wherever the text goes into an edit
+  /// field the user confirms, or into a message that names a threshold.
+  static QString  engText(double, int significantDigits = 9);
 
 };
 

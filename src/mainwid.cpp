@@ -863,7 +863,7 @@ void MainWid::alarmRaised(int, const Alarm &alarm, double value)
   if (!alarm.command.isEmpty())
   {
     QString cmd = alarm.command;
-    cmd.replace("%v", EngNumberValidator::engValue(value)).replace("%u", m_baseUnit).replace("%n", alarm.name);
+    cmd.replace("%v", EngNumberValidator::engText(value)).replace("%u", m_baseUnit).replace("%n", alarm.name);
     QStringList args = QProcess::splitCommand(cmd);
     if (!args.isEmpty())
     {

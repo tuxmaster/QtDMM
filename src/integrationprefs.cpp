@@ -112,7 +112,7 @@ double IntegrationPrefs::intOffset() const
 
 void IntegrationPrefs::setThreshold(double value)
 {
-  ui_intThreshold->setText(EngNumberValidator::engValue(value));
+  ui_intThreshold->setText(EngNumberValidator::engText(value));
 }
 
 bool IntegrationPrefs::showIntegration() const

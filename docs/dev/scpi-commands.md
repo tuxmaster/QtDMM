@@ -46,7 +46,7 @@ command changes what the meter measures.
 | `[SENSe:]DATA?` | NR3 | same as `READ?` |
 | `VALue1?`, `VALue2?` | NR3 | Fluke 45 style names for main and second value |
 | `READ2?`, `FETCh2?`, `MEASure2?`, `DATA2?` | NR3 | the second value |
-| `UNIT?`, `UNIT2?` | `"V"`, `"A"`, `"Ohm"`, `"F"`, `"Hz"`, `"°C"`, `"%"`, … | base unit without SI prefix |
+| `UNIT?`, `UNIT2?` | `"V"`, `"A"`, `"Ohm"`, `"F"`, `"Hz"`, `"C"`, `"dF"`, `"%"`, … | the meter's base unit without SI prefix, spelled as the decoder emits it (`C` and `dF` for the temperature scales) |
 | `CONFigure?`, `CONFigure2?` | `"<function> <range>"` | see below |
 
 `CONFigure?` derives the function from the meter's mode and unit:
@@ -59,7 +59,7 @@ command changes what the meter measures.
 | `CONT` | continuity (beeper mode) |
 | `CAP` | unit F |
 | `FREQ` | unit Hz |
-| `TEMP` | temperature |
+| `TEMP` | temperature (unit `C` or `dF`) |
 | `DIOD` | diode test |
 | `PER` | unit % (duty cycle, Victron SoC) |
 | `POW` | unit W |

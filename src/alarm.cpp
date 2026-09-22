@@ -34,9 +34,11 @@ Alarm::Condition conditionFromKey(const QString &k)
   return Alarm::Below;
 }
 
+// A threshold is named with the digits it was entered with: "below 4.7512V",
+// not "below 4.8V" for an alarm that raises at 4.7512.
 QString eng(double v, const QString &unit)
 {
-  return EngNumberValidator::engValue(v) + unit;
+  return EngNumberValidator::engText(v) + unit;
 }
 }
 

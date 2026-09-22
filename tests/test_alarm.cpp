@@ -7,6 +7,7 @@
 #include <QtCore>
 
 #include "alarm.h"
+#include "engnumbervalidator.h"
 
 static int failed = 0;
 
@@ -186,6 +187,15 @@ int main(int argc, char **argv)
     check(nr.describe("V") == "no readings for 10 s", "describe silence: " + nr.describe("V"));
     Alarm milli = low; milli.a = 0.0047;
     check(milli.describe("A") == "below 4.7mA", "describe with SI prefix: " + milli.describe("A"));
+    // a threshold keeps its digits: the dialog reads its fields back, and a
+    // banner that says "below 4.8V" for an alarm raising at 4.7512 is a lie
+    Alarm exact = low; exact.a = 4.7512;
+    check(exact.describe("V") == "below 4.7512V", "describe keeps the digits: " + exact.describe("V"));
+    Alarm ohms = low; ohms.a = 1234;
+    check(ohms.describe("Ohm") == "below 1.234kOhm", "... with a prefix: " + ohms.describe("Ohm"));
+    for (double v : {4.7512, 1234.0, 0.04712, -2.5e-6, 0.0})
+      check(qFuzzyCompare(EngNumberValidator::value(EngNumberValidator::engText(v)) + 1.0, v + 1.0),
+            QString("engText(%1) reads back as %2").arg(v).arg(EngNumberValidator::value(EngNumberValidator::engText(v))));
   }
 
   if (failed == 0)
