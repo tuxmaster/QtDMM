@@ -70,6 +70,11 @@ public:
 
   /// A reading arrived: @p value in base units, @p overload for OL.
   void feed(double value, bool overload, qint64 nowMs);
+  /// The meter was connected or disconnected. "No readings" is silence of a
+  /// connected meter, so it is counted from the connection, not from the
+  /// start of the program: without this call a NoReadings alarm never
+  /// raises. Disconnecting clears the ones it had raised.
+  void setConnected(bool on, qint64 nowMs);
   /// Time passes without a reading (call once a second or so).
   void tick(qint64 nowMs);
   /// The user saw it: the banner may go, the alarm stays raised until the
@@ -89,7 +94,8 @@ private:
   QList<Alarm> m_alarms;
   QList<State> m_state;
   QList<qint64> m_since;       ///< when the condition started to hold (Pending)
-  qint64 m_lastReading = -1;
+  qint64 m_lastReading = -1;   ///< when the last reading arrived, -1 for none
+  qint64 m_silenceFrom = -1;   ///< when the meter was connected, -1 while it is not
   double m_lastValue = 0;
   bool m_lastOverload = false;
 };

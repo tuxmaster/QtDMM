@@ -114,6 +114,39 @@ int main(int argc, char **argv)
     check(log.events.last() == "cleared 0 silence", "a reading clears it");
   }
 
+  // --- 5b. silence before the first reading: only a connected meter can be
+  // silent. Without this the alarm raised on the first tick after the start
+  // (epoch as the time base) and ran its actions - recorder, command.
+  {
+    AlarmManager m;
+    Log log(m);
+    Alarm nr; nr.name = "silence"; nr.condition = Alarm::NoReadings; nr.seconds = 60;
+    m.setAlarms({nr});
+    const qint64 now = QDateTime::currentMSecsSinceEpoch();
+    m.tick(now);
+    m.tick(now + 3600 * 1000);
+    check(log.events.isEmpty(), "not connected, never a reading: no alarm");
+
+    m.setConnected(true, now);
+    m.tick(now + 59000);
+    check(log.events.isEmpty(), "connected 59 s ago: not yet");
+    m.tick(now + 60000);
+    check(log.events == QStringList{"raised 0 silence 0"}, "connected 60 s ago without a reading: raised");
+
+    m.setConnected(false, now + 61000);
+    check(log.events.last() == "cleared 0 silence", "disconnecting clears it");
+    m.tick(now + 7200 * 1000);
+    check(log.events.size() == 2, "and it stays quiet while disconnected");
+
+    // after reconnecting the clock starts again, and a reading takes over
+    m.setConnected(true, now + 100000);
+    m.feed(1, false, now + 110000);
+    m.tick(now + 165000);
+    check(log.events.size() == 2, "silence is measured from the last reading");
+    m.tick(now + 171000);
+    check(log.events.last() == "raised 0 silence 1", "60 s after that reading: raised");
+  }
+
   // --- 6. disabled alarms and edits ---
   {
     AlarmManager m;

@@ -14,7 +14,7 @@ alarms under **Settings → Alarms**.
 | Reading outside a range | it is under the lower or over the upper bound |
 | Reading inside a range | it is between the bounds |
 | Overload (OL) | the meter shows an overload |
-| No readings for a while | nothing arrived for the given number of seconds |
+| No readings for a while | nothing arrived for the given number of seconds. Counted from the moment the meter is connected, so it does not raise while QtDMM is not connected |
 
 Thresholds are in the reading's base unit and take SI suffixes (`4.7m`,
 `12k`). Two settings keep an alarm from chattering:

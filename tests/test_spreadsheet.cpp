@@ -99,6 +99,36 @@ int main(int argc, char **argv)
   check(!empty.write(tmp.filePath("e.xlsx"), SpreadsheetWriter::Xlsx, &error) && !error.isEmpty(), "empty refuses");
   check(!w.write("/no/such/dir/x.ods", SpreadsheetWriter::Ods, &error), "unwritable path fails");
 
+  // --- 2b. control characters: a noisy line makes an ASCII decoder produce
+  // readings like "1.2\x034"; unescaped they made the file unopenable ---
+  {
+    SpreadsheetWriter n("Noise");
+    n.setHeader({"timestamp", "value", QString("unit\x01")});
+    n.addRow({t0, QString("1.2\x03" "4"), QString("V\x1f")});
+    n.addRow({t0.addMSecs(500), QString("ok\tand\nnewline"), "V"});
+    const QString sheet2 = QString::fromUtf8(n.xlsxSheet());
+    const QString ods2 = QString::fromUtf8(n.odsContent());
+    for (const QString &xml : {sheet2, ods2})
+    {
+      check(!xml.contains(QChar(0x03)) && !xml.contains(QChar(0x01)) && !xml.contains(QChar(0x1f)),
+            "control characters are gone");
+      check(xml.contains(QChar(0xFFFD)), "... replaced by U+FFFD");
+      check(xml.contains('\t') && xml.contains('\n'), "tab and newline survive");
+      QXmlStreamReader r(xml);
+      while (!r.atEnd())
+        r.readNext();
+      check(!r.hasError(), "well-formed XML: " + r.errorString());
+    }
+    const QString noisy = tmp.filePath("n.ods");
+    check(n.write(noisy, SpreadsheetWriter::Ods, &error), "written: " + error);
+    QMap<QString, QByteArray> noisyParts;
+    zipEntries(noisy, &noisyParts);
+    QXmlStreamReader r(noisyParts.value("content.xml"));
+    while (!r.atEnd())
+      r.readNext();
+    check(!r.hasError(), "content.xml in the zip is well-formed: " + r.errorString());
+  }
+
   // --- 3. LibreOffice reads both back with the same values ---
   const QString soffice = QStandardPaths::findExecutable("soffice");
   if (soffice.isEmpty() || qEnvironmentVariableIsSet("QTDMM_NO_SOFFICE"))

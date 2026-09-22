@@ -223,6 +223,25 @@ void AlarmManager::feed(double value, bool overload, qint64 nowMs)
   }
 }
 
+void AlarmManager::setConnected(bool on, qint64 nowMs)
+{
+  if (on == (m_silenceFrom >= 0))
+    return;
+  m_silenceFrom = on ? nowMs : -1;
+  m_lastReading = -1;
+  if (on)
+    return;
+  // nothing is expected from a meter that is not connected
+  for (int i = 0; i < m_alarms.size(); ++i)
+    if (m_alarms[i].condition == Alarm::NoReadings && m_state[i] != Off)
+    {
+      const bool wasRaised = m_state[i] != Pending;
+      m_state[i] = Off;
+      if (wasRaised)
+        Q_EMIT cleared(i, m_alarms[i]);
+    }
+}
+
 void AlarmManager::tick(qint64 nowMs)
 {
   for (int i = 0; i < m_alarms.size(); ++i)
@@ -232,7 +251,14 @@ void AlarmManager::tick(qint64 nowMs)
       continue;
     if (!al.enabled)
       continue;
-    const qint64 since = m_lastReading >= 0 ? m_lastReading : m_since[i];
+    // silence is measured from the last reading, or from the moment the
+    // meter was connected when none has arrived yet. Before that there is
+    // nothing to be silent about - counting from 0 (the epoch) would raise
+    // every alarm on the first tick after the program starts, actions and
+    // all.
+    const qint64 since = m_lastReading >= 0 ? m_lastReading : m_silenceFrom;
+    if (since < 0)
+      continue;
     const bool silent = nowMs - since >= qint64(al.seconds * 1000.0);
     if (silent && m_state[i] == Off)
     {
