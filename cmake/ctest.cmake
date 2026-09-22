@@ -33,7 +33,7 @@ if (BUILD_TESTING)
 	## the analog meter: angle mapping, full-scale derivation, ballistics and
 	## a headless render check
 	set( TEST_METER test_meter)
-	add_executable(${TEST_METER} MACOSX_BUNDLE tests/test_meter.cpp src/meterwid.cpp src/panelframe.cpp)
+	add_executable(${TEST_METER} MACOSX_BUNDLE tests/test_meter.cpp src/meterwid.cpp src/panelframe.cpp src/siprefix.cpp)
 	target_include_directories(${TEST_METER} PRIVATE src)
 	target_link_libraries(${TEST_METER} PRIVATE Qt6::Widgets Qt::Core Qt::Test)
 	add_test(NAME analog_meter COMMAND ${TEST_METER})

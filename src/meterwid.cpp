@@ -17,6 +17,7 @@
 //======================================================================
 
 #include "meterwid.h"
+#include "siprefix.h"
 #include "panelframe.h"
 
 #include <QPainter>
@@ -152,6 +153,13 @@ double MeterWid::fullScaleFromReading(const QString &value, int counts)
     return kNaN;
   const int decimals = m.captured(2).size();
   return counts / std::pow(10.0, decimals);
+}
+
+double MeterWid::fullScaleFromReading(const QString &value, int counts, const QString &unit)
+{
+  if (SiPrefix::split(unit).baseUnit == QLatin1String("%"))
+    return 100.0;
+  return fullScaleFromReading(value, counts);
 }
 
 void MeterWid::setReading(double value, const QString &text, const QString &unit, bool overload, bool hold)
