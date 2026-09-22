@@ -91,8 +91,17 @@ namespace VictronBle
     quint32 unsignedBits(int bits);
     /// The next @p bits bits as a two's complement value.
     qint32 signedBits(int bits);
+    /// False once a read has touched bits past the end of the record. All
+    /// ones is the "not available" pattern of the unsigned fields, so those
+    /// read as NA by themselves - but for a signed field all ones is -1,
+    /// not its NA pattern (the largest positive value), and a short record
+    /// would show -0.01 V instead of nothing. Ask this after a read: it
+    /// stays false once it has tripped, and reads are sequential, so it
+    /// covers that field and everything before it.
+    bool ok() const { return m_ok; }
   private:
     QByteArray m_data;
     int m_pos = 0;
+    bool m_ok = true;
   };
 }

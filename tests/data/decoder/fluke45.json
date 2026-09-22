@@ -227,6 +227,41 @@
         "hold": false,
         "special": "DC"
       }
+    },
+    {
+      "comment": "[fluke_45_users_manual.pdf] 'OHMS;1;0;+12.345E+6 OHM'",
+      "hex": "4F 48 4D 53 3B 31 3B 30 3B 2B 31 32 2E 33 34 35 45 2B 36 20 4F 48 4D 0D 0A",
+      "expected": {
+        "dval": 12345000.0,
+        "unit": "MOhm",
+        "range": "AUTO",
+        "hold": false,
+        "special": "OH",
+        "val": "12.345"
+      }
+    },
+    {
+      "comment": "[fluke_45_users_manual.pdf] 'VDC;1;0;+1.2345E+0 VDC'",
+      "hex": "56 44 43 3B 31 3B 30 3B 2B 31 2E 32 33 34 35 45 2B 30 20 56 44 43 0D 0A",
+      "expected": {
+        "dval": 1.2345,
+        "unit": "V",
+        "range": "AUTO",
+        "hold": false,
+        "special": "DC",
+        "val": "1.2345"
+      }
+    },
+    {
+      "comment": "[fluke_45_users_manual.pdf] 'OHMS;1;0;+1E+9 OHM'",
+      "hex": "4F 48 4D 53 3B 31 3B 30 3B 2B 31 45 2B 39 20 4F 48 4D 0D 0A",
+      "expected": {
+        "unit": "Ohm",
+        "range": "AUTO",
+        "hold": false,
+        "special": "OH",
+        "val": "OL"
+      }
     }
   ]
 }
