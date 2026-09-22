@@ -39,6 +39,9 @@ class Settings;
 class InstancesDlg;
 class MeterWid;
 class ReadingLog;
+class AlarmManager;
+class AlarmBar;
+struct Alarm;
 class SharedStateManager;
 
 /// The central widget: owns the DMM connection, the settings dialog and the
@@ -156,6 +159,14 @@ protected:
   DisplayWid *m_display;
   MeterWid   *m_meter;
   ReadingLog *m_readingLog = nullptr;
+  AlarmManager *m_alarms;
+  AlarmBar   *m_alarmBar;
+  QString     m_baseUnit;          ///< of the current reading, for the alarms
+  bool        m_overload = false;
+  /// Runs an alarm's actions; the banner is rebuilt from all raised alarms.
+  void        alarmRaised(int index, const Alarm &alarm, double value);
+  void        alarmCleared(int index, const Alarm &alarm);
+  void        updateAlarmBar();
   SharedStateManager *m_stateMgr;
   double      m_dval;
   TipDlg     *m_tipDlg;

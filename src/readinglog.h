@@ -3,6 +3,7 @@
 #pragma once
 
 #include <QAbstractTableModel>
+#include <QColor>
 #include <QDateTime>
 #include <QVector>
 
@@ -26,6 +27,8 @@ public:
     QString range;        ///< "AUTO", "MANU" or empty
     bool hold = false;
     int id = 0;           ///< 0 = main display, 1+ = secondary values
+    QColor alarmColor;    ///< set when an alarm raised on this reading
+    QString alarmName;
   };
 
   enum Column { Time, Value, Unit, Mode, Range, Hold, ColumnCount };
@@ -55,6 +58,8 @@ public:
   bool isPaused() const { return m_paused; }
   void setPaused(bool paused) { m_paused = paused; }
   void clear();
+  /// An alarm raised on the newest reading: the row gets the colour.
+  void markLast(const QColor &color, const QString &name);
   const Entry &entry(int row) const { return m_entries[row]; }
 
   int maxRows() const { return m_maxRows; }

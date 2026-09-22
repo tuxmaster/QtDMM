@@ -49,6 +49,14 @@ QVariant ReadingLog::data(const QModelIndex &index, int role) const
 
   if (role == DvalRole)
     return e.dval;
+  if (role == Qt::BackgroundRole && e.alarmColor.isValid())
+  {
+    QColor c = e.alarmColor;
+    c.setAlpha(70);
+    return c;
+  }
+  if (role == Qt::ToolTipRole && !e.alarmName.isEmpty())
+    return tr("Alarm %1").arg(e.alarmName);
   if (role == Qt::TextAlignmentRole)
     return int(index.column() == Value ? Qt::AlignRight | Qt::AlignVCenter : Qt::AlignLeft | Qt::AlignVCenter);
   if (role != Qt::DisplayRole)
@@ -98,6 +106,16 @@ void ReadingLog::append(const Entry &entry)
   beginInsertRows(QModelIndex(), m_entries.size(), m_entries.size());
   m_entries.append(entry);
   endInsertRows();
+}
+
+void ReadingLog::markLast(const QColor &color, const QString &name)
+{
+  if (m_entries.isEmpty())
+    return;
+  const int row = m_entries.size() - 1;
+  m_entries[row].alarmColor = color;
+  m_entries[row].alarmName = name;
+  Q_EMIT dataChanged(index(row, 0), index(row, ColumnCount - 1), {Qt::BackgroundRole, Qt::ToolTipRole});
 }
 
 void ReadingLog::clear()
