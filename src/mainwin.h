@@ -105,6 +105,7 @@ protected:
   bool        m_running;
   QLabel     *m_error;
   QLabel     *m_info;
+  QLabel     *m_scpi;      ///< SCPI server state, hidden while it is off
   QMenu      *m_menu;
   HelpDlg    *m_helpDlg;
   SharedStateManager* m_stateMgr;

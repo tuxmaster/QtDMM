@@ -158,6 +158,115 @@ QByteArray MdnsMessage::query(const QString &service)
   return q;
 }
 
+QList<MdnsMessage::Question> MdnsMessage::questions(const QByteArray &d)
+{
+  QList<Question> qs;
+  if (d.size() < 12 || (quint8(d[2]) & 0x80))   // QR set: a response
+    return qs;
+  const int qd = u16(d, 4);
+  int pos = 12;
+  for (int i = 0; i < qd; ++i)
+  {
+    Question q;
+    if (!readName(d, pos, q.name) || pos + 4 > d.size())
+      return {};
+    q.type = u16(d, pos);
+    q.unicastResponse = quint8(d[pos + 2]) & 0x80;
+    pos += 4;
+    qs << q;
+  }
+  return qs;
+}
+
+namespace
+{
+QByteArray encodeName(const QString &name)
+{
+  QByteArray out;
+  for (const QString &label : name.split('.', Qt::SkipEmptyParts))
+  {
+    const QByteArray l = label.toUtf8().left(63);
+    out.append(char(l.size()));
+    out.append(l);
+  }
+  out.append('\0');
+  return out;
+}
+
+void appendU16(QByteArray &d, quint16 v)
+{
+  d.append(char(v >> 8));
+  d.append(char(v & 0xFF));
+}
+
+void appendRecord(QByteArray &d, const MdnsMessage::Record &r)
+{
+  d.append(encodeName(r.name));
+  appendU16(d, r.type);
+  // IN; unique records carry the cache-flush bit, the shared PTR of the
+  // service enumeration must not (RFC 6762 10.2)
+  appendU16(d, r.type == MdnsMessage::PTR ? 0x0001 : 0x8001);
+  appendU16(d, quint16(r.ttl >> 16));
+  appendU16(d, quint16(r.ttl & 0xFFFF));
+  QByteArray rdata;
+  switch (r.type)
+  {
+    case MdnsMessage::PTR:
+      rdata = encodeName(r.target);
+      break;
+    case MdnsMessage::SRV:
+      appendU16(rdata, 0);   // priority
+      appendU16(rdata, 0);   // weight
+      appendU16(rdata, r.port);
+      rdata.append(encodeName(r.target));
+      break;
+    case MdnsMessage::TXT:
+      for (auto it = r.txt.cbegin(); it != r.txt.cend(); ++it)
+      {
+        const QByteArray entry = (it.key() + '=' + it.value()).toUtf8().left(255);
+        rdata.append(char(entry.size()));
+        rdata.append(entry);
+      }
+      if (rdata.isEmpty())
+        rdata.append('\0');
+      break;
+    case MdnsMessage::A:
+    {
+      const quint32 ip = r.address.toIPv4Address();
+      appendU16(rdata, quint16(ip >> 16));
+      appendU16(rdata, quint16(ip & 0xFFFF));
+      break;
+    }
+    case MdnsMessage::AAAA:
+    {
+      const Q_IPV6ADDR ip = r.address.toIPv6Address();
+      rdata.append(reinterpret_cast<const char *>(ip.c), 16);
+      break;
+    }
+    default:
+      break;
+  }
+  appendU16(d, quint16(rdata.size()));
+  d.append(rdata);
+}
+}
+
+QByteArray MdnsMessage::response(const QList<Record> &answers, const QList<Record> &additional)
+{
+  QByteArray d;
+  appendU16(d, 0);        // id
+  appendU16(d, 0x8400);   // response, authoritative
+  appendU16(d, 0);        // questions
+  appendU16(d, quint16(answers.size()));
+  appendU16(d, 0);        // authority
+  appendU16(d, quint16(additional.size()));
+  for (const Record &r : answers)
+    appendRecord(d, r);
+  for (const Record &r : additional)
+    appendRecord(d, r);
+  return d;
+}
+
 // ---------------------------------------------------------------------------
 
 MdnsBrowser::MdnsBrowser(QObject *parent) : QObject(parent), m_timer(new QTimer(this))

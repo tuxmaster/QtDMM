@@ -40,6 +40,7 @@ class GraphPrefs;
 class IntegrationPrefs;
 class ExecutePrefs;
 class AlarmPrefs;
+class ScpiPrefs;
 #include "alarm.h"
 class PortsPrefs;
 
@@ -68,6 +69,7 @@ public:
     Ports,
     External,
     Alarms,
+    Scpi,
     NumItems,
   };
 
@@ -169,6 +171,15 @@ public:
   /// Base unit of the reading, for the alarm page's threshold labels.
   void                  setAlarmUnit(const QString &unit);
 
+  /// @name SCPI server page
+  /// @{
+  bool                  scpiEnabled() const;
+  int                   scpiPort() const;
+  bool                  scpiAllInterfaces() const;
+  bool                  scpiMdns() const;
+  void                  setScpiStatus(const QString &text);
+  /// @}
+
   /// Printer settings are kept in the Settings too.
   void                  writePrinter(QPrinter *);
   void                  readPrinter(QPrinter *);
@@ -217,6 +228,7 @@ protected:
   IntegrationPrefs     *m_integration;
   ExecutePrefs         *m_execute;
   AlarmPrefs           *m_alarms;
+  ScpiPrefs            *m_scpi;
   bool                  m_buttonBox_OK;
 
   void                  reloadSettings();

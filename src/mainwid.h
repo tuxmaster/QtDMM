@@ -43,6 +43,8 @@ class AlarmManager;
 class AlarmBar;
 struct Alarm;
 class SharedStateManager;
+class ScpiServer;
+class MdnsResponder;
 
 /// The central widget: owns the DMM connection, the settings dialog and the
 /// graph, and routes readings to the display, the meter and the recorder.
@@ -110,6 +112,8 @@ Q_SIGNALS:
   void        configChanged();
   /// A state string for the other instances (SharedStateManager).
   void        sendState(const QString&);
+  /// The SCPI server's state for the status bar ("SCPI 5025", empty = off).
+  void        scpiStatus(const QString&);
 
 public Q_SLOTS:
   /// A reading from DMM::value(). Updates display, meter, min/max, the
@@ -168,10 +172,16 @@ protected:
   void        alarmCleared(int index, const Alarm &alarm);
   void        updateAlarmBar();
   SharedStateManager *m_stateMgr;
+  ScpiServer *m_scpi;
+  MdnsResponder *m_mdns;
+  /// Starts/stops the SCPI server as configured and reports its state.
+  void        applyScpi();
+  void        updateScpiStatus();
   double      m_dval;
   TipDlg     *m_tipDlg;
   InstancesDlg *m_instancesDlg;
   Settings    *m_settings;
+  QString     m_instanceId;
 
   /// Applies the settings to DMM, graph, display and meter.
   void        readConfig();

@@ -30,6 +30,8 @@ side, one window each, and can be combined into calculated values.
   their encrypted broadcasts: key from VictronConnect, scan, what is shown.
 - [Meters over the network](remote-bridge.md) — qtdmm-bridge on a Raspberry Pi,
   serial and HID meters over RFC 2217, running it as a service.
+- [SCPI server](scpi-server.md) — the meter as a network instrument: `*IDN?`,
+  `READ?` over TCP for lxi-tools, Python or LabVIEW, announced by mDNS.
 - [Command line](command-line.md) — options, multiple instances, debug output.
 - [Keyboard and mouse](keyboard.md) — shortcuts in the main window and the
   graph.
