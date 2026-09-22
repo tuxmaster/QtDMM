@@ -25,9 +25,14 @@ static void check(bool cond, const QString &what)
 static QStringList zipEntries(const QString &path, QMap<QString, QByteArray> *contents = nullptr, bool *firstStored = nullptr)
 {
   QStringList names;
+  // miniz is built without stdio (MINIZ_NO_STDIO): read the file ourselves
+  QFile f(path);
+  if (!f.open(QIODevice::ReadOnly))
+    return names;
+  const QByteArray bytes = f.readAll();
   mz_zip_archive zip;
   memset(&zip, 0, sizeof(zip));
-  if (!mz_zip_reader_init_file(&zip, path.toLocal8Bit().constData(), 0))
+  if (!mz_zip_reader_init_mem(&zip, bytes.constData(), size_t(bytes.size()), 0))
     return names;
   for (mz_uint i = 0; i < mz_zip_reader_get_num_files(&zip); ++i)
   {
