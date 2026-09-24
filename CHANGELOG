@@ -1,5 +1,38 @@
 
-* xx/xx/2025 1.0.0
+* xx/xx/2026 yy.mm.dd (next release, version scheme changes to CalVer)
+Platforms, build and packaging
+- Versions are now calendar based (yy.mm.dd), no more manual version bumps
+- Qt Charts for the recorder graph (replaces the own plotting code)
+- Windows build (MSVC, ZIP and Inno Setup installer) and FreeBSD build, both in CI
+- Arch/CachyOS fixes ported from duke2421's fork
+- Unit tests for decoders, IPC and I/O; decoder fixtures generated from protocol specs
+- Doxygen developer documentation, handbook built into the app (help browser) and published on qtdmm.de
+- Translations: German, Spanish, French, Polish
+- Project moved to github.com/qtdmm/QtDMM, AppStream id is now io.github.qtdmm.qtdmm
+
+Meters and connections
+- Device table split into vendor and model, with chip and connection columns
+- Fluke 87-IV/89-IV/187/189/287/289 (IR cable) and Fluke 45 bench meter
+- Brymen meters over the BU-86X USB-HID cable
+- Keysight, Agilent, HP and Siglent bench meters through sigrok-cli
+- UNI-T UT-D09 cable in both revisions (CP2110 and CH9329)
+- UNI-T UT60BT over Bluetooth LE; UT61B+/D+/E+ (UT-D09, UT-D07B) and UT161B/D/E
+- Victron SmartShunt/BMV, SmartSolar/BlueSolar MPPT and Phoenix inverter (encrypted Bluetooth LE advertisements)
+- More meters and decoder chips from data sheets and sigrok; meters that need a hardware modification are marked
+- qtdmm-bridge: serve serial and USB-HID meters over the network (RFC 2217, mDNS), found by QtDMM automatically
+- Connection watchdog with automatic reconnect
+- Multiple instances with instance manager; calculated values as a formula over other instances; virtual meter
+
+Display and recording
+- New digit display and an analog meter, both as lockable dock panels
+- Readings table with every value the meter sent
+- Alarms: named conditions with banner, beep, popup, program call and graph marks
+- Export as CSV, Excel (.xlsx) and OpenDocument (.ods); graph as SVG, PDF, PNG or JPEG
+- CSV import of recordings, sample time taken from the timestamps
+- SCPI server: other programs (lxi-tools, PyVISA, ...) read the meter over the network, announced by mDNS
+- Keyboard shortcuts everywhere, settings dialog cleaned up
+
+* 06/08/2025 1.0.0-alpha.1 (pre-release)
 - Switch Qt6 (redpanther)
 - Switch to cmake build system
 - Use C++17

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.tuxmaster.qtdmm</id>
+  <id>io.github.qtdmm.qtdmm</id>
   <name>QtDMM</name>
   <summary>Digital multimeter readout application</summary>
   <metadata_license>CC-BY-SA-4.0</metadata_license>
@@ -15,9 +15,13 @@
     </p>
   </description>
 
-  <developer id="io.github.tuxmaster.qtdmm">
+  <developer id="io.github.qtdmm">
     <name>qtdmm team</name>
   </developer>
+
+  <replaces>
+    <id>io.github.tuxmaster.qtdmm</id>
+  </replaces>
 
   <launchable type="desktop-id">qtdmm.desktop</launchable>
   <url type="homepage">https://qtdmm.de</url>
