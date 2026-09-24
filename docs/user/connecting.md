@@ -31,6 +31,7 @@ The port box lists everything QtDMM found, prefixed with its type:
 | `RFC2217` | serial port on another machine, via an RFC 2217 server | `localhost:4000` |
 | `Sigrok` | any meter that `sigrok-cli` supports; the SCPI bench meters in the model list set this up in their own group ([Bench meters](bench-meters.md)) | `scpi-dmm:conn=/dev/ttyUSB0` |
 | `BLE` | Bluetooth LE broadcasts: Victron SmartShunt / MPPT / Phoenix Inverter ([Bluetooth LE](bluetooth.md)); set up in its own group instead of the port box | `CB:09:E4:16:33:DB` |
+| `BLEGATT` | Bluetooth LE connection: UNI-T UT60BT ([Bluetooth LE](bluetooth.md)); set up in the same group | `18:90:67:F1:AB:9E` |
 
 RFC2217 and sigrok entries are not detected automatically - except the
 ports of a [qtdmm-bridge](remote-bridge.md) announcing itself by mDNS, which

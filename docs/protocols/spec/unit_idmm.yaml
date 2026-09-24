@@ -1,0 +1,174 @@
+protocol: UniTiDMM
+decoder: src/decoders/unit_idmm.cpp
+devices: [UNI-T UT60BT, UNI-T UT161A, UNI-T UT161B, UNI-T UT161D, UNI-T UT161E]
+frames_per_reading: 1
+unit_map:                      # spec spelling -> what the decoder emits
+  "u": "µ"
+sources:
+  - tmp/ut60bt/walk_all.log (UT60BT dial walk, 2026-09-24)
+  - ablage/ut60bt/src/decode.test.ts (ble-multimeter, MIT - captures from a UT60BTk, 2026-06-06)
+  - ablage/ut60bt/uni-t.md (ble-multimeter protocol description)
+  - ablage/ut61xpy-main/adapters/ut61xp.py (ut61xpy - the '^' poll QtDMM uses)
+
+# UNI-T "iDMM" over Bluetooth LE GATT (Microchip/ISSC Transparent UART
+# service 49535343-fe7d-..., notify 49535343-1e4d-..., write 49535343-8841-...).
+# QtDMM writes the poll AB CD 03 5E 01 D9 and the meter answers with one
+# 19-byte frame:
+#
+#   0-1  AB CD            header
+#   2    10               length of what follows (16)
+#   3    function         bit 7 masked: 0 ACV, 1 ACmV, 2 DCV, 3 DCmV, 4 Hz, 5 %,
+#                         6 OHM, 7 CONT, 8 DIODE, 9 CAP, 10 C, 11 F, 12 DCuA,
+#                         13 ACuA, 14 DCmA, 15 ACmA, 16 DCA, 17 ACA, 18 hFE,
+#                         20 NCV, 21 LozV (22-30 other UNI-T models)
+#   4    range            ASCII digit; with the function it gives unit/prefix
+#                         (OHM 0 Ohm, 1-3 kOhm, 4-6 MOhm; CAP 0-1 nF, 2-4 uF,
+#                         5-7 mF; Hz 0-1 Hz, 2-4 kHz, 5-7 MHz)
+#   5-11 display          7 ASCII characters as on the LCD, sign and decimal
+#                         point included; overload as OL with a floating dot
+#   12-13 bar graph       hi, lo
+#   14   flags A          bit 3 MAX, 2 MIN, 1 HOLD, 0 REL
+#   15   flags B          bit 2 manual range, 1 low battery, 0 high voltage
+#   16   flags C          bit 3 AC, 2 peak max, 1 peak min, 0 bar negative
+#   17-18 checksum        16-bit big-endian sum of bytes 0-16
+#
+# Ranges were checked on a UT60BT dial by dial against its LCD (2026-09-24,
+# tmp/ut60bt/walk_all.log): V DC and V AC start in a 999.9 mV range (range 0),
+# the mV position has two ranges (9.999 / 99.99 mV), OHM range 4 is MOhm.
+# Switching the dial produces one transition frame with the new function and
+# the old display (fn=2 with the mV text "-18.11") - ble-multimeter's
+# "DCV r0 -1.325 V" is such a frame and is left out; its "ACV r0 274.7" is mV.
+# The NCV strength bar ("-") is left out because it is neither a number nor a
+# letter display. The vectors after ble-multimeter's are captures from that
+# UT60BT.
+vectors:
+  - source_line: "ACV r0: 274.7 (mV - ble-multimeter labels it V)"
+    bytes: AB CD 10 00 30 20 20 32 37 34 2E 37 00 00 00 00 08 03 02
+    reading: {value: "274.7", unit: "mV", range_mode: auto}
+    expect: {special: "AC", val: "274.7"}
+  - source_line: "ACV r1: 0.219"
+    bytes: AB CD 10 00 31 20 20 30 2E 32 31 39 00 00 00 04 08 02 FF
+    reading: {value: "0.219", unit: "V", range_mode: manual}
+    expect: {special: "AC", val: "0.219"}
+  - source_line: "ACV r2: 0.26"
+    bytes: AB CD 10 00 32 20 20 20 30 2E 32 36 00 00 00 04 08 02 EC
+    reading: {value: "0.26", unit: "V", range_mode: manual}
+    expect: {special: "AC", val: "0.26"}
+  - source_line: "ACV r3: 1.4"
+    bytes: AB CD 10 00 33 20 20 20 20 31 2E 34 00 00 00 04 08 02 DA
+    reading: {value: "1.4", unit: "V", range_mode: manual}
+    expect: {special: "AC", val: "1.4"}
+  - source_line: "DCV r1: -0.001"
+    bytes: AB CD 10 02 31 20 2D 30 2E 30 30 31 00 00 00 04 00 02 FB
+    reading: {value: "-0.001", unit: "V", range_mode: manual}
+    expect: {special: "DC", val: "-0.001"}
+  - source_line: "DCV r2: 0.00"
+    bytes: AB CD 10 02 32 20 20 20 30 2E 30 30 00 00 00 04 00 02 DE
+    reading: {value: "0.00", unit: "V", range_mode: manual}
+    expect: {special: "DC", val: "0.00"}
+  - source_line: "DCV r3: 0.0"
+    bytes: AB CD 10 02 33 20 20 20 20 30 2E 30 00 00 00 04 00 02 CF
+    reading: {value: "0.0", unit: "V", range_mode: manual}
+    expect: {special: "DC", val: "0.0"}
+  - source_line: "DCmV r1: 32.42"
+    bytes: AB CD 10 03 31 20 20 33 32 2E 34 32 00 00 00 00 00 02 F5
+    reading: {value: "32.42", unit: "mV", range_mode: auto}
+    expect: {special: "DC", val: "32.42"}
+  - source_line: "Hz r0: 0.000"
+    bytes: AB CD 10 04 30 20 20 30 2E 30 30 30 00 00 00 00 08 02 F2
+    reading: {value: "0.000", unit: "Hz", range_mode: auto}
+    expect: {special: "HZ", val: "0.000"}
+  - source_line: "OHM r0 OL: OL."
+    bytes: AB CD 10 06 30 20 20 20 4F 4C 2E 20 00 00 00 00 00 03 07
+    reading: {value: "OL", unit: "Ohm", range_mode: auto}
+    expect: {special: "OH", val: "OL"}
+  - source_line: "OHM r5 OL: O.L"
+    bytes: AB CD 10 06 35 20 20 20 4F 2E 4C 20 00 00 00 00 00 03 0C
+    reading: {value: "OL", unit: "MOhm", range_mode: auto}
+    expect: {special: "OH", val: "OL"}
+  - source_line: "CONT r0 OL: OL."
+    bytes: AB CD 10 07 30 20 20 20 4F 4C 2E 20 00 00 00 04 00 03 0C
+    reading: {value: "OL", unit: "Ohm", range_mode: manual}
+    expect: {special: "BUZ", val: "OL"}
+  - source_line: "DIODE r1 OL: .OL"
+    bytes: AB CD 10 08 31 20 20 2E 4F 4C 20 20 00 00 00 04 00 03 0E
+    reading: {value: "OL", unit: "V", range_mode: manual}
+    expect: {special: "DI", val: "OL"}
+  - source_line: "CAP r0: 0.011"
+    bytes: AB CD 10 09 30 20 20 30 2E 30 31 31 00 00 00 00 00 02 F1
+    reading: {value: "0.011", unit: "nF", range_mode: auto}
+    expect: {special: "CA", val: "0.011"}
+  - source_line: "CAP r1 OL: .OL"
+    bytes: AB CD 10 09 31 20 20 2E 4F 4C 20 20 00 00 00 00 00 03 0B
+    reading: {value: "OL", unit: "nF", range_mode: auto}
+    expect: {special: "CA", val: "OL"}
+  - source_line: "°C r0: 0"
+    bytes: AB CD 10 0A 30 20 20 20 20 20 30 20 00 00 00 04 00 02 B6
+    reading: {value: "0", unit: "C", range_mode: manual}
+    expect: {special: "TE", val: "0"}
+  - source_line: "°C r0 OL: OL"
+    bytes: AB CD 10 0A 30 20 20 20 4F 4C 20 20 00 00 00 04 00 03 01
+    reading: {value: "OL", unit: "C", range_mode: manual}
+    expect: {special: "TE", val: "OL"}
+  - source_line: "DCµA r0: 0.0"
+    bytes: AB CD 10 0C 30 20 20 20 20 30 2E 30 00 00 00 04 00 02 D6
+    reading: {value: "0.0", unit: "µA", range_mode: manual}
+    expect: {special: "DC", val: "0.0"}
+  - source_line: "DCmA r0: 0.0"
+    bytes: AB CD 10 0E 30 20 20 20 20 30 2E 30 00 00 00 00 00 02 D4
+    reading: {value: "0.0", unit: "mA", range_mode: auto}
+    expect: {special: "DC", val: "0.0"}
+  - source_line: "NCV EFLO: EFLO"
+    bytes: AB CD 10 14 30 20 20 45 46 4C 4F 20 00 00 00 04 08 03 5E
+    reading: {value: "EFLO", unit: "", range_mode: manual}
+    expect: {special: "NCV", val: "EFLO"}
+  - source_line: "UT60BT V DC, 1.5 V cell: 1.594 V"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 02 31 20 20 31 2E 35 39 34 00 00 00 00 00 02 FC
+    reading: {value: "1.594", unit: "V", range_mode: auto}
+    expect: {special: "DC", val: "1.594"}
+  - source_line: "UT60BT V DC r0: 91.5 mV"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 02 30 20 20 20 39 31 2E 35 00 00 00 00 00 02 E7
+    reading: {value: "91.5", unit: "mV", range_mode: auto}
+    expect: {special: "DC", val: "91.5"}
+  - source_line: "UT60BT V AC open: 38.2 mV"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 00 30 20 20 20 33 38 2E 32 00 00 00 00 08 02 EB
+    reading: {value: "38.2", unit: "mV", range_mode: auto}
+    expect: {special: "AC", val: "38.2"}
+  - source_line: "UT60BT mV r0: -4.569 mV"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 03 30 20 2D 34 2E 35 36 39 00 00 00 00 00 03 0E
+    reading: {value: "-4.569", unit: "mV", range_mode: auto}
+    expect: {special: "DC", val: "-4.569"}
+  - source_line: "UT60BT mV r1: -20.77 mV"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 03 31 20 2D 32 30 2E 37 37 00 00 00 00 00 03 07
+    reading: {value: "-20.77", unit: "mV", range_mode: auto}
+    expect: {special: "DC", val: "-20.77"}
+  - source_line: "UT60BT OHM r4: 1.188 MOhm"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 06 34 20 20 31 2E 31 38 38 00 00 00 00 00 03 02
+    reading: {value: "1.188", unit: "MOhm", range_mode: auto}
+    expect: {special: "OH", val: "1.188"}
+  - source_line: "UT60BT OHM r5 O.L"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 06 35 20 20 20 4F 2E 4C 20 00 00 00 00 00 03 0C
+    reading: {value: "OL", unit: "MOhm", range_mode: auto}
+    expect: {special: "OH", val: "OL"}
+  - source_line: "UT60BT CAP r0: 0.019 nF"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 09 30 20 20 30 2E 30 31 39 00 00 00 00 00 02 F9
+    reading: {value: "0.019", unit: "nF", range_mode: auto}
+    expect: {special: "CA", val: "0.019"}
+  - source_line: "UT60BT duty r0: 0.0 %"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 05 30 20 20 20 20 30 2E 30 00 00 00 00 08 02 D3
+    reading: {value: "0.0", unit: "%", range_mode: auto}
+    expect: {special: "DU", val: "0.0"}
+  - source_line: "UT60BT NCV EFLO"
+    source: tmp/ut60bt/walk_all.log
+    bytes: AB CD 10 14 30 20 20 45 46 4C 4F 20 00 00 00 04 08 03 5E
+    reading: {value: "EFLO", unit: "", range_mode: manual}
+    expect: {special: "NCV", val: "EFLO"}

@@ -1,4 +1,40 @@
-# Bluetooth LE: Victron Instant Readout
+# Bluetooth LE
+
+QtDMM reads two kinds of Bluetooth LE meters:
+
+- **UNI-T UT60BT** (and, untested, the UT161 series) - QtDMM *connects* to
+  the meter and asks it for readings, like a serial meter on a cable.
+- **Victron** SmartShunt, BMV-712, MPPT chargers and Phoenix inverters - QtDMM
+  *listens* to the readings they broadcast, without a connection.
+
+## UNI-T UT60BT
+
+The UT60BT has Bluetooth built in. Switch it on with the meter's Bluetooth
+key (the Bluetooth symbol appears on the LCD); the meter switches it off
+again after a while without a connection.
+
+In QtDMM, **Settings → Multimeter**: choose vendor **Uni-Trend** and the
+model **UT60BT**. Instead of the port box a **Bluetooth** group appears:
+
+- **Device** - press **Scan** to list the UT60BT meters in range (six
+  seconds), or type the address. The meter advertises as *UT60BT*.
+
+Then **Connect**. QtDMM connects to the meter, asks it for a reading about
+three times a second and shows what the LCD shows - value, unit and range,
+AC/DC, HOLD, manual/auto range, the diode and continuity symbols and OL.
+When the meter goes out of range or switches Bluetooth off, the status line
+says so and QtDMM connects again as soon as the meter is back.
+
+Only one program can be connected to the meter at a time: close the UNI-T
+app or any other tool first.
+
+Like the meter itself, QtDMM shows 0 in the dead bands the UT60BT keeps
+around zero (about ±10 µV in the mV position, ±5 mA on the current
+ranges). The rotary switch is mechanical; changing it produces one frame
+with the new function and the old number, which QtDMM passes on like the
+meter's own display does.
+
+## Victron Instant Readout
 
 Victron Energy's SmartShunt, BMV-712 Smart, the SmartSolar / BlueSolar
 MPPT chargers and the Phoenix Inverter Smart broadcast their readings in their Bluetooth LE
@@ -20,7 +56,7 @@ The defaults are the first two of each row. About one reading per second
 arrives. Run several QtDMM instances on the same device to record more
 than two of its values at once ([instances](command-line.md)).
 
-## Setting it up
+### Setting it up
 
 The broadcasts are encrypted with a key that only the device's owner has.
 In the VictronConnect app open the device, then **Settings → Product info →
@@ -44,18 +80,18 @@ does not match* after a few advertisements; when the device goes out of
 range or is switched off the usual timeout appears and QtDMM keeps
 listening.
 
+### What is not there yet
+
+The device state (eco mode, bulk/absorption/float), alarms and charger
+errors are decoded but not shown. Other Victron products (DC-DC converters,
+Smart Lithium, Multi RS, AC chargers) broadcast in the same way and can
+follow once someone has one to test with.
+
 ## Requirements
 
 A Bluetooth LE adapter and a QtDMM built with Qt's Bluetooth module
 (`QTDMM_WITH_BLE`, on by default when Qt6 Bluetooth is found - on Debian /
 Ubuntu that is the `qt6-connectivity-dev` package at build time and
 `libqt6bluetooth6` at run time). Linux uses BlueZ over D-Bus; QtDMM does
-not need root. Without the module the Victron models are listed but cannot
+not need root. Without the module the Bluetooth models are listed but cannot
 be connected.
-
-## What is not there yet
-
-The device state (eco mode, bulk/absorption/float), alarms and charger
-errors are decoded but not shown. Other Victron products (DC-DC converters,
-Smart Lithium, Multi RS, AC chargers) broadcast in the same way and can
-follow once someone has one to test with.

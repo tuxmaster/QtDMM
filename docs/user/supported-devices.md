@@ -114,9 +114,14 @@ meter working, please report it on the
 | Tenma | 72-7732 | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
 | Tenma | 72-7745 | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Tenma | 72-9380A ¹ | - | `VC940Continuous` | 2400 7O1 | DTR | 40000 |
+| Uni-Trend | UT161A ¹ | - | `UniTiDMM` | Bluetooth LE | - | 6000 |
+| Uni-Trend | UT161B ¹ | - | `UniTiDMM` | Bluetooth LE | - | 6000 |
+| Uni-Trend | UT161D ¹ | - | `UniTiDMM` | Bluetooth LE | - | 6000 |
+| Uni-Trend | UT161E ¹ | - | `UniTiDMM` | Bluetooth LE | - | 22000 |
 | Uni-Trend | UT30A ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Uni-Trend | UT30E ¹ | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Uni-Trend | UT60A | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
+| Uni-Trend | UT60BT | - | `UniTiDMM` | Bluetooth LE | - | 10000 |
 | Uni-Trend | UT60D ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
 | Uni-Trend | UT60E | FS9721 LP3 | `VC820Continuous` | 2400 8N1 | DTR | 4000 |
 | Uni-Trend | UT61A ¹ | FS9922-DMM4 | `QM1537Continuous` | 2400 8N1 | DTR | 6000 |
@@ -177,4 +182,4 @@ meter working, please report it on the
 - **Generic DTM0660 4000 count, DTM0660 6000 count, DTM0660 8000 count**: the DTM0660 chip has a UART, but meters built on it (Victor VC921 and similar) ship without an interface: an IR LED with a 100 Ω resistor goes on the chip's TX pin and the RS232 bit in the 24C02 EEPROM has to be set - [eevblog: hacking the Victor VC-921](https://www.eevblog.com/forum/testgear/hacking-the-victor-vc-921/). PeakTech 3415 and Velleman DVM4100 use the same chip but come with a cable and need no change.
 - **Vichy VC99**: the FS9922-DMM4 chip sends the display at 2400 baud on an unused pin; a wire or IR LED has to be soldered to it and *REL* held to start the output - [Hackaday](https://hackaday.com/2010/11/30/unlocking-rs232-serial-comm-on-a-multimeter/), [David Pilling](https://www.davidpilling.com/wiki/index.php/VC99).
 
-146 devices across 37 vendors.
+151 devices across 37 vendors.

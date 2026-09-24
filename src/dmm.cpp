@@ -30,6 +30,7 @@
 #include "portdevices/calc.h"
 #ifdef QTDMM_WITH_BLE
 #include "portdevices/ble.h"
+#include "portdevices/blegatt.h"
 #endif
 #include "portdevices/rfc2217serial.h"
 #include "portdevices/sigrok.h"
@@ -201,7 +202,7 @@ bool DMM::openPort()
   if (m_portHandler->port() && !m_portHandler->port()->open(QIODevice::ReadWrite))
   {
     if (m_portType == PortHandler::PortType::Calc || m_portType == PortHandler::PortType::RFC2217
-        || m_portType == PortHandler::PortType::Ble)
+        || m_portType == PortHandler::PortType::Ble || m_portType == PortHandler::PortType::BleGatt)
     {
       // the formula did not parse / the address or key is malformed; the device says where
       m_error = m_portHandler->port()->errorString();
@@ -259,6 +260,8 @@ bool DMM::openPort()
 #ifdef QTDMM_WITH_BLE
   else if (auto *ble = dynamic_cast<BleAdvertisementDevice *>(port))
     connect(ble, &BleAdvertisementDevice::finished, this, [this, ble](const QString &reason) { portLost(ble, reason); });
+  else if (auto *gatt = dynamic_cast<BleGattDevice *>(port))
+    connect(gatt, &BleGattDevice::finished, this, [this, gatt](const QString &reason) { portLost(gatt, reason); });
 #endif
   else if (auto *serial = dynamic_cast<QSerialPort *>(port))
     connect(serial, &QSerialPort::errorOccurred, this, [this, serial](QSerialPort::SerialPortError e)
