@@ -131,7 +131,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_dmm->label(),
                  ui_list);
   m_dmm->setCfg(m_settings);
-  ui_stack->insertWidget(m_dmm->id(), m_dmm);
+  addPage(m_dmm);
 
   m_gui = new GuiPrefs(ui_stack);
   m_gui->setId(ConfigDlg::GUI);
@@ -140,7 +140,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_gui->label(),
                  ui_list);
   m_gui->setCfg(m_settings);
-  ui_stack->insertWidget(m_gui->id(), m_gui);
+  addPage(m_gui);
 
   m_graph = new GraphPrefs(ui_stack);
   m_graph->setId(ConfigDlg::Graph);
@@ -149,7 +149,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_graph->label(),
                  ui_list);
   m_graph->setCfg(m_settings);
-  ui_stack->insertWidget(m_graph->id(), m_graph);
+  addPage(m_graph);
 
   m_scale = new ScalePrefs(ui_stack);
   m_scale->setId(ConfigDlg::Scale);
@@ -158,7 +158,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_scale->label(),
                  ui_list);
   m_scale->setCfg(m_settings);
-  ui_stack->insertWidget(m_scale->id(), m_scale);
+  addPage(m_scale);
 
   m_integration = new IntegrationPrefs(ui_stack);
   m_integration->setId(ConfigDlg::Integration);
@@ -167,7 +167,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_integration->label(),
                  ui_list);
   m_integration->setCfg(m_settings);
-  ui_stack->insertWidget(m_integration->id(), m_integration);
+  addPage(m_integration);
 
   m_recorder = new RecorderPrefs(ui_stack);
   m_recorder->setId(ConfigDlg::Recorder);
@@ -176,7 +176,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_recorder->label(),
                  ui_list);
   m_recorder->setCfg(m_settings);
-  ui_stack->insertWidget(m_recorder->id(), m_recorder);
+  addPage(m_recorder);
 
   m_ports = new PortsPrefs(ui_stack);
   m_ports->setId(ConfigDlg::Ports);
@@ -185,7 +185,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_ports->label(),
                  ui_list);
   m_ports->setCfg(m_settings);
-  ui_stack->insertWidget(m_ports->id(), m_ports);
+  addPage(m_ports);
 
   m_execute = new ExecutePrefs(ui_stack);
   m_execute->setId(ConfigDlg::External);
@@ -194,7 +194,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_execute->label(),
                  ui_list);
   m_execute->setCfg(m_settings);
-  ui_stack->insertWidget(m_execute->id(), m_execute);
+  addPage(m_execute);
 
   m_alarms = new AlarmPrefs(ui_stack);
   m_alarms->setId(ConfigDlg::Alarms);
@@ -203,7 +203,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_alarms->label(),
                  ui_list);
   m_alarms->setCfg(m_settings);
-  ui_stack->insertWidget(m_alarms->id(), m_alarms);
+  addPage(m_alarms);
 
   m_scpi = new ScpiPrefs(ui_stack);
   m_scpi->setId(ConfigDlg::Scpi);
@@ -212,7 +212,7 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
                  m_scpi->label(),
                  ui_list);
   m_scpi->setCfg(m_settings);
-  ui_stack->insertWidget(m_scpi->id(), m_scpi);
+  addPage(m_scpi);
 
   // init stuff
   //
@@ -220,6 +220,38 @@ ConfigDlg::ConfigDlg(Settings* settings, QWidget *parent)
   showPage(DMM);
   ui_undo->hide();
   adjustSize();
+}
+
+void ConfigDlg::addPage(PrefWidget *page)
+{
+  auto *scroll = new QScrollArea(ui_stack);
+  scroll->setWidgetResizable(true);
+  scroll->setFrameShape(QFrame::NoFrame);
+  scroll->setWidget(page);
+  ui_stack->insertWidget(page->id(), scroll);
+}
+
+PrefWidget *ConfigDlg::page(int index) const
+{
+  auto *scroll = qobject_cast<QScrollArea *>(ui_stack->widget(index));
+  return scroll ? qobject_cast<PrefWidget *>(scroll->widget()) : nullptr;
+}
+
+void ConfigDlg::showEvent(QShowEvent *event)
+{
+  QDialog::showEvent(event);
+  // the pages scroll, so the dialog may be smaller than its content; leave
+  // room for the window frame, which frameGeometry() only knows once shown
+  const QRect avail = screen()->availableGeometry();
+  const QSize frame = frameGeometry().size() - size();
+  const QSize max = avail.size() - frame.expandedTo(QSize(0, 40));
+  if (width() > max.width() || height() > max.height())
+    resize(size().boundedTo(max));
+  QRect r = frameGeometry();
+  r.moveTop(qBound(avail.top(), r.top(), qMax(avail.top(), avail.bottom() - r.height())));
+  r.moveLeft(qBound(avail.left(), r.left(), qMax(avail.left(), avail.right() - r.width())));
+  if (r.topLeft() != frameGeometry().topLeft())
+    move(r.topLeft());
 }
 
 void ConfigDlg::setStateManager(SharedStateManager *state)
@@ -237,7 +269,7 @@ void ConfigDlg::showPage(ConfigDlg::PageType page)
     {
       ui_list->setCurrentRow(entry);
       ui_stack->setCurrentIndex(page);
-      wid = dynamic_cast<PrefWidget *>(ui_stack->widget(page));
+      wid = this->page(page);
       break;
     }
   }
@@ -250,7 +282,7 @@ void ConfigDlg::showPage(ConfigDlg::PageType page)
 
 void ConfigDlg::on_ui_factoryDefaults_clicked()
 {
-  dynamic_cast<PrefWidget *>(ui_stack->currentWidget())->factoryDefaultsSLOT();
+  page(ui_stack->currentIndex())->factoryDefaultsSLOT();
 }
 
 void ConfigDlg::zoomInSLOT(double fac)
@@ -310,7 +342,7 @@ void ConfigDlg::reloadSettings()
   for (int i = 0; i < count; i++)
     QColorDialog::setCustomColor(i, m_settings->getColor(QString("Custom colors/color_%1").arg(i)));
   for (int i = 0; i < NumItems; ++i)
-    dynamic_cast<PrefWidget *>(ui_stack->widget(i))->defaultsSLOT();
+    page(i)->defaultsSLOT();
 }
 
 void ConfigDlg::on_ui_buttonBox_rejected()
@@ -349,7 +381,7 @@ void ConfigDlg::on_ui_buttonBox_accepted()
   m_settings->setBool("Printer/print-file", (m_printer->outputFormat() == QPrinter::PdfFormat) ? true : false);
 
   for (int i = 0; i < NumItems; ++i)
-    dynamic_cast<PrefWidget *>(ui_stack->widget(i))->applySLOT();
+    page(i)->applySLOT();
 
   m_settings->save();
   reloadSettings();
@@ -399,8 +431,8 @@ void ConfigDlg::readPrinter(QPrinter *printer)
 void ConfigDlg::on_ui_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *)
 {
   int id = dynamic_cast<ConfigItem *>(current)->id();
-  PrefWidget *wid = dynamic_cast<PrefWidget *>(ui_stack->widget(id));
-  ui_stack->setCurrentWidget(wid);
+  PrefWidget *wid = page(id);
+  ui_stack->setCurrentIndex(id);
 
   ui_helpText->setText(wid->description());
   ui_helpPixmap->setPixmap(wid->pixmap());
