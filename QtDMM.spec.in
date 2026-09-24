@@ -10,18 +10,22 @@ Source0:        %{name}-%{version}.tar.bz2
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
 BuildRequires:  desktop-file-utils
-BuildRequires:  hicolor-icon-theme
-BuildRequires:  pkgconfig(Qt6Core)
-BuildRequires:  pkgconfig(Qt6Gui)
-BuildRequires:  pkgconfig(Qt6Widgets)
-BuildRequires:  pkgconfig(Qt6SerialPort)
+BuildRequires:  libappstream-glib
+BuildRequires:  cmake(Qt6Core)
+BuildRequires:  cmake(Qt6Gui)
+BuildRequires:  cmake(Qt6Widgets)
+BuildRequires:  cmake(Qt6SerialPort)
+BuildRequires:  cmake(Qt6PrintSupport)
+BuildRequires:  cmake(Qt6Network)
+BuildRequires:  cmake(Qt6Charts)
+BuildRequires:  cmake(Qt6Svg)
+BuildRequires:  cmake(Qt6Bluetooth)
+BuildRequires:  cmake(Qt6Test)
+BuildRequires:  cmake(Qt6LinguistTools)
 BuildRequires:  pkgconfig(hidapi-hidraw)
-
-Requires: pkgconfig(Qt6Core)
-Requires: pkgconfig(Qt6SerialPort)
-Requires: pkgconfig(hidapi-hidraw)
-
-%undefine source_date_epoch_from_changelog
+Requires:       hicolor-icon-theme
+Suggests:       sigrok-cli
+# the libraries (Qt modules, hidapi) are found by rpm's automatic dependencies
 
 %description
 @CPACK_DEBIAN_PACKAGE_DESCRIPTION@
@@ -30,15 +34,16 @@ Requires: pkgconfig(hidapi-hidraw)
 %autosetup
 
 %build
-%cmake .
+%cmake -DBUILD_TESTING=ON
 %cmake_build
 
 %check
-./compile.sh ctest
+desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
+appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/io.github.qtdmm.qtdmm.metainfo.xml
+QT_QPA_PLATFORM=offscreen %ctest
 
 %install
 %cmake_install
-desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 
 %files
 %license LICENSE
@@ -46,6 +51,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/qtdmm.desktop
 %{_bindir}/qtdmm
 %{_datadir}/applications/qtdmm.desktop
 %{_datadir}/icons/hicolor/*/apps/qtdmm.png
+%{_mandir}/man1/qtdmm.1*
+%{_metainfodir}/io.github.qtdmm.qtdmm.metainfo.xml
 
 %changelog
 @RPM_CHANGELOG@

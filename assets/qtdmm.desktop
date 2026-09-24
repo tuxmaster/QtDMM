@@ -1,9 +1,13 @@
 [Desktop Entry]
 Type=Application
 Name=QtDMM
-Comment=Application for dmm's
-Comment[de]=Anwendung für DMM's
+GenericName=Multimeter Readout
+GenericName[de]=Multimeter-Auslese
+Comment=Read out and record digital multimeters
+Comment[de]=Digitalmultimeter auslesen und aufzeichnen
 Exec=qtdmm
 Icon=qtdmm
 Terminal=false
 Categories=Science;Electronics;
+Keywords=multimeter;DMM;voltmeter;recorder;logger;measurement;
+Keywords[de]=Multimeter;DMM;Messgerät;Aufzeichnung;Logger;Messung;

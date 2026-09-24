@@ -112,6 +112,8 @@ then
 	wget -q https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
 	chmod +x appimagetool-x86_64.AppImage
 	DESTDIR=AppDir cmake --install .
+	# appimagetool looks the metadata up by the desktop file's name
+	rm -f AppDir/usr/share/metainfo/io.github.qtdmm.qtdmm.metainfo.xml
 	cp -v ../assets/qtdmm.desktop ../qtdmm.png AppDir
 	cp -v ../assets/appimage/qtdmm.appdata.xml AppDir/usr/share/metainfo
 	echo '#!/bin/sh' > AppDir/AppRun

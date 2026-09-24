@@ -1,14 +1,15 @@
-# Maintainer: Dein Name <deine@email.tld>
+# Maintainer: QtDMM team <hello@qtdmm.de>
 pkgname=qtdmm
 pkgver=0.0.0 # placeholder, overwritten by pkgver() below on every build
 pkgrel=1
-pkgdesc="A DMM readout software including a configurable recorder "
+pkgdesc="Read out and record digital multimeters"
 arch=('x86_64')
 url="https://github.com/qtdmm/QtDMM"
-license=('GPL3')
+license=('GPL-3.0-or-later')
 provides=('qtdmm')
 conflicts=('qtdmm' 'qtdmm-qt5')
-depends=('qt6-base' 'qt6-translations' 'qt6-serialport' 'qt6-charts' 'qt6-svg' 'hidapi')
+depends=('qt6-base' 'qt6-translations' 'qt6-serialport' 'qt6-charts' 'qt6-svg' 'qt6-connectivity' 'hidapi')
+optdepends=('sigrok-cli: bench meters through sigrok')
 makedepends=('qt6-tools' 'cmake' 'git')
 source=("$pkgname::git+https://github.com/qtdmm/QtDMM.git")
 sha256sums=('SKIP')
@@ -29,6 +30,5 @@ build() {
 
 package() {
   cd "$pkgname"
-  echo "---- $pkgdir"
   DESTDIR="$pkgdir" cmake --install build
 }

@@ -2,21 +2,27 @@
 <component type="desktop-application">
   <id>io.github.qtdmm.qtdmm</id>
   <name>QtDMM</name>
-  <summary>Digital multimeter readout application</summary>
+  <summary>Read out and record digital multimeters</summary>
   <metadata_license>CC-BY-SA-4.0</metadata_license>
-  <project_license>AGPL-3.0-only</project_license>
-  
+  <project_license>GPL-3.0-or-later</project_license>
+
   <description>
     <p>
-      QtDMM is a simple, cross-platform digital multimeter (DMM) readout application with a built-in, configurable transient recorder. It&apos;s especially useful for users of older multimeters whose original software no longer runs on modern operating systems.
+      QtDMM reads digital multimeters (DMMs) over serial and USB cables, Bluetooth LE or the network, shows the reading as an LCD display and an analog meter, and records it with a configurable transient recorder. It is especially useful for older multimeters whose original software no longer runs on current operating systems.
     </p>
+    <ul>
+      <li>More than 150 meters from UNI-T, Voltcraft, Metex, PeakTech, Fluke, Brymen and others, plus bench meters through sigrok-cli</li>
+      <li>Recorder with export as CSV, Excel, OpenDocument, SVG, PDF and PNG</li>
+      <li>Readings table, alarms, calculated values across several meters</li>
+      <li>SCPI server, so other programs can read the meter over the network</li>
+    </ul>
     <p>
-      QtDMM provides a reliable, open-source alternative to outdated or proprietary DMM software and continues to work on current Linux and macOS systems (Windows support is currently limited/untested).
+      QtDMM runs on Linux, Windows, macOS and FreeBSD.
     </p>
   </description>
 
   <developer id="io.github.qtdmm">
-    <name>qtdmm team</name>
+    <name>QtDMM team</name>
   </developer>
 
   <replaces>
@@ -24,14 +30,19 @@
   </replaces>
 
   <launchable type="desktop-id">qtdmm.desktop</launchable>
+  <provides>
+    <binary>qtdmm</binary>
+  </provides>
   <url type="homepage">https://qtdmm.de</url>
-  <url type="contact">mailto:hello@qtdmm.de</url>
   <url type="bugtracker">https://github.com/qtdmm/QtDMM/issues</url>
+  <url type="vcs-browser">https://github.com/qtdmm/QtDMM</url>
   <url type="help">https://qtdmm.de/docs/</url>
-  <content_rating type="oars-1.0" />
+  <update_contact>hello@qtdmm.de</update_contact>
+  <content_rating type="oars-1.1" />
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/qtdmm/QtDMM/blob/master/assets/appimage/screenshot.png</image>
+      <caption>LCD display, analog meter, recorder and readings table</caption>
+      <image>https://raw.githubusercontent.com/qtdmm/QtDMM/master/assets/appimage/screenshot.png</image>
     </screenshot>
   </screenshots>
 </component>

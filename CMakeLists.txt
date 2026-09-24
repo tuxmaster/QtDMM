@@ -5,8 +5,8 @@ project(qtdmm VERSION "0.0.0" HOMEPAGE_URL "https://qtdmm.de" LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
-set(PROJECT_LICENSE "GPL-3.0")
-set(RESOURCES "src/resources.qrc")
+set(PROJECT_LICENSE "GPL-3.0-or-later")
+set(RESOURCES "${CMAKE_BINARY_DIR}/resources.qrc")
 set(APP_NAME "QtDMM")
 set(APP_ORGANIZATION "QtDMM")
 set(QT_COMPONENTS Widgets SerialPort PrintSupport Test LinguistTools Network Charts Svg)
@@ -21,21 +21,21 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp src/*.h )
 file(GLOB XPM_FILES CONFIGURE_DEPENDS assets/icons/*.xpm )
 
 
-## generate resource.qrc so you can't forget to add the icons and translations
+## generate resources.qrc so you can't forget to add the icons and translations.
+## It lives in the build directory with absolute paths: the source tree stays
+## untouched, and several build directories don't overwrite each other's file.
 list(SORT XPM_FILES)
 set(RES_CONTENT "    <qresource prefix=\"/Symbols\">\n")
 foreach(file_path IN LISTS XPM_FILES)
 	get_filename_component(base_name "${file_path}" NAME)
-	set(RES_CONTENT "${RES_CONTENT}        <file alias=\"${base_name}\">../assets/icons/${base_name}</file>\n")
+	set(RES_CONTENT "${RES_CONTENT}        <file alias=\"${base_name}\">${file_path}</file>\n")
 endforeach()
-file(WRITE "src/resources.qrc" "${RES_CONTENT}    </qresource>\n")
 set(RES_CONTENT "${RES_CONTENT}    </qresource>\n")
 
 set(RES_CONTENT "${RES_CONTENT}    <qresource prefix=\"/Translations\">\n")
 foreach(translation_file IN LISTS TRANSLATIONS)
 	string(REGEX REPLACE "^.*/${PROJECT_NAME}_([^.]+)\\.ts$" "\\1" lang ${translation_file})
-	file(RELATIVE_PATH translation_file ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}/${PROJECT_NAME}_${lang}.qm)
-	set(RES_CONTENT "${RES_CONTENT}        <file alias=\"${lang}\">../${translation_file}</file>\n")
+	set(RES_CONTENT "${RES_CONTENT}        <file alias=\"${lang}\">${CMAKE_BINARY_DIR}/${PROJECT_NAME}_${lang}.qm</file>\n")
 endforeach()
 set(RES_CONTENT "${RES_CONTENT}    </qresource>\n")
 
@@ -46,12 +46,13 @@ list(SORT HELP_FILES)
 set(RES_CONTENT "${RES_CONTENT}    <qresource prefix=\"/Help\">\n")
 foreach(file_path IN LISTS HELP_FILES)
 	file(RELATIVE_PATH alias "${CMAKE_SOURCE_DIR}/docs/user" "${file_path}")
-	file(RELATIVE_PATH rel "${CMAKE_SOURCE_DIR}/src" "${file_path}")
-	set(RES_CONTENT "${RES_CONTENT}        <file alias=\"${alias}\">${rel}</file>\n")
+	set(RES_CONTENT "${RES_CONTENT}        <file alias=\"${alias}\">${file_path}</file>\n")
 endforeach()
 set(RES_CONTENT "${RES_CONTENT}    </qresource>\n")
 
-file(WRITE "src/resources.qrc" "<!-- ATTENTION this file is auto generated -->\n<RCC>\n${RES_CONTENT}</RCC>\n")
+## written only when the content changed, so a reconfigure doesn't rebuild the resources
+file(WRITE "${CMAKE_BINARY_DIR}/resources.qrc.new" "<!-- ATTENTION this file is auto generated -->\n<RCC>\n${RES_CONTENT}</RCC>\n")
+configure_file("${CMAKE_BINARY_DIR}/resources.qrc.new" "${RESOURCES}" COPYONLY)
 
 ## generate header file for drivers, to make adding a driver easier
 set(DRIVER_HEADER_CONTENT "#pragma once\n\n")
@@ -223,6 +224,8 @@ if (NOT WIN32)
 	install(FILES assets/icons/qtdmm_64.png DESTINATION share/icons/hicolor/64x64/apps RENAME qtdmm.png)
 	install(FILES assets/icons/qtdmm_128.png DESTINATION share/icons/hicolor/128x128/apps RENAME qtdmm.png)
 	install(FILES ${CMAKE_BINARY_DIR}/qtdmm.1.gz DESTINATION share/man/man1)
+	## AppStream metadata for software centres, named after the component id
+	install(FILES assets/appimage/qtdmm.appdata.xml DESTINATION share/metainfo RENAME io.github.qtdmm.qtdmm.metainfo.xml)
 endif()
 
 ## include test framework
