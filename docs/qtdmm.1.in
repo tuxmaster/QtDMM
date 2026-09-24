@@ -1,0 +1,113 @@
+.\" QtDMM manual page. CMake fills in version and date (docs/qtdmm.1.in).
+.\" The options must match src/main.cpp - tests/generate_docs.py --check
+.\" (ctest docs_generated) compares them.
+.TH QTDMM 1 "@QTDMM_MAN_DATE@" "QtDMM @QTDMM_VERSION@" "User Commands"
+.SH NAME
+qtdmm \- read out and record digital multimeters
+.SH SYNOPSIS
+.B qtdmm
+.RB [ \-\-config\-id
+.IR id ]
+.RB [ \-\-config\-dir
+.IR dir ]
+.RB [ \-\-debug ]
+.br
+.B qtdmm
+.BR \-h " | " \-\-help " | " \-v " | " \-\-version
+.SH DESCRIPTION
+.B QtDMM
+reads digital multimeters and bench meters and shows the reading as an LCD
+display and an analog meter. A configurable recorder draws the readings as a
+graph. It can start by hand, at a set time or when a threshold is crossed, and
+exports to CSV, Excel (.xlsx), OpenDocument (.ods), SVG, PDF, PNG and JPEG.
+.PP
+More than 150 meters are supported, connected over:
+.IP \(bu 2
+serial ports and USB\-serial cables;
+.IP \(bu 2
+USB\-HID cables such as the UNI\-T UT\-D04/UT\-D09 and Brymen BU\-86X;
+.IP \(bu 2
+the network (RFC 2217, for example through
+.BR qtdmm\-bridge );
+.IP \(bu 2
+Bluetooth LE (UNI\-T UT60BT, Victron battery monitors, solar chargers and
+inverters);
+.IP \(bu 2
+.BR sigrok\-cli (1)
+for SCPI bench meters.
+.PP
+Further features are a readings table, alarms with actions, calculated values
+across several meters, a virtual meter for trying QtDMM without hardware, and
+an SCPI server through which other programs read the meter over the network.
+The complete handbook is built into the program (Help) and online at
+.UR https://qtdmm.de/docs/
+.UE .
+.SH OPTIONS
+.TP
+.BI \-\-config\-id " id"
+Use the configuration
+.I id
+instead of
+.BR default .
+Each id has its own settings file, so one meter can be set up per id; several
+instances with different ids run side by side and know about each other.
+.TP
+.BI \-\-config\-dir " dir"
+Keep the configuration files in
+.I dir
+instead of the platform's user configuration directory.
+.TP
+.B \-\-debug
+Print every frame received from the meter as a line of hex bytes on
+standard output.
+Include this output, together with what the meter displayed, in a bug report
+about a meter that is not decoded correctly.
+.TP
+.BR \-h ", " \-\-help
+Show the options and exit.
+.TP
+.BR \-v ", " \-\-version
+Show the version and exit.
+.SH FILES
+.TP
+.I ~/.config/QtDMM/QtDMM.conf
+Settings of the
+.B default
+configuration (Linux, FreeBSD and macOS).
+.TP
+.IR ~/.config/QtDMM/QtDMM_ id .conf
+Settings of the configuration
+.IR id .
+.TP
+.I %APPDATA%\eQtDMM\eQtDMM.ini
+Settings on Windows; further ids as
+.IR QtDMM_ id .ini .
+.SH EXAMPLES
+Start a second instance for another meter:
+.PP
+.RS
+.B qtdmm \-\-config\-id power\-supply
+.RE
+.PP
+Capture the raw frames of a meter for a bug report:
+.PP
+.RS
+.B qtdmm \-\-debug > frames.txt
+.RE
+.SH SEE ALSO
+.BR sigrok\-cli (1)
+.PP
+Handbook:
+.UR https://qtdmm.de/docs/
+.UE
+.br
+Source and bug reports:
+.UR https://github.com/qtdmm/QtDMM
+.UE
+.br
+Contact: hello@qtdmm.de
+.SH AUTHORS
+QtDMM was written by Matthias Toussaint (up to 0.9.3) and has been continued
+since 0.9.5 by tuxmaster and other contributors; see the AUTHORS file.
+.SH LICENSE
+GNU General Public License, version 3 or later.

@@ -216,8 +216,13 @@ install(TARGETS ${PROJECT_NAME}
 )
 
 if (NOT WIN32)
-	file( COPY ${CMAKE_SOURCE_DIR}/docs/qtdmm.1 DESTINATION ${CMAKE_BINARY_DIR} )
-	execute_process( COMMAND gzip -f ${CMAKE_BINARY_DIR}/qtdmm.1 )
+	## man page with this build's version and commit date; gzip -n leaves the
+	## time stamp out, so the same commit gives the same file
+	set(QTDMM_MAN_DATE "${QTDMM_COMMIT_YEAR}-${QTDMM_COMMIT_MONTH}-${QTDMM_COMMIT_DAY}")
+	string(REGEX REPLACE "-([0-9])(-|$)" "-0\\1\\2" QTDMM_MAN_DATE "${QTDMM_MAN_DATE}")
+	string(REGEX REPLACE "-([0-9])$" "-0\\1" QTDMM_MAN_DATE "${QTDMM_MAN_DATE}")
+	configure_file(${CMAKE_SOURCE_DIR}/docs/qtdmm.1.in ${CMAKE_BINARY_DIR}/qtdmm.1 @ONLY)
+	execute_process( COMMAND gzip -n -f ${CMAKE_BINARY_DIR}/qtdmm.1 )
 
 	install(FILES assets/qtdmm.desktop DESTINATION share/applications)
 	install(FILES assets/icons/qtdmm_32.png DESTINATION share/icons/hicolor/32x32/apps RENAME qtdmm.png)
