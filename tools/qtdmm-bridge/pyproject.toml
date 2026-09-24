@@ -14,7 +14,7 @@ dependencies = ["pyserial>=3.4"]
 [project.optional-dependencies]
 mdns = ["zeroconf>=0.38"]
 authors = [{ name = "The QtDMM developers", email = "hello@qtdmm.de" }]
-urls = { Homepage = "https://qtdmm.de", Source = "https://github.com/tuxmaster/QtDMM" }
+urls = { Homepage = "https://qtdmm.de", Source = "https://github.com/qtdmm/QtDMM" }
 
 [project.scripts]
 qtdmm-bridge = "qtdmm_bridge:main"

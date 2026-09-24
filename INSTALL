@@ -27,7 +27,7 @@ it or follow the standard CMake workflow.
 Basic steps:
 ------------
 - Download and extract the QtDMM source code from GitHub:
-  https://github.com/tuxmaster/QtDMM
+  https://github.com/qtdmm/QtDMM
   (project website with handbook and downloads: https://qtdmm.de,
    contact: hello@qtdmm.de)
 - Open a terminal and change to the QtDMM directory:
@@ -83,7 +83,7 @@ special installations:
 ----------------------
 
 Arch Linux:
-curl -O https://raw.githubusercontent.com/tuxmaster/QtDMM/refs/heads/master/PKGBUILD && makepkg --clean --syncdeps -fi
+curl -O https://raw.githubusercontent.com/qtdmm/QtDMM/refs/heads/master/PKGBUILD && makepkg --clean --syncdeps -fi
 
 deb/rpm based Linux:
 ./compile.sh pack
@@ -105,5 +105,5 @@ Feedback & Support:
 If you find working settings for an unsupported device or encounter problems,
 please get in touch via the GitHub project page:
 
-    https://github.com/tuxmaster/QtDMM
+    https://github.com/qtdmm/QtDMM
 
