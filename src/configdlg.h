@@ -43,6 +43,7 @@ class AlarmPrefs;
 class ScpiPrefs;
 #include "alarm.h"
 class PortsPrefs;
+class PrefWidget;
 
 /// The settings dialog: a category list beside a stack of PrefWidget pages.
 ///
@@ -232,6 +233,13 @@ protected:
   bool                  m_buttonBox_OK;
 
   void                  reloadSettings();
+  /// Puts @p page into the stack, inside a scroll area: the tallest page
+  /// would otherwise make the dialog taller than a 1080p screen.
+  void                  addPage(PrefWidget *page);
+  /// The settings page at stack index @p index (unwrapped from its scroll area).
+  PrefWidget           *page(int index) const;
+  /// Keeps the dialog within the available area of its screen.
+  void                  showEvent(QShowEvent *event) override;
 
 protected Q_SLOTS:
   void                  on_ui_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *);
