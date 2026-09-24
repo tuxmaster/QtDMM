@@ -160,6 +160,17 @@ if (BUILD_TESTING)
 		endif()
 	endif()
 
+	## desktop entry and AppStream metadata, when the validators are installed
+	## (desktop-file-utils, appstream); no network: screenshot URLs aren't fetched
+	find_program(DESKTOP_FILE_VALIDATE desktop-file-validate)
+	if (DESKTOP_FILE_VALIDATE)
+		add_test(NAME desktop_entry COMMAND ${DESKTOP_FILE_VALIDATE} "${CMAKE_SOURCE_DIR}/assets/qtdmm.desktop")
+	endif()
+	find_program(APPSTREAMCLI appstreamcli)
+	if (APPSTREAMCLI)
+		add_test(NAME appstream_metadata COMMAND ${APPSTREAMCLI} validate --no-net "${CMAKE_SOURCE_DIR}/assets/appimage/qtdmm.appdata.xml")
+	endif()
+
 	## the tests report through qWarning()/qInfo(); on Windows Qt sends those
 	## to the debugger instead of stderr unless told otherwise, and ctest's
 	## --output-on-failure would show nothing
