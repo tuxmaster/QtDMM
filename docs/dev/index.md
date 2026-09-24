@@ -30,6 +30,12 @@ Documentation for people working on QtDMM itself. Planned pages:
 None of these pages exist yet. The architecture is documented in the code
 itself, see below.
 
+## Versions and releases
+
+[Versions and releases](releasing.md): the version scheme YY.N (26.1,
+26.1-rc1, 26.1.1), where the version of a build comes from, and the steps
+for a release.
+
 ## SCPI command reference
 
 The network instrument QtDMM presents (Settings → SCPI server) is

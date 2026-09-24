@@ -1,7 +1,7 @@
 
-* xx/xx/2026 yy.mm.dd (next release, version scheme changes to CalVer)
+* xx/xx/2026 26.1 (next release; versions are now YY.N, see docs/dev/releasing.md)
 Platforms, build and packaging
-- Versions are now calendar based (yy.mm.dd), no more manual version bumps
+- Versions are YY.N like FreeCAD (26.1, 26.1-rc1, 26.1.1), taken from git tags - no manual version bumps
 - Qt Charts for the recorder graph (replaces the own plotting code)
 - Windows build (MSVC, ZIP and Inno Setup installer) and FreeBSD build, both in CI
 - Arch/CachyOS fixes ported from duke2421's fork

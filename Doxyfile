@@ -5,7 +5,7 @@
 PROJECT_NAME           = QtDMM
 PROJECT_BRIEF          = "Multimeter readout and recorder (Qt 6)"
 OUTPUT_DIRECTORY       = build/doxygen
-INPUT                  = src docs/dev/index.md docs/dev/scpi-commands.md docs/user/scpi-server.md
+INPUT                  = src docs/dev/index.md docs/dev/scpi-commands.md docs/dev/releasing.md docs/user/scpi-server.md
 RECURSIVE              = YES
 FILE_PATTERNS          = *.h *.cpp *.md
 EXCLUDE                = src/ui

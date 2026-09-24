@@ -3,7 +3,7 @@ include(InstallRequiredSystemLibraries)
 set(CPACK_PACKAGE_DIRECTORY "${CMAKE_SOURCE_DIR}/packages")
 
 set(CPACK_PACKAGE_NAME "${PROJECT_NAME}" )
-set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}" ) 
+set(CPACK_PACKAGE_VERSION "${QTDMM_PACKAGE_VERSION}")
 set(CPACK_PACKAGE_CONTACT "hello@qtdmm.de")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "DMM Readout Software Including a Configurable Recorder.")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
@@ -14,7 +14,12 @@ if(WIN32)
 	## portable zip plus an Inno Setup installer, both from the same install tree.
 	## windeployqt (via the generated deploy script) adds the Qt DLLs and plugins.
 	set(CPACK_GENERATOR "ZIP;INNOSETUP")
-	set(CPACK_PACKAGE_FILE_NAME "${APP_NAME}-${PROJECT_VERSION}-windows-x64")
+	## file names carry the version as shown (26.1-rc1), '+' of a dev build as '-'
+	string(REPLACE "+" "-" _file_version "${QTDMM_VERSION}")
+	set(CPACK_PACKAGE_FILE_NAME "${APP_NAME}-${_file_version}-windows-x64")
+	set(CPACK_PACKAGE_VERSION "${QTDMM_VERSION}")
+	## the Windows file version must be numeric
+	set(CPACK_INNOSETUP_SETUP_VersionInfoVersion "${PROJECT_VERSION}")
 	set(CPACK_PACKAGE_INSTALL_DIRECTORY "${APP_NAME}")
 	set(CPACK_PACKAGE_VENDOR "${APP_ORGANIZATION}")
 	set(CPACK_PACKAGE_EXECUTABLES "${PROJECT_NAME};${APP_NAME}")
@@ -46,15 +51,26 @@ elseif(UNIX AND NOT APPLE)
 
 	set(CPACK_SOURCE_GENERATOR "TBZ2")
 	set(CPACK_SOURCE_IGNORE_FILES \\.git/ bin/ packages/ build/ tmp/ site/ __pycache__/ Testing/ ".*~$")
-	set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${PROJECT_VERSION}")
-	set(CPACK_SOURCE_TOPLEVEL_DIRECTORY "${CMAKE_PROJECT_NAME}-${PROJECT_VERSION}")
+	set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}-${QTDMM_PACKAGE_VERSION}")
+	set(CPACK_SOURCE_TOPLEVEL_DIRECTORY "${CMAKE_PROJECT_NAME}-${QTDMM_PACKAGE_VERSION}")
+	## the tarball has no .git: it carries the version in .tarball-version
+	## (read by cmake/git_version.cmake). CPack runs this script after staging
+	## the files of every package; only the source package (the one with
+	## CPACK_INSTALLED_DIRECTORIES) gets the file. CPACK_PRE_BUILD_SCRIPTS
+	## needs CMake 3.19; older ones build the tarball without it.
+	file(WRITE "${CMAKE_BINARY_DIR}/tarball-version.txt" "${QTDMM_TARBALL_VERSION}")
+	file(WRITE "${CMAKE_BINARY_DIR}/tarball-version.cmake"
+		"if (CPACK_INSTALLED_DIRECTORIES)\n"
+		"  configure_file(\"${CMAKE_BINARY_DIR}/tarball-version.txt\" \"\${CPACK_TEMPORARY_DIRECTORY}/.tarball-version\" COPYONLY)\n"
+		"endif()\n")
+	set(CPACK_PRE_BUILD_SCRIPTS "${CMAKE_BINARY_DIR}/tarball-version.cmake")
 
 	## RPM wants "* Www Mmm DD YYYY Name <mail> - version-release" entries; the
 	## CHANGELOG file (shipped as %doc) has its own format, so the spec gets one
-	## entry for this version, dated like the version (the commit date)
-	set(_y ${PROJECT_VERSION_MAJOR})
-	set(_m ${PROJECT_VERSION_MINOR})
-	set(_d ${PROJECT_VERSION_PATCH})
+	## entry for this version, dated with the commit date
+	set(_y ${QTDMM_COMMIT_YEAR})
+	set(_m ${QTDMM_COMMIT_MONTH})
+	set(_d ${QTDMM_COMMIT_DAY})
 	# day of the week (Zeller's congruence, 0 = Saturday)
 	if (_m LESS 3)
 		math(EXPR _zm "${_m} + 12")
@@ -72,7 +88,7 @@ elseif(UNIX AND NOT APPLE)
 	if (_d LESS 10)
 		set(_d "0${_d}")
 	endif()
-	set(RPM_CHANGELOG "* ${_wday} ${_mon} ${_d} ${_y} QtDMM team <hello@qtdmm.de> - ${PROJECT_VERSION}-1\n- Build of ${PROJECT_VERSION_FULL}; the changes are listed in CHANGELOG")
+	set(RPM_CHANGELOG "* ${_wday} ${_mon} ${_d} ${_y} QtDMM team <hello@qtdmm.de> - ${QTDMM_PACKAGE_VERSION}-1\n- QtDMM ${QTDMM_VERSION}; the changes are listed in CHANGELOG")
 	configure_file(${CMAKE_SOURCE_DIR}/QtDMM.spec.in ${CMAKE_SOURCE_DIR}/QtDMM.spec @ONLY)
 endif()
 

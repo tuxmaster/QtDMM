@@ -17,10 +17,15 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd $pkgname
-  # CalVer from HEAD's commit date, same scheme as cmake/git_version.cmake,
-  # plus Arch's usual .rN.gHASH VCS-package suffix so same-day rebuilds still
-  # sort correctly. No tags needed, no manual bumping.
-  echo "$(git log -1 --format=%cd --date=format:%Y.%m.%d).r$(git rev-list --count HEAD).g$(git rev-parse --short HEAD)"
+  # QtDMM tags releases YY.N[.P][-rcK] (cmake/git_version.cmake); Arch's usual
+  # VCS form on top: 26.1.r14.g1234abc after the tag 26.1, 26.1rc1.r3.g... after
+  # 26.1-rc1 (pacman sorts 26.1rc1 before 26.1). Without a tag yet: 0.r<count>.g<hash>.
+  local d
+  if d=$(git describe --tags --long --abbrev=7 --match '[0-9][0-9].[1-9]*' 2>/dev/null); then
+    echo "$d" | sed -E 's/-(alpha|beta|rc)/\1/; s/-([0-9]+)-g/.r\1.g/'
+  else
+    printf '0.r%s.g%s\n' "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+  fi
 }
 
 build() {

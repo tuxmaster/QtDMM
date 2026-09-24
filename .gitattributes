@@ -2,3 +2,6 @@
 # their line endings as committed even where git would convert to CRLF.
 tests/data/** -text
 docs/protocols/sources/** -text
+
+# GitHub source downloads (git archive) fill in the version, see cmake/git_version.cmake
+VERSION export-subst
