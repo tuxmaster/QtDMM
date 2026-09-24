@@ -9,8 +9,10 @@
 # Where the version comes from, first match wins:
 #   1. git describe on the newest such tag (a clone; CI must fetch tags)
 #   2. .tarball-version, written into the source tarball by CPack
-#   3. VERSION, filled in by "git archive" (GitHub's source downloads) via
-#      export-subst in .gitattributes
+#   3. .archive-version, filled in by "git archive" (GitHub's source
+#      downloads) via export-subst in .gitattributes. Not "VERSION": the
+#      source root is on the include path, and on case-insensitive file
+#      systems (Windows, macOS) <version> from the C++ library would find it.
 #   4. nothing: 0.0-unknown
 #
 # A commit that is not tagged is a development build of the next release:
@@ -151,8 +153,8 @@ function(get_version_from_git)
 		endif()
 		set(_source ".tarball-version")
 	endif()
-	if (_source STREQUAL "" AND EXISTS "${CMAKE_SOURCE_DIR}/VERSION")
-		file(STRINGS "${CMAKE_SOURCE_DIR}/VERSION" _lines)
+	if (_source STREQUAL "" AND EXISTS "${CMAKE_SOURCE_DIR}/.archive-version")
+		file(STRINGS "${CMAKE_SOURCE_DIR}/.archive-version" _lines)
 		list(GET _lines 0 _describe)
 		if (_describe MATCHES "^\\$Format")
 			set(_describe "")   # not an archive: git did not fill it in
@@ -161,7 +163,7 @@ function(get_version_from_git)
 			if (_len GREATER 1)
 				list(GET _lines 1 _date)
 			endif()
-			set(_source "VERSION")
+			set(_source ".archive-version")
 		endif()
 	endif()
 
@@ -173,7 +175,7 @@ function(get_version_from_git)
 	string(SUBSTRING "${_date}" 0 4 _cyear)
 
 	if (_source STREQUAL "")
-		message(WARNING "No git, no .tarball-version, no VERSION: version unknown")
+		message(WARNING "No git, no .tarball-version, no .archive-version: version unknown")
 		set(V_DISPLAY "0.0-unknown")
 		set(V_PACKAGE "0.0~unknown")
 		set(V_MAJOR 0)

@@ -4,4 +4,4 @@ tests/data/** -text
 docs/protocols/sources/** -text
 
 # GitHub source downloads (git archive) fill in the version, see cmake/git_version.cmake
-VERSION export-subst
+.archive-version export-subst

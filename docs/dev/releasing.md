@@ -31,7 +31,7 @@ are ignored. The same version appears in different forms:
 Builds without `.git` still know their version:
 
 - The CPack source tarball carries a `.tarball-version` file.
-- GitHub's source downloads get it through `export-subst` in `VERSION`.
+- GitHub's source downloads get it through `export-subst` in `.archive-version`.
 
 A clone needs its tags: `git fetch --tags`. The CI checkouts use `fetch-depth: 0`. `ctest -R version_scheme` checks the mapping from tag to version.
 
