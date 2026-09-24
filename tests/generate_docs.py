@@ -228,15 +228,15 @@ def protocol_drift():
 
 def transport_drift():
     """A device without a baud rate must have a transport on its protocol
-    row, and a protocol with a transport must not carry a baud rate."""
+    row."""
     problems = []
     for r in devices():
         if r["serial"] == "?":
             problems.append(f'{r["vendor"]} {r["model"]} ({r["protocol"]}) has no baud rate and its '
                             f'protocol row in src/protocols.cpp has no transport')
-        elif r["serial"][0].isdigit() and r["protocol"] in TRANSPORT:
-            problems.append(f'{r["vendor"]} {r["model"]} has a baud rate although {r["protocol"]} '
-                            f'is reached over {TRANSPORT[r["protocol"]]}')
+        # a protocol may be reached both ways - the UT61E+ over the UT-D09 USB
+        # cable (a baud rate) or the UT-D07B Bluetooth adapter (baud 0) - so a
+        # baud rate next to a transport is not an error
     return problems
 
 

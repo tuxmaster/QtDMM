@@ -295,52 +295,52 @@
 <context>
     <name>BleGattDevice</name>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="60"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="62"/>
         <source>No Bluetooth address configured.</source>
         <translation>Aucune adresse Bluetooth configurée.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="65"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="67"/>
         <source>This meter does not use a Bluetooth LE connection.</source>
         <translation>Ce multimètre n&apos;utilise pas de connexion Bluetooth LE.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="86"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="88"/>
         <source>The meter %1 closed the Bluetooth connection.</source>
         <translation>Le multimètre %1 a fermé la connexion Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="90"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="92"/>
         <source>Bluetooth: %1</source>
         <translation>Bluetooth : %1</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="98"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="100"/>
         <source>No answer from %1 - is the meter on and its Bluetooth switched on?</source>
         <translation>Pas de réponse de %1 - le multimètre est-il allumé et son Bluetooth activé ?</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="159"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="161"/>
         <source>%1 does not offer the expected Bluetooth service - is it the right meter?</source>
         <translation>%1 n&apos;offre pas le service Bluetooth attendu - est-ce le bon multimètre ?</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="165"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="167"/>
         <source>Could not open the Bluetooth service of %1.</source>
         <translation>Impossible d&apos;ouvrir le service Bluetooth de %1.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="187"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="189"/>
         <source>Bluetooth service error %1 on %2.</source>
         <translation>Erreur %1 du service Bluetooth sur %2.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="199"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="201"/>
         <source>%1 has no notify characteristic.</source>
         <translation>%1 n&apos;a pas de caractéristique de notification.</translation>
     </message>
     <message>
-        <location filename="../../src/portdevices/blegatt.cpp" line="213"/>
+        <location filename="../../src/portdevices/blegatt.cpp" line="215"/>
         <source>%1 has no writable characteristic.</source>
         <translation>%1 n&apos;a pas de caractéristique inscriptible.</translation>
     </message>
@@ -833,114 +833,114 @@ Le multimètre est-il branché et allumé ?</translation>
         <translation>Tous les fabricants</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="432"/>
-        <location filename="../../src/dmmprefs.cpp" line="507"/>
+        <location filename="../../src/dmmprefs.cpp" line="435"/>
+        <location filename="../../src/dmmprefs.cpp" line="510"/>
         <source>Position %1: %2</source>
         <translation>Position %1 : %2</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="523"/>
+        <location filename="../../src/dmmprefs.cpp" line="526"/>
         <source>%1: no such instance running</source>
         <translation>%1 : aucune instance de ce nom n&apos;est lancée</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="533"/>
+        <location filename="../../src/dmmprefs.cpp" line="536"/>
         <source>Running instances: %1</source>
         <translation>Instances lancées : %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="535"/>
+        <location filename="../../src/dmmprefs.cpp" line="538"/>
         <source>No other instance is running.</source>
         <translation>Aucune autre instance n&apos;est lancée.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="734"/>
+        <location filename="../../src/dmmprefs.cpp" line="737"/>
         <source>none</source>
         <translation>aucune</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="797"/>
+        <location filename="../../src/dmmprefs.cpp" line="800"/>
         <source>%1 was not found or does not run. Install sigrok-cli, or set its path under &lt;a href=&quot;ports&quot;&gt;Special ports&lt;/a&gt;.</source>
         <translation>%1 est introuvable ou ne démarre pas. Installez sigrok-cli ou indiquez son chemin sous &lt;a href=&quot;ports&quot;&gt;Ports spéciaux&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="800"/>
+        <location filename="../../src/dmmprefs.cpp" line="803"/>
         <source>%1 has no driver &quot;%2&quot;; see sigrok-cli --list-supported.</source>
         <translation>%1 n&apos;a pas de pilote « %2 » ; voir sigrok-cli --list-supported.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="802"/>
+        <location filename="../../src/dmmprefs.cpp" line="805"/>
         <source>%1 found.</source>
         <translation>%1 trouvé.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="812"/>
+        <location filename="../../src/dmmprefs.cpp" line="815"/>
         <source>Running %1 --driver %2 --scan ...</source>
         <translation>%1 --driver %2 --scan en cours…</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="834"/>
+        <location filename="../../src/dmmprefs.cpp" line="837"/>
         <source>No meter answered within 30 s (a serial port without a SCPI meter keeps sigrok-cli waiting).</source>
         <translation>Aucun appareil n&apos;a répondu en 30 s (un port série sans appareil SCPI fait attendre sigrok-cli indéfiniment).</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="836"/>
+        <location filename="../../src/dmmprefs.cpp" line="839"/>
         <source>Found: %1</source>
         <translation>Trouvé : %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="838"/>
+        <location filename="../../src/dmmprefs.cpp" line="841"/>
         <source>No meter answered.</source>
         <translation>Aucun appareil n&apos;a répondu.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="849"/>
+        <location filename="../../src/dmmprefs.cpp" line="852"/>
         <source>Pick the device or type its Bluetooth address.</source>
         <translation>Choisissez l&apos;appareil ou saisissez son adresse Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="852"/>
+        <location filename="../../src/dmmprefs.cpp" line="855"/>
         <source>Switch the meter&apos;s Bluetooth on (it shows the Bluetooth symbol) before scanning or connecting.</source>
         <translation>Activez le Bluetooth du multimètre (le symbole Bluetooth s&apos;affiche) avant de rechercher ou de connecter.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="857"/>
+        <location filename="../../src/dmmprefs.cpp" line="860"/>
         <source>The key is the 32-digit &quot;Encryption key&quot; VictronConnect shows under Product info, Instant readout via Bluetooth.</source>
         <translation>La clé est la « clé de chiffrement » à 32 chiffres que VictronConnect affiche sous Infos produit, Lecture instantanée via Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="867"/>
+        <location filename="../../src/dmmprefs.cpp" line="870"/>
         <source>Scanning for %1 (6 s)...</source>
         <translation>Recherche de %1 (6 s)...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="868"/>
+        <location filename="../../src/dmmprefs.cpp" line="871"/>
         <source>Scanning for Victron devices (5 s)...</source>
         <translation>Recherche d&apos;appareils Victron (5 s)…</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="879"/>
+        <location filename="../../src/dmmprefs.cpp" line="882"/>
         <source>No meter found. Is its Bluetooth switched on, and no other program connected to it?</source>
         <translation>Aucun multimètre trouvé. Son Bluetooth est-il activé, et aucun autre programme n&apos;y est-il connecté ?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="880"/>
+        <location filename="../../src/dmmprefs.cpp" line="883"/>
         <source>No Victron device found. Is Bluetooth on, and Instant readout enabled on the device?</source>
         <translation>Aucun appareil Victron trouvé. Le Bluetooth est-il activé, et la lecture instantanée activée sur l&apos;appareil ?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="919"/>
+        <location filename="../../src/dmmprefs.cpp" line="922"/>
         <source>Load DMM description</source>
         <translation>Charger une description de multimètre</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="919"/>
-        <location filename="../../src/dmmprefs.cpp" line="945"/>
+        <location filename="../../src/dmmprefs.cpp" line="922"/>
+        <location filename="../../src/dmmprefs.cpp" line="948"/>
         <source>DMM description (*.cfg)</source>
         <translation>Description de multimètre (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="945"/>
+        <location filename="../../src/dmmprefs.cpp" line="948"/>
         <source>Save DMM description</source>
         <translation>Enregistrer la description du multimètre</translation>
     </message>
@@ -1570,6 +1570,11 @@ Choisissez quelle instance doit enregistrer.</translation>
         <location filename="../../src/protocols.cpp" line="47"/>
         <source>19 bytes binary, polled over Bluetooth LE (UNI-T UT60BT)</source>
         <translation>19 octets binaires, interrogé par Bluetooth LE (UNI-T UT60BT)</translation>
+    </message>
+    <message>
+        <location filename="../../src/protocols.cpp" line="48"/>
+        <source>19 bytes binary, polled (UNI-T UT61B+/D+/E+, USB or Bluetooth adapter)</source>
+        <translation>19 octets binaires, interrogé (UNI-T UT61B+/D+/E+, adaptateur USB ou Bluetooth)</translation>
     </message>
 </context>
 <context>

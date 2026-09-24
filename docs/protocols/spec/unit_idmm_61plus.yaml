@@ -1,0 +1,84 @@
+protocol: UniTUT61Plus
+decoder: src/decoders/unit_idmm.cpp
+devices: [UNI-T UT61E+, UNI-T UT61D+, UNI-T UT61B+, UNI-T UT161E, UNI-T UT161D, UNI-T UT161B]
+frames_per_reading: 1
+unit_map:                      # spec spelling -> what the decoder emits
+  "u": "µ"
+sources:
+  - "ablage/unit_ut61eplus/from_vendor/funOl_UT61E+/D+/B+.json and funOl_UT161E/D/B.json (range tables from UNI-T's own app)"
+  - ablage/ut61xpy-main/adapters/ut61xp.py (ut61xpy - UT61X+ base class, range offsets, mode 25 channels)
+  - ablage/ut61xpy-main/misc/current_ranges.md (current ranges of UT61D+ and UT61E+)
+
+# The UT61B+/D+/E+ and the UT161B/D/E speak the UNI-T iDMM frame of the UT60BT
+# (see unit_idmm.yaml for the layout) - the UT61+ over the UT-D09 USB cable
+# (HID UART, 9600 8N1) or the UT-D07B Bluetooth adapter, the UT161 over its
+# built-in Bluetooth - polled with AB CD 03 5E 01 D9. Only the ranges differ
+# from the UT60BT; UNI-T's own app tables (funOl_*.json, saved by the
+# unit_ut61eplus project) and ut61xpy agree: the V positions start in volts
+# (2.2 V resp. 6 V), mV stays mV, the uA and mA positions keep their unit, CAP
+# is nF up to range 1, Hz is Hz up to range 1, and function 25 (AC/DC) is the
+# DC V position that alternates DC and AC readings (flags C bit 3 = AC) - QtDMM
+# makes the AC ones the second value.
+#
+# SYNTHETIC: no UT61E+ capture is available; the frames below are built from
+# that description (with correct checksums) and test the decoder's reading of
+# it, not the meter. Replace them with captures when someone has the meter.
+vectors:
+  - source_line: "DCV r0: 1.5940 V (the 2.2 V range - volts, not mV as on the UT60BT)"
+    bytes: AB CD 10 02 30 20 31 2E 35 39 34 30 00 00 00 00 00 03 0B
+    reading: {value: "1.5940", unit: "V", range_mode: auto}
+    expect: {special: "DC", val: "1.5940"}
+  - source_line: "DCV r1: 12.345 V"
+    bytes: AB CD 10 02 31 20 31 32 2E 33 34 35 00 00 00 00 00 03 08
+    reading: {value: "12.345", unit: "V", range_mode: auto}
+    expect: {special: "DC", val: "12.345"}
+  - source_line: "ACV r2: 230.12 V"
+    bytes: AB CD 10 00 32 20 32 33 30 2E 31 32 00 00 00 00 08 03 08
+    reading: {value: "230.12", unit: "V", range_mode: auto}
+    expect: {special: "AC", val: "230.12"}
+  - source_line: "mV r0: 123.45 mV"
+    bytes: AB CD 10 03 30 20 31 32 33 2E 34 35 00 00 00 00 00 03 08
+    reading: {value: "123.45", unit: "mV", range_mode: auto}
+    expect: {special: "DC", val: "123.45"}
+  - source_line: "DCmA r1: 123.45 mA (the 220 mA range stays mA)"
+    bytes: AB CD 10 0E 31 20 31 32 33 2E 34 35 00 00 00 00 00 03 14
+    reading: {value: "123.45", unit: "mA", range_mode: auto}
+    expect: {special: "DC", val: "123.45"}
+  - source_line: "DCuA r1: 1234.5 uA"
+    bytes: AB CD 10 0C 31 20 31 32 33 34 2E 35 00 00 00 04 00 03 16
+    reading: {value: "1234.5", unit: "uA", range_mode: manual}
+    expect: {special: "DC", val: "1234.5"}
+  - source_line: "OHM r2: 12.345 kOhm"
+    bytes: AB CD 10 06 32 20 31 32 2E 33 34 35 00 00 00 00 00 03 0D
+    reading: {value: "12.345", unit: "kOhm", range_mode: auto}
+    expect: {special: "OH", val: "12.345"}
+  - source_line: "CAP r2: 1.2345 uF"
+    bytes: AB CD 10 09 32 20 31 2E 32 33 34 35 00 00 00 00 00 03 10
+    reading: {value: "1.2345", unit: "uF", range_mode: auto}
+    expect: {special: "CA", val: "1.2345"}
+  - source_line: "DCV r1 with HOLD"
+    bytes: AB CD 10 02 31 20 20 35 2E 30 30 30 00 00 02 00 00 02 F0
+    reading: {value: "5.000", unit: "V", range_mode: auto, flags: [HOLD]}
+    expect: {special: "DC", val: "5.000"}
+  - source_line: "DC+AC position, DC frame: 1.2345 V"
+    bytes: AB CD 10 19 30 20 31 2E 32 33 34 35 00 00 00 00 00 03 1E
+    reading: {value: "1.2345", unit: "V", range_mode: auto}
+    expect: {special: "DC", val: "1.2345", id: 0}
+  - source_line: "DC+AC position, AC frame: 0.0123 V -> second value"
+    bytes: AB CD 10 19 30 20 30 2E 30 31 32 33 00 00 00 00 08 03 1D
+    reading: {value: "0.0123", unit: "V", range_mode: auto}
+    expect: {special: "AC", val: "0.0123", id: 1}
+  - source_line: "OHM r0 overload"
+    bytes: AB CD 10 06 30 20 20 20 4F 4C 2E 20 00 00 00 00 00 03 07
+    reading: {value: "OL", unit: "Ohm", range_mode: auto}
+    expect: {special: "OH", val: "OL"}
+  - source_line: "Hz r2: 2.2 kHz range (vendor table; synthetic frame)"
+    source: ablage/unit_ut61eplus/from_vendor
+    bytes: AB CD 10 04 32 20 31 2E 32 33 34 35 00 00 00 00 08 03 13
+    reading: {value: "1.2345", unit: "kHz", range_mode: auto}
+    expect: {special: "HZ", val: "1.2345"}
+  - source_line: "AC+DC current (function 27): 1.234 A (vendor table; synthetic frame)"
+    source: ablage/unit_ut61eplus/from_vendor
+    bytes: AB CD 10 1B 31 20 20 31 2E 32 33 34 00 00 00 00 00 03 0C
+    reading: {value: "1.234", unit: "A", range_mode: auto}
+    expect: {special: "DC", val: "1.234"}
