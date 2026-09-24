@@ -26,8 +26,8 @@ side, one window each, and can be combined into calculated values.
 - [Bench meters through sigrok-cli](bench-meters.md) — Keysight, Agilent, HP
   and Siglent SCPI meters over USB-TMC, LAN or serial, with sigrok-cli doing
   the talking.
-- [Bluetooth LE](bluetooth.md) — Victron SmartShunt and MPPT chargers over
-  their encrypted broadcasts: key from VictronConnect, scan, what is shown.
+- [Bluetooth LE](bluetooth.md) — the UNI-T UT60BT over a Bluetooth connection;
+  Victron SmartShunt and MPPT chargers over their encrypted broadcasts.
 - [Meters over the network](remote-bridge.md) — qtdmm-bridge on a Raspberry Pi,
   serial and HID meters over RFC 2217, running it as a service.
 - [SCPI server](scpi-server.md) — the meter as a network instrument: `*IDN?`,

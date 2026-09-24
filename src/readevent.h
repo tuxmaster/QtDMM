@@ -65,6 +65,7 @@ public:
     FlukeQM,
     Fluke45,
     VictronBLE,
+    UniTiDMM,
     EndOfList              // new stuff always before!
   };
 

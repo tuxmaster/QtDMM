@@ -72,6 +72,7 @@ public:
   bool           isVirtual() const;
   /// Victron over Bluetooth LE: the Bluetooth group replaces the port.
   bool           isBluetooth() const;
+  bool           isGatt() const;
   /// A bench meter read through sigrok-cli: the sigrok group replaces the port.
   bool           isSigrokMeter() const;
   /// Source of the other instances' readings, shown as a hint below the formula.

@@ -18,7 +18,7 @@ class PortHandler : public QObject
     Q_OBJECT
 public:
     /// The kinds of port; the settings file stores them by name (str2portType()).
-    enum class PortType { None, Serial, Hid, Sigrok, RFC2217, Calc, Ble };
+    enum class PortType { None, Serial, Hid, Sigrok, RFC2217, Calc, Ble, BleGatt };
 
     explicit PortHandler(QObject *parent = Q_NULLPTR) : QObject(parent) {}
     /// Creates the device object for @p type (closing any previous one). The

@@ -33,6 +33,7 @@
 #include "victronble.h"
 #ifdef QTDMM_WITH_BLE
 #include "portdevices/ble.h"
+#include "portdevices/blegatt.h"
 #endif
 #include "sharedstatemanager.h"
 #include "siprefix.h"
@@ -389,7 +390,18 @@ bool DmmPrefs::isSigrokMeter() const
 
 bool DmmPrefs::isBluetooth() const
 {
-  return ui_vendor->currentIndex() != 0 && m_dmmInfo.protocol == ReadEvent::VictronBLE;
+  return ui_vendor->currentIndex() != 0 && (m_dmmInfo.protocol == ReadEvent::VictronBLE || isGatt());
+}
+
+// A meter QtDMM connects to over GATT (UT60BT): address only, no key and no
+// choice of values - unlike the Victron broadcasts
+bool DmmPrefs::isGatt() const
+{
+#ifdef QTDMM_WITH_BLE
+  return ui_vendor->currentIndex() != 0 && BleGattDevice::profile(m_dmmInfo.protocol).has_value();
+#else
+  return false;
+#endif
 }
 
 bool DmmPrefs::isCalculated() const
@@ -439,6 +451,12 @@ void DmmPrefs::updateCalcMode()
   ui_calcGroup->setVisible(calc);
   ui_virtualGroup->setVisible(virt);
   ui_bleGroup->setVisible(ble);
+  const bool gatt = isGatt();
+  for (QWidget *w : std::initializer_list<QWidget *>{ ui_bleKeyLabel, ui_bleKey, ui_bleMainLabel, ui_bleMain,
+                                                      ui_bleSecondLabel, ui_bleSecond })
+    w->setVisible(ble && !gatt);
+  if (ble)
+    updateBleHint();
   ui_sigrokGroup->setVisible(sigrok);
   if (sigrok)
   {
@@ -829,6 +847,12 @@ void DmmPrefs::updateBleHint()
   QStringList hints;
   if (address.isEmpty())
     hints << tr("Pick the device or type its Bluetooth address.");
+  if (isGatt())
+  {
+    hints << tr("Switch the meter's Bluetooth on (it shows the Bluetooth symbol) before scanning or connecting.");
+    ui_bleHint->setText(hints.join(' '));
+    return;
+  }
   if (!keyOk)
     hints << tr("The key is the 32-digit \"Encryption key\" VictronConnect shows under Product info, Instant readout via Bluetooth.");
   ui_bleHint->setText(hints.join(' '));
@@ -839,9 +863,11 @@ void DmmPrefs::on_ui_bleScan_clicked()
 {
 #ifdef QTDMM_WITH_BLE
   ui_bleScan->setEnabled(false);
-  ui_bleHint->setText(tr("Scanning for Victron devices (5 s)..."));
+  const bool gatt = isGatt();
+  ui_bleHint->setText(gatt ? tr("Scanning for %1 (6 s)...").arg(m_dmmInfo.model.section(' ', 0, 0))
+                           : tr("Scanning for Victron devices (5 s)..."));
   QCoreApplication::processEvents();
-  const QStringList found = BleAdvertisementDevice::scan(5000);
+  const QStringList found = gatt ? BleGattDevice::scan(m_dmmInfo.protocol, 6000) : BleAdvertisementDevice::scan(5000);
   const QString current = ui_bleAddress->currentText();
   ui_bleAddress->clear();
   ui_bleAddress->addItems(found);
@@ -850,7 +876,8 @@ void DmmPrefs::on_ui_bleScan_clicked()
   ui_bleScan->setEnabled(true);
   if (found.isEmpty())
   {
-    ui_bleHint->setText(tr("No Victron device found. Is Bluetooth on, and Instant readout enabled on the device?"));
+    ui_bleHint->setText(gatt ? tr("No meter found. Is its Bluetooth switched on, and no other program connected to it?")
+                             : tr("No Victron device found. Is Bluetooth on, and Instant readout enabled on the device?"));
     return;
   }
 #endif
@@ -872,6 +899,8 @@ QString DmmPrefs::device() const
       spec += ":" + options;
     return "SIGROK " + spec;
   }
+  if (isGatt())
+    return QString("blegatt %1").arg(ui_bleAddress->currentText().section(' ', 0, 0).trimmed());
   if (isBluetooth())
     return QString("ble %1 %2 %3 %4").arg(ui_bleAddress->currentText().section(' ', 0, 0).trimmed(),
                                           ui_bleKey->text().simplified().remove(' '),
