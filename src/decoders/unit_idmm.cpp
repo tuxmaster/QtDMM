@@ -140,12 +140,15 @@ bool DecoderUniTiDMM::frameValid(const unsigned char *f)
 
 // The last kFrameLength bytes form a frame: header, length and checksum all
 // have to agree, so a stray name answer (11 bytes) or a split notification
-// only delays the next frame, it never produces a false one.
+// only delays the next frame, it never produces a false one. The reader's
+// FIFO is a ring, so the frame may run across its end.
 bool DecoderUniTiDMM::checkFormat(const char *data, size_t idx)
 {
-  if (idx + 1 < size_t(kFrameLength))
-    return false;
-  return frameValid(reinterpret_cast<const unsigned char *>(data) + idx + 1 - kFrameLength);
+  unsigned char f[kFrameLength];
+  const size_t start = (idx + FIFO_LENGTH + 1 - kFrameLength) % FIFO_LENGTH;
+  for (int i = 0; i < kFrameLength; ++i)
+    f[i] = static_cast<unsigned char>(data[(start + i) % FIFO_LENGTH]);
+  return frameValid(f);
 }
 
 std::optional<DmmDecoder::DmmResponse> DecoderUniTiDMM::decode(const QByteArray &data, int id)
