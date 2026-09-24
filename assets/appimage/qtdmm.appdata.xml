@@ -39,6 +39,14 @@
   <url type="help">https://qtdmm.de/docs/</url>
   <update_contact>hello@qtdmm.de</update_contact>
   <content_rating type="oars-1.1" />
+  <releases>
+    <release version="26.1-rc1" date="2026-09-24" type="development">
+      <description>
+        <p>First release candidate for QtDMM 26.1, the first release since 0.9.8 (2017): Qt 6, Windows and FreeBSD builds, more than 150 meters over serial, USB, Bluetooth LE and the network, recorder export to spreadsheets and images, alarms, readings table and an SCPI server.</p>
+      </description>
+      <url>https://github.com/qtdmm/QtDMM/releases/tag/26.1-rc1</url>
+    </release>
+  </releases>
   <screenshots>
     <screenshot type="default">
       <caption>LCD display, analog meter, recorder and readings table</caption>
