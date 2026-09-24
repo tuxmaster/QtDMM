@@ -4,6 +4,8 @@ name: Release
 # Linux AppImage and the Windows installer + ZIP with the regular workflows and
 # puts them into a DRAFT release. A maintainer reviews it and publishes it by
 # hand; tags with a suffix (-rc1, -beta1) become pre-releases.
+# When the release already exists (made on GitHub's release page, which also
+# creates the tag), the files are added to it and the release is left as it is.
 on:
   push:
     tags: [ '[0-9][0-9].[1-9]*' ]
@@ -27,16 +29,24 @@ jobs:
         path: dist
         merge-multiple: true
 
-    - name: Create the draft release
+    - name: Create the draft release, or add the files to an existing one
       env:
         GH_TOKEN: ${{ github.token }}
         TAG: ${{ github.ref_name }}
       run: |
         mv dist/QtDMM.AppImage "dist/QtDMM-${TAG}-x86_64.AppImage"
         ls -l dist
-        pre=""
-        case "$TAG" in *-*) pre="--prerelease" ;; esac
-        gh release create "$TAG" dist/* \
-          --repo "$GITHUB_REPOSITORY" --verify-tag --draft $pre \
-          --title "QtDMM $TAG" \
-          --notes "Draft created from tag $TAG. The changes are in CHANGELOG; the handbook is at https://qtdmm.de/docs/."
+        if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+          gh release upload "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --clobber
+          case "$TAG" in *-*)
+            [ "$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json isPrerelease --jq .isPrerelease)" = true ] \
+              || echo "::warning::$TAG has a suffix but the release is not marked as a pre-release" ;;
+          esac
+        else
+          pre=""
+          case "$TAG" in *-*) pre="--prerelease" ;; esac
+          gh release create "$TAG" dist/* \
+            --repo "$GITHUB_REPOSITORY" --verify-tag --draft $pre \
+            --title "QtDMM $TAG" \
+            --notes "Draft created from tag $TAG. The changes are in CHANGELOG; the handbook is at https://qtdmm.de/docs/."
+        fi
