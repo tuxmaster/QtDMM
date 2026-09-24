@@ -1,5 +1,5 @@
 
-* xx/xx/2026 26.1 (next release; versions are now YY.N, see docs/dev/releasing.md)
+* 24/09/2026 26.1-rc1 (first release candidate for 26.1; versions are now YY.N, see docs/dev/releasing.md)
 Platforms, build and packaging
 - Versions are YY.N like FreeCAD (26.1, 26.1-rc1, 26.1.1), taken from git tags - no manual version bumps
 - Qt Charts for the recorder graph (replaces the own plotting code)
@@ -9,6 +9,8 @@ Platforms, build and packaging
 - Doxygen developer documentation, handbook built into the app (help browser) and published on qtdmm.de
 - Translations: German, Spanish, French, Polish
 - Project moved to github.com/qtdmm/QtDMM, AppStream id is now io.github.qtdmm.qtdmm
+- Release builds from version tags: Linux AppImage, Windows installer and ZIP; DEB and RPM packaging fixed
+- Known limit: no Bluetooth on macOS yet (the macOS build leaves it out)
 
 Meters and connections
 - Device table split into vendor and model, with chip and connection columns
