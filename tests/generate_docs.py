@@ -264,6 +264,29 @@ def hid_cable_drift():
     return problems
 
 
+def option_drift():
+    """The command-line options exist in src/main.cpp and are described twice,
+    in docs/qtdmm.1.in (the man page) and docs/user/command-line.md. Returns
+    the options one of them is missing."""
+    main_cpp = (REPO / "src" / "main.cpp").read_text(encoding="utf-8")
+    options = set(re.findall(r'addOption\(\{\s*"([\w-]+)"', main_cpp))
+    if "addHelpOption()" in main_cpp:
+        options.add("help")
+    if "addVersionOption()" in main_cpp:
+        options.add("version")
+    man = "\n".join(l for l in (REPO / "docs" / "qtdmm.1.in").read_text(encoding="utf-8").splitlines()
+                    if not l.startswith('.\\"')).replace("\\-", "-")   # without roff comments
+    md = (REPO / "docs" / "user" / "command-line.md").read_text(encoding="utf-8")
+    problems = []
+    for name, text in (("docs/qtdmm.1.in", man), ("docs/user/command-line.md", md)):
+        documented = set(re.findall(r"--([a-z][\w-]*)", text))
+        for o in sorted(options - documented):
+            problems.append(f"option --{o} (src/main.cpp) is not described in {name}")
+        for o in sorted(documented - options):
+            problems.append(f"{name} describes --{o}, which src/main.cpp does not have")
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--check", action="store_true")
@@ -285,7 +308,7 @@ def main():
             path.write_text(text, encoding="utf-8")
             print(f"wrote    {rel}")
 
-    for problem in protocol_drift() + transport_drift() + hid_cable_drift():
+    for problem in protocol_drift() + transport_drift() + hid_cable_drift() + option_drift():
         print(f"DRIFT    {problem}", file=sys.stderr)
         stale += 1
 
