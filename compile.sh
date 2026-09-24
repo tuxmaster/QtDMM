@@ -116,8 +116,10 @@ then
 	rm -f AppDir/usr/share/metainfo/io.github.qtdmm.qtdmm.metainfo.xml
 	cp -v ../assets/qtdmm.desktop ../qtdmm.png AppDir
 	cp -v ../assets/appimage/qtdmm.appdata.xml AppDir/usr/share/metainfo
+	# pass the command line on (--version, --config-id, ...); quoted, as the
+	# AppImage may be mounted below a path with spaces
 	echo '#!/bin/sh' > AppDir/AppRun
-	echo '$APPDIR/usr/bin/qtdmm' >> AppDir/AppRun
+	echo 'exec "$APPDIR/usr/bin/qtdmm" "$@"' >> AppDir/AppRun
 	chmod +x AppDir/AppRun
 
 	for lib in $(ldd -r AppDir/usr/bin/qtdmm | awk '{ print $3 }' | grep -v '^$')
