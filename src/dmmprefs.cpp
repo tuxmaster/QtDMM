@@ -390,7 +390,15 @@ bool DmmPrefs::isSigrokMeter() const
 
 bool DmmPrefs::isBluetooth() const
 {
+#ifdef QTDMM_WITH_BLE
   return ui_vendor->currentIndex() != 0 && (m_dmmInfo.protocol == ReadEvent::VictronBLE || isGatt());
+#else
+  // no Bluetooth port in this build: still show the Bluetooth group for these
+  // models, with a hint instead of the serial settings they don't have
+  const ProtocolInfo *info = protocolInfo(m_dmmInfo.protocol);
+  return ui_vendor->currentIndex() != 0 && m_dmmInfo.baud == 0 && info
+         && QLatin1String(info->transport) == QLatin1String("Bluetooth LE");
+#endif
 }
 
 // A meter QtDMM connects to over GATT (UT60BT): address only, no key and no
@@ -845,6 +853,11 @@ void DmmPrefs::on_ui_sigrokTest_clicked()
 // "ble <address> <key> <main> <second>", see BleAdvertisementDevice
 void DmmPrefs::updateBleHint()
 {
+#ifndef QTDMM_WITH_BLE
+  ui_bleScan->setEnabled(false);
+  ui_bleHint->setText(tr("This QtDMM was built without Bluetooth support, so it cannot connect to this meter."));
+  return;
+#endif
   const QString address = ui_bleAddress->currentText().section(' ', 0, 0).trimmed();
   const bool keyOk = VictronBle::keyFromHex(ui_bleKey->text()).size() == 16;
   QStringList hints;

@@ -114,5 +114,11 @@ A Bluetooth LE adapter and a QtDMM built with Qt's Bluetooth module
 (`QTDMM_WITH_BLE`, on by default when Qt6 Bluetooth is found - on Debian /
 Ubuntu that is the `qt6-connectivity-dev` package at build time and
 `libqt6bluetooth6` at run time). Linux uses BlueZ over D-Bus; QtDMM does
-not need root. Without the module the Bluetooth models are listed but cannot
-be connected.
+not need root. Windows builds include Bluetooth as well. Without the module
+the Bluetooth models are listed but cannot be connected; the settings page
+says so.
+
+**macOS:** not supported yet. macOS does not tell programs the Bluetooth
+address of a device, and QtDMM finds and addresses the meters by that
+address, so the macOS build leaves Bluetooth out (`QTDMM_WITH_BLE` is off by
+default there).

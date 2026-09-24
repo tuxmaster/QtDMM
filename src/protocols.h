@@ -25,7 +25,8 @@ struct ProtocolInfo
   const char *chip;          ///< meter chip, "" when unknown
   /// How the meter is reached when it is not a serial line: "Bluetooth LE",
   /// "USB-HID (BU-86X)", "sigrok-cli". "" means serial, and then the
-  /// devices carry a baud rate. Documentation only (the device table).
+  /// devices carry a baud rate. Used by the device table, and by the
+  /// settings page of a build without Bluetooth to recognise these models.
   const char *transport;
   std::shared_ptr<DmmDecoder> (*create)(ReadEvent::DataFormat);
 };

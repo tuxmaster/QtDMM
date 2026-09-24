@@ -194,7 +194,9 @@ bool DMM::openPort()
 {
   if (!m_portHandler->create(m_dmmInfo, m_portType, m_device))
   {
-    m_error = tr("Error creating port %1.").arg(deviceName());
+    const bool bluetooth = m_portType == PortHandler::PortType::Ble || m_portType == PortHandler::PortType::BleGatt;
+    m_error = bluetooth ? tr("This QtDMM was built without Bluetooth support.")
+                        : tr("Error creating port %1.").arg(deviceName());
     Q_EMIT error(m_error);
     return false;
   }
