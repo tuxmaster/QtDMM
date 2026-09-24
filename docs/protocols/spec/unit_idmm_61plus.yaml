@@ -1,20 +1,24 @@
 protocol: UniTUT61Plus
 decoder: src/decoders/unit_idmm.cpp
-devices: [UNI-T UT61E+, UNI-T UT61D+, UNI-T UT61B+]
+devices: [UNI-T UT61E+, UNI-T UT61D+, UNI-T UT61B+, UNI-T UT161E, UNI-T UT161D, UNI-T UT161B]
 frames_per_reading: 1
 unit_map:                      # spec spelling -> what the decoder emits
   "u": "µ"
 sources:
+  - "ablage/unit_ut61eplus/from_vendor/funOl_UT61E+/D+/B+.json and funOl_UT161E/D/B.json (range tables from UNI-T's own app)"
   - ablage/ut61xpy-main/adapters/ut61xp.py (ut61xpy - UT61X+ base class, range offsets, mode 25 channels)
   - ablage/ut61xpy-main/misc/current_ranges.md (current ranges of UT61D+ and UT61E+)
 
-# The UT61B+/D+/E+ speak the UNI-T iDMM frame of the UT60BT (see unit_idmm.yaml
-# for the layout) over the UT-D09 USB cable (HID UART, 9600 8N1) or the
-# UT-D07B Bluetooth adapter, polled with AB CD 03 5E 01 D9. Only the ranges
-# differ, per ut61xpy: the V positions start in volts (UT61E+ 2.2 V range),
-# the mA position stays in mA (22/220 mA), the uA position in uA, and
-# function 25 is the DC V position that alternates DC and AC readings (flags
-# C bit 3 = AC) - QtDMM makes the AC ones the second value.
+# The UT61B+/D+/E+ and the UT161B/D/E speak the UNI-T iDMM frame of the UT60BT
+# (see unit_idmm.yaml for the layout) - the UT61+ over the UT-D09 USB cable
+# (HID UART, 9600 8N1) or the UT-D07B Bluetooth adapter, the UT161 over its
+# built-in Bluetooth - polled with AB CD 03 5E 01 D9. Only the ranges differ
+# from the UT60BT; UNI-T's own app tables (funOl_*.json, saved by the
+# unit_ut61eplus project) and ut61xpy agree: the V positions start in volts
+# (2.2 V resp. 6 V), mV stays mV, the uA and mA positions keep their unit, CAP
+# is nF up to range 1, Hz is Hz up to range 1, and function 25 (AC/DC) is the
+# DC V position that alternates DC and AC readings (flags C bit 3 = AC) - QtDMM
+# makes the AC ones the second value.
 #
 # SYNTHETIC: no UT61E+ capture is available; the frames below are built from
 # that description (with correct checksums) and test the decoder's reading of
@@ -68,3 +72,13 @@ vectors:
     bytes: AB CD 10 06 30 20 20 20 4F 4C 2E 20 00 00 00 00 00 03 07
     reading: {value: "OL", unit: "Ohm", range_mode: auto}
     expect: {special: "OH", val: "OL"}
+  - source_line: "Hz r2: 2.2 kHz range (vendor table; synthetic frame)"
+    source: ablage/unit_ut61eplus/from_vendor
+    bytes: AB CD 10 04 32 20 31 2E 32 33 34 35 00 00 00 00 08 03 13
+    reading: {value: "1.2345", unit: "kHz", range_mode: auto}
+    expect: {special: "HZ", val: "1.2345"}
+  - source_line: "AC+DC current (function 27): 1.234 A (vendor table; synthetic frame)"
+    source: ablage/unit_ut61eplus/from_vendor
+    bytes: AB CD 10 1B 31 20 20 31 2E 32 33 34 00 00 00 00 00 03 0C
+    reading: {value: "1.234", unit: "A", range_mode: auto}
+    expect: {special: "DC", val: "1.234"}

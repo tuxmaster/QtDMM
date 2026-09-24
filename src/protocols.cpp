@@ -45,7 +45,7 @@ const std::vector<ProtocolInfo> &protocols()
     { ReadEvent::Fluke45,               "Fluke45",               QT_TRANSLATE_NOOP("Protocols", "variable bytes ASCII, polled (Fluke 45 bench meter)"),           "",                      "",                         make<DecoderFluke45> },
     { ReadEvent::VictronBLE,            "VictronBLE",            QT_TRANSLATE_NOOP("Protocols", "Bluetooth LE advertisements, encrypted (Victron Instant Readout)"),  "",                 "Bluetooth LE",             make<DecoderVictronBLE> },
     { ReadEvent::UniTiDMM,              "UniTiDMM",              QT_TRANSLATE_NOOP("Protocols", "19 bytes binary, polled over Bluetooth LE (UNI-T UT60BT)"),   "",                      "Bluetooth LE",             make<DecoderUniTiDMM> },
-    { ReadEvent::UniTUT61Plus,          "UniTUT61Plus",          QT_TRANSLATE_NOOP("Protocols", "19 bytes binary, polled (UNI-T UT61B+/D+/E+, USB or Bluetooth adapter)"), "", "Bluetooth LE (UT-D07B)", make<DecoderUniTiDMM> },
+    { ReadEvent::UniTUT61Plus,          "UniTUT61Plus",          QT_TRANSLATE_NOOP("Protocols", "19 bytes binary, polled (UNI-T UT61B+/D+/E+, USB or Bluetooth adapter)"), "", "Bluetooth LE", make<DecoderUniTiDMM> },
   };
   return table;
 }

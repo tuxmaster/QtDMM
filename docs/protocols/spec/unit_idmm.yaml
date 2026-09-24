@@ -1,10 +1,11 @@
 protocol: UniTiDMM
 decoder: src/decoders/unit_idmm.cpp
-devices: [UNI-T UT60BT, UNI-T UT161A, UNI-T UT161B, UNI-T UT161D, UNI-T UT161E]
+devices: [UNI-T UT60BT]
 frames_per_reading: 1
 unit_map:                      # spec spelling -> what the decoder emits
   "u": "µ"
 sources:
+  - "ablage/unit_ut61eplus/from_vendor/funOl_UT60BT.json (range table from UNI-T's own app)"
   - tmp/ut60bt/walk_all.log (UT60BT dial walk, 2026-09-24)
   - ablage/ut60bt/src/decode.test.ts (ble-multimeter, MIT - captures from a UT60BTk, 2026-06-06)
   - ablage/ut60bt/uni-t.md (ble-multimeter protocol description)
@@ -21,9 +22,11 @@ sources:
 #                         6 OHM, 7 CONT, 8 DIODE, 9 CAP, 10 C, 11 F, 12 DCuA,
 #                         13 ACuA, 14 DCmA, 15 ACmA, 16 DCA, 17 ACA, 18 hFE,
 #                         20 NCV, 21 LozV (22-30 other UNI-T models)
-#   4    range            ASCII digit; with the function it gives unit/prefix
-#                         (OHM 0 Ohm, 1-3 kOhm, 4-6 MOhm; CAP 0-1 nF, 2-4 uF,
-#                         5-7 mF; Hz 0-1 Hz, 2-4 kHz, 5-7 MHz)
+#   4    range            ASCII digit; with the function it gives unit/prefix,
+#                         per UNI-T's app table for the UT60BT: DCV/ACV 0 mV,
+#                         1-3 V; OHM 0 Ohm, 1-3 kOhm, 4-5 MOhm; CAP 0-2 nF,
+#                         3-5 uF, 6-7 mF; Hz 0-2 Hz, 3-5 kHz, 6-7 MHz; mA 0 mA,
+#                         1 A
 #   5-11 display          7 ASCII characters as on the LCD, sign and decimal
 #                         point included; overload as OL with a floating dot
 #   12-13 bar graph       hi, lo
@@ -172,3 +175,18 @@ vectors:
     bytes: AB CD 10 14 30 20 20 45 46 4C 4F 20 00 00 00 04 08 03 5E
     reading: {value: "EFLO", unit: "", range_mode: manual}
     expect: {special: "NCV", val: "EFLO"}
+  - source_line: "UT60BT CAP r2: 999.9 nF range (vendor table; synthetic frame)"
+    source: ablage/unit_ut61eplus/from_vendor
+    bytes: AB CD 10 09 32 20 34 37 30 2E 35 20 00 00 00 00 00 03 01
+    reading: {value: "470.5", unit: "nF", range_mode: auto}
+    expect: {special: "CA", val: "470.5"}
+  - source_line: "UT60BT Hz r2: 999.90 Hz range (vendor table; synthetic frame)"
+    source: ablage/unit_ut61eplus/from_vendor
+    bytes: AB CD 10 04 32 20 34 39 39 2E 39 30 00 00 00 00 08 03 23
+    reading: {value: "499.90", unit: "Hz", range_mode: auto}
+    expect: {special: "HZ", val: "499.90"}
+  - source_line: "UT60BT DCmA r1: 9.999 A range (vendor table; synthetic frame)"
+    source: ablage/unit_ut61eplus/from_vendor
+    bytes: AB CD 10 0E 31 20 20 31 2E 32 33 34 00 00 00 00 00 02 FF
+    reading: {value: "1.234", unit: "A", range_mode: auto}
+    expect: {special: "DC", val: "1.234"}
