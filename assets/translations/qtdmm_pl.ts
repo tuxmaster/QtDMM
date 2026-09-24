@@ -477,82 +477,92 @@ Stara konfiguracja ~/.qtdmmrc została przemianowana na ~/.qtdmmrc.old.</transla
 <context>
     <name>DMM</name>
     <message>
-        <location filename="../../src/dmm.cpp" line="197"/>
+        <location filename="../../src/dmm.cpp" line="199"/>
         <source>Error creating port %1.</source>
         <translation>Błąd tworzenia portu %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="217"/>
+        <location filename="../../src/dmm.cpp" line="219"/>
         <source>Missing Permission</source>
         <translation>Brak uprawnień</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="220"/>
+        <location filename="../../src/dmm.cpp" line="222"/>
         <source>No such device %1.</source>
         <translation>Brak urządzenia %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="223"/>
+        <location filename="../../src/dmm.cpp" line="225"/>
         <source>Error opening %1.
 DMM connected and switched on?</source>
         <translation>Błąd otwierania %1.
 Czy multimetr jest podłączony i włączony?</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="235"/>
+        <location filename="../../src/dmm.cpp" line="237"/>
         <source>Error configuring serial port %1.</source>
         <translation>Błąd konfiguracji portu szeregowego %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="277"/>
+        <location filename="../../src/dmm.cpp" line="279"/>
         <source>Connecting ...</source>
         <translation>Łączenie…</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="323"/>
+        <location filename="../../src/dmm.cpp" line="325"/>
         <source>Lost connection to %1.</source>
         <translation>Utracono połączenie z %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="327"/>
-        <location filename="../../src/dmm.cpp" line="381"/>
+        <location filename="../../src/dmm.cpp" line="329"/>
+        <location filename="../../src/dmm.cpp" line="383"/>
         <source>Retrying every %1 s.</source>
         <translation>Ponowna próba co %1 s.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="343"/>
+        <location filename="../../src/dmm.cpp" line="345"/>
         <source>Calculating %1</source>
         <translation>Obliczanie %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="354"/>
+        <location filename="../../src/dmm.cpp" line="356"/>
         <source>Access denied for %1.</source>
         <translation>Odmowa dostępu do %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="366"/>
+        <location filename="../../src/dmm.cpp" line="368"/>
         <source>Not connected</source>
         <translation>Niepołączony</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="344"/>
+        <location filename="../../src/dmm.cpp" line="346"/>
         <source>Connected %1</source>
         <translation>Połączono z %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="418"/>
+        <location filename="../../src/dmm.cpp" line="198"/>
+        <source>This QtDMM was built without Bluetooth support.</source>
+        <translation>Ten QtDMM zbudowano bez obsługi Bluetooth.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="396"/>
+        <source>Connecting to %1 over Bluetooth ...</source>
+        <translation>Łączenie z %1 przez Bluetooth ...</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmm.cpp" line="432"/>
         <source>Error %1</source>
         <translation>Błąd %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="303"/>
+        <location filename="../../src/dmm.cpp" line="305"/>
         <source>The USB cable answers, but the meter sends nothing.
 Switch on the meter&apos;s serial output (on UNI-T meters: hold the RS232/USB button).</source>
         <translation>Kabel USB odpowiada, ale multimetr nic nie wysyła.
 Włącz wyjście szeregowe multimetru (w UNI-T: przytrzymaj przycisk RS232/USB).</translation>
     </message>
     <message>
-        <location filename="../../src/dmm.cpp" line="305"/>
+        <location filename="../../src/dmm.cpp" line="307"/>
         <source>Timeout on device %1.
 DMM connected and switched on?</source>
         <translation>Przekroczono czas oczekiwania na %1.
@@ -833,114 +843,119 @@ Czy multimetr jest podłączony i włączony?</translation>
         <translation>Wszyscy producenci</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="435"/>
-        <location filename="../../src/dmmprefs.cpp" line="510"/>
+        <location filename="../../src/dmmprefs.cpp" line="443"/>
+        <location filename="../../src/dmmprefs.cpp" line="518"/>
         <source>Position %1: %2</source>
         <translation>Pozycja %1: %2</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="526"/>
+        <location filename="../../src/dmmprefs.cpp" line="534"/>
         <source>%1: no such instance running</source>
         <translation>%1: nie działa instancja o takiej nazwie</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="536"/>
+        <location filename="../../src/dmmprefs.cpp" line="544"/>
         <source>Running instances: %1</source>
         <translation>Działające instancje: %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="538"/>
+        <location filename="../../src/dmmprefs.cpp" line="546"/>
         <source>No other instance is running.</source>
         <translation>Nie działa żadna inna instancja.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="737"/>
+        <location filename="../../src/dmmprefs.cpp" line="745"/>
         <source>none</source>
         <translation>brak</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="800"/>
+        <location filename="../../src/dmmprefs.cpp" line="808"/>
         <source>%1 was not found or does not run. Install sigrok-cli, or set its path under &lt;a href=&quot;ports&quot;&gt;Special ports&lt;/a&gt;.</source>
         <translation>Nie znaleziono %1 lub nie da się uruchomić. Zainstaluj sigrok-cli lub ustaw jego ścieżkę w &lt;a href=&quot;ports&quot;&gt;Portach specjalnych&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="803"/>
+        <location filename="../../src/dmmprefs.cpp" line="811"/>
         <source>%1 has no driver &quot;%2&quot;; see sigrok-cli --list-supported.</source>
         <translation>%1 nie ma sterownika „%2”; zobacz sigrok-cli --list-supported.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="805"/>
+        <location filename="../../src/dmmprefs.cpp" line="813"/>
         <source>%1 found.</source>
         <translation>Znaleziono %1.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="815"/>
+        <location filename="../../src/dmmprefs.cpp" line="823"/>
         <source>Running %1 --driver %2 --scan ...</source>
         <translation>Trwa %1 --driver %2 --scan…</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="837"/>
+        <location filename="../../src/dmmprefs.cpp" line="845"/>
         <source>No meter answered within 30 s (a serial port without a SCPI meter keeps sigrok-cli waiting).</source>
         <translation>Żaden miernik nie odpowiedział w ciągu 30 s (port szeregowy bez miernika SCPI każe sigrok-cli czekać bez końca).</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="839"/>
+        <location filename="../../src/dmmprefs.cpp" line="847"/>
         <source>Found: %1</source>
         <translation>Znaleziono: %1</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="841"/>
+        <location filename="../../src/dmmprefs.cpp" line="849"/>
         <source>No meter answered.</source>
         <translation>Żaden miernik nie odpowiedział.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="852"/>
+        <location filename="../../src/dmmprefs.cpp" line="858"/>
+        <source>This QtDMM was built without Bluetooth support, so it cannot connect to this meter.</source>
+        <translation>Ten QtDMM zbudowano bez obsługi Bluetooth, więc nie może połączyć się z tym miernikiem.</translation>
+    </message>
+    <message>
+        <location filename="../../src/dmmprefs.cpp" line="865"/>
         <source>Pick the device or type its Bluetooth address.</source>
         <translation>Wybierz urządzenie lub wpisz jego adres Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="855"/>
+        <location filename="../../src/dmmprefs.cpp" line="868"/>
         <source>Switch the meter&apos;s Bluetooth on (it shows the Bluetooth symbol) before scanning or connecting.</source>
         <translation>Włącz Bluetooth miernika (pojawi się symbol Bluetooth) przed wyszukiwaniem lub łączeniem.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="860"/>
+        <location filename="../../src/dmmprefs.cpp" line="873"/>
         <source>The key is the 32-digit &quot;Encryption key&quot; VictronConnect shows under Product info, Instant readout via Bluetooth.</source>
         <translation>Klucz to 32-cyfrowy „klucz szyfrowania&quot;, który VictronConnect pokazuje w Informacjach o produkcie, Natychmiastowy odczyt przez Bluetooth.</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="870"/>
+        <location filename="../../src/dmmprefs.cpp" line="883"/>
         <source>Scanning for %1 (6 s)...</source>
         <translation>Wyszukiwanie %1 (6 s)...</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="871"/>
+        <location filename="../../src/dmmprefs.cpp" line="884"/>
         <source>Scanning for Victron devices (5 s)...</source>
         <translation>Wyszukiwanie urządzeń Victron (5 s)…</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="882"/>
+        <location filename="../../src/dmmprefs.cpp" line="895"/>
         <source>No meter found. Is its Bluetooth switched on, and no other program connected to it?</source>
         <translation>Nie znaleziono miernika. Czy jego Bluetooth jest włączony i żaden inny program nie jest z nim połączony?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="883"/>
+        <location filename="../../src/dmmprefs.cpp" line="896"/>
         <source>No Victron device found. Is Bluetooth on, and Instant readout enabled on the device?</source>
         <translation>Nie znaleziono urządzenia Victron. Czy Bluetooth jest włączony, a natychmiastowy odczyt włączony w urządzeniu?</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="922"/>
+        <location filename="../../src/dmmprefs.cpp" line="935"/>
         <source>Load DMM description</source>
         <translation>Wczytaj opis multimetru</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="922"/>
-        <location filename="../../src/dmmprefs.cpp" line="948"/>
+        <location filename="../../src/dmmprefs.cpp" line="935"/>
+        <location filename="../../src/dmmprefs.cpp" line="961"/>
         <source>DMM description (*.cfg)</source>
         <translation>Opis multimetru (*.cfg)</translation>
     </message>
     <message>
-        <location filename="../../src/dmmprefs.cpp" line="948"/>
+        <location filename="../../src/dmmprefs.cpp" line="961"/>
         <source>Save DMM description</source>
         <translation>Zapisz opis multimetru</translation>
     </message>

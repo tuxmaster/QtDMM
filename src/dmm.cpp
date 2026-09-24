@@ -385,6 +385,18 @@ void DMM::timerEvent(QTimerEvent *)
     return;
   }
   m_readerThread->startRead();
+#ifdef QTDMM_WITH_BLE
+  // a Bluetooth GATT link takes seconds to set up after open(); that is not a
+  // silent meter yet - the device reports its own failure after 20 s, and the
+  // frame timeout counts from the moment it is ready
+  auto *gatt = dynamic_cast<BleGattDevice *>(m_portHandler->port());
+  if (gatt && !gatt->isReady())
+  {
+    m_lastFrame.start();
+    setState(LinkState::Connecting, tr("Connecting to %1 over Bluetooth ...").arg(deviceName()));
+    return;
+  }
+#endif
   if ((m_state == LinkState::Connecting || m_state == LinkState::Connected || m_state == LinkState::Timeout)
       && m_lastFrame.elapsed() > m_timeoutMs)
     setState(LinkState::Timeout, timeoutMessage());
