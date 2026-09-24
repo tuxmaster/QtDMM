@@ -61,6 +61,10 @@ A clone needs its tags: `git fetch --tags`. The CI checkouts use `fetch-depth: 0
    Linux AppImage and the Windows installer and ZIP. It then creates a
    **draft** release with them, marked as a pre-release when the tag has a
    suffix.
+   If the release was made on GitHub's release page instead (which creates
+   the tag), the workflow adds the files to it and leaves it as it is. Its
+   builds take about 20 minutes, and until then the release has no binaries.
+   Mark a release candidate as a pre-release there by hand.
 5. Check the draft on GitHub: download and start the builds, then write the
    notes (from CHANGELOG). Publish it.
 6. Tell the website: the download page links the new release.
