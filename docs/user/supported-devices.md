@@ -19,7 +19,7 @@ been tried with QtDMM at all. Models marked ² are sold without a serial
 interface and need a hardware modification first (see the notes below the
 table). If you can confirm one, or get an unlisted
 meter working, please report it on the
-[project page](https://github.com/tuxmaster/QtDMM/issues).
+[project page](https://github.com/qtdmm/QtDMM/issues).
 
 | Vendor | Model | Chip | Protocol | Serial | Lines | Counts |
 |---|---|---|---|---|---|---|

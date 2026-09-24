@@ -4,13 +4,13 @@ pkgver=0.0.0 # placeholder, overwritten by pkgver() below on every build
 pkgrel=1
 pkgdesc="A DMM readout software including a configurable recorder "
 arch=('x86_64')
-url="https://github.com/tuxmaster/QtDMM"
+url="https://github.com/qtdmm/QtDMM"
 license=('GPL3')
 provides=('qtdmm')
 conflicts=('qtdmm' 'qtdmm-qt5')
 depends=('qt6-base' 'qt6-translations' 'qt6-serialport' 'qt6-charts' 'qt6-svg' 'hidapi')
 makedepends=('qt6-tools' 'cmake' 'git')
-source=("$pkgname::git+https://github.com/tuxmaster/QtDMM.git")
+source=("$pkgname::git+https://github.com/qtdmm/QtDMM.git")
 sha256sums=('SKIP')
 
 

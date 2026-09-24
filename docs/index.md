@@ -11,7 +11,7 @@ systems.
 
 Website with downloads and the online handbook: **<https://qtdmm.de>**,
 contact: <hello@qtdmm.de>.
-Source code and bug reports: <https://github.com/tuxmaster/QtDMM>.
+Source code and bug reports: <https://github.com/qtdmm/QtDMM>.
 
 ## Features
 
