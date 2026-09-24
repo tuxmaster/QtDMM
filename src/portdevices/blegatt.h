@@ -52,8 +52,10 @@ public:
   qint64 bytesAvailable() const override;
   bool isSequential() const override { return true; }
 
-  /// True once notifications are subscribed and the write characteristic
-  /// is known: polls sent before are dropped (the reader repeats them).
+  /// True once the meter has confirmed the notification subscription and the
+  /// write characteristic is known; until then open() has returned but the
+  /// link is still being set up (up to 20 s). The last poll written before
+  /// is sent on becoming ready.
   bool isReady() const { return m_ready; }
 
   /// Shortest time between two repeated polls.
@@ -71,6 +73,7 @@ private:
   void onServiceDiscovered(const QBluetoothUuid &uuid);
   void onDiscoveryFinished();
   void onServiceState();
+  void setReady();
   void fail(const QString &reason);
   qint64 readData(char *data, qint64 maxSize) override;
   qint64 writeData(const char *data, qint64 len) override;

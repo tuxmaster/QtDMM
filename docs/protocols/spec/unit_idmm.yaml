@@ -49,6 +49,10 @@ vectors:
     bytes: AB CD 10 00 30 20 20 32 37 34 2E 37 00 00 00 00 08 03 02
     reading: {value: "274.7", unit: "mV", range_mode: auto}
     expect: {special: "AC", val: "274.7"}
+  - source_line: "ACV r0: 274.7 again, after 82 bytes of noise - the frame runs across the end of the reader's 100-byte ring buffer (the test feeds it up to 5 times; with 82 it wraps every time)"
+    bytes: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 AB CD 10 00 30 20 20 32 37 34 2E 37 00 00 00 00 08 03 02
+    reading: {value: "274.7", unit: "mV", range_mode: auto}
+    expect: {special: "AC", val: "274.7"}
   - source_line: "ACV r1: 0.219"
     bytes: AB CD 10 00 31 20 20 30 2E 32 31 39 00 00 00 04 08 02 FF
     reading: {value: "0.219", unit: "V", range_mode: manual}

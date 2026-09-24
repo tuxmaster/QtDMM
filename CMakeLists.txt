@@ -66,7 +66,15 @@ find_package(Qt6 REQUIRED COMPONENTS ${QT_COMPONENTS})
 
 ## Bluetooth LE (Victron Instant Readout) needs Qt6::Bluetooth; without it
 ## the BLE port is left out and everything else builds as before.
-option(QTDMM_WITH_BLE "Bluetooth LE port (needs Qt6 Bluetooth)" ON)
+## Off by default on macOS: CoreBluetooth hides device addresses (Qt reports a
+## device UUID instead), but both BLE ports find and address meters by their
+## MAC address, and the bundle carries no NSBluetoothAlwaysUsageDescription.
+if (APPLE)
+	set(QTDMM_WITH_BLE_DEFAULT OFF)
+else()
+	set(QTDMM_WITH_BLE_DEFAULT ON)
+endif()
+option(QTDMM_WITH_BLE "Bluetooth LE port (needs Qt6 Bluetooth)" ${QTDMM_WITH_BLE_DEFAULT})
 if (QTDMM_WITH_BLE)
 	find_package(Qt6 COMPONENTS Bluetooth)
 	if (NOT Qt6Bluetooth_FOUND)
@@ -75,7 +83,7 @@ if (QTDMM_WITH_BLE)
 	endif()
 endif()
 if (NOT QTDMM_WITH_BLE)
-	list(FILTER SRC_FILES EXCLUDE REGEX "portdevices/ble\\.(h|cpp)$")
+	list(FILTER SRC_FILES EXCLUDE REGEX "portdevices/ble(gatt)?\\.(h|cpp)$")
 endif()
 ## AES-128-CTR for the encrypted Victron advertisements (public domain tiny-AES-c)
 list(APPEND SRC_FILES src/3rdparty/tiny-aes/aes.c)

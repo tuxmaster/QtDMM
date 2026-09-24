@@ -216,12 +216,29 @@ void BleGattDevice::onServiceState()
     return;
   }
   const QLowEnergyDescriptor cccd = notify.clientCharacteristicConfiguration();
-  if (cccd.isValid())
-    m_service->writeDescriptor(cccd, QLowEnergyCharacteristic::CCCDEnableNotification);
+  if (!cccd.isValid())
+  {
+    setReady();   // notifies without a CCCD: nothing to switch on
+    return;
+  }
+  // ready once the meter has confirmed the subscription - answers to polls
+  // sent before would go nowhere (a failed write ends in errorOccurred)
+  connect(m_service, &QLowEnergyService::descriptorWritten, this,
+          [this](const QLowEnergyDescriptor &d, const QByteArray &)
+  {
+    if (d.type() == QBluetoothUuid::DescriptorType::ClientCharacteristicConfiguration && !m_ready)
+      setReady();
+  });
+  m_service->writeDescriptor(cccd, QLowEnergyCharacteristic::CCCDEnableNotification);
+}
+
+void BleGattDevice::setReady()
+{
   m_ready = true;
   if (m_connectTimeout)
     m_connectTimeout->stop();
   qCDebug(lcBle) << m_address << "ready";
+  sendPoll();   // the reader's poll from before is still waiting
 }
 
 qint64 BleGattDevice::bytesAvailable() const

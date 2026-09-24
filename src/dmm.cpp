@@ -194,7 +194,9 @@ bool DMM::openPort()
 {
   if (!m_portHandler->create(m_dmmInfo, m_portType, m_device))
   {
-    m_error = tr("Error creating port %1.").arg(deviceName());
+    const bool bluetooth = m_portType == PortHandler::PortType::Ble || m_portType == PortHandler::PortType::BleGatt;
+    m_error = bluetooth ? tr("This QtDMM was built without Bluetooth support.")
+                        : tr("Error creating port %1.").arg(deviceName());
     Q_EMIT error(m_error);
     return false;
   }
@@ -383,6 +385,18 @@ void DMM::timerEvent(QTimerEvent *)
     return;
   }
   m_readerThread->startRead();
+#ifdef QTDMM_WITH_BLE
+  // a Bluetooth GATT link takes seconds to set up after open(); that is not a
+  // silent meter yet - the device reports its own failure after 20 s, and the
+  // frame timeout counts from the moment it is ready
+  auto *gatt = dynamic_cast<BleGattDevice *>(m_portHandler->port());
+  if (gatt && !gatt->isReady())
+  {
+    m_lastFrame.start();
+    setState(LinkState::Connecting, tr("Connecting to %1 over Bluetooth ...").arg(deviceName()));
+    return;
+  }
+#endif
   if ((m_state == LinkState::Connecting || m_state == LinkState::Connected || m_state == LinkState::Timeout)
       && m_lastFrame.elapsed() > m_timeoutMs)
     setState(LinkState::Timeout, timeoutMessage());
