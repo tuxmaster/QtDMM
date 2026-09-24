@@ -26,3 +26,4 @@ nav:
   - Development:
       - Overview: dev/index.md
       - SCPI command reference: dev/scpi-commands.md
+      - Versions and releases: dev/releasing.md

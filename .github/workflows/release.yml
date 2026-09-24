@@ -1,0 +1,42 @@
+name: Release
+
+# A version tag (26.1-rc1, 26.1, 26.1.1 - see docs/dev/releasing.md) builds the
+# Linux AppImage and the Windows installer + ZIP with the regular workflows and
+# puts them into a DRAFT release. A maintainer reviews it and publishes it by
+# hand; tags with a suffix (-rc1, -beta1) become pre-releases.
+on:
+  push:
+    tags: [ '[0-9][0-9].[1-9]*' ]
+
+permissions:
+  contents: write
+
+jobs:
+  linux:
+    uses: ./.github/workflows/cmake-ubuntu-platform.yml
+
+  windows:
+    uses: ./.github/workflows/cmake-windows-platform.yml
+
+  draft:
+    needs: [ linux, windows ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        path: dist
+        merge-multiple: true
+
+    - name: Create the draft release
+      env:
+        GH_TOKEN: ${{ github.token }}
+        TAG: ${{ github.ref_name }}
+      run: |
+        mv dist/QtDMM.AppImage "dist/QtDMM-${TAG}-x86_64.AppImage"
+        ls -l dist
+        pre=""
+        case "$TAG" in *-*) pre="--prerelease" ;; esac
+        gh release create "$TAG" dist/* \
+          --repo "$GITHUB_REPOSITORY" --verify-tag --draft $pre \
+          --title "QtDMM $TAG" \
+          --notes "Draft created from tag $TAG. The changes are in CHANGELOG; the handbook is at https://qtdmm.de/docs/."

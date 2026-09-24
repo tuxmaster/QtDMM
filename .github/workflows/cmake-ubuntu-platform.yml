@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow_call:   # from release.yml for a version tag
 
 jobs:
   build:
@@ -12,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0   # tags and history: the version comes from git describe
  
     - name: Install dependencies
       run: |
@@ -40,8 +43,8 @@ jobs:
       run: ./compile.sh ctest
 
     - name: Upload AppImage artifact
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      if: github.event_name != 'pull_request'
       uses: actions/upload-artifact@v4
       with:
-        name: qtdmm-dev-build
+        name: QtDMM-linux-AppImage
         path: ${{ github.workspace }}/packages/QtDMM.AppImage

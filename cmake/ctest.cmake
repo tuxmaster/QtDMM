@@ -160,6 +160,9 @@ if (BUILD_TESTING)
 		endif()
 	endif()
 
+	## the version scheme YY.N[.P][-rcK]: tags and dev builds -> version strings
+	add_test(NAME version_scheme COMMAND ${CMAKE_COMMAND} -P "${CMAKE_SOURCE_DIR}/tests/test_version.cmake")
+
 	## desktop entry and AppStream metadata, when the validators are installed
 	## (desktop-file-utils, appstream); no network: screenshot URLs aren't fetched
 	find_program(DESKTOP_FILE_VALIDATE desktop-file-validate)

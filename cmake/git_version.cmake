@@ -1,73 +1,211 @@
 # get version
 #
-# CalVer, derived from HEAD's commit date - not from git tags, not from the
-# build date. This needs no tag management, is reproducible (rebuilding the
-# same commit always yields the same version), and works on a shallow clone
-# (unlike `git describe --tags`, which needs tag refs to be fetched).
+# QtDMM versions are YY.N[.P][-rcK] (like FreeCAD): YY the two-digit year,
+# N the release number within that year, P a bugfix release of YY.N, -rcK /
+# -betaK / -alphaK a pre-release of YY.N. Releases are git tags with exactly
+# that name ("26.1-rc1", "26.1", "26.1.1"); docs/dev/releasing.md has the
+# steps.
 #
-# PROJECT_VERSION (MAJOR.MINOR.PATCH = YEAR.MONTH.DAY) is the clean form fed
-# to CPack/RPM/Debian packaging, where a raw commit hash isn't valid syntax.
-# PROJECT_VERSION_FULL additionally carries the short commit hash and is used
-# for the APP_VERSION shown in the UI/--version, for build traceability.
-function(get_version_from_git)
-	set(GIT_COMMIT_SHORT_HASH "unknown")
-	set(HAVE_GIT_DATE FALSE)
+# Where the version comes from, first match wins:
+#   1. git describe on the newest such tag (a clone; CI must fetch tags)
+#   2. .tarball-version, written into the source tarball by CPack
+#   3. .archive-version, filled in by "git archive" (GitHub's source
+#      downloads) via export-subst in .gitattributes. Not "VERSION": the
+#      source root is on the include path, and on case-insensitive file
+#      systems (Windows, macOS) <version> from the C++ library would find it.
+#   4. nothing: 0.0-unknown
+#
+# A commit that is not tagged is a development build of the next release:
+#   26.1 + 14 commits      -> 26.2-dev.14+g1234abc  (27.1-dev... once the commit is from 2027)
+#   26.1-rc1 + 3 commits   -> 26.1-rc1.3+g1234abc   (after rc1, before the release)
+#   no tag at all          -> <YY of the commit>.1-dev.<commits>+g...
+#
+# Results (PARENT_SCOPE):
+#   QTDMM_VERSION           shown in the UI, --version, *IDN?  (26.2-dev.14+g1234abc)
+#   QTDMM_PACKAGE_VERSION   RPM/DEB: '~' sorts a pre-release before the release,
+#                           '+' is not allowed                  (26.2~dev.14.g1234abc)
+#   PROJECT_VERSION[_MAJOR|_MINOR|_PATCH]
+#                           numbers only, for CMake, CPack, the macOS bundle and
+#                           Windows version resources            (26.2.0)
+#   QTDMM_COMMIT_YEAR/_MONTH/_DAY  date of the commit (RPM changelog)
+#
+# qtdmm_parse_describe() is also what tests/test_version.cmake checks.
 
+## @p describe: a tag, or "<tag>-<n>-g<hash>" (git describe --long), or ""
+## when there is no tag; @p count / @p hash are used for "" only.
+## Sets <prefix>_DISPLAY, <prefix>_PACKAGE, <prefix>_MAJOR/_MINOR/_PATCH,
+## <prefix>_ERROR (empty when fine) in the caller's scope.
+function(qtdmm_parse_describe describe commit_yy count hash prefix)
+	set(_err "")
+	set(_tag "")
+	set(_n 0)
+	set(_h "${hash}")
+	if (describe MATCHES "^(.+)-([0-9]+)-g([0-9a-f]+)$")
+		set(_tag "${CMAKE_MATCH_1}")
+		set(_n "${CMAKE_MATCH_2}")
+		set(_h "${CMAKE_MATCH_3}")
+	elseif (NOT describe STREQUAL "")
+		set(_tag "${describe}")
+	else()
+		set(_n "${count}")
+	endif()
+
+	if (_tag STREQUAL "")
+		# no release yet: working towards the first one of the commit's year
+		set(_yy ${commit_yy})
+		set(_minor 1)
+		set(_patch 0)
+		set(_display "${_yy}.1-dev.${_n}+g${_h}")
+		set(_package "${_yy}.1~dev.${_n}.g${_h}")
+	elseif (_tag MATCHES "^([0-9][0-9])\\.([1-9][0-9]*)(\\.([0-9]+))?(-(alpha|beta|rc)([1-9][0-9]*))?$")
+		set(_yy ${CMAKE_MATCH_1})
+		set(_minor ${CMAKE_MATCH_2})
+		set(_patch "${CMAKE_MATCH_4}")
+		if ("${_patch}" STREQUAL "")
+			set(_patch 0)
+		endif()
+		set(_pre "${CMAKE_MATCH_6}${CMAKE_MATCH_7}")
+		if (_n EQUAL 0)
+			set(_display "${_tag}")
+			string(REPLACE "-" "~" _package "${_tag}")
+		elseif (NOT _pre STREQUAL "")
+			# after a pre-release tag: still heading for that release
+			set(_display "${_tag}.${_n}+g${_h}")
+			string(REPLACE "-" "~" _package "${_tag}.${_n}.g${_h}")
+		else()
+			# after a release: the next one, a new year starts at .1
+			if (commit_yy GREATER _yy)
+				set(_yy ${commit_yy})
+				set(_minor 1)
+			else()
+				math(EXPR _minor "${_minor} + 1")
+			endif()
+			set(_patch 0)
+			set(_display "${_yy}.${_minor}-dev.${_n}+g${_h}")
+			set(_package "${_yy}.${_minor}~dev.${_n}.g${_h}")
+		endif()
+	else()
+		set(_err "'${_tag}' is not a version tag (YY.N[.P][-rcK])")
+		set(_yy 0)
+		set(_minor 0)
+		set(_patch 0)
+		set(_display "0.0-unknown")
+		set(_package "0.0~unknown")
+	endif()
+
+	# 26 -> 26, but "05" -> 5 for the numeric fields
+	string(REGEX REPLACE "^0+([0-9])" "\\1" _yy "${_yy}")
+	set(${prefix}_DISPLAY "${_display}" PARENT_SCOPE)
+	set(${prefix}_PACKAGE "${_package}" PARENT_SCOPE)
+	set(${prefix}_MAJOR "${_yy}" PARENT_SCOPE)
+	set(${prefix}_MINOR "${_minor}" PARENT_SCOPE)
+	set(${prefix}_PATCH "${_patch}" PARENT_SCOPE)
+	set(${prefix}_ERROR "${_err}" PARENT_SCOPE)
+endfunction()
+
+function(get_version_from_git)
+	set(_describe "")
+	set(_count 0)
+	set(_hash "unknown")
+	set(_source "")
+	string(TIMESTAMP _date "%Y.%m.%d")   # no git: today, only for the RPM changelog
+
+	# the tag pattern leaves out the old 0.9.x and 1.0.0-alpha.1 tags
+	set(_match "[0-9][0-9].[1-9]*")
 	find_package(Git QUIET)
-	if(Git_FOUND)
+	if (Git_FOUND AND EXISTS "${CMAKE_SOURCE_DIR}/.git")
 		execute_process(
 			COMMAND ${GIT_EXECUTABLE} log -1 --format=%cd --date=format:%Y.%m.%d
 			WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-			OUTPUT_VARIABLE GIT_COMMIT_DATE
-			OUTPUT_STRIP_TRAILING_WHITESPACE
-			RESULT_VARIABLE GIT_DATE_RESULT
-		)
-
-		if(GIT_DATE_RESULT EQUAL 0 AND GIT_COMMIT_DATE MATCHES "^([0-9]+)\\.([0-9]+)\\.([0-9]+)$")
-			set(HAVE_GIT_DATE TRUE)
+			OUTPUT_VARIABLE _gitdate OUTPUT_STRIP_TRAILING_WHITESPACE
+			RESULT_VARIABLE _r)
+		if (_r EQUAL 0)
+			set(_date "${_gitdate}")
+			execute_process(
+				COMMAND ${GIT_EXECUTABLE} describe --tags --long --abbrev=7 --match "${_match}"
+				WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+				OUTPUT_VARIABLE _describe OUTPUT_STRIP_TRAILING_WHITESPACE
+				RESULT_VARIABLE _r ERROR_QUIET)
+			if (NOT _r EQUAL 0)
+				set(_describe "")   # no version tag reachable (or a shallow clone)
+			endif()
+			execute_process(
+				COMMAND ${GIT_EXECUTABLE} rev-list --count HEAD
+				WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+				OUTPUT_VARIABLE _count OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
+			execute_process(
+				COMMAND ${GIT_EXECUTABLE} rev-parse --short=7 HEAD
+				WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+				OUTPUT_VARIABLE _hash OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
+			set(_source "git")
+		endif()
+	endif()
+	if (_source STREQUAL "" AND EXISTS "${CMAKE_SOURCE_DIR}/.tarball-version")
+		# lines: git describe --long (may be empty), commit date, commit count, hash
+		file(READ "${CMAKE_SOURCE_DIR}/.tarball-version" _content)
+		string(REPLACE "\n" ";" _lines "${_content}")
+		list(LENGTH _lines _len)
+		if (_len GREATER 3)
+			list(GET _lines 0 _describe)
+			list(GET _lines 1 _date)
+			list(GET _lines 2 _count)
+			list(GET _lines 3 _hash)
+		endif()
+		set(_source ".tarball-version")
+	endif()
+	if (_source STREQUAL "" AND EXISTS "${CMAKE_SOURCE_DIR}/.archive-version")
+		file(STRINGS "${CMAKE_SOURCE_DIR}/.archive-version" _lines)
+		list(GET _lines 0 _describe)
+		if (_describe MATCHES "^\\$Format")
+			set(_describe "")   # not an archive: git did not fill it in
 		else()
-			message(WARNING "git log did not return a usable commit date, falling back to today's date")
+			list(LENGTH _lines _len)
+			if (_len GREATER 1)
+				list(GET _lines 1 _date)
+			endif()
+			set(_source ".archive-version")
 		endif()
-
-		execute_process(
-			COMMAND ${GIT_EXECUTABLE} rev-parse --short=7 HEAD
-			WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-			OUTPUT_VARIABLE GIT_COMMIT_SHORT_HASH
-			OUTPUT_STRIP_TRAILING_WHITESPACE
-			RESULT_VARIABLE GIT_HASH_RESULT
-		)
-		if(NOT GIT_HASH_RESULT EQUAL 0)
-			set(GIT_COMMIT_SHORT_HASH "unknown")
-		endif()
-	else()
-		message(WARNING "Git not found, falling back to today's date for the version")
 	endif()
 
-	if(HAVE_GIT_DATE)
-		set(VERSION_YEAR  "${CMAKE_MATCH_1}")
-		set(VERSION_MONTH "${CMAKE_MATCH_2}")
-		set(VERSION_DAY   "${CMAKE_MATCH_3}")
+	# YYYY.MM.DD from git log, YYYY-MM-DD from git archive (%cs)
+	string(REGEX MATCH "^[0-9][0-9]([0-9][0-9])[.-]([0-9]+)[.-]([0-9]+)" _ "${_date}")
+	set(_cyy "${CMAKE_MATCH_1}")
+	set(_cm "${CMAKE_MATCH_2}")
+	set(_cd "${CMAKE_MATCH_3}")
+	string(SUBSTRING "${_date}" 0 4 _cyear)
+
+	if (_source STREQUAL "")
+		message(WARNING "No git, no .tarball-version, no .archive-version: version unknown")
+		set(V_DISPLAY "0.0-unknown")
+		set(V_PACKAGE "0.0~unknown")
+		set(V_MAJOR 0)
+		set(V_MINOR 0)
+		set(V_PATCH 0)
 	else()
-		# No git (e.g. a tarball build without .git) or the command failed:
-		# CMake's own current-date timestamp needs no external tool at all.
-		string(TIMESTAMP VERSION_YEAR  "%Y")
-		string(TIMESTAMP VERSION_MONTH "%m")
-		string(TIMESTAMP VERSION_DAY   "%d")
+		qtdmm_parse_describe("${_describe}" "${_cyy}" "${_count}" "${_hash}" V)
+		if (NOT V_ERROR STREQUAL "")
+			message(WARNING "${V_ERROR}")
+		endif()
 	endif()
 
+	set(QTDMM_VERSION "${V_DISPLAY}" PARENT_SCOPE)
+	set(QTDMM_PACKAGE_VERSION "${V_PACKAGE}" PARENT_SCOPE)
+	# for .tarball-version (cmake/deploy.cmake)
+	set(QTDMM_TARBALL_VERSION "${_describe}\n${_date}\n${_count}\n${_hash}\n" PARENT_SCOPE)
+	set(PROJECT_VERSION_MAJOR ${V_MAJOR} PARENT_SCOPE)
+	set(PROJECT_VERSION_MINOR ${V_MINOR} PARENT_SCOPE)
+	set(PROJECT_VERSION_PATCH ${V_PATCH} PARENT_SCOPE)
+	set(PROJECT_VERSION "${V_MAJOR}.${V_MINOR}.${V_PATCH}" PARENT_SCOPE)
 	# strip leading zeros (CMake/CPack/RPM want plain integers, e.g. "9" not "09")
-	string(REGEX REPLACE "^0+([0-9])" "\\1" VERSION_MONTH "${VERSION_MONTH}")
-	string(REGEX REPLACE "^0+([0-9])" "\\1" VERSION_DAY   "${VERSION_DAY}")
+	string(REGEX REPLACE "^0+([0-9])" "\\1" _cm "${_cm}")
+	string(REGEX REPLACE "^0+([0-9])" "\\1" _cd "${_cd}")
+	set(QTDMM_COMMIT_YEAR "${_cyear}" PARENT_SCOPE)
+	set(QTDMM_COMMIT_MONTH "${_cm}" PARENT_SCOPE)
+	set(QTDMM_COMMIT_DAY "${_cd}" PARENT_SCOPE)
 
-	set(PROJECT_VERSION_MAJOR ${VERSION_YEAR}  PARENT_SCOPE)
-	set(PROJECT_VERSION_MINOR ${VERSION_MONTH} PARENT_SCOPE)
-	set(PROJECT_VERSION_PATCH ${VERSION_DAY}   PARENT_SCOPE)
-
-	set(CLEAN_VERSION "${VERSION_YEAR}.${VERSION_MONTH}.${VERSION_DAY}")
-	set(PROJECT_VERSION "${CLEAN_VERSION}" PARENT_SCOPE)
-	set(PROJECT_VERSION_FULL "${CLEAN_VERSION}+g${GIT_COMMIT_SHORT_HASH}" PARENT_SCOPE)
-
-	message(STATUS "QtDMM version: ${CLEAN_VERSION} (${CLEAN_VERSION}+g${GIT_COMMIT_SHORT_HASH})")
+	message(STATUS "QtDMM version: ${V_DISPLAY} (package ${V_PACKAGE}, from ${_source})")
 endfunction()
 
-get_version_from_git()
+if (NOT QTDMM_VERSION_TEST)
+	get_version_from_git()
+endif()
