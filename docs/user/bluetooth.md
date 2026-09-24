@@ -2,8 +2,9 @@
 
 QtDMM reads two kinds of Bluetooth LE meters:
 
-- **UNI-T UT60BT** (and, untested, the UT161 series) - QtDMM *connects* to
-  the meter and asks it for readings, like a serial meter on a cable.
+- **UNI-T UT60BT** (and, untested, the UT161 series and the UT61B+/D+/E+
+  with the UT-D07B adapter) - QtDMM *connects* to the meter and asks it for
+  readings, like a serial meter on a cable.
 - **Victron** SmartShunt, BMV-712, MPPT chargers and Phoenix inverters - QtDMM
   *listens* to the readings they broadcast, without a connection.
 
@@ -33,6 +34,23 @@ around zero (about ±10 µV in the mV position, ±5 mA on the current
 ranges). The rotary switch is mechanical; changing it produces one frame
 with the new function and the old number, which QtDMM passes on like the
 meter's own display does.
+
+## UNI-T UT61B+ / UT61D+ / UT61E+
+
+These meters speak the same protocol as the UT60BT. They have no Bluetooth
+of their own; either use the **UT-D09 USB cable** that comes with them -
+choose the model *UT61E+* (or B+/D+) and the cable's HID port, as for any
+[USB-HID cable](connecting.md) - or the **UT-D07B Bluetooth adapter**:
+choose *UT61E+ (UT-D07B Bluetooth)* and set it up like the UT60BT above
+(the adapter advertises as *UT-D07B*).
+
+In the DC V position with AC shown alongside (the meter's DC+AC mode), the
+meter sends DC and AC readings in turn: QtDMM records the DC reading and
+shows the AC one on the display's second line and in the readings table.
+
+Not tried with a real UT61E+ yet - the ranges come from the
+[ut61xpy](https://github.com/olegv142/ut61xpy) project. Please report how it
+works for you.
 
 ## Victron Instant Readout
 

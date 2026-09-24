@@ -35,7 +35,9 @@ std::optional<BleGattDevice::Profile> BleGattDevice::profile(ReadEvent::DataForm
   switch (format)
   {
     case ReadEvent::UniTiDMM:
-      return Profile{ kIsscService, kIsscNotify, { kIsscWrite, kIsscWriteFallback }, { "UT60BT", "UT161", "UT-D07" } };
+      return Profile{ kIsscService, kIsscNotify, { kIsscWrite, kIsscWriteFallback }, { "UT60BT", "UT161" } };
+    case ReadEvent::UniTUT61Plus:   // UT61B+/D+/E+ through the UT-D07B adapter
+      return Profile{ kIsscService, kIsscNotify, { kIsscWrite, kIsscWriteFallback }, { "UT-D07" } };
     default:
       return std::nullopt;
   }

@@ -66,6 +66,7 @@ public:
     Fluke45,
     VictronBLE,
     UniTiDMM,
+    UniTUT61Plus,
     EndOfList              // new stuff always before!
   };
 

@@ -37,6 +37,7 @@ regression tests.
 | `vc870.cpp` | `VC870Continuous` | Voltcraft VC 870 | — | none |
 | `victron_ble.cpp` | `VictronBLE` | Victron SmartShunt, BMV-712 Smart, SmartSolar / BlueSolar MPPT, Phoenix Inverter Smart over Bluetooth LE (SmartShunt 500A/50mV, SmartSolar MPPT 100/20 48V and Phoenix Inverter 12V 500VA verified live) | — (bit layouts and test vectors from [victron-ble](https://github.com/keshavdv/victron-ble); AES-CTR decryption tested in `test_victronble`) | yes |
 | `unit_idmm.cpp` | `UniTiDMM` | UNI-T UT60BT over Bluetooth LE GATT (verified live, dial walk against the LCD); UT161A/B/D/E (unconfirmed) | `tmp/ut60bt/walk_all.log` (UT60BT captures); frames and tables from [ble-multimeter](https://github.com/deligent4/ut60bt_multimeter) and [ut61xpy](https://github.com/olegv142/ut61xpy), both in `ablage/` | yes |
+| `unit_idmm.cpp` | `UniTUT61Plus` | UNI-T UT61B+/D+/E+ over the UT-D09 USB-HID cable or the UT-D07B Bluetooth adapter (unconfirmed) | — (synthetic vectors from [ut61xpy](https://github.com/olegv142/ut61xpy)'s ranges) | yes, synthetic |
 | `vc940.cpp` | `VC940Continuous` | Tenma 72-7732, Uni-Trend UT71B/UT71CDE/UT804, Voltcraft VC 920/940/960 | `UT71BCDE.log`, `UT804.log` | yes |
 
 `FlukeQM` and `Fluke45` are polled protocols with variable-length frames:

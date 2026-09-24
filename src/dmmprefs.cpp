@@ -398,7 +398,10 @@ bool DmmPrefs::isBluetooth() const
 bool DmmPrefs::isGatt() const
 {
 #ifdef QTDMM_WITH_BLE
-  return ui_vendor->currentIndex() != 0 && BleGattDevice::profile(m_dmmInfo.protocol).has_value();
+  // baud 0: the Bluetooth entry of a protocol that also has a cable (UT61E+
+  // with the UT-D07B adapter vs. the UT-D09 USB cable)
+  return ui_vendor->currentIndex() != 0 && m_dmmInfo.baud == 0
+         && BleGattDevice::profile(m_dmmInfo.protocol).has_value();
 #else
   return false;
 #endif
