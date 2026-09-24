@@ -1,6 +1,6 @@
 # get version
 #
-# QtDMM versions are YY.N[.P][-rcK] (like FreeCAD): YY the two-digit year,
+# QtDMM versions are YY.N[.P][-rcK] (calendar versioning): YY the two-digit year,
 # N the release number within that year, P a bugfix release of YY.N, -rcK /
 # -betaK / -alphaK a pre-release of YY.N. Releases are git tags with exactly
 # that name ("26.1-rc1", "26.1", "26.1.1"); docs/dev/releasing.md has the

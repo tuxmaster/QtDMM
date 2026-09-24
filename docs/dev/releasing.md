@@ -2,8 +2,9 @@
 
 ## Version scheme
 
-QtDMM uses **YY.N**, the scheme [FreeCAD](https://blog.freecad.org/2026/06/26/new-freecad-versioning-scheme-and-development-cycle/)
-introduced in 2026:
+QtDMM uses calendar versioning ([CalVer](https://calver.org/)) in the form
+**YY.N**: the two-digit year, then a running number for the releases of that
+year. A version number thus says how current a build is:
 
 | Version | Meaning |
 |---|---|
