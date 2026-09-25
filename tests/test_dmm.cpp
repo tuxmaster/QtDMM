@@ -186,7 +186,7 @@ int main(int argc, char **argv)
     });
 
     DMM meter(nullptr);
-    DmmDecoder::DMMInfo flukeInfo;
+    DmmDecoder::DMMInfo flukeInfo{};
     flukeInfo.baud = 115200;
     flukeInfo.bits = 8;
     meter.setDmmInfo(flukeInfo);
@@ -236,7 +236,7 @@ int main(int argc, char **argv)
     });
 
     DMM meter(nullptr);
-    DmmDecoder::DMMInfo benchInfo;
+    DmmDecoder::DMMInfo benchInfo{};
     benchInfo.baud = 9600;
     benchInfo.bits = 8;
     meter.setDmmInfo(benchInfo);
