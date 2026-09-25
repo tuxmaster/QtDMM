@@ -6,7 +6,7 @@ srpm:
 	echo SPEC $(spec)
 	mkdir -p $(TMP)/X/{SOURCES,SPECS}
 	tar czf $(TMP)/X/SOURCES/$(ARCHIV) .
-	cp $(SPEC) $(TMP)/X/SPECS/
+	cp $(spec) $(TMP)/X/SPECS/
 	sed -i "s|^Source0.*|Source0:\t$(ARCHIV)|g" $(TMP)/X/SPECS/$(SPEC)
-	rpmbuild --define "_topdir $(TMP)/X" -bs SPECS/$(SPEC)
+	rpmbuild --define "_topdir $(TMP)/X" -bs $(SPEC)
 	mv $(TMP)/X/SRPMS/* $(outdir)/
