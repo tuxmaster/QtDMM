@@ -1,5 +1,6 @@
 %bcond test 1
 %global	toolchain gcc
+%global %_pkg_extra_cxxflags -Werror
 
 Name:		qtdmm
 Version:	26.1
