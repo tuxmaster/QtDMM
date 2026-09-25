@@ -9,5 +9,5 @@ srpm:
 	tar czf $(RPM_ROOT)/SOURCES/$(ARCHIV) .
 	cp $(spec) $(RPM_ROOT)/SPECS/
 	sed -i "s|^Source0.*|Source0:\t$(ARCHIV)|g" $(RPM_ROOT)/SPECS/$(SPEC)
-	rpmbuild -bs $(SPEC)
+	rpmbuild -bs $(RPM_ROOT)/SPECS/$(SPEC)
 	mv $(RPM_ROOT)/SRPMS/* $(outdir)/
