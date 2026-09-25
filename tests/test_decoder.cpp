@@ -131,7 +131,7 @@ int main(int argc, char **argv)
             bytesToRead = length + 1;
           length = (length - bytesToRead + 1 + FIFO_LENGTH) % FIFO_LENGTH;
 
-          for (int i = 0; i < bytesToRead; ++i)
+          for (size_t i = 0; i < bytesToRead; ++i)
           {
             buffer[i] = fifo[length];
             length = (length + 1) % FIFO_LENGTH;
