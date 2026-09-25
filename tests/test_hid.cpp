@@ -164,7 +164,7 @@ int main(int argc, char **argv)
 
   // --- 4. a device object without hardware reports itself closed ---
   {
-    DmmDecoder::DMMInfo info;
+    DmmDecoder::DMMInfo info{};
     info.baud = 9600;
     info.bits = 8;
     HIDSerialDevice dev(info, "HID 0x1a86:0xe429 /nonexistent/hidraw99");
