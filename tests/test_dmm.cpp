@@ -63,7 +63,7 @@ int main(int argc, char **argv)
   QObject::connect(&server, &QTcpServer::newConnection, [&] { peer = server.nextPendingConnection(); });
 
   DMM dmm(nullptr);
-  DmmDecoder::DMMInfo info;
+  DmmDecoder::DMMInfo info{};
   info.baud = 9600;
   info.bits = 8;
   dmm.setDmmInfo(info);

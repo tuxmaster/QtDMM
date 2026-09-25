@@ -59,7 +59,7 @@ int main(int argc, char **argv)
   SharedStateManager u("u"), i("i"), p("p"), odd("uni-t_803");
   check(u.registerInstance() && i.registerInstance() && p.registerInstance() && odd.registerInstance(), "all register");
 
-  DmmDecoder::DMMInfo info;
+  DmmDecoder::DMMInfo info{};
   info.protocol = ReadEvent::Sigrok;
   info.display = 40000;
   const qint64 now = QDateTime::currentMSecsSinceEpoch();
