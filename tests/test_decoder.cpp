@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 
     for (size_t n = 0; n < 5 && !frameValid; n++)
     {
-      for (size_t idx = 0; idx < frame.size(); idx++)
+      for (qsizetype idx = 0; idx < frame.size(); idx++)
       {
         fifo[length] = frame[idx];
         if (decoder->checkFormat(fifo, length))
