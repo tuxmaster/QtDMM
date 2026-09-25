@@ -65,10 +65,6 @@ then
 	if [ -f /etc/debian_version ]
 	then
 		cpack --config CPackConfig.cmake
-	elif [ -f /etc/os-release ] && grep -qiE 'rhel|fedora|suse' /etc/os-release
-	then
-		cp ../packages/qtdmm*.tar.bz2 ~/rpmbuild/SOURCES/
-		( cd ..; rpmbuild -ba QtDMM.spec )
 	elif [ "$(uname)" = "Darwin" ]
 	then
 		echo "mac osx packages not supported yet"

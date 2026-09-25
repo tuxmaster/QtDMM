@@ -89,7 +89,7 @@ elseif(UNIX AND NOT APPLE)
 		set(_d "0${_d}")
 	endif()
 	set(RPM_CHANGELOG "* ${_wday} ${_mon} ${_d} ${_y} QtDMM team <hello@qtdmm.de> - ${QTDMM_PACKAGE_VERSION}-1\n- QtDMM ${QTDMM_VERSION}; the changes are listed in CHANGELOG")
-	configure_file(${CMAKE_SOURCE_DIR}/QtDMM.spec.in ${CMAKE_SOURCE_DIR}/QtDMM.spec @ONLY)
+#	configure_file(${CMAKE_SOURCE_DIR}/QtDMM.spec.in ${CMAKE_SOURCE_DIR}/QtDMM.spec @ONLY)
 endif()
 
 include(CPack)
