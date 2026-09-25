@@ -1,5 +1,6 @@
 srpm:
 	echo RAUS $(outdir) 
 	echo SPEC $(spec)
-	rpmbuild --define "_topdir $(pwd)" -bs $(spec)
+	ls -l 
+	rpmbuild --define "_topdir $(CURDIR)" -bs $(spec)
 	mv SRPMS/* $(outdir)/
