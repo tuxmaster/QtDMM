@@ -8,5 +8,5 @@ srpm:
 	tar czf $(TMP)/X/SOURCES/$(ARCHIV) .
 	cp $(SPEC) $(TMP)/X/SPECS/
 	sed -i "s|^Source0.*|Source0:\t$(ARCHIV)|g" $(TMP)/X/SPECS/$(SPEC)
-	rpmbuild --define "_topdir $(TMP)/X" -bs $(spec)
+	rpmbuild --define "_topdir $(TMP)/X" -bs SPECS/$(SPEC)
 	mv $(TMP)/X/SRPMS/* $(outdir)/
