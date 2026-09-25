@@ -1,5 +1,8 @@
 %bcond test 1
 %global	toolchain gcc
+# Um die Warnungen einfacher zu finden
+# Warnung =  Fehler -> Rumps
+%global _pkg_extra_cxxflags -Werror
 
 Name:		qtdmm
 Version:	26.1

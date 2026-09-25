@@ -68,7 +68,7 @@ public:
     QString model;
     QString name;                   ///< "vendor model", filled in by addConfig()
     int   baud;                     ///< 600 ... 19200
-    ReadEvent::DataFormat protocol; ///< which decoder handles the meter
+    ReadEvent::DataFormat protocol{}; ///< which decoder handles the meter
     int   bits;                     ///< data bits, 5..8
     int   stopBits;                 ///< 1 or 2
     int   numValues;                ///< frames per reading, for meters that send several lines

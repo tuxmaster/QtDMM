@@ -40,7 +40,7 @@ int main(int argc, char **argv)
   QTcpServer server;
   check(server.listen(QHostAddress::LocalHost, 0), "fake server listens");
 
-  DmmDecoder::DMMInfo info;
+  DmmDecoder::DMMInfo info{};
   info.baud = 19200;
   info.bits = 7;
   info.parity = 1;     // even (DMMInfo: 0 none, 1 even, 2 odd)

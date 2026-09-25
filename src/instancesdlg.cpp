@@ -17,8 +17,8 @@ const QRegularExpression kIdentifier("^[A-Za-z_][A-Za-z0-9_]*$");
 
 InstancesDlg::InstancesDlg(Settings *settings, QString instance_id, QString config_path, QWidget *parent)
   :  QDialog(parent)
-  , m_instanceId(instance_id.isEmpty() ? "default" : instance_id)
   , m_configPath(config_path)
+  , m_instanceId(instance_id.isEmpty() ? "default" : instance_id)
   , m_settings(settings)
   , m_onDelete(false)
 {

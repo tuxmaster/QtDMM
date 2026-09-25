@@ -63,7 +63,7 @@ int main(int argc, char **argv)
   QObject::connect(&server, &QTcpServer::newConnection, [&] { peer = server.nextPendingConnection(); });
 
   DMM dmm(nullptr);
-  DmmDecoder::DMMInfo info;
+  DmmDecoder::DMMInfo info{};
   info.baud = 9600;
   info.bits = 8;
   dmm.setDmmInfo(info);
@@ -186,7 +186,7 @@ int main(int argc, char **argv)
     });
 
     DMM meter(nullptr);
-    DmmDecoder::DMMInfo flukeInfo;
+    DmmDecoder::DMMInfo flukeInfo{};
     flukeInfo.baud = 115200;
     flukeInfo.bits = 8;
     meter.setDmmInfo(flukeInfo);
@@ -236,7 +236,7 @@ int main(int argc, char **argv)
     });
 
     DMM meter(nullptr);
-    DmmDecoder::DMMInfo benchInfo;
+    DmmDecoder::DMMInfo benchInfo{};
     benchInfo.baud = 9600;
     benchInfo.bits = 8;
     meter.setDmmInfo(benchInfo);

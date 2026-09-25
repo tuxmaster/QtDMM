@@ -7,8 +7,8 @@
 SigrokDevice::SigrokDevice(const DmmDecoder::DMMInfo &info, QString device, QObject *parent)
   : QIODevice(parent)
   , m_dmmInfo(info)
-  , m_process(new QProcess(this))
   , m_device(device)
+  , m_process(new QProcess(this))
 {
   m_sigrok = info.sigrokExe.isEmpty() ? "sigrok-cli" : info.sigrokExe;
 
