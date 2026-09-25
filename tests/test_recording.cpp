@@ -135,7 +135,7 @@ int main(int argc, char **argv)
     check(RecordingFile::writeAny(rec, tmp.filePath("a.csv"), &err), "csv via writeAny: " + err);
     check(QFileInfo(tmp.filePath("a.xlsx")).size() > 1000 && QFile(tmp.filePath("a.xlsx")).open(QIODevice::ReadOnly), "xlsx exists");
     QFile z(tmp.filePath("a.xlsx"));
-    z.open(QIODevice::ReadOnly);
+    (void)z.open(QIODevice::ReadOnly);
     check(z.read(2) == "PK", "xlsx is a zip");
     QFile c(tmp.filePath("a.csv"));
     c.open(QIODevice::ReadOnly | QIODevice::Text);
